@@ -28,3 +28,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Note Davide&Alessandro
+[Mappa Sito]
+Menu:
+1. Home
+2. Chi Sono (breve parte che spiego MTS)
+3. I miei servizi
+4. recensioni
+5. quiz
+6. privacy europa
+7. articoli
+8. glossario e dizionario
