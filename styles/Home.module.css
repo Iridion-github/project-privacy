@@ -8,7 +8,9 @@
 }
 
 .main {
-  padding: 5rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
   padding-bottom: 6rem;
   flex: 1;
   display: flex;
@@ -27,15 +29,35 @@
 
 .navbarText {
   font-size: 1.6em;
-  color: #343a40!;
+  color: #343a40;
   font-weight: 400;
   /*font-family: ;*/
+}
+
+.navbarDivider {
+  border-right: 1px solid #343a4041;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.dropdownTitle {
+  font-size: 1.2em;
+  color: #343a40 !important;
+  font-weight: 600 !important;
+}
+
+.dropdownOption {
+  font-size: 1em;
+  color: #343a40!;
+  font-weight: 400;
 }
 
 .carouselContainer {
   width: 100%;
   text-shadow: 1px 1px 2px red, 0 0 1em #0070f3, 0 0 0.2em #0070f3;
 }
+
+.carouselStyle {}
 
 .footer {
   width: 100%;
@@ -127,6 +149,11 @@
 .logo {
   height: 2.5em;
   color: rgb(75, 73, 73);
+}
+
+.footerLogo {
+  height: 2.5em;
+  width: 2.5em;
 }
 
 @media (max-width: 600px) {

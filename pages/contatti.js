@@ -1,0 +1,75 @@
+import styles from '../styles/Home.module.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {
+  Card,
+  Table
+} from 'react-bootstrap'
+import { Header } from '../components/Header'
+import { Navigation } from '../components/Navbar'
+import { Footer } from '../components/Footer'
+
+export default function contatti() {
+  return (
+    <div className={styles.container}>
+      <Header
+        title="Contatti"
+      />
+      {/* Navbar */}
+      <Navigation />
+      {/* Page Content */}
+      <main className={styles.main}>
+        <Card>
+          <Card.Img variant="top" src="contatti.png" />
+          <Card.Body>
+            <Card.Title className="text-center">Contatti</Card.Title>
+            <Card.Text>
+              <div className="row">
+                <div className="col-md-6">
+                  <Table striped bordered hover size="sm">
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><b>Indirizzo:</b></td>
+                        <td>Via Fregene 33 - 00183 ROMA (RM)</td>
+                      </tr>
+                      <tr>
+                        <td><b>Telefono:</b></td>
+                        <td>335-236564</td>
+                      </tr>
+                      <tr>
+                        <td><b>Email:</b></td>
+                        <td>mastrogae@gmail.com</td>
+                      </tr>
+                      <tr>
+                        <td><b>P.IVA:</b></td>
+                        <td>00000000000</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+                <div className="col-md-6">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.56015081952!2d12.508396296107795!3d41.88080899993093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61ebb6fa2465%3A0xbd6dcbf7a83c7e20!2sVia%20Fregene%2C%2033%2C%2000183%20Roma%20RM!5e0!3m2!1sen!2sit!4v1606502757348!5m2!1sen!2sit"
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    style={{ border: "1px solid black" }}
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0">
+                  </iframe>
+                </div>
+              </div>
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer className="text-center">
+            <small className="text-muted">Aggiornato al: 27/11/2020</small>
+          </Card.Footer>
+        </Card>
+      </main >
+      {/* Footer */}
+      < Footer />
+    </div >
+  )
+}
