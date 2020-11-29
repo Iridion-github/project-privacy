@@ -1,9 +1,7 @@
-import { useState, useContext, createContext } from 'react'
 import {
   Row,
   Col,
-  Card,
-  Button
+  Card
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
