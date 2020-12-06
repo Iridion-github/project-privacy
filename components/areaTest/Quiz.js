@@ -11,13 +11,9 @@ import { QuizTimer } from './QuizTimer'
 import { Question } from './Question'
 
 export const Quiz = function (props) {
-
   const [questionCounter, setQuestionCounter] = useState(1)
-
   const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions.map((elem, i) => ({ list: props.selectedTest.questions[i].answers.map(el => ({ selected: false })) })))
-
-  console.log(allUserAnswers)
-
+  //console.log(allUserAnswers)
   return (
     <Row className="w-100 h-75 text-center">
       <Row className="d-flex align-items-center w-100 mb-4">

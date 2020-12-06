@@ -11,9 +11,9 @@ export const Answers = function (props) {
 
   const selectAnswer = (answerIndex) => {
     const resultingAnswer = props.selectedAnswersList.map((elem, i) => i === answerIndex ? ({ selected: true }) : ({ selected: false }))
-    console.log(resultingAnswer)
+    //console.log(resultingAnswer)
     const resultingAllAnswers = props.allUserAnswers.map((elem, i) => i === props.questionIndex ? ({ list: resultingAnswer }) : elem)
-    console.log(resultingAllAnswers)
+    //console.log(resultingAllAnswers)
     props.setSelectedAnswersList(resultingAllAnswers)
   }
 
@@ -21,6 +21,7 @@ export const Answers = function (props) {
     const selected = props.selectedAnswersList[answerNumber - 1].selected
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     return (< Button
+      key={answerNumber}
       type="radio"
       size="lg"
       variant={selected ? "secondary" : "outline-secondary"}
