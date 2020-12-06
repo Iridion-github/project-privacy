@@ -1,15 +1,18 @@
 import { useState, useContext, createContext } from 'react'
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Header } from '../components/Header'
-import { Navigation } from '../components/Navbar'
-import { TopicChoice } from '../components/TopicChoice'
-import { Quiz } from '../components/Quiz'
-import { Footer } from '../components/Footer'
+import { Header } from '../components/layout/Header'
+import { Navigation } from '../components/layout/Navbar'
+import { TopicChoice } from '../components/areaTest/TopicChoice'
+import { Quiz } from '../components/areaTest/Quiz'
+import { Footer } from '../components/layout/Footer'
+import tests from "../database/readiedTests"
 
 export default function areaTest() {
 
   const [selectedTopic, setSelectedTopic] = useState(null)
+
+  const [selectedTest, setSelectedTest] = useState(null)
 
   const [questions, setQuestions] = useState([
     {
@@ -41,13 +44,14 @@ export default function areaTest() {
         {(selectedTopic === null) &&
           <TopicChoice
             setSelectedTopic={setSelectedTopic}
+            setSelectedTest={setSelectedTest}
           />}
         {/* Fine Scelta Quiz */}
         {/* Quiz */}
         {selectedTopic && <Quiz
           selectedTopic={selectedTopic}
+          selectedTest={tests[selectedTest]}
           setSelectedTopic={setSelectedTopic}
-          questions={questions}
         />}
         {/* Fine Quiz */}
       </main>

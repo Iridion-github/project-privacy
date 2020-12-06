@@ -2,9 +2,9 @@ import styles from '../styles/Home.module.css'
 import { Carousel } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import { Header } from '../components/Header'
-import { Navigation } from '../components/Navbar'
-import { Footer } from '../components/Footer'
+import { Header } from '../components/layout/Header'
+import { Navigation } from '../components/layout/Navbar'
+import { Footer } from '../components/layout/Footer'
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
             <picture>
               <source
                 media="(max-width: 650px)"
-                srcset="contatti.png"
+                srcSet="contatti.png"
                 alt="img alternativa mobile view"
               />
               <img
@@ -34,16 +34,16 @@ export default function Home() {
               <h2 className={styles.title}>
                 Consulenza Privacy e Antiriciclaggio
               </h2>
-              <p className={styles.description}>
+              <span className={styles.description}>
                 Analisi e valutazione rischi
-              </p>
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={2000}>
             <picture>
               <source
                 media="(max-width: 650px)"
-                srcset="contatti.png"
+                srcSet="contatti.png"
                 alt="img alternativa mobile view"
               />
               <img
@@ -56,16 +56,16 @@ export default function Home() {
               <h1 className={styles.title}>
                 Consulenza Privacy e Antiriciclaggio
               </h1>
-              <p className={styles.description}>
+              <span className={styles.description}>
                 Analisi e valutazione rischi
-              </p>
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={2000}>
             <picture>
               <source
                 media="(max-width: 650px)"
-                srcset="contatti.png"
+                srcSet="contatti.png"
                 alt="img alternativa mobile view"
               />
               <img
@@ -78,9 +78,9 @@ export default function Home() {
               <h2 className={styles.title}>
                 Consulenza Privacy e Antiriciclaggio
               </h2>
-              <p className={styles.description}>
+              <span className={styles.description}>
                 Analisi e valutazione rischi
-              </p>
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

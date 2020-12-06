@@ -7,11 +7,16 @@ import {
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import { QuizTimer } from '../components/QuizTimer'
+import { QuizTimer } from './QuizTimer'
+import { Question } from './Question'
 
 export const Quiz = function (props) {
 
   const [questionCounter, setQuestionCounter] = useState(1)
+
+  const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions.map((elem, i) => ({ list: props.selectedTest.questions[i].answers.map(el => ({ selected: false })) })))
+
+  console.log(allUserAnswers)
 
   return (
     <Row className="w-100 h-75 text-center">
@@ -26,7 +31,7 @@ export const Quiz = function (props) {
           </Button>
         </Col>
         <Col md={8}>
-          <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: Privacy</div>
+          <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: {props.selectedTopic}</div>
         </Col>
       </Row>
       <Row className="w-100 mb-4">
@@ -46,61 +51,16 @@ export const Quiz = function (props) {
           }
         </Col>
         <Col md={6}>
-          <Card className="">
-            <Card.Img variant="top" src="" />
-            <Card.Body className="">
-              <Card.Title className="text-center">{props.questions[0].question}</Card.Title>
-              <Card.Text>
-                <Row className="mb-4">
-                  <Col>
-                    <Button
-                      type="radio"
-                      size="lg"
-                      variant="outline-success"
-                      block
-                    >
-                      {props.questions[0].answer1.text}
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      type="radio"
-                      size="lg"
-                      variant="outline-success"
-                      block
-                    >
-                      {props.questions[0].answer2.text}
-                    </Button>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Button
-                      type="radio"
-                      size="lg"
-                      variant="outline-success"
-                      block
-                    >
-                      {props.questions[0].answer3.text}
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      type="radio"
-                      size="lg"
-                      variant="outline-success"
-                      block
-                    >
-                      {props.questions[0].answer4.text}
-                    </Button>
-                  </Col>
-                </Row>
-              </Card.Text>
-            </Card.Body>
-          </Card>
+          <Question
+            questionNumber={questionCounter}
+            question={props.selectedTest.questions[questionCounter - 1].text}
+            answers={props.selectedTest.questions[questionCounter - 1].answers}
+            allUserAnswers={allUserAnswers}
+            setAllUserAnswers={setAllUserAnswers}
+          />
         </Col>
         <Col md={3} className="d-flex align-items-center justify-content-start">
-          {(questionCounter < props.questions.length) &&
+          {(questionCounter < props.selectedTest.questions.length) &&
             <Button
               size="lg"
               variant="success"
@@ -113,7 +73,7 @@ export const Quiz = function (props) {
               </Row>
             </Button>
           }
-          {(questionCounter === props.questions.length) &&
+          {(questionCounter === props.selectedTest.questions.length) &&
             <Button
               size="lg"
               variant="success"
@@ -131,7 +91,7 @@ export const Quiz = function (props) {
         </Col>
       </Row>
       <QuizTimer
-        milliseconds={10000}
+        milliseconds={props.selectedTest.timeLimit}
       />
     </Row>
   )

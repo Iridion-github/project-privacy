@@ -1,8 +1,8 @@
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Header } from '../components/Header'
-import { Navigation } from '../components/Navbar'
-import { Footer } from '../components/Footer'
+import { Header } from '../components/layout/Header'
+import { Navigation } from '../components/layout/Navbar'
+import { Footer } from '../components/layout/Footer'
 
 export default function chiSono() {
   return (

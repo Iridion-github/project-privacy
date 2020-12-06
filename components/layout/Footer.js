@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import { Navbar } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
