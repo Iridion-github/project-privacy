@@ -34,7 +34,7 @@ export const TopicChoice = function (props) {
               block
               onClick={() => {
                 props.setSelectedTopic("Test 2")
-                props.setSelectedTest(1)
+                props.setSelectedTest(null)
               }}
             >
               Test 2
@@ -46,11 +46,11 @@ export const TopicChoice = function (props) {
               variant="outline-dark"
               block
               onClick={() => {
-                props.setSelectedTopic("Test 3")
-                props.setSelectedTest(2)
+                props.setSelectedTopic("Test Debug")
+                props.setSelectedTest(1)
               }}
             >
-              Test 3
+              Test Debug
                   </Button>
           </Col>
         </Row>

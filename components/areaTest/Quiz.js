@@ -12,7 +12,7 @@ import { Question } from './Question'
 
 export const Quiz = function (props) {
   const [questionCounter, setQuestionCounter] = useState(1)
-  const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions.map((elem, i) => ({ list: props.selectedTest.questions[i].answers.map(el => ({ selected: false })) })))
+  const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions)
   //console.log(allUserAnswers)
   return (
     <Row className="w-100 h-75 text-center">
@@ -73,6 +73,11 @@ export const Quiz = function (props) {
             <Button
               size="lg"
               variant="success"
+              onClick={() => {
+                props.setShowResults(true)
+                props.setSelectedTopic(null)
+                props.setResults(allUserAnswers)
+              }}
             >
               <Row>
                 <Col sm={6}>

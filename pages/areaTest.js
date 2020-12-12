@@ -5,6 +5,7 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { TopicChoice } from '../components/areaTest/TopicChoice'
 import { Quiz } from '../components/areaTest/Quiz'
+import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
 import tests from "../database/readiedTests"
 
@@ -14,22 +15,9 @@ export default function areaTest() {
 
   const [selectedTest, setSelectedTest] = useState(null)
 
-  const [questions, setQuestions] = useState([
-    {
-      question: "Is privacy good?",
-      answer1: { text: "No", value: 0 },
-      answer2: { text: "Nope", value: 0 },
-      answer3: { text: "Maybe?", value: 0 },
-      answer4: { text: "Yes", value: 1 }
-    },
-    {
-      question: "Is privacy important?",
-      answer1: { text: "Nope", value: 0 },
-      answer2: { text: "Maybe?", value: 0 },
-      answer3: { text: "Yes", value: 1 },
-      answer4: { text: "No", value: 0 }
-    }
-  ])
+  const [showResults, setShowResults] = useState(false)
+
+  const [results, setResults] = useState([])
 
   return (
     <div className={styles.container}>
@@ -41,7 +29,7 @@ export default function areaTest() {
       {/* Page Content */}
       <main className={styles.main}>
         {/* Scelta Quiz */}
-        {(selectedTopic === null) &&
+        {(selectedTopic === null && showResults === false) &&
           <TopicChoice
             setSelectedTopic={setSelectedTopic}
             setSelectedTest={setSelectedTest}
@@ -52,8 +40,18 @@ export default function areaTest() {
           selectedTopic={selectedTopic}
           selectedTest={tests[selectedTest]}
           setSelectedTopic={setSelectedTopic}
+          setShowResults={setShowResults}
+          setResults={setResults}
         />}
         {/* Fine Quiz */}
+        {/* Risultati */}
+        {showResults && <Results
+          selectedTopic={selectedTopic}
+          selectedTest={tests[selectedTest]}
+          setShowResults={setShowResults}
+          results={results}
+        />}
+        {/* Fine Risultati */}
       </main>
       {/* Footer */}
       <Footer />

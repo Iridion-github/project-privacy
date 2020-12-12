@@ -10,20 +10,19 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Answers } from './Answers'
 
 export const Question = function (props) {
+  console.log("Question - props.allUserAnswers[props.questionNumber - 1]:", props.allUserAnswers[props.questionNumber - 1])
   return (
     <Card className="">
       <Card.Img variant="top" src="" />
       <Card.Body className="">
         <Card.Title className="text-center">{props.questionNumber + ") "} {props.question}</Card.Title>
-
         <Answers
           questionIndex={props.questionNumber - 1}
           answers={props.answers}
           allUserAnswers={props.allUserAnswers}
-          selectedAnswersList={props.allUserAnswers[props.questionNumber - 1].list}
+          selectedAnswersList={props.allUserAnswers[props.questionNumber - 1].answers}
           setSelectedAnswersList={props.setAllUserAnswers}
         />
-
       </Card.Body>
     </Card >
   )
