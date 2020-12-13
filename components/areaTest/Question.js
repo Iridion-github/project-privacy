@@ -10,7 +10,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Answers } from './Answers'
 
 export const Question = function (props) {
-  console.log("Question - props.allUserAnswers[props.questionNumber - 1]:", props.allUserAnswers[props.questionNumber - 1])
   return (
     <Card className="">
       <Card.Img variant="top" src="" />

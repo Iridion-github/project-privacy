@@ -2,6 +2,8 @@ const tests = [
   {
     title: "TEST N°1 DI VERIFICA DELL’APPRENDIMENTO",
     subtitle: "(RISPOSTA MULTIPLA, SCELTA SINGOLA)",
+    multipleAnswer: false,
+    pointsSystem: false,
     instructions: "gli item elencati di seguito prevedono una sola risposta esatta, il test non è valutativo ma ha come obiettivo primario la verifica dell’apprendimento ai fini del proseguimento del percorso formativo identificato.",
     timeLimit: 900000,
     questions: [
@@ -425,61 +427,71 @@ const tests = [
   {
     title: "TEST DEBUGGING",
     subtitle: "(only for debugging)",
+    multipleAnswer: false,
+    pointsSystem: false,
     instructions: "fake instructions",
     timeLimit: 9000000,
     questions: [
       {
-        text: "Fake question 1",
+        text: "Fake question 1: two right answers",
         answers: [
           {
             text: "wrong answer",
             selected: false,
-            value: false
+            value: false,
+            points: 0
           },
           {
-            text: "right answer",
+            text: "right answer A",
             selected: false,
-            value: true
-          },
-          {
-            text: "wrong answer",
-            selected: false,
-            value: false
+            value: true,
+            points: 1
           },
           {
             text: "wrong answer",
             selected: false,
-            value: false
+            value: false,
+            points: 0
+          },
+          {
+            text: "right answer B",
+            selected: false,
+            value: false,
+            points: 1
           }
         ]
       },
       {
-        text: "Fake question 2",
+        text: "Fake question 2: three right answers.",
         answers: [
           {
             text: "wrong answer",
             selected: false,
-            value: false
+            value: false,
+            points: 0
           },
           {
-            text: "right answer",
+            text: "right answer A",
             selected: false,
-            value: true
+            value: true,
+            points: 1
           },
           {
-            text: "wrong answer",
+            text: "right answer B",
             selected: false,
-            value: false
+            value: true,
+            points: 1
           },
           {
-            text: "wrong answer",
+            text: "right answer C (+)",
             selected: false,
-            value: false
+            value: true,
+            points: 2
           }
         ]
       },
       {
-        text: "Fake question 3",
+        text: "Fake question 3: one right asnwer",
         answers: [
           {
             text: "wrong answer",
@@ -489,7 +501,8 @@ const tests = [
           {
             text: "right answer",
             selected: false,
-            value: true
+            value: true,
+            points: 2
           },
           {
             text: "wrong answer",

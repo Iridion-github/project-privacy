@@ -11,7 +11,29 @@ import { ResultRow } from './ResultRow'
 
 export const Results = function (props) {
 
-  console.log("props.results:", props.results)
+  const getUserAnswerText = (answers) => {
+    const userAnswers = []
+    answers.forEach(elem => { if (elem.selected === true) userAnswers.push(elem) })
+    return userAnswers
+  }
+
+  const getCorrectAnswer = (answers) => {
+    const rightAnswers = []
+    answers.forEach(elem => { if (elem.value === true) rightAnswers.push(elem) })
+    return rightAnswers
+  }
+
+  const getUserCorrectAnswer = (answers) => {
+    const rightSelectedAnswers = []
+    answers.forEach(elem => { if (elem.value === true && elem.selected === true) rightSelectedAnswers.push(elem) })
+    return rightSelectedAnswers
+  }
+
+  const getPoints = (answers) => {
+    let points = 0
+    answers.forEach(elem => { if (elem.value === true && elem.selected === true) points += elem.points })
+    return points
+  }
 
   return (
     <Row className="w-100 h-75 text-center">
@@ -38,7 +60,7 @@ export const Results = function (props) {
                     <th scope="col" key="1">Domanda</th>
                     <th scope="col" key="2">Tua Risposta</th>
                     <th scope="col" key="3">Risposta Corretta</th>
-                    <th scope="col" key="4">Punti</th>
+                    {props.selectedTest.pointsSystem && <th scope="col" key="4">Punti</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -50,8 +72,11 @@ export const Results = function (props) {
                     <ResultRow
                       key={index}
                       questionNumber={index + 1}
-                      userAnswer={elem.answers[0].selected}
-                      rightAnswer={elem.answers[0].value}
+                      questionText={elem.text}
+                      correctAnswer={getCorrectAnswer(elem.answers)}
+                      userAnswer={getUserAnswerText(elem.answers)}
+                      color={getUserCorrectAnswer(elem.answers).length > 0 ? "green" : "red"}
+                      points={props.selectedTest.pointsSystem ? getPoints(elem.answers) : null}
                     />
                   ))}
                 </tbody>
