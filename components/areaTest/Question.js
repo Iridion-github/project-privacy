@@ -11,7 +11,7 @@ import { Answers } from './Answers'
 
 export const Question = function (props) {
   return (
-    <Card className="">
+    <Card className="p-2" border="secondary">
       <Card.Img variant="top" src="" />
       <Card.Body className="">
         <Card.Title className="text-center">{props.questionNumber + ") "} {props.question}</Card.Title>

@@ -48,7 +48,7 @@ export const Results = function (props) {
           </Button>
         </Col>
       </Row>
-      <Card style={{}}>
+      <Card className="w-75 p-2" border="secondary">
         <Card.Img variant="top" src="" />
         <Card.Body>
           <Card.Title className="text-center">Risultati del Test: </Card.Title>

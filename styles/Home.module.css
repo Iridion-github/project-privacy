@@ -57,8 +57,6 @@
   text-shadow: 1px 1px 2px red, 0 0 1em #0070f3, 0 0 0.2em #0070f3;
 }
 
-.carouselStyle {}
-
 .footer {
   width: 100%;
   border-top: 1px solid #eaeaea;
@@ -163,7 +161,11 @@
   }
 }
 
-.text-justified {
-  text-align: justify !important;
-  text-justify: inter-word !important;
+.blackBorder {
+  border: 1px solid black !important;
+}
+
+.flagIcon {
+  width: 30px !important;
+  height: 20px !important;
 }

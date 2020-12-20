@@ -1,6 +1,8 @@
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {
+  Row,
+  Col,
   Card,
   Table
 } from 'react-bootstrap'
@@ -18,13 +20,12 @@ export default function contatti() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card>
+        <Card className="w-75 p-2" border="secondary">
           <Card.Img variant="top" src="contatti.png" />
           <Card.Body>
             <Card.Title className="text-center">Contatti</Card.Title>
-
-            <div className="row">
-              <div className="col-md-6">
+            <Row>
+              <Col md={{ span: 6 }}>
                 <Table striped bordered hover size="sm">
                   <thead>
                   </thead>
@@ -47,8 +48,8 @@ export default function contatti() {
                     </tr>
                   </tbody>
                 </Table>
-              </div>
-              <div className="col-md-6">
+              </Col>
+              <Col md={{ span: 6 }}>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.56015081952!2d12.508396296107795!3d41.88080899993093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61ebb6fa2465%3A0xbd6dcbf7a83c7e20!2sVia%20Fregene%2C%2033%2C%2000183%20Roma%20RM!5e0!3m2!1sen!2sit!4v1606502757348!5m2!1sen!2sit"
                   width="100%"
@@ -59,9 +60,8 @@ export default function contatti() {
                   aria-hidden="false"
                   tabIndex="0">
                 </iframe>
-              </div>
-            </div>
-
+              </Col>
+            </Row>
           </Card.Body>
           <Card.Footer className="text-center">
             <small className="text-muted">Aggiornato al: 27/11/2020</small>

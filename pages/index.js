@@ -26,7 +26,7 @@ export default function Home() {
               />
               <img
                 className="d-block"
-                src="1stSlide.png"
+                src="slides/1stSlide.png"
                 alt="First slide"
               />
             </picture>
@@ -48,7 +48,7 @@ export default function Home() {
               />
               <img
                 className="d-block"
-                src="2ndSlide.png"
+                src="slides/2ndSlide.png"
                 alt="Second slide"
               />
             </picture>
@@ -70,7 +70,7 @@ export default function Home() {
               />
               <img
                 className="d-block"
-                src="3rdSlide.png"
+                src="slides/3rdSlide.png"
                 alt="Third slide"
               />
             </picture>

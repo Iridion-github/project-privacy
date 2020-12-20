@@ -14,7 +14,7 @@ export const Quiz = function (props) {
   const [questionCounter, setQuestionCounter] = useState(1)
   const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions)
   return (
-    <Row className="w-100 h-75 text-center">
+    <Row className="w-100 h-75 text-center" border="secondary">
       <Row className="d-flex align-items-center w-100 mb-4">
         <Col md={4} className="text-center">
           <Button
