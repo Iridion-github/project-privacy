@@ -21,3 +21,15 @@ a {
   width: 60px !important;
   height: 60px !important;
 }
+
+.mobile-compatible-75-to-100 {
+  width: 75% !important;
+  flex-direction: column;
+}
+
+@media all and (max-width: 450px) {
+  .mobile-compatible-75-to-100 {
+    width: 100% !important;
+    flex-direction: column;
+  }
+}

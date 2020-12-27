@@ -169,3 +169,10 @@
   width: 30px !important;
   height: 20px !important;
 }
+
+.articlePreviewImg {
+  max-width: 800px;
+  max-height: 250px;
+  object-fit: cover;
+  /*object-fit: contain;*/
+}
