@@ -3,16 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {
   Row,
   Col,
+  Container,
   Button,
   Card,
   Nav,
   Image
 } from 'react-bootstrap'
+import articles from "../database/articles"
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
-import articles from "../database/articles"
+import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 
 export default function articoli() {
   return (
@@ -24,10 +26,21 @@ export default function articoli() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <ArticlesList
-          className="w-75"
-          allArticles={articles}
-        />
+        <Row>
+          <Col md={3} className="">
+            <ArticlesLeftMenu
+              allArticles={articles}
+            />
+          </Col>
+          <Col md={6} className="justify-content-center">
+            <ArticlesList
+              allArticles={articles}
+            />
+          </Col>
+          <Col md={3} className="">
+
+          </Col>
+        </Row>
       </main>
       {/* Footer */}
       <Footer />

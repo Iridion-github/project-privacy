@@ -14,7 +14,11 @@ a {
 }
 
 .bg-standard-blue {
-  background-color: rgb(131, 203, 221);
+  background-color: rgb(131, 203, 221) !important;
+}
+
+.bg-lighter-blue {
+  background-color: rgb(167, 222, 236) !important;
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
@@ -22,14 +26,22 @@ a {
   height: 60px !important;
 }
 
-.mobile-compatible-75-to-100 {
-  width: 75% !important;
-  flex-direction: column;
-}
-
 @media all and (max-width: 450px) {
-  .mobile-compatible-75-to-100 {
+  .mobile-compatible {
+    padding: auto;
     width: 100% !important;
     flex-direction: column;
   }
+}
+
+.black-border {
+  border: 1px solid black !important;
+}
+
+.mobile-adaptive-card-container {
+  min-width: 350px !important;
+}
+
+.inline-form-custom {
+  display: inline !important;
 }

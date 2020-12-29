@@ -20,13 +20,13 @@ export default function contatti() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="w-75 p-2" border="secondary">
+        <Card className="p-2" border="secondary">
           <Card.Img variant="top" src="contatti.png" />
           <Card.Body>
             <Card.Title className="text-center">Contatti</Card.Title>
             <Row>
               <Col md={{ span: 6 }}>
-                <Table striped bordered hover size="sm">
+                <Table striped bordered responsive size="sm">
                   <thead>
                   </thead>
                   <tbody>

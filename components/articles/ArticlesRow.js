@@ -15,7 +15,7 @@ export const ArticlesRow = function (props) {
   return (
     <Row className="w-100">
       {props.articles.map(article => (
-        <Col md={6} >
+        <Col md={6} className="mobile-adaptive-card-container">
           <ArticlePreview
             article={article}
           />
