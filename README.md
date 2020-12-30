@@ -40,3 +40,8 @@ Menu:
 6. privacy europa
 7. articoli
 8. glossario e dizionario
+___________________________________________
+
+[30/12/2020]
+- Articoli - Filtri a sinistra, articoli correlati a destra. Argomenti sono diversi dai tags.
+- Generale - Spostare ogni contenuto e scritta nel database e renderizzare tutto condizionalmente in base alla siteLanguage (context).

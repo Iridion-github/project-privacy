@@ -14,8 +14,8 @@ export const ArticlesRow = function (props) {
 
   return (
     <Row className="w-100">
-      {props.articles.map(article => (
-        <Col md={6} className="mobile-adaptive-card-container">
+      {props.articles.map((article, i) => (
+        <Col md={6} className="mobile-adaptive-card-container" key={i}>
           <ArticlePreview
             article={article}
           />

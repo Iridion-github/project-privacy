@@ -44,7 +44,7 @@ export const ArticlePreview = function (props) {
             <small className="text-muted"> {props.article.author} </small>
           </Col>
           <Col>
-            <span className="text-muted"> {props.article.tags.map(tag => <Badge variant="info" className="mr-1">{tag}</Badge>)}</span>
+            <span className="text-muted"> {props.article.tags.map(tag => <Badge variant="info" className="mr-1" key={tag}>{tag}</Badge>)}</span>
           </Col>
           <Col className="text-right">
             <small className="text-muted"> {datePrettifier(props.article.date, language)} </small>

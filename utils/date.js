@@ -51,5 +51,3 @@ export const datePrettifier = (inputDate, lang) => {
     : weekday + ', ' + month + ' ' + day + ' ' + year
   return result
 }
-
-console.log(datePrettifier("2020-12-25", "ita"))

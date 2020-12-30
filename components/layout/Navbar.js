@@ -5,16 +5,19 @@ import {
   Navbar,
   Nav,
   NavDropdown,
-  Container
+  Image
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 export const Navigation = function () {
+  const siteLanguage = useLanguage() //context
+  const siteLanguageUpdate = useLanguageUpdate() //context
   return (
     <Row className="m-0 w-100 bg-standard-blue">
       <Col md={{ span: 9, offset: 2 }} className="m-auto justify-content-center">
         <Navbar sticky="top" bg="standard-blue" expand="lg" className={styles.navbar}>
-          <Navbar.Brand href="/"><img src="/privacy.svg" className={styles.logo + " ml-2 mr-5"} /></Navbar.Brand>
+          <Navbar.Brand href="/" className="text-center"><img src="/privacy.svg" className={styles.logo} /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -39,6 +42,24 @@ export const Navigation = function () {
               <Nav.Link href="/articoli" className={styles.navbarText}>Articoli</Nav.Link>
               <div className={styles.navbarDivider}></div>
               <Nav.Link href="/contatti" className={styles.navbarText}>Contatti</Nav.Link>
+              <div className={styles.navbarDivider}></div>
+              <Row className="m-0 bg-standard-blue">
+                <Nav.Link
+                  active={siteLanguage === "ita"}
+                  href="#ita"
+                  onClick={() => siteLanguageUpdate("ita")}
+                  className="mr-1"
+                >
+                  <Image src="bandiere/ita.png" className={styles.blackBorder + " " + styles.flagIcon} />
+                </Nav.Link>
+                <Nav.Link
+                  active={siteLanguage === "eng"}
+                  href="#eng"
+                  onClick={() => siteLanguageUpdate("eng")}
+                  className="ml-0 mr-0">
+                  <Image src="bandiere/GB.png" className={styles.blackBorder + " " + styles.flagIcon} />
+                </Nav.Link>
+              </Row>
             </Nav>
             {/* Searchbar un pò brutta e che rompe le scatole nel layout 
         <Form inline>

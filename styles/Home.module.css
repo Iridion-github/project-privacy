@@ -35,8 +35,8 @@
 
 .navbarDivider {
   border-right: 1px solid #343a4041;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 .dropdownTitle {
@@ -144,7 +144,7 @@
 }
 
 .logo {
-  height: 2.5em;
+  height: 2em;
   color: rgb(75, 73, 73);
 }
 
