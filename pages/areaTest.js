@@ -8,6 +8,7 @@ import { Quiz } from '../components/areaTest/Quiz'
 import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
 import tests from "../database/readiedTests"
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 
 export default function areaTest() {
 
@@ -19,10 +20,12 @@ export default function areaTest() {
 
   const [results, setResults] = useState([])
 
+  const siteLanguage = useLanguage() //context
+
   return (
     <div className={styles.container}>
       <Header
-        title="Area Test"
+        title={siteLanguage === "ita" ? "Area Test" : "Test Area"}
       />
       {/* Navbar */}
       <Navigation />

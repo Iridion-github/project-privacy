@@ -5,8 +5,11 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 
 export default function Home() {
+  const siteLanguage = useLanguage() //context
   return (
     <div className={styles.container}>
       <Header
@@ -32,10 +35,10 @@ export default function Home() {
             </picture>
             <Carousel.Caption>
               <h2 className={styles.title}>
-                Consulenza Privacy e Antiriciclaggio
+                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
               <span className={styles.description}>
-                Analisi e valutazione rischi
+                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -53,11 +56,11 @@ export default function Home() {
               />
             </picture>
             <Carousel.Caption>
-              <h1 className={styles.title}>
-                Consulenza Privacy e Antiriciclaggio
-              </h1>
+              <h2 className={styles.title}>
+                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+              </h2>
               <span className={styles.description}>
-                Analisi e valutazione rischi
+                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -76,10 +79,10 @@ export default function Home() {
             </picture>
             <Carousel.Caption>
               <h2 className={styles.title}>
-                Consulenza Privacy e Antiriciclaggio
+                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
               <span className={styles.description}>
-                Analisi e valutazione rischi
+                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>

@@ -45,3 +45,11 @@ a {
 .inline-form-custom {
   display: inline !important;
 }
+
+.small-input {
+  max-width: 80px !important;
+}
+
+.small-text {
+  font-size: 0.8rem !important;
+}

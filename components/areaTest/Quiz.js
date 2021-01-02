@@ -13,6 +13,7 @@ import { Question } from './Question'
 export const Quiz = function (props) {
   const [questionCounter, setQuestionCounter] = useState(1)
   const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions)
+
   return (
     <Row className="w-100 h-75 text-center" border="secondary">
       <Row className="d-flex align-items-center w-100 mb-4">
@@ -48,7 +49,7 @@ export const Quiz = function (props) {
         <Col md={6}>
           <Question
             questionNumber={questionCounter}
-            question={props.selectedTest.questions[questionCounter - 1].text}
+            question={[questionCounter - 1].text}
             answers={props.selectedTest.questions[questionCounter - 1].answers}
             allUserAnswers={allUserAnswers}
             setAllUserAnswers={setAllUserAnswers}

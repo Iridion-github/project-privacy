@@ -23,25 +23,25 @@ export const Navigation = function () {
             <Nav className="mr-auto">
               <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <Nav.Link href="/chiSono" className={styles.navbarText}>Chi Sono</Nav.Link>
+              <Nav.Link href="/chiSono" className={styles.navbarText}>{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <NavDropdown title="Formazione" id="basic-nav-dropdown1" className={styles.navbarText}>
+              <NavDropdown title={siteLanguage === "ita" ? "Formazione" : "Training"} id="basic-nav-dropdown1" className={styles.navbarText}>
                 <NavDropdown.Item href="/formazione/privacy" className={styles.dropdownOption}>Privacy</NavDropdown.Item>
-                <NavDropdown.Item href="/formazione/antiriciclaggio" className={styles.dropdownOption} > Antiriciclaggio</NavDropdown.Item>
+                <NavDropdown.Item href="/formazione/antiriciclaggio" className={styles.dropdownOption}>{siteLanguage === "ita" ? "Antiriciclaggio" : "Anti Money-laundering"}</NavDropdown.Item>
               </NavDropdown>
               <div className={styles.navbarDivider}></div>
-              <NavDropdown title="Consulenza" id="basic-nav-dropdown2" className={styles.navbarText}>
+              <NavDropdown title={siteLanguage === "ita" ? "Consulenza" : "Consultation"} id="basic-nav-dropdown2" className={styles.navbarText}>
                 <NavDropdown.Item href="/consulenza/privacy" className={styles.dropdownOption}>Privacy</NavDropdown.Item>
-                <NavDropdown.Item href="/consulenza/antiriciclaggio" className={styles.dropdownOption} > Antiriciclaggio</NavDropdown.Item>
+                <NavDropdown.Item href="/consulenza/antiriciclaggio" className={styles.dropdownOption}> {siteLanguage === "ita" ? "Antiriciclaggio" : "Anti Money-laundering"}</NavDropdown.Item>
               </NavDropdown>
               <div className={styles.navbarDivider}></div>
-              <Nav.Link href="/areaTest" className={styles.navbarText}>Area Test</Nav.Link>
+              <Nav.Link href="/areaTest" className={styles.navbarText}>{siteLanguage === "ita" ? "Area Test" : "Test Area"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>Recensioni Bibliografiche</Nav.Link>
+              <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>{siteLanguage === "ita" ? "Recensioni Bibliografiche" : "Bibliographic Reviews"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <Nav.Link href="/articoli" className={styles.navbarText}>Articoli</Nav.Link>
+              <Nav.Link href="/articoli" className={styles.navbarText}>{siteLanguage === "ita" ? "Articoli" : "Articles"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <Nav.Link href="/contatti" className={styles.navbarText}>Contatti</Nav.Link>
+              <Nav.Link href="/contatti" className={styles.navbarText}>{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
               <Row className="m-0 bg-standard-blue">
                 <Nav.Link
@@ -61,12 +61,6 @@ export const Navigation = function () {
                 </Nav.Link>
               </Row>
             </Nav>
-            {/* Searchbar un pò brutta e che rompe le scatole nel layout 
-        <Form inline>
-          <FormControl type="text" placeholder="Cerca" className="mr-sm-2" />
-          <Button variant="primary"><i className="fas fa-search"></i></Button>
-        </Form>
-        */}
           </Navbar.Collapse>
         </Navbar >
       </Col>

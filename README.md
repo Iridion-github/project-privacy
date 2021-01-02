@@ -44,4 +44,4 @@ ___________________________________________
 
 [30/12/2020]
 - Articoli - Filtri a sinistra, articoli correlati a destra. Argomenti sono diversi dai tags.
-- Generale - Spostare ogni contenuto e scritta nel database e renderizzare tutto condizionalmente in base alla siteLanguage (context).
+- Ispirazione - Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.

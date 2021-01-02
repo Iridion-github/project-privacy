@@ -9,12 +9,14 @@ import {
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 
 export default function contatti() {
+  const siteLanguage = useLanguage() //context
   return (
     <div className={styles.container}>
       <Header
-        title="Contatti"
+        title={siteLanguage === "ita" ? "Contatti" : "Contacts"}
       />
       {/* Navbar */}
       <Navigation />
@@ -23,7 +25,7 @@ export default function contatti() {
         <Card className="p-2" border="secondary">
           <Card.Img variant="top" src="contatti.png" />
           <Card.Body>
-            <Card.Title className="text-center">Contatti</Card.Title>
+            <Card.Title className="text-center">{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Card.Title>
             <Row>
               <Col md={{ span: 6 }}>
                 <Table striped bordered responsive size="sm">
@@ -31,11 +33,11 @@ export default function contatti() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td><b>Indirizzo:</b></td>
-                      <td>Via Fregene 33 - 00183 ROMA (RM)</td>
+                      <td><b>{siteLanguage === "ita" ? "Indirizzo" : "Address"}:</b></td>
+                      <td>Via Fregene 33 - 00183 {siteLanguage === "ita" ? "Roma" : "Rome"} (RM)</td>
                     </tr>
                     <tr>
-                      <td><b>Telefono:</b></td>
+                      <td><b>{siteLanguage === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
                       <td>335-236564</td>
                     </tr>
                     <tr>
@@ -43,7 +45,7 @@ export default function contatti() {
                       <td>mastrogae@gmail.com</td>
                     </tr>
                     <tr>
-                      <td><b>P.IVA:</b></td>
+                      <td><b>{siteLanguage === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
                       <td>00000000000</td>
                     </tr>
                   </tbody>
@@ -64,7 +66,7 @@ export default function contatti() {
             </Row>
           </Card.Body>
           <Card.Footer className="text-center">
-            <small className="text-muted">Aggiornato al: 27/11/2020</small>
+            <small className="text-muted">{siteLanguage === "ita" ? "Aggiornato al" : "Last updated"}: 27/11/2020</small>
           </Card.Footer>
         </Card>
       </main >

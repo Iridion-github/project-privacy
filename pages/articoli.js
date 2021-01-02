@@ -11,12 +11,14 @@ import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 
 export default function articoli(props) {
+  const siteLanguage = useLanguage() //context
   return (
     <div className={styles.container}>
       <Header
-        title="Articoli"
+        title={siteLanguage === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
       <Navigation />

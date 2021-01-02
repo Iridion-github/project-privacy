@@ -88,7 +88,229 @@ const articles = [
       subtitle: "subtitle article 5",
       content: "content article 5 - bla bla bla"
     }
-  }
+  },
+  {
+    id: "5",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic1",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "6",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic2",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "7",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic3",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "8",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic1",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "9",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic2",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "10",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic3",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "11",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic4",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "12",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic5",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "13",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic4",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "14",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic5",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "15",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic4",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+  {
+    id: "16",
+    date: "2020-12-25",
+    author: "Gaetano Mastropierro",
+    topic: "topic5",
+    tags: ["tag1", "tag2", "tag3"],
+    previewImg: "articoli/url-preview-img-1.png",
+    ita: {
+      title: "titolo articolo 1",
+      subtitle: "sottotitolo articolo 1",
+      content: "contenuto articolo 1 - bla bla bla"
+    },
+    eng: {
+      title: "title article 1",
+      subtitle: "subtitle article 1",
+      content: "content article 1 - bla bla bla"
+    }
+  },
+
+
+
+
+
+
 ]
 
 export default articles
