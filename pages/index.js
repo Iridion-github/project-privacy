@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { Carousel } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'

@@ -6,7 +6,6 @@ import {
   Button
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import { Answers } from './Answers'
 
 export const Question = function (props) {

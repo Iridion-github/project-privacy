@@ -5,7 +5,6 @@ import {
   ListGroup
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import { ArticlesTagRow } from './ArticlesTagRow'
 import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 

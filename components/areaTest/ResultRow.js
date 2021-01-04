@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 
 export const ResultRow = function (props) {
   const userAnswerSpan = props.userAnswer.length > 1 ? props.userAnswer.map((elem, i) => (<span key={i}> {elem.text} | </span>)) : " - "

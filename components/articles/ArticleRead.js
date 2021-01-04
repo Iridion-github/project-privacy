@@ -9,7 +9,6 @@ import {
 } from 'react-bootstrap'
 import styles from '../../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 
 export const ArticleRead = function (props) {
   const [language, setLanguage] = useState("ita")

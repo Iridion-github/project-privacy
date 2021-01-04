@@ -6,7 +6,6 @@ import {
   Table
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import { ResultRow } from './ResultRow'
 
 export const Results = function (props) {
