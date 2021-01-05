@@ -34,7 +34,12 @@ export const ArticlePreview = function (props) {
           {language === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}
         </Card.Text>
         <Row className="justify-content-end pr-3">
-          <Button size="md">{language === "ita" ? "Leggi " : "Read "}<i className="ml-2 fab fa-readme"></i></Button>
+          <Button
+            size="md"
+            onClick={() => props.setOpenedArticle(props.article.id)}
+          >
+            {language === "ita" ? "Leggi " : "Read "}<i className="ml-2 fab fa-readme"></i>
+          </Button>
         </Row>
       </Card.Body>
       <Card.Footer>

@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesRow } from "./ArticlesRow"
 import { MyPagination } from "../layout/MyPagination"
 import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { removeDuplicatesById, includesAll } from '../../utils/arrays'
 
 export const ArticlesList = function (props) {
 
@@ -17,23 +18,26 @@ export const ArticlesList = function (props) {
   const siteLanguageUpdate = useLanguageUpdate() //context
 
   const searchFilter = (articles, input) => {
-    let result = []
+    const searchTerms = input.toLowerCase().split(" ")
+    const found = []
     if (input !== "") {
-      let searchTerms = input.split(" ")
-      for (let x = 0; x < searchTerms.length; x++) {
-        result = articles.filter(art => {
-          return art.author.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.topic.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.tags.includes(searchTerms[x].toLowerCase())
-            || art.ita.title.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.ita.subtitle.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.ita.content.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.eng.title.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.eng.subtitle.toLowerCase().includes(searchTerms[x].toLowerCase())
-            || art.eng.content.toLowerCase().includes(searchTerms[x].toLowerCase())
-        })
-      }
+      articles.forEach(art => {
+        if (
+          includesAll(art.author, searchTerms, Array.isArray(art.author)).length > 0
+          || includesAll(art.topic, searchTerms, Array.isArray(art.topic)).length > 0
+          || includesAll(art.tags, searchTerms, Array.isArray(art.tags)).length > 0
+          || includesAll(art.ita.title, searchTerms, Array.isArray(art.ita.title)).length > 0
+          || includesAll(art.ita.subtitle, searchTerms, Array.isArray(art.ita.subtitle)).length > 0
+          || includesAll(art.ita.content, searchTerms, Array.isArray(art.ita.content)).length > 0
+          || includesAll(art.eng.title, searchTerms, Array.isArray(art.eng.title)).length > 0
+          || includesAll(art.eng.subtitle, searchTerms, Array.isArray(art.eng.subtitle)).length > 0
+          || includesAll(art.eng.content, searchTerms, Array.isArray(art.eng.content)).length > 0
+        ) {
+          found.push(art)
+        }
+      })
     }
+    const result = removeDuplicatesById(found)
     return result
   }
 
@@ -108,6 +112,7 @@ export const ArticlesList = function (props) {
         <Col>
           {visibleRows.map((row, i) =>
             <ArticlesRow
+              setOpenedArticle={props.setOpenedArticle}
               key={i}
               articles={row}
             />

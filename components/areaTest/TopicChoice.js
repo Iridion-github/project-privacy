@@ -8,97 +8,101 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const TopicChoice = function (props) {
   return (
-    <Card className="w-75 p-2" border="secondary">
-      <Card.Img variant="top" src="" />
-      <Card.Body>
-        <Card.Title className="text-center">Test di verifica dell'Apprendimento</Card.Title>
-        <Row className="mb-4">
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => {
-                props.setSelectedTopic("Test 1")
-                props.setSelectedTest(0)
-              }}
-            >
-              Test 1
+    <Row className="w-100 align-items-center m-auto">
+      <Col md={{ span: 4, offset: 4 }} className="align-items-center m-auto">
+        <Card className="w-100 p-2" border="secondary">
+          <Card.Img variant="top" src="" />
+          <Card.Body>
+            <Card.Title className="text-center">Test di verifica dell'Apprendimento</Card.Title>
+            <Row className="mb-4">
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Test 1")
+                    props.setSelectedTest(0)
+                  }}
+                >
+                  Test 1
                   </Button>
-          </Col>
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => {
-                props.setSelectedTopic("Test 2")
-                props.setSelectedTest(null)
-              }}
-            >
-              Test 2
+              </Col>
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Test 2")
+                    props.setSelectedTest(null)
+                  }}
+                >
+                  Test 2
                   </Button>
-          </Col>
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => {
-                props.setSelectedTopic("Test Debug")
-                props.setSelectedTest(1)
-              }}
-            >
-              Test Debug
+              </Col>
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Test Debug")
+                    props.setSelectedTest(1)
+                  }}
+                >
+                  Test Debug
                   </Button>
-          </Col>
-        </Row>
-        <h5 className="text-center">I Nostri Test</h5>
-        <Row className="mb-4">
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => props.setSelectedTopic("anticorruzione")}
-            >
-              Anticorruzione e Trasparenza
+              </Col>
+            </Row>
+            <h5 className="text-center">I Nostri Test</h5>
+            <Row className="mb-4">
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => props.setSelectedTopic("anticorruzione")}
+                >
+                  Anticorruzione e Trasparenza
                   </Button>
-          </Col>
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => props.setSelectedTopic("privacy")}
-            >
-              Privacy
+              </Col>
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => props.setSelectedTopic("privacy")}
+                >
+                  Privacy
                   </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => props.setSelectedTopic("antiriciclaggio")}
-            >
-              Antiriciclaggio
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => props.setSelectedTopic("antiriciclaggio")}
+                >
+                  Antiriciclaggio
                   </Button>
-          </Col>
-          <Col>
-            <Button
-              size="lg"
-              variant="outline-dark"
-              block
-              onClick={() => props.setSelectedTopic("responsabilitàAmministrativa")}
-            >
-              Responsabilità amministrativa delle persone giuridiche
+              </Col>
+              <Col>
+                <Button
+                  size="lg"
+                  variant="outline-dark"
+                  block
+                  onClick={() => props.setSelectedTopic("responsabilitàAmministrativa")}
+                >
+                  Responsabilità amministrativa delle persone giuridiche
                   </Button>
-          </Col>
-        </Row>
-      </Card.Body>
-    </Card>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row >
   )
 }

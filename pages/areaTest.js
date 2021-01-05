@@ -1,6 +1,10 @@
 import { useState, useContext, createContext } from 'react'
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import {
+  Row,
+  Col
+} from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { TopicChoice } from '../components/areaTest/TopicChoice'
@@ -31,30 +35,32 @@ export default function areaTest() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        {/* Scelta Quiz */}
-        {(selectedTopic === null && showResults === false) &&
-          <TopicChoice
+        <Row className="w-100 m-auto">
+          {/* Scelta Quiz */}
+          {(selectedTopic === null && showResults === false) &&
+            <TopicChoice
+              setSelectedTopic={setSelectedTopic}
+              setSelectedTest={setSelectedTest}
+            />}
+          {/* Fine Scelta Quiz */}
+          {/* Quiz */}
+          {selectedTopic && <Quiz
+            selectedTopic={selectedTopic}
+            selectedTest={tests[selectedTest]}
             setSelectedTopic={setSelectedTopic}
-            setSelectedTest={setSelectedTest}
+            setShowResults={setShowResults}
+            setResults={setResults}
           />}
-        {/* Fine Scelta Quiz */}
-        {/* Quiz */}
-        {selectedTopic && <Quiz
-          selectedTopic={selectedTopic}
-          selectedTest={tests[selectedTest]}
-          setSelectedTopic={setSelectedTopic}
-          setShowResults={setShowResults}
-          setResults={setResults}
-        />}
-        {/* Fine Quiz */}
-        {/* Risultati */}
-        {showResults && <Results
-          selectedTopic={selectedTopic}
-          selectedTest={tests[selectedTest]}
-          setShowResults={setShowResults}
-          results={results}
-        />}
-        {/* Fine Risultati */}
+          {/* Fine Quiz */}
+          {/* Risultati */}
+          {showResults && <Results
+            selectedTopic={selectedTopic}
+            selectedTest={tests[selectedTest]}
+            setShowResults={setShowResults}
+            results={results}
+          />}
+          {/* Fine Risultati */}
+        </Row>
       </main>
       {/* Footer */}
       <Footer />

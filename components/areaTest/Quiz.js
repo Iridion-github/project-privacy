@@ -14,9 +14,9 @@ export const Quiz = function (props) {
   const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions)
 
   return (
-    <Row className="w-100 h-75 text-center" border="secondary">
-      <Row className="d-flex align-items-center w-100 mb-4">
-        <Col md={4} className="text-center">
+    <Row className="w-100 h-75 text-center align-items-center m-auto" border="secondary">
+      <Row className="w-100 mb-4">
+        <Col md={4} className="d-flex align-items-center justify-content-end">
           <Button
             variant="danger"
             onClick={() => props.setSelectedTopic(null)}
@@ -25,12 +25,12 @@ export const Quiz = function (props) {
             I nostri Test
           </Button>
         </Col>
-        <Col md={8}>
+        <Col md={4}>
           <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: {props.selectedTopic}</div>
         </Col>
       </Row>
       <Row className="w-100 mb-4">
-        <Col md={3} className="d-flex align-items-center justify-content-end">
+        <Col md={4} className="d-flex align-items-center justify-content-end">
           {(questionCounter > 1) &&
             <Button
               size="lg"
@@ -45,16 +45,16 @@ export const Quiz = function (props) {
             </Button>
           }
         </Col>
-        <Col md={6}>
+        <Col md={4}>
           <Question
             questionNumber={questionCounter}
-            question={[questionCounter - 1].text}
+            question={props.selectedTest.questions[questionCounter - 1].text}
             answers={props.selectedTest.questions[questionCounter - 1].answers}
             allUserAnswers={allUserAnswers}
             setAllUserAnswers={setAllUserAnswers}
           />
         </Col>
-        <Col md={3} className="d-flex align-items-center justify-content-start">
+        <Col md={4} className="d-flex align-items-center justify-content-start">
           {(questionCounter < props.selectedTest.questions.length) &&
             <Button
               size="lg"

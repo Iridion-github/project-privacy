@@ -53,3 +53,8 @@ a {
 .small-text {
   font-size: 0.8rem !important;
 }
+
+.flag-icon {
+  width: 30px !important;
+  height: 20px !important;
+}

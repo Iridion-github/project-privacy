@@ -15,6 +15,7 @@ export const ArticlesRow = function (props) {
       {props.articles.map((article, i) => (
         <Col md={6} className="mobile-adaptive-card-container" key={i}>
           <ArticlePreview
+            setOpenedArticle={props.setOpenedArticle}
             article={article}
           />
         </Col>

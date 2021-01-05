@@ -4,7 +4,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic1",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 1",
@@ -22,7 +22,7 @@ const articles = [
     date: "2020-12-26",
     author: "Alessandro Mastropierro",
     topic: "topic2",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-2.png",
     ita: {
       title: "titolo articolo 2",
@@ -40,7 +40,7 @@ const articles = [
     date: "2020-12-27",
     author: "Autore Esterno",
     topic: "topic3",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-3.png",
     ita: {
       title: "titolo articolo 3",
@@ -58,7 +58,7 @@ const articles = [
     date: "2020-12-28",
     author: "Autore Esterno",
     topic: "topic4",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-4.png",
     ita: {
       title: "titolo articolo 4",
@@ -76,7 +76,7 @@ const articles = [
     date: "2020-12-29",
     author: "Autore Esterno",
     topic: "topic5",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-5.png",
     ita: {
       title: "titolo articolo 5",
@@ -94,7 +94,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic1",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 6",
@@ -112,7 +112,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic2",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 7",
@@ -130,7 +130,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic3",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 8",
@@ -148,7 +148,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic1",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 9",
@@ -166,7 +166,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic2",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 10",
@@ -184,7 +184,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic3",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 11",
@@ -202,7 +202,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic4",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 12",
@@ -220,7 +220,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic5",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 13",
@@ -238,7 +238,7 @@ const articles = [
     date: "2020-12-25",
     author: "Gaetano Mastropierro",
     topic: "topic4",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 14",
@@ -254,9 +254,9 @@ const articles = [
   {
     id: "14",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    author: "Gaetano Mastropierro, Davide Antinori",
     topic: "topic5",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 15",
@@ -272,9 +272,9 @@ const articles = [
   {
     id: "15",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    author: "Gaetano Mastropierro, Alessandro Mastropierro",
     topic: "topic4",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 16",
@@ -290,9 +290,9 @@ const articles = [
   {
     id: "16",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    author: "Gaetano Mastropierro, Alessandro Mastropierro",
     topic: "topic5",
-    tags: ["tag1", "tag2", "tag3"],
+    tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
     ita: {
       title: "titolo articolo 17",
