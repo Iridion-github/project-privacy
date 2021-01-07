@@ -11,7 +11,7 @@ import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContex
 export const ArticlesLeftMenu = function (props) {
   const siteLanguage = useLanguage() //context
   return (
-    <Row className="justify-content-center">
+    <Row className="justify-content-center mb-2">
       <Row className="mobile-compatible w-100 mt-5">
         <Col>
           <Card className="bg-standard-blue">

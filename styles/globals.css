@@ -58,3 +58,40 @@ a {
   width: 30px !important;
   height: 20px !important;
 }
+
+.special-bottom-border {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.article-img-sm-left {
+  max-height: 130px !important;
+  max-width: 100% !important;
+  object-fit: contain;
+  float: left !important;
+}
+
+.article-img-md-left {
+  max-height: 250px !important;
+  max-width: 100% !important;
+  object-fit: contain;
+  float: left !important;
+}
+
+.article-img-lg-center {
+  max-width: 100% !important;
+  object-fit: contain;
+}
+
+.article-img-sm-right {
+  max-height: 130px !important;
+  max-width: 100% !important;
+  object-fit: contain;
+  float: right !important;
+}
+
+.article-img-md-right {
+  max-height: 250px !important;
+  max-width: 100% !important;
+  object-fit: contain;
+  float: right !important;
+}
