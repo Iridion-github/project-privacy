@@ -45,4 +45,5 @@ ___________________________________________
 [30/12/2020]
 - Article Read - Filtri a sinistra, articoli correlati a destra. Argomenti sono diversi dai tags.
 - Articoli - Nella colonna di destra, affianco all'articlesPreview ci sarà un glossario per i termini più importanti inclusi negli articoli.
+- Layout - Sarà necessaria la presenza di una Breadcrumbs Bar.
 - Ispirazione - Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.

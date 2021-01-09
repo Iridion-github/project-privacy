@@ -7,7 +7,7 @@ const getOrdinal = (day) => {
   return result
 }
 
-export const datePrettifier = (inputDate, lang) => {
+export const datePrettifier = (inputDate, lang, shorter) => {
   const giorniSettimana = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   const mesi = [
@@ -47,7 +47,7 @@ export const datePrettifier = (inputDate, lang) => {
   const month = months[rawDate.getMonth()]
   const year = rawDate.getFullYear()
   let result = (lang === "ita")
-    ? giornoSettimana + ', ' + day + ' ' + mese + ' ' + year
-    : weekday + ', ' + month + ' ' + day + ' ' + year
+    ? (shorter ? "" : giornoSettimana + ', ') + day + ' ' + mese + ' ' + year
+    : (shorter ? "" : weekday + ', ') + month + ' ' + day + ' ' + year
   return result
 }

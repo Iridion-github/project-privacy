@@ -13,6 +13,7 @@ import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { ArticleRead } from "../components/articles/ArticleRead"
+import { Glossary } from "../components/layout/Glossary"
 import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 
 export default function articoli(props) {
@@ -50,7 +51,7 @@ export default function articoli(props) {
             }
           </Col>
           <Col md={3} className="">
-            Glossario
+            <Glossary />
           </Col>
         </Row>
       </main>

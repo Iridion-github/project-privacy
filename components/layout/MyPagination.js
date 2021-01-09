@@ -1,4 +1,3 @@
-import styles from '../../styles/Home.module.css'
 import { useState, useContext, createContext } from 'react'
 import {
   Row,
@@ -24,7 +23,7 @@ export const MyPagination = function (props) {
       <Col sm={7} className="m-auto text-center justify-content-center">
         <Pagination
           size="sm"
-          className="justify-content-end"
+          className="justify-content-end custom-pagination"
         >
           <Pagination.First onClick={() => changePage(1)} />
           {props.currentPage >= 4 && <Pagination.Ellipsis disabled />}
@@ -49,7 +48,7 @@ export const MyPagination = function (props) {
                 <Button
                   disabled={targetPage === ""}
                   size="sm"
-                  variant="primary"
+                  variant="info"
                   className="ml-1"
                   onClick={() => changePage(Number(targetPage))}
                 >

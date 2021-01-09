@@ -2,7 +2,7 @@ const articles = [
   {
     id: "0",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic1",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -26,52 +26,12 @@ const articles = [
         margin: " mt-2 mb-2"
       }],
     ita: {
-      title: "titolo articolo 1",
-      subtitle: "sottotitolo articolo 1",
+      title: "Prenotazioni on line di servizi sanitari: c’è ancora molto da fare. Il rischio di essere sottoposti ad attività ispettive online.",
+      subtitle: "Le recenti sanzioni applicate dalla CNIL in Francia a due medici evidenziano aspetti che potrebbero riguardare il settore sanitario italiano. ",
       content: [
-        `contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-        ùad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est 
-        laborum. contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
-        `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.`,
-        `
-        <strong><span style="font-size: 24px;">TITOLETTO PIU' GRANDE</span></strong>
-
-        &nbsp;
-        
-        <strong>prova lista</strong>
-        <ul>
-           <li>elemento 1</li>
-           <li>elemento 2</li>
-           <li>elemento 3</li>
-        </ul>
-        &nbsp;
-        
-        prova citazione:&nbsp;
-        <div>
-        <blockquote>
-        <div><span style="font-size: 14px;">Lorem&nbsp;ipsum&nbsp;dolor&nbsp;sit&nbsp;amet,&nbsp;consectetur&nbsp;adipiscing&nbsp;elit,&nbsp;sed&nbsp;do&nbsp;eiusmod&nbsp;tempor&nbsp;incididunt&nbsp;ut&nbsp;labore&nbsp;et&nbsp;dolore&nbsp;magna&nbsp;aliqua.&nbsp;</span></div>
-        <div><span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ut&nbsp;enim&nbsp;ad&nbsp;minim&nbsp;veniam,&nbsp;quis&nbsp;nostrud&nbsp;exercitation&nbsp;ullamco&nbsp;laboris&nbsp;nisi&nbsp;ut&nbsp;aliquip&nbsp;ex&nbsp;ea&nbsp;commodo&nbsp;consequat.&nbsp;Duis&nbsp;aute&nbsp;irure&nbsp;dolor&nbsp;in&nbsp;reprehenderit&nbsp;in&nbsp;</span></div>
-        <div><span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voluptate&nbsp;velit&nbsp;esse&nbsp;cillum&nbsp;dolore&nbsp;eu&nbsp;fugiat&nbsp;nulla&nbsp;pariatur.</span></div></blockquote>
-        </div>
-        `
+        `Il significato di privacy nel tempo si &egrave; evoluto anche in relazione all'evoluzione tecnologica che dai tempi di Warren e Brandeis (fine&nbsp;XIX secolo) &egrave; intercorsa. Inizialmente riferito alla sfera della vita privata, negli ultimi decenni ha subito un'evoluzione estensiva, arrivando ad indicare il diritto al controllo sui propri&nbsp;dati personali.<sup id="cite_ref-11" class="reference"></sup>&nbsp;Quindi, il significato odierno, di&nbsp;<em>privacy</em>, comunemente, &egrave; relativo al diritto della persona di controllare che le informazioni che la riguardano vengano trattate o guardate da altri solo in caso di necessit&agrave;.La&nbsp;<em>privacy</em>&nbsp;non va confusa nemmeno con la solitudine, e questa non va confusa con l'abbandono, in quanto sussiste una profonda differenza, infatti, tra &laquo;l'esser soli&raquo;, &laquo;l'esser lasciati soli&raquo; e &laquo;l'esser lasciati in condizioni di non-autosufficienza&raquo; con&nbsp;handicap&nbsp;senza essere capaci n&eacute; di intendere n&eacute; di volere. Il termine avrebbe anche un'accezione culturale: secondo alcuni ricercatori il concetto di&nbsp;<em>privacy</em>&nbsp;distingue la cultura Anglo-americana da quella Europea occidentale, come quella Italiana, Tedesca o Francese. Tuttavia si hanno troppi punti in comune tra le due soprattutto dal punto di vista del ruolo delle informazioni personali all'interno della societ&agrave;.<sup id="cite_ref-12" class="reference"></sup>`,
+        `Il diritto alla privacy non va confuso con il diritto al segreto, anch'esso finalizzato a tutelare un'area riservata della vita privata ma che per qualche motivo comprenda elementi comunque conosciuti da alcune persone: il medico, ad esempio, &egrave; sicuramente consapevole dello stato di salute del proprio paziente, ma ha il dovere di mantenere il segreto professionale sulle notizie di cui &egrave; a conoscenza.Il diritto alla privacy non &egrave; nemmeno interamente sovrapponibile al diritto alla protezione dei dati personali (cio&egrave; alla protezione da monitoraggio continuo, previsione dei comportamenti, profilazione degli individui) che nasce come corollario del diritto alla riservatezza.[13]La diffusione delle nuove tecnologie a partire dal XXI secolo ha contribuito ad un assottigliamento della barriera della privacy, ad esempio la tracciabilit&agrave; dei cellulari o la relativa facilit&agrave; a reperire gli indirizzi di posta elettronica delle persone, che pu&ograve; dar luogo, ad esempio, al fenomeno dello spamming, pubblicit&agrave; indesiderata. Anche la geolocalizzazione degli smartwatch, combinata con funzioni in questi contenute, come il cardiofrequenzimetro, pu&ograve; impattare in modo significativo sulla privacy, permettendo ad aziende di marketing di monitorare l'utente nelle sue abitudini di consumo e gusti personali attraverso tecniche di pubblicit&agrave; comportamentale, cio&egrave; una raccolta delle informazioni personali degli utenti come mezzo di marketing per proporre pubblicit&agrave; targetizzate, come evidenziato da Federprivacy nel 2015, e confermato da uno studio condotto dall'Universit&agrave; di Pisa in collaborazione con l'Universit&agrave; dell'Essex, e l'Harvard Medical School.`,
+        `La digitalizzazione delle immagini contribuisce ad una continua e progressiva riduzione della riservatezza e da difficolt&agrave; nella sua tutela: condividere un'immagine o un video on-line su internet comporta la perdita di controllo sul materiale inserito. Ad esempio il sexting - condivisione di fotografie a carattere erotico prevalentemente sui social network - comporta la totale impossibilit&agrave; di nasconderla potendo essere scaricata da altri utenti e reimmessa in Rete in qualunque altro momento. Analoghi problemi sorgono allorch&eacute; vi siano video che in qualche modo siano lesivi della privacy o in qualche modo lesivi di altre persone, soprattutto se di minore et&agrave;.Il 28 gennaio &egrave; celebrata da diversi paesi nel mondo la Giornata europea della protezione dei dati personali, istituita dal Consiglio d'Europa.`
       ]
     },
     eng: {
@@ -83,7 +43,7 @@ const articles = [
   {
     id: "1",
     date: "2020-12-26",
-    author: "Alessandro Mastropierro",
+    authors: ["Alessandro Mastropierro"],
     topic: "topic2",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-2.png",
@@ -99,46 +59,25 @@ const articles = [
         position: "center",
         size: "lg",
         margin: " mt-2 mb-2"
+      },
+      {
+        src: "articoli/url-preview-img-4.png",
+        position: "center",
+        size: "lg",
+        margin: " mt-2 mb-2"
       }
     ],
     ita: {
       title: "titolo articolo 2",
       subtitle: "sottotitolo articolo 2",
       content: [
-        `contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-        ùad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est 
-        laborum. contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.`,
-        `contenuto articolo 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-        deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit 
-        anim id est laborum.`
+        `Paragrafo 1 - dolor uno due tre quattro cinque dolor sei sette otto nove dieci dolor;
+        dolor undici dodici tredici quattordici quindici dolor sedici diciassette diciotto diciannove venti dolor.
+        `,
+        `Paragrafo 2 - dolor uno due tre quattro cinque dolor sei sette otto nove dieci dolor;
+        dolor undici dodici tredici quattordici quindici dolor sedici diciassette diciotto diciannove venti dolor.`,
+        `Paragrafo 3 - dolor uno due tre quattro cinque dolor sei sette otto nove dieci dolor;
+        dolor undici dodici tredici quattordici quindici dolor sedici diciassette diciotto diciannove venti dolor.`
       ]
     },
     eng: {
@@ -150,7 +89,7 @@ const articles = [
   {
     id: "2",
     date: "2020-12-27",
-    author: "Autore Esterno",
+    authors: ["Autore Esterno"],
     topic: "topic3",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-3.png",
@@ -169,7 +108,7 @@ const articles = [
   {
     id: "3",
     date: "2020-12-28",
-    author: "Autore Esterno",
+    authors: ["Autore Esterno"],
     topic: "topic4",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-4.png",
@@ -188,7 +127,7 @@ const articles = [
   {
     id: "4",
     date: "2020-12-29",
-    author: "Autore Esterno",
+    authors: ["Autore Esterno"],
     topic: "topic5",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-5.png",
@@ -207,7 +146,7 @@ const articles = [
   {
     id: "5",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic1",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -226,7 +165,7 @@ const articles = [
   {
     id: "6",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic2",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -245,7 +184,7 @@ const articles = [
   {
     id: "7",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic3",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -264,7 +203,7 @@ const articles = [
   {
     id: "8",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic1",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -283,7 +222,7 @@ const articles = [
   {
     id: "9",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic2",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -302,7 +241,7 @@ const articles = [
   {
     id: "10",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic3",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -321,7 +260,7 @@ const articles = [
   {
     id: "11",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic4",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -340,7 +279,7 @@ const articles = [
   {
     id: "12",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic5",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -359,7 +298,7 @@ const articles = [
   {
     id: "13",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro",
+    authors: ["Gaetano Mastropierro"],
     topic: "topic4",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -378,7 +317,7 @@ const articles = [
   {
     id: "14",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro, Davide Antinori",
+    authors: ["Gaetano Mastropierro", "Davide Antinori"],
     topic: "topic5",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -397,7 +336,7 @@ const articles = [
   {
     id: "15",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro, Alessandro Mastropierro",
+    authors: ["Gaetano Mastropierro", "Alessandro Mastropierro"],
     topic: "topic4",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",
@@ -416,7 +355,7 @@ const articles = [
   {
     id: "16",
     date: "2020-12-25",
-    author: "Gaetano Mastropierro, Alessandro Mastropierro",
+    authors: ["Gaetano Mastropierro", "Alessandro Mastropierro"],
     topic: "topic5",
     tags: ["#tag1", "#tag2", "#tag3"],
     previewImg: "articoli/url-preview-img-1.png",

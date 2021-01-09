@@ -91,7 +91,7 @@ export const ArticlesList = function (props) {
                 onChange={event => searchInputOnChange(event.target.value)}
                 className="w-75 inline-form-custom" />
               <Button
-                variant={!filtered ? "primary" : "danger"}
+                variant={!filtered ? "info" : "danger"}
                 disabled={searchInput.length < 3}
                 onClick={!filtered ? () => setFiltered(true) : () => setFiltered(false)}
                 className="ml-1">

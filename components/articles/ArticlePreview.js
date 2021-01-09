@@ -11,9 +11,11 @@ import {
 import styles from '../../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { datePrettifier } from '../../utils/date'
+import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 export const ArticlePreview = function (props) {
   const [language, setLanguage] = useState("ita")
+  const siteLanguage = useLanguage() //context
 
   return (
     <Card className="w-100 mb-4" border="secondary">
@@ -36,6 +38,7 @@ export const ArticlePreview = function (props) {
         <Row className="justify-content-end pr-3">
           <Button
             size="md"
+            variant="info"
             onClick={() => props.setOpenedArticle(props.article.id)}
           >
             {language === "ita" ? "Leggi " : "Read "}<i className="ml-2 fab fa-readme"></i>
@@ -44,13 +47,17 @@ export const ArticlePreview = function (props) {
       </Card.Body>
       <Card.Footer>
         <Row>
-          <Col>
-            <small className="text-muted"> {props.article.author} </small>
+          <Col md={5} className="pr-0">
+            <small className="text-muted">
+              {props.article.authors.map((author, i) => {
+                return (<Row key={i}>{props.article.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>)
+              })}
+            </small>
           </Col>
-          <Col>
+          <Col md={3} className="p-0">
             <span className="text-muted"> {props.article.tags.map(tag => <Badge variant="info" className="mr-1" key={tag}>{tag}</Badge>)}</span>
           </Col>
-          <Col className="text-right">
+          <Col md={4} className="text-right p-0">
             <small className="text-muted"> {datePrettifier(props.article.date, language)} </small>
           </Col>
         </Row>
