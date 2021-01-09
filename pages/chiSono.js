@@ -28,7 +28,7 @@ export default function chiSono() {
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="w-75 p-2" border="secondary">
-          <Card.Img className={styles.blackBorder} variant="top" src="handshake.png" />
+          <Card.Img className="black-border" variant="top" src="handshake.png" />
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Card.Title>
             <Row>

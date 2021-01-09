@@ -23,7 +23,7 @@ export const includesAll = (toCheck, targets, isArray) => {
   } else {
     let toCheckIsInclusive = true
     for (let y = 0; y < targets.length; y++) {
-      if (!toCheck.toLowerCase().includes(targets[y].toLowerCase())) toCheckIsInclusive = false
+      if (!toCheck || !toCheck.toLowerCase().includes(targets[y].toLowerCase())) toCheckIsInclusive = false
     }
     if (toCheckIsInclusive) result.push(toCheck)
   }

@@ -95,6 +95,7 @@ export const ArticleRead = function (props) {
           <Row>
             <Col md={12} className="text-justify">
               <ArticleContent
+                glossary={props.article.glossary}
                 paragraphs={props.article[language].content}
                 previewImg={props.article.previewImg}
                 images={props.article.images}

@@ -25,6 +25,7 @@ export const getGlossaryPopover = (textRaw, targetsRaw) => {
           end: x,
           value: targetsRaw.find(word => word.name === analyzing.join('').toLowerCase()).name,
           meaning: targetsRaw.find(word => word.name === analyzing.join('').toLowerCase()).meaning,
+          reference: targetsRaw.find(word => word.name === analyzing.join('').toLowerCase()).reference
         })
       }
       analyzing = []
@@ -41,31 +42,28 @@ export const getGlossaryPopover = (textRaw, targetsRaw) => {
         <Popover.Content id="glossary-popover-content">
           {el.meaning}
         </Popover.Content>
+        <Popover.Title id="glossary-popover-footer">{el.reference}</Popover.Title>
       </Popover>
     )
     let segment = (
-      <OverlayTrigger trigger={["hover", "focus"]} placement="auto" overlay={popover} key={i} id="glossary-word-container">
+      <OverlayTrigger trigger={["click", "hover", "focus"]} placement="auto" overlay={popover} key={i} id="glossary-word-container">
         <span id="glossary-word">{textRaw.slice(el.start, el.end)}</span>
       </OverlayTrigger>
     )
     result.push(segment, " ")
     prevTarget = el.end
-    if (found.length === i + 1) {
+    if (found.length === i + 1 && textRaw.slice(prevTarget).trim().length > 0) { //Se abbiamo markato già tutte le keywords e c'è ancora del testo da stampare.
       let formattedStr = textRaw.slice(prevTarget).trim()
       result.push(formattedStr, " ")
     }
   })
-  if (found.length === 0) result = textRaw.trim()
+  if (found.length === 0) result = stringToHTML(textRaw.trim())
   let finalResult = []
   for (let x = 0; x < result.length; x++) {
     if (typeof result[x] === "string") { //Caso della stringa contenente html
-      console.log("result[x] è una stringa")
-      finalResult.push(stringToHTML(result[x]))  //Questa versione porta al misterioso linebreak prima di ogni parola del glossario.
-      //finalResult.push(parse(result[x]))  //Questa versione porta a { Error: Objects are not valid as a React child }
-      //finalResult.push(result[x])  //Questa versione porta al testo preformattato nell'articolo.
-    } else { //Caso dell'oggetto
-      console.log("result[x] NON è una stringa")
-      finalResult.push(result[x]) //component
+      finalResult.push(stringToHTML(result[x]))
+    } else { //Caso del component
+      finalResult.push(result[x])
     }
   }
   return finalResult

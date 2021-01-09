@@ -8,7 +8,6 @@ import {
   Nav,
   Badge
 } from 'react-bootstrap'
-import styles from '../../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { datePrettifier } from '../../utils/date'
 import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
@@ -22,15 +21,15 @@ export const ArticlePreview = function (props) {
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#ita">
           <Nav.Item>
-            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="bandiere/ita.png" className={styles.blackBorder + " " + styles.flagIcon} /></Nav.Link>
+            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="bandiere/GB.png" className={styles.blackBorder + " " + styles.flagIcon} /></Nav.Link>
+            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
         </Nav>
       </Card.Header>
       <Card.Body>
-        <Card.Img className={styles.articlePreviewImg} variant="top" src={props.article.previewImg} />
+        <Card.Img className="article-preview-img" variant="top" src={props.article.previewImg} />
         <Card.Title>{language === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
         <Card.Text>
           {language === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}

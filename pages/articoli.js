@@ -13,12 +13,15 @@ import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { ArticleRead } from "../components/articles/ArticleRead"
-import { Glossary } from "../components/layout/Glossary"
+import { RelatedArticles } from "../components/articles/RelatedArticles"
 import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+import { getRelatedArticles } from '../utils/articles'
 
 export default function articoli(props) {
   const siteLanguage = useLanguage() //context
   const [openedArticle, setOpenedArticle] = useState(null)
+  let relatedArticles = openedArticle ? getRelatedArticles(openedArticle, articles) : []
+
   return (
     <div className={styles.container}>
       <Header
@@ -51,7 +54,12 @@ export default function articoli(props) {
             }
           </Col>
           <Col md={3} className="">
-            <Glossary />
+            {openedArticle &&
+              <RelatedArticles
+                relatedArticles={relatedArticles}
+                setOpenedArticle={setOpenedArticle}
+              />
+            }
           </Col>
         </Row>
       </main>

@@ -50,14 +50,14 @@ export const Navigation = function () {
                   onClick={() => siteLanguageUpdate("ita")}
                   className="mr-1"
                 >
-                  <Image src="bandiere/ita.png" className={styles.blackBorder + " " + styles.flagIcon} />
+                  <Image src="bandiere/ita.png" className="black-border flag-icon" />
                 </Nav.Link>
                 <Nav.Link
                   active={siteLanguage === "eng"}
                   href="#eng"
                   onClick={() => siteLanguageUpdate("eng")}
                   className="ml-0 mr-0">
-                  <Image src="bandiere/GB.png" className={styles.blackBorder + " " + styles.flagIcon} />
+                  <Image src="bandiere/GB.png" className="black-border flag-icon" />
                 </Nav.Link>
               </Row>
             </Nav>
