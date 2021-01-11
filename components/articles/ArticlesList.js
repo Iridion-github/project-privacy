@@ -10,44 +10,19 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesRow } from "./ArticlesRow"
 import { MyPagination } from "../layout/MyPagination"
 import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
-import { removeDuplicatesById, includesAll } from '../../utils/arrays'
+
 
 export const ArticlesList = function (props) {
 
   const siteLanguage = useLanguage() //context
   const siteLanguageUpdate = useLanguageUpdate() //context
 
-  const searchFilter = (articles, input) => {
-    const searchTerms = input.toLowerCase().split(" ")
-    const found = []
-    if (input !== "") {
-      articles.forEach(art => {
-        if (
-          includesAll(art.author, searchTerms, Array.isArray(art.author)).length > 0
-          || includesAll(art.topic, searchTerms, Array.isArray(art.topic)).length > 0
-          || includesAll(art.tags, searchTerms, Array.isArray(art.tags)).length > 0
-          || includesAll(art.ita.title, searchTerms, Array.isArray(art.ita.title)).length > 0
-          || includesAll(art.ita.subtitle, searchTerms, Array.isArray(art.ita.subtitle)).length > 0
-          || includesAll(art.ita.content, searchTerms, Array.isArray(art.ita.content)).length > 0
-          || includesAll(art.eng.title, searchTerms, Array.isArray(art.eng.title)).length > 0
-          || includesAll(art.eng.subtitle, searchTerms, Array.isArray(art.eng.subtitle)).length > 0
-          || includesAll(art.eng.content, searchTerms, Array.isArray(art.eng.content)).length > 0
-        ) {
-          found.push(art)
-        }
-      })
-    }
-    const result = removeDuplicatesById(found)
-    return result
-  }
-
   const [currentPage, setCurrentPage] = useState(1)
   const [elementsPerPage, setElementsPerPage] = useState(6)
   const [elementsPerRow, setElementsPerRow] = useState(2)
-  const [filtered, setFiltered] = useState(false)
-  const [searchInput, setSearchInput] = useState("")
 
-  const articlesRows = !filtered
+
+  const articlesRows = !props.filtered
     ? props.allArticles.reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
         articles[articles.length - 1].push(acc)
@@ -56,7 +31,7 @@ export const ArticlesList = function (props) {
       }
       return articles
     }, [])
-    : searchFilter(props.allArticles, searchInput).reduce(function (articles, acc, i) {
+    : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
         articles[articles.length - 1].push(acc)
       } else {
@@ -69,10 +44,10 @@ export const ArticlesList = function (props) {
 
   const searchInputOnChange = (value) => {
     if (value.length < 3) {
-      setSearchInput(value)
-      setFiltered(false)
+      props.setSearchInput(value)
+      props.setFiltered(false)
     } else {
-      setSearchInput(value)
+      props.setSearchInput(value)
     }
   }
 
@@ -91,22 +66,22 @@ export const ArticlesList = function (props) {
                 onChange={event => searchInputOnChange(event.target.value)}
                 className="w-75 inline-form-custom" />
               <Button
-                variant={!filtered ? "info" : "danger"}
-                disabled={searchInput.length < 3}
-                onClick={!filtered ? () => setFiltered(true) : () => setFiltered(false)}
+                variant={!props.filtered ? "info" : "danger"}
+                disabled={props.searchInput.length < 3}
+                onClick={!props.filtered ? () => props.setFiltered(true) : () => props.setFiltered(false)}
                 className="ml-1">
-                {!filtered ? (<i className="fas fa-search"></i>) : (<i className="fas fa-times-circle"></i>)}
+                {!props.filtered ? (<i className="fas fa-search"></i>) : (<i className="fas fa-times-circle"></i>)}
               </Button>
             </Form.Group>
           </Form>
         </Col>
       </Row>
       <MyPagination
-        totalPages={!filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(searchFilter(props.allArticles, searchInput).length / elementsPerPage)}
+        totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         elementsPerPage={elementsPerPage}
-        totalElements={!filtered ? props.allArticles.length : searchFilter(props.allArticles, searchInput).length}
+        totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
       />
       <Row className="mobile-compatible  m-auto">
         <Col>
@@ -120,11 +95,11 @@ export const ArticlesList = function (props) {
         </Col>
       </Row>
       <MyPagination
-        totalPages={!filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(searchFilter(props.allArticles, searchInput).length / elementsPerPage)}
+        totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         elementsPerPage={elementsPerPage}
-        totalElements={!filtered ? props.allArticles.length : searchFilter(props.allArticles, searchInput).length}
+        totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
       />
     </Row>
   )

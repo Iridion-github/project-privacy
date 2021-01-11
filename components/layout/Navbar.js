@@ -25,15 +25,9 @@ export const Navigation = function () {
               <div className={styles.navbarDivider}></div>
               <Nav.Link href="/chiSono" className={styles.navbarText}>{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <NavDropdown title={siteLanguage === "ita" ? "Formazione" : "Training"} id="basic-nav-dropdown1" className={styles.navbarText}>
-                <NavDropdown.Item href="/formazione/privacy" className={styles.dropdownOption}>Privacy</NavDropdown.Item>
-                <NavDropdown.Item href="/formazione/antiriciclaggio" className={styles.dropdownOption}>{siteLanguage === "ita" ? "Antiriciclaggio" : "Anti Money-laundering"}</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link href="/formazione" className={styles.navbarText}>{siteLanguage === "ita" ? "Formazione" : "Training"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
-              <NavDropdown title={siteLanguage === "ita" ? "Consulenza" : "Consultation"} id="basic-nav-dropdown2" className={styles.navbarText}>
-                <NavDropdown.Item href="/consulenza/privacy" className={styles.dropdownOption}>Privacy</NavDropdown.Item>
-                <NavDropdown.Item href="/consulenza/antiriciclaggio" className={styles.dropdownOption}> {siteLanguage === "ita" ? "Antiriciclaggio" : "Anti Money-laundering"}</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link href="/consulenza" className={styles.navbarText}>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}</Nav.Link>
               <div className={styles.navbarDivider}></div>
               <Nav.Link href="/areaTest" className={styles.navbarText}>{siteLanguage === "ita" ? "Area Test" : "Test Area"}</Nav.Link>
               <div className={styles.navbarDivider}></div>

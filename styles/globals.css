@@ -184,6 +184,14 @@ a {
   /*object-fit: contain;*/
 }
 
+.article-preview-title {
+  font-weight: 800 !important;
+}
+
+.article-preview-subtitle {
+  font-weight: 400 !important;
+}
+
 .related-article-preview-img {
   height: 120px;
   width: 120px;
@@ -200,4 +208,22 @@ a {
 
 .overflow.hidden {
   overflow: hidden;
+}
+
+.consultation-card-img {}
+
+.consultation-card-title {}
+
+.consultation-card-description {}
+
+.consultation-card-header {
+  background-color: #17a2b8 !important;
+}
+
+.consultation-card-body {
+  background-color: rgb(131, 203, 221) !important;
+}
+
+.consultation-card-footer {
+  background-color: #17a2b8 !important;
 }

@@ -3,11 +3,25 @@ import {
   Navbar,
   Row,
   Col,
-  Image
+  Image,
+  Button
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState, useContext, createContext } from 'react'
 
 export const Footer = function () {
+
+  const scrollToTopSmoothly = () => {
+    if (window.scrollY > 0) {
+      window.scrollTo({
+        top: window.scrollY - Math.ceil(window.scrollY / 10),
+        behavior: 'smooth'
+      })
+      setTimeout(scrollToTop, 10);
+    }
+  }
+
+
   return (
     <Navbar fixed="" bg="standard-blue" expand="lg" className={styles.footer}>
       <Navbar.Text className="w-100">
@@ -16,6 +30,11 @@ export const Footer = function () {
         <Image src="/privacy.svg" className={styles.footerLogo + " ml-2"} />
         </Col>
       </Navbar.Text>
+      <Button
+        variant="info"
+        onClick={() => scrollToTopSmoothly()}>
+        <i className="fas fa-arrow-circle-up"></i>
+      </Button>
     </Navbar>
   )
 }

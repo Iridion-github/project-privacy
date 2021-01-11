@@ -2,7 +2,8 @@ import {
   Row,
   Col,
   Card,
-  ListGroup
+  ListGroup,
+  Button
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesTagRow } from './ArticlesTagRow'
@@ -15,12 +16,32 @@ export const ArticlesLeftMenu = function (props) {
       <Row className="mobile-compatible w-100 mt-5">
         <Col>
           <Card className="bg-standard-blue">
-            <Card.Header>{siteLanguage === "ita" ? "Argomenti" : "Topics"}</Card.Header>
+            <Card.Header>
+              <Row>
+                <Col>
+                  {siteLanguage === "ita" ? "Argomenti" : "Topics"}
+                </Col>
+                <Col className="text-right">
+                  {props.filteredByTopic &&
+                    <Button
+                      size="sm"
+                      className="black-border"
+                      variant="danger"
+                      onClick={() => props.removeTopicFilter()}
+                    >
+                      <i className="fas fa-times-circle"></i>
+                    </Button>
+                  }
+                </Col>
+              </Row>
+            </Card.Header>
             <ListGroup variant="flush">
               {props.allTags.map(tag => (
                 <ArticlesTagRow
                   key={tag._id}
                   tagName={siteLanguage === "ita" ? tag.name.ita : tag.name.eng}
+                  siteLanguage={siteLanguage}
+                  searchTopic={props.searchTopic}
                 />
               ))}
             </ListGroup>

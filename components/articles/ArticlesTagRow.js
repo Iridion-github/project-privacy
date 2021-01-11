@@ -6,6 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const ArticlesTagRow = function (props) {
   return (
-    <ListGroup.Item><Button block variant="info">{props.tagName}</Button></ListGroup.Item>
+    <ListGroup.Item>
+      <Button
+        block
+        variant="info"
+        onClick={() => props.searchTopic(props.tagName, props.siteLanguage)}>
+        {props.tagName}
+      </Button>
+    </ListGroup.Item>
   )
 }

@@ -1,16 +1,10 @@
-import { useState, useContext, createContext } from 'react'
 import {
   Row,
   Col,
   Card,
-  Button,
-  Image,
-  Nav,
-  Badge,
-  Container
+  Image
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { datePrettifier } from '../../utils/date'
 import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 export const RelatedArticlePreview = function (props) {

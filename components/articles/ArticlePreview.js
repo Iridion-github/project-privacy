@@ -30,8 +30,8 @@ export const ArticlePreview = function (props) {
       </Card.Header>
       <Card.Body>
         <Card.Img className="article-preview-img" variant="top" src={props.article.previewImg} />
-        <Card.Title>{language === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
-        <Card.Text>
+        <Card.Title className="article-preview-title">{language === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
+        <Card.Text className="article-preview-subtitle">
           {language === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}
         </Card.Text>
         <Row className="justify-content-end pr-3">
