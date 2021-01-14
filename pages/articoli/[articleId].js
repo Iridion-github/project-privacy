@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import { useState, useEffect, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,28 +6,34 @@ import {
   Row,
   Col
 } from 'react-bootstrap'
-import DBarticles from "../database/articles"
-import articlesTopics from "../database/articlesTopics"
-import { Header } from '../components/layout/Header'
-import { Navigation } from '../components/layout/Navbar'
-import { Breadcrumbs } from '../components/layout/Breadcrumbs'
-import { Footer } from '../components/layout/Footer'
-import { ArticlesList } from "../components/articles/ArticlesList"
-import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
-import { removeDuplicatesById, includesAll } from '../utils/arrays'
+import DBarticles from "../../database/articles"
+import articlesTopics from "../../database/articlesTopics"
+import { Header } from '../../components/layout/Header'
+import { Navigation } from '../../components/layout/Navbar'
+import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
+import { Footer } from '../../components/layout/Footer'
+import { ArticlesLeftMenu } from "../../components/articles/ArticlesLeftMenu"
+import { ArticleRead } from "../../components/articles/ArticleRead"
+import { RelatedArticles } from "../../components/articles/RelatedArticles"
+import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { getRelatedArticles } from '../../utils/articles'
+import { removeDuplicatesById, includesAll } from '../../utils/arrays'
 
 export default function articoli(props) {
+  const router = useRouter()
+  console.log('router:', router)
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
 
-  const router = useRouter()
-
   const handleOpenedArticle = (articleId) => {
-    const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
+    const fullRoute = articleId !== null ? window.location.origin + '/articoli/' + articleId : window.location.origin + '/articoli/'
+    console.log('fullRoute:', fullRoute)
     router.push(fullRoute, undefined, { shallow: true })
+    if (articleId !== null) setOpenedArticle(articleId)
   }
+
+  let relatedArticles = openedArticle ? getRelatedArticles(openedArticle, articles) : []
 
   const searchTopic = async (topic, lang) => {
     handleOpenedArticle(null)
@@ -77,6 +83,9 @@ export default function articoli(props) {
   const [filteredByTopic, setFilteredByTopic] = useState(false)
   const [searchInput, setSearchInput] = useState("")
 
+  useEffect(() => {
+    setOpenedArticle(router.query.articleId)
+  })
 
   return (
     <div className={styles.container}>
@@ -85,35 +94,31 @@ export default function articoli(props) {
       />
       {/* Navbar */}
       <Navigation />
-      <Breadcrumbs />
+      {openedArticle &&
+        <Breadcrumbs
+          articleId={openedArticle}
+          articleTitle={articles.find(art => art.id === openedArticle)[siteLanguage].title}
+        />
+      }
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100">
           <Col md={3} className="">
-            <ArticlesLeftMenu
-              allArticles={articles}
-              allTags={articlesTopics}
-              searchTopic={searchTopic}
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-              filteredByTopic={filteredByTopic}
-              removeTopicFilter={removeTopicFilter}
-            />
           </Col>
           <Col md={6} className="justify-content-center">
-            {openedArticle === null &&
-              <ArticlesList
+            {openedArticle &&
+              <ArticleRead
+                article={articles.find(art => art.id === openedArticle)}
                 allArticles={articles}
                 setOpenedArticle={handleOpenedArticle}
-                searchFilter={searchFilter}
-                filtered={filtered}
-                setFiltered={setFiltered}
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
               />
             }
           </Col>
           <Col md={3} className="">
+            <RelatedArticles
+              relatedArticles={relatedArticles}
+              setOpenedArticle={handleOpenedArticle}
+            />
           </Col>
         </Row>
       </main>

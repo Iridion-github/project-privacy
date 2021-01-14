@@ -5,22 +5,22 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#anticorruzione", "#privacy"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: [
       {
-        src: "articoli/url-preview-img-2.png",
+        src: "/articoli/url-preview-img-2.png",
         position: "right",
         size: "sm",
         margin: " mt-1 mb-1 ml-2"
       },
       {
-        src: "articoli/url-preview-img-1.png",
+        src: "/articoli/url-preview-img-1.png",
         position: "left",
         size: "md",
         margin: " mt-1 mb-1 mr-2"
       },
       {
-        src: "articoli/url-preview-img-4.png",
+        src: "/articoli/url-preview-img-4.png",
         position: "center",
         size: "lg",
         margin: " mt-2 mb-2"
@@ -52,22 +52,22 @@ const articles = [
     date: "2020-12-26",
     authors: ["Alessandro Mastropierro"],
     tags: ["#curiosità", "#antiriciclaggio"],
-    previewImg: "articoli/url-preview-img-2.png",
+    previewImg: "/articoli/url-preview-img-2.png",
     images: [
       {
-        src: "articoli/imgProva1.jpg",
+        src: "/articoli/imgProva1.jpg",
         position: "left",
         size: "md",
         margin: " mt-1 mb-1 mr-2"
       },
       {
-        src: "articoli/imgProva2.jpg",
+        src: "/articoli/imgProva2.jpg",
         position: "center",
         size: "lg",
         margin: " mt-2 mb-2"
       },
       {
-        src: "articoli/url-preview-img-4.png",
+        src: "/articoli/url-preview-img-4.png",
         position: "center",
         size: "lg",
         margin: " mt-2 mb-2"
@@ -100,7 +100,7 @@ const articles = [
     date: "2020-12-27",
     authors: ["Autore Esterno"],
     tags: ["#privacy", "#internazionale"],
-    previewImg: "articoli/url-preview-img-3.png",
+    previewImg: "/articoli/url-preview-img-3.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Privacy",
@@ -121,7 +121,7 @@ const articles = [
     date: "2020-12-28",
     authors: ["Autore Esterno"],
     tags: ["#antiriciclaggio", "#anticorruzione"],
-    previewImg: "articoli/url-preview-img-4.png",
+    previewImg: "/articoli/url-preview-img-4.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Anticorruzione",
@@ -142,7 +142,7 @@ const articles = [
     date: "2020-12-29",
     authors: ["Autore Esterno"],
     tags: ["#internazionale", "#nazionale"],
-    previewImg: "articoli/url-preview-img-5.png",
+    previewImg: "/articoli/url-preview-img-5.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Anticorruzione",
@@ -163,7 +163,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#nazionale", "#curiosità"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Anticorruzione",
@@ -184,7 +184,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Antiriciclaggio",
@@ -205,7 +205,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#anticorruzione", "#privacy"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Antiriciclaggio",
@@ -226,7 +226,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#anticorruzione"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Antiriciclaggio",
@@ -247,7 +247,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "GDPR",
@@ -268,7 +268,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#anticorruzione"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "GDPR",
@@ -289,7 +289,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#anticorruzione"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "GDPR",
@@ -310,7 +310,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Privacy Policy",
@@ -331,7 +331,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro"],
     tags: ["#antiriciclaggio", "#anticorruzione"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Privacy Policy",
@@ -352,7 +352,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro", "Davide Antinori"],
     tags: ["#antiriciclaggio", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Privacy Policy",
@@ -373,7 +373,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro", "Alessandro Mastropierro"],
     tags: ["#privacy", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Cookie Policy",
@@ -394,7 +394,7 @@ const articles = [
     date: "2020-12-25",
     authors: ["Gaetano Mastropierro", "Alessandro Mastropierro"],
     tags: ["#privacy", "#internazionale"],
-    previewImg: "articoli/url-preview-img-1.png",
+    previewImg: "/articoli/url-preview-img-1.png",
     images: ["url-preview-img-2.png", "url-preview-img-3.png", "url-preview-img-4.png"],
     ita: {
       topic: "Cookie Policy",

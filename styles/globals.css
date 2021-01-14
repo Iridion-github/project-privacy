@@ -1,3 +1,7 @@
+#__next-prerender-indicator {
+  display: none !important;
+}
+
 html, body {
   padding: 0;
   margin: 0;
@@ -212,18 +216,34 @@ a {
 
 .consultation-card-img {}
 
-.consultation-card-title {}
+.consultation-card-title {
+  font-size: 2rem !important;
+  font-weight: 400 !important;
+}
 
 .consultation-card-description {}
 
 .consultation-card-header {
-  background-color: #17a2b8 !important;
+  background-color: #17a3b8c4 !important;
 }
 
 .consultation-card-body {
-  background-color: rgb(131, 203, 221) !important;
+  background-color: rgb(131, 203, 221, 0.5) !important;
 }
 
 .consultation-card-footer {
-  background-color: #17a2b8 !important;
+  background-color: #17a3b8c4 !important;
+}
+
+.navbar-row {
+  border-bottom: 1px solid #17a3b8c4 !important;
+}
+
+.breadcrumbs {
+  background-color: rgb(131, 203, 221) !important;
+  font-size: 0.8em;
+}
+
+.breadcrumbs a {
+  color: #343a40;
 }

@@ -7,7 +7,6 @@ import {
   Button
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useContext, createContext } from 'react'
 
 export const Footer = function () {
 
@@ -17,7 +16,7 @@ export const Footer = function () {
         top: window.scrollY - Math.ceil(window.scrollY / 10),
         behavior: 'smooth'
       })
-      setTimeout(scrollToTop, 10);
+      setTimeout(scrollToTopSmoothly, 10)
     }
   }
 

@@ -21,10 +21,10 @@ export const ArticlePreview = function (props) {
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#ita">
           <Nav.Item>
-            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
+            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="/bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
+            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="/bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
         </Nav>
       </Card.Header>

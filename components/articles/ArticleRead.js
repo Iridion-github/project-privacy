@@ -23,7 +23,7 @@ export const ArticleRead = function (props) {
         <Button
           className="black-border"
           variant="info"
-          onClick={() => props.setOpenedArticle(null)}
+          href="/articoli"
         >
           <i className="fas fa-long-arrow-alt-left mr-2"></i> {siteLanguage === "ita" ? "Torna agli Articoli" : "Back to Articles"}
         </Button>
@@ -36,7 +36,7 @@ export const ArticleRead = function (props) {
             </Col>
           </Row>
           <Row>
-            <Col md={10}>
+            <Col md={12}>
               <Row>
                 <Col md={12}>
                   <h6 className="text-justify">«{props.article[language].subtitle}»</h6>
@@ -76,7 +76,7 @@ export const ArticleRead = function (props) {
                     active={language === "ita"}
                     href="#ita"
                     onClick={() => setLanguage("ita")}>
-                    <Image src="bandiere/ita.png" className="black-border flag-icon" />
+                    <Image src="/bandiere/ita.png" className="black-border flag-icon" />
                   </Button>
                   <Button
                     className="btn btn-light grey-border"
@@ -84,7 +84,7 @@ export const ArticleRead = function (props) {
                     href="#eng"
                     onClick={() => setLanguage("eng")}
                   >
-                    <Image src="bandiere/GB.png" className="black-border flag-icon" />
+                    <Image src="/bandiere/GB.png" className="black-border flag-icon" />
                   </Button>
                 </ButtonGroup>
               </ButtonToolbar>

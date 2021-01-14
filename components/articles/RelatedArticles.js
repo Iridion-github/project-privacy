@@ -24,6 +24,7 @@ export const RelatedArticles = function (props) {
         <Col>
           {props.relatedArticles.map((art, i) =>
             <RelatedArticlePreview
+              key={i}
               setOpenedArticle={props.setOpenedArticle}
               article={art}
             />
