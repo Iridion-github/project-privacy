@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import {
   Row,
   Col,
@@ -9,7 +9,7 @@ import {
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 
 export default function contatti() {
   const siteLanguage = useLanguage() //context

@@ -4,7 +4,6 @@ import {
   Col,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { QuizTimer } from './QuizTimer'
 import { Question } from './Question'
 

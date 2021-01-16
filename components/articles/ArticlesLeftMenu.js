@@ -1,3 +1,4 @@
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
@@ -5,9 +6,8 @@ import {
   ListGroup,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesTagRow } from './ArticlesTagRow'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 
 export const ArticlesLeftMenu = function (props) {
   const siteLanguage = useLanguage() //context

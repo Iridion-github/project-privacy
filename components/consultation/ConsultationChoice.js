@@ -1,18 +1,12 @@
-
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
-  Col,
-  Button,
-  Card
+  Col
 } from 'react-bootstrap'
-import { useState, useContext, createContext } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 import { ConsultationChoiceBtn } from './ConsultationChoiceBtn'
 
 export const ConsultationChoice = function (props) {
-  const siteLanguage = useLanguage() //context
-
+  const siteLanguage = useLanguage() //context //per ora inutilizzato qui, ma work in progress
   return (
     <Row className="text-justify m-0 p-0">
       <Col md={{ span: 8, offset: 2 }} className="text-justify p-0">

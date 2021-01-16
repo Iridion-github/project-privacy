@@ -1,15 +1,13 @@
-
+import { useState } from 'react'
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
   Button,
   Form
 } from 'react-bootstrap'
-import { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesRow } from "./ArticlesRow"
 import { MyPagination } from "../layout/MyPagination"
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 
 export const ArticlesList = function (props) {

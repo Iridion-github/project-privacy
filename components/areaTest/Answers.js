@@ -3,7 +3,6 @@ import {
   Col,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const Answers = function (props) {
 

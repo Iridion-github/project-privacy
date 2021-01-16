@@ -1,10 +1,8 @@
-
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
 import { RelatedArticlePreview } from './RelatedArticlePreview'
 
 export const RelatedArticles = function (props) {

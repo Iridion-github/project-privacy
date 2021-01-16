@@ -3,7 +3,6 @@ import {
   Col,
   Card
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Timer from 'react-compound-timer'
 
 export const QuizTimer = function (props) {

@@ -1,16 +1,13 @@
 import styles from '../styles/Home.module.css'
-import { useState, useContext, createContext } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState } from 'react'
+import { useLanguage } from '../context/siteLanguageContext' //context
 import {
-  Row,
-  Col,
   Card
 } from 'react-bootstrap'
 import consultations from '../database/consultations'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import { ConsultationChoice } from '../components/consultation/ConsultationChoice'
 import { ConsultationCard } from '../components/consultation/ConsultationCard'
 

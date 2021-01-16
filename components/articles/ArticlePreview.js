@@ -8,7 +8,6 @@ import {
   Nav,
   Badge
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { datePrettifier } from '../../utils/date'
 
 export const ArticlePreview = function (props) {

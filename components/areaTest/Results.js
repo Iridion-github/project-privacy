@@ -5,7 +5,6 @@ import {
   Button,
   Table
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { ResultRow } from './ResultRow'
 
 export const Results = function (props) {

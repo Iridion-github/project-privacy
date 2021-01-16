@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
-import { useState, useEffect, useContext, createContext } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import {
   Row,
   Col
@@ -14,10 +14,9 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs'
 import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-export default function articoli(props) {
+export default function articoli() {
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)

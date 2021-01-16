@@ -1,11 +1,10 @@
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
   Card,
   Image
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
 
 export const RelatedArticlePreview = function (props) {
   const siteLanguage = useLanguage() //context

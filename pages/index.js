@@ -1,10 +1,9 @@
 import styles from '../styles/Home.module.css'
+import { useLanguage } from '../context/siteLanguageContext' //context
 import { Carousel } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-import { useLanguage } from '../context/siteLanguageContext' //context
 
 
 export default function Home() {

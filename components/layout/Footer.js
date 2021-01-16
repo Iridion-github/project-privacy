@@ -5,10 +5,8 @@ import {
   Image,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const Footer = function () {
-
   const scrollToTopSmoothly = () => {
     if (window.scrollY > 0) {
       window.scrollTo({
@@ -18,8 +16,6 @@ export const Footer = function () {
       setTimeout(scrollToTopSmoothly, 10)
     }
   }
-
-
   return (
     <Navbar fixed="" bg="standard-blue" expand="lg" className={styles.footer}>
       <Navbar.Text className="w-100">

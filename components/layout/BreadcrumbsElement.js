@@ -1,16 +1,7 @@
-import {
-  NavItem,
-  NavLink,
-  Button,
-  Nav
-} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { useLanguage } from '../../context/siteLanguageContext' //context
 
 export const BreadcrumbsElement = function (props) {
-
-  const siteLanguage = useLanguage() //context
-  const siteLanguageUpdate = useLanguageUpdate() //context
+  const siteLanguage = useLanguage() //context, da usare.
   return (<>
     {props.index > 0 && <span> » </span>}
     <a

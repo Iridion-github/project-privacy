@@ -1,4 +1,5 @@
 import styles from '../../styles/Home.module.css'
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,10 +14,10 @@ import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
 import { Footer } from '../../components/layout/Footer'
 import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import { getRelatedArticles } from '../../utils/articles'
 
-export default function articoli(props) {
+export default function articoli() {
   const router = useRouter()
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)

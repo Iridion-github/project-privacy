@@ -1,22 +1,15 @@
-import styles from '../../styles/Home.module.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
-  Col,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Image
+  Col
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 import { BreadcrumbsElement } from './BreadcrumbsElement'
 
 
 export const Breadcrumbs = function (props) {
-  const siteLanguage = useLanguage() //context
-  const siteLanguageUpdate = useLanguageUpdate() //context
+  const siteLanguage = useLanguage() //context, da usare.
   const router = useRouter()
 
   const [init, setInit] = useState(false)

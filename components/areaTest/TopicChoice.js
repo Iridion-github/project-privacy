@@ -4,7 +4,6 @@ import {
   Card,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 export const TopicChoice = function (props) {
   return (

@@ -1,18 +1,13 @@
 
 import {
   Row,
-  Col,
-  Button,
-  Form
+  Col
 } from 'react-bootstrap'
-import { useState, useContext, createContext } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { useLanguage } from '../../context/siteLanguageContext' //context
 
 
 export const ConsultationCard = function (props) {
-  const siteLanguage = useLanguage() //context
-
+  const siteLanguage = useLanguage() //context //per ora inutilizzato qui, ma work in progress
   return (
     <Row>
       <Col md={{ span: 4, offset: 2 }} className="text-justify">

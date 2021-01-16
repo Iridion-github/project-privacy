@@ -1,7 +1,6 @@
 import {
   Image
 } from 'react-bootstrap'
-
 import { getGlossaryPopover } from '../../utils/text'
 import glossary from '../../database/glossary'
 

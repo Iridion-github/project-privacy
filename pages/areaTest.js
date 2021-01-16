@@ -1,9 +1,8 @@
-import { useState, useContext, createContext } from 'react'
 import styles from '../styles/Home.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState } from 'react'
+import { useLanguage } from '../context/siteLanguageContext' //context
 import {
-  Row,
-  Col
+  Row
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -12,7 +11,7 @@ import { Quiz } from '../components/areaTest/Quiz'
 import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
 import tests from "../database/readiedTests"
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 
 export default function areaTest() {
 

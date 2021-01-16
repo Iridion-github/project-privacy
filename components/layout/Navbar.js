@@ -1,21 +1,17 @@
 import styles from '../../styles/Home.module.css'
-import { useState, useEffect } from 'react'
+import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
   Navbar,
   Nav,
-  NavDropdown,
   Image
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 
 export const Navigation = function () {
   const siteLanguage = useLanguage() //context
   const siteLanguageUpdate = useLanguageUpdate() //context
-
   return (
     <>
       <Row className="m-0 w-100 bg-standard-blue navbar-row">

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
@@ -6,8 +7,6 @@ import {
   Form,
   Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
 
 export const MyPagination = function (props) {
   const siteLanguage = useLanguage() //context

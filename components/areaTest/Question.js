@@ -1,8 +1,6 @@
-import { useState, useContext, createContext } from 'react'
 import {
   Card
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Answers } from './Answers'
 
 export const Question = function (props) {

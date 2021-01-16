@@ -1,15 +1,10 @@
-import { useState, useContext, createContext } from 'react'
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
   Card,
-  Button,
-  Image,
-  Nav,
-  Badge
+  Button
 } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 export const ConsultationChoiceBtn = function (props) {
   const siteLanguage = useLanguage() //context
