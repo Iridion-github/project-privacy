@@ -28,23 +28,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Note Davide&Alessandro
-[Mappa Sito]
-Menu:
-1. Home
-2. Chi Sono (breve parte che spiego MTS)
-3. I miei servizi
-4. recensioni
-5. quiz
-6. privacy europa
-7. articoli
-8. glossario e dizionario
 ___________________________________________
 
-[30/12/2020]
-- Article Read - Filtri a sinistra, articoli correlati a destra. Argomenti sono diversi dai tags.
-- Articoli - Nella colonna di destra, affianco all'articlesPreview ci sarà un glossario per i termini più importanti inclusi negli articoli.
-- Articoli - I tag degli articoli non sono automaticamente tradotti.
-- Articoli - In caso la searchbar non trovi risultati, il div dovrebbe cmq avere un'altezza minima, e dovrebbe essere visualizzato un responso per l'user.
-- Ispirazione - Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
+## Note
+- [Issue] Articoli - I tag degli articoli non sono automaticamente tradotti.
+- [Issue] Articoli - In caso la searchbar non trovi risultati, il div dovrebbe cmq avere un'altezza minima, e dovrebbe essere visualizzato un responso per l'user.
+- [Idea] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
+- [Articoli] Manca la gestione errore nel caso si inserisca manualmente nell'url l'id di un articolo non esistente.

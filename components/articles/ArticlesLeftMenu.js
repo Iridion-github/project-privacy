@@ -25,7 +25,7 @@ export const ArticlesLeftMenu = function (props) {
                   {props.filteredByTopic &&
                     <Button
                       size="sm"
-                      className="black-border"
+                      className="blue-border"
                       variant="danger"
                       onClick={() => props.removeTopicFilter()}
                     >

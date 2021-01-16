@@ -16,8 +16,7 @@ export const RelatedArticlePreview = function (props) {
 
   return (
     <Card
-      className="w-100 mb-4 cursor-pointer"
-      border="secondary"
+      className="w-100 mb-4 cursor-pointer blue-border"
       onClick={() => props.setOpenedArticle(props.article.id)}
     >
       <Card.Header className="pt-1 pb-1 overflow-hidden">

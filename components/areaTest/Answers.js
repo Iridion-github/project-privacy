@@ -19,7 +19,7 @@ export const Answers = function (props) {
       key={answerNumber}
       type="radio"
       size="lg"
-      variant={selected ? "secondary" : "outline-secondary"}
+      variant={selected ? "info" : "outline-info"}
       block
       onClick={() => selectAnswer(answerNumber - 1)}
     >

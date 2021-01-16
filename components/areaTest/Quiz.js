@@ -12,38 +12,41 @@ export const Quiz = function (props) {
   const [allUserAnswers, setAllUserAnswers] = useState(props.selectedTest.questions)
 
   return (
-    <Row className="w-100 h-75 text-center align-items-center m-auto" border="secondary">
-      <Row className="w-100 mb-4">
-        <Col md={4} className="d-flex align-items-center justify-content-end">
+    <Row className="w-100 text-center align-items-center justify-content-center m-auto">
+      <Row className="w-100 mb-3">
+        <Col md={{ span: 4 }} className="">
+        </Col>
+        <Col md={{ span: 1 }} className="d-flex align-items-center">
           <Button
-            variant="danger"
+            block
+            variant="info"
             onClick={() => props.setSelectedTopic(null)}
           >
             <i className="fas fa-long-arrow-alt-left mr-2"></i>
-            I nostri Test
+            I Test
           </Button>
         </Col>
-        <Col md={4}>
+        <Col md={2}>
           <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: {props.selectedTopic}</div>
         </Col>
       </Row>
-      <Row className="w-100 mb-4">
-        <Col md={4} className="d-flex align-items-center justify-content-end">
+
+      <Row className="w-100 mb-3">
+        <Col md={{ span: 3 }} className="">
+        </Col>
+        <Col md={{ span: 1 }} className="d-flex align-items-center justify-content-end">
           {(questionCounter > 1) &&
             <Button
+              block
               size="lg"
-              variant="secondary"
+              variant="info"
               onClick={() => setQuestionCounter(questionCounter - 1)}
             >
-              <Row>
-                <Col>
-                  <i className="fas fa-long-arrow-alt-left"></i>
-                </Col>
-              </Row>
+              <i className="fas fa-long-arrow-alt-left"></i>
             </Button>
           }
         </Col>
-        <Col md={4}>
+        <Col md={4} className="">
           <Question
             questionNumber={questionCounter}
             question={props.selectedTest.questions[questionCounter - 1].text}
@@ -52,22 +55,20 @@ export const Quiz = function (props) {
             setAllUserAnswers={setAllUserAnswers}
           />
         </Col>
-        <Col md={4} className="d-flex align-items-center justify-content-start">
+        <Col md={1} className="d-flex align-items-center justify-content-start">
           {(questionCounter < props.selectedTest.questions.length) &&
             <Button
+              block
               size="lg"
-              variant="success"
+              variant="info"
               onClick={() => setQuestionCounter(questionCounter + 1)}
             >
-              <Row>
-                <Col>
-                  <i className="fas fa-long-arrow-alt-right"></i>
-                </Col>
-              </Row>
+              <i className="fas fa-long-arrow-alt-right"></i>
             </Button>
           }
           {(questionCounter === props.selectedTest.questions.length) &&
             <Button
+              block
               size="lg"
               variant="success"
               onClick={() => {

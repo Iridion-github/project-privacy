@@ -9,15 +9,15 @@ export const TopicChoice = function (props) {
   return (
     <Row className="w-100 align-items-center m-auto">
       <Col md={{ span: 4, offset: 4 }} className="align-items-center m-auto">
-        <Card className="w-100 p-2" border="secondary">
+        <Card className="w-100 p-2 grey-border" border="">
           <Card.Img variant="top" src="" />
           <Card.Body>
-            <Card.Title className="text-center">Test di verifica dell'Apprendimento</Card.Title>
+            <h4 className="text-center">Test di verifica dell'Apprendimento</h4>
             <Row className="mb-4">
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => {
                     props.setSelectedTopic("Test 1")
@@ -27,10 +27,10 @@ export const TopicChoice = function (props) {
                   Test 1
                   </Button>
               </Col>
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => {
                     props.setSelectedTopic("Test 2")
@@ -40,10 +40,10 @@ export const TopicChoice = function (props) {
                   Test 2
                   </Button>
               </Col>
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => {
                     props.setSelectedTopic("Test Debug")
@@ -54,22 +54,22 @@ export const TopicChoice = function (props) {
                   </Button>
               </Col>
             </Row>
-            <h5 className="text-center">I Nostri Test</h5>
+            <h4 className="text-center">I Nostri Test</h4>
             <Row className="mb-4">
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => props.setSelectedTopic("anticorruzione")}
                 >
                   Anticorruzione e Trasparenza
                   </Button>
               </Col>
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => props.setSelectedTopic("privacy")}
                 >
@@ -78,20 +78,20 @@ export const TopicChoice = function (props) {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => props.setSelectedTopic("antiriciclaggio")}
                 >
                   Antiriciclaggio
                   </Button>
               </Col>
-              <Col>
+              <Col className="mb-2">
                 <Button
                   size="lg"
-                  variant="outline-dark"
+                  variant="info"
                   block
                   onClick={() => props.setSelectedTopic("responsabilitàAmministrativa")}
                 >

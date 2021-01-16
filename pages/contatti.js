@@ -22,7 +22,7 @@ export default function contatti() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="p-2" border="secondary">
+        <Card className="grey-border p-2" border="">
           <Card.Img variant="top" src="contatti.png" />
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Card.Title>

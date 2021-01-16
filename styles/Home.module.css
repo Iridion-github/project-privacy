@@ -10,8 +10,8 @@
 .main {
   width: 100%;
   padding-top: 1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: 0px;
+  padding-left: 0px;
   padding-bottom: 6rem;
   flex: 1;
   display: flex;
@@ -58,7 +58,7 @@
 
 .footer {
   width: 100%;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid #17a3b8c4;
   display: flex;
   justify-content: center;
   align-items: center;

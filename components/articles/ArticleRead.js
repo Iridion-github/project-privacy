@@ -20,9 +20,9 @@ export const ArticleRead = function (props) {
   const [language, setLanguage] = useState("ita")
   return (
     <Row className="w-100 m-auto">
-      <Card className="w-100 mb-4 p-1" border="secondary">
+      <Card className="w-100 mb-4 p-1 blue-border">
         <Button
-          className="black-border"
+          className=""
           variant="info"
           href="/articoli"
         >
@@ -32,7 +32,7 @@ export const ArticleRead = function (props) {
           <Row>
             <Col md={{ span: 12, offset: 0 }}>
               <Row>
-                <h3 className="text-justify"><strong>{props.article[language].title}</strong></h3>
+                <h3 className=""><strong>{props.article[language].title}</strong></h3>
               </Row>
             </Col>
           </Row>
@@ -40,7 +40,7 @@ export const ArticleRead = function (props) {
             <Col md={12}>
               <Row>
                 <Col md={12}>
-                  <h6 className="text-justify">«{props.article[language].subtitle}»</h6>
+                  <h6 className="">«{props.article[language].subtitle}»</h6>
                 </Col>
               </Row>
             </Col>
@@ -94,7 +94,7 @@ export const ArticleRead = function (props) {
         </Card.Header>
         <Card.Body>
           <Row>
-            <Col md={12} className="text-justify">
+            <Col md={12} className="">
               <ArticleContent
                 glossary={props.article.glossary}
                 paragraphs={props.article[language].content}
