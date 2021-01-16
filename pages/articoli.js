@@ -76,7 +76,6 @@ export default function articoli() {
   const [filteredByTopic, setFilteredByTopic] = useState(false)
   const [searchInput, setSearchInput] = useState("")
 
-
   return (
     <div className={styles.container}>
       <Header

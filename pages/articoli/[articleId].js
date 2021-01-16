@@ -13,25 +13,25 @@ import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
 import { Footer } from '../../components/layout/Footer'
 import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
-
-import { getRelatedArticles } from '../../utils/articles'
+import { getRelatedArticles, getBreadcrumbsList } from '../../utils/articles'
 
 export default function articoli() {
-  const router = useRouter()
   const siteLanguage = useLanguage() //context
+  const router = useRouter()
+  const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
 
-  const handleOpenedArticle = (articleId) => {
-    const fullRoute = articleId !== null ? window.location.origin + '/articoli/' + articleId : window.location.origin + '/articoli/'
+  const handleOpenedArticle = (id) => {
+    const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
     router.push(fullRoute, undefined, { shallow: true })
-    if (articleId !== null) setOpenedArticle(articleId)
+    setOpenedArticle(id)
   }
 
-  let relatedArticles = openedArticle ? getRelatedArticles(openedArticle, articles) : []
+  let relatedArticles = articleId ? getRelatedArticles(articleId, articles) : []
 
   useEffect(() => {
-    setOpenedArticle(router.query.articleId)
+    if (!openedArticle) setOpenedArticle(articleId)
   })
 
   return (
@@ -45,6 +45,7 @@ export default function articoli() {
         <Breadcrumbs
           articleId={openedArticle}
           articleTitle={articles.find(art => art.id === openedArticle)[siteLanguage].title}
+          getBreadcrumbsList={getBreadcrumbsList}
         />
       }
       {/* Page Content */}
