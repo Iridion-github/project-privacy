@@ -41,7 +41,6 @@ export default function chiSono() {
               </Col>
             </Row>
           </Card.Body>
-          <Card.Footer className="text-center"></Card.Footer>
         </Card>
       </main>
       {/* Footer */}

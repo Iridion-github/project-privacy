@@ -17,10 +17,12 @@ export const Navigation = function () {
       <Row className="m-0 w-100 bg-standard-blue navbar-row">
         <Col md={{ span: 9, offset: 2 }} className="m-auto justify-content-center">
           <Navbar sticky="top" bg="standard-blue" expand="lg" className={styles.navbar}>
-            <Navbar.Brand href="/" className="text-center"><img src="/privacy.svg" className={styles.logo} /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="m-auto">
+                <Nav.Link className={styles.navbarLogoContainer} href="/">
+                  <Image src="/privacy.svg" className={styles.navbarLogo} />
+                </Nav.Link>
                 <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
                 <div className={styles.navbarDivider}></div>
                 <Nav.Link href="/chiSono" className={styles.navbarText}>{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Nav.Link>

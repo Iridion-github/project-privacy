@@ -25,7 +25,7 @@ export default function errorPage(props) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="w-75 p-2 grey-border">
+        <Card className="w-75 p-2 no-border">
           <Card.Title className="text-center"><h2>{siteLanguage === "ita" ? "Errore 404" : "Error 404"}</h2></Card.Title>
           <Card.Img className="error-img" variant="top" src="/standardError.png" />
           <Card.Body>

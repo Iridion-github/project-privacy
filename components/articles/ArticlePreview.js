@@ -14,14 +14,14 @@ export const ArticlePreview = function (props) {
   const [language, setLanguage] = useState("ita")
 
   return (
-    <Card className="w-100 mb-4 blue-border">
+    <Card className="w-100 mb-4 grey-border">
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#ita">
           <Nav.Item>
-            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="/bandiere/ita.png" className="blue-border flag-icon" /></Nav.Link>
+            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="/bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="/bandiere/GB.png" className="blue-border flag-icon" /></Nav.Link>
+            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="/bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
           </Nav.Item>
         </Nav>
       </Card.Header>

@@ -20,7 +20,7 @@ export const ArticleRead = function (props) {
   const [language, setLanguage] = useState("ita")
   return (
     <Row className="w-100 m-auto">
-      <Card className="w-100 mb-4 p-1 blue-border">
+      <Card className="w-100 mb-4 p-1 grey-border">
         <Button
           className=""
           variant="info"

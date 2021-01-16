@@ -13,7 +13,7 @@ export const ArticlesLeftMenu = function (props) {
   const siteLanguage = useLanguage() //context
   return (
     <Row className="justify-content-center mb-2">
-      <Row className="mobile-compatible w-100 mt-5">
+      <Row className="mobile-compatible w-100 mt-1">
         <Col>
           <Card className="bg-standard-blue">
             <Card.Header>
@@ -25,7 +25,7 @@ export const ArticlesLeftMenu = function (props) {
                   {props.filteredByTopic &&
                     <Button
                       size="sm"
-                      className="blue-border"
+                      className=""
                       variant="danger"
                       onClick={() => props.removeTopicFilter()}
                     >

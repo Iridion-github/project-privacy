@@ -39,6 +39,10 @@ a {
   }
 }
 
+.no-border {
+  border: none !important;
+}
+
 .black-border {
   border: 1px solid black !important;
 }
@@ -250,6 +254,7 @@ a {
 .breadcrumbs {
   background-color: rgb(131, 203, 221) !important;
   font-size: 0.8em;
+  border-bottom: 1px solid #17a3b8c4;
 }
 
 .breadcrumbs a {
