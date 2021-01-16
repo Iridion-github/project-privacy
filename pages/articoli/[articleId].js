@@ -2,7 +2,6 @@ import styles from '../../styles/Home.module.css'
 import { useLanguage } from '../../context/siteLanguageContext' //context
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import {
   Row,
   Col
