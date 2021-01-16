@@ -5,7 +5,7 @@ import {
   Button,
   Form
 } from 'react-bootstrap'
-import { useState, useContext, createContext } from 'react'
+import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ArticlesRow } from "./ArticlesRow"
 import { MyPagination } from "../layout/MyPagination"
@@ -15,7 +15,6 @@ import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContex
 export const ArticlesList = function (props) {
 
   const siteLanguage = useLanguage() //context
-  const siteLanguageUpdate = useLanguageUpdate() //context
 
   const [currentPage, setCurrentPage] = useState(1)
   const [elementsPerPage, setElementsPerPage] = useState(6)

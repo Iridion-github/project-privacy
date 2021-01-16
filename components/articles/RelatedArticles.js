@@ -1,19 +1,15 @@
 
 import {
   Row,
-  Col,
-  Button,
-  Form
+  Col
 } from 'react-bootstrap'
-import { useState, useContext, createContext } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import { RelatedArticlePreview } from './RelatedArticlePreview'
 
 export const RelatedArticles = function (props) {
 
   const siteLanguage = useLanguage() //context
-  const siteLanguageUpdate = useLanguageUpdate() //context
 
   return (
     <>

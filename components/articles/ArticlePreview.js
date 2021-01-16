@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react'
+import { useState } from 'react'
 import {
   Row,
   Col,
@@ -10,11 +10,9 @@ import {
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { datePrettifier } from '../../utils/date'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 
 export const ArticlePreview = function (props) {
   const [language, setLanguage] = useState("ita")
-  const siteLanguage = useLanguage() //context
 
   return (
     <Card className="w-100 mb-4" border="secondary">

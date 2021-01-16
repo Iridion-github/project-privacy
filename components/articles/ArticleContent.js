@@ -1,5 +1,5 @@
 import {
-  Image,
+  Image
 } from 'react-bootstrap'
 
 import { getGlossaryPopover } from '../../utils/text'

@@ -1,7 +1,6 @@
 import styles from '../../styles/Home.module.css'
 import {
   Navbar,
-  Row,
   Col,
   Image,
   Button

@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react'
+import { useState } from 'react'
 import {
   Row,
   Col,
@@ -9,7 +9,7 @@ import {
   Image,
   Nav
 } from 'react-bootstrap'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
+import { useLanguage } from '../../context/siteLanguageContext' //context
 import { ArticleContent } from './ArticleContent'
 import { datePrettifier } from '../../utils/date'
 import stringToHTML from 'html-react-parser'
