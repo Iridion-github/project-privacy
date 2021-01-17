@@ -1,7 +1,4 @@
 import {
-  Row,
-  Col,
-  Image,
   Popover,
   OverlayTrigger
 } from 'react-bootstrap'
