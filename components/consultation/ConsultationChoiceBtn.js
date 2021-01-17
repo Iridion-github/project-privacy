@@ -2,7 +2,6 @@ import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
-  Card,
   Button
 } from 'react-bootstrap'
 
@@ -10,25 +9,13 @@ export const ConsultationChoiceBtn = function (props) {
   const siteLanguage = useLanguage() //context
   return (
     <Button
-      className="p-0"
+      className="py-5"
       block
-      variant=""
-      onClick={() => props.setConsultation(props.consultation[siteLanguage].title)}
+      variant="info"
+      onClick={() => props.setConsultation(props.consultation)}
     >
-      <Card className="w-100 h-100" border="secondary">
-        <Card.Header className="consultation-card-header">
-        </Card.Header>
-        <Card.Body className="consultation-card-body">
-          <Card.Img className="consultation-card-img" variant="top" src={props.consultation.img} />
-          <Card.Title className="consultation-card-title">{props.consultation[siteLanguage].title}</Card.Title>
-        </Card.Body>
-        <Card.Footer className="consultation-card-footer">
-          <Row>
-            <Col>
-            </Col>
-          </Row>
-        </Card.Footer>
-      </Card >
+      <Row><Col className="text-center px-2"> <h3>{props.consultation[siteLanguage].title}</h3></Col></Row>
+      <Row><Col className="text-center px-4"><p>{(siteLanguage === "ita" ? "Piccola descrizione del consulto offerto riguardo " : "Short description regarding the offered consultation about") + props.consultation[siteLanguage].title}</p></Col></Row>
     </Button>
   )
 }

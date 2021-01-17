@@ -34,7 +34,7 @@ export const Footer = function () {
           xs={{ span: 1 }}
           className={styles.footerLogoContainer + " text-center"}
         >
-          <Image href='/' src="/privacy.svg" className={styles.footerLogo} />
+          <Image href='/' src="/editedLogo.png" className={styles.footerLogo} />
         </Col>
         <Col xs={2} className={styles.footerBtnContainer + " text-center"}>
           <Button

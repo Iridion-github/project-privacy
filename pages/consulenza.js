@@ -32,7 +32,7 @@ export default function consulenza() {
         <Card className="w-75 p-2">
           <Card.Img className="black-border" variant="top" src="consulenza.png" />
           <Card.Body>
-            <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation : ""}</h1></Card.Title>
+            <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
             {!consultation &&
               <ConsultationChoice
                 consultations={consultations}
