@@ -20,21 +20,21 @@ export const Footer = function () {
     }
   }
   return (
-    <Navbar fixed="" bg="standard-blue" expand="lg" className={styles.footer}>
-      <Navbar.Text className="w-100">
-        <Row>
-          <Col md={{ span: 3, offset: 4 }} className="d-flex align-items-center justify-content-end text-dark">
-            Gaetano Mastropierro - Consulenza Privacy
+    <Navbar fixed="bottom" bg="standard-blue" expand="lg" className={styles.footer}>
+      <Row className="w-100">
+        <Col md={{ span: 4 }} className={styles.footerText + " text-dark"}>
         </Col>
-          <Col
-            onClick={() => router.push('/', undefined, { shallow: true })}
-            md={{ span: 1, offset: 0 }}
-            className={styles.footerLogoContainer}
-          >
-            <Image href='/' src="/privacy.svg" className={styles.footerLogo} />
-          </Col>
-        </Row>
-      </Navbar.Text>
+        <Col md={{ span: 3 }} className={styles.footerText + " text-dark mr-3"}>
+          Gaetano Mastropierro - Consulenza Privacy
+        </Col>
+        <Col
+          onClick={() => router.push('/', undefined, { shallow: true })}
+          md={{ span: 1, offset: 0 }}
+          className={styles.footerLogoContainer}
+        >
+          <Image href='/' src="/privacy.svg" className={styles.footerLogo} />
+        </Col>
+      </Row>
       <Button
         variant="info"
         onClick={() => scrollToTopSmoothly()}>

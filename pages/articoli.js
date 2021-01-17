@@ -86,7 +86,7 @@ export default function articoli() {
       <Breadcrumbs />
       {/* Page Content */}
       <main className={styles.main}>
-        <Row className="w-100">
+        <Row className="w-100 mb-5">
           <Col md={3} className="">
             <ArticlesLeftMenu
               allArticles={articles}

@@ -29,8 +29,8 @@ export default function consulenza() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="w-75 p-2" border="secondary">
-          <Card.Img className="blue-border" variant="top" src="consulenza.png" />
+        <Card className="w-75 p-2">
+          <Card.Img className="black-border" variant="top" src="consulenza.png" />
           <Card.Body>
             <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation : ""}</h1></Card.Title>
             {!consultation &&

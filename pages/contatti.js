@@ -4,7 +4,8 @@ import {
   Row,
   Col,
   Card,
-  Table
+  Table,
+  Image
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -22,7 +23,7 @@ export default function contatti() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="grey-border p-2" border="">
+        <Card className="pt-2 pb-2">
           <Card.Img variant="top" src="contatti.png" />
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Card.Title>

@@ -32,6 +32,5 @@ ___________________________________________
 
 ## Note
 - [Issue] Articoli - I tag degli articoli non sono automaticamente tradotti.
-- [Issue] Articoli - In caso la searchbar non trovi risultati, il div dovrebbe cmq avere un'altezza minima, e dovrebbe essere visualizzato un responso per l'user.
 - [Idea] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
 - [Articoli] Manca la gestione errore nel caso si inserisca manualmente nell'url l'id di un articolo non esistente.

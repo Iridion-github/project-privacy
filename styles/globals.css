@@ -75,9 +75,16 @@ a {
   font-size: 0.8rem !important;
 }
 
+@media all and (max-width: 600px) {
+  .flag-icon-container {
+    text-align: center !important;
+  }
+}
+
 .flag-icon {
-  width: 30px !important;
-  height: 20px !important;
+  width: 40px;
+  height: 26px;
+  object-fit: cover;
 }
 
 .special-bottom-border {
@@ -197,7 +204,6 @@ a {
   max-width: 800px;
   max-height: 250px;
   object-fit: cover;
-  /*object-fit: contain;*/
 }
 
 .article-preview-title {
@@ -264,4 +270,13 @@ a {
 .error-img {
   max-height: 300px !important;
   object-fit: contain;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.resulting-article-container {
+  min-height: 50vh;
 }

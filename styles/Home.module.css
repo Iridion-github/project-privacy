@@ -1,15 +1,15 @@
 .container {
-  min-height: 100vh;
+  min-height: 100%;
   padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /*align-items: center;*/
 }
 
 .main {
   width: 100%;
-  padding-top: 0.5rem;
+  padding-top: 0.5em;
   padding-right: 0px;
   padding-left: 0px;
   padding-bottom: 1rem;
@@ -18,6 +18,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5em !important;
+}
+
+@media (max-width: 600px) {
+  .main {
+    width: 100%;
+    padding-top: 0.5em;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10em !important;
+  }
 }
 
 .navbar {
@@ -28,9 +45,22 @@
 }
 
 .navbarText {
+  text-align: center;
   font-size: 1.2rem;
   color: #343a40;
   font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .navbarText {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #343a40;
+    font-weight: 400;
+    border: solid 1px #17a2b8 !important;
+    border-radius: 2px;
+    margin-bottom: 1px;
+  }
 }
 
 .navbarDivider {
@@ -108,7 +138,7 @@
 
 .grid {
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
@@ -156,8 +186,32 @@
   cursor: pointer;
 }
 
+@media (max-width: 600px) {
+  .navbarLogoContainer {
+    margin-right: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+    text-align: center;
+  }
+  .navbarLogo {
+    padding: 0px !important;
+    height: 2.5em;
+    color: rgb(75, 73, 73);
+    cursor: pointer;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+}
+
+.footerText {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  line-height: 2;
+  text-align: right !important;
+}
+
 .footerLogoContainer {
-  line-height: -2 !important;
+  line-height: -3 !important;
   padding: 0 !important;
   height: 100%;
 }
@@ -167,6 +221,32 @@
   height: 2.5em;
   color: rgb(75, 73, 73);
   cursor: pointer;
+  margin: auto !important;
+}
+
+@media (max-width: 600px) {
+  .footerText {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    line-height: 3;
+    text-align: center !important;
+    align-content: center !important;
+  }
+  .footerLogoContainer {
+    line-height: -3 !important;
+    padding: 0 !important;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .footerLogo {
+    padding: 0px !important;
+    height: 2.5em;
+    color: rgb(75, 73, 73);
+    cursor: pointer;
+    margin: auto !important;
+    text-align: center;
+  }
 }
 
 @media (max-width: 600px) {

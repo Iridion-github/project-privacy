@@ -49,7 +49,7 @@ export const ArticlesList = function (props) {
   }
 
   return (
-    <Row>
+    <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
           <h1>{siteLanguage === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
@@ -73,31 +73,37 @@ export const ArticlesList = function (props) {
           </Form>
         </Col>
       </Row>
-      <MyPagination
-        totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        elementsPerPage={elementsPerPage}
-        totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
-      />
-      <Row className="mobile-compatible  m-auto">
-        <Col>
-          {visibleRows.map((row, i) =>
-            <ArticlesRow
-              setOpenedArticle={props.setOpenedArticle}
-              key={i}
-              articles={row}
-            />
-          )}
+      { visibleRows.length > 0 &&
+        <MyPagination
+          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          elementsPerPage={elementsPerPage}
+          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
+        />
+      }
+      <Row className="w-100 mobile-compatible m-auto">
+        <Col md={12} className={visibleRows.length > 0 ? "resulting-article-container" : "d-flex resulting-article-container align-items-center justify-content-center"}>
+          {visibleRows.length > 0 ?
+            visibleRows.map((row, i) =>
+              <ArticlesRow
+                setOpenedArticle={props.setOpenedArticle}
+                key={i}
+                articles={row}
+              />
+            ) : <Row className="w-100 text-center justify-content-center">{(siteLanguage === "ita") ? "Nessun risultato trovato" : "No result found"}</Row>
+          }
         </Col>
       </Row>
-      <MyPagination
-        totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        elementsPerPage={elementsPerPage}
-        totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
-      />
+      { visibleRows.length > 0 &&
+        <MyPagination
+          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          elementsPerPage={elementsPerPage}
+          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
+        />
+      }
     </Row>
   )
 }

@@ -8,8 +8,7 @@ import {
   Button,
   ButtonToolbar,
   ButtonGroup,
-  Image,
-  Nav
+  Image
 } from 'react-bootstrap'
 import { ArticleContent } from './ArticleContent'
 import { datePrettifier } from '../../utils/date'

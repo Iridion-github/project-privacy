@@ -1,9 +1,11 @@
 import styles from '../styles/Home.module.css'
 import { useLanguage } from '../context/siteLanguageContext' //context
 import {
+  Container,
   Row,
   Col,
-  Card
+  Card,
+  Image
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -14,7 +16,7 @@ export default function chiSono() {
   const siteLanguage = useLanguage() //context
 
   const translate = (lang, data) => {
-    return data[lang]
+    return (data[lang]).toString()
   }
 
   return (
@@ -26,27 +28,31 @@ export default function chiSono() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="w-75 p-2 grey-border">
-          <Card.Img className="grey-border" variant="top" src="handshake.png" />
-          <Card.Body>
-            <Card.Title className="text-center">{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Card.Title>
-            <Row>
-              <Col md={{ span: 8, offset: 2 }} className="text-justify">
-                {translate(siteLanguage, content.firstCol)}
+        <Container className="justify-content-center p-0">
+          <Row className="w-100 justify-content-center ml-0 mr-0">
+            <Card className="pt-2 pb-2 text-center justify-content-center">
+              <Col md={{ span: 12 }} >
+                <Card.Img variant="top" src="handshake.png" className="black-border" />
               </Col>
-            </Row>
-            <Row>
-              <Col md={{ span: 8, offset: 2 }} className="text-justify mt-2">
-                {translate(siteLanguage, content.secondCol)}
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-      </main>
+              <Card.Body>
+                <Col md={{ span: 12 }} >
+                  <Card.Title className="text-center">{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Card.Title>
+                </Col>
+                <Col md={{ span: 12 }} className="text-justify">
+                  <p>{translate(siteLanguage, content.firstCol)
+                  }</p>
+                </Col>
+                <Col md={{ span: 12 }} className="text-justify">
+                  <p>{translate(siteLanguage, content.secondCol)
+                  }</p>
+                </Col>
+              </Card.Body>
+            </Card>
+          </Row>
+        </Container>
+      </main >
       {/* Footer */}
       <Footer />
     </div>
   )
 }
-
-

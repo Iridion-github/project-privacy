@@ -5,7 +5,8 @@ import {
   Col,
   Navbar,
   Nav,
-  Image
+  Image,
+  Button
 } from 'react-bootstrap'
 
 
@@ -39,22 +40,17 @@ export const Navigation = function () {
                 <div className={styles.navbarDivider}></div>
                 <Nav.Link href="/contatti" className={styles.navbarText}>{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Nav.Link>
                 <div className={styles.navbarDivider}></div>
-                <Row className="m-0 bg-standard-blue">
-                  <Nav.Link
-                    active={siteLanguage === "ita"}
-                    href="#ita"
-                    onClick={() => siteLanguageUpdate("ita")}
-                    className="mr-1"
-                  >
-                    <Image src="/bandiere/ita.png" className="black-border flag-icon" />
-                  </Nav.Link>
-                  <Nav.Link
-                    active={siteLanguage === "eng"}
-                    href="#eng"
-                    onClick={() => siteLanguageUpdate("eng")}
-                    className="ml-0 mr-0">
-                    <Image src="/bandiere/GB.png" className="black-border flag-icon" />
-                  </Nav.Link>
+                <Row className="m-0 bg-standard-blue flag-container justify-content-center align-items-center p-0">
+                  <Col md={2} className="justify-content-center align-items-center p-0 flag-icon-container">
+                    <Button
+                      onClick={() => siteLanguageUpdate(siteLanguage === "ita" ? "eng" : "ita")}
+                      variant=""
+                      active={false}
+                      className="p-0 flag-icon-btn"
+                    >
+                      <Image src="/bandiere/hybrid.png" className="black-border flag-icon" />
+                    </Button>
+                  </Col>
                 </Row>
               </Nav>
             </Navbar.Collapse>
