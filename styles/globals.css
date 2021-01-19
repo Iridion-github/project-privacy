@@ -59,6 +59,10 @@ a {
   border: 1px solid #17a2b8 !important;
 }
 
+.border-radius {
+  border-radius: 3px !important;
+}
+
 .mobile-adaptive-card-container {
   min-width: 350px !important;
 }
@@ -258,6 +262,15 @@ a {
   border-bottom: 1px solid #17a3b8c4 !important;
 }
 
+@media all and (max-width: 600px) {
+  .navbar-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+    border-bottom: 1px solid #17a3b8c4 !important;
+  }
+}
+
 .breadcrumbs {
   background-color: rgb(131, 203, 221) !important;
   font-size: 0.8em;
@@ -284,4 +297,18 @@ a {
 
 .h-100 {
   height: 100%;
+}
+
+.email-form label {
+  font-size: 1.3em;
+  margin-bottom: 0;
+}
+
+.email-formgroup {
+  margin-bottom: 0 !important;
+  max-width: 391px !important;
+}
+
+.email-form-checkbox-label label {
+  font-size: 1em;
 }

@@ -10,6 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bootstrap": "^4.5.3",
+    "cors": "^2.8.5",
     "html-react-parser": "^1.1.1",
     "next": "9.5.5",
     "react": "^16.14.0",

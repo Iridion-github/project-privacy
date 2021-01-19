@@ -34,3 +34,4 @@ ___________________________________________
 - [Issue] Articoli - I tag degli articoli non sono automaticamente tradotti.
 - [Idea] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
 - [Articoli] Manca la gestione errore nel caso si inserisca manualmente nell'url l'id di un articolo non esistente.
+- [Post/Get] Siamo in alto mare. Siamo riusciti ad ottenere un redirect col submit btn, ma non viene passato alcun dato, nè si sa come caricare una page con un set di dati impostati dall'API.
