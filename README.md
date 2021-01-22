@@ -30,7 +30,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 ___________________________________________
 
+## Checkpoint
+- [MongoDB] Abbiamo collegato il db, ma tutto il sito riceve ancora i dati dai file js. Prossimo passaggio: far si che tutti i dati dipendano dal db (video part 3).
+
 ## Note
+- [Issue] Articoli - Nel search non funziona più la ricerca per autore.
+- [Style] Il signor Gaetano vuole il breadcrumbs più grande.
 - [Issue] Articoli - I tag degli articoli non sono automaticamente tradotti.
 - [Idea] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
 - [Articoli] Manca la gestione errore nel caso si inserisca manualmente nell'url l'id di un articolo non esistente.

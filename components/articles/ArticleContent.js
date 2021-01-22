@@ -7,7 +7,6 @@ import glossary from '../../database/glossary'
 export const ArticleContent = function (props) {
 
   const getSections = (imgs, paragraphs) => {
-    //searchTargetWords("Alfa, beta e gamma. Poi c'è Delta seguita da epsilon. A sorpresa troviamo beta di nuovo alla fine.", ["beta"])
     const specifiedGlossary = glossary.filter(word => props.glossary.includes(word.name))
     return paragraphs.map(
       (parag, i) => {
