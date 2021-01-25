@@ -1,5 +1,5 @@
 import dbConnect from '../../../utils/dbConnect'
-import Glossaryword from '../../../models/Glossaryword'
+import Test from '../../../models/Test'
 
 dbConnect()
 
@@ -8,16 +8,16 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const glossaryword = await Glossaryword.find({})
-        res.status(200).json({ success: true, data: glossaryword })
+        const test = await Test.find({})
+        res.status(200).json({ success: true, data: test })
       } catch (err) {
         res.status(400).json({ success: false, error: err })
       }
       break
     case "POST":
       try {
-        const glossaryWord = await Glossaryword.create(req.body)
-        res.status(201).json({ success: true, data: glossaryWord })
+        const test = await Test.create(req.body)
+        res.status(201).json({ success: true, data: test })
       } catch (err) {
         res.status(400).json({ success: false, error: err })
       }

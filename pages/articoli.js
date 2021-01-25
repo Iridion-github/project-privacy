@@ -6,8 +6,6 @@ import {
   Row,
   Col
 } from 'react-bootstrap'
-import DBarticles from "../database/articles"
-import articlesTopics from "../database/articlesTopics"
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Breadcrumbs } from '../components/layout/Breadcrumbs'
@@ -16,7 +14,7 @@ import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-export default function articoli() {
+function articoli({ DBarticles, articleTopics }) {
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
@@ -90,7 +88,7 @@ export default function articoli() {
           <Col md={3} className="">
             <ArticlesLeftMenu
               allArticles={articles}
-              allTags={articlesTopics}
+              allTags={articleTopics}
               searchTopic={searchTopic}
               searchInput={searchInput}
               setSearchInput={setSearchInput}
@@ -120,3 +118,14 @@ export default function articoli() {
     </div>
   )
 }
+
+articoli.getInitialProps = async () => {
+  const resArticle = await fetch("http://localhost:3000/api/article")
+  const DBarticles = await resArticle.json()
+  const resArticleTopics = await fetch("http://localhost:3000/api/articleTopics")
+  const articleTopics = await resArticleTopics.json()
+  console.log(articleTopics)
+  return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
+}
+
+export default articoli

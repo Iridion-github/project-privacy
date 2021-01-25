@@ -6,7 +6,6 @@ import {
   Row,
   Col
 } from 'react-bootstrap'
-import DBarticles from "../../database/articles"
 import { Header } from '../../components/layout/Header'
 import { Navigation } from '../../components/layout/Navbar'
 import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
@@ -15,7 +14,7 @@ import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
 import { getRelatedArticles, getBreadcrumbsList } from '../../utils/articles'
 
-export default function articoli() {
+const articoli = ({ glossarywords, DBarticles }) => {
   const siteLanguage = useLanguage() //context
   const router = useRouter()
   const { articleId } = router.query
@@ -59,6 +58,7 @@ export default function articoli() {
                 article={articles.find(art => art.id === openedArticle)}
                 allArticles={articles}
                 setOpenedArticle={handleOpenedArticle}
+                glossarywords={glossarywords}
               />
             }
           </Col>
@@ -75,3 +75,13 @@ export default function articoli() {
     </div>
   )
 }
+
+articoli.getInitialProps = async () => {
+  const resGlossaryword = await fetch("http://localhost:3000/api/glossaryword")
+  const glossarywords = await resGlossaryword.json()
+  const resArticle = await fetch("http://localhost:3000/api/article")
+  const DBarticles = await resArticle.json()
+  return { DBarticles: DBarticles.data, glossarywords: glossarywords.data }
+}
+
+export default articoli

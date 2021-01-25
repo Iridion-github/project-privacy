@@ -15,7 +15,7 @@ const GlossarywordSchema = new mongoose.Schema({
   },
   reference: {
     type: String,
-    maxlength: [100, "Reference max length is 30 0!"]
+    maxlength: [100, "Reference max length is 300!"]
   }
 })
 

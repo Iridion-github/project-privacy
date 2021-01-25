@@ -12,7 +12,8 @@ import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import content from '../database/chiSono'
 
-export default function chiSono() {
+
+function chiSono(props) {
   const siteLanguage = useLanguage() //context
 
   const translate = (lang, data) => {
@@ -31,9 +32,7 @@ export default function chiSono() {
         <Container className="justify-content-center p-0">
           <Row className="w-100 justify-content-center ml-0 mr-0">
             <Card className="pt-2 pb-2 text-center justify-content-center">
-              <Col md={{ span: 12 }} >
-                <Card.Img variant="top" src="handshake.png" className="black-border" />
-              </Col>
+              <Image src="logoCropped.svg" className="chiSonoImg" />
               <Card.Body>
                 <Col md={{ span: 12 }} >
                   <Card.Title className="text-center">{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Card.Title>
@@ -56,3 +55,5 @@ export default function chiSono() {
     </div>
   )
 }
+
+export default chiSono

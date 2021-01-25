@@ -36,13 +36,7 @@ export default async (req, res) => {
     case "DELETE":
       try {
         const deletedGlossaryword = await Glossaryword.deleteOne({ _id: id })
-
-        const glossaryword = await Glossaryword.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true
-        })
-
-        if (!deletedGlossaryword) return res.status(400).json({ success: false, error: "Failed deletion of new glossary word!" })
+        if (!deletedGlossaryword) return res.status(400).json({ success: false, error: "Failed deletion of glossary word!" })
         res.status(200).json({ success: true, data: {} })
       } catch (error) {
         res.status(400).json({ success: false, error })
@@ -50,8 +44,5 @@ export default async (req, res) => {
       break
 
     default: res.status(400).json({ success: false, error })
-
-
-
   }
 }

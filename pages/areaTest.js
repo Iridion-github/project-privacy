@@ -10,10 +10,9 @@ import { TopicChoice } from '../components/areaTest/TopicChoice'
 import { Quiz } from '../components/areaTest/Quiz'
 import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
-import tests from "../database/readiedTests"
 
 
-export default function areaTest() {
+function areaTest({ tests }) {
 
   const [selectedTopic, setSelectedTopic] = useState(null)
 
@@ -66,3 +65,11 @@ export default function areaTest() {
     </div>
   )
 }
+
+areaTest.getInitialProps = async () => {
+  const res = await fetch("http://localhost:3000/api/test")
+  const { data } = await res.json()
+  return { tests: data }
+}
+
+export default areaTest

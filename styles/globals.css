@@ -312,3 +312,7 @@ a {
 .email-form-checkbox-label label {
   font-size: 1em;
 }
+
+.chiSonoImg {
+  max-height: 600px !important;
+}

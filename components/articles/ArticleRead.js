@@ -95,7 +95,8 @@ export const ArticleRead = function (props) {
           <Row>
             <Col md={12} className="">
               <ArticleContent
-                glossary={props.article.glossary}
+                glossarywords={props.glossarywords} //array preso dal db
+                glossary={props.article.glossary} //glossario dell'articolo aperto
                 paragraphs={props.article[language].content}
                 previewImg={props.article.previewImg}
                 images={props.article.images}
