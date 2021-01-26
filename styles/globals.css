@@ -316,3 +316,7 @@ a {
 .chiSonoImg {
   max-height: 600px !important;
 }
+
+.archive-result-container {
+  max-width: 835px !important;
+}

@@ -15,7 +15,6 @@ import { Footer } from '../components/layout/Footer'
 
 const contatti = function (props) {
   const siteLanguage = useLanguage() //context
-  console.log("contatti - props:", props)
   return (
     <div className={styles.container}>
       <Header
