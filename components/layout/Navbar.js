@@ -32,6 +32,7 @@ export const Navigation = function () {
                 <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>{siteLanguage === "ita" ? "Recensioni Bibliografiche" : "Bibliographic Reviews"}</Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText}>{siteLanguage === "ita" ? "Articoli" : "Articles"}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText}>{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Nav.Link>
+                <Nav.Link href="/archivio" className={styles.navbarText}>{siteLanguage === "ita" ? "Archivio" : "Archive"}</Nav.Link>
                 <Row className="m-0 bg-standard-blue flag-container justify-content-center align-items-center p-0">
                   <Col md={2} className="justify-content-center align-items-center p-0 flag-icon-container">
                     <Button

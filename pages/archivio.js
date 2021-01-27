@@ -82,7 +82,7 @@ const archivio = function (props) {
               </Form>
             </Row>
 
-            {(searched && searchResult.length > 0) && (
+            {(searched && searchResult && searchResult.length > 0) && (
               <Row className="mt-4 p-3 justify-content-center archive-result-container">
 
                 <Col md={12}>
@@ -95,21 +95,26 @@ const archivio = function (props) {
                   <ul>
                     {searchResult.map((el, i) => (
                       <li key={i}>
-                        <a href={el.relativepath}>
-                          <>
-                            {el.filename}
-                            <i className="ml-2 fas fa-download"></i>
-                          </>
-                        </a>
+                        <>
+                          {el.filename}
+                          <Button
+                            size="sm"
+                            variant="info"
+                            className="ml-3 py-0 px-1"
+                            href={el.relativepath}
+                          >
+                            <i className="fas fa-download"></i>
+                          </Button>
+                        </>
                       </li>
                     ))}
                   </ul>
                 </Col>
               </Row>
             )}
-            {(searched && searchResult.length === 0) && (
+            {(searched && searchResult && searchResult.length === 0) && (
               <Row className="mt-4 p-3 justify-content-center archive-result-container">
-                <h4>Nessun documento/i contenente: " {searched} "</h4>
+                <h4>Nessun documento contenente: " {searched} "</h4>
               </Row>
             )}
 

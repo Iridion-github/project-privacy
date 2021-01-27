@@ -16,16 +16,17 @@ export default async (req, res) => {
       if (dirent.isDirectory()) {
         yield* getFiles(fullpath)
       } else {
+        console.log('fullpath.split("public") - ', fullpath.split("public"))
         yield {
-          //fullpath: fullpath, //nascosto per motivi di sicurezza, da rimuovere in futuro
-          relativepath: fullpath.replace("C:\\Users\\antin\\Desktop\\Lavoro\\Siti Ale\\project-privacy\\public\\", ""), //vitale ma così fa schifo, da ottimizzare
+          fullpath: fullpath,
+          relativepath: fullpath.split("public\\")[1],
           filename: dirent.name
         }
       }
     }
   }
   (() => {
-    for (const f of getFiles('public/archive', true)) {
+    for (const f of getFiles('public/archive')) {
       docsToAnalyze.push(f)
     }
   })()
@@ -37,7 +38,6 @@ export default async (req, res) => {
 
     return {
       filename: fileObj.filename,
-      fullpath: fileObj.fullpath,
       relativepath: fileObj.relativepath,
       content: fileContents
     }
@@ -51,6 +51,6 @@ export default async (req, res) => {
   if (filteredDocs.length > 0) {
     res.status(200).json({ success: true, data: { filteredDocs: filteredDocs } })
   } else {
-    res.status(200).json({ success: true, data: "No Results found!" })
+    res.status(200).json({ success: true, data: { filteredDocs: [] } })
   }
 }
