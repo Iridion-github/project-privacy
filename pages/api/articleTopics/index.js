@@ -9,7 +9,6 @@ export default async (req, res) => {
     case "GET":
       try {
         const articleTopics = await ArticleTopics.find()
-        console.log("articleTopics:", articleTopics)
         res.status(200).json({ success: true, data: articleTopics })
       } catch (err) {
         res.status(400).json({ success: false, error: err })

@@ -8,7 +8,6 @@ import {
   Form,
   Button
 } from 'react-bootstrap'
-import Link from 'next/link'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
@@ -19,13 +18,15 @@ const archivio = function (props) {
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
   const [searchResult, setSerchResult] = useState([])
-  console.log("archivio - props", props)
-
 
   const submitSearch = async () => {
     try {
       const res = await fetch(`http://localhost:3000/api/archive/?searchterms=${searchInput}`, {
         method: 'GET',
+        headers: {
+          key: 'Access-Control-Allow-Origin',
+          value: '*'
+        },
         query: {
           searchterms: searchInput
         }
@@ -105,6 +106,7 @@ const archivio = function (props) {
                           >
                             <i className="fas fa-download"></i>
                           </Button>
+                          <iframe src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
                         </>
                       </li>
                     ))}

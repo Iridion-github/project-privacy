@@ -89,7 +89,6 @@ const contatti = function (props) {
 
 
 contatti.getInitialProps = async (extra) => {
-  console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| \n\n\n extra: ', extra, '\n\n\n ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
   const res = await fetch('http://localhost:3000/api/Get')
   const json = await res.json()
   return { data: json.data }

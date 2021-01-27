@@ -124,7 +124,6 @@ articoli.getInitialProps = async () => {
   const DBarticles = await resArticle.json()
   const resArticleTopics = await fetch("http://localhost:3000/api/articleTopics")
   const articleTopics = await resArticleTopics.json()
-  console.log(articleTopics)
   return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
 }
 
