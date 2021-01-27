@@ -8,6 +8,7 @@ import {
   Form,
   Button
 } from 'react-bootstrap'
+import Link from 'next/link'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
@@ -91,7 +92,18 @@ const archivio = function (props) {
                   <p className="text-center">"{searched}" </p>
                 </Col>
                 <Col md={12}>
-                  <ul>{searchResult.map((el, i) => <li key={i}>{el.filePath}</li>)}</ul>
+                  <ul>
+                    {searchResult.map((el, i) => (
+                      <li key={i}>
+                        <a href={el.relativepath}>
+                          <>
+                            {el.filename}
+                            <i className="ml-2 fas fa-download"></i>
+                          </>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </Col>
               </Row>
             )}

@@ -12,28 +12,33 @@ export default async (req, res) => {
   function* getFiles(dir) {
     const dirents = fs.readdirSync(dir, { withFileTypes: true })
     for (const dirent of dirents) {
-      const res = path.resolve(dir, dirent.name)
+      const fullpath = path.resolve(dir, dirent.name)
       if (dirent.isDirectory()) {
-        yield* getFiles(res)
+        yield* getFiles(fullpath)
       } else {
-        yield res
+        yield {
+          //fullpath: fullpath, //nascosto per motivi di sicurezza, da rimuovere in futuro
+          relativepath: fullpath.replace("C:\\Users\\antin\\Desktop\\Lavoro\\Siti Ale\\project-privacy\\public\\", ""), //vitale ma così fa schifo, da ottimizzare
+          filename: dirent.name
+        }
       }
     }
   }
   (() => {
-    for (const f of getFiles('archive')) {
+    for (const f of getFiles('public/archive', true)) {
       docsToAnalyze.push(f)
     }
   })()
 
-  const docs = docsToAnalyze.map(filePath => {
-    const fileContents = fs.readFileSync(filePath, {
+  const docs = docsToAnalyze.map(fileObj => {
+    const fileContents = fs.readFileSync(fileObj.fullpath, {
       encoding: 'utf8'
     })
 
     return {
-      filename: "file name is temporary unavailable",
-      filePath: filePath.replace("C:\\Users\\antin\\Desktop\\Lavoro\\Siti Ale\\project-privacy\\archive\\", ""),
+      filename: fileObj.filename,
+      fullpath: fileObj.fullpath,
+      relativepath: fileObj.relativepath,
       content: fileContents
     }
   })
@@ -41,7 +46,7 @@ export default async (req, res) => {
   const filteredDocs = docs.filter(d => {
     //Eventuali affinamenti del filtro andranno qui
     return d.content.trim().includes(searchterms)
-  }).map(el => ({ filename: el.filename, filePath: el.filePath })) //NON includo il content nella risposta
+  }) //NON includo il content nella risposta
 
   if (filteredDocs.length > 0) {
     res.status(200).json({ success: true, data: { filteredDocs: filteredDocs } })
