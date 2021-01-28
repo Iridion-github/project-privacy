@@ -14,11 +14,10 @@ export default async (req, res) => {
       try {
         const consultation = await Consultation.findById(id)
         if (!consultation) return res.status(400).json({ success: false, error: "No consultation found for that id!" })
-        res.status(200).json({ success: true, data: consultation })
+        return res.status(200).json({ success: true, data: consultation })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error })
       }
-      break
 
     case "PUT":
       try {
@@ -27,22 +26,20 @@ export default async (req, res) => {
           runValidators: true
         })
         if (!consultation) return res.status(400).json({ success: false, error: "Failed update of consultation!" })
-        res.status(200).json({ success: true, data: consultation })
+        return res.status(200).json({ success: true, data: consultation })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error })
       }
-      break
 
     case "DELETE":
       try {
         const deletedConsultation = await Consultation.deleteOne({ _id: id })
         if (!deletedConsultation) return res.status(400).json({ success: false, error: "Failed deletion of consultation!" })
-        res.status(200).json({ success: true, data: {} })
+        return res.status(200).json({ success: true, data: {} })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error })
       }
-      break
 
-    default: res.status(400).json({ success: false, error })
+    default: return res.status(400).json({ success: false, error })
   }
 }

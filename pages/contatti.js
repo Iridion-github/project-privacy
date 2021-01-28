@@ -12,7 +12,7 @@ import { EmailForm } from '../components/form/EmailForm'
 import { Footer } from '../components/layout/Footer'
 
 
-const contatti = function (props) {
+const contatti = function () {
   const siteLanguage = useLanguage() //context
   return (
     <div className={styles.container}>
@@ -85,13 +85,5 @@ const contatti = function (props) {
     </div >
   )
 }
-
-
-contatti.getInitialProps = async (extra) => {
-  //const res = await fetch('http://localhost:3000/api/Get')
-  //const json = await res.json()
-  return { data: [] }
-}
-
 
 export default contatti
