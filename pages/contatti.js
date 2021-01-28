@@ -4,8 +4,7 @@ import {
   Row,
   Col,
   Card,
-  Table,
-  Image
+  Table
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -89,9 +88,9 @@ const contatti = function (props) {
 
 
 contatti.getInitialProps = async (extra) => {
-  const res = await fetch('http://localhost:3000/api/Get')
-  const json = await res.json()
-  return { data: json.data }
+  //const res = await fetch('http://localhost:3000/api/Get')
+  //const json = await res.json()
+  return { data: [] }
 }
 
 
