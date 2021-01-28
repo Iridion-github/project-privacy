@@ -26,7 +26,7 @@ export default async (req, res) => {
           new: true,
           runValidators: true
         })
-        if (!glossaryword) return res.status(400).json({ success: false, error: "Failed creation of new glossary word!" })
+        if (!glossaryword) return res.status(400).json({ success: false, error: "Failed update of glossary word!" })
         res.status(200).json({ success: true, data: glossaryword })
       } catch (error) {
         res.status(400).json({ success: false, error })

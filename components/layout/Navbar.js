@@ -20,7 +20,7 @@ export const Navigation = function () {
           <Navbar sticky="top" bg="standard-blue pt-0 pb-0 h-100" expand="lg" className={styles.navbar}>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="h-100">
-              <Nav className="m-auto align-items-center mt-0 mb-0 h-100">
+              <Nav className="m-auto align-items-center mt-0 mb-0 h-100 nav-link-container justify-content-center">
                 <Nav.Link className={styles.navbarLogoContainer + " h-100"} href="/">
                   <Image src="/editedLogo.png" className={styles.navbarLogo + " h-100"} />
                 </Nav.Link>
@@ -33,17 +33,30 @@ export const Navigation = function () {
                 <Nav.Link href="/articoli" className={styles.navbarText}>{siteLanguage === "ita" ? "Articoli" : "Articles"}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText}>{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Nav.Link>
                 <Nav.Link href="/archivio" className={styles.navbarText}>{siteLanguage === "ita" ? "Archivio" : "Archive"}</Nav.Link>
-                <Row className="m-0 bg-standard-blue flag-container justify-content-center align-items-center p-0">
-                  <Col md={2} className="justify-content-center align-items-center p-0 flag-icon-container">
+
+                <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
+
+                  <Col className="align-items-center p-0 flag-icon-container">
                     <Button
-                      onClick={() => siteLanguageUpdate(siteLanguage === "ita" ? "eng" : "ita")}
+                      onClick={() => siteLanguageUpdate("ita")}
+                      variant=""
+                      active={false}
+                      className="p-0 flag-icon-btn mr-1"
+                    >
+                      <Image src="/bandiere/ita.png" className={"black-border flag-icon " + styles.responsiveFlagIcon} />
+                    </Button>
+                  </Col>
+                  <Col className="align-items-center p-0 flag-icon-container">
+                    <Button
+                      onClick={() => siteLanguageUpdate("eng")}
                       variant=""
                       active={false}
                       className="p-0 flag-icon-btn"
                     >
-                      <Image src={siteLanguage === "ita" ? "/bandiere/GB.png" : "/bandiere/ita.png"} className={"black-border flag-icon " + styles.responsiveFlagIcon} />
+                      <Image src="/bandiere/GB.png" className={"black-border flag-icon " + styles.responsiveFlagIcon} />
                     </Button>
                   </Col>
+
                 </Row>
               </Nav>
             </Navbar.Collapse>

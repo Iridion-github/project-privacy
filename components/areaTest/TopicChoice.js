@@ -21,7 +21,7 @@ export const TopicChoice = function (props) {
                   block
                   onClick={() => {
                     props.setSelectedTopic("Test 1")
-                    props.setSelectedTest(0)
+                    props.setSelectedTest(1)
                   }}
                 >
                   Test 1
@@ -29,6 +29,7 @@ export const TopicChoice = function (props) {
               </Col>
               <Col className="mb-2">
                 <Button
+                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
@@ -47,7 +48,7 @@ export const TopicChoice = function (props) {
                   block
                   onClick={() => {
                     props.setSelectedTopic("Test Debug")
-                    props.setSelectedTest(1)
+                    props.setSelectedTest(0)
                   }}
                 >
                   Test Debug
@@ -58,6 +59,7 @@ export const TopicChoice = function (props) {
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
+                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
@@ -68,6 +70,7 @@ export const TopicChoice = function (props) {
               </Col>
               <Col className="mb-2">
                 <Button
+                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
@@ -80,6 +83,7 @@ export const TopicChoice = function (props) {
             <Row>
               <Col className="mb-2">
                 <Button
+                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
@@ -90,6 +94,7 @@ export const TopicChoice = function (props) {
               </Col>
               <Col className="mb-2">
                 <Button
+                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block

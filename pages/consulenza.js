@@ -2,16 +2,18 @@ import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { useLanguage } from '../context/siteLanguageContext' //context
 import {
-  Card
+  Row,
+  Col,
+  Card,
+  Button
 } from 'react-bootstrap'
-import consultations from '../database/consultations'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ConsultationChoice } from '../components/consultation/ConsultationChoice'
 import { ConsultationCard } from '../components/consultation/ConsultationCard'
 
-export default function consulenza() {
+function consulenza(props) {
   const siteLanguage = useLanguage() //context
 
   const translate = (lang, data) => {
@@ -29,13 +31,27 @@ export default function consulenza() {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="w-75 p-2">
+        <Card className="p-2 responsive-width-card">
           <Card.Img className="black-border" variant="top" src="consulenza.png" />
           <Card.Body>
-            <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
+            <Row>
+              <Col md={3}>
+                {consultation &&
+                  <Button
+                    variant="info"
+                    onClick={() => setConsultation(null)}
+                  >
+                    <i className="fas fa-long-arrow-alt-left mr-2"></i>
+                    {siteLanguage === "ita" ? "Torna Indietro" : "Back to Selection"}
+                  </Button>}
+              </Col>
+              <Col md={6}>
+                <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
+              </Col>
+            </Row>
             {!consultation &&
               <ConsultationChoice
-                consultations={consultations}
+                consultations={props.consultations}
                 setConsultation={setConsultation}
               />
             }
@@ -55,4 +71,10 @@ export default function consulenza() {
   )
 }
 
+consulenza.getInitialProps = async () => {
+  const resConsult = await fetch("http://localhost:3000/api/consultation")
+  const consultations = await resConsult.json()
+  return { consultations: consultations.data }
+}
 
+export default consulenza

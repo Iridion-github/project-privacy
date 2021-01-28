@@ -6,7 +6,7 @@ import {
   Table
 } from 'react-bootstrap'
 import { ResultRow } from './ResultRow'
-
+import { ContactsBtn } from '../buttons/ContactsBtn'
 export const Results = function (props) {
 
   const getUserAnswerText = (answers) => {
@@ -89,6 +89,9 @@ export const Results = function (props) {
                     </tbody>
                   </Table>
                 </Col>
+              </Row>
+              <Row className="justify-content-center">
+                <ContactsBtn />
               </Row>
             </Card.Body>
           </Card>
