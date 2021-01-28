@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
+import path from 'path'
 import { useLanguage } from '../context/siteLanguageContext' //context
 import {
   Row,
@@ -71,8 +72,8 @@ function consulenza(props) {
   )
 }
 
-consulenza.getInitialProps = async () => {
-  const resConsult = await fetch("http://localhost:3000/api/consultation")
+consulenza.getInitialProps = async (context) => {
+  const resConsult = await fetch("http://" + context.req.headers.host + "/api/consultation")
   const consultations = await resConsult.json()
   return { consultations: consultations.data }
 }
