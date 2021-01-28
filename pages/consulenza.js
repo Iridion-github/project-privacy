@@ -73,6 +73,7 @@ function consulenza(props) {
 }
 
 consulenza.getInitialProps = async (context) => {
+  /*
   console.log("context.req.headers.referer", context.req.headers.referer)
   console.log("context.pathname", context.pathname)
   const apiUrl = context.req.headers.referer.replace(context.pathname, "/api/consultation")
@@ -80,6 +81,9 @@ consulenza.getInitialProps = async (context) => {
   const resConsult = await fetch(apiUrl)
   const consultations = await resConsult.json()
   return { consultations: consultations.data }
+  */
+  return { consultations: [] }
+
 }
 
 export default consulenza
