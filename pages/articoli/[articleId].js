@@ -14,7 +14,7 @@ import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
 import { getRelatedArticles, getBreadcrumbsList } from '../../utils/articles'
 
-const articoli = ({ glossarywords, DBarticles }) => {
+export default function articoli({ glossarywords, DBarticles, context }) {
   const siteLanguage = useLanguage() //context
   const router = useRouter()
   const { articleId } = router.query
@@ -23,7 +23,7 @@ const articoli = ({ glossarywords, DBarticles }) => {
 
   const handleOpenedArticle = (id) => {
     const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
-    router.push(fullRoute, undefined, { shallow: true })
+    router.push(fullRoute)
     setOpenedArticle(id)
   }
 
@@ -76,12 +76,13 @@ const articoli = ({ glossarywords, DBarticles }) => {
   )
 }
 
-articoli.getInitialProps = async () => {
-  const resGlossaryword = await fetch("http://localhost:3000/api/glossaryword")
+export async function getServerSideProps({ req }) {
+  const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"
+  const resGlossaryword = await fetch(apiUrlGlossary)
   const glossarywords = await resGlossaryword.json()
-  const resArticle = await fetch("http://localhost:3000/api/article")
+  const apiUrlArticle = "http://" + req.headers.host + "/api/article"
+  console.log('apiUrlArticle:', apiUrlArticle)
+  const resArticle = await fetch(apiUrlArticle)
   const DBarticles = await resArticle.json()
-  return { DBarticles: DBarticles.data, glossarywords: glossarywords.data }
+  return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } }
 }
-
-export default articoli

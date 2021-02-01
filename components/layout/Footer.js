@@ -30,7 +30,7 @@ export const Footer = function () {
           {siteLanguage === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
         </Col>
         <Col
-          onClick={() => router.push('/', undefined, { shallow: true })}
+          onClick={() => router.push('/')}
           xs={{ span: 1 }}
           className={styles.footerLogoContainer + " text-center"}
         >

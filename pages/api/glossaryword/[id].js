@@ -6,42 +6,39 @@ dbConnect()
 export default async (req, res) => {
   const {
     query: { id },
-    method
+    method,
+    body
   } = req
+
+  let targetGlossaryword = await Glossaryword.findOne({ id: id })
+  if (!targetGlossaryword) return res.status(400).json({ success: false, error: "No glossary word found for that id!" })
 
   switch (method) {
     case "GET":
       try {
-        const glossaryword = await Glossaryword.findById(id)
-        if (!glossaryword) return res.status(400).json({ success: false, error: "No glossary word found for that id!" })
-        res.status(200).json({ success: true, data: glossaryword })
+        return res.status(200).json({ success: true, data: targetGlossaryword })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error })
       }
-      break
 
     case "PUT":
       try {
-        const glossaryword = await Glossaryword.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true
-        })
-        if (!glossaryword) return res.status(400).json({ success: false, error: "Failed update of glossary word!" })
-        res.status(200).json({ success: true, data: glossaryword })
+        const updatedGlossaryword = whichToUpdate(body, targetGlossaryword)
+        targetGlossaryword = updatedGlossaryword
+        await targetGlossaryword.save()
+        return res.status(200).json({ success: true, data: updatedGlossaryword })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed update of existing glossary word!" })
       }
-      break
 
     case "DELETE":
       try {
-        const deletedGlossaryword = await Glossaryword.deleteOne({ _id: id })
-        if (!deletedGlossaryword) return res.status(400).json({ success: false, error: "Failed deletion of glossary word!" })
-        res.status(200).json({ success: true, data: {} })
+        await Glossaryword.deleteOne({ _id: targetGlossaryword.id })
+        await targetGlossaryword.save()
+        return res.status(200).json({ success: true, data: {} })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed deletion of glossary word!" })
       }
-      break
 
     default: res.status(400).json({ success: false, error })
   }

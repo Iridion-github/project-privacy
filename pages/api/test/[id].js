@@ -6,42 +6,39 @@ dbConnect()
 export default async (req, res) => {
   const {
     query: { id },
-    method
+    method,
+    body
   } = req
+
+  let targetTest = await Test.findOne({ id: id })
+  if (!targetTest) return res.status(400).json({ success: false, error: "No test found for that id!" })
 
   switch (method) {
     case "GET":
       try {
-        const test = await Test.findById(id)
-        if (!test) return res.status(400).json({ success: false, error: "No test found for that id!" })
-        res.status(200).json({ success: true, data: test })
+        return res.status(200).json({ success: true, data: targetTest })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error })
       }
-      break
 
     case "PUT":
       try {
-        const test = await Test.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true
-        })
-        if (!test) return res.status(400).json({ success: false, error: "Failed creation of new test!" })
-        res.status(200).json({ success: true, data: test })
+        const updatedTest = whichToUpdate(body, targetTest)
+        targetTest = updatedTest
+        await targetTest.save()
+        return res.status(200).json({ success: true, data: updatedTest })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed update of existing test!" })
       }
-      break
 
     case "DELETE":
       try {
-        const deletedTest = await Test.deleteOne({ _id: id })
-        if (!deletedTest) return res.status(400).json({ success: false, error: "Failed deletion of test!" })
-        res.status(200).json({ success: true, data: {} })
+        await Test.deleteOne({ _id: targetTest.id })
+        await targetTest.save()
+        return res.status(200).json({ success: true, data: {} })
       } catch (error) {
-        res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed deletion of test!" })
       }
-      break
 
     default: res.status(400).json({ success: false, error })
   }

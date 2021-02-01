@@ -14,7 +14,7 @@ import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-function articoli({ DBarticles, articleTopics }) {
+export default function articoli({ DBarticles, articleTopics }) {
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
@@ -23,7 +23,7 @@ function articoli({ DBarticles, articleTopics }) {
 
   const handleOpenedArticle = (articleId) => {
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
-    router.push(fullRoute, undefined, { shallow: true })
+    router.push(fullRoute, undefined, { shallow: false })
   }
 
   const searchTopic = async (topic, lang) => {
@@ -119,12 +119,12 @@ function articoli({ DBarticles, articleTopics }) {
   )
 }
 
-articoli.getInitialProps = async () => {
-  const resArticle = await fetch("http://localhost:3000/api/article")
+export async function getServerSideProps(context) {
+  const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
+  const resArticle = await fetch(apiUrlArticle)
   const DBarticles = await resArticle.json()
-  const resArticleTopics = await fetch("http://localhost:3000/api/articleTopics")
+  const apiUrlTopics = "http://" + context.req.headers.host + "/api/articleTopics"
+  const resArticleTopics = await fetch(apiUrlTopics)
   const articleTopics = await resArticleTopics.json()
-  return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
+  return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } }
 }
-
-export default articoli

@@ -14,7 +14,6 @@ export const ConsultationCard = function (props) {
     <>
       <Row>
         <Col md={{ span: 8, offset: 2 }} className="">
-          {console.log(props.consultation[siteLanguage])}
           {stringToHTML(props.consultation[siteLanguage].content)}
         </Col>
       </Row>

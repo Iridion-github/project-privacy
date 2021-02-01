@@ -11,7 +11,7 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 
-function formazione(props) {
+export default function formazione(props) {
   const siteLanguage = useLanguage() //context
 
   return (
@@ -37,11 +37,10 @@ function formazione(props) {
   )
 }
 
-formazione.getInitialProps = async () => {
-  //const resLessons = await fetch("http://localhost:3000/api/consultation")
+export async function getServerSideProps(context) {
+  //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
+  //const resLessons = await fetch(apiUrl)
   //const lessons = await resLessons.json()
   //return { lessons: lessons.data }
-  return { lessons: [] }
+  return { props: { lessons: [] } }
 }
-
-export default formazione

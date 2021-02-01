@@ -12,7 +12,7 @@ import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
 
 
-function areaTest({ tests }) {
+export default function areaTest({ tests }) {
 
   const [selectedTopic, setSelectedTopic] = useState(null)
 
@@ -66,10 +66,9 @@ function areaTest({ tests }) {
   )
 }
 
-areaTest.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/test")
+export async function getServerSideProps(context) {
+  const apiUrl = "http://" + context.req.headers.host + "/api/test"
+  const res = await fetch(apiUrl)
   const { data } = await res.json()
-  return { tests: data }
+  return { props: { tests: data } }
 }
-
-export default areaTest

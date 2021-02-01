@@ -1,19 +1,22 @@
 import dbConnect from '../../../utils/dbConnect'
 import Consultation from '../../../models/Consultation'
+import { whichToUpdate } from '../../../utils/dbFunctions'
 
 dbConnect()
 
 export default async (req, res) => {
   const {
     query: { id },
-    method
+    method,
+    body
   } = req
+
+  let targetConsult = await Consultation.findOne({ id: id })
+  if (!targetConsult) return res.status(400).json({ success: false, error: "No consultation found for that id!" })
 
   switch (method) {
     case "GET":
       try {
-        const consultation = await Consultation.findById(id)
-        if (!consultation) return res.status(400).json({ success: false, error: "No consultation found for that id!" })
         return res.status(200).json({ success: true, data: consultation })
       } catch (error) {
         return res.status(400).json({ success: false, error })
@@ -21,23 +24,21 @@ export default async (req, res) => {
 
     case "PUT":
       try {
-        const consultation = await Consultation.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true
-        })
-        if (!consultation) return res.status(400).json({ success: false, error: "Failed update of consultation!" })
-        return res.status(200).json({ success: true, data: consultation })
+        const updatedConsult = whichToUpdate(body, targetConsult)
+        targetConsult = updatedConsult
+        await targetConsult.save()
+        return res.status(200).json({ success: true, data: updatedConsult })
       } catch (error) {
-        return res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed update of existing consultation!" })
       }
 
     case "DELETE":
       try {
-        const deletedConsultation = await Consultation.deleteOne({ _id: id })
-        if (!deletedConsultation) return res.status(400).json({ success: false, error: "Failed deletion of consultation!" })
+        await Consultation.deleteOne({ _id: targetConsult.id })
+        await targetConsult.save()
         return res.status(200).json({ success: true, data: {} })
       } catch (error) {
-        return res.status(400).json({ success: false, error })
+        return res.status(400).json({ success: false, error: "Failed deletion of existing consultation!" })
       }
 
     default: return res.status(400).json({ success: false, error })

@@ -14,7 +14,7 @@ import { Footer } from '../components/layout/Footer'
 import { ConsultationChoice } from '../components/consultation/ConsultationChoice'
 import { ConsultationCard } from '../components/consultation/ConsultationCard'
 
-function consulenza(props) {
+export default function consulenza(props) {
   const siteLanguage = useLanguage() //context
 
   const translate = (lang, data) => {
@@ -72,14 +72,9 @@ function consulenza(props) {
   )
 }
 
-consulenza.getInitialProps = async (context) => {
-  //console.log("context.req.headers.referer", context.req.headers.referer)
-  //console.log("context.pathname", context.pathname)
-  const apiUrl = context.req.headers.referer.replace(context.pathname, "/api/consultation")
-  //console.log("apiUrl:", apiUrl)
+export async function getServerSideProps(context) {
+  const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
   const resConsult = await fetch(apiUrl)
   const consultations = await resConsult.json()
-  return { consultations: consultations.data }
+  return { props: { consultations: consultations.data } }
 }
-
-export default consulenza

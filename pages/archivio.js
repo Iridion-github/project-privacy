@@ -13,13 +13,14 @@ import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 
 
-const archivio = function (props) {
+export default function archivio(props) {
   const siteLanguage = useLanguage() //context
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
   const [searchResult, setSerchResult] = useState([])
 
-  const submitSearch = async () => {
+  const submitSearch = async () => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
+    //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
       const res = await fetch(`http://localhost:3000/api/archive/?searchterms=${searchInput}`, {
         method: 'GET',
@@ -131,5 +132,3 @@ const archivio = function (props) {
     </div >
   )
 }
-
-export default archivio
