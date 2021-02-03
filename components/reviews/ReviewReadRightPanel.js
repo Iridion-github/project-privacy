@@ -3,9 +3,9 @@ import {
   Row,
   Col
 } from 'react-bootstrap'
-import { RelatedReviewPreview } from './RelatedReviewPreview'
+import { ReviewReadRightPanelElement } from './ReviewReadRightPanelElement'
 
-export const RelatedReviews = function (props) {
+export const ReviewReadRightPanel = function (props) {
 
   const siteLanguage = useLanguage() //context
 
@@ -16,13 +16,9 @@ export const RelatedReviews = function (props) {
       </Row>
       <Row>
         <Col>
-          {props.relatedReviews.map((art, i) =>
-            <RelatedReviewPreview
-              key={i}
-              setOpenedReview={props.setOpenedReview}
-              review={art}
-            />
-          )}
+
+          <ReviewReadRightPanelElement />
+
         </Col>
       </Row>
     </>

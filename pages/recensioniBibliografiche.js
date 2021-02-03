@@ -120,14 +120,11 @@ export default function recensioniBibliografiche({ DBreviews, reviewTopics }) {
 }
 
 export async function getServerSideProps(context) {
-  /*
   const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
   const resReview = await fetch(apiUrlReview)
   const DBreviews = await resReview.json()
   const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
   const resReviewTopics = await fetch(apiUrlTopics)
-  const reviewTopics = await resReviewTopics.json()  
-  return { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data }
-  */
-  return { props: { DBreviews: [], reviewTopics: [] } }
+  const reviewTopics = await resReviewTopics.json()
+  return { props: { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data } }
 }

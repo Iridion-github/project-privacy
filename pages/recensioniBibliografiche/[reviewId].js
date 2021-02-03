@@ -11,8 +11,8 @@ import { Navigation } from '../../components/layout/Navbar'
 import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
 import { Footer } from '../../components/layout/Footer'
 import { ReviewRead } from "../../components/reviews/ReviewRead"
-import { RelatedReviews } from "../../components/reviews/RelatedReviews"
-import { getRelatedReviews, getBreadcrumbsList } from '../../utils/reviews'
+import { ReviewReadRightPanel } from "../../components/reviews/ReviewReadRightPanel"
+import { getBreadcrumbsList } from '../../utils/reviews'
 
 export default function recensione({ glossarywords, DBreviews }) {
   const siteLanguage = useLanguage() //context
@@ -26,8 +26,6 @@ export default function recensione({ glossarywords, DBreviews }) {
     router.push(fullRoute)
     setOpenedReview(id)
   }
-
-  let relatedReviews = reviewId ? getRelatedReviews(reviewId, reviews) : []
 
   useEffect(() => {
     if (!openedReview) setOpenedReview(reviewId)
@@ -63,10 +61,7 @@ export default function recensione({ glossarywords, DBreviews }) {
             }
           </Col>
           <Col md={3} className="">
-            <RelatedReviews
-              relatedReviews={relatedReviews}
-              setOpenedReview={handleOpenedReview}
-            />
+            <ReviewReadRightPanel />
           </Col>
         </Row>
       </main>
