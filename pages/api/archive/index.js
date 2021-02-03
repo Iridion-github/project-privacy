@@ -1,32 +1,18 @@
 import fs from 'fs'
 import path from 'path'
 import slash from 'slash'
-import unoconv2 from 'unoconv2'
+import { PdfReader } from "pdfreader"
 
 
 export default async (req, res) => {
   if (!req.query.searchterms) return res.status(400).json({ success: false, error: "Missing searchterms!" })
-  const searchterms = req.query.searchterms.trim()
+  const searchterms = req.query.searchterms
   const docsToAnalyze = []
-  const convertedPdfs = []
 
   //funzione che estrae i path precisi di ogni file all'interno della dir archive
   function* getFiles(dir) {
     const dirents = fs.readdirSync(dir, { withFileTypes: true })
     for (const dirent of dirents) {
-      if (dirent.name.includes('.pdf') && !convertedPdfs.includes(dirent.name)) {
-        const pdfpath = path.resolve(dir, dirent.name)
-        console.log("pdfpath:", pdfpath)
-        const convertedFile = unoconv2.convert(pdfpath, 'doc', function (err, result) {
-          // result is returned as a Buffer
-          fs.writeFileSync(dirent.name.split('.pdf')[0] + '.doc', result)
-          return result
-        })
-        console.log("convertedFile = ", convertedFile) //this is undefined, so line 20 is certainly the wrong method
-        convertedPdfs.push(dirent.name)
-        console.log("convertedPdfs array:", convertedPdfs)
-        yield* getFiles(dir)
-      }
       const fullpath = path.resolve(dir, dirent.name)
       if (dirent.isDirectory()) {
         yield* getFiles(fullpath)
@@ -46,45 +32,60 @@ export default async (req, res) => {
     }
   })()
 
-  const docsToAnalyzeFiltered = docsToAnalyze.filter(fileObj => !fileObj.filename.includes(".pdf"))
+  const getDocs = async () => {
+    docsToAnalyze.map(fileObj => {
+      const pdf = fileObj.fullpath.includes(".pdf")
+      if (pdf) {
+        console.log("Analyzing a pdf file: ", fileObj.fullpath)
+        let pdfContent = ""
+        let thePromise = new Promise((resolve, reject) => {
+          let pdfContentArray = []
+          new PdfReader().parseFileItems(fileObj.fullpath, function (err, item) {
+            if (err) {
+              reject(err)
+            } else if (!item) {
+              resolve(pdfContentArray.join(" ")) //La callback è stata effettuata su tutto il pdf, esco.
+            } else if (item.text) {
+              pdfContentArray.push(item.text) //Per ogni frammento del pdf, pusho.
+            }
+          })
+        })
 
-  const docs = docsToAnalyzeFiltered.map(fileObj => {
-    console.log("fileObj.fullpath.includes(.pdf):", fileObj.fullpath.includes(".pdf"))
-    const pdf = fileObj.fullpath.includes(".pdf")
-    const getEncoding = (typepdf) => {
-      if (typepdf) {
-        return { encoding: 'binary' }
+        thePromise.then((promiseResult) => {
+          console.log("promiseResult: ", promiseResult) //Questo è ok
+          //[MEMO] Qui! Devo ancora capire come far uscire dalla promise l'intero oggetto seguente
+          return {
+            //fullpath: fileObj.,
+            filename: fileObj.filename,
+            relativepath: fileObj.relativepath,
+            linuxpath: fileObj.linuxpath,
+            content: promiseResult
+          }
+        })
+
       } else {
-        return { encoding: 'utf8' }
+        const docContent = fs.readFileSync(fileObj.fullpath, 'utf8')
+        return {
+          //fullpath: fileObj.,
+          filename: fileObj.filename,
+          relativepath: fileObj.relativepath,
+          linuxpath: fileObj.linuxpath,
+          content: docContent
+        }
       }
-    }
+    })
+  }
 
-    const fileContents = fs.readFileSync(fileObj.fullpath, getEncoding(pdf))
-
-    return {
-      //fullpath: fileObj.,
-      filename: fileObj.filename,
-      relativepath: fileObj.relativepath,
-      linuxpath: fileObj.linuxpath,
-      content: fileContents
-    }
-  })
-
-
+  const docs = await getDocs()
 
   const filteredDocs = docs.filter(d => {
     //Eventuali affinamenti del filtro andranno qui
     if (d.filename.includes(".pdf")) {
-      function text2Binary(string) {
-        return string.split('').map(function (char) {
-          return char.charCodeAt(0).toString(2);
-        }).join(' ');
-      }
-      const searchtermsBinary = text2Binary(searchterms)
-      console.log(`il pdf include ${searchterms}?`, d.content.includes(searchtermsBinary))
+      console.log(`il pdf include ${searchterms}?`, d.content.includes(searchterms))
     }
     if (d.filename.includes(".doc")) {
-      return d.content.trim().includes(searchterms)
+      const cleanContent = d.content.replace(/[^\w\s]/gi, '')
+      return cleanContent.includes(searchterms)
     }
   })
 

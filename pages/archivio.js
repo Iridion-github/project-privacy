@@ -19,10 +19,10 @@ export default function archivio(props) {
   const [searched, setSearched] = useState(false)
   const [searchResult, setSerchResult] = useState([])
 
-  const submitSearch = async () => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
+  const submitSearch = async (input) => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
-      const res = await fetch(`http://localhost:3000/api/archive/?searchterms=${searchInput}`, {
+      const res = await fetch(`http://localhost:3000/api/archive/?searchterms=${input}`, {
         method: 'GET',
         headers: {
           key: 'Access-Control-Allow-Origin',
@@ -44,7 +44,8 @@ export default function archivio(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    submitSearch()
+    const cleanInput = searchInput.replace(/[^\w\s]/gi, '')
+    submitSearch(cleanInput)
   }
 
   return (
