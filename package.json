@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.3",
     "cors": "^2.8.5",
     "html-react-parser": "^1.1.1",
+    "mammoth": "^1.4.16",
     "mongoose": "^5.11.13",
     "next": "9.5.5",
     "pdfreader": "^1.2.8",

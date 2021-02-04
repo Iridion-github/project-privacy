@@ -7,7 +7,7 @@ import { PdfReader } from "pdfreader"
 export default async (req, res) => {
   if (!req.query.searchterms) return res.status(400).json({ success: false, error: "Missing searchterms!" })
   const searchterms = req.query.searchterms
-  const docsToAnalyze = []
+  const filesToAnalyze = []
 
   //funzione che estrae i path precisi di ogni file all'interno della dir archive
   function* getFiles(dir) {
@@ -28,78 +28,86 @@ export default async (req, res) => {
   }
   (() => {
     for (const f of getFiles('public/archive')) {
-      docsToAnalyze.push(f)
+      filesToAnalyze.push(f)
     }
   })()
 
-  const getDocs = async () => {
-    docsToAnalyze.map(fileObj => {
+  const containerPromise = new Promise((resolveContainer, rejectContainer) => {
+    const analyzedFiles = []
+    filesToAnalyze.forEach(fileObj => {
       const pdf = fileObj.fullpath.includes(".pdf")
-      if (pdf) {
-        console.log("Analyzing a pdf file: ", fileObj.fullpath)
-        let pdfContent = ""
-        let thePromise = new Promise((resolve, reject) => {
+      const singleFilePromise = new Promise((resolveSingle, rejectSingle) => {
+        if (pdf) {
+          //console.log("||||||||| Analyzing a pdf file: ")
           let pdfContentArray = []
           new PdfReader().parseFileItems(fileObj.fullpath, function (err, item) {
             if (err) {
-              reject(err)
+              rejectSingle(err)
             } else if (!item) {
-              resolve(pdfContentArray.join(" ")) //La callback è stata effettuata su tutto il pdf, esco.
+              resolveSingle(pdfContentArray.join(" ")) //La callback è stata effettuata su tutto il pdf, esco.
             } else if (item.text) {
               pdfContentArray.push(item.text) //Per ogni frammento del pdf, pusho.
             }
           })
-        })
-
-        thePromise.then((promiseResult) => {
-          console.log("promiseResult: ", promiseResult) //Questo è ok
-          //[MEMO] Qui! Devo ancora capire come far uscire dalla promise l'intero oggetto seguente
-          return {
-            //fullpath: fileObj.,
+        } else {
+          //console.log("||||||||| Analyzing a doc file: ")
+          const docContent = fs.readFileSync(fileObj.fullpath, 'utf8')
+          resolveSingle({
+            fullpath: fileObj.fullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
-            content: promiseResult
-          }
-        })
-
-      } else {
-        const docContent = fs.readFileSync(fileObj.fullpath, 'utf8')
-        return {
-          //fullpath: fileObj.,
-          filename: fileObj.filename,
-          relativepath: fileObj.relativepath,
-          linuxpath: fileObj.linuxpath,
-          content: docContent
+            content: docContent
+          })
         }
-      }
+      }).then((singleResult) => {
+        //console.log("||||||||| pushing object into analyzedFiles array")
+        //nel caso dei pdf, singleResult ha l'aspetto di oggetto con prop numerata, quindi lo adatto
+        if (Object.keys(singleResult).includes('0')) {
+          analyzedFiles.push({
+            fullpath: fileObj.fullpath,
+            filename: fileObj.filename,
+            relativepath: fileObj.relativepath,
+            linuxpath: fileObj.linuxpath,
+            content: Object.values(singleResult).join("")
+          })
+        } else { //nel caso dei doc, singleResult ha un aspetto normale, tranne per il content che è una copia di sè. Quindi il content diventa la prop['content']
+          analyzedFiles.push({
+            fullpath: fileObj.fullpath,
+            filename: fileObj.filename,
+            relativepath: fileObj.relativepath,
+            linuxpath: fileObj.linuxpath,
+            content: singleResult.content
+          })
+        }
+        //console.log("||||||||| analyzedFiles.length:", analyzedFiles.length)
+        //console.log("||||||||| filesToAnalyze.length:", filesToAnalyze.length)
+        if (analyzedFiles.length === filesToAnalyze.length) {
+          //console.log("analyzedFiles[16] should be file object for doc:", analyzedFiles[16])
+          resolveContainer(analyzedFiles)
+        }
+      })
     })
-  }
 
-  const docs = await getDocs()
-
-  const filteredDocs = docs.filter(d => {
-    //Eventuali affinamenti del filtro andranno qui
-    if (d.filename.includes(".pdf")) {
-      console.log(`il pdf include ${searchterms}?`, d.content.includes(searchterms))
-    }
-    if (d.filename.includes(".doc")) {
-      const cleanContent = d.content.replace(/[^\w\s]/gi, '')
-      return cleanContent.includes(searchterms)
-    }
-  })
-
-  if (filteredDocs.length > 0) {
-    res.status(200)
-      .json({
+  }).then((containerResult) => {
+    //console.log('||||||||| containerResult[16] should be file object for doc:', containerResult[16])
+    const filteredDocs = containerResult.filter(d => {
+      //Eventuali affinamenti del filtro andranno qui
+      const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase()
+      return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+    })
+    //console.log('||||||||| filteredDocs.length: ', filteredDocs.length)
+    if (filteredDocs.length > 0) {
+      console.log({ ...filteredDocs[0], content: "removed" })
+      return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi
         success: true,
         data: { filteredDocs: filteredDocs }
       })
-  } else {
-    res.status(200)
-      .json({
+    } else {
+      return res.status(200).json({ //Success - ma nessun risultatp per i searchterms immessi
         success: true,
         data: { filteredDocs: [] }
       })
-  }
+    }
+  })
 }

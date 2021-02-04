@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+import mammoth from 'mammoth'
 import {
   Row,
   Col,
@@ -18,6 +19,9 @@ export default function archivio(props) {
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
   const [searchResult, setSerchResult] = useState([])
+  const [fileviewerHTML, setFileviewerHTML] = useState(<p></p>)
+  const [fileviewerContent, setFileviewerContent] = useState("")
+  const [fileviewerTitle, setFileviewerTitle] = useState("")
 
   const submitSearch = async (input) => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
@@ -39,6 +43,29 @@ export default function archivio(props) {
         })
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getDocumentViewer = async (mode, filepath) => {
+    switch (mode) {
+      case 'html':
+        mammoth.convertToHtml({ path: filepath })
+          .then(function (result) {
+            setFileviewerHTML(result.value) // The generated HTML
+            const messages = result.messages // Any messages, such as warnings during conversion
+          })
+          .done()
+        break
+      case 'rawtext':
+        console.log("getDocumentViewer - rawtext mode - path = ", filepath)
+        mammoth.extractRawText({ path: filepath })
+          .then(function (result) {
+            setFileviewerContent(result.value) // The raw text
+            const messages = result.messages;
+          })
+          .done();
+        break
+      default: console.log("documentViewer - Unexpected case!")
     }
   }
 
@@ -105,10 +132,22 @@ export default function archivio(props) {
                             variant="info"
                             className="ml-3 py-0 px-1"
                             href={el.relativepath}
+                            target="_blank"
                           >
                             <i className="fas fa-download"></i>
                           </Button>
-                          <iframe src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
+                          {
+                            fileviewerContent
+                          }
+                          <Button
+                            size="sm"
+                            variant="info"
+                            className="ml-1 py-0 px-1"
+                            onClick={() => getDocumentViewer("rawtext", el.relativepath)} //[Memo] Qui, non riesco a far leggere il file neanche col fullpath: { Uncaught Error: Could not find file in options }
+                          >
+                            <i className="fas fa-eye"></i>
+                          </Button>
+                          <iframe className="ml-2" src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
                         </>
                       </li>
                     ))}
