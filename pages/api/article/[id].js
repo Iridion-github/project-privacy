@@ -11,14 +11,10 @@ export default async (req, res) => {
     body
   } = req
 
-  console.log("article api[id] was called")
-
   let targetArticle = await Article.findOne({ id: id })
   if (!targetArticle) {
-    console.log("Problem, we got no article whose id is:", id)
     return res.status(400).json({ success: false, error: "No article found for that id!" })
   }
-  console.log("No, problem, we got an article whose id is:", id)
 
   switch (method) {
     case "GET":

@@ -11,7 +11,9 @@ export default async (req, res) => {
   } = req
 
   let targetReview = await Review.findOne({ id: id })
-  if (!targetReview) return res.status(400).json({ success: false, error: "No review found for that id!" })
+  if (!targetReview) {
+    return res.status(400).json({ success: false, error: "No review found for that id!" })
+  }
 
   switch (method) {
     case "GET":

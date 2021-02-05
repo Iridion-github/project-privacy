@@ -20,6 +20,9 @@ export default function recensione({ glossarywords, DBreviews }) {
   const { reviewId } = router.query
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(null)
+  const [shouldRenderComponent, setShouldRenderComponent] = useState(null)
+
+  if (shouldRenderComponent === false) router.push('/404')
 
   const handleOpenedReview = (id) => {
     const fullRoute = id !== null ? '/recensioniBibliografiche/' + id : '/recensioniBibliografiche/'
@@ -28,7 +31,14 @@ export default function recensione({ glossarywords, DBreviews }) {
   }
 
   useEffect(() => {
-    if (!openedReview) setOpenedReview(reviewId)
+    if (!openedReview) {
+      if (DBreviews.map(el => el.id).includes(reviewId)) {
+        setOpenedReview(reviewId)
+      } else {
+        setShouldRenderComponent(false)
+      }
+    }
+    if (!shouldRenderComponent) setShouldRenderComponent(DBreviews.map(el => el.id).includes(reviewId))
   })
 
   return (
@@ -38,7 +48,7 @@ export default function recensione({ glossarywords, DBreviews }) {
       />
       {/* Navbar */}
       <Navigation />
-      {openedReview &&
+      {(openedReview && shouldRenderComponent) &&
         <Breadcrumbs
           reviewId={openedReview}
           reviewTitle={reviews.find(art => art.id === openedReview)[siteLanguage].title}
@@ -50,19 +60,21 @@ export default function recensione({ glossarywords, DBreviews }) {
         <Row className="w-100">
           <Col md={3} className="">
           </Col>
-          <Col md={6} className="justify-content-center">
-            {openedReview &&
-              <ReviewRead
-                review={reviews.find(art => art.id === openedReview)}
-                allReviews={reviews}
-                setOpenedReview={handleOpenedReview}
-                glossarywords={glossarywords}
-              />
-            }
-          </Col>
-          <Col md={3} className="">
-            <ReviewReadRightPanel />
-          </Col>
+          {(openedReview && shouldRenderComponent) &&
+            <>
+              <Col md={6} className="justify-content-center">
+                <ReviewRead
+                  review={reviews.find(art => art.id === openedReview)}
+                  allReviews={reviews}
+                  setOpenedReview={handleOpenedReview}
+                  glossarywords={glossarywords}
+                />
+              </Col>
+              <Col md={3} className="">
+                <ReviewReadRightPanel />
+              </Col>
+            </>
+          }
         </Row>
       </main>
       {/* Footer */}
