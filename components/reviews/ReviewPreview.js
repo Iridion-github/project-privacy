@@ -51,7 +51,8 @@ export const ReviewPreview = function (props) {
             </small>
           </Col>
           <Col md={3} className="p-0">
-            <span className="text-muted"> {props.review.tags.map(tag => <Badge variant="info" className="mr-1" key={tag}>{tag}</Badge>)}</span>
+            {console.log(props.review[language])}
+            <span className="text-muted"> {props.review[language].tags.map(tag => <Badge variant="info" className="mr-1" key={tag}>{tag}</Badge>)}</span>
           </Col>
           <Col md={4} className="text-right p-0">
             <small className="text-muted"> {datePrettifier(props.review.date, language)} </small>

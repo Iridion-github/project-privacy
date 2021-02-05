@@ -52,9 +52,9 @@ export default function articoli({ DBarticles, articleTopics }) {
     if (input !== "") {
       articles.forEach(art => {
         if (
-          includesAll(art.author, searchTerms, Array.isArray(art.author)).length > 0
+          includesAll(art.authors, searchTerms, Array.isArray(art.authors)).length > 0
           || includesAll(art[lang].topic, searchTerms, Array.isArray(art[lang].topic)).length > 0
-          || includesAll(art.tags, searchTerms, Array.isArray(art.tags)).length > 0
+          || includesAll(art[lang].tags, searchTerms, Array.isArray(art[lang].tags)).length > 0
           || includesAll(art.ita.title, searchTerms, Array.isArray(art.ita.title)).length > 0
           || includesAll(art.ita.subtitle, searchTerms, Array.isArray(art.ita.subtitle)).length > 0
           || includesAll(art.ita.content, searchTerms, Array.isArray(art.ita.content)).length > 0
@@ -88,7 +88,7 @@ export default function articoli({ DBarticles, articleTopics }) {
           <Col md={3} className="">
             <ArticlesLeftMenu
               allArticles={articles}
-              allTags={articleTopics}
+              allTopics={articleTopics}
               searchTopic={searchTopic}
               searchInput={searchInput}
               setSearchInput={setSearchInput}

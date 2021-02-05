@@ -19,10 +19,6 @@ const ReviewSchema = new mongoose.Schema({
     type: Array,
     required: [true, 'Author is required!'],
   },
-  tags: {
-    type: Array,
-    required: [true, 'At least one Tag is required!'],
-  },
   previewImg: {
     type: String,
     required: [true, 'previewImg is required!']
@@ -35,6 +31,10 @@ const ReviewSchema = new mongoose.Schema({
       type: String,
       required: [true, 'Topic is required!'],
       trim: true
+    },
+    tags: {
+      type: Array,
+      required: [true, 'At least one ita.tag is required!'],
     },
     title: {
       type: String,
@@ -55,6 +55,10 @@ const ReviewSchema = new mongoose.Schema({
       type: String,
       required: [true, 'Topic is required!'],
       trim: true
+    },
+    tags: {
+      type: Array,
+      required: [true, 'At least one eng.tag is required!'],
     },
     title: {
       type: String,

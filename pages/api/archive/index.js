@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import slash from 'slash'
 import { PdfReader } from "pdfreader"
+import mammoth from 'mammoth'
 
 
 export default async (req, res) => {
@@ -19,6 +20,7 @@ export default async (req, res) => {
       } else {
         yield {
           fullpath: fullpath,
+          linuxfullpath: slash(fullpath),
           relativepath: fullpath.split("public\\")[1],
           linuxpath: slash(fullpath.split("public\\")[1]),
           filename: dirent.name
@@ -38,7 +40,6 @@ export default async (req, res) => {
       const pdf = fileObj.fullpath.includes(".pdf")
       const singleFilePromise = new Promise((resolveSingle, rejectSingle) => {
         if (pdf) {
-          //console.log("||||||||| Analyzing a pdf file: ")
           let pdfContentArray = []
           new PdfReader().parseFileItems(fileObj.fullpath, function (err, item) {
             if (err) {
@@ -50,55 +51,69 @@ export default async (req, res) => {
             }
           })
         } else {
-          //console.log("||||||||| Analyzing a doc file: ")
           const docContent = fs.readFileSync(fileObj.fullpath, 'utf8')
           resolveSingle({
             fullpath: fileObj.fullpath,
+            linuxfullpath: fileObj.linuxfullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
             content: docContent
+
           })
         }
       }).then((singleResult) => {
-        //console.log("||||||||| pushing object into analyzedFiles array")
-        //nel caso dei pdf, singleResult ha l'aspetto di oggetto con prop numerata, quindi lo adatto
+        //[PDF] singleResult ha l'aspetto di oggetto con prop numerata, quindi lo adatto
         if (Object.keys(singleResult).includes('0')) {
           analyzedFiles.push({
             fullpath: fileObj.fullpath,
+            linuxfullpath: fileObj.linuxfullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
             content: Object.values(singleResult).join("")
           })
-        } else { //nel caso dei doc, singleResult ha un aspetto normale, tranne per il content che è una copia di sè. Quindi il content diventa la prop['content']
+        } else {
+          //[DOC/DOCX] singleResult ha un aspetto normale, tranne per il content che è una copia di sè. Quindi il content diventa la prop['content']
+
+          if (fileObj.filename.includes("provafileesterno")) {
+            const options = {}
+            console.log("||||||| providing this file path:", 'public\\' + fileObj.relativepath)
+            mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
+              if (mammothResult.messages.length > 0) {
+                for (let x; x < mammothResult.messages.length; x++) {
+                  console.log("\n\n Errors:", mammothResult.messages[x], '\n\n')
+                }
+              }
+              console.log("\n\n\n\n ||||| relativepath - value: ", mammothResult.value, "\n\n\n\n")
+            })
+          }
+
+
+
           analyzedFiles.push({
             fullpath: fileObj.fullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
             content: singleResult.content
+
           })
         }
-        //console.log("||||||||| analyzedFiles.length:", analyzedFiles.length)
-        //console.log("||||||||| filesToAnalyze.length:", filesToAnalyze.length)
         if (analyzedFiles.length === filesToAnalyze.length) {
-          //console.log("analyzedFiles[16] should be file object for doc:", analyzedFiles[16])
           resolveContainer(analyzedFiles)
         }
       })
     })
 
   }).then((containerResult) => {
-    //console.log('||||||||| containerResult[16] should be file object for doc:', containerResult[16])
     const filteredDocs = containerResult.filter(d => {
       //Eventuali affinamenti del filtro andranno qui
       const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase()
       return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
     })
-    //console.log('||||||||| filteredDocs.length: ', filteredDocs.length)
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Pulizia Console \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     if (filteredDocs.length > 0) {
-      console.log({ ...filteredDocs[0], content: "removed" })
       return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi
         success: true,
         data: { filteredDocs: filteredDocs }

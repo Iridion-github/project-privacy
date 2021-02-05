@@ -14,12 +14,15 @@ import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
 import { getRelatedArticles, getBreadcrumbsList } from '../../utils/articles'
 
-export default function articoli({ glossarywords, DBarticles, context }) {
+export default function articoli({ glossarywords, DBarticles }) {
   const siteLanguage = useLanguage() //context
   const router = useRouter()
   const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
+  const [shouldRenderComponent, setShouldRenderComponent] = useState(null)
+
+  if (shouldRenderComponent === false) router.push('/404')
 
   const handleOpenedArticle = (id) => {
     const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
@@ -27,10 +30,17 @@ export default function articoli({ glossarywords, DBarticles, context }) {
     setOpenedArticle(id)
   }
 
-  let relatedArticles = articleId ? getRelatedArticles(articleId, articles) : []
+  let relatedArticles = shouldRenderComponent ? getRelatedArticles(articleId, articles, siteLanguage) : []
 
   useEffect(() => {
-    if (!openedArticle) setOpenedArticle(articleId)
+    if (!openedArticle) {
+      if (DBarticles.map(el => el.id).includes(articleId)) {
+        setOpenedArticle(articleId)
+      } else {
+        setShouldRenderComponent(false)
+      }
+    }
+    if (!shouldRenderComponent) setShouldRenderComponent(DBarticles.map(el => el.id).includes(articleId))
   })
 
   return (
@@ -40,7 +50,7 @@ export default function articoli({ glossarywords, DBarticles, context }) {
       />
       {/* Navbar */}
       <Navigation />
-      {openedArticle &&
+      {(openedArticle && shouldRenderComponent) &&
         <Breadcrumbs
           articleId={openedArticle}
           articleTitle={articles.find(art => art.id === openedArticle)[siteLanguage].title}
@@ -52,22 +62,24 @@ export default function articoli({ glossarywords, DBarticles, context }) {
         <Row className="w-100">
           <Col md={3} className="">
           </Col>
-          <Col md={6} className="justify-content-center">
-            {openedArticle &&
-              <ArticleRead
-                article={articles.find(art => art.id === openedArticle)}
-                allArticles={articles}
-                setOpenedArticle={handleOpenedArticle}
-                glossarywords={glossarywords}
-              />
-            }
-          </Col>
-          <Col md={3} className="">
-            <RelatedArticles
-              relatedArticles={relatedArticles}
-              setOpenedArticle={handleOpenedArticle}
-            />
-          </Col>
+          {(openedArticle && shouldRenderComponent) &&
+            <>
+              <Col md={6} className="justify-content-center">
+                <ArticleRead
+                  article={articles.find(art => art.id === openedArticle)}
+                  allArticles={articles}
+                  setOpenedArticle={handleOpenedArticle}
+                  glossarywords={glossarywords}
+                />
+              </Col>
+              <Col md={3} className="">
+                <RelatedArticles
+                  relatedArticles={relatedArticles}
+                  setOpenedArticle={handleOpenedArticle}
+                />
+              </Col>
+            </>
+          }
         </Row>
       </main>
       {/* Footer */}
@@ -76,12 +88,14 @@ export default function articoli({ glossarywords, DBarticles, context }) {
   )
 }
 
+
 export async function getServerSideProps({ req }) {
+  //api of glossary
   const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"
   const resGlossaryword = await fetch(apiUrlGlossary)
   const glossarywords = await resGlossaryword.json()
+  //api of all articles (for the related articles)
   const apiUrlArticle = "http://" + req.headers.host + "/api/article"
-  console.log('apiUrlArticle:', apiUrlArticle)
   const resArticle = await fetch(apiUrlArticle)
   const DBarticles = await resArticle.json()
   return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } }

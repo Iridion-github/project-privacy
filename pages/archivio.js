@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
-import mammoth from 'mammoth'
 import {
   Row,
   Col,
@@ -46,27 +45,8 @@ export default function archivio(props) {
     }
   }
 
-  const getDocumentViewer = async (mode, filepath) => {
-    switch (mode) {
-      case 'html':
-        mammoth.convertToHtml({ path: filepath })
-          .then(function (result) {
-            setFileviewerHTML(result.value) // The generated HTML
-            const messages = result.messages // Any messages, such as warnings during conversion
-          })
-          .done()
-        break
-      case 'rawtext':
-        console.log("getDocumentViewer - rawtext mode - path = ", filepath)
-        mammoth.extractRawText({ path: filepath })
-          .then(function (result) {
-            setFileviewerContent(result.value) // The raw text
-            const messages = result.messages;
-          })
-          .done();
-        break
-      default: console.log("documentViewer - Unexpected case!")
-    }
+  const getDocumentViewer = async (mode, filepath, content) => {
+
   }
 
   const handleSubmit = (event) => {
@@ -143,7 +123,7 @@ export default function archivio(props) {
                             size="sm"
                             variant="info"
                             className="ml-1 py-0 px-1"
-                            onClick={() => getDocumentViewer("rawtext", el.relativepath)} //[Memo] Qui, non riesco a far leggere il file neanche col fullpath: { Uncaught Error: Could not find file in options }
+                            onClick={() => getDocumentViewer("rawtext", el.relativepath, el.content)} //[Memo] Qui, non riesco a far leggere il file neanche col fullpath: { Uncaught Error: Could not find file in options }
                           >
                             <i className="fas fa-eye"></i>
                           </Button>

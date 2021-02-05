@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 
-export const getRelatedArticles = (openedArticleId, allArticles) => {
+export const getRelatedArticles = (openedArticleId, allArticles, lang) => {
   let result = []
   for (let x = 0; x < allArticles.length && result.length < 5; x++) {
     if (
-      allArticles[x].tags.some(x => allArticles.find(y => y.id === openedArticleId).tags.includes(x))
+      allArticles[x][lang].tags.some(x => allArticles.find(y => y.id === openedArticleId)[lang].tags.includes(x))
       && openedArticleId !== allArticles[x].id
     ) {
       result.push(allArticles[x])

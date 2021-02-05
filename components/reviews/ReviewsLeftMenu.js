@@ -36,7 +36,7 @@ export const ReviewsLeftMenu = function (props) {
               </Row>
             </Card.Header>
             <ListGroup variant="flush">
-              {props.allTags.map(tag => (
+              {props.allTopics.map(tag => (
                 <ReviewsTagRow
                   key={tag.id}
                   tagName={siteLanguage === "ita" ? tag.name.ita : tag.name.eng}

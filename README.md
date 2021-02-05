@@ -31,12 +31,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- [MongoDB] Abbiamo collegato il db, ma tutto il sito riceve ancora i dati dai file js. Prossimo passaggio: far si che tutti i dati dipendano dal db (video part 3).
+- 
 
 ## Note
-- [Issue] Articoli - Nel search non funziona più la ricerca per autore.
-- [Style] Il signor Gaetano vuole il breadcrumbs più grande.
-- [Issue] Articoli - I tag degli articoli non sono automaticamente tradotti.
-- [Idea] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
-- [Articoli] Manca la gestione errore nel caso si inserisca manualmente nell'url l'id di un articolo non esistente.
-- [Post/Get] Siamo in alto mare. Siamo riusciti ad ottenere un redirect col submit btn, ma non viene passato alcun dato, nè si sa come caricare una page con un set di dati impostati dall'API.
+- [Archive] Mammoth.js richiede esclusivamente documenti .docx e NON FUNZIONA con i .doc | Cercare un'alternativa per i files .doc
+- [Style] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.

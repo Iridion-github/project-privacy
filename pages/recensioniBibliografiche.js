@@ -54,7 +54,7 @@ export default function recensioniBibliografiche({ DBreviews, reviewTopics }) {
         if (
           includesAll(rev.author, searchTerms, Array.isArray(rev.author)).length > 0
           || includesAll(rev[lang].topic, searchTerms, Array.isArray(rev[lang].topic)).length > 0
-          || includesAll(rev.tags, searchTerms, Array.isArray(rev.tags)).length > 0
+          || includesAll(rev[lang].tags, searchTerms, Array.isArray(rev[lang].tags)).length > 0
           || includesAll(rev.ita.title, searchTerms, Array.isArray(rev.ita.title)).length > 0
           || includesAll(rev.ita.subtitle, searchTerms, Array.isArray(rev.ita.subtitle)).length > 0
           || includesAll(rev.ita.content, searchTerms, Array.isArray(rev.ita.content)).length > 0
@@ -88,7 +88,7 @@ export default function recensioniBibliografiche({ DBreviews, reviewTopics }) {
           <Col md={3} className="">
             <ReviewsLeftMenu
               allReviews={reviews}
-              allTags={reviewTopics}
+              allTopics={reviewTopics}
               searchTopic={searchTopic}
               searchInput={searchInput}
               setSearchInput={setSearchInput}
