@@ -13,7 +13,7 @@ export const getRelatedArticles = (openedArticleId, allArticles, lang) => {
   return result
 }
 
-export const getBreadcrumbsList = (articleId, articleTitle) => {
+export const getBreadcrumbsForArticles = (articleId, articleTitle) => {
   const router = useRouter()
   const breadcrumbsList = []
   const section = router.asPath.slice(1)

@@ -12,7 +12,9 @@ import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
 import { Footer } from '../../components/layout/Footer'
 import { ReviewRead } from "../../components/reviews/ReviewRead"
 import { ReviewReadRightPanel } from "../../components/reviews/ReviewReadRightPanel"
-import { getBreadcrumbsList } from '../../utils/reviews'
+import { getBreadcrumbsForReviews } from '../../utils/reviews'
+import { getBreadcrumbsForErrors } from '../../utils/errors'
+import { ErrorComponent } from '../../components/layout/ErrorComponent'
 
 export default function recensione({ glossarywords, DBreviews }) {
   const siteLanguage = useLanguage() //context
@@ -21,8 +23,6 @@ export default function recensione({ glossarywords, DBreviews }) {
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(null)
   const [shouldRenderComponent, setShouldRenderComponent] = useState(null)
-
-  if (shouldRenderComponent === false) router.push('/404')
 
   const handleOpenedReview = (id) => {
     const fullRoute = id !== null ? '/recensioniBibliografiche/' + id : '/recensioniBibliografiche/'
@@ -50,13 +50,19 @@ export default function recensione({ glossarywords, DBreviews }) {
       <Navigation />
       {(openedReview && shouldRenderComponent) &&
         <Breadcrumbs
-          reviewId={openedReview}
-          reviewTitle={reviews.find(art => art.id === openedReview)[siteLanguage].title}
-          getBreadcrumbsList={getBreadcrumbsList}
+          breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(art => art.id === openedReview)[siteLanguage].title)}
+        />
+      }
+      {shouldRenderComponent === false &&
+        <Breadcrumbs
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliografiche", siteLanguage)}
         />
       }
       {/* Page Content */}
       <main className={styles.main}>
+        {shouldRenderComponent === false &&
+          <ErrorComponent />
+        }
         <Row className="w-100">
           <Col md={3} className="">
           </Col>

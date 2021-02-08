@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 
-export const getBreadcrumbsForReviews = (reviewId, reviewTitle) => {
-  const router = useRouter()
+export const getBreadcrumbsForErrors = (errorMsg, href, lang) => {
   const breadcrumbsList = []
+  const router = useRouter()
   const section = router.asPath.slice(1)
   const title = section.split("/").reverse().pop()
   breadcrumbsList.push({ title: 'Home', path: '/' })
   breadcrumbsList.push({ title: title, path: '/' + title })
-  if (reviewId) breadcrumbsList.push({ title: reviewTitle, path: section })
+  breadcrumbsList.push({ title: errorMsg[lang], path: href })
   return breadcrumbsList
 }

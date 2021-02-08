@@ -12,7 +12,9 @@ import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
 import { Footer } from '../../components/layout/Footer'
 import { ArticleRead } from "../../components/articles/ArticleRead"
 import { RelatedArticles } from "../../components/articles/RelatedArticles"
-import { getRelatedArticles, getBreadcrumbsList } from '../../utils/articles'
+import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/articles'
+import { getBreadcrumbsForErrors } from '../../utils/errors'
+import { ErrorComponent } from '../../components/layout/ErrorComponent'
 
 export default function articoli({ glossarywords, DBarticles }) {
   const siteLanguage = useLanguage() //context
@@ -21,8 +23,6 @@ export default function articoli({ glossarywords, DBarticles }) {
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
   const [shouldRenderComponent, setShouldRenderComponent] = useState(null)
-
-  if (shouldRenderComponent === false) router.push('/404')
 
   const handleOpenedArticle = (id) => {
     const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
@@ -52,13 +52,19 @@ export default function articoli({ glossarywords, DBarticles }) {
       <Navigation />
       {(openedArticle && shouldRenderComponent) &&
         <Breadcrumbs
-          articleId={openedArticle}
-          articleTitle={articles.find(art => art.id === openedArticle)[siteLanguage].title}
-          getBreadcrumbsList={getBreadcrumbsList}
+          breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[siteLanguage].title)}
+        />
+      }
+      {shouldRenderComponent === false &&
+        <Breadcrumbs
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", siteLanguage)}
         />
       }
       {/* Page Content */}
       <main className={styles.main}>
+        {shouldRenderComponent === false &&
+          <ErrorComponent />
+        }
         <Row className="w-100">
           <Col md={3} className="">
           </Col>
