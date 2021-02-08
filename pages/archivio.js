@@ -18,9 +18,6 @@ export default function archivio(props) {
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
   const [searchResult, setSerchResult] = useState([])
-  const [fileviewerHTML, setFileviewerHTML] = useState(<p></p>)
-  const [fileviewerContent, setFileviewerContent] = useState("")
-  const [fileviewerTitle, setFileviewerTitle] = useState("")
 
   const submitSearch = async (input) => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
@@ -37,7 +34,8 @@ export default function archivio(props) {
       })
         .then(response => response.json())
         .then(response => {
-          setSerchResult(response.data.filteredDocs)
+          console.log("Receiving data from server | blob size:", response.data.filteredDocs[0].blob.size)
+          setSerchResult(getFile(response.data.filteredDocs))
           setSearched(searchInput)
         })
     } catch (error) {
@@ -45,14 +43,28 @@ export default function archivio(props) {
     }
   }
 
-  const getDocumentViewer = async (mode, filepath, content) => {
-
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault()
     const cleanInput = searchInput.replace(/[^\w\s]/gi, '')
     submitSearch(cleanInput)
+  }
+
+  const getFile = (fileObjArray) => {
+    console.log("bytes del file:", fileObjArray[0].blob.size)
+    const withFile = fileObjArray.map(el => {
+      const myFile = new File([el.blob], el.filename)
+      console.log("getFileViewer - converted to file: myFile = ", myFile)
+      return { ...el, file: myFile }
+    })
+    return withFile
+  }
+
+  function inputFileGetValue(file) {
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      console.log("filereader result:", (Object.values(e.target.result)))
+    }
+    return reader.readAsText(file)
   }
 
   return (
@@ -116,14 +128,12 @@ export default function archivio(props) {
                           >
                             <i className="fas fa-download"></i>
                           </Button>
-                          {
-                            fileviewerContent
-                          }
+                          <input hidden type="file" value={inputFileGetValue(el.file)}></input>
                           <Button
                             size="sm"
                             variant="info"
                             className="ml-1 py-0 px-1"
-                            onClick={() => getDocumentViewer("rawtext", el.relativepath, el.content)} //[Memo] Qui, non riesco a far leggere il file neanche col fullpath: { Uncaught Error: Could not find file in options }
+                            onClick={() => getDocumentViewer("rawtext", el.relativepath, el.content)}
                           >
                             <i className="fas fa-eye"></i>
                           </Button>

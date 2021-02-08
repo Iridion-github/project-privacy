@@ -3,6 +3,7 @@ import path from 'path'
 import slash from 'slash'
 import { PdfReader } from "pdfreader"
 import mammoth from 'mammoth'
+import Blob from "cross-blob"
 
 
 export default async (req, res) => {
@@ -52,18 +53,28 @@ export default async (req, res) => {
           })
         } else {
           const docContent = fs.readFileSync(fileObj.fullpath, 'utf8')
+          const docBuffer = fs.readFileSync(fileObj.fullpath)
+          //console.log("\n\n\n ||||| docBuffer stringed:", docBuffer.toString().substr(0, 4000), "\n\n\n")
+          const docBlob = new Blob(docBuffer)
+          console.log("\n\n\n ||||| AT CREATION - docBlob:", docBlob, "\n\n\n")
+          console.log("\n\n\n ||||| AT CREATION - blob size:", docBlob.size, "\n\n\n")
           resolveSingle({
             fullpath: fileObj.fullpath,
             linuxfullpath: fileObj.linuxfullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
-            content: docContent
-
+            content: docContent,
+            blob: docBlob
           })
         }
       }).then((singleResult) => {
         //[PDF] singleResult ha l'aspetto di oggetto con prop numerata, quindi lo adatto
+        if (singleResult.blob) {
+          //console.log("\n\n\n ||||| AFTER THEN - singleResult without content ", { ...singleResult, content: "" })
+          //console.log("\n\n\n ||||| AFTER THEN - singleResult.blob of " + fileObj.filename + ":", singleResult.blob, "\n\n\n")
+          //console.log("\n\n\n ||||| AFTER THEN - singleResult.blob.size of " + fileObj.filename + ":", singleResult.blob.size, "\n\n\n")
+        }
         if (Object.keys(singleResult).includes('0')) {
           analyzedFiles.push({
             fullpath: fileObj.fullpath,
@@ -71,33 +82,30 @@ export default async (req, res) => {
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
-            content: Object.values(singleResult).join("")
+            content: Object.values(singleResult).join(""),
+            blob: singleResult.blob
           })
         } else {
           //[DOC/DOCX] singleResult ha un aspetto normale, tranne per il content che è una copia di sè. Quindi il content diventa la prop['content']
 
           if (fileObj.filename.includes("provafileesterno")) {
             const options = {}
-            console.log("||||||| providing this file path:", 'public\\' + fileObj.relativepath)
             mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
               if (mammothResult.messages.length > 0) {
                 for (let x; x < mammothResult.messages.length; x++) {
                   console.log("\n\n Errors:", mammothResult.messages[x], '\n\n')
                 }
               }
-              console.log("\n\n\n\n ||||| relativepath - value: ", mammothResult.value, "\n\n\n\n")
+              //console.log("\n\n\n\n ||||| mammothResult.value: ", mammothResult.value, "\n\n\n\n")
             })
           }
-
-
-
           analyzedFiles.push({
             fullpath: fileObj.fullpath,
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
-            content: singleResult.content
-
+            content: singleResult.content,
+            blob: singleResult.blob
           })
         }
         if (analyzedFiles.length === filesToAnalyze.length) {
@@ -110,10 +118,15 @@ export default async (req, res) => {
     const filteredDocs = containerResult.filter(d => {
       //Eventuali affinamenti del filtro andranno qui
       const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase()
+      if (cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())) {
+        //console.log("Content tradotto dal binario: ", d.content.replace(/[^\w\s]/gi, '').substr(0, 4000))
+        //console.log("Blob del .doc file: ", d.blob)
+      }
       return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
     })
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Pulizia Console \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     if (filteredDocs.length > 0) {
+      console.log("About to send data to client | blob size:", filteredDocs[0].blob.size)
       return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi
         success: true,
         data: { filteredDocs: filteredDocs }
