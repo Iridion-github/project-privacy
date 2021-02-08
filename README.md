@@ -31,9 +31,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- 
+- Otteniamo il blob per ogni file, ma esso arriva modificato al client (size è sempre undefined). Chiedere a Marco.
 
 ## Note
+- [Memo] Sviluppare barre di caricamento/attesa per la UX
 - [Domande] Attualmente la breacrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 - [Archive] Mammoth.js richiede esclusivamente documenti .docx e NON FUNZIONA con i .doc | Cercare un'alternativa per i files .doc
 - [Style] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
