@@ -11,18 +11,53 @@ import {
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
+import { convertPdfToPng } from '../utils/pdf'; //pacchetto usato per convertire i pdf in png
 
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
-  const [searchResult, setSerchResult] = useState([])
+  const [searchResult, setSearchResult] = useState([])
+  const [pdfBlobsArray, setPdfBlobsArray] = useState([])
+
+  const pdfProcedure = async (fileObj) => {
+    /*
+      const convertAndDownload = e => {
+        const pdf = e.target.files[0]
+        convertPdfToPng(pdf, { outputType: 'download' })
+      }
+    */
+    const convertAndDoSomething = event => {
+      //const pdf = event.target.files[0]
+      const callback = images => {
+        images.forEach(img => {
+          console.log("file object properties of img:", img)
+        })
+      }
+      convertPdfToPng(fileObj.blob, {
+        outputType: 'callback',
+        callback: callback
+      })
+    }
+    await convertAndDoSomething()
+  }
+
+  const handleSetSearchResult = (searchResBefore) => {
+    const searchResAfter = searchResBefore.map(el => {
+      if (el.filename.includes(".pdf")) {
+        pdfProcedure(el)
+        return { ...el }
+      }
+      return el
+    })
+    setSearchResult(searchResAfter)
+  }
 
   const submitSearch = async (input) => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
-      const res = await fetch(`http://localhost:3000/api/archive/?searchterms=${input}`, {
+      const resJson = await fetch(`http://localhost:3000/api/archive/search?searchterms=${input}`, {
         method: 'GET',
         headers: {
           key: 'Access-Control-Allow-Origin',
@@ -33,10 +68,31 @@ export default function archivio(props) {
         }
       })
         .then(response => response.json())
-        .then(response => {
-          console.log("Receiving data from server | blob size:", response.data.filteredDocs[0].blob.size)
-          setSerchResult(getFile(response.data.filteredDocs))
-          setSearched(searchInput)
+        .then(async response => {
+          //Se ci sono dei pdf, mando la richiesta per la creazione dei blobs
+          if (response.data.filteredDocs.filter(el => el.filename.includes(".pdf")).length > 0) {
+            console.log("Just before sending request to server")
+            const pdfToBlobify = await response.data.filteredDocs.filter(el => el.filename.includes(".pdf")).map(el => ({ filename: el.filename, fullpath: el.fullpath }))
+            console.log("pdfToBlobify:", pdfToBlobify)
+            const pdfBlobs = await fetch(`http://localhost:3000/api/archive/getBlobs?pdfObjects=` + JSON.stringify(pdfToBlobify),
+              {
+                method: 'GET',
+                headers: {
+                  key: 'Access-Control-Allow-Origin',
+                  value: '*'
+                }
+              })
+              .then(response => response.blob())
+              .then(blobs => {
+                console.log("blob:", blobs)
+                return blobs
+              })
+            setPdfBlobsArray(pdfBlobs)
+            console.log("pdfBlobsArray:", pdfBlobsArray)
+          }
+          //Continuo con le operazioni clientside
+          //handleSetSearchResult(response.data.filteredDocs)
+          //setSearched(searchInput)          
         })
     } catch (error) {
       console.log(error)
@@ -47,24 +103,6 @@ export default function archivio(props) {
     event.preventDefault()
     const cleanInput = searchInput.replace(/[^\w\s]/gi, '')
     submitSearch(cleanInput)
-  }
-
-  const getFile = (fileObjArray) => {
-    console.log("bytes del file:", fileObjArray[0].blob.size)
-    const withFile = fileObjArray.map(el => {
-      const myFile = new File([el.blob], el.filename)
-      console.log("getFileViewer - converted to file: myFile = ", myFile)
-      return { ...el, file: myFile }
-    })
-    return withFile
-  }
-
-  function inputFileGetValue(file) {
-    const reader = new FileReader()
-    reader.onload = function (e) {
-      console.log("filereader result:", (Object.values(e.target.result)))
-    }
-    return reader.readAsText(file)
   }
 
   return (
@@ -128,7 +166,6 @@ export default function archivio(props) {
                           >
                             <i className="fas fa-download"></i>
                           </Button>
-                          <input hidden type="file" value={inputFileGetValue(el.file)}></input>
                           <Button
                             size="sm"
                             variant="info"
@@ -137,7 +174,12 @@ export default function archivio(props) {
                           >
                             <i className="fas fa-eye"></i>
                           </Button>
+                          { el.relativepath.includes(".pdf") &&
+                            <img src={el.pngPath} className="m-2" />
+                          }
+                          {/* googledocviewer non funziona con localhost
                           <iframe className="ml-2" src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
+                          */}
                         </>
                       </li>
                     ))}
