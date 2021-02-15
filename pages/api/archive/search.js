@@ -39,9 +39,9 @@ export default async (req, res) => {
     try {
       const analyzedFiles = []
       filesToAnalyze.forEach(async fileObj => {
-        const pdf = fileObj.fullpath.includes(".pdf")
-        const docx = fileObj.fullpath.includes(".docx")
-        const doc = fileObj.fullpath.includes(".doc")
+        const pdf = fileObj.fullpath.toLowerCase().includes(".pdf")
+        const docx = fileObj.fullpath.toLowerCase().includes(".docx")
+        const doc = fileObj.fullpath.toLowerCase().includes(".doc")
 
         //singleResult Promise starts pending
         const singleResult = await new Promise((resolveSingle, rejectSingle) => {

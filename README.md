@@ -30,7 +30,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- Finalmente ottenuto il content dei doc files non corrotto, quindi il filtro per content funziona bene su di loro nel 99% dei casi. Prossimo passo: scoprire come mantenere la formattazione, e poi convertire in html in modo da avere contenuto da visualizzare in client-side.
+- PdfViewer funzionante. Affinare, abbellire, finire.
 
 ## Note
 - [Memo] Sviluppare barre di caricamento/attesa per la UX.
