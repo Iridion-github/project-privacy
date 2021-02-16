@@ -20,6 +20,16 @@ export default function archivio(props) {
   const [searched, setSearched] = useState(false)
   const [searchResult, setSearchResult] = useState([])
 
+  const [showPdfModal, setShowPdfModal] = useState(false)
+
+  const openPdfViewer = () => {
+    setShowPdfModal(true)
+  }
+
+  const closePdfViewer = () => {
+    setShowPdfModal(false)
+  }
+
   const handleSetSearchResult = (searchResBefore) => {
     setSearchResult(searchResBefore)
   }
@@ -118,12 +128,14 @@ export default function archivio(props) {
                             size="sm"
                             variant="info"
                             className="ml-1 py-0 px-1"
-                            onClick={() => getDocumentViewer("rawtext", el.relativepath, el.content)}
+                            onClick={openPdfViewer}
                           >
                             <i className="fas fa-eye"></i>
                           </Button>
                           <PdfViewer
                             path={el.relativepath}
+                            show={showPdfModal}
+                            onClose={closePdfViewer}
                           />
                           {/* googledocviewer non funziona con localhost
                           <iframe className="ml-2" src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
@@ -135,6 +147,7 @@ export default function archivio(props) {
                 </Col>
               </Row>
             )}
+
             {(searched && searchResult && searchResult.length === 0) && (
               <Row className="mt-4 p-3 justify-content-center archive-result-container">
                 <h4>Nessun documento contenente: " {searched} "</h4>

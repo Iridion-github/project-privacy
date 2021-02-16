@@ -30,7 +30,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- PdfViewer funzionante. Affinare, abbellire, finire.
+- PdfViewer funzionante ma da fixare per bene, abbellire, completare;
+- Pensare a come gestire i file con estensione .docx e .doc;
+
+## Known Issues
+- PdfViewer | All'apertura, non è visualizzato il content sino a che non si cambia pagina. Se si va a pagina 2 mostra la prima pagina, se si torna a pagina 1 mostra l'ULTIMA pagina del pdf. Indagare.
 
 ## Note
 - [Memo] Sviluppare barre di caricamento/attesa per la UX.
