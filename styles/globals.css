@@ -366,6 +366,6 @@ a {
 
 @media all and (max-width: 600px) {
   .pdfviewer-dialog {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 }
