@@ -13,19 +13,36 @@ import {
 export const PdfViewer = function (props) {
   const siteLanguage = useLanguage() //context
   const [pdf, setPdf] = useState(null)
+  const [init, setInit] = useState(false)
   const [maxPageNum, setMaxPageNum] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
-  const [zoom, setZoom] = useState(1.4)
+  const [zoom, setZoom] = useState(1)
   const [destination, setDestination] = useState(null)
 
-  const renderPdf = (pdf) => {
-    pdf.getPage(currentPage).then(async page => {
-      console.log(`renderPdf - setting canvas to  ${document.getElementById("pdf_renderer_" + props.path)})`)
+  const renderPdf = (pdf, targetPage, targetZoom) => {
+    const isMobile = screen.width < 400
+    if (!targetZoom) targetZoom = 1
+    setDestination(null)
+    pdf.getPage(targetPage).then(async page => {
+      //console.log(`renderPdf - setting canvas to  ${document.getElementById("pdf_renderer_" + props.path)})`)
       const canvas = document.getElementById("pdf_renderer_" + props.path)
       const ctx = canvas.getContext('2d')
-      const viewport = page.getViewport(zoom)
-      canvas.width = viewport.width
-      canvas.height = viewport.height
+      const viewport = page.getViewport(targetZoom) //grandezza ed altezza del contenitore della pagina
+      console.log("viewport:", viewport)
+      canvas.width = viewport.width //grandezza della pagina
+      console.log("canvas.width:", canvas.width)
+      canvas.height = viewport.height //altezza della pagina
+
+      //viewport.width o viewport.viewBox[2] ? [MEMO] Qui!!
+      if (isMobile) {
+        console.log("Un mobile sta visualizzando!")
+        viewport.width = screen.width
+        viewport.viewBox[2] = screen.width
+        viewport.scale = 0.8
+        canvas.width = screen.width
+        console.log("viewport:", viewport)
+      }
+
       page.render({
         canvasContext: ctx,
         viewport: viewport
@@ -36,24 +53,23 @@ export const PdfViewer = function (props) {
   const pdfjsLibSetup = async () => {
     await pdfjsLib.getDocument(props.path).then(async pdfResult => {
       if (!maxPageNum) {
-        console.log("pdfjsLibSetup - maxPageNum is not set yet, so setting to:", pdfResult._pdfInfo.numPages)
+        //console.log("pdfjsLibSetup - maxPageNum is not set yet, so setting to:", pdfResult._pdfInfo.numPages)
         await setMaxPageNum(pdfResult._pdfInfo.numPages)
       }
       await setPdf(pdfResult)
-      renderPdf(pdfResult)
     })
   }
 
   const goPrevPage = () => {
     const prevPage = Number(currentPage - 1) > 0 ? Number(currentPage - 1) : 1
     setCurrentPage(prevPage)
-    renderPdf(pdf)
+    renderPdf(pdf, prevPage, zoom)
   }
 
   const goNextPage = () => {
     const nextPage = Number(currentPage + 1) < maxPageNum ? Number(currentPage + 1) : maxPageNum
     setCurrentPage(nextPage)
-    renderPdf(pdf)
+    renderPdf(pdf, nextPage, zoom)
   }
 
   const handleSetDestination = (dest) => {
@@ -64,24 +80,30 @@ export const PdfViewer = function (props) {
   }
 
   const handleGoToDestination = () => {
+    console.log("setting currentPage to:", destination)
     setCurrentPage(destination)
-    renderPdf(pdf)
+    renderPdf(pdf, destination, zoom)
   }
 
-  const zoomIn = async () => {
-    await setZoom(zoom + 0.1)
-    renderPdf(pdf)
+  const zoomIn = () => {
+    const newZoomLevel = Number(zoom + 0.2)
+    setZoom(newZoomLevel)
+    renderPdf(pdf, currentPage, newZoomLevel)
   }
 
-  const zoomOut = async () => {
-    await setZoom(zoom - 0.1)
-    renderPdf(pdf)
+  const zoomOut = () => {
+    const newZoomLevel = Number(zoom - 0.2)
+    setZoom(newZoomLevel)
+    renderPdf(pdf, currentPage, newZoomLevel)
   }
 
   const handleClose = () => {
     setPdf(null)
     setCurrentPage(1)
-    setZoom(1.4)
+    setInit(false)
+    setMaxPageNum(null)
+    setZoom(1)
+    setDestination(null)
     props.onClose()
   }
 
@@ -91,6 +113,10 @@ export const PdfViewer = function (props) {
         pdfjsLibSetup()
       }
       document.title = `Pdf viewer - page: ` + currentPage + ' / ' + maxPageNum
+      if (pdf && !init) {
+        setInit(true)
+        renderPdf(pdf, 1, zoom)
+      }
     }
   })
 
@@ -112,7 +138,7 @@ export const PdfViewer = function (props) {
                   size="lg"
                   id={"zoom_out"}
                   onClick={zoomOut}
-                  disabled={zoom <= 1.4}
+                  disabled={zoom <= 1}
                   variant="info"
                   className="mr-1"
                 >
@@ -130,7 +156,7 @@ export const PdfViewer = function (props) {
               </div>
             </Col>
             <Col md={{ span: 4 }} className="text-center">
-              <h2>{siteLanguage === "ita" ? "Visualizzatore Pdf" : "Pdf Viewer"}</h2>
+              <h2>{props.filename}</h2>
             </Col>
             <Col md={{ span: 4 }} className="m-0 p-0">
               <Row className="w-100">
@@ -167,7 +193,7 @@ export const PdfViewer = function (props) {
                 block
                 id={"go_previous"}
                 onClick={goPrevPage}
-                disabled={currentPage < 2}
+                disabled={currentPage === 1}
                 variant="info"
               >
                 <i className="fas fa-arrow-left mr-1"></i>
@@ -179,14 +205,14 @@ export const PdfViewer = function (props) {
                 <FormControl
                   className="mr-2"
                   id={"current_page"}
-                  value={destination ? destination : currentPage}
-                  onChange={(event) => handleSetDestination(event.target.value)}
+                  value={destination !== null ? destination : currentPage}
+                  onChange={(event) => handleSetDestination(Number(event.target.value))}
                 /><span style={{ lineHeight: 2.2 }}> / {maxPageNum}</span>
                 <Button
                   size="md"
                   className="ml-3 mr-1"
                   onClick={handleGoToDestination}
-                  disabled={currentPage === destination}
+                  disabled={(destination === null || currentPage === destination)}
                   variant="info"
                 >
                   <i className="far fa-arrow-alt-circle-right"></i>
@@ -198,6 +224,7 @@ export const PdfViewer = function (props) {
                 block
                 id={"go_next"}
                 onClick={goNextPage}
+                disabled={currentPage >= maxPageNum}
                 variant="info"
               >
                 <i className="far fa-file"></i>

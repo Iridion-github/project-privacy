@@ -20,14 +20,14 @@ export default function archivio(props) {
   const [searched, setSearched] = useState(false)
   const [searchResult, setSearchResult] = useState([])
 
-  const [showPdfModal, setShowPdfModal] = useState(false)
+  const [showPdfModal, setShowPdfModal] = useState(null)
 
-  const openPdfViewer = () => {
-    setShowPdfModal(true)
+  const openPdfViewer = (path) => {
+    setShowPdfModal(path)
   }
 
   const closePdfViewer = () => {
-    setShowPdfModal(false)
+    setShowPdfModal(null)
   }
 
   const handleSetSearchResult = (searchResBefore) => {
@@ -128,13 +128,14 @@ export default function archivio(props) {
                             size="sm"
                             variant="info"
                             className="ml-1 py-0 px-1"
-                            onClick={openPdfViewer}
+                            onClick={() => openPdfViewer(el.relativepath)}
                           >
                             <i className="fas fa-eye"></i>
                           </Button>
                           <PdfViewer
                             path={el.relativepath}
-                            show={showPdfModal}
+                            filename={el.filename}
+                            show={showPdfModal === el.relativepath}
                             onClose={closePdfViewer}
                           />
                           {/* googledocviewer non funziona con localhost

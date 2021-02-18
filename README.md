@@ -30,8 +30,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- PdfViewer - Di base funzionante ma da fixare per bene, è pieno di bug.
-- PdfViewer - Rendere piacevole alla vista.
+- PdfViewer - Di base funzionante ma settare per il mobile.
+- PdfViewer - Di base funzionante ma da rendere piacevole alla vista. 
 - PdfViewer - Alcuni pdf non vengono accettate da PdfViewer, capire perchè;
 - PdfViewer - mettere le pezze alla versione mobile;
 - DocumentViewer - Pensare a come gestire i file con estensione .docx e .doc;
@@ -44,3 +44,5 @@ ___________________________________________
 - [Domande] Attualmente la breacrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 - [Style] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
 - [Archive] Avvicinarsi il più possibile al funzionamento di https://dejure.it/
+
+In onore di Alessandro Mastropierro, che ha contribuito, seguito e (indirettamente) finanziato l'intero progetto. Pace alla sua anima.
