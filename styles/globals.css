@@ -361,11 +361,32 @@ a {
 }
 
 .pdfviewer-dialog {
-  max-width: 50% !important;
+  min-width: 75% !important;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 770px) {
   .pdfviewer-dialog {
-    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+}
+
+#pdf_renderer {
+  overflow: scroll !important;
+}
+
+@media all and (max-width: 770px) {
+  #pdf_renderer {
+    overflow: auto !important;
+  }
+}
+
+#canvas_container {
+  overflow: auto !important;
+}
+
+@media all and (max-width: 770px) {
+  #canvas_container {
+    overflow: auto !important;
+    display: block;
   }
 }

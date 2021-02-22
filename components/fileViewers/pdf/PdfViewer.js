@@ -24,8 +24,8 @@ export const PdfViewer = function (props) {
     if (!targetZoom) targetZoom = 1
     setDestination(null)
     pdf.getPage(targetPage).then(async page => {
-      //console.log(`renderPdf - setting canvas to  ${document.getElementById("pdf_renderer_" + props.path)})`)
-      const canvas = document.getElementById("pdf_renderer_" + props.path)
+      //console.log(`renderPdf - setting canvas to  ${document.getElementById("pdf_renderer")})`)
+      const canvas = document.getElementById("pdf_renderer")
       const ctx = canvas.getContext('2d')
       const viewport = page.getViewport(targetZoom) //grandezza ed altezza del contenitore della pagina
       console.log("viewport:", viewport)
@@ -36,10 +36,10 @@ export const PdfViewer = function (props) {
       //viewport.width o viewport.viewBox[2] ? [MEMO] Qui!!
       if (isMobile) {
         console.log("Un mobile sta visualizzando!")
-        viewport.width = screen.width
-        viewport.viewBox[2] = screen.width
-        viewport.scale = 0.8
-        canvas.width = screen.width
+        //viewport.width = //screen.width
+        //viewport.viewBox[2] = //screen.width
+        //viewport.scale = 1
+        //canvas.width = screen.width
         console.log("viewport:", viewport)
       }
 
@@ -126,7 +126,7 @@ export const PdfViewer = function (props) {
         className="justify-content-center"
         show={props.show}
         onHide={handleClose}
-        dialogClassName="pdfviewer-dialog"
+        dialogClassName="w-100 pdfviewer-dialog"
       >
         <Modal.Header
           className="w-100"
@@ -176,19 +176,19 @@ export const PdfViewer = function (props) {
             </Col>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="w-100">
+        <Modal.Body className="" style={{ padding: 0 }}>
           {/* Altra soluzione in caso di seri problemi: html object
           <object width="400" height="400" data={props.path} type="application/pdf"></object>
           */}
           <div id={"my_pdf_viewer"}>
             <div id={"canvas_container"} className="justify-content-center text-center">
-              <canvas id={"pdf_renderer_" + props.path}></canvas>
+              <canvas id={"pdf_renderer"}></canvas>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
           <div id={"navigation_controls"} className="w-100 row">
-            <Col md={{ span: 2 }} className="">
+            <Col md={{ span: 2 }} className="mb-2">
               <Button
                 block
                 id={"go_previous"}
@@ -200,7 +200,7 @@ export const PdfViewer = function (props) {
                 <i className="far fa-file"></i>
               </Button>
             </Col>
-            <Col md={{ span: 4, offset: 2 }} className="p-0">
+            <Col md={{ span: 4, offset: 2 }} className="p-0 mb-2">
               <InputGroup className="pl-4">
                 <FormControl
                   className="mr-2"
@@ -219,7 +219,7 @@ export const PdfViewer = function (props) {
                 </Button>
               </InputGroup>
             </Col>
-            <Col md={{ span: 2, offset: 2 }} className="">
+            <Col md={{ span: 2, offset: 2 }} className="mb-2">
               <Button
                 block
                 id={"go_next"}
