@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
+import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
 
@@ -19,7 +20,7 @@ export default function archivio(props) {
   const [searchInput, setSearchInput] = useState("")
   const [searched, setSearched] = useState(false)
   const [searchResult, setSearchResult] = useState([])
-
+  const [loading, setLoading] = useState(false)
   const [showPdfModal, setShowPdfModal] = useState(null)
 
   const openPdfViewer = (path) => {
@@ -34,9 +35,10 @@ export default function archivio(props) {
     setSearchResult(searchResBefore)
   }
 
-  const submitSearch = async (input) => { //Questo non andrà bene, per il momento non ho il context. Provare a piazzarlo come parametro.
+  const submitSearch = async (input) => {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
+      setLoading(true)
       const resJson = await fetch(`http://localhost:3000/api/archive/search?searchterms=${input}`, {
         method: 'GET',
         headers: {
@@ -49,6 +51,7 @@ export default function archivio(props) {
       })
         .then(response => response.json())
         .then(async response => {
+          setLoading(false)
           handleSetSearchResult(response.data.filteredDocs)
           setSearched(searchInput)
         })
@@ -70,6 +73,9 @@ export default function archivio(props) {
       />
       {/* Navbar */}
       <Navigation />
+      <Loading
+        loading={loading}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="p-2">
