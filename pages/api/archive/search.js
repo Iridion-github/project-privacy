@@ -142,7 +142,8 @@ export default async (req, res) => {
     fullpath: d.fullpath,
     filename: d.filename,
     relativepath: d.relativepath,
-    linuxpath: d.linuxpath
+    linuxpath: d.linuxpath,
+    content: d.filename.includes(".docx") ? d.content : ""
   }))
 
   if (filteredDocs.length > 0) {

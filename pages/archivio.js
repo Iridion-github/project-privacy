@@ -13,7 +13,7 @@ import { Navigation } from '../components/layout/Navbar'
 import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
-
+import { DocxViewer } from '../components/fileViewers/docx/DocxViewer'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -22,6 +22,7 @@ export default function archivio(props) {
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
   const [showPdfModal, setShowPdfModal] = useState(null)
+  const [showDocxModal, setShowDocxModal] = useState(null)
 
   const openPdfViewer = (path) => {
     setShowPdfModal(path)
@@ -29,6 +30,14 @@ export default function archivio(props) {
 
   const closePdfViewer = () => {
     setShowPdfModal(null)
+  }
+
+  const openDocxViewer = (content) => {
+    setShowDocxModal(content)
+  }
+
+  const closeDocxViewer = () => {
+    setShowDocxModal(null)
   }
 
   const handleSetSearchResult = (searchResBefore) => {
@@ -119,6 +128,7 @@ export default function archivio(props) {
                       <li key={i}>
                         <>
                           {el.filename}
+                          {/*
                           <Button
                             size="sm"
                             variant="info"
@@ -128,19 +138,48 @@ export default function archivio(props) {
                           >
                             <i className="fas fa-download"></i>
                           </Button>
-                          <Button
-                            size="sm"
-                            variant="info"
-                            className="ml-1 py-0 px-1"
-                            onClick={() => openPdfViewer(el.relativepath)}
-                          >
-                            <i className="fas fa-eye"></i>
-                          </Button>
+                          */}
+                          {el.filename.includes(".pdf") && //pdf files viewer btn
+                            <Button
+                              size="sm"
+                              variant="info"
+                              className="ml-1 py-0 px-1"
+                              onClick={() => openPdfViewer(el.relativepath)}
+                            >
+                              <i className="fas fa-eye"></i>
+                            </Button>
+                          }
+                          {el.filename.includes(".docx") && //docx files viewer btn
+                            <Button
+                              size="sm"
+                              variant="info"
+                              className="ml-1 py-0 px-1"
+                              onClick={() => openDocxViewer(el.content)}
+                            >
+                              <i className="fas fa-eye"></i>
+                            </Button>
+                          }
+                          {(el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
+                            <Button
+                              size="sm"
+                              variant="info"
+                              className="ml-1 py-0 px-1"
+                              onClick={() => console.log("Open " + el.filename + " into docViewer")}
+                            >
+                              <i className="fas fa-eye"></i>
+                            </Button>
+                          }
                           <PdfViewer
                             path={el.relativepath}
                             filename={el.filename}
                             show={showPdfModal === el.relativepath}
                             onClose={closePdfViewer}
+                          />
+                          <DocxViewer
+                            content={el.content}
+                            filename={el.filename}
+                            show={showDocxModal === el.content}
+                            onClose={closeDocxViewer}
                           />
                           {/* googledocviewer non funziona con localhost
                           <iframe className="ml-2" src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>

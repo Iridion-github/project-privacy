@@ -8,53 +8,43 @@ import {
   InputGroup,
   FormControl
 } from 'react-bootstrap'
+import stringToHTML from 'html-react-parser'
 
 
-export const PdfViewer = function (props) {
+export const DocxViewer = function (props) {
   const siteLanguage = useLanguage() //context
-  const [pdf, setPdf] = useState(null)
   const [init, setInit] = useState(false)
   const [maxPageNum, setMaxPageNum] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [zoom, setZoom] = useState(1)
   const [destination, setDestination] = useState(null)
+  const [pdf, setPdf] = useState(null)
+  const [docxRendererStyle, setDocxRendererStyle] = useState({})
 
-  const renderPdf = (pdf, targetPage, targetZoom) => {
-    const isMobile = screen.width < 400
+  const renderDocx = async (targetZoom) => {
     if (!targetZoom) targetZoom = 1
     setDestination(null)
-    pdf.getPage(targetPage).then(async page => {
-      const canvas = document.getElementById("pdf_renderer")
-      const ctx = canvas.getContext('2d')
-      const viewport = page.getViewport(targetZoom) //grandezza ed altezza del contenitore della pagina
-      canvas.width = viewport.width //grandezza della pagina
-      canvas.height = viewport.height //altezza della pagina
-      page.render({
-        canvasContext: ctx,
-        viewport: viewport
-      })
+    const renderer = document.getElementById("docx_renderer")
+    const text = props.content
+    renderer.innerHTML = text
+    await setDocxRendererStyle({ fontSize: targetZoom + "rem !important" })
+    //[Memo] Siamo arrivati qui: elaborazione di un sistema per zoomare. A Luigi potrebbe non andar bene cmq il sistema di DocxViewer.
+    renderer.children = React.Children.map(children, async function (child) {
+      child.style = { fontSize: targetZoom + "rem !important" }
     })
-  }
 
-  const pdfjsLibSetup = async () => {
-    await pdfjsLib.getDocument(props.path).then(async pdfResult => {
-      if (!maxPageNum) {
-        await setMaxPageNum(pdfResult._pdfInfo.numPages)
-      }
-      await setPdf(pdfResult)
-    })
   }
 
   const goPrevPage = () => {
     const prevPage = Number(currentPage - 1) > 0 ? Number(currentPage - 1) : 1
     setCurrentPage(prevPage)
-    renderPdf(pdf, prevPage, zoom)
+    renderDocx(zoom)
   }
 
   const goNextPage = () => {
     const nextPage = Number(currentPage + 1) < maxPageNum ? Number(currentPage + 1) : maxPageNum
     setCurrentPage(nextPage)
-    renderPdf(pdf, nextPage, zoom)
+    renderDocx(zoom)
   }
 
   const handleSetDestination = (dest) => {
@@ -65,23 +55,22 @@ export const PdfViewer = function (props) {
 
   const handleGoToDestination = () => {
     setCurrentPage(destination)
-    renderPdf(pdf, destination, zoom)
+    renderDocx(zoom)
   }
 
   const zoomIn = () => {
     const newZoomLevel = Number(zoom + 0.2)
     setZoom(newZoomLevel)
-    renderPdf(pdf, currentPage, newZoomLevel)
+    renderDocx(newZoomLevel)
   }
 
   const zoomOut = () => {
     const newZoomLevel = Number(zoom - 0.2)
     setZoom(newZoomLevel)
-    renderPdf(pdf, currentPage, newZoomLevel)
+    renderDocx(newZoomLevel)
   }
 
   const handleClose = () => {
-    setPdf(null)
     setCurrentPage(1)
     setInit(false)
     setMaxPageNum(null)
@@ -92,13 +81,10 @@ export const PdfViewer = function (props) {
 
   useEffect(() => {
     if (props.show) {
-      if (!pdf) {
-        pdfjsLibSetup()
-      }
-      document.title = `Pdf viewer - page: ` + currentPage + ' / ' + maxPageNum
-      if (pdf && !init) {
+      document.title = `Docx viewer - page: ` + currentPage + ' / ' + maxPageNum
+      if (!init) {
         setInit(true)
-        renderPdf(pdf, 1, zoom)
+        renderDocx(zoom)
       }
     }
   })
@@ -160,13 +146,11 @@ export const PdfViewer = function (props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="" style={{ padding: 0 }}>
-          {/* Altra soluzione in caso di seri problemi: html object
-          <object width="400" height="400" data={props.path} type="application/pdf"></object>
-          */}
           <div id={"my_pdf_viewer"}>
-            <div id={"canvas_container"} className="justify-content-center text-center">
-              <canvas id={"pdf_renderer"}></canvas>
-            </div>
+            <Row id={"canvas_container"} className="w-100 text-center">
+              <Col md={{ span: 8, offset: 2 }} id={"docx_renderer"} className="text-left p-5" style={docxRendererStyle}>
+              </Col>
+            </Row>
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
