@@ -3,26 +3,28 @@ import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 import {
   Row,
-  Col,
-  Modal
+  Spinner
 } from 'react-bootstrap'
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
+/*
 const override = css`
   display: flex;
   border: 14px solid;
   border-color: rgb(131,203,221);
   border-bottom-color: transparent;
  `;
+ */
 
 export const Loading = function (props) {
   return (
-    <ClipLoader
-      loading={props.loading}
-      size={80}
-      color={"rgb(131, 203, 221)"}
-      css={override}
-    />
+    <Row className="spinner-container">
+      <Spinner
+        className="spinner-style"
+        animation="border"
+        variant="info"
+      />
+    </Row>
   )
 }
 

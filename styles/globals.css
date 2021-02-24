@@ -390,3 +390,22 @@ a {
     display: block;
   }
 }
+
+.spinner-container {
+  width: 100% !important;
+  padding: 0.5rem !important;
+  justify-content: center !important;
+  position: fixed;
+  top: 45% !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+}
+
+.spinner-style {
+  display: flex;
+  border: 50px solid;
+  border-color: rgb(131, 203, 221);
+  border-bottom-color: transparent;
+  width: 3.3rem !important;
+  height: 3.3rem !important;
+}

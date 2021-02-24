@@ -73,9 +73,7 @@ export default function archivio(props) {
       />
       {/* Navbar */}
       <Navigation />
-      <Loading
-        loading={loading}
-      />
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="p-2">
