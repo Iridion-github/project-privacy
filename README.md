@@ -30,8 +30,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- DocumentViewer - elaborazione di un sistema per zoomare. A Luigi potrebbe non andar bene cmq il sistema di DocxViewer.
-- DocumentViewer - Pensare a come gestire i file con estensione .doc;
+- DocumentViewer(docx) - Siamo costretti a usare il canvas: è l'unico modo per impedire il "furto dati" dall'html view
+- DocumentViewer(doc) - Pensare a come gestire i file con estensione .doc
 
 
 ## Known Issues

@@ -8,54 +8,46 @@ import {
   InputGroup,
   FormControl
 } from 'react-bootstrap'
-import stringToHTML from 'html-react-parser'
+import * as htmlToImage from 'html-to-image'
 
 
 export const DocxViewer = function (props) {
   const siteLanguage = useLanguage() //context
   const [init, setInit] = useState(false)
-  const [maxPageNum, setMaxPageNum] = useState(null)
-  const [currentPage, setCurrentPage] = useState(1)
   const [zoom, setZoom] = useState(1)
-  const [destination, setDestination] = useState(null)
-  const [pdf, setPdf] = useState(null)
   const [docxRendererStyle, setDocxRendererStyle] = useState({})
 
   const renderDocx = async (targetZoom) => {
     if (!targetZoom) targetZoom = 1
-    setDestination(null)
     const renderer = document.getElementById("docx_renderer")
     const text = props.content
-    renderer.innerHTML = text
+    renderer.innerHTML += text
+    renderer.onCopy = '() => false'
+    renderer.onCut = '() => false'
+    /**
+     * [MEMO] 
+     * Siamo costretti a usare il canvas: è l'unico modo per impedire il "furto dati" dall'html view. 
+     * Problemi che ne conseguono:
+     * 1) Il content è clippato male
+     * 2) Il content non si presta bene allo zoom
+     * 3) Il content è blurry as fuck
+     */
+    htmlToImage.toCanvas(renderer)
+      .then(function (canvas) {
+        const context = canvas.getContext('2d')
+        context.scale(3, 3)
+        context.imageSmoothingEnabled = false
+        console.log("context:", context)
+        //const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+        //const modalWidth = Math.floor(viewportWidth * 0.50)
+        //canvas.style.width = `${modalWidth}px` //ampiezza della pagina        
+        document.getElementById("canvas_container").appendChild(canvas)
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
     await setDocxRendererStyle({ fontSize: targetZoom + "rem !important" })
-    //[Memo] Siamo arrivati qui: elaborazione di un sistema per zoomare. A Luigi potrebbe non andar bene cmq il sistema di DocxViewer.
-    renderer.children = React.Children.map(children, async function (child) {
-      child.style = { fontSize: targetZoom + "rem !important" }
-    })
-
-  }
-
-  const goPrevPage = () => {
-    const prevPage = Number(currentPage - 1) > 0 ? Number(currentPage - 1) : 1
-    setCurrentPage(prevPage)
-    renderDocx(zoom)
-  }
-
-  const goNextPage = () => {
-    const nextPage = Number(currentPage + 1) < maxPageNum ? Number(currentPage + 1) : maxPageNum
-    setCurrentPage(nextPage)
-    renderDocx(zoom)
-  }
-
-  const handleSetDestination = (dest) => {
-    if (dest > maxPageNum) dest = maxPageNum
-    if (dest < 1) dest = 1
-    setDestination(dest)
-  }
-
-  const handleGoToDestination = () => {
-    setCurrentPage(destination)
-    renderDocx(zoom)
+    document.body.style.zoom = `${Math.floor(100 * targetZoom)}%`
   }
 
   const zoomIn = () => {
@@ -71,17 +63,15 @@ export const DocxViewer = function (props) {
   }
 
   const handleClose = () => {
-    setCurrentPage(1)
     setInit(false)
-    setMaxPageNum(null)
+    renderDocx(1)
     setZoom(1)
-    setDestination(null)
     props.onClose()
   }
 
   useEffect(() => {
     if (props.show) {
-      document.title = `Docx viewer - page: ` + currentPage + ' / ' + maxPageNum
+      document.title = "Docx viewer"
       if (!init) {
         setInit(true)
         renderDocx(zoom)
@@ -97,6 +87,7 @@ export const DocxViewer = function (props) {
         onHide={handleClose}
         dialogClassName="w-100 pdfviewer-dialog"
       >
+        <a name="top"></a>
         <Modal.Header
           className="w-100"
         >
@@ -129,9 +120,7 @@ export const DocxViewer = function (props) {
             </Col>
             <Col md={{ span: 4 }} className="m-0 p-0">
               <Row className="w-100">
-                <Col md={{ span: 6 }} className="m-0 p-0 text-center" >
-                  {currentPage} / {maxPageNum}
-                </Col>
+
                 <Col md={{ span: 6 }} className="m-0 p-0 text-right">
                   <Button
                     size="lg"
@@ -147,8 +136,13 @@ export const DocxViewer = function (props) {
         </Modal.Header>
         <Modal.Body className="" style={{ padding: 0 }}>
           <div id={"my_pdf_viewer"}>
-            <Row id={"canvas_container"} className="w-100 text-center">
-              <Col md={{ span: 8, offset: 2 }} id={"docx_renderer"} className="text-left p-5" style={docxRendererStyle}>
+            <Row id={"canvas_container"} className="w-100 p-0 ">
+              <Col
+                md={{ span: 8, offset: 2 }}
+                id={"docx_renderer"}
+                className="text-left p-5"
+                style={docxRendererStyle}
+              >
               </Col>
             </Row>
           </div>
@@ -156,47 +150,19 @@ export const DocxViewer = function (props) {
         <Modal.Footer className="justify-content-center">
           <div id={"navigation_controls"} className="w-100 row">
             <Col md={{ span: 2 }} className="mb-2">
-              <Button
-                block
-                id={"go_previous"}
-                onClick={goPrevPage}
-                disabled={currentPage === 1}
-                variant="info"
-              >
-                <i className="fas fa-arrow-left mr-1"></i>
-                <i className="far fa-file"></i>
-              </Button>
             </Col>
             <Col md={{ span: 4, offset: 2 }} className="p-0 mb-2">
-              <InputGroup className="pl-4">
-                <FormControl
-                  className="mr-2"
-                  id={"current_page"}
-                  value={destination !== null ? destination : currentPage}
-                  onChange={(event) => handleSetDestination(Number(event.target.value))}
-                /><span style={{ lineHeight: 2.2 }}> / {maxPageNum}</span>
+              <Row className="docxviewer-scrollup-btn-container">
                 <Button
-                  size="md"
-                  className="ml-3 mr-1"
-                  onClick={handleGoToDestination}
-                  disabled={(destination === null || currentPage === destination)}
+                  className="docxviewer-scrollup-btn"
                   variant="info"
+                  href="#top"
                 >
-                  <i className="far fa-arrow-alt-circle-right"></i>
+                  <i className="fas fa-arrow-circle-up"></i>
                 </Button>
-              </InputGroup>
+              </Row>
             </Col>
             <Col md={{ span: 2, offset: 2 }} className="mb-2">
-              <Button
-                block
-                id={"go_next"}
-                onClick={goNextPage}
-                disabled={currentPage >= maxPageNum}
-                variant="info"
-              >
-                <i className="far fa-file"></i>
-                <i className="fas fa-arrow-right ml-1"></i>
-              </Button>
             </Col>
           </div>
         </Modal.Footer>

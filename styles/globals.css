@@ -409,3 +409,23 @@ a {
   width: 3.3rem !important;
   height: 3.3rem !important;
 }
+
+.docxviewer-scrollup-btn-container {
+  justify-content: center;
+}
+
+.docxviewer-scrollup-btn {}
+
+@media (max-width: 600px) {
+  .docxviewer-scrollup-btn-container {
+    position: absolute;
+    left: 75%;
+    bottom: 100%;
+    margin-bottom: 2px;
+  }
+  .docxviewer-scrollup-btn {
+    position: absolute;
+    left: 75%;
+    bottom: 100%;
+  }
+}
