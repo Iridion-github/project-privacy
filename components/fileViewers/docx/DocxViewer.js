@@ -8,45 +8,37 @@ import {
   InputGroup,
   FormControl
 } from 'react-bootstrap'
-import * as htmlToImage from 'html-to-image'
+import html2canvas from 'html2canvas'
 
 
 export const DocxViewer = function (props) {
   const siteLanguage = useLanguage() //context
   const [init, setInit] = useState(false)
   const [zoom, setZoom] = useState(1)
-  const [docxRendererStyle, setDocxRendererStyle] = useState({})
+  const [pdfViewerClass, setPdfViewerClass] = useState("my_pdf_viewer-preCanvas")
+
+
 
   const renderDocx = async (targetZoom) => {
     if (!targetZoom) targetZoom = 1
-    const renderer = document.getElementById("docx_renderer")
+    const pdfViewer = document.getElementById("my_pdf_viewer")
     const text = props.content
-    renderer.innerHTML += text
-    renderer.onCopy = '() => false'
-    renderer.onCut = '() => false'
-    /**
-     * [MEMO] 
-     * Siamo costretti a usare il canvas: è l'unico modo per impedire il "furto dati" dall'html view. 
-     * Problemi che ne conseguono:
-     * 1) Il content è clippato male
-     * 2) Il content non si presta bene allo zoom
-     * 3) Il content è blurry as fuck
-     */
-    htmlToImage.toCanvas(renderer)
-      .then(function (canvas) {
-        const context = canvas.getContext('2d')
-        context.scale(3, 3)
-        context.imageSmoothingEnabled = false
-        console.log("context:", context)
-        //const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-        //const modalWidth = Math.floor(viewportWidth * 0.50)
-        //canvas.style.width = `${modalWidth}px` //ampiezza della pagina        
-        document.getElementById("canvas_container").appendChild(canvas)
+    pdfViewer.innerHTML += text //Prima inserisco il contenuto del docx nel pdfViewer, come HTML puro
+
+    html2canvas(document.getElementById("my_pdf_viewer")) //html2canvas screena l'elemento posto come param
+      .then(function (canvas) { //canvas è lo screen dell'elemento        
+        pdfViewer.innerHTML = "" //Rimuovo l'html per non render semplice il furto di contenuti    
+
+        //[Checkpoint] Trovare il modo di mostrare il content mancante, di non far sforare il canvas ed in seguito, di zoomare.    
+
+        //canvas.style = "" //Canvas per qualche motivo ha sia le props height e width dirette sia lo style con height e width, identici.
+        console.log("canvas:", canvas)
+        //const context = canvas.getContext('2d') //Dobbiamo provare a settare roba col context.
+        //context.canvas.clientHeight = 1000 //Qualsiasi modifica, in aggiunta o riduzione, pare turbofottere l'intero canvas.
+        canvas.className = "shown-canvas"
+        document.getElementById("my_pdf_viewer").appendChild(canvas)
+        setPdfViewerClass("my_pdf_viewer-postCanvas")
       })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
-    await setDocxRendererStyle({ fontSize: targetZoom + "rem !important" })
     document.body.style.zoom = `${Math.floor(100 * targetZoom)}%`
   }
 
@@ -120,8 +112,7 @@ export const DocxViewer = function (props) {
             </Col>
             <Col md={{ span: 4 }} className="m-0 p-0">
               <Row className="w-100">
-
-                <Col md={{ span: 6 }} className="m-0 p-0 text-right">
+                <Col md={{ span: 12 }} className="m-0 p-0 text-right">
                   <Button
                     size="lg"
                     onClick={handleClose}
@@ -135,17 +126,19 @@ export const DocxViewer = function (props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="" style={{ padding: 0 }}>
-          <div id={"my_pdf_viewer"}>
-            <Row id={"canvas_container"} className="w-100 p-0 ">
-              <Col
-                md={{ span: 8, offset: 2 }}
-                id={"docx_renderer"}
-                className="text-left p-5"
-                style={docxRendererStyle}
-              >
-              </Col>
-            </Row>
-          </div>
+
+          <Row
+            id={"my_pdf_viewer"}
+            className={pdfViewerClass}
+          >
+            <Col
+              md={{ span: 8, offset: 2 }}
+              id={"docx_renderer"}
+              className="text-left"
+            >
+            </Col>
+          </Row>
+
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
           <div id={"navigation_controls"} className="w-100 row">

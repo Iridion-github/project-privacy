@@ -30,7 +30,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- DocumentViewer(docx) - Siamo costretti a usare il canvas: è l'unico modo per impedire il "furto dati" dall'html view
+- DocumentViewer(docx) - Siamo costretti a usare il canvas: è l'unico modo per impedire il "furto dati" dall'html view. In progress.
 - DocumentViewer(doc) - Pensare a come gestire i file con estensione .doc
 
 

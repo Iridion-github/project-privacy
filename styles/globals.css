@@ -429,3 +429,23 @@ a {
     bottom: 100%;
   }
 }
+
+.my_pdf_viewer-preCanvas {
+  z-index: -9999 !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.my_pdf_viewer-postCanvas {
+  z-index: 10 !important;
+  padding-top: -500px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.my_pdf_viewer-postCanvas .shown-canvas {
+  /* Qualsiasi modifica apportata qui, anche l'aggiunta del border, rende l'intero canvas super blurry*/
+}
