@@ -4,6 +4,8 @@ import { PdfReader } from "pdfreader"  //pacchetto usato per leggere i pdf
 import fs from 'fs'//pacchetto usato per leggere docx files
 import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
+import libre from 'libreoffice-convert' //pacchetto usato per convertire i docx in pdf 
+
 
 
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
@@ -68,7 +70,21 @@ export default async (req, res) => {
               })
             }
             getPdfContent()
-          } else if (docx) {//[Docx procedure] (mammoth)
+          } else if (docx) {
+            //[Docx procedure] (libre-convert)
+            const extension = ".pdf"
+            const enterPath = 'public\\' + fileObj.relativepath
+            const outputPath = path.join(__dirname, `/resources/example${fileObj.filename}${extension}`)
+            const file = fs.readFileSync(enterPath)
+            libre.convert(file, extension, undefined, (err, convertedFile) => {
+              if (err) {
+                console.log(`Error converting file: ${err}`)
+              }
+              // [Checkpoint] Error: ENOTEMPTY: directory not empty, rmdir 'C:\Users\antin\AppData\Local\Temp\libreofficeConvert_-6076-Rq916hUyyKRU'
+              fs.writeFileSync(outputPath, convertedFile)
+              console.log("convertedFile:", convertedFile)
+            })
+            //[Docx procedure] (mammoth)
             const options = {}
             mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
               if (mammothResult.messages.length > 0) {

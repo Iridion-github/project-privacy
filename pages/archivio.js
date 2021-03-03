@@ -181,9 +181,6 @@ export default function archivio(props) {
                             show={showDocxModal === el.content}
                             onClose={closeDocxViewer}
                           />
-                          {/* googledocviewer non funziona con localhost
-                          <iframe className="ml-2" src={"https://docs.google.com/gview?url=http://localhost:3000/" + el.linuxpath + "&embedded=true"}></iframe>
-                          */}
                         </>
                       </li>
                     ))}

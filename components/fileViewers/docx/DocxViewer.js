@@ -28,12 +28,11 @@ export const DocxViewer = function (props) {
     html2canvas(document.getElementById("my_pdf_viewer")) //html2canvas screena l'elemento posto come param
       .then(function (canvas) { //canvas è lo screen dell'elemento        
         pdfViewer.innerHTML = "" //Rimuovo l'html per non render semplice il furto di contenuti    
-
         //[Checkpoint] Trovare il modo di mostrare il content mancante, di non far sforare il canvas ed in seguito, di zoomare.    
-
         //canvas.style = "" //Canvas per qualche motivo ha sia le props height e width dirette sia lo style con height e width, identici.
         console.log("canvas:", canvas)
-        //const context = canvas.getContext('2d') //Dobbiamo provare a settare roba col context.
+        const context = canvas.getContext('2d') //Dobbiamo provare a settare roba col context.
+        console.log("context:", context)
         //context.canvas.clientHeight = 1000 //Qualsiasi modifica, in aggiunta o riduzione, pare turbofottere l'intero canvas.
         canvas.className = "shown-canvas"
         document.getElementById("my_pdf_viewer").appendChild(canvas)
