@@ -4,7 +4,8 @@ import { PdfReader } from "pdfreader"  //pacchetto usato per leggere i pdf
 import fs from 'fs'//pacchetto usato per leggere docx files
 import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
-import libre from 'libreoffice-convert' //pacchetto usato per convertire i docx in pdf 
+//import libre from 'libreoffice-convert'
+import libre from 'libreoffice-convert-win'
 
 
 
@@ -71,19 +72,6 @@ export default async (req, res) => {
             }
             getPdfContent()
           } else if (docx) {
-            //[Docx procedure] (libre-convert)
-            const extension = ".pdf"
-            const enterPath = 'public\\' + fileObj.relativepath
-            const outputPath = path.join(__dirname, `/resources/example${fileObj.filename}${extension}`)
-            const file = fs.readFileSync(enterPath)
-            libre.convert(file, extension, undefined, (err, convertedFile) => {
-              if (err) {
-                console.log(`Error converting file: ${err}`)
-              }
-              // [Checkpoint] Error: ENOTEMPTY: directory not empty, rmdir 'C:\Users\antin\AppData\Local\Temp\libreofficeConvert_-6076-Rq916hUyyKRU'
-              fs.writeFileSync(outputPath, convertedFile)
-              console.log("convertedFile:", convertedFile)
-            })
             //[Docx procedure] (mammoth)
             const options = {}
             mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
@@ -154,13 +142,53 @@ export default async (req, res) => {
     } else {
       return false
     }
-  }).map(d => ({
-    fullpath: d.fullpath,
-    filename: d.filename,
-    relativepath: d.relativepath,
-    linuxpath: d.linuxpath,
-    content: d.filename.includes(".docx") ? d.content : ""
-  }))
+  }).map(async d => {
+
+
+
+
+    //[CHECKPOINT] Usando libre-convert-win qualcosa funziona, ripartire da qui. Il done viene effettuato, ma il buffer non viene sovrascritto.
+    let buffer = null
+    if (d.filename.includes(".docx")) {
+      const nameOnly = d.filename.split('.docx')[0]
+      const extend = '.pdf'
+      //const enterPath = path.join(__dirname, d.relativepath)
+      const enterPath = d.fullpath
+      console.log(`\n\n Provided enterPath: ${enterPath} \n\n`)
+      //const outputPath = path.join(__dirname, `\\archive\\converte\\${nameOnly}${extend}`)
+      const outputPath = d.fullpath.split('.docx')[0] + extend
+      console.log(`\n\n Provided outputPath: ${outputPath} \n\n`)
+      // Read file
+      const file = fs.readFileSync(enterPath)
+      // Convert it to pdf format with undefined filter (see Libreoffice doc about filter)
+      await libre.convert(file, extend, undefined, async (err, done) => {
+        if (err) {
+          await console.log(`\n\n Error converting file: ${err} \n\n`)
+          buffer = err
+          return err
+        } else {
+          // Here in done you have pdf file which you can save or transfer in another stream
+          await console.log(`\n\n libre.convert - done! \n\n`)
+          buffer = done
+          await fs.writeFileSync(outputPath, done)
+          return done
+        }
+      })
+      console.log("buffer", buffer ? JSON.stringify(buffer).slice(100) : null)
+    }
+
+
+
+
+    return {
+      fullpath: d.fullpath,
+      filename: d.filename,
+      relativepath: d.relativepath,
+      linuxpath: d.linuxpath,
+      content: d.filename.includes(".docx") ? d.content : "",
+      buffer: buffer ? buffer : null
+    }
+  })
 
   if (filteredDocs.length > 0) {
     return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
