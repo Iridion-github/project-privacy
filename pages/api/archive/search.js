@@ -5,7 +5,7 @@ import fs from 'fs'//pacchetto usato per leggere docx files
 import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert'
-import libre from 'libreoffice-convert-win'
+import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf
 
 
 
@@ -77,7 +77,7 @@ export default async (req, res) => {
             mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
               if (mammothResult.messages.length > 0) {
                 for (let x; x < mammothResult.messages.length; x++) {
-                  console.log("\n\n Errors:", mammothResult.messages[x], '\n\n')
+                  //console.log("\n\n Errors:", mammothResult.messages[x], '\n\n')
                 }
               }
               return resolveSingle({ //resolving singleResult Promise
@@ -142,63 +142,94 @@ export default async (req, res) => {
     } else {
       return false
     }
-  }).map(async d => {
-
-
-
-
-    //[CHECKPOINT] Usando libre-convert-win qualcosa funziona, ripartire da qui. Il done viene effettuato, ma il buffer non viene sovrascritto.
-    let buffer = null
-    if (d.filename.includes(".docx")) {
-      const nameOnly = d.filename.split('.docx')[0]
-      const extend = '.pdf'
-      //const enterPath = path.join(__dirname, d.relativepath)
-      const enterPath = d.fullpath
-      console.log(`\n\n Provided enterPath: ${enterPath} \n\n`)
-      //const outputPath = path.join(__dirname, `\\archive\\converte\\${nameOnly}${extend}`)
-      const outputPath = d.fullpath.split('.docx')[0] + extend
-      console.log(`\n\n Provided outputPath: ${outputPath} \n\n`)
-      // Read file
-      const file = fs.readFileSync(enterPath)
-      // Convert it to pdf format with undefined filter (see Libreoffice doc about filter)
-      await libre.convert(file, extend, undefined, async (err, done) => {
-        if (err) {
-          await console.log(`\n\n Error converting file: ${err} \n\n`)
-          buffer = err
-          return err
-        } else {
-          // Here in done you have pdf file which you can save or transfer in another stream
-          await console.log(`\n\n libre.convert - done! \n\n`)
-          buffer = done
-          await fs.writeFileSync(outputPath, done)
-          return done
-        }
-      })
-      console.log("buffer", buffer ? JSON.stringify(buffer).slice(100) : null)
-    }
-
-
-
-
-    return {
-      fullpath: d.fullpath,
-      filename: d.filename,
-      relativepath: d.relativepath,
-      linuxpath: d.linuxpath,
-      content: d.filename.includes(".docx") ? d.content : "",
-      buffer: buffer ? buffer : null
-    }
   })
 
-  if (filteredDocs.length > 0) {
-    return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
-      success: true,
-      data: { filteredDocs: filteredDocs }
+  let conversionFinished = false
+  let convertedDocs = []
+
+  for (let x = 0; x <= filteredDocs.length; x++) {
+    console.log("\n\n" + (x + 1) + "° cycle of the for \n\n")
+    /*
+    [CHECKPOINT] Al secondo ciclo del for appare il seguente errore:
+    TypeError: Cannot read property 'filename' of undefined
+    at libreResult (C:\Users\antin\Desktop\Lavoro\SitiAle\project-privacy\.next\server\pages\api\archive\search.js:289:13)
+
+    */
+
+    const d = filteredDocs[x]
+    //console.log("At this cycle d is:", d)
+    const libreResult = await new Promise((resolveLibre, rejectLibre) => {
+      if (d.filename.includes(".docx")) {
+        const extend = '.pdf'
+        const enterPath = d.fullpath
+        const outputPath = d.fullpath.split('.docx')[0] + extend
+        console.log(`Giving to readFileSync this enterpath: ${enterPath}`)
+        const file = fs.readFileSync(enterPath)
+        libre.convert(file, extend, undefined, async (err, done) => {
+          if (err) {
+            console.log(`\n\n Error converting file: ${err} \n\n`)
+            rejectLibre(err)
+          } else {
+            // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
+            //await fs.writeFileSync(outputPath, done)
+            resolveLibre(done)
+          }
+        })
+      } else {
+        console.log("che cazzo di file sto guardando? ", d.filename)
+      }
+    }).then(libreResult => {
+      return libreResult
     })
-  } else {
-    return res.status(200).json({ //Success - ma nessun risultatp per i searchterms immessi, ma nessun errore.
-      success: true,
-      data: { filteredDocs: [] }
-    })
+
+    let mapResult = {}
+
+    if (libreResult && libreResult.byteLength) {
+      console.log(`We got a buffer for file: ${d.filename}, whose size is: ${libreResult.byteLength}`)
+      mapResult = {
+        fullpath: d.fullpath,
+        filename: d.filename,
+        relativepath: d.relativepath,
+        linuxpath: d.linuxpath,
+        content: d.filename.includes(".docx") ? d.content : "",
+        buffer: libreResult
+      }
+    } else {
+      console.log(`We got no buffer for file: ${d.filename}`)
+      mapResult = {
+        fullpath: d.fullpath,
+        filename: d.filename,
+        relativepath: d.relativepath,
+        linuxpath: d.linuxpath,
+        content: d.filename.includes(".docx") ? d.content : ""
+      }
+    }
+    //console.log(`map returns an object containing this buffer: ${mapResult.buffer}`) //Ok
+    const updateConvertedDocs = (convertedArr, originalArr) => {
+      console.log("updateConvertedDocs - when entering the func convertedArr.lenght:", convertedArr.length)
+      const resultArr = [...convertedArr, mapResult]
+      console.log("updateConvertedDocs - resultArr.length:", resultArr.length)
+      console.log("updateConvertedDocs - originalArr.length:", originalArr.length)
+      if (resultArr.length === originalArr.length) {
+        console.log("setting conversionFinished to true")
+        conversionFinished = true
+      } else {
+        console.log("conversionFinished is staying false")
+      }
+      return resultArr
+    }
+    convertedDocs = await updateConvertedDocs(convertedDocs, filteredDocs)
+    console.log(`convertedDocs.length: ${convertedDocs.length} VS filteredDocs.length: ${filteredDocs.length}`)
   }
+
+  (function forceWait() {
+    if (!conversionFinished) {
+      setTimeout(forceWait, 1000)
+    } else {
+      return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
+        success: true,
+        data: { filteredDocs: convertedDocs }
+      })
+    }
+  })()
 }

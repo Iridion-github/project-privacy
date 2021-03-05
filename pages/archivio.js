@@ -60,6 +60,7 @@ export default function archivio(props) {
       })
         .then(response => response.json())
         .then(async response => {
+          console.log("response:", response)
           setLoading(false)
           handleSetSearchResult(response.data.filteredDocs)
           setSearched(searchInput)
@@ -139,7 +140,7 @@ export default function archivio(props) {
                             <i className="fas fa-download"></i>
                           </Button>
                           */}
-                          {el.filename.includes(".pdf") && //pdf files viewer btn
+                          {(el.filename && el.filename.includes(".pdf")) && //pdf files viewer btn
                             <Button
                               size="sm"
                               variant="info"
@@ -149,7 +150,7 @@ export default function archivio(props) {
                               <i className="fas fa-eye"></i>
                             </Button>
                           }
-                          {el.filename.includes(".docx") && //docx files viewer btn
+                          {(el.filename && el.filename.includes(".docx")) && //docx files viewer btn
                             <Button
                               size="sm"
                               variant="info"
@@ -159,7 +160,7 @@ export default function archivio(props) {
                               <i className="fas fa-eye"></i>
                             </Button>
                           }
-                          {(el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
+                          {(el.filename && el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
                             <Button
                               size="sm"
                               variant="info"
