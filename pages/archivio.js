@@ -13,7 +13,6 @@ import { Navigation } from '../components/layout/Navbar'
 import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
-import { DocxViewer } from '../components/fileViewers/docx/DocxViewer'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -24,20 +23,12 @@ export default function archivio(props) {
   const [showPdfModal, setShowPdfModal] = useState(null)
   const [showDocxModal, setShowDocxModal] = useState(null)
 
-  const openPdfViewer = (path) => {
-    setShowPdfModal(path)
+  const openPdfViewer = (path, buffer) => {
+    path ? setShowPdfModal(path) : setShowPdfModal(buffer)
   }
 
   const closePdfViewer = () => {
     setShowPdfModal(null)
-  }
-
-  const openDocxViewer = (content) => {
-    setShowDocxModal(content)
-  }
-
-  const closeDocxViewer = () => {
-    setShowDocxModal(null)
   }
 
   const handleSetSearchResult = (searchResBefore) => {
@@ -150,17 +141,20 @@ export default function archivio(props) {
                               <i className="fas fa-eye"></i>
                             </Button>
                           }
-                          {(el.filename && el.filename.includes(".docx")) && //docx files viewer btn
+                          {(el.filename && (el.filename.includes(".docx") || el.filename.includes(".doc"))) && //docx files viewer btn
                             <Button
                               size="sm"
                               variant="info"
                               className="ml-1 py-0 px-1"
-                              onClick={() => openDocxViewer(el.content)}
+                              onClick={() => {
+                                console.log("el.buffer:", el.buffer)
+                                openPdfViewer(null, el.buffer)
+                              }}
                             >
                               <i className="fas fa-eye"></i>
                             </Button>
                           }
-                          {(el.filename && el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
+                          {/*(el.filename && el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
                             <Button
                               size="sm"
                               variant="info"
@@ -169,18 +163,13 @@ export default function archivio(props) {
                             >
                               <i className="fas fa-eye"></i>
                             </Button>
-                          }
+                        */}
                           <PdfViewer
                             path={el.relativepath}
+                            buffer={el.buffer}
                             filename={el.filename}
-                            show={showPdfModal === el.relativepath}
+                            show={showPdfModal === el.relativepath || showPdfModal === el.buffer}
                             onClose={closePdfViewer}
-                          />
-                          <DocxViewer
-                            content={el.content}
-                            filename={el.filename}
-                            show={showDocxModal === el.content}
-                            onClose={closeDocxViewer}
                           />
                         </>
                       </li>

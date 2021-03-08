@@ -30,12 +30,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ___________________________________________
 
 ## Checkpoint
-- DocumentViewer(docx) - Canvas paused. Trying with libreoffice-convert npm package. Check in search.js
-- DocumentViewer(doc) - Pensare a come gestire i file con estensione .doc
+- Archivio base funzionante al 100%. Cominciare a lavorare sull'algoritmo di filtro dei documenti (come voleva Luigi, più simile possibile a dejure.it)
 
 
 ## Known Issues
-- 
+- Dopo la lettura archivi, viene stampato in bash quest'errore non bloccante. Indagare: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client at ServerResponse.setHeader (_http_outgoing.js:518:11)
+
 
 ## Note
 - [Memo] Sviluppare barre di caricamento/attesa per la UX.
