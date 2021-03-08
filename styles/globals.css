@@ -247,14 +247,10 @@ a {
   overflow: hidden;
 }
 
-.consultation-card-img {}
-
 .consultation-card-title {
   font-size: 2rem !important;
   font-weight: 400 !important;
 }
-
-.consultation-card-description {}
 
 .consultation-card-header {
   background-color: #17a3b8c4 !important;
@@ -424,8 +420,4 @@ a {
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
-}
-
-.my_pdf_viewer-postCanvas .shown-canvas {
-  /* Qualsiasi modifica apportata qui, anche l'aggiunta del border, rende l'intero canvas super blurry*/
 }
