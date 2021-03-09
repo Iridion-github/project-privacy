@@ -6,22 +6,24 @@ import {
   Col,
   Card,
   Form,
-  Button
+  Button,
+  Jumbotron
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
+import { AdvancedSearch } from '../components/archive/AdvancedSearch'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
   const [searchInput, setSearchInput] = useState("")
+  const [isAdvanced, setIsAdvanced] = useState(false)
   const [searched, setSearched] = useState(false)
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
   const [showPdfModal, setShowPdfModal] = useState(null)
-  const [showDocxModal, setShowDocxModal] = useState(null)
 
   const openPdfViewer = (path, buffer) => {
     path ? setShowPdfModal(path) : setShowPdfModal(buffer)
@@ -33,6 +35,14 @@ export default function archivio(props) {
 
   const handleSetSearchResult = (searchResBefore) => {
     setSearchResult(searchResBefore)
+  }
+
+  const openAdvancedSearch = () => {
+    setIsAdvanced(true)
+  }
+
+  const closeAdvancedSearch = () => {
+    setIsAdvanced(false)
   }
 
   const submitSearch = async (input) => {
@@ -101,8 +111,23 @@ export default function archivio(props) {
                     className="ml-1">
                     <i className="fas fa-search"></i>
                   </Button>
+                  <Button
+                    variant={"info"}
+                    className="ml-1"
+                    onClick={() => openAdvancedSearch()}
+                  >
+                    <i className="fas fa-search-plus mr-2"></i>
+                    <span className="small-text">Ricerca Avanzata</span>
+                  </Button>
                 </Form.Group>
               </Form>
+
+              {isAdvanced &&
+                <AdvancedSearch
+
+                />
+              }
+
             </Row>
 
             {(searched && searchResult && searchResult.length > 0) && (
@@ -120,17 +145,6 @@ export default function archivio(props) {
                       <li key={i}>
                         <>
                           {el.filename}
-                          {/*
-                          <Button
-                            size="sm"
-                            variant="info"
-                            className="ml-3 py-0 px-1"
-                            href={el.relativepath}
-                            target="_blank"
-                          >
-                            <i className="fas fa-download"></i>
-                          </Button>
-                          */}
                           {(el.filename && el.filename.includes(".pdf")) && //pdf files viewer btn
                             <Button
                               size="sm"
@@ -154,16 +168,6 @@ export default function archivio(props) {
                               <i className="fas fa-eye"></i>
                             </Button>
                           }
-                          {/*(el.filename && el.filename.includes(".doc") && !el.filename.includes(".docx")) &&  //doc files viewer btn
-                            <Button
-                              size="sm"
-                              variant="info"
-                              className="ml-1 py-0 px-1"
-                              onClick={() => console.log("Open " + el.filename + " into docViewer")}
-                            >
-                              <i className="fas fa-eye"></i>
-                            </Button>
-                        */}
                           <PdfViewer
                             path={el.relativepath}
                             buffer={el.buffer}

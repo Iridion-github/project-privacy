@@ -43,12 +43,7 @@ export const PdfViewer = function (props) {
   const pdfjsLibSetup = async () => {
     let view = []
     if (props.buffer) {
-      console.log("pdfjsLibSetup - props.path", props.path)
-      console.log("pdfjsLibSetup - props.buffer", props.buffer)
       view = await new Uint8Array(props.buffer.data)
-      console.log("pdfjsLibSetup - view.length", view.length)
-      console.log("pdfjsLibSetup - view.byteLength", view.byteLength)
-      console.log("pdfjsLibSetup - view", view)
     }
     await pdfjsLib.getDocument(props.buffer ? view : props.path).then(async pdfResult => {
       if (!maxPageNum) {
