@@ -12,6 +12,12 @@ import { getAdvancedSearch } from '../../../utils/archive' //Funzione per il fil
 
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
 export default async (req, res) => {
+  let currentLength = 0
+  let prevLength = 0
+  const increaseLoopCounter = () => {
+    loopCounter = loopCounter + 1
+    return loopCounter
+  }
   let conversionFinished = true
   const searchterms = req.query.searchterms
   const filesToAnalyze = []
@@ -125,7 +131,12 @@ export default async (req, res) => {
         if (analyzedFiles.length === filesToAnalyze.length) {
           resolveContainer(analyzedFiles) //resolving containerResult Promise
         } else {
-          console.log("Error - Not resolving Container!")
+          currentLength = analyzedFiles.length
+          if (currentLength === prevLenght) {
+            console.log("Error - Not resolving Container: Exited by length comparison!")
+            resolveContainer(analyzedFiles)
+          }
+          prevLenght = currentLength
         }
 
       })
@@ -177,6 +188,8 @@ export default async (req, res) => {
           })
         } else {
           console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x])
+          increaseLoopCounter()
+          if (loopCounter > 100) rejectLibre("Exited by loopCounter")
         }
       }).then(libreResult => {
         return libreResult
