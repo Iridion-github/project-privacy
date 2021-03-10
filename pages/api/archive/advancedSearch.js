@@ -10,7 +10,13 @@ import { getAdvancedSearch } from '../../../utils/archive' //Funzione per il fil
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
 export default async (req, res) => {
   let conversionFinished = true
-  const searchterms = req.query.searchterms
+  //const searchterms = req.query.searchterms
+  const activeFilters = JSON.parse(req.query.activeFilters)
+  console.log("advanced search backed - activeFilters:", activeFilters)
+  return res.status(200).json({ //Fake success to avoid blocking app every time
+    success: true,
+    data: { filteredDocs: [], msg: "this is advancedSearch's backend response" }
+  })
   const filesToAnalyze = []
   //funzione che estrae i path precisi di ogni file all'interno della dir archive
   function* getFiles(dir) {

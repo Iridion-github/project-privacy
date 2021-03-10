@@ -421,3 +421,7 @@ a {
   padding-left: 0;
   padding-right: 0;
 }
+
+.chevron-container {
+  padding-top: 0.15rem !important;
+}

@@ -1,4 +1,5 @@
 ## Checkpoint
+- Iniziati advancedSearch client e backend. 
 - Archivio base funzionante al 100%. Cominciare a lavorare sull'algoritmo di filtro dei documenti (come voleva Luigi, più simile possibile a dejure.it)
 
 

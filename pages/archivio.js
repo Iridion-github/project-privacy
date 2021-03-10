@@ -98,33 +98,45 @@ export default function archivio(props) {
                 className="w-100 p-0"
               >
                 <Form.Group className="w-100 justify-content-center" controlId="">
-                  <Form.Control
-                    type="text"
-                    placeholder={siteLanguage === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
-                    value={searchInput}
-                    onChange={event => setSearchInput(event.target.value)}
-                    className="w-75 inline-form-custom" />
-                  <Button
-                    variant={"info"}
-                    disabled={searchInput.length < 10}
-                    type="submit"
-                    className="ml-1">
-                    <i className="fas fa-search"></i>
-                  </Button>
-                  <Button
-                    variant={"info"}
-                    className="ml-1"
-                    onClick={() => openAdvancedSearch()}
-                  >
-                    <i className="fas fa-search-plus mr-2"></i>
-                    <span className="small-text">Ricerca Avanzata</span>
-                  </Button>
+                  <Col md={9} className="text-right">
+                    <Form.Control
+                      type="text"
+                      placeholder={siteLanguage === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
+                      value={searchInput}
+                      onChange={event => setSearchInput(event.target.value)}
+                      className="w-75 inline-form-custom" />
+                    <Button
+                      variant={"info"}
+                      disabled={searchInput.length < 10}
+                      type="submit"
+                      className="ml-1">
+                      <i className="fas fa-search"></i>
+                    </Button>
+                  </Col>
+                  <Col md={3} className="pl-0 pr-0">
+                    <Button
+                      variant={"info"}
+                      className="ml-1"
+                      onClick={isAdvanced ? () => closeAdvancedSearch() : () => openAdvancedSearch()}
+                    >
+                      <Row className="m-0">
+                        <Col md={10} className="pr-0 pl-0">
+                          <span className="small-text">Ricerca Avanzata</span>
+                        </Col>
+                        <Col md={2} className="pr-0 pl-1 chevron-container">
+                          {isAdvanced ? <i className="fas fa-chevron-up"></i> : <i className="fas fa-chevron-down"></i>}
+                        </Col>
+                      </Row>
+                    </Button>
+                  </Col>
                 </Form.Group>
               </Form>
-
+            </Row>
+            <Row className="p-3 justify-content-center">
               {isAdvanced &&
                 <AdvancedSearch
-
+                  loading={loading}
+                  setLoading={setLoading}
                 />
               }
 
