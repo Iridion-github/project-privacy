@@ -21,6 +21,7 @@ export default function archivio(props) {
   const [searchInput, setSearchInput] = useState("")
   const [isAdvanced, setIsAdvanced] = useState(false)
   const [searched, setSearched] = useState(false)
+  const [advancedSearched, setAdvancedSearched] = useState(false)
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
   const [showPdfModal, setShowPdfModal] = useState(null)
@@ -45,6 +46,15 @@ export default function archivio(props) {
     setIsAdvanced(false)
   }
 
+  const handleSetSearched = (searchedString, advancedFilters) => {
+    if (!advancedFilters) {
+      setSearched(searchedString)
+    } else {
+      setAdvancedSearched(advancedFilters)
+      if (searchedString && searchedString.length > 0) setSearched(searchedString)
+    }
+  }
+
   const submitSearch = async (input) => {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
@@ -54,17 +64,13 @@ export default function archivio(props) {
         headers: {
           key: 'Access-Control-Allow-Origin',
           value: '*'
-        },
-        query: {
-          searchterms: searchInput
         }
       })
         .then(response => response.json())
         .then(async response => {
-          console.log("response:", response)
-          setLoading(false)
           handleSetSearchResult(response.data.filteredDocs)
-          setSearched(searchInput)
+          handleSetSearched(searchInput)
+          setLoading(false)
         })
     } catch (error) {
       console.log(error)
@@ -137,20 +143,40 @@ export default function archivio(props) {
                 <AdvancedSearch
                   loading={loading}
                   setLoading={setLoading}
+                  searchInput={searchInput}
+                  handleSetSearched={handleSetSearched}
+                  handleSetSearchResult={handleSetSearchResult}
                 />
               }
 
             </Row>
-
-            {(searched && searchResult && searchResult.length > 0) && (
+            {((searched && searchResult && searchResult.length > 0) || (advancedSearched)) && (
               <Row className="mt-4 p-3 justify-content-center archive-result-container">
-
-                <Col md={12}>
-                  <h4 className="text-center">Nell'Archivio {searchResult.length === 1 ? "è presente" : "sono presenti"} {searchResult.length} {searchResult.length === 1 ? "Documento" : "Documenti"} {searchResult.length === 1 ? "contenente" : "contenenti"}: </h4>
-                </Col>
-                <Col md={12}>
-                  <p className="text-center">"{searched}" </p>
-                </Col>
+                {(searched && searchResult && searchResult.length > 0 && !advancedSearched) &&
+                  <>
+                    <Col md={12}>
+                      <h4 className="text-center">Nell'Archivio
+                  {searchResult.length === 1 ? " è presente " : " sono presenti "}
+                        {searchResult.length}
+                        {searchResult.length === 1 ? " Documento " : " Documenti "}
+                        {(searched && searchResult && searchResult.length > 0) && searchResult.length === 1 ? " contenente" : " contenenti"}: </h4>
+                    </Col>
+                    <Col md={12}>
+                      <p className="text-center">"{searched}" </p>
+                    </Col>
+                  </>
+                }
+                {(advancedSearched && searchResult && searchResult.length > 0 && !searched) &&
+                  <Col md={12}>
+                    <h4 className="text-center">Nell'Archivio
+                  {searchResult.length === 1 ? " è presente " : " sono presenti "}
+                      {searchResult.length}
+                      {searchResult.length === 1 ? " Documento " : " Documenti "}
+                      {searchResult.length === 1 ? " che soddisfa " : " che soddisfano "}
+                      i filtri di ricerca.
+                      </h4>
+                  </Col>
+                }
                 <Col md={12}>
                   <ul>
                     {searchResult.map((el, i) => (
@@ -173,7 +199,6 @@ export default function archivio(props) {
                               variant="info"
                               className="ml-1 py-0 px-1"
                               onClick={() => {
-                                console.log("el.buffer:", el.buffer)
                                 openPdfViewer(null, el.buffer)
                               }}
                             >

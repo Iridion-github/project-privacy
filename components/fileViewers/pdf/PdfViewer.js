@@ -19,8 +19,6 @@ export const PdfViewer = function (props) {
   const [zoom, setZoom] = useState(1)
   const [destination, setDestination] = useState(null)
 
-  console.log("state was set")
-
   const renderPdf = (pdf, targetPage, targetZoom) => {
     const isMobile = screen.width < 400
     if (!targetZoom) targetZoom = 1
@@ -38,8 +36,6 @@ export const PdfViewer = function (props) {
     })
   }
 
-  console.log("renderPdf was declared")
-
   const pdfjsLibSetup = async () => {
     let view = []
     if (props.buffer) {
@@ -52,8 +48,6 @@ export const PdfViewer = function (props) {
       await setPdf(pdfResult)
     })
   }
-
-  console.log("pdfjsLibSetup was declared")
 
   const goPrevPage = () => {
     const prevPage = Number(currentPage - 1) > 0 ? Number(currentPage - 1) : 1
@@ -101,7 +95,6 @@ export const PdfViewer = function (props) {
   }
 
   useEffect(() => {
-    console.log("useEffect props.show:", props.show)
     if (props.show) {
       if (!pdf) {
         pdfjsLibSetup()

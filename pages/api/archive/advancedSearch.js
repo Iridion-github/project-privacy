@@ -5,18 +5,14 @@ import fs from 'fs'//pacchetto usato per leggere docx files
 import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
 import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf
-import { getAdvancedSearch } from '../../../utils/archive' //Funzione per il filtro avanzato di ricerca - WORK IN PROGRESS
 
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
 export default async (req, res) => {
   let conversionFinished = true
-  //const searchterms = req.query.searchterms
+
+  const searchterms = req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null
   const activeFilters = JSON.parse(req.query.activeFilters)
-  console.log("advanced search backed - activeFilters:", activeFilters)
-  return res.status(200).json({ //Fake success to avoid blocking app every time
-    success: true,
-    data: { filteredDocs: [], msg: "this is advancedSearch's backend response" }
-  })
+
   const filesToAnalyze = []
   //funzione che estrae i path precisi di ogni file all'interno della dir archive
   function* getFiles(dir) {
@@ -54,6 +50,7 @@ export default async (req, res) => {
         //singleResult Promise starts pending
         const singleResult = await new Promise((resolveSingle, rejectSingle) => {
           if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
+            if (!activeFilters.includePdf) resolveSingle({})
             const pdfBuffer = fs.readFileSync(fileObj.fullpath)
             const getPdfContent = async () => {
               const pdfContentArray = []
@@ -77,6 +74,7 @@ export default async (req, res) => {
             }
             getPdfContent()
           } else if (docx) {
+            if (!activeFilters.includeDocx) resolveSingle({})
             //[Docx procedure] (mammoth)
             const options = {}
             mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
@@ -94,7 +92,9 @@ export default async (req, res) => {
                 content: mammothResult.value
               })
             })
-          } else if (doc) { //[Doc procedure] (WordExtractor)
+          } else if (doc) {
+            if (!activeFilters.includeDoc) resolveSingle({})
+            //[Doc procedure] (WordExtractor)
             const getDocContent = async (fileObj) => {
               const docExtractor = new WordExtractor()
               const extractedContent = await docExtractor.extract('public\\' + fileObj.relativepath).then(function (doc) {
@@ -122,7 +122,7 @@ export default async (req, res) => {
           filename: fileObj.filename,
           relativepath: fileObj.relativepath,
           linuxpath: fileObj.linuxpath,
-          content: singleResult.content
+          content: (singleResult && singleResult.content) ? singleResult.content : ""
         })
 
         if (analyzedFiles.length === filesToAnalyze.length) {
@@ -142,9 +142,19 @@ export default async (req, res) => {
 
   const filteredDocs = containerResult.filter(d => {
     if (d.content) {
-      //Eventuali affinamenti del filtro andranno qui
+      if (!activeFilters.includePdf && d.filename.includes(".pdf")) return false
+      if (!activeFilters.includeDocx && d.filename.includes(".docx")) return false
+      if (!activeFilters.includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false
+      //Eventuali affinamenti del filtro andranno qui 
       const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase()
-      return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+      let result = null
+      if (activeFilters.indCorteCost) {
+        let target = ".ind corte".replace(/[^\w\s]/gi, '')
+        result = cleanContent.includes(target)
+      } else {
+        result = cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+      }
+      return result
     } else {
       return false
     }

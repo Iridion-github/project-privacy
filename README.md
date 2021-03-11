@@ -1,7 +1,5 @@
 ## Checkpoint
-- Iniziati advancedSearch client e backend. 
-- Archivio base funzionante al 100%. Cominciare a lavorare sull'algoritmo di filtro dei documenti (come voleva Luigi, più simile possibile a dejure.it)
-
+- Ottimo avanzamento con AdvancedSearch. 
 
 ## Known Issues
 - Dopo la lettura archivi, viene stampato in bash quest'errore non bloccante, indagare: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client at ServerResponse.setHeader (_http_outgoing.js:518:11)

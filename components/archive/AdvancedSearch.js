@@ -36,36 +36,29 @@ export const AdvancedSearch = function (props) {
     setIndCorteCost(!indCorteCost)
   }
 
-  const submitAdvancedSearch = async (input) => {
+  const submitAdvancedSearch = async () => {
     let activeFilters = {}
     if (includeDoc) activeFilters = { ...activeFilters, includeDoc: true }
     if (includeDocx) activeFilters = { ...activeFilters, includeDocx: true }
     if (includePdf) activeFilters = { ...activeFilters, includePdf: true }
     if (indCorteCost) activeFilters = { ...activeFilters, indCorteCost: true }
-    console.log("submitAdvancedSearch - Active filters:", activeFilters)
     try {
       props.setLoading(true)
       const activeFiltersStr = JSON.stringify(activeFilters)
-      const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${input}&activeFilters=${activeFiltersStr}`, {
+      const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${props.searchInput}&activeFilters=${activeFiltersStr}`, {
         method: 'GET',
         headers: {
           key: 'Access-Control-Allow-Origin',
           value: '*'
-        },
-        query: {
-          //searchterms: searchInput,
-          activeFilters: activeFiltersStr
         }
       })
         .then(response => {
-          console.log("submitAdvancedSearch 1st phase response:", response)
           return response.json()
         })
         .then(async response => {
-          console.log("submitAdvancedSearch 2nd phase response:", response)
+          props.handleSetSearchResult(response.data.filteredDocs)
+          props.handleSetSearched(props.searchInput, activeFilters)
           props.setLoading(false)
-          //handleSetSearchResult(response.data.filteredDocs)
-          //setSearched(searchInput)
         })
     } catch (error) {
       console.log("submitAdvancedSearch error:", error)
