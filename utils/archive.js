@@ -65,7 +65,3 @@ organizzative responsabili dei procedimenti amministrativi
 presso il Garante per la protezione dei dati personali
 [9107640]
 */
-
-export const getAdvancedSearch = () => {
-  return ["Yo!"]
-}
