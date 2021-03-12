@@ -18,7 +18,7 @@ export default async (req, res) => {
   const todayUTC = todayDate.toUTCString()
   const readFileName = todayUTC.slice(0, 16)
   try {
-    const mappedArchiveRaw = await fs.readFileSync(readFileName + ".json")
+    const mappedArchiveRaw = await fs.readFileSync("mappedArchive\\" + readFileName + ".json")
     mappedArchive = JSON.parse(mappedArchiveRaw)
     isArchiveMapped = true
     dataToFilter.push(...mappedArchive)
@@ -143,7 +143,7 @@ export default async (req, res) => {
             const todayDate = new Date()
             const todayUTC = todayDate.toUTCString()
             const writeFileName = todayUTC.slice(0, 16)
-            await fs.writeFileSync(writeFileName + ".json", mappedArchiveStr)
+            await fs.writeFileSync("mappedArchive\\" + writeFileName + ".json", mappedArchiveStr)
             console.log("|||||||||||||||||||||||| finished writing json file")
             resolveContainer(analyzedFiles) //resolving containerResult Promise
             //analyzedFiles is ready
