@@ -9,10 +9,10 @@ import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i d
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
 export default async (req, res) => {
   let conversionFinished = true
-  const searchterms = req.query.searchterms
-  const filesToAnalyze = []
   let isArchiveMapped //variabile bool che ci dirà se c'è una versione di oggi dell'archivio mappato
   let mappedArchive //variabile array dei dati dell'archivio mappato
+  const searchterms = req.query.searchterms
+  const filesToAnalyze = []
   const dataToFilter = []
   const todayDate = new Date()
   const todayUTC = todayDate.toUTCString()
@@ -138,7 +138,6 @@ export default async (req, res) => {
           if (analyzedFiles.length === filesToAnalyze.length) {
             //Qui dovrebbe salvare il json di containerResult
             const mappedArchiveStr = JSON.stringify([...analyzedFiles])
-            //const today = new Date()
             console.log("|||||||||||||||||||||||| started writing a json file representing the archive")
             const todayDate = new Date()
             const todayUTC = todayDate.toUTCString()
@@ -233,6 +232,7 @@ export default async (req, res) => {
         }
         return resultArr
       }
+
       convertedDocs = await updateConvertedDocs(convertedDocs, filteredDocs)
     }
 
@@ -246,9 +246,10 @@ export default async (req, res) => {
         })
       }
     })()
+  } else {
+    return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
+      success: true,
+      data: { filteredDocs: filteredDocs }
+    })
   }
-  return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
-    success: true,
-    data: { filteredDocs: filteredDocs }
-  })
 }
