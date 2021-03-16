@@ -1,4 +1,50 @@
 /**
+-------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
+
+[Menù a Tendina a sinistra della Searchbar] tasso utilità 90%
+- Tutto
+- Libri
+- Note
+- Pareri
+
+[Menù a Tendina a destra della Searchbar] tasso utilità 100%
+- Una parola almeno
+- Tutte le parole
+- Tutta la frase
+
+[1° Menù sotto la Searchbar: DATA] tasso utilità 100%
+
+[2° Menù sotto la Searchbar: CONTENUTI] tasso utilità 100%
+- Direttive
+- Ordinanze
+- Provvedimenti
+- Raccomandazioni
+- Regolamenti
+
+[3° Menù sotto la Searchbar: AUTORITA'] tasso utilità 60% (Ci basiamo su dati estratti manualmente da una trentina di file, non del tutto affidabile)
+- Presidente Consiglio Ministri
+- Agenzia Entrate
+- Ministeriale
+- Commissione
+- Unione Europea
+- ANAC
+- Autorità
+- Garante
+
+[4° Menù sotto la Searchbar: CODICI] tasso utilità 10% (Non abbiamo i tipi di codice, infattibile per ora)
+
+[5° Menù sotto la Searchbar: LEGGI] tasso utilità 10% (Non abbiamo i tipi di leggi, infattibile per ora)
+
+[6° Menù sotto la Searchbar: FONTE] tasso utilità 100%
+
+[7° Menù sotto la Searchbar: CLASSIFICAZIONE] tasso utilità 0% (Non abbiamo neanche capito cosa sia esattamente, pare identico alla searchbar)
+
+-------------------------------------- [AUTORITA' (Dejure style)] --------------------------------------
+Note: ("LUIGIIIIIII!!" *agitando il pugno*)
+I seguenti tag li abbiamo estratti manualmente dai 20-30 files datici per fare le prove.
+Se si ottenessero TUTTI, o quasi, i tag dei documenti, si potrebbe emulare molto di più Dejure.
+Per adesso abbiamo le mani legate, ed utilizzeremo i tag offertici dal sistema F3 di Luigi.
+
 [DIRETTIVA PRESIDENTE CONSIGLIO MINISTRI]
 Titolo: Dr20-02-2007
 Inizio: Dir. P.C.M. 20 febbraio 2007 (G.U. 15 maggio 2007, n. 111). Interscambio dei dati tra le pubbliche amministrazioni e pubblicità dell’attività negoziale. (Direttiva n. 2).
@@ -64,4 +110,552 @@ concernente l'individuazione dei termini e delle unità
 organizzative responsabili dei procedimenti amministrativi
 presso il Garante per la protezione dei dati personali
 [9107640]
+
+
+-------------------------------------- TUTTI i TAG GENERICI --------------------------------------
+
+ABOR = Aborto
+ABRU = Abruzzo
+ACPOT = Acque potabili e acquedotti
+ACPUB = Acque pubbliche
+ACTER = Acque termali e terme
+AGENT = Agenti di commercio
+AGGEN = Agricoltura (generalità)
+AGLAV = Agricoltura (Lavoro)
+AGPRO = Agricoltura (Prodotti)
+AGCON = Agricoltura (Contratti)
+AGCRE = Agricoltura (Credito)
+AGANT = Agricoltura (Antiparassitari, Anticrittogamici, etc.)
+AGRO = Agronomi
+ALB = Alberghi, Pensioni, Locande, etc.
+ALCOL = Alcolismo
+ALIM = Alimenti (Diritto agli)
+ALCON = Alimenti (Confezionamento)
+ADOC = Alimenti (Doc e Marchi)
+ALADD = Alimenti (Additivi, Coloranti e Sofisticazioni)
+ALANI = Alimenti (Origine Animale)
+ALVEG = Alimenti (Origine Vegetale)
+ALINF = Alimenti (Prima Infanzia e Prodotti Dietetici)
+ALPIN = Alpinismo
+AMBIE = Ambiente
+AMNIS = Amnistie, indulti e condoni
+AMMIN = Amministrazione Pubblica
+ARMI = Armi ed Esplosivi
+ASCEN =  Ascensori, Montacarichi e Scale Mobili
+ASSE = Assegni e Cambiali
+ASSIC = Assicurazioni Private
+ASSPA =  Assistenza a Paesi in via di sviluppo
+ASSBE =  Assistenza e Beneficienza Pubblica
+ASSO = Associazioni Vietate
+AUTO = Autoveicoli e Circolazione Stradale
+AVPRO = Avvocati e Procuratori
+AVSTA = Avvocatura dello Stato
+
+BAITA = Banca d'Italia
+BANCH = Banche
+BAND = Bandiere
+BARB = Barbieri e Parrucchieri
+BASI = Basilicata
+BENI = Beni di Stati Esteri in Italia
+BECON = Bevande (Confezionamento)
+BEDOC = Bevande (Doc e Marchi)
+BEADD = Bevande (Additivi, coloranti, sofisticazioni)
+BEALC = Bevande (Alcoliche)
+BEANA = Bevande (Analcoliche)
+BIO = Biologi
+BOL = Bollo (Imposta di)
+BORS = Borsa
+BOSC = Boschi e Foreste
+BOT =  Bot, CCT e Debito Pubblico
+BREV = Brevetti, Marchi, Nomi di Origine
+
+CACCI = Caccia
+CALAB = Calabria
+CALAM = Calamità
+CAMBI = Cambi, Valute e Capitali stranieri
+CAMPA = Campania
+CARA = Carabinieri
+CART = Cartine per Sigarette
+CASS = Cassa Depositi e Prestiti
+CATA = Catasto e Registri Immobiliari
+CHIES = Chiesa Cattolica e Culti Diversi
+CHIM = Chimici e Chimica
+CIVAT = Città del Vaticano (Stato della)
+CITT = Cittadinanza
+CC = Codice Civile
+CONPU = Contratti Pubblici
+CPC = Codice di Procedura Civile
+CPP = Codice di Procedura Penale
+CP = Codice Penale
+COMM =  Commercialisti
+CEE = Comunità Europee
+COISR = Comunità Israelitiche
+CONCE = Concessioni (tasse sulle)
+CEUR = Consiglio d'Europa
+CNEL = Consiglio Nazionale dell'Economia e del Lavoro
+CSPA = Consiglio Superiore della Pubblica Amministrazione
+CONSO = Consorzi e Imprese Cooperative
+CONSU = Consulenti del Lavoro
+CONTA = Contatori
+CORTE = Corte Costituzionale
+COSTI = Costituzione dello Stato
+CRESP = Credito all'Esportazione
+CRED = Credito Edilizio e Fondiario
+CRI = Croce Rossa Italiana
+CULT = Cultura e Beni Culturali
+
+DEMA = Demanio
+DEPE = Depenalizzazione
+DIPLO = Diplomazia e Consolati
+DIRI = Dirigenti e Quadri
+DIAUT = Diritti d'Autore
+DIUOM = Diritti dell'Uomo
+DOCU = Documentazione Amministrativa etc.
+
+EDIUR = Edilizia e Urbanistica
+EDIRE = Edilizia Residenziale
+EDIT = Editoria e Giornali
+ELE = Elezioni
+EMIGR = Emigrazione e Immigrazione
+EMILI =  Emilia Romagna
+ENEL = Energia Elettrica
+ENNU =  Energia Nucleare
+ENLOC = Enti Locali
+ENPUB = Enti Pubblici
+ESGEN = Esportazioni e Importazioni (Generalità)
+ESDOG = Esportazioni e Importazioni (Dogane)
+ESPOS = Esposizioni, Mostre, Fiere e Mercati
+ESPRO = Espropriazione per Pubblica Utilità
+
+FACC = Facchinaggio
+FALL =  Fallimento
+FAMI = Famiglia
+FARI = Porti, Fari, Spiagge, Pilotaggio
+FASCI = Fascismo
+FIAM = Fiammiferi
+FONDI = Fondi Comuni di Investimento
+FAGEN = Forze Armate (Generalità)
+FAPER = Forze Armate (Personale)
+FACOD = Codici Penali Militari
+FRANC = Francobolli, Cartoline e altri valori postali
+FRIU = Friuli Venezia Giulia
+
+GEOL = Geologi e Geologia
+GIOC = Giochi e Concorsi
+GOV = Governo
+GUARD = Guardia di Finanza
+GUERR = Guerra
+
+IMPI = Impiego Pubblico
+IMCOM = Imposta Complementare
+IMCON = Imposta di Consumo
+IMENT = Imposta di Entrata
+IMCAS = Imposta Fabbricati
+IMFON = Imposta Fondiaria
+IMRIC = Imposta di Ricchezza Mobile
+IMFAB = Imposte di Fabbricazione
+IMERA = Imposte Erariali e di Consumo
+IMGEN = Imposte e Tasse in Genere
+IMIPO = Imposte Ipotecarie e Catastali
+INGEN = Industria, Commercio, Artigianato (Generalità)
+INCAM = Industria, Commercio, Artigianato (Camere di)
+INCRE = Industria, Commercio, Artigianato (Crediti)
+INGAR = Ingegneri, Architetti, Geometri
+INQUI = Inquinamento
+INTE = Interprete
+ISPRE = Istituti di Prevenzione e di Pena
+ISPOL = Istituto Poligrafico e Zecca dello Stato
+ISGEN = Istruzione (Generalità)
+ISPER = Istruzione (Personale)
+ISART = Istruzione (Artistica e Musicale)
+ISELE = Istruzione (Elementare e Materna)
+ISMED = Istruzione (Media e Secondaria)
+ISPRO = Istruzione (Professionale e Tecnica)
+ISSUP = Istruzione (Superiore)
+ISEST = Istruzione (all'Estero)
+ISPRI = Istruzione (Privata)
+IVA = Iva
+
+LAV = Lavoro
+LAZ = Lazio
+LEAS = Leasing
+LEG = Leggi e Decreti
+LIG = Liguria
+LOC = Locazione di Cose
+LOMB = Lombardia
+
+MAR = Marche
+MEZ = Mezzogiorno
+MINIE = Miniere, Cave e Torbiere
+MIGEN = Ministeri in genere
+MIAFF = Ministero Affari Esteri
+MIAGR = Ministero  Agricoltura e Foreste
+MIAMB = Ministero Ambiente
+MIBEN = Ministero Beni Culturali
+MIBIL = Ministero Bilancio e Programmazione Economica
+MICOM = Ministero Commercio con l'Estero
+MIDIF = Ministero Difesa
+MIFIN = Ministero Finanze
+MIGRA = Ministero Grazia e Giustizia
+MILAV = Ministero Lavori Pubblici
+MIPRE = Ministero  Lavoro e Previdenza Sociale
+MIIND = Ministero Industria, Commercio e Artigianato
+MIINT = Ministero Interni
+MIMAR = Ministero Marina Mercantile
+MIPAR = Ministero Partecipazioni Statali
+MIPOS = Ministero Poste e Telecomunicazioni
+MIIST = Ministero Pubblica Istruzione
+MISAN = Ministero Sanità
+MITES = Ministero Tesoro
+MITRA = Ministero Trasporti
+MITUR = Ministero Turismo e Spettacolo
+MIUNI = Ministero Università e Ricerca Scientifica
+MOLI = Molise
+MONE = Moneta
+MONOP = Monopoli di Stato
+
+NAAER = Navigazione Aerea
+NAMAR = Navigazione Marittima
+NAZIO = Nazioni Unite
+NOTA = Notariato
+NOTIF =  Notificazioni
+
+OCCU =  Occupazione
+OGGE =  Oggetti e sostanze non alimentari
+OLI =  Oli Minerali, Idrocarburi e Gas
+ONOR =  Onorificenze e Ordini
+OPERE =  Opere Pubbliche
+ORA =  Ora Legale
+ORGEN =  Ordinamento Giudiziario (Generalità)
+ORORG =  Ordinamento Giudiziario (Organi e Uffici)
+ORPER =  Ordinamento Giudiziario (Personale)
+
+PARL =  Parlamento
+PART =  Partiti Politici
+PASS =  Passaporti e Carte di Identità
+PECIV =  Pensioni dei Dipendenti Civili e Militari dello Stato
+PEGUE =  Pensioni di Guerra
+PERIT =  Periti Industriali
+PESC =  Pesca
+PESI =  Pesi, Misure, Marchio etc.
+PIEMO =  Piemonte
+PIETR =  Pietre e Metalli Preziosi
+PORTA =  Portatori di Handicap
+PORTI =  Portinai
+POSTE =  Poste e Telecomunicazioni
+PREF = Prefetto e Prefettura
+PRESI =  Presidente della Repubblica
+PREZZ =  Prezzi
+PROCA =  Procedimento Amministrativo
+PROST =  Prostituzione
+PROVV =  Provveditorato Generale dello Stato
+PSI =  Psicologi
+PS =  Pubblica Sicurezza
+PUB =  Pubblicità
+PUGL =  Puglia
+
+RAPP =  Rapporti Giudiziari con l'Estero
+REDD =  Redditi (Imposte sui)
+REFE =  Referendum
+REGI =  Regioni
+REGIS =  Registro (Imposta di)
+RICE =  Ricerca Scientifica e Tecnologica
+RIFU =   Rifugiati e Profughi
+RISC =   Riscaldamento
+
+SAGEN =  Sanità, Sanitari, etc. (Generalità)
+SAPER =  Sanità, Sanitari, etc. (Personale)
+SAIGI =  Sanità, Sanitari, etc. (Igiene)
+SAMED =  Sanità, Sanitari, etc. (Medicinali)
+SAFAR =  Sanità, Sanitari, etc. (Farmacie e Farmacisti)
+SAMAL =  Sanità, Sanitari, etc. (Malattie)
+SANMA =  San Marino
+SARD =  Sardegna
+SEMPL =  Semplificazione
+SEP =  Sepolture
+SERV =  Servizi Segreti
+SICIL =  Sicilia
+SIGEN =  Sicurezza Sociale (Generalità)
+SIASS =  Sicurezza Sociale (Assicurazioni Obbligatorie)
+SIPEN =  Sicurezza Sociale (Fine Rapporto e Pensioni)
+SIND =  Sindacati
+SOC =  Società
+SPAZ =  Spazio
+SPET =  Spettacoli
+SPIMP =  Spettacoli (Imposta sugli)
+SPIRI =  Spiriti
+SPORT =  Sport
+STATI =  Statistica e Censimenti
+STATO =  Stato Civile e Anagrafe
+STUP =   Stupefacenti
+STRA =  Strade
+SUCC =  Successioni (Imposta sulle)
+
+TASS = Tasse Automobilistiche
+TERM = Termini (Sospensioni di)
+TOSC =   Toscana
+TRGEN =  Trasporti (Generalità)
+TRAUT =  Trasporti  (Di merci mediante Autoveicoli)
+TRMAR =  Trasporti  (Marittimi e Aerei)
+TRPER =  Trasporti  (Personale)
+TRINT =  Trasporti  Internazionali
+TRMER =  Trasporti di merci pericolose
+TRAT =   Trattati e Convenzioni Internazionali
+TRENT =  Trentino Alto Adige
+TRIB =   Tributi locali
+TURI =   Turismo
+
+UFIN =   Uffici finanziari
+UMBR =   Umbria
+UNIFI =  Unificazione del diritto
+UNEUR =  Unione dell'Europa Occidentale
+UNLAT =  Unione latina
+USI = Usi
+USICI =  Usi civili
+
+VAL = Valle d'Aosta
+VENDI = Vendite Mobiliari Internazionali
+VENE = Veneto
+VIGI = Vigili del Fuoco
+VITA = Vitalizi
+
+ZOGEN =  Zootecnia (Generalità)
+ZOALL =  Zootecnia (Allevamento)
+ZOESP =  Zootecnia (Esportazioni e importazioni)
+ZOVAC =  Zootecnia (Malattie e vaccini)
+ZOMAN =  Zootecnia (Mangimi)
+ZOVET =  Zootecnia (Veterinari)
+
+
+-------------------------------------- TAG SCELTI per l'ADVANCED SEARCH --------------------------------------
+
+[ ZONE GEOGRAFICHE ]
+ABRU = Abruzzo
+BASI = Basilicata
+CALAB = Calabria
+CAMPA = Campania
+CIVAT = Città del Vaticalo (Stato della)
+EMILI =  Emilia Romagna
+FRIU = Friuli Venezia Giulia
+LAZ = Lazio
+LIG = Liguria
+LOMB = Lombardia
+MAR = Marche
+MEZ = Mezzogiorno
+MOLI = Molise
+PIEMO =  Piemonte
+PUGL =  Puglia
+SANMA =  San Marino
+SARD =  Sardegna
+SICIL = Sicilia
+TOSC =   Toscana
+TRENT =  Trentino Alto Adige
+UMBR =   Umbria
+VAL =    Valle d'Aosta
+VENE = Veneto
+
+[MINISTERI]
+MIGEN = Ministeri in genere
+MIAFF = Ministero Affari Esteri
+MIAGR = Ministero  Agricoltura e Foreste
+MIAMB = Ministero Ambiente
+MIBEN = Ministero Beni Culturali
+MIBIL = Ministero Bilancio e Programmazione Economica
+MICOM = Ministero Commercio con l'Estero
+MIDIF = Ministero Difesa
+MIFIN = Ministero Finanze
+MIGRA = Ministero Grazia e Giustizia
+MILAV = Ministero Lavori Pubblici
+MIPRE = Ministero  Lavoro e Previdenza Sociale
+MIIND = Ministero Industria, Commercio e Artigianato
+MIINT = Ministero Interni
+MIMAR = Ministero Marina Mercantile
+MIPAR = Ministero Partecipazioni Statali
+MIPOS = Ministero Poste e Telecomunicazioni
+MIIST = Ministero Pubblica Istruzione
+MISAN = Ministero Sanità
+MITES = Ministero Tesoro
+MITRA = Ministero Trasporti
+MITUR = Ministero Turismo e Spettacolo
+MIUNI = Ministero Università e Ricerca Scientifica
+
+[ECONOMIA]
+AGENT = Agenti di commercio
+ASSE = Assegni e Cambiali
+BAITA = Banca d'Italia
+BANCH = Banche
+BENI = Beni di Stati Esteri in Italia
+BOT =  Bot, CCT e Debito Pubblico
+CAMBI = Cambi, Valute e Capitali stranieri
+CASS = Cassa Depositi e Prestiti
+COMM =  Commercialisti
+CNEL = Consiglio Nazionale dell'Economia e del Lavoro
+CRED = Credito Edilizio e Fondiario
+CRESP = Credito all'Esportazione
+ESDOG = Esportazioni e Importazioni (Dogane)
+ESGEN = Esportazioni e Importazioni (Generalità)
+FALL =  Fallimento
+FONDI = Fondi Comuni di Investimento
+INGEN = Industria, Commercio, Artigianato (Generalità)
+INCAM = Industria, Commercio, Artigianato (Camere di)
+INCRE = Industria, Commercio, Artigianato (Crediti)
+ISPOL = Istituto Poligrafico e Zecca dello Stato
+IVA = Iva
+LEAS = Leasing
+MONE = Moneta
+MONOP = Monopoli di Stato
+PECIV =  Pensioni dei Dipendenti Civili e Militari dello Stato
+PEGUE =  Pensioni di Guerra
+PREZZ =  Prezzi
+REDD =  Redditi (Imposte sui)
+UFIN =   Uffici finanziari
+VENDI = Vendite Mobiliari Internazionali
+VITA = Vitalizi
+
+[TASSE e IMPOSTE]
+BOL = Bollo (Imposta di)
+CONCE = Concessioni (tasse sulle)
+IMCOM = Imposta Complementare
+IMCON = Imposta di Consumo
+IMENT = Imposta di Entrata
+IMCAS = Imposta Fabbricati
+IMFON = Imposta Fondiaria
+IMRIC = Imposta di Ricchezza Mobile
+IMFAB = Imposte di Fabbricazione
+IMERA = Imposte Erariali e di Consumo
+IMGEN = Imposte e Tasse in Genere
+IMIPO = Imposte Ipotecarie e Catastali
+REDD =  Redditi (Imposte sui)
+REGIS =  Registro (Imposta di)
+SPIMP =  Spettacoli (Imposta sugli)
+SUCC =  Successioni (Imposta sulle)
+TASS = Tasse Automobilistiche
+
+[LAVORO]
+AGLAV = Agricoltura (Lavoro)
+CNEL = Consiglio Nazionale dell'Economia e del Lavoro
+CONSU = Consulenti del Lavoro
+LAV = Lavoro
+MILAV = Ministero Lavori Pubblici
+MIPRE = Ministero  Lavoro e Previdenza Sociale
+
+[PRODUZIONE e CONSUMAZIONE]
+ACPUB = Acque pubbliche
+AGGEN = Agricoltura (generalità)
+AGLAV = Agricoltura (Lavoro)
+AGPRO = Agricoltura (Prodotti)
+AGCON = Agricoltura (Contratti)
+AGCRE = Agricoltura (Credito)
+AGANT = Agricoltura (Antiparassitari, Anticrittogamici, etc.)
+AGRO = Agronomi
+ALIM = Alimenti (Diritto agli)
+ALCON = Alimenti (Confezionamento)
+ADOC = Alimenti (Doc e Marchi)
+ALADD = Alimenti (Additivi, Coloranti e Sofisticazioni)
+ALANI = Alimenti (Origine Animale)
+ALVEG = Alimenti (Origine Vegetale)
+ALINF = Alimenti (Prima Infanzia e Prodotti Dietetici)
+BECON = Bevande (Confezionamento)
+BEDOC = Bevande (Doc e Marchi)
+BEADD = Bevande (Additivi, coloranti, sofisticazioni)
+BEALC = Bevande (Alcoliche)
+BEANA = Bevande (Analcoliche)
+SPIRI =  Spiriti
+
+[SANITA']
+ABOR = Aborto
+ALCOL = Alcolismo
+CRI = Croce Rossa Italiana
+MISAN = Ministero Sanità
+PORTA =  Portatori di Handicap
+SAGEN =  Sanità, Sanitari, etc. (Generalità)
+SAPER =  Sanità, Sanitari, etc. (Personale)
+SAIGI =  Sanità, Sanitari, etc. (Igiene)
+SAMED =  Sanità, Sanitari, etc. (Medicinali)
+SAFAR =  Sanità, Sanitari, etc. (Farmacie e Farmacisti)
+SAMAL =  Sanità, Sanitari, etc. (Malattie)
+STUP =   Stupefacenti
+
+[FORZE dell'ORDINE / SOCCORSI]
+CARA = Carabinieri
+FACOD = Codici Penali Militari
+FAGEN = Forze Armate (Generalità)
+FAPER = Forze Armate (Personale)
+GUARD = Guardia di Finanza
+PECIV = Pensioni dei Dipendenti Civili e Militari dello Stato
+PS =  Pubblica Sicurezza
+SERV =  Servizi Segreti
+VIGI = Vigili del Fuoco
+
+[ISTRUZIONE]
+CULT = Cultura e Beni Culturali
+ISGEN = Istruzione (Generalità)
+ISPER = Istruzione (Personale)
+ISART = Istruzione (Artistica e Musicale)
+ISELE = Istruzione (Elementare e Materna)
+ISMED = Istruzione (Media e Secondaria)
+ISPRO = Istruzione (Professionale e Tecnica)
+ISSUP = Istruzione (Superiore)
+ISEST = Istruzione (all'Estero)
+ISPRI = Istruzione (Privata)
+MIIST = Ministero Pubblica Istruzione
+
+[BENI PRIMARI]
+ACPOT = Acque potabili e acquedotti
+ENEL = Energia Elettrica
+PASS =  Passaporti e Carte di Identità
+RISC =   Riscaldamento
+STRA =  Strade
+
+[BENI SECONDARI]
+ASCEN =  Ascensori, Montacarichi e Scale Mobili
+BECON = Bevande (Confezionamento)
+BEDOC = Bevande (Doc e Marchi)
+BEADD = Bevande (Additivi, coloranti, sofisticazioni)
+BEALC = Bevande (Alcoliche)
+BEANA = Bevande (Analcoliche)
+CART = Cartine per Sigarette
+FIAM = Fiammiferi
+FRANC = Francobolli, Cartoline e altri valori postali
+OGGE =  Oggetti e sostanze non alimentari
+PESC =  Pesca
+PIETR =  Pietre e Metalli Preziosi
+PROST =  Prostituzione
+PUB =  Pubblicità
+SEP =  Sepolture
+STUP =   Stupefacenti
+TRGEN =  Trasporti (Generalità)
+TRMAR =  Trasporti  (Marittimi e Aerei)
+TRPER =  Trasporti  (Personale)
+TRINT =  Trasporti  Internazionali
+
+[INTRATTENIMENTO e TURISMO]
+ACTER = Acque termali e terme
+ALB = Alberghi, Pensioni, Locande, etc.
+ALPIN = Alpinismo
+BOSC = Boschi e Foreste
+CACCI = Caccia
+ESPOS = Esposizioni, Mostre, Fiere e Mercati
+FARI = Porti, Fari, Spiagge, Pilotaggio
+GIOC = Giochi e Concorsi
+SPET =  Spettacoli
+SPIMP =  Spettacoli (Imposta sugli)
+SPIRI =  Spiriti
+SPORT =  Sport
+TURI =   Turismo
+
+[LAVORO/I]
+BARB = Barbieri e Parrucchieri
+CONSO = Consorzi e Imprese Cooperative
+CONSU = Consulenti del Lavoro
+FACC = Facchinaggio
+IMPI = Impiego Pubblico
+INTE = Interprete
+LAV = Lavoro
+NOTA = Notariato
+OCCU =  Occupazione
+PERIT =  Periti Industriali
+PORTI =  Portinai
+PSI =  Psicologi
+
 */
