@@ -79,6 +79,10 @@ a {
   font-size: 0.8rem !important;
 }
 
+.kinda-small-text {
+  font-size: 0.95rem !important;
+}
+
 .navbar-flag-row {
   padding-left: .5rem!important;
   margin-left: 0!important;
@@ -424,4 +428,22 @@ a {
 
 .chevron-container {
   padding-top: 0.15rem !important;
+}
+
+.search-select-1 {
+  color: white !important;
+  border-right: none !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  background-color: #17a2b8 !important;
+  font-size: 600 !important;
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, label:focus, .select {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
 }

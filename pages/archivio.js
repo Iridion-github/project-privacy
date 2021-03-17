@@ -6,8 +6,7 @@ import {
   Col,
   Card,
   Form,
-  Button,
-  Jumbotron
+  Button
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -97,37 +96,59 @@ export default function archivio(props) {
           <Card.Img variant="top" src="archiveImg.png" />
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Archivio" : "Archive"}</Card.Title>
-            <Row className="p-3 justify-content-center">
+            <Row className="p-3 justify-content-center ml-0">
               <Form
                 onSubmit={(event) => handleSubmit(event)}
                 inline
                 className="w-100 p-0"
               >
                 <Form.Group className="w-100 justify-content-center" controlId="">
-                  <Col md={9} className="text-right">
-                    <Form.Control
-                      type="text"
-                      placeholder={siteLanguage === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
-                      value={searchInput}
-                      onChange={event => setSearchInput(event.target.value)}
-                      className="w-75 inline-form-custom" />
-                    <Button
-                      variant={"info"}
-                      disabled={searchInput.length < 10}
-                      type="submit"
-                      className="ml-1">
-                      <i className="fas fa-search"></i>
-                    </Button>
+                  <Col md={9} className="text-right pl-0 pr-0">
+                    <Row>
+                      <Col md={2} className="pl-0 pr-0">
+                        <Form.Control
+                          as="select"
+                          className="search-select-1"
+                          size="lg"
+                        >
+                          <option>Tutto</option>
+                          <option>Libri</option>
+                          <option>Note</option>
+                          <option>Pareri</option>
+                        </Form.Control>
+                      </Col>
+                      <Col md={8} className="pl-0 pr-0">
+                        <Form.Control
+                          size="lg"
+                          type="text"
+                          placeholder={siteLanguage === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
+                          value={searchInput}
+                          onChange={event => setSearchInput(event.target.value)}
+                          className="inline-form-custom w-100"
+                        />
+                      </Col>
+                      <Col md={2} className="pl-0 pr-0 text-center">
+                        <Button
+                          variant={"info"}
+                          disabled={searchInput.length < 10}
+                          type="submit"
+                          size="lg"
+                          className="">
+                          <i className="fas fa-search"></i>
+                        </Button>
+                      </Col>
+                    </Row>
                   </Col>
                   <Col md={3} className="pl-0 pr-0">
                     <Button
                       variant={"info"}
-                      className="ml-1"
+                      className="ml-1 w-100"
+                      size="lg"
                       onClick={isAdvanced ? () => closeAdvancedSearch() : () => openAdvancedSearch()}
                     >
-                      <Row className="m-0">
+                      <Row className="m-0 w-100">
                         <Col md={10} className="pr-0 pl-0">
-                          <span className="small-text">Ricerca Avanzata</span>
+                          <span className="kinda-small-text">Ricerca Avanzata</span>
                         </Col>
                         <Col md={2} className="pr-0 pl-1 chevron-container">
                           {isAdvanced ? <i className="fas fa-chevron-up"></i> : <i className="fas fa-chevron-down"></i>}

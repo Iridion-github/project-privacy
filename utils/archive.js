@@ -12,14 +12,14 @@
 - Tutte le parole
 - Tutta la frase
 
-[1° Menù sotto la Searchbar: DATA] tasso utilità 100%
-
-[2° Menù sotto la Searchbar: CONTENUTI] tasso utilità 100%
+[1° Menù sotto la Searchbar: CONTENUTI] tasso utilità 100%
 - Direttive
 - Ordinanze
 - Provvedimenti
 - Raccomandazioni
 - Regolamenti
+
+[2° Menù sotto la Searchbar: DATA] tasso utilità 100%
 
 [3° Menù sotto la Searchbar: AUTORITA'] tasso utilità 60% (Ci basiamo su dati estratti manualmente da una trentina di file, non del tutto affidabile)
 - Presidente Consiglio Ministri
