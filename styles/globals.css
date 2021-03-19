@@ -442,7 +442,7 @@ a {
   box-shadow: none !important;
 }
 
-textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, label:focus, .select {
+textarea:hover, textarea:active, textarea:focus, label:focus, .select {
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
