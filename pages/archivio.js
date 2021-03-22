@@ -92,7 +92,7 @@ export default function archivio(props) {
       {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="p-2">
+        <Card className="p-2 fixed-width-card">
           <Card.Img variant="top" src="archiveImg.png" />
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Archivio" : "Archive"}</Card.Title>

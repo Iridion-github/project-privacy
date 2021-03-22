@@ -447,3 +447,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .select {
   -webkit-appearance: none;
   box-shadow: none !important;
 }
+
+.fixed-width-card {
+  width: 50% !important;
+}

@@ -534,10 +534,13 @@ TASS = Tasse Automobilistiche
 [LAVORO]
 AGLAV = Agricoltura (Lavoro)
 CNEL = Consiglio Nazionale dell'Economia e del Lavoro
+CONSO = Consorzi e Imprese Cooperative
 CONSU = Consulenti del Lavoro
+IMPI = Impiego Pubblico
 LAV = Lavoro
 MILAV = Ministero Lavori Pubblici
 MIPRE = Ministero  Lavoro e Previdenza Sociale
+OCCU =  Occupazione
 
 [PRODUZIONE e CONSUMAZIONE]
 ACPUB = Acque pubbliche
@@ -644,16 +647,12 @@ SPIRI =  Spiriti
 SPORT =  Sport
 TURI =   Turismo
 
-[LAVORO/I]
+[IMPIEGHI SPECIFICI]
 BARB = Barbieri e Parrucchieri
-CONSO = Consorzi e Imprese Cooperative
 CONSU = Consulenti del Lavoro
 FACC = Facchinaggio
-IMPI = Impiego Pubblico
 INTE = Interprete
-LAV = Lavoro
 NOTA = Notariato
-OCCU =  Occupazione
 PERIT =  Periti Industriali
 PORTI =  Portinai
 PSI =  Psicologi
