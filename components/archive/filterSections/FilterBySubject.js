@@ -52,7 +52,6 @@ export const FilterBySubject = function (props) {
             {secondCol ? secondCol : ""}
           </Row>
         )
-        console.log("result:", result)
         arrResult.push(result)
       }
     })
