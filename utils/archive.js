@@ -1,46 +1,77 @@
 /**
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
 
-[Menù a Tendina a sinistra della Searchbar] tasso utilità 90%
-- Tutto
-- Libri
-- Note
-- Pareri
-
-[Menù a Tendina a destra della Searchbar] tasso utilità 100%
+[TESTUALE | Menù a Tendina a destra della Searchbar] (24/03/2021) (tabs: tutte)
 - Una parola almeno
 - Tutte le parole
 - Tutta la frase
 
-[1° Menù sotto la Searchbar: CONTENUTI] tasso utilità 100%
-- Direttive
-- Ordinanze
-- Provvedimenti
-- Raccomandazioni
-- Regolamenti
+[DATA | Menù di tipo Date con una sua row] (24/03/2021) (tabs: GIURISPRUDENZA, NORMATIVA, NOTE & DOTTRINA)
 
-[2° Menù sotto la Searchbar: DATA] tasso utilità 100%
+[AUTORITA' | Menù multiplo con sottocampi, vedasi Dejure] (24/03/2021) (tabs: GIURISPRUDENZA)
 
-[3° Menù sotto la Searchbar: AUTORITA'] tasso utilità 60% (Ci basiamo su dati estratti manualmente da una trentina di file, non del tutto affidabile)
-- Presidente Consiglio Ministri
-- Agenzia Entrate
-- Ministeriale
-- Commissione
-- Unione Europea
-- ANAC
-- Autorità
-- Garante
+[CODICI | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: GIURISPRUDENZA, FORMULARI)
+- Una delle ultime cose da fare: bisogna sapere quali codici esistono effettivamente e con tag a loro dedicato, all'interno dei files dell'archivio di Luigi.
 
-[4° Menù sotto la Searchbar: CODICI] tasso utilità 10% (Non abbiamo i tipi di codice, infattibile per ora)
+[LEGGI | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: GIURISPRUDENZA, FORMULARI)
 
-[5° Menù sotto la Searchbar: LEGGI] tasso utilità 10% (Non abbiamo i tipi di leggi, infattibile per ora)
+[FONTE | Menù doppio con sottocampi, vedasi Dejure] ===> (24/03/2021) (tabs: GIURISPRUDENZA, NOTE & DOTTRINA)
 
-[6° Menù sotto la Searchbar: FONTE] tasso utilità 100%
+[CLASSIFICAZIONE | Menù multiplo con moltissime opzioni in ordine alfabetico (copiare html da Dejure)] ===> (24/03/2021) (tabs: tutte)
+- Una delle ultime cose da fare: bisogna sapere quali tags esistono effettivamente all'interno dei files dell'archivio di Luigi.
 
-[7° Menù sotto la Searchbar: CLASSIFICAZIONE] tasso utilità 0% (Non abbiamo neanche capito cosa sia esattamente, pare identico alla searchbar)
+[SCEGLI TESTO UNICO (o simil nome) | campo select che starta da null. Rappresenta una displina normativa a parte. Da approfondire assieme a Luigi) ===> (24/03/2021) (tabs: GIURISPRUDENZA (attenzione, forse tab sbagliato, chiedere!))
 
--------------------------------------- [AUTORITA' (Dejure style)] --------------------------------------
-Note: ("LUIGIIIIIII!!" *agitando il pugno*)
+[PROVVEDIMENTO | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: NORMATIVA)
+
+[GAZZETTA UFFICIALE | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: NORMATIVA)
+
+[CERCA IN TITOLO DOCUMENTO / DOCUMENTO | booleano ] ===> (24/03/2021) (tabs: NOTE & DOTTRINA)
+
+[AUTORE | campo testuale (renderlo autosuggest) ] ===> (24/03/2021) (tabs: NOTE & DOTTRINA)
+
+[LISTA FORMULARI | semplice select ] ===> (24/03/2021) (tabs: FORMULARI)
+
+_________________________________[TAB: GIURISPRUDENZA]_________________________________
+DATA
+AUTORITÀ
+CODICI
+LEGGI
+FONTE
+CLASSIFICAZIONE
+SCEGLI TESTO UNICO
+______________________________________________________________________________________
+
+
+_________________________________[TAB: NORMATIVA]_____________________________________
+DATA
+PROVVEDIMENTO
+GAZZETTA UFFICIALE
+CLASSIFICAZIONE
+______________________________________________________________________________________
+
+
+________________________________[TAB: NOTE & DOTTRINA]________________________________
+CERCA IN TITOLO DOCUMENTO / DOCUMENTO
+DATA
+AUTORE
+FONTE
+CLASSIFICAZIONE
+______________________________________________________________________________________
+
+
+___________________________________[TAB: FORMULARI]___________________________________
+CERCA IN TITOLO FORMULARIO / FORMULARIO
+LISTA FORMULARI
+CODICI
+LEGGI
+CLASSIFICAZIONE
+______________________________________________________________________________________
+
+
+
+
+-------------------------------------- [Dati filtri in elaborazione] --------------------------------------
 I seguenti tag li abbiamo estratti manualmente dai 20-30 files datici per fare le prove.
 Se si ottenessero TUTTI, o quasi, i tag dei documenti, si potrebbe emulare molto di più Dejure.
 Per adesso abbiamo le mani legate, ed utilizzeremo i tag offertici dal sistema F3 di Luigi.
@@ -112,7 +143,7 @@ presso il Garante per la protezione dei dati personali
 [9107640]
 
 
--------------------------------------- TUTTI i TAG GENERICI --------------------------------------
+-------------------------------------- TUTTI i TAG GENERICI (24/03/2021: Luigi ci ha confessato che son quasi tutti vecchi e da sostituire, da suicidio)--------------------------------------
 
 ABOR = Aborto
 ABRU = Abruzzo
@@ -429,7 +460,7 @@ ZOVET =  Zootecnia (Veterinari)
 
 -------------------------------------- TAG SCELTI per l'ADVANCED SEARCH --------------------------------------
 
-[ ZONE GEOGRAFICHE ]
+[ ZONE GEOGRAFICHE ] --> [REGIONI]
 ABRU = Abruzzo
 BASI = Basilicata
 CALAB = Calabria
@@ -454,7 +485,7 @@ UMBR =   Umbria
 VAL =    Valle d'Aosta
 VENE = Veneto
 
-[MINISTERI]
+[MINISTERI] ---> tutte le diciture sono da aggiornare / sostituire
 MIGEN = Ministeri in genere
 MIAFF = Ministero Affari Esteri
 MIAGR = Ministero  Agricoltura e Foreste
@@ -479,7 +510,7 @@ MITRA = Ministero Trasporti
 MITUR = Ministero Turismo e Spettacolo
 MIUNI = Ministero Università e Ricerca Scientifica
 
-[ECONOMIA]
+[ECONOMIA] ---> Diritto Commerciale &
 AGENT = Agenti di commercio
 ASSE = Assegni e Cambiali
 BAITA = Banca d'Italia
@@ -659,5 +690,8 @@ PSI =  Psicologi
 
 [IMPORTANTI secondo il signor LUIGI]
 ???
+
+
+
 
 */

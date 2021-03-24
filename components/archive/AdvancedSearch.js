@@ -12,7 +12,6 @@ import { filterStateInit } from '../../utils/archive'
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../../context/siteLanguageContext' //context
 import { FilterByText } from './filterSections/FilterByText' //Comportamento ricerca testuale
-import { FilterByContent } from './filterSections/FilterByContent' //Filtro per Contenuti
 import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
 import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
 import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
@@ -75,11 +74,6 @@ export const AdvancedSearch = function (props) {
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Campania"])
         },
         {
-          label: "Città del Vaticano",
-          checked: false,
-          onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Città del Vaticano"])
-        },
-        {
           label: "Emilia Romagna",
           checked: false,
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Emilia Romagna"])
@@ -110,11 +104,6 @@ export const AdvancedSearch = function (props) {
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Marche"])
         },
         {
-          label: "Mezzogiorno",
-          checked: false,
-          onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Mezzogiorno"])
-        },
-        {
           label: "Molise",
           checked: false,
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Molise"])
@@ -128,11 +117,6 @@ export const AdvancedSearch = function (props) {
           label: "Puglia",
           checked: false,
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Puglia"])
-        },
-        {
-          label: "San Marino",
-          checked: false,
-          onChange: () => toggleInclude(["bySubject", "byZoneGeog", "San Marino"])
         },
         {
           label: "Sardegna",
@@ -1154,10 +1138,6 @@ export const AdvancedSearch = function (props) {
         <Form>
           {/* Comportamento ricerca testuale */}
           <FilterByText
-
-          />
-          {/* Filtro per Contenuti */}
-          <FilterByContent
 
           />
           {/* Filtro per Data */}
