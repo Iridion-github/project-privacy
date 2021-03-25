@@ -6,7 +6,8 @@ import {
   Col,
   Card,
   Form,
-  Button
+  Button,
+  ButtonGroup
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -24,6 +25,7 @@ export default function archivio(props) {
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
   const [showPdfModal, setShowPdfModal] = useState(null)
+  const [shownTab, setShownTab] = useState("giurisprudenza")
 
   const openPdfViewer = (path, buffer) => {
     path ? setShowPdfModal(path) : setShowPdfModal(buffer)
@@ -94,6 +96,40 @@ export default function archivio(props) {
       <main className={styles.main}>
         <Card className="p-2 fixed-width-card">
           <Card.Img variant="top" src="archiveImg.png" />
+          <ButtonGroup className="mt-5 mb-3 w-100">
+            <Button
+              block
+              className="mt-0"
+              variant={(shownTab === "giurisprudenza") ? "info" : "outline-info"}
+              onClick={() => setShownTab("giurisprudenza")}
+            >
+              <h4>Giurisprudenza</h4>
+            </Button>
+            <Button
+              block
+              className="mt-0"
+              variant={(shownTab === "normativa") ? "info" : "outline-info"}
+              onClick={() => setShownTab("normativa")}
+            >
+              <h4>Normativa</h4>
+            </Button>
+            <Button
+              block
+              className="mt-0"
+              variant={(shownTab === "noteedottrina") ? "info" : "outline-info"}
+              onClick={() => setShownTab("noteedottrina")}
+            >
+              <h4>Note e Dottrina</h4>
+            </Button>
+            <Button
+              block
+              className="mt-0"
+              variant={(shownTab === "formulari") ? "info" : "outline-info"}
+              onClick={() => setShownTab("formulari")}
+            >
+              <h4>Formulari</h4>
+            </Button>
+          </ButtonGroup>
           <Card.Body>
             <Card.Title className="text-center">{siteLanguage === "ita" ? "Archivio" : "Archive"}</Card.Title>
             <Row className="p-3 justify-content-center ml-0">
@@ -102,22 +138,10 @@ export default function archivio(props) {
                 inline
                 className="w-100 p-0"
               >
-                <Form.Group className="w-100 justify-content-center" controlId="">
+                <Form.Group className="w-100 justify-content-center">
                   <Col md={9} className="text-right pl-0 pr-0">
-                    <Row>
-                      <Col md={2} className="pl-0 pr-0">
-                        <Form.Control
-                          as="select"
-                          className="search-select-1"
-                          size="lg"
-                        >
-                          <option>Tutto</option>
-                          <option>Libri</option>
-                          <option>Note</option>
-                          <option>Pareri</option>
-                        </Form.Control>
-                      </Col>
-                      <Col md={8} className="pl-0 pr-0">
+                    <Row className="w-100">
+                      <Col md={11} className="pl-0 pr-0">
                         <Form.Control
                           size="lg"
                           type="text"
@@ -127,8 +151,9 @@ export default function archivio(props) {
                           className="inline-form-custom w-100"
                         />
                       </Col>
-                      <Col md={2} className="pl-0 pr-0 text-center">
+                      <Col md={1} className="pl-0 pr-0">
                         <Button
+                          block
                           variant={"info"}
                           disabled={searchInput.length < 10}
                           type="submit"
@@ -162,6 +187,7 @@ export default function archivio(props) {
             <Row className="p-3 justify-content-center">
               {isAdvanced &&
                 <AdvancedSearch
+                  shownTab={shownTab}
                   loading={loading}
                   setLoading={setLoading}
                   searchInput={searchInput}
@@ -169,7 +195,6 @@ export default function archivio(props) {
                   handleSetSearchResult={handleSetSearchResult}
                 />
               }
-
             </Row>
             {((searched && searchResult && searchResult.length > 0) || (advancedSearched)) && (
               <Row className="mt-4 p-3 justify-content-center archive-result-container">
@@ -248,6 +273,8 @@ export default function archivio(props) {
             )}
 
           </Card.Body>
+
+
           <Card.Footer className="text-center">
             <small className="text-muted">{siteLanguage === "ita" ? "Archivio aggiornato al" : "Archive last updated"}: 26/01/2020</small>
           </Card.Footer>

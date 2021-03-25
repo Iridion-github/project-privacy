@@ -3,10 +3,8 @@ import {
   Row,
   Col,
   Form,
-  FormLabel,
   Button,
-  Jumbotron,
-  Card
+  Jumbotron
 } from 'react-bootstrap'
 import { filterStateInit } from '../../utils/archive'
 import { useState, useEffect } from 'react'
@@ -1141,41 +1139,53 @@ export const AdvancedSearch = function (props) {
 
           />
           {/* Filtro per Data */}
-          <FilterByDate
+          {(
+            props.shownTab === "giurisprudenza"
+            || props.shownTab === "normativa"
+            || props.shownTab === "noteedottrina"
+          ) && <FilterByDate
 
-          />
+            />}
           {/* Filtro per Autorità */}
-          <FilterByAuthority
+          {(props.shownTab === "giurisprudenza") && <FilterByAuthority
 
-          />
+          />}
           {/* Filtro per tipo di File */}
-          <FilterByExtension
-            includeDoc={filtersState?.byExtension?.find(el => el.label === "Doc").checked}
-            toggleIncludeDoc={() => toggleInclude(["byExtension", "Doc"])}
-            includeDocx={filtersState?.byExtension?.find(el => el.label === "Docx").checked}
-            toggleIncludeDocx={() => toggleInclude(["byExtension", "Docx"])}
-            includePdf={filtersState?.byExtension?.find(el => el.label === "Pdf").checked}
-            toggleIncludePdf={() => toggleInclude(["byExtension", "Pdf"])}
-            indCorteCost={filtersState?.byAuthority?.find(el => el.label === "indCorteCost").checked}
-            toggleIncludeIndCorteCost={() => toggleInclude(["byAuthority", "indCorteCost"])}
-          />
+          {(props.shownTab === "giurisprudenza"
+            || props.shownTab === "normativa"
+            || props.shownTab === "normativa"
+            || props.shownTab === "noteedottrina") &&
+            <FilterByExtension
+              includeDoc={filtersState?.byExtension?.find(el => el.label === "Doc").checked}
+              toggleIncludeDoc={() => toggleInclude(["byExtension", "Doc"])}
+              includeDocx={filtersState?.byExtension?.find(el => el.label === "Docx").checked}
+              toggleIncludeDocx={() => toggleInclude(["byExtension", "Docx"])}
+              includePdf={filtersState?.byExtension?.find(el => el.label === "Pdf").checked}
+              toggleIncludePdf={() => toggleInclude(["byExtension", "Pdf"])}
+              indCorteCost={filtersState?.byAuthority?.find(el => el.label === "indCorteCost").checked}
+              toggleIncludeIndCorteCost={() => toggleInclude(["byAuthority", "indCorteCost"])}
+            />}
           {/* Filtro per Fonte */}
-          <FilterBySubject
-            zoneGeogList={filtersState?.bySubject?.byZoneGeog}
-            ministeriList={filtersState?.bySubject?.byMinistero}
-            economiaList={filtersState?.bySubject?.byEconomia}
-            tasseImposteList={filtersState?.bySubject?.byTasse}
-            lavoroList={filtersState?.bySubject?.byLavoro}
-            produzConsumList={filtersState?.bySubject?.byProduzione}
-            sanitàList={filtersState?.bySubject?.bySanità}
-            forzeOrdineList={filtersState?.bySubject?.byForzeOrdine}
-            istruzioneList={filtersState?.bySubject?.byIstruzione}
-            beniPrimariList={filtersState?.bySubject?.byBeniPrimari}
-            beniSecondariList={filtersState?.bySubject?.byBeniSecondari}
-            intrattenimList={filtersState?.bySubject?.byIntrattenimento}
-            impieghiList={filtersState?.bySubject?.byImpieghi}
-          />
-
+          {(props.shownTab === "giurisprudenza"
+            || props.shownTab === "normativa"
+            || props.shownTab === "normativa"
+            || props.shownTab === "noteedottrina") &&
+            <FilterBySubject
+              zoneGeogList={filtersState?.bySubject?.byZoneGeog}
+              ministeriList={filtersState?.bySubject?.byMinistero}
+              economiaList={filtersState?.bySubject?.byEconomia}
+              tasseImposteList={filtersState?.bySubject?.byTasse}
+              lavoroList={filtersState?.bySubject?.byLavoro}
+              produzConsumList={filtersState?.bySubject?.byProduzione}
+              sanitàList={filtersState?.bySubject?.bySanità}
+              forzeOrdineList={filtersState?.bySubject?.byForzeOrdine}
+              istruzioneList={filtersState?.bySubject?.byIstruzione}
+              beniPrimariList={filtersState?.bySubject?.byBeniPrimari}
+              beniSecondariList={filtersState?.bySubject?.byBeniSecondari}
+              intrattenimList={filtersState?.bySubject?.byIntrattenimento}
+              impieghiList={filtersState?.bySubject?.byImpieghi}
+            />
+          }
         </Form>
         <Row className="w-100 ml-0 mr-0">
           <Col md={12} className="pr-0 pl-0 text-right">

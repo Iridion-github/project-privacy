@@ -1,14 +1,88 @@
 /**
+
+-------------------- [CHECKPOINT] --------------------
+- Giurisprudenza [100%]
+- Normativa [0%]
+- Note e Dottrina [0%]
+- Formulari [0%]
+-------------------- [PANNELLI OK] --------------------
+- TESTUALE
+- DATA
+-------------------- [PANNELLI DA CREARE] --------------------
+- CODICI: {
+  dati_necessari: "lista completa dei codici"
+ }
+ inputs: {
+    art.: "number",
+    sottonumero: "multiselect",
+    data: "date input"
+ }
+- LEGGI: {
+  dati_necessari: "lista completa dei tipi di legge"
+ }
+ inputs: {
+    legge: "select",
+    data: "date input",
+    numero: "number",
+    articolo: "number",
+    sottonumero: "multiselect",
+    provincia: "select",
+    regione: "select",
+    città: "select"
+ }
+- FONTE: { NON SI CAPISCE COSA SIA ESATTAMENTE!!
+  dati_necessari: "???"
+ }
+ inputs: {
+    tag: "select (o multiselect? approfondire)",
+    anno: "date(year-only)"
+ }
+- SCEGLI TESTO UNICO
+- PROVVEDIMENTO
+- GAZZETTA UFFICIALE
+- CERCA IN TITOLO DOCUMENTO / DOCUMENTO
+- AUTORE
+- LISTA FORMULARI
+-------------------- [PANNELLI DA MODIFICARE] --------------------
+- AUTORITÀ: {
+  dati_necessari: "lista completa di autorità"
+ }
+ inputs: {
+    sezione: "select",
+    città: "text-input/autosuggest",
+    data: "date input"
+ }
+- CLASSIFICAZIONE: {
+  inputs: {
+    multiselect: "lista completa dei tag nuovi"
+  }
+}
+-------------------- [PANNELLI DA VALUTARE] --------------------
+- CATEGORIA (Verrebbe inglobato da Fonte o Autorità)
+- TIPO FILE (ext)
+
+
+
+
+
+
+---------------------------------[ COMPONENTI NECESSARI ]---------------------------------
+-
+-
+-
+
+
+
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
 
-[TESTUALE | Menù a Tendina a destra della Searchbar] (24/03/2021) (tabs: tutte)
+[TESTUALE | Menù select con 3 options] (24/03/2021) (tabs: tutte)
 - Una parola almeno
 - Tutte le parole
 - Tutta la frase
 
-[DATA | Menù di tipo Date con una sua row] (24/03/2021) (tabs: GIURISPRUDENZA, NORMATIVA, NOTE & DOTTRINA)
+[DATA | Menù di tipo Date con una sua row] (24/03/2021) (tabs: GIURISPRUDENZA,    , NOTE & DOTTRINA)
 
-[AUTORITA' | Menù multiplo con sottocampi, vedasi Dejure] (24/03/2021) (tabs: GIURISPRUDENZA)
+[AUTORITÀ | Menù multiplo con sottocampi, vedasi Dejure] (24/03/2021) (tabs: GIURISPRUDENZA)
 
 [CODICI | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: GIURISPRUDENZA, FORMULARI)
 - Una delle ultime cose da fare: bisogna sapere quali codici esistono effettivamente e con tag a loro dedicato, all'interno dei files dell'archivio di Luigi.
