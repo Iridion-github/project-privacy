@@ -1,26 +1,18 @@
 /**
-
--------------------- [CHECKPOINT] --------------------
-- Giurisprudenza [100%]
-- Normativa [0%]
-- Note e Dottrina [0%]
-- Formulari [0%]
 -------------------- [PANNELLI OK] --------------------
 - TESTUALE
 - DATA
 -------------------- [PANNELLI DA CREARE] --------------------
 - CODICI: {
-  dati_necessari: "lista completa dei codici"
- }
- inputs: {
+  dati_necessari: "lista completa dei codici",
+  inputs: {
     art.: "number",
     sottonumero: "multiselect",
     data: "date input"
  }
 - LEGGI: {
-  dati_necessari: "lista completa dei tipi di legge"
- }
- inputs: {
+  dati_necessari: "lista completa dei tipi di legge",
+  inputs: {
     legge: "select",
     data: "date input",
     numero: "number",
@@ -31,18 +23,49 @@
     città: "select"
  }
 - FONTE: { NON SI CAPISCE COSA SIA ESATTAMENTE!!
-  dati_necessari: "???"
- }
- inputs: {
+  dati_necessari: "???",
+  inputs: {
     tag: "select (o multiselect? approfondire)",
     anno: "date(year-only)"
  }
 - SCEGLI TESTO UNICO
-- PROVVEDIMENTO
-- GAZZETTA UFFICIALE
-- CERCA IN TITOLO DOCUMENTO / DOCUMENTO
-- AUTORE
-- LISTA FORMULARI
+- PROVVEDIMENTO: {
+  dati_necessari: "lista provvedimenti abbastanza lunga",
+  inputs: {
+   scegli_provvedimento: "select",
+   specifica_tra_vigente_e_testo_gu: "select che sostituisce 2 checkbox" <--- [ vigente, testo_g.u.(???)],
+   data: "date input",
+   numero: "number",
+   articolo: "number",
+   sottonumero: "multiselect",
+   allegato: "text input",
+   categoria_misteriosa: "select"
+  }
+- GAZZETTA UFFICIALE: {
+    dati_necessari: null,
+    inputs: {
+    data: "date input",
+    numero: "number",
+  }
+}
+- CERCA IN TITOLO DOCUMENTO / DOCUMENTO: {
+  dati_necessari: null,
+  inputs: {
+    noteOdottrina: "select"
+  }
+}
+- AUTORE: {
+  dati_necessari: "lista autori",
+  inputs: {
+    autore/i: "autosuggest"
+  }
+}
+- LISTA FORMULARI: {
+  dati_necessari: "lista formulari",
+  inputs: {
+    formulario: "select"
+  }
+}
 -------------------- [PANNELLI DA MODIFICARE] --------------------
 - AUTORITÀ: {
   dati_necessari: "lista completa di autorità"
@@ -58,21 +81,18 @@
   }
 }
 -------------------- [PANNELLI DA VALUTARE] --------------------
-- CATEGORIA (Verrebbe inglobato da Fonte o Autorità)
-- TIPO FILE (ext)
-
-
-
-
+- CATEGORIA: Molto probabilmente verrebbe inglobato da Fonte o Autorità, vedere alla fine se vale la pena inserirlo.
+- TIPO FILE (extension):  Molto probabilmente risulterebbe inutile, vedere alla fine se vale la pena inserirlo (poichè già implementato).
 
 
 ---------------------------------[ COMPONENTI NECESSARI ]---------------------------------
--
--
--
-
-
-
+- TextInput [O]
+- Select [X]
+- MultiSelect [X]
+- NumberInput [O]
+- DateInput (+ yearOnly) [X]
+- DateIntervalInput (+ yearOnly) [X]
+- CustomAutosuggest [X]
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
 
 [TESTUALE | Menù select con 3 options] (24/03/2021) (tabs: tutte)
@@ -218,6 +238,30 @@ presso il Garante per la protezione dei dati personali
 
 
 -------------------------------------- TUTTI i TAG GENERICI (24/03/2021: Luigi ci ha confessato che son quasi tutti vecchi e da sostituire, da suicidio)--------------------------------------
+
+Ministero dell’interno = .IND MINT
+Ministero della giustizia = .IND MIGIUS
+Ministero della difesa = .IND MIDIF
+Ministero dell’economia e delle finanze = .IND MEF
+Ministero dello sviluppo economico = .IND MISE
+Ministero delle politiche agricole, alimentari e forestali = .IND MIAGR
+Ministero della transizione ecologica = .IND MIAMB
+Ministero delle infrastrutture e della mobilità sostenibili = .IND MINFR
+Ministero del lavoro e delle politiche sociali = .IND MILAV
+Ministero dell’istruzione = MISTR
+Ministero dell’università e della ricerca = .IND MIUR
+Ministero della cultura = .IND MICUL
+Ministero della salute = .IND MISAL
+Ministero del turismo = .IND MITUR
+Ministero per i rapporti con il Parlamento = .IND MIPARL
+Ministero per l’innovazione tecnologica e la transizione digitale = .IND MITECN
+Ministero per la pubblica amministrazione = .IND MIPA
+Ministero per gli affari regionali e le autonomie = .IND MIREG
+Ministero per il sud e la coesione territoriale = .IND MISUD
+Ministero per le politiche giovanili = .IND MIGIOV
+Ministero per le pari opportunità e la famiglia = .IND MIFAM
+Ministero per la disabilità = .IND MIDISA
+
 
 ABOR = Aborto
 ABRU = Abruzzo
@@ -391,30 +435,29 @@ LOMB = Lombardia
 
 MAR = Marche
 MEZ = Mezzogiorno
-MINIE = Miniere, Cave e Torbiere
-MIGEN = Ministeri in genere
-MIAFF = Ministero Affari Esteri
-MIAGR = Ministero  Agricoltura e Foreste
-MIAMB = Ministero Ambiente
-MIBEN = Ministero Beni Culturali
-MIBIL = Ministero Bilancio e Programmazione Economica
-MICOM = Ministero Commercio con l'Estero
-MIDIF = Ministero Difesa
-MIFIN = Ministero Finanze
-MIGRA = Ministero Grazia e Giustizia
-MILAV = Ministero Lavori Pubblici
-MIPRE = Ministero  Lavoro e Previdenza Sociale
-MIIND = Ministero Industria, Commercio e Artigianato
-MIINT = Ministero Interni
-MIMAR = Ministero Marina Mercantile
-MIPAR = Ministero Partecipazioni Statali
-MIPOS = Ministero Poste e Telecomunicazioni
-MIIST = Ministero Pubblica Istruzione
-MISAN = Ministero Sanità
-MITES = Ministero Tesoro
-MITRA = Ministero Trasporti
-MITUR = Ministero Turismo e Spettacolo
-MIUNI = Ministero Università e Ricerca Scientifica
+MIEF = Ministero dell’economia e delle finanze
+MIAGR = Ministero delle politiche agricole, alimentari e forestali
+MIAMB = Ministero della transizione ecologica
+MICUL = Ministero della cultura
+MIDIF = Ministero della difesa
+MIDISA = Ministero per la disabilità
+MIFAM = Ministero per le pari opportunità e la famiglia
+MIGIOV = Ministero per le politiche giovanili
+MIGIUS = Ministero della giustizia
+MILAV = Ministero del lavoro e delle politiche sociali
+MINFR = Ministero delle infrastrutture e della mobilità sostenibili
+MINT = Ministero dell’interno
+MIPA = Ministero per la pubblica amministrazione
+MIPARL = Ministero per i rapporti con il Parlamento
+MIREG = Ministero per gli affari regionali e le autonomie
+MISAL = Ministero della salute
+MISE = Ministero dello sviluppo economico
+MISTR = Ministero dell’istruzione
+MISUD = Ministero per il sud e la coesione territoriale
+MITECN = Ministero per l’innovazione tecnologica e la transizione di gitale
+MITUR = Ministero del turismo
+MIUR = Ministero dell’università e della ricerca
+
 MOLI = Molise
 MONE = Moneta
 MONOP = Monopoli di Stato
@@ -560,29 +603,28 @@ VAL =    Valle d'Aosta
 VENE = Veneto
 
 [MINISTERI] ---> tutte le diciture sono da aggiornare / sostituire
-MIGEN = Ministeri in genere
-MIAFF = Ministero Affari Esteri
-MIAGR = Ministero  Agricoltura e Foreste
-MIAMB = Ministero Ambiente
-MIBEN = Ministero Beni Culturali
-MIBIL = Ministero Bilancio e Programmazione Economica
-MICOM = Ministero Commercio con l'Estero
-MIDIF = Ministero Difesa
-MIFIN = Ministero Finanze
-MIGRA = Ministero Grazia e Giustizia
-MILAV = Ministero Lavori Pubblici
-MIPRE = Ministero  Lavoro e Previdenza Sociale
-MIIND = Ministero Industria, Commercio e Artigianato
-MIINT = Ministero Interni
-MIMAR = Ministero Marina Mercantile
-MIPAR = Ministero Partecipazioni Statali
-MIPOS = Ministero Poste e Telecomunicazioni
-MIIST = Ministero Pubblica Istruzione
-MISAN = Ministero Sanità
-MITES = Ministero Tesoro
-MITRA = Ministero Trasporti
-MITUR = Ministero Turismo e Spettacolo
-MIUNI = Ministero Università e Ricerca Scientifica
+MIEF = Ministero dell’economia e delle finanze
+MIAGR = Ministero delle politiche agricole, alimentari e forestali
+MIAMB = Ministero della transizione ecologica
+MICUL = Ministero della cultura
+MIDIF = Ministero della difesa
+MIDISA = Ministero per la disabilità
+MIFAM = Ministero per le pari opportunità e la famiglia
+MIGIOV = Ministero per le politiche giovanili
+MIGIUS = Ministero della giustizia
+MILAV = Ministero del lavoro e delle politiche sociali
+MINFR = Ministero delle infrastrutture e della mobilità sostenibili
+MINT = Ministero dell’interno
+MIPA = Ministero per la pubblica amministrazione
+MIPARL = Ministero per i rapporti con il Parlamento
+MIREG = Ministero per gli affari regionali e le autonomie
+MISAL = Ministero della salute
+MISE = Ministero dello sviluppo economico
+MISTR = Ministero dell’istruzione
+MISUD = Ministero per il sud e la coesione territoriale
+MITECN = Ministero per l’innovazione tecnologica e la transizione di gitale
+MITUR = Ministero del turismo
+MIUR = Ministero dell’università e della ricerca
 
 [ECONOMIA] ---> Diritto Commerciale &
 AGENT = Agenti di commercio

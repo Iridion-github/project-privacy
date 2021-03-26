@@ -6,18 +6,20 @@ import {
   Button,
   Jumbotron
 } from 'react-bootstrap'
-import { filterStateInit } from '../../utils/archive'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useLanguage } from '../../context/siteLanguageContext' //context
 import { FilterByText } from './filterSections/FilterByText' //Comportamento ricerca testuale
 import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
 import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
 import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Fonte
+import { NumberInput } from './ui/NumberInput'
 
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
+
+  const [numeroArt, setNumeroArt] = useState(0)
 
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
@@ -1199,6 +1201,18 @@ export const AdvancedSearch = function (props) {
           </Col>
         </Row>
       </Jumbotron>
+      <NumberInput
+        formGroupClass={""}
+        formLabelClass={""}
+        colSpan={8}
+        label={"prova label"}
+        placeholderText={""}
+        textmuted={"prova textmuted"}
+        value={numeroArt}
+        onChange={setNumeroArt}
+        validationFunc={(num) => num >= 0 && num <= 10}
+        isDisabled={false}
+      />
     </Row >
   )
 }
