@@ -34,3 +34,5 @@ yarn-error.log*
 .vercel
 /mappedArchive
 /public/archive
+
+package-lock.json

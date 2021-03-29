@@ -442,7 +442,7 @@ a {
   box-shadow: none !important;
 }
 
-textarea:hover, textarea:active, textarea:focus, label:focus, .select {
+textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input, .select {
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
@@ -450,4 +450,9 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .select {
 
 .fixed-width-card {
   width: 50% !important;
+}
+
+.datepicker-input {
+  border: 1px solid #17a2b8 !important;
+  border-radius: 5px;
 }

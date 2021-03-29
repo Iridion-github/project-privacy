@@ -6,20 +6,38 @@ import {
   Button,
   Jumbotron
 } from 'react-bootstrap'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLanguage } from '../../context/siteLanguageContext' //context
 import { FilterByText } from './filterSections/FilterByText' //Comportamento ricerca testuale
 import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
 import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
 import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Fonte
-import { NumberInput } from './ui/NumberInput'
+import { DateIntervalInput } from './ui/DateIntervalInput'
 
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
 
-  const [numeroArt, setNumeroArt] = useState(0)
+  const dateWith31 = new Date("2017-08-31");
+  const dateWith29 = new Date("2016-02-29");
+
+  const amountToIncreaseWith = 1;
+
+  console.log(incrementDate(dateWith31, amountToIncreaseWith));
+  console.log(incrementDate(dateWith29, amountToIncreaseWith));
+
+  function incrementDate(dateInput, increment) {
+    const dateFormatTotime = new Date(dateInput);
+    const increasedDate = new Date(dateFormatTotime.getTime() + (increment * 86400000));
+    return increasedDate;
+  }
+
+  const today = new Date
+  const tomorrow = incrementDate(today, 1)
+  const [startEs, setStartEs] = useState(today)
+  const [endEs, setEndEs] = useState(tomorrow)
+
 
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
@@ -1131,6 +1149,9 @@ export const AdvancedSearch = function (props) {
     }
   }
 
+  useEffect(() => {
+    console.log("data aggiornata:", dataEsempio)
+  })
 
   return (
     <Row className="w-100 mt-2 ml-0 mr-0">
@@ -1201,17 +1222,44 @@ export const AdvancedSearch = function (props) {
           </Col>
         </Row>
       </Jumbotron>
-      <NumberInput
-        formGroupClass={""}
-        formLabelClass={""}
-        colSpan={8}
-        label={"prova label"}
-        placeholderText={""}
-        textmuted={"prova textmuted"}
-        value={numeroArt}
-        onChange={setNumeroArt}
-        validationFunc={(num) => num >= 0 && num <= 10}
-        isDisabled={false}
+      <DateIntervalInput
+        //container
+        formGroupClass=""
+        formLabelClass=""
+        label="prova interval"
+        textmuted="prova textmuted interval"
+        colSpan_1={8}
+        colSpan_2={4}
+        //start
+        value_1={startEs}
+        datepickerClassName_1={null}
+        calendarClassName_1={null}
+        onChange_1={setStartEs}
+        withTime_1={false}
+        dateFormat_1={null}
+        isDisabled_1={false}
+        filterDate_1={[]}
+        locale_1={null}
+        maxDate_1={null}
+        minDate_1={null}
+        readOnly_1={false}
+        required_1={false}
+        excludeDates_1={null}
+        //end
+        value_2={endEs}
+        datepickerClassName_2={null}
+        calendarClassName_2={null}
+        onChange_2={setEndEs}
+        withTime_2={false}
+        dateFormat_2={null}
+        isDisabled_2={false}
+        filterDate_2={[]}
+        locale_2={null}
+        maxDate_2={null}
+        minDate_2={null}
+        readOnly_2={false}
+        required_2={false}
+        excludeDates_2={null}
       />
     </Row >
   )

@@ -1,4 +1,5 @@
 ## Checkpoint
+- RangeError: Format string contains an unescaped latin alphabet character `n`! Controllare: https://github.com/mui-org/material-ui-pickers/issues/1440
 - AdvancedSearch frontend: Inserire tutti i possibili dati del filtro in filtersState. Partendo da bySubject.byZoneGeog. Memo: Le Fonti saranno i tag f3-style del signor Luigi, ma essendo moltissimi e suddivisi a loro volta in categoria, sarà necessario gestire bene l'ordinamento e l'assetto. Forse l'approccio migliore sarebbe avere delle Headings che se clickate mostrano la lista di possibili checkboxes. Per esempio heading clickabile "Zona Geografica", che poi mostra regioni, etc.
 
 
