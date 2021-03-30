@@ -13,21 +13,12 @@ import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
 import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
 import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Fonte
-import { DateIntervalInput } from './ui/DateIntervalInput'
 
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
 
-  const dateWith31 = new Date("2017-08-31");
-  const dateWith29 = new Date("2016-02-29");
-
-  const amountToIncreaseWith = 1;
-
-  console.log(incrementDate(dateWith31, amountToIncreaseWith));
-  console.log(incrementDate(dateWith29, amountToIncreaseWith));
-
-  function incrementDate(dateInput, increment) {
+  const incrementDate = (dateInput, increment) => {
     const dateFormatTotime = new Date(dateInput);
     const increasedDate = new Date(dateFormatTotime.getTime() + (increment * 86400000));
     return increasedDate;
@@ -37,7 +28,6 @@ export const AdvancedSearch = function (props) {
   const tomorrow = incrementDate(today, 1)
   const [startEs, setStartEs] = useState(today)
   const [endEs, setEndEs] = useState(tomorrow)
-
 
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
@@ -1088,21 +1078,21 @@ export const AdvancedSearch = function (props) {
 
   const getMinifiedFilterState = (original) => {
     const newFilterState = { ...original }
-    console.log("newFilterState - pre filter func:", newFilterState)
+    console.log("newFilterState - pre filter func:", newFilterState) //buggato, non rimuovere!
     const externalProps = Object.keys(original)
-    console.log("these are the externalProps", externalProps)
+    console.log("these are the externalProps", externalProps) //buggato, non rimuovere!
     for (let x = 0; x < externalProps.length; x++) {
       if (Array.isArray(original[externalProps[x]])) {
         newFilterState[externalProps[x]] = original[externalProps[x]].filter(el => el.checked === true)
       } else {
         const internalProps = Object.keys(original[externalProps[x]])
-        console.log("Analyzing:", externalProps[x], " - it contains these props: ", internalProps)
+        console.log("Analyzing:", externalProps[x], " - it contains these props: ", internalProps) //buggato, non rimuovere!
         for (let y = 0; y < internalProps.length; y++) {
           newFilterState[externalProps[x]] = original[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
         }
       }
     }
-    console.log("newFilterState - after removing the false booleans:", newFilterState)
+    console.log("newFilterState - after removing the false booleans:", newFilterState) //buggato, non rimuovere!
 
 
     //[Checkpoint] funziona male, rimuove fin troppo. Da rivedere.
@@ -1119,7 +1109,7 @@ export const AdvancedSearch = function (props) {
         }
       }
     })
-    console.log("newFilterState - after removing the empty arr:", newFilterState)
+    console.log("newFilterState - after removing the empty arr:", newFilterState) //buggato, non rimuovere!
     return newFilterState
   }
 
@@ -1150,7 +1140,7 @@ export const AdvancedSearch = function (props) {
   }
 
   useEffect(() => {
-    console.log("data aggiornata:", dataEsempio)
+    //code to execute at every state update
   })
 
   return (
@@ -1222,45 +1212,6 @@ export const AdvancedSearch = function (props) {
           </Col>
         </Row>
       </Jumbotron>
-      <DateIntervalInput
-        //container
-        formGroupClass=""
-        formLabelClass=""
-        label="prova interval"
-        textmuted="prova textmuted interval"
-        colSpan_1={8}
-        colSpan_2={4}
-        //start
-        value_1={startEs}
-        datepickerClassName_1={null}
-        calendarClassName_1={null}
-        onChange_1={setStartEs}
-        withTime_1={false}
-        dateFormat_1={null}
-        isDisabled_1={false}
-        filterDate_1={[]}
-        locale_1={null}
-        maxDate_1={null}
-        minDate_1={null}
-        readOnly_1={false}
-        required_1={false}
-        excludeDates_1={null}
-        //end
-        value_2={endEs}
-        datepickerClassName_2={null}
-        calendarClassName_2={null}
-        onChange_2={setEndEs}
-        withTime_2={false}
-        dateFormat_2={null}
-        isDisabled_2={false}
-        filterDate_2={[]}
-        locale_2={null}
-        maxDate_2={null}
-        minDate_2={null}
-        readOnly_2={false}
-        required_2={false}
-        excludeDates_2={null}
-      />
     </Row >
   )
 }

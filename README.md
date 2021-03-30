@@ -1,5 +1,5 @@
 ## Checkpoint
-- RangeError: Format string contains an unescaped latin alphabet character `n`! Controllare: https://github.com/mui-org/material-ui-pickers/issues/1440
+- CreazioneComponenti | ultimo creato: DateIntervalInput ---> ATTENZIONE: MANCA LA VERSIONE YEAR-ONLY
 - AdvancedSearch frontend: Inserire tutti i possibili dati del filtro in filtersState. Partendo da bySubject.byZoneGeog. Memo: Le Fonti saranno i tag f3-style del signor Luigi, ma essendo moltissimi e suddivisi a loro volta in categoria, sarà necessario gestire bene l'ordinamento e l'assetto. Forse l'approccio migliore sarebbe avere delle Headings che se clickate mostrano la lista di possibili checkboxes. Per esempio heading clickabile "Zona Geografica", che poi mostra regioni, etc.
 
 
@@ -8,6 +8,7 @@
 
 
 ## Note
+- [AggiunteUtili] Tutti i componenti calendario dovrebbero essere dotati di reset button
 - [Domande] Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 - [Style] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
 - [Archive] Avvicinarsi il più possibile al funzionamento di https://dejure.it/, sia per stile che per filtri di ricerca.

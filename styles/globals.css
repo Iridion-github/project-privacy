@@ -452,7 +452,16 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
   width: 50% !important;
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container{
+  width: 100%;
+}
+
 .datepicker-input {
   border: 1px solid #17a2b8 !important;
   border-radius: 5px;
+  width: 100%;
 }

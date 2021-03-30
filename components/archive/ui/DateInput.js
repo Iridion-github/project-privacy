@@ -10,32 +10,51 @@ import {
   Col
 } from 'react-bootstrap'
 
-export const DateInput = function (props) {
+export const DateInput = function ({
+  formGroupClass = "",
+  formLabelClass = "",
+  calendarClassName = "",
+  datepickerClassName = "",
+  colSpan = 12,
+  validationFunc = () => true,
+  label = "",
+  textmuted = false,
+  value = new Date,
+  onChange = val => val,
+  isDisabled = false,
+  withTime = false,
+  dateFormat = 'dd/MM/yyyy',
+  excludeDates = [],
+  filterDate = () => true,
+  locale = "it",
+  maxDate = undefined,
+  minDate = undefined,
+  readOnly = false,
+  required = true,
+}) {
 
-  console.log("DateInput props:", props)
-
-  const {
-    formGroupClass = "",
-    formLabelClass = "",
-    calendarClassName = "",
-    datepickerClassName = "",
-    colSpan = 12,
-    validationFunc = () => true,
-    label = "",
-    textmuted = null,
-    value = new Date,
-    onChange = val => val,
-    isDisabled = false,
-    withTime = false,
-    dateFormat = 'dd/MM/yyyy',
-    excludeDates = [],
-    filterDate = () => true,
-    locale = "it",
-    maxDate = null,
-    minDate = null,
-    readOnly = false,
-    required = true,
-  } = props
+  const props = {
+    formGroupClass,
+    formLabelClass,
+    calendarClassName,
+    datepickerClassName,
+    colSpan,
+    validationFunc,
+    label,
+    textmuted,
+    value,
+    onChange,
+    isDisabled,
+    withTime,
+    dateFormat,
+    excludeDates,
+    filterDate,
+    locale,
+    maxDate,
+    minDate,
+    readOnly,
+    required,
+  }
 
   const handleChange = (val) => {
     if (validationFunc(val)) {
@@ -45,10 +64,10 @@ export const DateInput = function (props) {
   }
 
   return (
-    <Form.Group className={formGroupClass + " w-25"}>
+    <Form.Group className={formGroupClass}>
       <Form.Label className={formLabelClass}>{label}</Form.Label>
-      <Row className="w-100">
-        <Col md={colSpan}>
+      <Row className="w-100 ml-0 mr-0">
+        <Col md={colSpan} className="pl-1 pr-1">
           <DatePicker
             selected={value}
             className={datepickerClassName + " datepicker-input"} //input-class
@@ -56,7 +75,7 @@ export const DateInput = function (props) {
             onChange={date => handleChange(date)}
             showTimeInput={withTime}
             dateFormat={dateFormat}
-            disabled={isDisabled}
+            disabled={isDisabled ? true : false}
             excludeDates={excludeDates}
             filterDate={filterDate}
             locale={locale}
@@ -76,29 +95,27 @@ export const DateInput = function (props) {
 
 /*
 [USAGE]
-
-<DateInput
+      <DateInput
         formGroupClass={""}
         formLabelClass={""}
         //colSpan={8}
         label={"prova label"}
         placeholderText={""}
         textmuted={"prova textmuted"}
-        value={dataEsempio}
-        onChange={setDataEsempio}
-        //validationFunc={() => { }}
+        value={startEs}
+        onChange={setStartEs}
+        validationFunc={el => el}
         isDisabled={false}
-      //calendarClassName="pt-5"
-      //datepickerClassName="pt-5"
-      //withTime={true}
-      //dateFormat='MM/dd/yyyy'
-      //excludeDates={[]}
-      //filterDate={()=> {}}
-      //locale={"es"}
-      //maxDate={new Date}
-      //minDate={new Date}
-      //readOnly={true}
-      //required={true}
+        calendarClassName=""
+        datepickerClassName=""
+        //withTime={true}
+        //dateFormat='MM/dd/yyyy'
+        excludeDates={[]}
+        filterDate={() => true}
+        locale={"es"}
+        //maxDate={new Date}
+        //minDate={new Date}
+        //readOnly={true}
+        required={true}
       />
-
 */

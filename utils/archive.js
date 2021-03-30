@@ -91,7 +91,7 @@
 - MultiSelect [X]
 - NumberInput [O]
 - DateInput (+ yearOnly) [X]
-- DateIntervalInput (+ yearOnly) [X]
+- DateIntervalInput (+ yearOnly) [O]
 - CustomAutosuggest [X]
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
 
