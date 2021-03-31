@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import {
@@ -15,6 +15,7 @@ import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
 import { AdvancedSearch } from '../components/archive/AdvancedSearch'
+import { YearInterval } from '../components/archive/ui/YearInterval'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -84,6 +85,32 @@ export default function archivio(props) {
     submitSearch(cleanInput)
   }
 
+  //[CHECKPOINT] DEBUGGARE TUTTO DA QUI ...
+
+  const [Y_1, setY_1] = useState("")
+  const [Y_2, setY_2] = useState("")
+
+  const [minYear_1, setMinYear_1] = useState(1900)
+  const [maxYear_1, setMaxYear_1] = useState(2021)
+  const [minYear_2, setMinYear_2] = useState(1900)
+  const [maxYear_2, setMaxYear_2] = useState(2021)
+
+
+
+  const handleChangeY_1 = (y) => {
+    setY_1(y)
+    setMinYear_2(y)
+  }
+
+  const handleChangeY_2 = (y) => {
+    setY_2(y)
+    setMaxYear_1(y)
+  }
+
+  useEffect(() => {
+    //console.log("parameter to check:", param)
+  })
+
   return (
     <div className={styles.container}>
       <Header
@@ -92,6 +119,29 @@ export default function archivio(props) {
       {/* Navbar */}
       <Navigation />
       {loading && <Loading />}
+      <YearInterval
+        formGroupClass={"mt-5"}
+        formLabelClass={"mt-5"}
+        label={"label"}
+        textmuted={"textmuted"}
+        setYear_1={handleChangeY_1}
+        formGroupClass_1={"mt-5"}
+        formLabelClass_1={"mt-5"}
+        validationFunc_1={"mt-5"}
+        label_1={"label_1"}
+        isDisabled_1={false}
+        minYear_1={minYear_1 ? minYear_1 : undefined}
+        maxYear_1={maxYear_1 ? maxYear_1 : undefined}
+        setYear_2={handleChangeY_2}
+        formGroupClass_2={"mt-5"}
+        formLabelClass_2={"mt-5"}
+        validationFunc_2={"mt-5"}
+        label_2={"label_2"}
+        isDisabled_2={false}
+        minYear_2={minYear_2 ? minYear_2 : undefined}
+        maxYear_2={maxYear_2 ? maxYear_2 : undefined}
+      />
+      {/*//[CHECKPOINT] ...A QUI */}
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="p-2 fixed-width-card">
