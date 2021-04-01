@@ -4,7 +4,6 @@ import {
   Col
 } from 'react-bootstrap'
 
-//[CHECKPOINT] DEBUGGARE TUTTO
 
 export const YearSelect = function (props) {
 
@@ -20,41 +19,25 @@ export const YearSelect = function (props) {
     minDate = undefined
   } = props
 
-  console.log("YearSelect - props:", props)
-
   const handleChange = (val) => {
     if (validationFunc(val)) {
-      console.log("validated ok")
-      console.log("valid val is:", val)
-      console.log("about to call this onChange: ", onChange)
       onChange(val)
       return
     }
   }
 
-  const getYearsArr = (start, partialEnd) => {
-    console.log("start:", start)
-    console.log("maxDate:", maxDate)
-    console.log("partialEnd:", partialEnd)
-    let end
-    if (partialEnd >= 0) {
-      end = partialEnd + 1900
-    }
-    /*
-    if (end >= 0) {
-      partialEnd = end + 1900
-    }*/
-    console.log("end:", end)
+  const getYearsArr = (startParam, endParam) => {
+    const start = startParam ? startParam : 1800
+    const partialEnd = endParam ? new Date(`06/06/${endParam}`).getYear() : new Date().getYear()
+    const end = partialEnd + 1900
     let result = [""]
     for (let x = start; x <= end; x++) {
       result.push(x)
     }
-    console.log("end:", end)
-    console.log("result: ", result)
     return result
   }
 
-  const selectableYears = getYearsArr(minDate ? minDate : 1800, maxDate ? new Date(`06/06/${maxDate}`).getYear() : new Date().getYear())
+  const selectableYears = getYearsArr(minDate, maxDate)
 
   return (
     <Form.Group className={formGroupClass}>
