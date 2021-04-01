@@ -16,10 +16,10 @@ export const Select = function (props) {
     onChange = val => val,
     isDisabled = false,
     selectableOptions = [],
+    defaultValue = "",
     placeholder,
     getOptionValue = el => (el && el !== "") ? el : null,
     getOptionStyle = () => ({}),
-    defaultValue = "",
   } = props
 
   const handleChange = (val) => {
@@ -41,18 +41,14 @@ export const Select = function (props) {
             disabled={isDisabled}
             value={defaultValue}
             custom>
-            {selectableOptions.map(el => {
-              console.log("getOptionStyle(el) returns:", getOptionStyle(el))
-              return (
-                <option
-                  style={getOptionStyle(el)}
-                  key={el}
-                  value={getOptionValue(el)}
-                >
-                  {el}
-                </option>
-              )
-            })}
+            {selectableOptions.map(el => <option
+              style={getOptionStyle(el)}
+              key={el}
+              value={getOptionValue(el)}
+            >
+              {el}
+            </option>
+            )}
           </Form.Control>
         </Col>
       </Row>
