@@ -80,6 +80,16 @@ const [maxYear_1, setMaxYear_1] = useState(2021)
 const [minYear_2, setMinYear_2] = useState(1800)
 const [maxYear_2, setMaxYear_2] = useState(2021)
 
+const handleChangeY_1 = (y) => {
+    setY_1(Number(y))
+    setMinYear_2(Number(y))
+  }
+
+const handleChangeY_2 = (y) => {
+  setY_2(Number(y))
+  setMaxYear_1(Number(y))
+}
+
 
 Return:
 <YearInterval

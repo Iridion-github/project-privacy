@@ -15,7 +15,7 @@ import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
 import { AdvancedSearch } from '../components/archive/AdvancedSearch'
-import { YearInterval } from '../components/archive/ui/YearInterval'
+import { Select } from '../components/archive/ui/Select'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -85,20 +85,6 @@ export default function archivio(props) {
     submitSearch(cleanInput)
   }
 
-
-
-
-
-  const handleChangeY_1 = (y) => {
-    setY_1(Number(y))
-    setMinYear_2(Number(y))
-  }
-
-  const handleChangeY_2 = (y) => {
-    setY_2(Number(y))
-    setMaxYear_1(Number(y))
-  }
-
   useEffect(() => {
     //console.log("parameter to check:", param)
   })
@@ -110,6 +96,7 @@ export default function archivio(props) {
       />
       {/* Navbar */}
       <Navigation />
+
       {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
