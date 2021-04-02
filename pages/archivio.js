@@ -15,7 +15,7 @@ import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
 import { AdvancedSearch } from '../components/archive/AdvancedSearch'
-import { Select } from '../components/archive/ui/Select'
+import { MultiSelect } from '../components/archive/ui/MultiSelect'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -86,7 +86,7 @@ export default function archivio(props) {
   }
 
   useEffect(() => {
-    //console.log("parameter to check:", param)
+    console.log("multiSelectVal:", multiSelectVal)
   })
 
   return (
