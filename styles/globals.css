@@ -411,7 +411,7 @@ a {
 }
 
 .my_pdf_viewer-preCanvas {
-  z-index: -9999 !important;
+  z-index: -9000 !important;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 15%;
@@ -456,7 +456,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
   width: 100%;
 }
 
-.react-datepicker__input-container{
+.react-datepicker__input-container {
   width: 100%;
 }
 
@@ -464,4 +464,8 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
   border: 1px solid #17a2b8 !important;
   border-radius: 5px;
   width: 100%;
+}
+
+.form-with-on-blur {
+  z-index: 5000 !important;
 }

@@ -15,7 +15,7 @@ import { Loading } from '../components/layout/Loading'
 import { Footer } from '../components/layout/Footer'
 import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
 import { AdvancedSearch } from '../components/archive/AdvancedSearch'
-import { MultiSelect } from '../components/archive/ui/MultiSelect'
+import { CustomAutoSuggest } from '../components/archive/ui/CustomAutoSuggest'
 
 export default function archivio(props) {
   const siteLanguage = useLanguage() //context
@@ -86,8 +86,64 @@ export default function archivio(props) {
   }
 
   useEffect(() => {
-    console.log("multiSelectVal:", multiSelectVal)
+    console.log("useEffect console.log:")
   })
+
+  const [autoSuggestOptions, setAutoSuggestOptions] = useState([
+    {
+      id: 0,
+      nome: "nome1",
+      cognome: "cognome1",
+      telefono: "000000001"
+    },
+    {
+      id: 1,
+      nome: "nome2",
+      cognome: "cognome2",
+      telefono: "000000002"
+    },
+    {
+      id: 2,
+      nome: "nome2",
+      cognome: "cognome2",
+      telefono: "000000002"
+    },
+    {
+      id: 3,
+      nome: "nome3",
+      cognome: "cognome3",
+      telefono: "000000003"
+    }
+  ])
+
+  /*
+  [CHECKPOINT] 
+  Cosa manca a CustomAutosuggest:
+  - Filtro che visualizzi le suggestions a seconda dell'input value
+  - sistema di paginazione/scorrimento con scrollbar nel caso in cui le suggestions superino una certa lenght
+  */
+
+  const [autoSuggestValue, setAutoSuggestValue] = useState("")
+  const [autoSuggestItems, setAutoSuggestItems] = useState([])
+
+  const onChangeAutosuggestValue = (val) => {
+    setAutoSuggestValue(val)
+  }
+
+  const AutosuggestItemsInsert = (val) => {
+    setAutoSuggestItems([...autoSuggestItems, val])
+  }
+
+  const AutosuggestItemsRemove = (val) => {
+    console.log("val:", val)
+    console.log("autoSuggestItems:", autoSuggestItems)
+    const filteredArr = [...autoSuggestItems].filter(items => items.id !== val.id)
+    setAutoSuggestItems(filteredArr)
+  }
+
+  const AutosuggestItemsRemoveAll = () => {
+    setAutoSuggestItems([])
+  }
 
   return (
     <div className={styles.container}>
@@ -101,6 +157,25 @@ export default function archivio(props) {
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="p-2 fixed-width-card">
+          <CustomAutoSuggest
+            formGroupId="formGroupId"
+            formGroupLabel="Prova Label"
+            formGroupClassName="prova-class-name"
+            type="text"
+            placeholder="Prova placeholder"
+            onChange={onChangeAutosuggestValue}
+            value={autoSuggestValue}
+            renderSuggestion={item => `${item.nome} | ${item.cognome}`}
+            suggestions={autoSuggestOptions}
+            onSuggestionClick={AutosuggestItemsInsert}
+            onRemove={AutosuggestItemsRemove}
+            onRemoveAll={AutosuggestItemsRemoveAll}
+            onSuggestionsClear={() => { }}
+            //getSuggestionValue={item => item.nome}
+            autoSuggestItems={autoSuggestItems}
+            //isTriggeredOnFocus={false}
+            textmuted={"this is text muted"}
+          />
           <Card.Img variant="top" src="archiveImg.png" />
           <ButtonGroup className="mt-5 mb-3 w-100">
             <Button
