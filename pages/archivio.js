@@ -102,27 +102,6 @@ export default function archivio(props) {
       {/* Page Content */}
       <main className={styles.main}>
         <Card className="p-2 fixed-width-card">
-          <CustomAutoSuggest
-            formGroupId="formGroupId"
-            formGroupLabel="Prova Label"
-            formGroupClassName="prova-class-name"
-            type="text"
-            placeholder="Prova placeholder"
-            onChange={onChangeAutosuggestValue}
-            value={autoSuggestValue}
-            renderSuggestion={item => `${item.nome} | ${item.cognome}`}
-            suggestions={suggestions}
-            shownSuggestions={shownSuggestions}
-            onSuggestionClick={AutosuggestItemsInsert}
-            onRevealSuggestions={handleRevealSuggestions}
-            onRemove={AutosuggestItemsRemove}
-            onRemoveAll={AutosuggestItemsRemoveAll}
-            onSuggestionsClear={() => { }}
-            //getSuggestionValue={item => item.nome}
-            autoSuggestItems={autoSuggestItems}
-            //isTriggeredOnFocus={false}
-            textmuted={"this is text muted"}
-          />
           <Card.Img variant="top" src="archiveImg.png" />
           <ButtonGroup className="mt-5 mb-3 w-100">
             <Button

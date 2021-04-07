@@ -276,17 +276,24 @@ const suggestionsFromDb = [
 
 ------------------------------[RETURN]------------------------------
 <CustomAutoSuggest
-  //formGroupClass={"mt-5"}
-  //formLabelClass={"mt-5"}
-  validationFunc={() => true}
-  label={"label"}
-  textmuted={"text muted"}
-  onChange={handleChangeSelectVal}
-  isDisabled={false}
-  selectableOptions={optionsList}
-  //laceholder={"placeholder"}
-  //getOptionValue={col => col}
-  //getOptionStyle={col => ({ color: `${col} !important` })}
-  defaultValue={selectVal}
-/>
+            formGroupId="formGroupId"
+            formGroupLabel="Prova Label"
+            formGroupClassName="prova-class-name"
+            type="text"
+            placeholder="Prova placeholder"
+            onChange={onChangeAutosuggestValue}
+            value={autoSuggestValue}
+            renderSuggestion={item => `${item.nome} | ${item.cognome}`}
+            suggestions={suggestions}
+            shownSuggestions={shownSuggestions}
+            onSuggestionClick={AutosuggestItemsInsert}
+            onRevealSuggestions={handleRevealSuggestions}
+            onRemove={AutosuggestItemsRemove}
+            onRemoveAll={AutosuggestItemsRemoveAll}
+            onSuggestionsClear={() => { }}
+            //getSuggestionValue={item => item.nome}
+            autoSuggestItems={autoSuggestItems}
+            //isTriggeredOnFocus={false}
+            textmuted={"this is text muted"}
+          />
 */
