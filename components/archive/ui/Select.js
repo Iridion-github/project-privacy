@@ -60,8 +60,7 @@ export const Select = function (props) {
 }
 
 /*
-[USAGE]
-State:
+------------------------------[STATE]------------------------------
 const [selectVal, setSelectVal] = useState("")
 
 const [optionsList, setOptionsList] = useState([
@@ -73,7 +72,7 @@ const handleChangeSelectVal = (val) => {
 }
 
 
-Return:
+------------------------------[RETURN]------------------------------
 <Select
   //formGroupClass={"mt-5"}
   //formLabelClass={"mt-5"}

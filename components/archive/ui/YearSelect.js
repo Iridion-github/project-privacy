@@ -69,8 +69,7 @@ export const YearSelect = function (props) {
 }
 
 /*
-[USAGE]
-
+------------------------------[RETURN]------------------------------
 <YearSelect
           onChange={setRandomDate}
           formGroupClass={"mt-5"}

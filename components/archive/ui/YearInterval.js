@@ -70,9 +70,7 @@ export const YearInterval = function (props) {
 }
 
 /*
-[USAGE]
-
-State:
+------------------------------[STATE]------------------------------
 const [Y_1, setY_1] = useState("")
 const [Y_2, setY_2] = useState("")
 const [minYear_1, setMinYear_1] = useState(1800)
@@ -91,7 +89,7 @@ const handleChangeY_2 = (y) => {
 }
 
 
-Return:
+------------------------------[RETURN]------------------------------
 <YearInterval
   formGroupClass={"mt-5"}
   formLabelClass={"mt-5"}

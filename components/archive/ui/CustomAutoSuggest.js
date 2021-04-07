@@ -21,6 +21,7 @@ export const CustomAutoSuggest = function (props) {
     label = "",
     textmuted = false,
     suggestions = [],
+    shownSuggestions = [],
     renderSuggestion = item => item.value ? item.value : item,
     onSuggestionClick = () => { },
     getSuggestionValue = null,
@@ -32,6 +33,7 @@ export const CustomAutoSuggest = function (props) {
     getOptionValue = el => (el && el !== "") ? el : null,
     getOptionStyle = () => ({}),
     autoSuggestItems = [],
+    onRevealSuggestions = null,
     onRemove = null,
     onRemoveAll = null,
     isTriggeredOnFocus = true,
@@ -43,6 +45,7 @@ export const CustomAutoSuggest = function (props) {
 
   const handleAutosuggestChange = (event) => {
     if (validationFunc(event.target.value)) {
+      onRevealSuggestions(event.target.value)
       if (event.target.value.length >= 3) {
         setIsListOpen(true)
       } else {
@@ -66,12 +69,6 @@ export const CustomAutoSuggest = function (props) {
   const disableFocus = () => {
     setIsFocused(false)
   }
-
-  const handleFocusOnInput = () => {
-    if (!isTriggeredOnFocus) return
-    enableFocus()
-  }
-
 
   useEffect(() => {
     console.log("AutoSuggest state has changed - props: ", props)
@@ -140,9 +137,9 @@ export const CustomAutoSuggest = function (props) {
             </Row>}
         </Col>
       </Row>
-      <Row className="w-100 text-center ml-0 mr-0">
+      <Row className="auto-suggest-list-container w-100 text-center ml-0 mr-0">
         {
-          (isListOpen && suggestions.length > 0 && isFocused) && props.suggestions.map((sugg, i) => (
+          (isListOpen && shownSuggestions.length > 0 && isFocused) && props.shownSuggestions.map((sugg, i) => (
             <Row className="w-100 pl-0 pr-0 ml-0 mr-0" key={i}>
               <Col md={12} className="">
                 <Button
@@ -166,12 +163,118 @@ export const CustomAutoSuggest = function (props) {
 }
 
 /*
-[USAGE]
-State:
+------------------------------[STATE]------------------------------
+const suggestionsFromDb = [
+    {
+      id: 0,
+      nome: "alfredo",
+      cognome: "mantovani",
+      telefono: "000000001"
+    },
+    {
+      id: 1,
+      nome: "mario",
+      cognome: "rossi",
+      telefono: "000000002"
+    },
+    {
+      id: 2,
+      nome: "giovanni",
+      cognome: "storti",
+      telefono: "000000002"
+    },
+    {
+      id: 3,
+      nome: "giacomo",
+      cognome: "poretti",
+      telefono: "000000003"
+    },
+    {
+      id: 5,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    },
+    {
+      id: 6,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    },
+    {
+      id: 7,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    },
+    {
+      id: 8,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    },
+    {
+      id: 9,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    },
+    {
+      id: 10,
+      nome: "mauro",
+      cognome: "giacomoni",
+      telefono: "000000003"
+    }
+  ]
+
+  const filterFunction = (option, inputVal) => {
+    if (
+      option.cognome.toLowerCase().includes(inputVal.toLowerCase())
+      || option.nome.toLowerCase().includes(inputVal.toLowerCase())
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const [suggestions, setSuggestions] = useState(suggestionsFromDb)
+
+  const [shownSuggestions, setShownSuggestions] = useState([])
 
 
+  const [autoSuggestValue, setAutoSuggestValue] = useState("")
+  const [autoSuggestItems, setAutoSuggestItems] = useState([])
 
-Return:
+  const onChangeAutosuggestValue = (val) => {
+    setAutoSuggestValue(val)
+  }
+
+  const AutosuggestItemsInsert = (val) => {
+    setAutoSuggestItems([...autoSuggestItems, val])
+  }
+
+  const handleFilterOptions = (suggestions, inputVal) => {
+    const filteredSuggestions = [...suggestions].filter(opt => filterFunction(opt, inputVal))
+    return filteredSuggestions
+  }
+
+  const handleRevealSuggestions = (inputVal) => {
+    const filteredSuggestions = handleFilterOptions(suggestions, inputVal)
+    setShownSuggestions(filteredSuggestions)
+  }
+
+  const AutosuggestItemsRemove = (val) => {
+    const filteredArr = [...autoSuggestItems].filter(items => items.id !== val.id)
+    setAutoSuggestItems(filteredArr)
+  }
+
+  const AutosuggestItemsRemoveAll = () => {
+    setAutoSuggestItems([])
+  }
+
+
+------------------------------[RETURN]------------------------------
 <CustomAutoSuggest
   //formGroupClass={"mt-5"}
   //formLabelClass={"mt-5"}

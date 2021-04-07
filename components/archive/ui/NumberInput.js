@@ -46,7 +46,7 @@ export const NumberInput = function ({
 }
 
 /*
-[USAGE]
+------------------------------[RETURN]------------------------------
 
 <NumberInput
   formGroupClass={""}

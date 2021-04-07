@@ -469,3 +469,8 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .form-with-on-blur {
   z-index: 5000 !important;
 }
+
+.auto-suggest-list-container {
+  max-height: 250px !important;
+  overflow-y: scroll !important;
+}

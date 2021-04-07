@@ -89,61 +89,6 @@ export default function archivio(props) {
     console.log("useEffect console.log:")
   })
 
-  const [autoSuggestOptions, setAutoSuggestOptions] = useState([
-    {
-      id: 0,
-      nome: "nome1",
-      cognome: "cognome1",
-      telefono: "000000001"
-    },
-    {
-      id: 1,
-      nome: "nome2",
-      cognome: "cognome2",
-      telefono: "000000002"
-    },
-    {
-      id: 2,
-      nome: "nome2",
-      cognome: "cognome2",
-      telefono: "000000002"
-    },
-    {
-      id: 3,
-      nome: "nome3",
-      cognome: "cognome3",
-      telefono: "000000003"
-    }
-  ])
-
-  /*
-  [CHECKPOINT] 
-  Cosa manca a CustomAutosuggest:
-  - Filtro che visualizzi le suggestions a seconda dell'input value
-  - sistema di paginazione/scorrimento con scrollbar nel caso in cui le suggestions superino una certa lenght
-  */
-
-  const [autoSuggestValue, setAutoSuggestValue] = useState("")
-  const [autoSuggestItems, setAutoSuggestItems] = useState([])
-
-  const onChangeAutosuggestValue = (val) => {
-    setAutoSuggestValue(val)
-  }
-
-  const AutosuggestItemsInsert = (val) => {
-    setAutoSuggestItems([...autoSuggestItems, val])
-  }
-
-  const AutosuggestItemsRemove = (val) => {
-    console.log("val:", val)
-    console.log("autoSuggestItems:", autoSuggestItems)
-    const filteredArr = [...autoSuggestItems].filter(items => items.id !== val.id)
-    setAutoSuggestItems(filteredArr)
-  }
-
-  const AutosuggestItemsRemoveAll = () => {
-    setAutoSuggestItems([])
-  }
 
   return (
     <div className={styles.container}>
@@ -166,8 +111,10 @@ export default function archivio(props) {
             onChange={onChangeAutosuggestValue}
             value={autoSuggestValue}
             renderSuggestion={item => `${item.nome} | ${item.cognome}`}
-            suggestions={autoSuggestOptions}
+            suggestions={suggestions}
+            shownSuggestions={shownSuggestions}
             onSuggestionClick={AutosuggestItemsInsert}
+            onRevealSuggestions={handleRevealSuggestions}
             onRemove={AutosuggestItemsRemove}
             onRemoveAll={AutosuggestItemsRemoveAll}
             onSuggestionsClear={() => { }}

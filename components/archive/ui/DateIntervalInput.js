@@ -103,8 +103,7 @@ export const DateIntervalInput = function ({
 }
 
 /*
-[USAGE]
-
+------------------------------[RETURN]------------------------------
 <DateIntervalInput
         //container
         formLabelClass=""

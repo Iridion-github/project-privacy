@@ -40,7 +40,7 @@ export const TextInput = function ({
 }
 
 /*
-[USAGE]
+------------------------------[RETURN]------------------------------
 
 <TextInput
         formGroupClass={"ml-5"}

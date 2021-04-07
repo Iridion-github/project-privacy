@@ -94,7 +94,7 @@ export const DateInput = function ({
 }
 
 /*
-[USAGE]
+------------------------------[RETURN]------------------------------
       <DateInput
         formGroupClass={""}
         formLabelClass={""}

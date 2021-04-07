@@ -103,9 +103,7 @@ export const MultiSelect = function (props) {
 }
 
 /*
-[USAGE]
-
-State&Functions:
+------------------------------[STATE]------------------------------
 
 const [multiSelectVal, setMultiSelectVal] = useState("")
   const [optionsList, setOptionsList] = useState([
@@ -148,7 +146,7 @@ const [multiSelectVal, setMultiSelectVal] = useState("")
     }))
   }
 
-Return:
+------------------------------[RETURN]------------------------------
 
  <MultiSelect
   //formGroupClass={"mt-5"}
