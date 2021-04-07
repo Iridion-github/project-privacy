@@ -2,13 +2,40 @@
 - Componenti completati - Iniziata implementazione
 - AdvancedSearch frontend: Inserire tutti i possibili dati del filtro in filtersState. Partendo da bySubject.byZoneGeog. Memo: Le Fonti saranno i tag f3-style del signor Luigi, ma essendo moltissimi e suddivisi a loro volta in categoria, sarà necessario gestire bene l'ordinamento e l'assetto. Forse l'approccio migliore sarebbe avere delle Headings che se clickate mostrano la lista di possibili checkboxes. Per esempio heading clickabile "Zona Geografica", che poi mostra regioni, etc.
 
+## Messaggio mandato a Luigi
+
+Salve Luigi, abbiamo bisogno di una serie di dati per implementare la ricerca avanzata. Qua sotto ti scrivo la lista completa di cos'è necessario. Nel caso in cui non avessi a disposizione quei dati, nulla di tragico, tuttavia saremo costretti a privarci di alcune funzioni presenti su Dejure. D'altronde siamo limitati comunque dal tuo sistema di categorizzazione dei file nel tuo archivio.
+
+
+Ti consiglio di guardare la ricerca avanzata di Dejure per capire meglio a che dati mi riferisco.
+Ogni elemento della liste qua sotto, nei files del tuo archivio deve avere una dicitura/tag corrispettivi. Se non ci sono corrispondenze, meglio non inserirlo in lista, perchè tanto l'algoritmo non sarebbe in grado di trovare comunque i bersagli.
+
+
+Quando selezioni la categoria GIURISPRUDENZA su Dejure:
+- Lista completa della lista "Scegli Autorità".
+- Lista completa della lista "Scegli Codice". 
+- Lista completa della lista "Scegli Legge".
+- Lista completa della lista "Scegli Fonte". Per caso sono i tag (o una parte d'essi) che ci hai fornito? 
+- Lista completa della lista "Scegli Testo Unico" (i titoli, e se vuoi anche i sottotitoli, ben staccati però. C'è ignoranza giuridica in noi ahah). 
+- Lista completa della lista "CLASSIFICAZIONE" con le sue voci e sottovoci. Per caso sono i tag (o una parte d'essi) che ci hai fornito? 
+- Lista completa degli Autori, nel caso non sia solo tu ad aver prodotto i files del tuo archivio, o magari dei collaboratori.
+- Lista completa della lista "Scegli Formulario".
+
+
+Quando selezioni la categoria NORMATIVA su Dejure:
+- Lista completa della lista "Scegli Provvedimento".
+
+
+Ok, i dati necessari finiscono qui, o almeno ciò che ci è venuto in mente per ora.
+Facci sapere se hai dubbi, buona giornata/serata.
+
+
 
 
 
 -------------------- [PANNELLI OK] --------------------
 - TESTUALE
 - DATA
-
 
 -------------------- [PANNELLI DA CREARE] --------------------
 - CODICI: {
@@ -114,7 +141,7 @@
 - Tutte le parole
 - Tutta la frase
 
-[DATA | Menù di tipo Date con una sua row] (24/03/2021) (tabs: GIURISPRUDENZA,    , NOTE & DOTTRINA)
+[DATA | Menù di tipo Date con una sua row] (24/03/2021) (tabs: GIURISPRUDENZA, NOTE & DOTTRINA)
 
 [AUTORITÀ | Menù multiplo con sottocampi, vedasi Dejure] (24/03/2021) (tabs: GIURISPRUDENZA)
 
