@@ -1,6 +1,9 @@
 ## Checkpoint
-- Componenti completati - Iniziata implementazione
-- AdvancedSearch frontend: Inserire tutti i possibili dati del filtro in filtersState. Partendo da bySubject.byZoneGeog. Memo: Le Fonti saranno i tag f3-style del signor Luigi, ma essendo moltissimi e suddivisi a loro volta in categoria, sarà necessario gestire bene l'ordinamento e l'assetto. Forse l'approccio migliore sarebbe avere delle Headings che se clickate mostrano la lista di possibili checkboxes. Per esempio heading clickabile "Zona Geografica", che poi mostra regioni, etc.
+Componenti completati - Iniziata implementazione. Implementati graficamente i componenti in:
+  - Giurisprudenza [O]
+  - Normativa [X]
+  - Note e Dottrina [X]
+  - Formulari [X]
 
 ## Messaggio mandato a Luigi
 
@@ -131,7 +134,7 @@ Facci sapere se hai dubbi, buona giornata/serata.
 - NumberInput [O]
 - DateInput (+ yearOnly) [O]
 - DateIntervalInput (+ yearOnly) [O]
-- CustomAutosuggest [X]
+- CustomAutosuggest [O]
 
 
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------

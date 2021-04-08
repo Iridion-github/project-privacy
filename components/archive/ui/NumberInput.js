@@ -7,7 +7,7 @@ import {
 export const NumberInput = function ({
   formGroupClass = "",
   formLabelClass = "",
-  colSpan = 6,
+  colSpan = 12,
   validationFunc = () => true,
   label = "",
   placeholderText = "",
@@ -25,7 +25,7 @@ export const NumberInput = function ({
   }
 
   return (
-    <Form.Group className={formGroupClass + " w-25"}>
+    <Form.Group className={formGroupClass}>
       <Form.Label className={formLabelClass}>{label}</Form.Label>
       <Row className="w-100">
         <Col md={colSpan}>

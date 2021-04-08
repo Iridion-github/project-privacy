@@ -4,12 +4,13 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
-import { useLanguage } from '../../../context/siteLanguageContext' //context
+import { Select } from '../ui/Select'
+import { DateInput } from '../ui/DateInput'
+import { NumberInput } from '../ui/NumberInput'
+import { TextInput } from '../ui/TextInput'
 
 
 export const FilterByAuthority = function (props) {
-  const siteLanguage = useLanguage()
-
   return (
     <Card className="pt-2 pb-2 mb-2">
       <Row className="w-100 ml-0 mr-0">
@@ -17,6 +18,89 @@ export const FilterByAuthority = function (props) {
           <Row className="w-100 justify-content-center ml-0 mr-0">
             <h5>Filtra per Autorità:</h5>
           </Row>
+          <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
+            <Col md={6} className="pl-0 pr-2">
+              <Select
+                validationFunc={() => true}
+                label={"Autorità"}
+                onChange={() => { }}
+                isDisabled={false}
+                selectableOptions={["1", "2", "3", "4", "5"]}
+                //placeholder={"placeholder"}
+                //getOptionValue={col => col}
+                defaultValue={""}
+              />
+            </Col>
+            <Col md={3} className="pl-2 pr-2">
+              <DateInput
+                formGroupClass={""}
+                formLabelClass={""}
+                label={"Data"}
+                placeholderText={""}
+                value={new Date()}
+                onChange={() => { }}
+                validationFunc={el => el}
+                isDisabled={false}
+                calendarClassName={""}
+                datepickerClassName={""}
+                dateFormat='dd/MM/yyyy'
+                excludeDates={[]}
+                filterDate={() => true}
+                locale={"it"}
+              //maxDate={new Date}
+              //minDate={new Date}
+              />
+            </Col>
+            <Col md={3} className="pl-2 pr-0">
+              <NumberInput
+                formGroupClass={""}
+                formLabelClass={""}
+                colSpan={8}
+                label={"Num."}
+                //placeholderText={""}
+                value={444}
+                onChange={() => { }}
+                validationFunc={() => true}
+                isDisabled={false}
+              />
+            </Col>
+          </Row>
+          <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
+            <Col md={4} className="pl-0 pr-2">
+              <Select
+                validationFunc={() => true}
+                label={"Sezione"}
+                onChange={() => { }}
+                isDisabled={false}
+                selectableOptions={["1", "2", "3", "4", "5"]}
+                //placeholder={"placeholder"}
+                //getOptionValue={col => col}
+                defaultValue={""}
+              />
+            </Col>
+            <Col md={4} className="pl-2 pr-2">
+              <Select
+                validationFunc={() => true}
+                label={"Regione"}
+                onChange={() => { }}
+                isDisabled={false}
+                selectableOptions={["1", "2", "3", "4", "5"]}
+                //placeholder={"placeholder"}
+                //getOptionValue={col => col}
+                defaultValue={""}
+              />
+            </Col>
+            <Col md={4} className="pl-2 pr-0">
+              <TextInput
+                label={"Città"}
+                //placeholderText={"prova placeholder"}
+                value={"prova value"}
+                onChange={(event) => event.target.value}
+              />
+
+            </Col>
+          </Row>
+          {/* 
           <Row className="w-100 justify-content-center ml-0 mr-0 pl-5">
             <Col className="pl-0 pr-0">
               <Form.Check
@@ -101,8 +185,9 @@ export const FilterByAuthority = function (props) {
               />
             </Col>
           </Row>
+          */}
         </Col>
       </Row>
-    </Card>
+    </Card >
   )
 }

@@ -30,6 +30,9 @@ export const MultiSelect = function (props) {
     },
     getOptionStyle = () => ({}),
     selectedItems = [],
+    onRemoveAll = null,
+    firstColSpan = 6,
+    secondColSpan = 6
   } = props
 
   const handleChange = (val) => {
@@ -44,7 +47,7 @@ export const MultiSelect = function (props) {
     <Form.Group className={formGroupClass}>
       <Form.Label className={formLabelClass}>{label}</Form.Label>
       <Row className="w-100 ml-0 mr-0">
-        <Col md={6} className="pl-1 pr-1">
+        <Col md={firstColSpan} className="pl-1 pr-1">
           <Form.Control
             as="select"
             defaultValue=""
@@ -68,31 +71,46 @@ export const MultiSelect = function (props) {
             )}
           </Form.Control>
         </Col>
-        <Col md={6} className="pl-1 pr-1">
-          {(selectedItems && selectedItems.length > 0) && selectedItems.map(opt => (
-            <Badge
-              variant="info"
-              className="mr-1"
-              key={opt.value ? opt.value : opt}
-            >
-              {opt.label ? opt.label : opt}
-              <Button
-                size="sm"
-                variant="danger"
-                className="ml-1 p-0"
-                style={{
-                  lineHeight: "1",
-                  height: "16px",
-                  width: "16px",
-                }}
-                onClick={() => onRemove(opt?.value ? opt.value : opt)}
-              >
-                <i
-                  className="fas fa-times p-0"
-                ></i>
-              </Button>
-            </Badge>
-          ))}
+        <Col md={secondColSpan} className="pl-1 pr-1">
+          {(selectedItems && selectedItems.length > 0) &&
+            <Row className="w-100 ml-0 mr-0">
+              <Col md={10} className="pl-0 pr-0">
+                {selectedItems.map(opt => (
+                  <Badge
+                    variant="info"
+                    className="mr-1"
+                    key={opt.value ? opt.value : opt}
+                  >
+                    {opt.label ? opt.label : opt}
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      className="ml-1 p-0"
+                      style={{
+                        lineHeight: "1",
+                        height: "16px",
+                        width: "16px",
+                      }}
+                      onClick={() => onRemove(opt?.value ? opt.value : opt)}
+                    >
+                      <i
+                        className="fas fa-times p-0"
+                      ></i>
+                    </Button>
+                  </Badge>
+                ))}
+              </Col>
+              <Col md={2} className="pl-0 pr-0 text-right">
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={onRemoveAll}
+                >
+                  <i className="fas fa-trash"></i>
+                </Button>
+              </Col>
+            </Row>
+          }
         </Col>
       </Row>
       {textmuted && <Form.Text className="text-muted">

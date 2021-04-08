@@ -11,6 +11,9 @@ import { useLanguage } from '../../context/siteLanguageContext' //context
 import { FilterByText } from './filterSections/FilterByText' //Comportamento ricerca testuale
 import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
 import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
+import { FilterByCodex } from './filterSections/FilterByCodex' //Filtro per Codice
+import { FilterByLaw } from './filterSections/FilterByLaw' //Filtro per Legge
+import { FilterBySource } from './filterSections/FilterBySource' //Filtro per Fonte
 import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Fonte
 
@@ -1156,18 +1159,25 @@ export const AdvancedSearch = function (props) {
             props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina"
-          ) && <FilterByDate
-
-            />}
+          ) && <FilterByDate />}
           {/* Filtro per Autorità */}
-          {(props.shownTab === "giurisprudenza") && <FilterByAuthority
-
-          />}
+          {(props.shownTab === "giurisprudenza") && <FilterByAuthority />}
+          {/* Filtro per Codice */}
+          {(props.shownTab === "giurisprudenza") && <FilterByCodex />}
+          {/* Filtro per Legge */}
+          {(props.shownTab === "giurisprudenza"
+            || props.shownTab === "formulari") && <FilterByLaw />}
+          {(props.shownTab === "giurisprudenza"
+            || props.shownTab === "formulari") && <FilterBySource />}
+          {/*
+            [CHECKPOINT] Appena implementato graficamente FilterBySource, ultima parte (per ora) del tab Giurisprudenza. 
+            Iniziare col tab Normativa.
+            */}
           {/* Filtro per tipo di File */}
           {(props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
-            || props.shownTab === "normativa"
-            || props.shownTab === "noteedottrina") &&
+            || props.shownTab === "noteedottrina"
+            || props.shownTab === "formulari") &&
             <FilterByExtension
               includeDoc={filtersState?.byExtension?.find(el => el.label === "Doc").checked}
               toggleIncludeDoc={() => toggleInclude(["byExtension", "Doc"])}

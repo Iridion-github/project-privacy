@@ -13,6 +13,7 @@ export const CustomAutoSuggest = function (props) {
 
   const {
     formGroupClass = "",
+    formGroupLabel = "",
     formLabelClass = "",
     formGroupId = "",
     formGroupStyle = {},
@@ -81,7 +82,7 @@ export const CustomAutoSuggest = function (props) {
       style={formGroupStyle ? { ...basicStyle, ...formGroupStyle } : basicStyle}
       onBlur={disableFocus}
     >
-      <Form.Label className={formLabelClass}>{label}</Form.Label>
+      <Form.Label className={formLabelClass}>{formGroupLabel}</Form.Label>
       <Row className="w-100 ml-0 mr-0">
         <Col md={6} className="pl-1 pr-1">
           <Row className="w-100 ml-0 mr-0">

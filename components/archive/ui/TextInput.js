@@ -6,7 +6,7 @@ export const TextInput = function ({
   formGroupClass = "",
   formLabelClass = "",
   colSpan = 12,
-  validationFunc = () => true, label = "",
+  validationFunc = () => true,
   label = "",
   placeholderText = "",
   textmuted = null,

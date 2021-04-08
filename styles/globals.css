@@ -474,3 +474,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
   max-height: 250px !important;
   overflow-y: scroll !important;
 }
+
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}

@@ -82,7 +82,7 @@ const handleChangeSelectVal = (val) => {
   onChange={handleChangeSelectVal}
   isDisabled={false}
   selectableOptions={optionsList}
-  //laceholder={"placeholder"}
+  //placeholder={"placeholder"}
   //getOptionValue={col => col}
   //getOptionStyle={col => ({ color: `${col} !important` })}
   defaultValue={selectVal}

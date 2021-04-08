@@ -74,7 +74,7 @@ export const DateInput = function ({
             calendarClassName={calendarClassName}
             onChange={date => handleChange(date)}
             showTimeInput={withTime}
-            dateFormat={"yyyy"}
+            dateFormat={dateFormat}
             disabled={isDisabled ? true : false}
             excludeDates={excludeDates}
             filterDate={filterDate}
@@ -106,8 +106,8 @@ export const DateInput = function ({
         onChange={setStartEs}
         validationFunc={el => el}
         isDisabled={false}
-        calendarClassName=""
-        datepickerClassName=""
+        calendarClassName={""}
+        datepickerClassName={""}
         //withTime={true}
         //dateFormat='MM/dd/yyyy'
         excludeDates={[]}
