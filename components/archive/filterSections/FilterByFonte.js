@@ -8,7 +8,7 @@ import { CustomAutoSuggest } from '../ui/CustomAutoSuggest'
 import { NumberInput } from '../ui/NumberInput'
 
 
-export const FilterBySource = function (props) {
+export const FilterByFonte = function (props) {
 
   return (
     <Card className="pt-2 pb-2 mb-2">

@@ -10,7 +10,7 @@ import { NumberInput } from '../ui/NumberInput'
 import { TextInput } from '../ui/TextInput'
 
 
-export const FilterByAuthority = function (props) {
+export const FilterByAutorità = function (props) {
   return (
     <Card className="pt-2 pb-2 mb-2">
       <Row className="w-100 ml-0 mr-0">
@@ -97,7 +97,6 @@ export const FilterByAuthority = function (props) {
                 value={"prova value"}
                 onChange={(event) => event.target.value}
               />
-
             </Col>
           </Row>
           {/* 

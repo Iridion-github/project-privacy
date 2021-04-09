@@ -6,11 +6,9 @@ import {
   Accordion,
   Button
 } from 'react-bootstrap'
-import { useLanguage } from '../../../context/siteLanguageContext' //context
 
 
 export const FilterBySubject = function (props) {
-  const siteLanguage = useLanguage()
 
   const getDoubleColList = (list) => {
     const arrResult = []

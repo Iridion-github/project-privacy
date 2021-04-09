@@ -1,9 +1,5 @@
 ## Checkpoint
-Componenti completati - Iniziata implementazione. Implementati graficamente i componenti in:
-  - Giurisprudenza [O]
-  - Normativa [X]
-  - Note e Dottrina [X]
-  - Formulari [X]
+Componenti completati e implementati. Dovremmo cominciare a lavorare sui dati, ma in attesa di Luigi applichiamo migliorie grafiche e ottimizzazioni.
 
 ## Messaggio mandato a Luigi
 

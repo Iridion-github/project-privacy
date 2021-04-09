@@ -8,14 +8,19 @@ import {
 } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../../context/siteLanguageContext' //context
-import { FilterByText } from './filterSections/FilterByText' //Comportamento ricerca testuale
-import { FilterByDate } from './filterSections/FilterByDate' //Filtro per Data
-import { FilterByAuthority } from './filterSections/FilterByAuthority' //Filtro per Autorità
-import { FilterByCodex } from './filterSections/FilterByCodex' //Filtro per Codice
-import { FilterByLaw } from './filterSections/FilterByLaw' //Filtro per Legge
-import { FilterBySource } from './filterSections/FilterBySource' //Filtro per Fonte
-import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File
-import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Fonte
+import { FilterByTesto } from './filterSections/FilterByTesto' //Comportamento ricerca testuale
+import { FilterByData } from './filterSections/FilterByData'
+import { FilterByAutorità } from './filterSections/FilterByAutorità'
+import { FilterByCodice } from './filterSections/FilterByCodice'
+import { FilterByLegge } from './filterSections/FilterByLegge'
+import { FilterByFonte } from './filterSections/FilterByFonte'
+import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento'
+import { FilterByGazzettaUfficiale } from './filterSections/FilterByGazzettaUfficiale'
+import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto'
+import { FilterByAutore } from './filterSections/FilterByAutore'
+import { FilterByFormulario } from './filterSections/FilterByFormulario'
+import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File(forse da scartare)
+import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Argomenti (da rivedere)
 
 
 export const AdvancedSearch = function (props) {
@@ -1150,32 +1155,38 @@ export const AdvancedSearch = function (props) {
     <Row className="w-100 mt-2 ml-0 mr-0">
       <Jumbotron className="w-100 pt-4 pb-4">
         <Form>
-          {/* Comportamento ricerca testuale */}
-          <FilterByText
-
-          />
+          {/* Comportamento ricerca testuale: parole/sequenza/lista */}
+          <FilterByTesto />
+          {/* Comportamento ricerca testuale: titolo/contenuto */}
+          {(props.shownTab === "noteedottrina"
+            || props.shownTab === "formulari") && <FilterByTitoloVsContenuto />}
           {/* Filtro per Data */}
           {(
             props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina"
-          ) && <FilterByDate />}
+          ) && <FilterByData />}
           {/* Filtro per Autorità */}
-          {(props.shownTab === "giurisprudenza") && <FilterByAuthority />}
+          {(props.shownTab === "giurisprudenza") && <FilterByAutorità />}
+          {/* Filtro per Formulario */}
+          {(props.shownTab === "formulari") && <FilterByFormulario />}
           {/* Filtro per Codice */}
-          {(props.shownTab === "giurisprudenza") && <FilterByCodex />}
+          {(props.shownTab === "giurisprudenza"
+            || props.shownTab === "formulari") && <FilterByCodice />}
           {/* Filtro per Legge */}
           {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "formulari") && <FilterByLaw />}
+            || props.shownTab === "formulari") && <FilterByLegge />}
+          {(props.shownTab === "noteedottrina") && <FilterByAutore />}
+          {/* Filtro per Fonte */}
           {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "formulari") && <FilterBySource />}
-          {/*
-            [CHECKPOINT] Appena implementato graficamente FilterBySource, ultima parte (per ora) del tab Giurisprudenza. 
-            Iniziare col tab Normativa.
-            */}
-          {/* Filtro per tipo di File */}
-          {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "normativa"
+            || props.shownTab === "noteedottrina") && <FilterByFonte />}
+          {/* Filtro per Provvedimento */}
+          {(props.shownTab === "normativa") && <FilterByProvvedimento />}
+          {/* Filtro per Gazzetta Ufficiale */}
+          {(props.shownTab === "normativa") && <FilterByGazzettaUfficiale />}
+          {/* Filtro per tipo di File (forse da scartare) */}
+          {/*(props.shownTab === "giurisprudenza"
+            || props.shownTab === "normativa"FilterByText
             || props.shownTab === "noteedottrina"
             || props.shownTab === "formulari") &&
             <FilterByExtension
@@ -1187,9 +1198,9 @@ export const AdvancedSearch = function (props) {
               toggleIncludePdf={() => toggleInclude(["byExtension", "Pdf"])}
               indCorteCost={filtersState?.byAuthority?.find(el => el.label === "indCorteCost").checked}
               toggleIncludeIndCorteCost={() => toggleInclude(["byAuthority", "indCorteCost"])}
-            />}
-          {/* Filtro per Fonte */}
-          {(props.shownTab === "giurisprudenza"
+          />*/}
+          {/* Filtro per Argomenti (da rivedere) */}
+          {/*(props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina") &&
@@ -1208,7 +1219,7 @@ export const AdvancedSearch = function (props) {
               intrattenimList={filtersState?.bySubject?.byIntrattenimento}
               impieghiList={filtersState?.bySubject?.byImpieghi}
             />
-          }
+          */}
         </Form>
         <Row className="w-100 ml-0 mr-0">
           <Col md={12} className="pr-0 pl-0 text-right">

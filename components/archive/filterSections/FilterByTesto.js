@@ -4,11 +4,9 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
-import { useLanguage } from '../../../context/siteLanguageContext' //context
 
 
-export const FilterByText = function (props) {
-  const siteLanguage = useLanguage()
+export const FilterByTesto = function (props) {
 
   return (
     <Card className="pt-2 pb-2 mb-2">
