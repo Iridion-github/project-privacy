@@ -31,7 +31,7 @@ export const FilterBySubject = function (props) {
           </Col>
         )
         const secondCol = nextEl ? (
-          <Col className="pl-2 pr-0 ">
+          <Col className="pl-2 pr-0">
             <Form.Group className="form-check-input-container">
               <Form.Check
                 size="lg"
@@ -53,6 +53,7 @@ export const FilterBySubject = function (props) {
         arrResult.push(result)
       }
     })
+    console.log("arrResult: ", arrResult)
     return arrResult
   }
 
@@ -408,9 +409,9 @@ export const FilterBySubject = function (props) {
 
           </Row>
 
-          <Row className="w-100 justify-content-center ml-0 mr-0 pl-2 pr-2">
+          <Row className="w-100 ml-0 mr-0 pl-2 pr-2">
 
-            <Col md={12} className="">
+            <Col md={6} className="">
               <Accordion
                 defaultActiveKey={null}
               >

@@ -11,6 +11,7 @@ import { TextInput } from '../ui/TextInput'
 
 
 export const FilterByAutorità = function (props) {
+
   return (
     <Card className="pt-2 pb-2 mb-2">
       <Row className="w-100 ml-0 mr-0">
@@ -25,7 +26,7 @@ export const FilterByAutorità = function (props) {
                 label={"Autorità"}
                 onChange={() => { }}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={props.arrAutorità}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
@@ -72,7 +73,7 @@ export const FilterByAutorità = function (props) {
                 label={"Sezione"}
                 onChange={() => { }}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={["-", "I", "II", "III", "IV", "V", "VI", "VII", "Feriali", "Unite"]}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
@@ -84,7 +85,28 @@ export const FilterByAutorità = function (props) {
                 label={"Regione"}
                 onChange={() => { }}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={[
+                  "-",
+                  "Abruzzo",
+                  "Basilicata",
+                  "Calabria",
+                  "Campania",
+                  "Emilia-Romagna",
+                  "Friuli Venezia Giulia",
+                  "Lazio",
+                  "Liguria",
+                  "Lombardia",
+                  "Marche",
+                  "Molise",
+                  "Piemonte",
+                  "Puglia",
+                  "Sardegna",
+                  "Sicilia",
+                  "Toscana",
+                  "Trentino-Alto Adige",
+                  "Umbria",
+                  "Valle d'Aosta",
+                  "Veneto"]}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
