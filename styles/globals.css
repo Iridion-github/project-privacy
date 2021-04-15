@@ -478,3 +478,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .react-datepicker-popper {
   z-index: 9999 !important;
 }
+
+.border-red {
+  border: 1px solid red !important;
+}

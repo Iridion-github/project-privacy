@@ -26,6 +26,75 @@ import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
 
+  const arrAutorità = [
+    "-",
+    "Corte Costituzionale",
+    "Cassazione civile",
+    "Cassazione penale",
+    "Consiglio di Stato",
+    "T.A.R.",
+    "Tribunale",
+    "Arbitro bancario finanziario",
+    "Aut. en. elettrica e gas",
+    "Aut. protez. dati person.",
+    "Collegio arbitrale",
+    "Collegio centr. garanzia elettorale",
+    "Comm. appello F.I.G.C.",
+    "Commissione centrale sanità",
+    "Commissione elettorale",
+    "Comm. gar. l. sciopero SS.PP.",
+    "Comm. ricorsi brevetti",
+    "Comm. Trib I grado Trentino Alto Adige",
+    "Comm. Trib II grado Trentino Alto Adige",
+    "Comm. trib. centr.",
+    "Comm. trib. prov.le",
+    "Comm. trib. prov-distr.",
+    "Comm. trib. reg.",
+    "Commissione usi civici",
+    "Cons. giust. amm. Sicilia",
+    "Cons. Naz.le Forense",
+    "Cons. Naz.le Geometri",
+    "Cons. Sup. Magistratura",
+    "Consiglio di Stato ad. gen.",
+    "Consiglio di Stato ad. plen.",
+    "Consiglio di Stato atti norm.",
+    "Consiglio di Stato comm. spec.",
+    "Corte appello",
+    "Corte assise",
+    "Corte assise appello",
+    "Corte Conti",
+    "Corte europea diritti dell'uomo",
+    "Corte di giustizia UE",
+    "Corte int.le giustizia",
+    "Corte militare appello",
+    "Corte penale internazionale",
+    "Garante concorr. e mercato",
+    "Garante editoria",
+    "Giudice conciliatore",
+    "Giudice di pace",
+    "Giudice istruttore",
+    "Giudice tutelare",
+    "Giurì cod. aut. pubb.ria",
+    "Lodo arbitrale",
+    "Ministero del lavoro",
+    "Ministero delle finanze",
+    "Prefettura",
+    "Pretura",
+    "Procura della Repubblica",
+    "Procura gen. Corte appello",
+    "Sacra Rota",
+    "Tribunale della funzione pubblica UE",
+    "Tribunale I grado UE",
+    "Tribunale minorenni",
+    "Tribunale regionale delle acque",
+    "Tribunale regionale Canonico",
+    "Tribunale superiore delle acque",
+    "Tribunale superiore militare",
+    "Ufficio centrale referendum",
+    "Ufficio europeo brevetti",
+    "Vicariato Urbe"
+  ]
+
   const incrementDate = (dateInput, increment) => {
     const dateFormatTotime = new Date(dateInput);
     const increasedDate = new Date(dateFormatTotime.getTime() + (increment * 86400000));
@@ -1167,7 +1236,10 @@ export const AdvancedSearch = function (props) {
             || props.shownTab === "noteedottrina"
           ) && <FilterByData />}
           {/* Filtro per Autorità */}
-          {(props.shownTab === "giurisprudenza") && <FilterByAutorità />}
+          {(props.shownTab === "giurisprudenza") &&
+            <FilterByAutorità
+              arrAutorità={arrAutorità}
+            />}
           {/* Filtro per Formulario */}
           {(props.shownTab === "formulari") && <FilterByFormulario />}
           {/* Filtro per Codice */}
@@ -1200,7 +1272,7 @@ export const AdvancedSearch = function (props) {
               toggleIncludeIndCorteCost={() => toggleInclude(["byAuthority", "indCorteCost"])}
           />*/}
           {/* Filtro per Argomenti (da rivedere) */}
-          {/*(props.shownTab === "giurisprudenza"
+          {(props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina") &&
@@ -1219,7 +1291,7 @@ export const AdvancedSearch = function (props) {
               intrattenimList={filtersState?.bySubject?.byIntrattenimento}
               impieghiList={filtersState?.bySubject?.byImpieghi}
             />
-          */}
+          }
         </Form>
         <Row className="w-100 ml-0 mr-0">
           <Col md={12} className="pr-0 pl-0 text-right">

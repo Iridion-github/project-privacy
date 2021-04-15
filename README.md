@@ -1,36 +1,7 @@
 ## Checkpoint
-Componenti completati e implementati. Dovremmo cominciare a lavorare sui dati, ma in attesa di Luigi applichiamo migliorie grafiche e ottimizzazioni.
-
-## Messaggio mandato a Luigi
-
-Salve Luigi, abbiamo bisogno di una serie di dati per implementare la ricerca avanzata. Qua sotto ti scrivo la lista completa di cos'è necessario. Nel caso in cui non avessi a disposizione quei dati, nulla di tragico, tuttavia saremo costretti a privarci di alcune funzioni presenti su Dejure. D'altronde siamo limitati comunque dal tuo sistema di categorizzazione dei file nel tuo archivio.
-
-
-Ti consiglio di guardare la ricerca avanzata di Dejure per capire meglio a che dati mi riferisco.
-Ogni elemento della liste qua sotto, nei files del tuo archivio deve avere una dicitura/tag corrispettivi. Se non ci sono corrispondenze, meglio non inserirlo in lista, perchè tanto l'algoritmo non sarebbe in grado di trovare comunque i bersagli.
-
-
-Quando selezioni la categoria GIURISPRUDENZA su Dejure:
-- Lista completa della lista "Scegli Autorità".
-- Lista completa della lista "Scegli Codice". 
-- Lista completa della lista "Scegli Legge".
-- Lista completa della lista "Scegli Fonte". Per caso sono i tag (o una parte d'essi) che ci hai fornito? 
-- Lista completa della lista "Scegli Testo Unico" (i titoli, e se vuoi anche i sottotitoli, ben staccati però. C'è ignoranza giuridica in noi ahah). 
-- Lista completa della lista "CLASSIFICAZIONE" con le sue voci e sottovoci. Per caso sono i tag (o una parte d'essi) che ci hai fornito? 
-- Lista completa degli Autori, nel caso non sia solo tu ad aver prodotto i files del tuo archivio, o magari dei collaboratori.
-- Lista completa della lista "Scegli Formulario".
-
-
-Quando selezioni la categoria NORMATIVA su Dejure:
-- Lista completa della lista "Scegli Provvedimento".
-
-
-Ok, i dati necessari finiscono qui, o almeno ciò che ci è venuto in mente per ora.
-Facci sapere se hai dubbi, buona giornata/serata.
-
-
-
-
+- Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
+  Filters dotati di liste:
+  - FilterByAutorità
 
 -------------------- [PANNELLI OK] --------------------
 - TESTUALE
@@ -55,12 +26,6 @@ Facci sapere se hai dubbi, buona giornata/serata.
     provincia: "select",
     regione: "select",
     città: "select"
- }
-- FONTE: { NON SI CAPISCE COSA SIA ESATTAMENTE!!
-  dati_necessari: "???",
-  inputs: {
-    tag: "select (o multiselect? approfondire)",
-    anno: "date(year-only)"
  }
 - SCEGLI TESTO UNICO
 - PROVVEDIMENTO: {
@@ -119,7 +84,7 @@ Facci sapere se hai dubbi, buona giornata/serata.
 
 
 -------------------- [PANNELLI DA VALUTARE] --------------------
-- CATEGORIA: Molto probabilmente verrebbe inglobato da Fonte o Autorità, vedere alla fine se vale la pena inserirlo.
+- CATEGORIA: Molto probabilmente verrebbe inglobato da Autorità, vedere alla fine se vale la pena inserirlo.
 - TIPO FILE (extension):  Molto probabilmente risulterebbe inutile, vedere alla fine se vale la pena inserirlo (poichè già implementato).
 
 
@@ -149,8 +114,6 @@ Facci sapere se hai dubbi, buona giornata/serata.
 
 [LEGGI | Menù multiplo con sottocampi, vedasi Dejure ] ===> (24/03/2021) (tabs: GIURISPRUDENZA, FORMULARI)
 
-[FONTE | Menù doppio con sottocampi, vedasi Dejure] ===> (24/03/2021) (tabs: GIURISPRUDENZA, NOTE & DOTTRINA)
-
 [CLASSIFICAZIONE | Menù multiplo con moltissime opzioni in ordine alfabetico (copiare html da Dejure)] ===> (24/03/2021) (tabs: tutte)
 - Una delle ultime cose da fare: bisogna sapere quali tags esistono effettivamente all'interno dei files dell'archivio di Luigi.
 
@@ -173,7 +136,6 @@ DATA
 AUTORITÀ
 CODICI
 LEGGI
-FONTE
 CLASSIFICAZIONE
 SCEGLI TESTO UNICO
 
@@ -195,7 +157,6 @@ ________________________________[TAB: NOTE & DOTTRINA]__________________________
 CERCA IN TITOLO DOCUMENTO / DOCUMENTO
 DATA
 AUTORE
-FONTE
 CLASSIFICAZIONE
 
 ______________________________________________________________________________________
@@ -286,7 +247,186 @@ presso il Garante per la protezione dei dati personali
 [9107640]
 
 
--------------------------------------- TUTTI i TAG GENERICI (24/03/2021: Luigi ci ha confessato che son quasi tutti vecchi e da sostituire)--------------------------------------
+## LISTE e TAGS (24/03/2021: Luigi ci ha confessato molti dei tags sono vecchi, e mancano le voci contenitrici) 
+
+[___FILTRA_PER_AUTORITA'___](copiata da Dejure)
+  - Corte Costituzionale
+  - Cassazione civile
+  - Cassazione penale
+  - Consiglio di Stato
+  - T.A.R.
+  - Tribunale
+  - Arbitro bancario finanziario
+  - Aut. en. elettrica e gas
+  - Aut. protez. dati person.
+  - Collegio arbitrale
+  - Collegio centr. garanzia elettorale
+  - Comm. appello F.I.G.C.
+  - Commissione centrale sanità
+  - Commissione elettorale
+  - Comm. gar. l. sciopero SS.PP.
+  - Comm. ricorsi brevetti
+  - Comm. Trib I grado Trentino Alto Adige
+  - Comm. Trib II grado Trentino Alto Adige
+  - Comm. trib. centr.
+  - Comm. trib. prov.le
+  - Comm. trib. prov-distr.
+  - Comm. trib. reg.
+  - Commissione usi civici
+  - Cons. giust. amm. Sicilia
+  - Cons. Naz.le Forense
+  - Cons. Naz.le Geometri
+  - Cons. Sup. Magistratura
+  - Consiglio di Stato ad. gen.
+  - Consiglio di Stato ad. plen.
+  - Consiglio di Stato atti norm.
+  - Consiglio di Stato comm. spec.
+  - Corte appello
+  - Corte assise
+  - Corte assise appello
+  - Corte Conti
+  - Corte europea diritti dell'uomo
+  - Corte di giustizia UE
+  - Corte int.le giustizia
+  - Corte militare appello
+  - Corte penale internazionale
+  - Garante concorr. e mercato
+  - Garante editoria
+  - Giudice conciliatore
+  - Giudice di pace
+  - Giudice istruttore
+  - Giudice tutelare
+  - Giurì cod. aut. pubb.ria
+  - Lodo arbitrale
+  - Ministero del lavoro
+  - Ministero delle finanze
+  - Prefettura
+  - Pretura
+  - Procura della Repubblica
+  - Procura gen. Corte appello
+  - Sacra Rota
+  - Tribunale della funzione pubblica UE
+  - Tribunale I grado UE
+  - Tribunale minorenni
+  - Tribunale regionale delle acque
+  - Tribunale regionale Canonico
+  - Tribunale superiore delle acque
+  - Tribunale superiore militare
+  - Ufficio centrale referendum
+  - Ufficio europeo brevetti
+  - Vicariato Urbe
+
+[___FILTRA_PER_CODICE___](copiata da Dejure perchè ci sfuggiva cosa intendesse Luigi con "LISTA GIÀ FORNITA")
+  - Codice Civile
+  - Codice di Procedura Civile
+  - Codice Penale
+  - Codice di Procedura Penale
+  - Codice della Navigazione
+  - Costituzione della Repubblica
+  - Codice Penale Militare di Guerra
+  - Codice Penale Militare di Pace
+  - Disp. Att. Codice Procedura Penale
+  - Disp. Att. Trans. Codice Civile
+  - Disp. Att. Trans. Codice Procedura Civile
+  - Disp. Coord. Trans. Att. Codici Penali Militari
+  - Disp. Coord. Trans. Codice Penale
+  - Disposizioni finali della Costituzione
+  - Disposizioni sulla legge in generale (Preleggi)
+  - Regolamento Codice della Navigazione
+  - Regolamento Codice Procedura Penale
+  - Regolamento per la navigazione interna
+
+  
+[___FILTRA_PER_LEGGE___](copiata da Dejure)
+  - Circolari ministeriali
+  - Contratti collettivi
+  - Decreti ministeriali
+  - Leggi dello Stato
+  - Leggi provinciali
+  - Leggi regionali
+  - Provvedimenti CE
+  - Trattati internazionali
+
+[___FILTRA_PER_PROVVEDIMENTO___](copiata da Dejure)
+  - Legge
+  - Decreto Legge
+  - Decreto legislativo
+  - Decreto del Presidente della Repubblica
+  - Decreto ministeriale
+  - Accordo
+  - Autorita' per la vigilanza sui lavori pubblici
+  - Avviso
+  - Azienda di stato per interventi nel mercato agricolo
+  - Bando
+  - Camera dei Deputati
+  - Comitato interm. Politica Industriale
+  - Comitato interm. Prezzi
+  - Comitato interm. Programmazione Economica
+  - Comitato interm. Programmazione Economica e Trasporti
+  - Commissione Nazionale per la Societa'  e la Borsa
+  - Comunicato della Presidenza Consiglio dei Ministri
+  - Comunicazione
+  - Corte Suprema di Cassazione
+  - Costituzione della Repubblica italiana
+  - Decreto
+  - Decreto Alto Commissario Alimentazione
+  - Decreto Alto Commissario Igiene e Sanita' pubblica
+  - Decreto del Capo del Governo
+  - Decreto del Capo provvisorio dello Stato
+  - Decreto del Commissario
+  - Decreto del Duce
+  - Decreto del Presidente del Consiglio dei Ministri
+  - Decreto del Presidente del Senato della Repubblica
+  - Decreto del Presidente della Camera dei Deputati
+  - Decreto dell'Assessore
+  - Decreto interministeriale
+  - Decreto Legge del Capo provvisorio dello Stato
+  - Decreto Legge luogotenenziale
+  - Decreto legislativo del Capo provvisorio dello Stato
+  - Decreto legislativo del Presidente del Consiglio
+  - Decreto legislativo luogotenenziale
+  - Decreto luogotenenziale
+  - Delibera del Senato della Repubblica
+  - Delibera della Camera dei Deputati
+  - Deliberazione
+  - Deliberazione della Corte costituzionale
+  - Determinazione
+  - Direttiva del Presidente del Consiglio dei Ministri
+  - Direttiva ministeriale
+  - Disposizione
+  - Documento
+  - Garante per i dati personali
+  - Garante per l'antitrust
+  - Garante per le telecomunicazioni
+  - Garante per l'editoria
+  - Garante per l'energia elettrica e il gas
+  - Istituto centrale di statistica
+  - Legge costituzionale
+  - Ministero degli affari esteri
+  - Ministero dei trasporti
+  - Ministero del lavoro e della previdenza sociale
+  - Ministero del tesoro
+  - Ministero della protezione civile
+  - Ministero della sanita'
+  - Ministero dell'agricoltura
+  - Ministero dell'industria commercio e artigianato
+  - Ordinanza
+  - Ordinanza Alto Commissario Igiene e Sanita' pubblica
+  - Ordinanza del Presidente del Consiglio dei Ministri
+  - Ordinanza ministeriale
+  - Provvedimento
+  - Regio decreto
+  - Regio Decreto Legge
+  - Regio Decreto Legislativo
+  - Regolamento
+  - Regolamento del Consiglio Superiore Magistratura
+  - Regolamento del Senato della Repubblica
+  - Regolamento della Camera dei Deputati
+  - Regolamento della Corte costituzionale
+  - Regolamento parlamentare
+  - Senato della Repubblica
+
+[___CLASSIFICAZIONE___]
 
 - ABOR = Aborto
 - ABRU = Abruzzo
@@ -602,7 +742,7 @@ presso il Garante per la protezione dei dati personali
 
 -------------------------------------- TAG SCELTI per l'ADVANCED SEARCH --------------------------------------
 
-[ ZONE GEOGRAFICHE ] --> [REGIONI]
+[ZONE_GEOGRAFICHE] --> [REGIONI]
 - ABRU = Abruzzo
 - BASI = Basilicata
 - CALAB = Calabria
@@ -684,7 +824,7 @@ presso il Garante per la protezione dei dati personali
 - VENDI = Vendite Mobiliari Internazionali
 - VITA = Vitalizi
 
-[TASSE e IMPOSTE]
+[TASSE_e_IMPOSTE]
 - BOL = Bollo (Imposta di)
 - CONCE = Concessioni (tasse sulle)
 - IMCOM = Imposta Complementare
@@ -714,7 +854,7 @@ presso il Garante per la protezione dei dati personali
 - MIPRE = Ministero  Lavoro e Previdenza Sociale
 - OCCU =  Occupazione
 
-[PRODUZIONE e CONSUMAZIONE]
+[PRODUZIONE_e_CONSUMAZIONE]
 - ACPUB = Acque pubbliche
 - AGGEN = Agricoltura (generalità)
 - AGLAV = Agricoltura (Lavoro)
@@ -751,7 +891,7 @@ presso il Garante per la protezione dei dati personali
 - SAMAL =  Sanità, Sanitari, etc. (Malattie)
 - STUP =   Stupefacenti
 
-[FORZE dell'ORDINE / SOCCORSI]
+[FORZE_dell'ORDINE/SOCCORSI]
 - CARA = Carabinieri
 - FACOD = Codici Penali Militari
 - FAGEN = Forze Armate (Generalità)
@@ -775,14 +915,14 @@ presso il Garante per la protezione dei dati personali
 - ISPRI = Istruzione (Privata)
 - MIIST = Ministero Pubblica Istruzione
 
-[BENI PRIMARI]
+[BENI_PRIMARI]
 - ACPOT = Acque potabili e acquedotti
 - ENEL = Energia Elettrica
 - PASS =  Passaporti e Carte di Identità
 - RISC =   Riscaldamento
 - STRA =  Strade
 
-[BENI SECONDARI]
+[BENI_SECONDARI]
 - ASCEN =  Ascensori, Montacarichi e Scale Mobili
 - BECON = Bevande (Confezionamento)
 - BEDOC = Bevande (Doc e Marchi)
@@ -804,7 +944,7 @@ presso il Garante per la protezione dei dati personali
 - TRPER =  Trasporti  (Personale)
 - TRINT =  Trasporti  Internazionali
 
-[INTRATTENIMENTO e TURISMO]
+[INTRATTENIMENTO_e_TURISMO]
 - ACTER = Acque termali e terme
 - ALB = Alberghi, Pensioni, Locande, etc.
 - ALPIN = Alpinismo
@@ -819,7 +959,7 @@ presso il Garante per la protezione dei dati personali
 - SPORT =  Sport
 - TURI =   Turismo
 
-[IMPIEGHI SPECIFICI]
+[IMPIEGHI_SPECIFICI]
 - BARB = Barbieri e Parrucchieri
 - CONSU = Consulenti del Lavoro
 - FACC = Facchinaggio
