@@ -1,7 +1,7 @@
 ## Checkpoint
+- [CHECKPOINT] Seppur i logs stampino valori aspettati, i titoletti delle columns delle date non vengono stampati. Indagare in DateIntervalInput.
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
-  Filters dotati di liste:
-  - FilterByAutorità
+
 
 -------------------- [PANNELLI OK] --------------------
 - TESTUALE
@@ -425,6 +425,352 @@ presso il Garante per la protezione dei dati personali
   - Regolamento della Corte costituzionale
   - Regolamento parlamentare
   - Senato della Repubblica
+
+[___FILTRA_PER_PROVVEDIMENTO-Categoria___](copiata da Dejure)
+
+- Aborto
+- Accordi di Villa Madama
+- Accordo di Schengen
+- Adozione e affidamento
+- Adozione internazionale
+- Adozione speciale
+- Affidamento condiviso
+- Agevolazioni tributarie (disciplina)
+- Amato
+- Antimafia
+- Antiriciclaggio
+- Antitrust (concorrenza)
+- Artbonus
+- Attività di governo (disciplina)
+- Barriere architettoniche 
+- Basaglia
+- Bassanini
+- Bassanini bis
+- Bassanini quater
+- Bassanini ter
+- Bersani (liberalizzazioni)
+- Bersani bis
+- Biagi
+- Biotestamento
+- Bossi - Fini
+- Bucalossi
+- Carbon tax
+- Carotti
+- Carta europea dell'autonomia locale
+- Catasto
+- Categorie protette
+- Cirami
+- Cittadinanza
+- Codice antimafia
+- Codice dei beni culturali e paesaggio
+- Codice dei contratti pubblici
+- Codice dei lavori pubblici
+- Codice del consumo
+- Codice del processo amministrativo
+- Codice del terzo settore
+- Codice del Turismo
+- Codice della crisi d'impresa e dell'insolvenza
+- Codice della giustizia contabile
+- Codice della nautica da diporto
+- Codice della proprietà industriale 
+- Codice della strada (nuovo)
+- Codice dell'ambiente
+- Codice dell'amministrazione digitale
+- Codice delle assicurazioni private
+- Codice delle comunicazioni elettroniche
+- Codice delle pari opportunità
+- Codice dell'ordinamento militare 
+- Codice postale
+- Codice privacy
+- Codice rosso
+- Collaboratori di giustizia
+- Collegato lavoro
+- Concessioni governative
+- Confidi
+- Conflitto di interessi
+- Consob
+- Contratti di solidarietà
+- Conv. affidamento e sottrazione di minori
+- Conv. di Bruxelles decisioni in materia civile e commerciale
+- Conv. diritti fanciullo (New York)
+- Conv. Europea Diritti dell'Uomo
+- Conv. Ginevra (prigionieri di guerra)
+- Conv. Italia - Santa Sede in materia fiscale
+- Conv. mutua assistenza e cooperazione tra amministrazioni doganali
+- Conv. New York eliminazione discriminazione razziale
+- Conv. ONU diritti disabili
+- Conv. ONU diritto del mare (Montego Bay)
+- Conv. Oviedo sulla biomedicina e divieto clonazione
+- Conv. Parigi doping nello sport
+- Conv. Strasburgo assistenza giudiziaria in materia penale
+- Conv. Vienna diritto dei trattati tra Stati e OI o tra OI
+- Conv. Vienna sul diritto dei trattati
+- Coronavirus - Covid-19
+- Crescitalia 1
+- Crescitalia 2
+- Decreto agosto
+- Decreto Cashback
+- Decreto Cio
+- Decreto clima
+- Decreto Covid
+- Decreto crescita
+- Decreto cultura
+- Decreto Cura Italia - Covid-19
+- Decreto del fare
+- Decreto dignità
+- Decreto fiscale 2018
+- Decreto fiscale 2019
+- Decreto IRPEF
+- Decreto liquidità - Covid-19
+- Decreto Rifiuti
+- Decreto Rilancio - Covid-19
+- Decreto Ristori
+- Decreto Ristori bis
+- Decreto Ristori quater
+- Decreto Ristori ter
+- Decreto Sanità – Decreto Balduzzi
+- Decreto scuola - Covid-19
+- Decreto semplificazioni 2018
+- Decreto semplificazioni 2020
+- Decreto sicurezza
+- Decreto sicurezza bis
+- Decreto Sostegni
+- Decreto Sviluppo
+- Depenalizzazione
+- Depenalizzazione reati minori
+- Devolution
+- Dini (Riforma delle pensioni)
+- Direttiva whistleblowing
+- Diritto d'autore
+- Diritto Internazionale Privato (riforma)
+- Disabili
+- Divorzio (Fortuna - Baslini)
+- Divorzio breve
+- DL Covid
+- Dpcm Natale 2020
+- Editoria
+- Elezioni Camera dei Deputati
+- Elezioni dirette Consigli Regionali
+- Elezioni Senato
+- Equo canone
+- Euro
+- Ex Cirielli
+- Factoring internazionale
+- Fallimento - Legge fallimentare
+- Famiglia (riforma)
+- Federalismo demaniale
+- Federalismo fiscale
+- Federalismo fiscale municipale 
+- Finanza locale
+- Finanziaria 2010
+- Finanziaria 2011 (Legge di stabilità)
+- Finanziaria 2012 (Legge di stabilità)
+- Finanziaria 2013 (Legge di stabilità)
+- Finanziaria 2014 (Legge di stabilità)
+- Finanziaria 2015 (Legge di stabilità) 
+- Finanziaria 2016 (Legge di stabilità)
+- Finanziaria 2017 (Legge di stabilità)
+- Finanziaria 2018 (Legge di stabilità)
+- Finanziaria 2019 (Legge di stabilità)
+- Finanziaria 2020 (Legge di stabilità)
+- Finanziaria 2021 (Legge di stabilità)
+- Finanziaria triennale
+- Fondi pensione
+- Formica
+- Franchising
+- Fusioni transfrontaliere
+- Gasparri
+- Gelmini
+- Giudice di pace
+- Giudice di pace (competenza penale)
+- Giudice Unico
+- Goria
+- Gozzini
+- Grandi rischi
+- Green economy
+- Ici
+- Impatto ambientale
+- Impiegati civili dello Stato
+- Imposta di bollo
+- Imposta di registro
+- Imposta di successioni e donazioni
+- Imposte ipotecaria e catastale
+- IMU
+- Indultino
+- Indulto
+- Infortuni sul lavoro
+- Inquinamento elettromagnetico
+- Intercettazioni telefoniche
+- Ipab
+- Irap
+- Italicum
+- IVA
+- Job Acts
+- Leasing finanziario internazionale
+- Legge Anticorruzione
+- Legge Brunetta
+- Legge comunitaria 2018
+- Legge Gelli - Bianco
+- Legge La Loggia
+- Legge Levi
+- Legge notarile 
+- Legge Pinto
+- Legge ponte urbanistica
+- Legge Severino
+- Legittima difesa
+- Legittimo impedimento
+- Locazioni (riforma)
+- Lodo Alfano
+- Lunardi (infrastrutture)
+- Maggiore età
+- Mammì
+- Mancino
+- Mandato di arresto europeo
+- Manette agli evasori
+- Manovra bis
+- Manovra economica 1 - Decreto anticrisi
+- Manovra economica 2 
+- Martelli
+- Marzano
+- Mediazione civile
+- Merlin
+- Milleproroghe 
+- Milleproroghe 2013
+- Milleproroghe 2017
+- Milleproroghe 2021
+- Minori a rischio
+- Monitoraggio fiscale 
+- Moratti
+- Mosca
+- NASPI
+- Nazioni Unite (Statuto)
+- Nicolazzi
+- Notificazione atti giudiziari
+- Nuovi compensi professionisti
+- Nuovo Coronavirus - Covid-19
+- Omicidio stradale
+- Ordinamento giudiziario
+- Ordinamento penitenziario (riforma)
+- Organizzazione Mondiale del Commercio
+- P2 (Anselmi)
+- Pacchetto Lavoro - Giovannini
+- Pacchetto sicurezza
+- Par condicio
+- Patente europea
+- Patti Lateranensi
+- Pecorella
+- Pentiti
+- Prestigiacomo (tratta di persone)
+- Processo civile, amministrativo e Corte dei Conti (strumenti telematici)
+- Processo penale minorenni
+- Processo tributario 
+- Procreazione assistita
+- Prodi bis
+- Province (abolizione)
+- Quadri intermedi
+- Reati tributari
+- Reddito di cittadinanza - Quota 100
+- Referendum
+- Responsabilità amministrativa persone giuridiche
+- Responsabilità civile dei magistrati
+- Riconoscimento figli naturali
+- Riforma del condominio
+- Riforma Fornero - Riforma del mercato del lavoro 
+- Riforma professione forense 
+- Riforma Sanitaria
+- Riforma sistema fiscale statale
+- Riforma tributaria (legge delega)
+- Riscossione delle imposte sui redditi
+- Rogatorie
+- Rognoni - La Torre
+- Ronchey
+- Sabatini
+- Salvacalcio
+- Salva-Italia
+- Salvaleggi
+- Salvaleggi 2
+- Sblocca cantieri
+- Sblocca Italia
+- Scelba (organi regionali)
+- Scelba (ricostituzione partito fascista)
+- Schifani
+- SCIA 2
+- Sciopero nei servizi pubblici
+- Scudo fiscale 
+- Scuola dell'obbligo
+- Seggiolini anti abbandono
+- Semplificazione 2012
+- Semplificazione dei riti
+- Semplificazione fiscale
+- Semplificazione normativa (Taglia-leggi, Calderoli)
+- Sicurezza cibernetica
+- Sicurezza e segreto di Stato
+- SIM
+- Simeone
+- Sismica
+- Smuraglia
+- Spending review
+- Sport (doping)
+- Sport (scommesse e frode sportiva - Totonero)
+- Stalking
+- Stampa
+- Stato civile
+- Statuto dei lavoratori
+- Statuto diritti dei contribuenti
+- Superprocura
+- Svuota carceri
+- T.A.R. (istituzione)
+- T.U. apprendistato 
+- T.U. bancario (TUB)
+- T.U. casellario giudiziario
+- T.U. debito pubblico
+- T.U. delle disposizioni regolamentari in materia di ordinamento militare
+- T.U. disposizioni legislative in materia doganale
+- T.U. documentazione amministrativa
+- T.U. edilizia
+- T.U. elettorato attivo
+- T.U. elezioni comunali
+- T.U. enti locali
+- T.U. espropriazione per pubblica utilità
+- T.U. Finanza  - T.U.F. Draghi
+- T.U. Immigrazione (Turco - Napolitano)
+- T.U. imposte dirette
+- T.U. istruzione
+- T.U. Leggi di pubblica sicurezza (T.U.L.P.S)
+- T.U. Leggi sanitarie
+- T.U. materia valutaria
+- T.U. Promulgazione delle leggi
+- T.U. Radiotelevisione
+- T.U. sostegno maternità e paternità
+- T.U. spese di giustizia 
+- T.U. stupefacenti (Jervolino - Vassalli)
+- T.U.I.R. imposte sui redditi
+- Taglio dei parlamentari
+- Tognoli
+- Trapianti di organi
+- Trasparenza atti amministrativi
+- Trattamento Pensione di anzianità
+- Trattato di Lisbona
+- Tremonti
+- Tremonti bis
+- Treu
+- Tribunale della libertà
+- Tribunale minorenni
+- Trust 
+- Turismo sessuale (norme contro)
+- Tutela del risparmio
+- Unioni civili
+- Urbani (salva cinema)
+- Usura
+- Vanoni
+- Violenza negli stadi)
+- Violenza sessuale
+- Visentini ter
+- Visto pesante
+- Volontariato
+- Voluntary disclosure 1
+- Voluntary disclosure 2
+- Whisteblowing
 
 [___CLASSIFICAZIONE___]
 

@@ -21,6 +21,7 @@ export const FilterByTesto = function (props) {
                 size="sm"
                 as="select"
                 className=""
+                onChange={val => val}
               >
                 <option>Contengono almeno 1 delle parole</option>
                 <option>Contengono tutte le parole</option>

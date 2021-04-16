@@ -72,7 +72,7 @@ export const CustomAutoSuggest = function (props) {
   }
 
   useEffect(() => {
-    console.log("AutoSuggest state has changed - props: ", props)
+    //console.log("AutoSuggest state has changed - props: ", props)
   })
 
   return (

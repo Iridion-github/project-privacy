@@ -20,6 +20,7 @@ export const DateIntervalInput = function ({
   colSpan_2 = 6,
   dateFormat = 'dd/MM/yyyy',
   //start
+  label1 = "",
   value_1 = new Date,
   datepickerClassName_1 = "",
   calendarClassName_1 = "",
@@ -34,12 +35,12 @@ export const DateIntervalInput = function ({
   required_1 = false,
   excludeDates_1 = [],
   //end
+  label2 = "",
   value_2 = new Date,
   datepickerClassName_2 = "",
   calendarClassName_2 = "",
   onChange_2 = val => val,
   withTime_2 = false,
-  dateFormat_2 = 'dd/MM/yyyy',
   isDisabled_2 = false,
   filterDate_2 = () => true,
   locale_2 = "it",
@@ -50,10 +51,25 @@ export const DateIntervalInput = function ({
   excludeDates_2 = [],
 }) {
 
+  /*[CHECKPOINT] Seppur i logs stampino valori aspettati, i titoletti delle columns delle date non vengono stampati. Indagare. */
+  console.log("label", label)
+  console.log("label1", label1)
+  console.log("label2", label2)
+
   return (
     <>
       <Row className="w-100 ml-0 mr-0">
-        <h5 className={formLabelClass + " w-100 text-center"}>{label}</h5>
+        {(label && label.length > 0) ?? <h5 className={formLabelClass + " w-100 text-center"}>{label}</h5>}
+        {(label1 && label1.length > 0) ?? (
+          <Col md={6} className="pl-1 pr-1 justify-content-center">
+            <h5 className={"w-100 text-center"}>{label1}</h5>
+          </Col>
+        )}
+        {(label2 && label2.length > 0) ?? (
+          <Col md={6} className="pl-1 pr-1 justify-content-center">
+            <h5 className={"w-100 text-center"}>{label2}</h5>
+          </Col>
+        )}
       </Row>
       <Row className="w-100 justify-content-center ml-0 mr-0">
         <Col md={colSpan_1} className="pl-1 pr-1">

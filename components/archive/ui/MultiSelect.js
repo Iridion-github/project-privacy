@@ -21,7 +21,6 @@ export const MultiSelect = function (props) {
     selectableOptions = [],
     placeholder,
     getOptionValue = el => {
-      console.log("getOptionValue - el", el)
       if (el?.label && el?.value) {
         return el.value
       } else {
@@ -36,7 +35,6 @@ export const MultiSelect = function (props) {
   } = props
 
   const handleChange = (val) => {
-    console.log("multiselect handlechange - val:", val)
     if (validationFunc(val)) {
       onChange(val)
       return
@@ -176,7 +174,7 @@ const [multiSelectVal, setMultiSelectVal] = useState("")
   onRemove={handleRemoveMultiSelectVal}
   isDisabled={false}
   selectableOptions={optionsList}
-  placeholder={"Seleziona i colori"}
+  placeholder={"-"}
   //getOptionValue={col => col}
   //getOptionStyle={col => ({ color: `${col} !important` })}
   selectedItems={multiSelectVal}

@@ -24,7 +24,7 @@ export const FilterByGazzettaUfficiale = function (props) {
                 label={"Data"}
                 placeholderText={""}
                 value={new Date()}
-                onChange={() => { }}
+                onChange={val => val}
                 validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
@@ -41,7 +41,7 @@ export const FilterByGazzettaUfficiale = function (props) {
               <NumberInput
                 label={"Num."}
                 //placeholderText={"prova placeholder"}
-                value={444}
+                value={""}
                 onChange={(event) => event.target.value}
               />
             </Col>

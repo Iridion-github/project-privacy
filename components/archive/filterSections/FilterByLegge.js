@@ -24,22 +24,22 @@ export const FilterByLegge = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Legge"}
-                onChange={() => { }}
+                onChange={props.handleChangeLegge}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={props.arrLegge}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
               />
             </Col>
-            <Col md={3} className="pl-2 pr-2">
+            <Col md={4} className="pl-2 pr-2">
               <DateInput
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
                 value={new Date()}
-                onChange={() => { }}
+                onChange={val => val}
                 validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
@@ -61,27 +61,23 @@ export const FilterByLegge = function (props) {
                 colSpan={8}
                 label={"Art."}
                 //placeholderText={""}
-                value={444}
-                onChange={() => { }}
+                value={""}
+                onChange={event => event.target.value}
                 validationFunc={() => true}
                 isDisabled={false}
               />
             </Col>
-            <Col md={8} className="pl-2 pr-2">
-              <MultiSelect
+            <Col md={4} className="pl-2 pr-0">
+              <NumberInput
+                formGroupClass={""}
+                formLabelClass={""}
+                colSpan={8}
+                label={"Numero"}
+                //placeholderText={""}
+                value={""}
+                onChange={event => event.target.value}
                 validationFunc={() => true}
-                label={"Sottonumero"}
-                onChange={() => { }}
-                onRemove={() => { }}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
-                placeholder={"-"}
-                //getOptionValue={col => col}
-                //getOptionStyle={col => ({ color: `${col} !important` })}
-                selectedItems={["1", "2", "3", "4", "5"]}
-                firstColSpan={4}
-                secondColSpan={8}
-              //onRemoveAll ={()=>{}}
               />
             </Col>
           </Row>

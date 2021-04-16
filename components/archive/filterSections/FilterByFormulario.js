@@ -21,9 +21,9 @@ export const FilterByFormulario = function (props) {
                 validationFunc={() => true}
                 formGroupClass="text-center"
                 label={"Lista Formulari"}
-                onChange={() => { }}
+                onChange={props.handleChangeFormulario}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={props.arrFormulario}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}

@@ -21,6 +21,7 @@ export const FilterByTitoloVsContenuto = function (props) {
                 size="sm"
                 as="select"
                 className=""
+                onChange={val => val}
               >
                 <option>Solo nel titolo dei documenti</option>
                 <option>Solo nel contenuto dei documenti</option>

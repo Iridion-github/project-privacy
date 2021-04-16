@@ -23,10 +23,10 @@ export const FilterByProvvedimento = function (props) {
             <Col md={7} className="pl-0 pr-2">
               <Select
                 validationFunc={() => true}
-                label={"Legge"}
-                onChange={() => { }}
+                label={"Provvedimento"}
+                onChange={props.handleChangeProvvedimento}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={props.arrProvvedimento}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
@@ -70,7 +70,7 @@ export const FilterByProvvedimento = function (props) {
               <NumberInput
                 label={"Num."}
                 //placeholderText={"prova placeholder"}
-                value={444}
+                value={""}
                 onChange={(event) => event.target.value}
               />
             </Col>
@@ -86,14 +86,14 @@ export const FilterByProvvedimento = function (props) {
               <MultiSelect
                 validationFunc={() => true}
                 label={"Sottonumero"}
-                onChange={() => { }}
+                onChange={props.handleChangeSottonumero}
                 onRemove={() => { }}
                 isDisabled={false}
-                selectableOptions={["1", "2", "3", "4", "5"]}
+                selectableOptions={props.arrSottonumero}
                 placeholder={"-"}
                 //getOptionValue={col => col}
                 //getOptionStyle={col => ({ color: `${col} !important` })}
-                selectedItems={["1", "2"]}
+                selectedItems={props.arrSottonumero.slice(1, 6)}
                 firstColSpan={4}
                 secondColSpan={8}
               //onRemoveAll ={()=>{}}
@@ -113,10 +113,10 @@ export const FilterByProvvedimento = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Argomento"}
-                onChange={() => { }}
+                onChange={props.handleChangeCategoriaProvvedimento}
                 isDisabled={false}
-                selectableOptions={["Volgare", "1", "2", "3", "4", "5"]}
-                placeholder={"Volgare"}
+                selectableOptions={props.arrCategoriaProvvedimento}
+                placeholder={"-"}
                 //getOptionValue={col => col}
                 defaultValue={""}
               />

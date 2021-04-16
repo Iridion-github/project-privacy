@@ -53,7 +53,6 @@ export const FilterBySubject = function (props) {
         arrResult.push(result)
       }
     })
-    console.log("arrResult: ", arrResult)
     return arrResult
   }
 
@@ -62,7 +61,7 @@ export const FilterBySubject = function (props) {
       <Row className="w-100 ml-0 mr-0">
         <Col md={12} className="justify-content-center">
           <Row className="w-100 justify-content-center ml-0 mr-0">
-            <h5>Filtra per Fonte:</h5>
+            <h5>Filtra per Argomento:</h5>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0 pl-2 pr-2">
             <Col md={6} className="">

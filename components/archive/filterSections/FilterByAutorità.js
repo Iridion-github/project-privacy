@@ -24,10 +24,9 @@ export const FilterByAutorità = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Autorità"}
-                onChange={() => { }}
+                onChange={props.handleChangeAutorità}
                 isDisabled={false}
                 selectableOptions={props.arrAutorità}
-                //placeholder={"placeholder"}
                 //getOptionValue={col => col}
                 defaultValue={""}
               />
@@ -39,7 +38,7 @@ export const FilterByAutorità = function (props) {
                 label={"Data"}
                 placeholderText={""}
                 value={new Date()}
-                onChange={() => { }}
+                onChange={val => val}
                 validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
@@ -59,8 +58,8 @@ export const FilterByAutorità = function (props) {
                 colSpan={8}
                 label={"Num."}
                 //placeholderText={""}
-                value={444}
-                onChange={() => { }}
+                value={""}
+                onChange={event => event.target.value}
                 validationFunc={() => true}
                 isDisabled={false}
               />
@@ -71,7 +70,7 @@ export const FilterByAutorità = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Sezione"}
-                onChange={() => { }}
+                onChange={val => val}
                 isDisabled={false}
                 selectableOptions={["-", "I", "II", "III", "IV", "V", "VI", "VII", "Feriali", "Unite"]}
                 //placeholder={"placeholder"}
@@ -83,7 +82,7 @@ export const FilterByAutorità = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Regione"}
-                onChange={() => { }}
+                onChange={val => val}
                 isDisabled={false}
                 selectableOptions={[
                   "-",
@@ -116,7 +115,7 @@ export const FilterByAutorità = function (props) {
               <TextInput
                 label={"Città"}
                 //placeholderText={"prova placeholder"}
-                value={"prova value"}
+                value={"-"}
                 onChange={(event) => event.target.value}
               />
             </Col>

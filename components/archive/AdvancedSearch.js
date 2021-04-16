@@ -1,99 +1,37 @@
 
+import { useEffect, useState } from 'react'
 import {
-  Row,
+  Button,
   Col,
   Form,
-  Button,
-  Jumbotron
+  Jumbotron,
+  Row
 } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
 import { useLanguage } from '../../context/siteLanguageContext' //context
-import { FilterByTesto } from './filterSections/FilterByTesto' //Comportamento ricerca testuale
-import { FilterByData } from './filterSections/FilterByData'
+import { FilterByAutore } from './filterSections/FilterByAutore'
 import { FilterByAutorità } from './filterSections/FilterByAutorità'
 import { FilterByCodice } from './filterSections/FilterByCodice'
-import { FilterByLegge } from './filterSections/FilterByLegge'
-import { FilterByFonte } from './filterSections/FilterByFonte'
-import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento'
-import { FilterByGazzettaUfficiale } from './filterSections/FilterByGazzettaUfficiale'
-import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto'
-import { FilterByAutore } from './filterSections/FilterByAutore'
+import { FilterByData } from './filterSections/FilterByData'
 import { FilterByFormulario } from './filterSections/FilterByFormulario'
-import { FilterByExtension } from './filterSections/FilterByExtension' //Filtro per tipo di File(forse da scartare)
+import { FilterByGazzettaUfficiale } from './filterSections/FilterByGazzettaUfficiale'
+import { FilterByLegge } from './filterSections/FilterByLegge'
+import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento'
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Argomenti (da rivedere)
+import { FilterByTesto } from './filterSections/FilterByTesto' //Comportamento ricerca testuale
+import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto'
+import {
+  arrAutorità,
+  arrCodice,
+  arrSottonumero,
+  arrLegge,
+  arrProvvedimento,
+  arrCategoriaProvvedimento,
+  arrFormulario
+} from '../../utils/advancedSearch'
 
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
-
-  const arrAutorità = [
-    "-",
-    "Corte Costituzionale",
-    "Cassazione civile",
-    "Cassazione penale",
-    "Consiglio di Stato",
-    "T.A.R.",
-    "Tribunale",
-    "Arbitro bancario finanziario",
-    "Aut. en. elettrica e gas",
-    "Aut. protez. dati person.",
-    "Collegio arbitrale",
-    "Collegio centr. garanzia elettorale",
-    "Comm. appello F.I.G.C.",
-    "Commissione centrale sanità",
-    "Commissione elettorale",
-    "Comm. gar. l. sciopero SS.PP.",
-    "Comm. ricorsi brevetti",
-    "Comm. Trib I grado Trentino Alto Adige",
-    "Comm. Trib II grado Trentino Alto Adige",
-    "Comm. trib. centr.",
-    "Comm. trib. prov.le",
-    "Comm. trib. prov-distr.",
-    "Comm. trib. reg.",
-    "Commissione usi civici",
-    "Cons. giust. amm. Sicilia",
-    "Cons. Naz.le Forense",
-    "Cons. Naz.le Geometri",
-    "Cons. Sup. Magistratura",
-    "Consiglio di Stato ad. gen.",
-    "Consiglio di Stato ad. plen.",
-    "Consiglio di Stato atti norm.",
-    "Consiglio di Stato comm. spec.",
-    "Corte appello",
-    "Corte assise",
-    "Corte assise appello",
-    "Corte Conti",
-    "Corte europea diritti dell'uomo",
-    "Corte di giustizia UE",
-    "Corte int.le giustizia",
-    "Corte militare appello",
-    "Corte penale internazionale",
-    "Garante concorr. e mercato",
-    "Garante editoria",
-    "Giudice conciliatore",
-    "Giudice di pace",
-    "Giudice istruttore",
-    "Giudice tutelare",
-    "Giurì cod. aut. pubb.ria",
-    "Lodo arbitrale",
-    "Ministero del lavoro",
-    "Ministero delle finanze",
-    "Prefettura",
-    "Pretura",
-    "Procura della Repubblica",
-    "Procura gen. Corte appello",
-    "Sacra Rota",
-    "Tribunale della funzione pubblica UE",
-    "Tribunale I grado UE",
-    "Tribunale minorenni",
-    "Tribunale regionale delle acque",
-    "Tribunale regionale Canonico",
-    "Tribunale superiore delle acque",
-    "Tribunale superiore militare",
-    "Ufficio centrale referendum",
-    "Ufficio europeo brevetti",
-    "Vicariato Urbe"
-  ]
 
   const incrementDate = (dateInput, increment) => {
     const dateFormatTotime = new Date(dateInput);
@@ -1153,6 +1091,48 @@ export const AdvancedSearch = function (props) {
     ]
   })
 
+  const [selectedAutorità, setSelectedAutorità] = useState(null)
+
+  const handleChangeAutorità = (val) => {
+    setSelectedAutorità(val)
+  }
+
+  const [selectedCodice, setSelectedCodice] = useState(null)
+
+  const handleChangeCodice = (val) => {
+    setSelectedCodice(val)
+  }
+
+  const [selectedSottonumero, setSelectedSottonumero] = useState(null)
+
+  const handleChangeSottonumero = (val) => {
+    setSelectedSottonumero(val)
+  }
+
+  const [selectedLegge, setSelectedLegge] = useState(null)
+
+  const handleChangeLegge = (val) => {
+    setSelectedLegge(val)
+  }
+
+  const [selectedProvvedimento, setSelectedProvvedimento] = useState(null)
+
+  const handleChangeProvvedimento = (val) => {
+    setSelectedProvvedimento(val)
+  }
+
+  const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState(null)
+
+  const handleChangeCategoriaProvvedimento = (val) => {
+    setSelectedCategoriaProvvedimento(val)
+  }
+
+  const [selectedFormulario, setSelectedFormulario] = useState(null)
+
+  const handleChangeFormulario = (val) => {
+    setSelectedFormulario(val)
+  }
+
   const getMinifiedFilterState = (original) => {
     const newFilterState = { ...original }
     console.log("newFilterState - pre filter func:", newFilterState) //buggato, non rimuovere!
@@ -1239,21 +1219,41 @@ export const AdvancedSearch = function (props) {
           {(props.shownTab === "giurisprudenza") &&
             <FilterByAutorità
               arrAutorità={arrAutorità}
+              handleChangeAutorità={handleChangeAutorità}
             />}
           {/* Filtro per Formulario */}
-          {(props.shownTab === "formulari") && <FilterByFormulario />}
+          {(props.shownTab === "formulari") &&
+            <FilterByFormulario
+              arrFormulario={arrFormulario}
+              handleChangeFormulario={handleChangeFormulario}
+            />}
           {/* Filtro per Codice */}
           {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "formulari") && <FilterByCodice />}
+            || props.shownTab === "formulari") &&
+            <FilterByCodice
+              arrCodice={arrCodice}
+              handleChangeCodice={handleChangeCodice}
+              arrSottonumero={arrSottonumero}
+              handleChangeSottonumero={handleChangeSottonumero}
+            />}
           {/* Filtro per Legge */}
           {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "formulari") && <FilterByLegge />}
+            || props.shownTab === "formulari") &&
+            <FilterByLegge
+              arrLegge={arrLegge}
+              handleChangeLegge={handleChangeLegge}
+            />}
           {(props.shownTab === "noteedottrina") && <FilterByAutore />}
-          {/* Filtro per Fonte */}
-          {(props.shownTab === "giurisprudenza"
-            || props.shownTab === "noteedottrina") && <FilterByFonte />}
           {/* Filtro per Provvedimento */}
-          {(props.shownTab === "normativa") && <FilterByProvvedimento />}
+          {(props.shownTab === "normativa") &&
+            <FilterByProvvedimento
+              arrProvvedimento={arrProvvedimento}
+              handleChangeProvvedimento={handleChangeProvvedimento}
+              arrSottonumero={arrSottonumero}
+              handleChangeSottonumero={handleChangeSottonumero}
+              arrCategoriaProvvedimento={arrCategoriaProvvedimento}
+              handleChangeCategoriaProvvedimento={handleChangeCategoriaProvvedimento}
+            />}
           {/* Filtro per Gazzetta Ufficiale */}
           {(props.shownTab === "normativa") && <FilterByGazzettaUfficiale />}
           {/* Filtro per tipo di File (forse da scartare) */}
