@@ -51,25 +51,20 @@ export const DateIntervalInput = function ({
   excludeDates_2 = [],
 }) {
 
-  /*[CHECKPOINT] Seppur i logs stampino valori aspettati, i titoletti delle columns delle date non vengono stampati. Indagare. */
-  console.log("label", label)
-  console.log("label1", label1)
-  console.log("label2", label2)
-
   return (
     <>
       <Row className="w-100 ml-0 mr-0">
-        {(label && label.length > 0) ?? <h5 className={formLabelClass + " w-100 text-center"}>{label}</h5>}
-        {(label1 && label1.length > 0) ?? (
+        {(label && label.length > 0) ? <h5 className={formLabelClass + " w-100 text-center"}>{label}</h5> : ""}
+        {(label1 && label1.length > 0) ? (
           <Col md={6} className="pl-1 pr-1 justify-content-center">
-            <h5 className={"w-100 text-center"}>{label1}</h5>
+            <h5 className={"w-100 text-center mb-0"}>{label1}</h5>
           </Col>
-        )}
-        {(label2 && label2.length > 0) ?? (
+        ) : ""}
+        {(label2 && label2.length > 0) ? (
           <Col md={6} className="pl-1 pr-1 justify-content-center">
-            <h5 className={"w-100 text-center"}>{label2}</h5>
+            <h5 className={"w-100 text-center mb-0"}>{label2}</h5>
           </Col>
-        )}
+        ) : ""}
       </Row>
       <Row className="w-100 justify-content-center ml-0 mr-0">
         <Col md={colSpan_1} className="pl-1 pr-1">

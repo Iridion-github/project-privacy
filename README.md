@@ -1,5 +1,4 @@
 ## Checkpoint
-- [CHECKPOINT] Seppur i logs stampino valori aspettati, i titoletti delle columns delle date non vengono stampati. Indagare in DateIntervalInput.
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
 
 
@@ -771,6 +770,25 @@ presso il Garante per la protezione dei dati personali
 - Voluntary disclosure 1
 - Voluntary disclosure 2
 - Whisteblowing
+
+[___FILTRA_PER_FORMULARIO___](copiata da Dejure)     
+            
+- Form. Tributario           
+- Form. Processo Amministrativo           
+- Form. Agrario           
+- Form. Condominio
+- Form. Contratti
+- Form. Locazioni           
+- Form. Esecuzioni           
+- Form. Richiesta pagamenti           
+- Form. Appalti           
+- Form. Lavoro           
+- Form. Società           
+- Form. Atti Penali                            
+- Form. Processo Civile           
+- Form. Crisi d'Impresa           
+- Form. Responsabilità Civile           
+- Form. Famiglia
 
 [___CLASSIFICAZIONE___]
 

@@ -4,7 +4,7 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
-import { DateInput } from '../ui/DateInput'
+import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
 import { NumberInput } from '../ui/NumberInput'
 
 export const FilterByGazzettaUfficiale = function (props) {
@@ -17,8 +17,8 @@ export const FilterByGazzettaUfficiale = function (props) {
             <h5>Filtra per Gazzetta Ufficiale:</h5>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={3} className="pl-0 pr-2">
-              <DateInput
+            <Col md={5} className="pl-0 pr-2">
+              <DateInputNoCalendar
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
@@ -33,8 +33,6 @@ export const FilterByGazzettaUfficiale = function (props) {
                 excludeDates={[]}
                 filterDate={() => true}
                 locale={"it"}
-              //maxDate={new Date}
-              //minDate={new Date}
               />
             </Col>
             <Col md={2} className="pl-2 pr-2">

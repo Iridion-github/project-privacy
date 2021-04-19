@@ -567,5 +567,20 @@ export const arrCategoriaProvvedimento = [
 
 export const arrFormulario = [
     "-",
-    /* Da finire se il signor Gaetano vorrà avere la parte dedicata ai formulari da lui gestiti, nell'archivio */
+    "Form. Tributario",
+    "Form. Processo Amministrativo",
+    "Form. Agrario",
+    "Form. Condominio",
+    "Form. Contratti",
+    "Form. Locazioni",
+    "Form. Esecuzioni",
+    "Form. Richiesta pagamenti",
+    "Form. Appalti",
+    "Form. Lavoro",
+    "Form. Società",
+    "Form. Atti Penali      ",
+    "Form. Processo Civile",
+    "Form. Crisi d'Impresa",
+    "Form. Responsabilità Civile",
+    "Form. Famiglia",
 ]

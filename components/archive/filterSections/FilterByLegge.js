@@ -5,7 +5,7 @@ import {
   Form
 } from 'react-bootstrap'
 import { Select } from '../ui/Select'
-import { DateInput } from '../ui/DateInput'
+import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
 import { NumberInput } from '../ui/NumberInput'
 import { MultiSelect } from '../ui/MultiSelect'
 
@@ -33,7 +33,7 @@ export const FilterByLegge = function (props) {
               />
             </Col>
             <Col md={4} className="pl-2 pr-2">
-              <DateInput
+              <DateInputNoCalendar
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
@@ -48,8 +48,6 @@ export const FilterByLegge = function (props) {
                 excludeDates={[]}
                 filterDate={() => true}
                 locale={"it"}
-              //maxDate={new Date}
-              //minDate={new Date}
               />
             </Col>
           </Row>

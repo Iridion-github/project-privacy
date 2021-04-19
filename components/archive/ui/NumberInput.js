@@ -26,9 +26,9 @@ export const NumberInput = function ({
 
   return (
     <Form.Group className={formGroupClass}>
-      <Form.Label className={formLabelClass}>{label}</Form.Label>
-      <Row className="w-100">
-        <Col md={colSpan}>
+      {(label && label.length > 0) && <Form.Label className={formLabelClass}>{label}</Form.Label>}
+      <Row className="w-100 ml-0 mr-0">
+        <Col md={colSpan} className="pl-0 pr-0">
           <Form.Control
             type="number"
             placeholder={placeholderText}

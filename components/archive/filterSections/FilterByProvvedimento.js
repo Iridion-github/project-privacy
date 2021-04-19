@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap'
 import { Select } from '../ui/Select'
 import { MultiSelect } from '../ui/MultiSelect'
-import { DateInput } from '../ui/DateInput'
+import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
 import { TextInput } from '../ui/TextInput'
 import { NumberInput } from '../ui/NumberInput'
 
@@ -46,14 +46,14 @@ export const FilterByProvvedimento = function (props) {
             </Col>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={3} className="pl-0 pr-2">
-              <DateInput
+            <Col md={5} className="pl-0 pr-2">
+              <DateInputNoCalendar
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
                 value={new Date()}
-                onChange={() => { }}
+                onChange={val => val}
                 validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
@@ -62,8 +62,6 @@ export const FilterByProvvedimento = function (props) {
                 excludeDates={[]}
                 filterDate={() => true}
                 locale={"it"}
-              //maxDate={new Date}
-              //minDate={new Date}
               />
             </Col>
             <Col md={2} className="pl-2 pr-2">
@@ -99,14 +97,7 @@ export const FilterByProvvedimento = function (props) {
               //onRemoveAll ={()=>{}}
               />
             </Col>
-            <Col md={2} className="pl-2 pr-2">
-              <TextInput
-                label={"Allegato"}
-                //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
-              />
-            </Col>
+
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
             <Col md={7} className="pl-2 pr-2">
@@ -119,6 +110,14 @@ export const FilterByProvvedimento = function (props) {
                 placeholder={"-"}
                 //getOptionValue={col => col}
                 defaultValue={""}
+              />
+            </Col>
+            <Col md={3} className="pl-2 pr-2">
+              <TextInput
+                label={"Allegato"}
+                //placeholderText={"prova placeholder"}
+                value={""}
+                onChange={(event) => event.target.value}
               />
             </Col>
           </Row>

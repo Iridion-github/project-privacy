@@ -5,7 +5,7 @@ import {
   Form
 } from 'react-bootstrap'
 import { Select } from '../ui/Select'
-import { DateInput } from '../ui/DateInput'
+import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
 import { NumberInput } from '../ui/NumberInput'
 import { TextInput } from '../ui/TextInput'
 
@@ -20,7 +20,7 @@ export const FilterByAutorità = function (props) {
             <h5>Filtra per Autorità:</h5>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={6} className="pl-0 pr-2">
+            <Col md={5} className="pl-0 pr-2">
               <Select
                 validationFunc={() => true}
                 label={"Autorità"}
@@ -31,8 +31,8 @@ export const FilterByAutorità = function (props) {
                 defaultValue={""}
               />
             </Col>
-            <Col md={3} className="pl-2 pr-2">
-              <DateInput
+            <Col md={5} className="pl-2 pr-2 align-items-start">
+              <DateInputNoCalendar
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
@@ -47,11 +47,9 @@ export const FilterByAutorità = function (props) {
                 excludeDates={[]}
                 filterDate={() => true}
                 locale={"it"}
-              //maxDate={new Date}
-              //minDate={new Date}
               />
             </Col>
-            <Col md={3} className="pl-2 pr-0">
+            <Col md={2} className="pl-2 pr-0">
               <NumberInput
                 formGroupClass={""}
                 formLabelClass={""}
@@ -115,7 +113,7 @@ export const FilterByAutorità = function (props) {
               <TextInput
                 label={"Città"}
                 //placeholderText={"prova placeholder"}
-                value={"-"}
+                value={""}
                 onChange={(event) => event.target.value}
               />
             </Col>
