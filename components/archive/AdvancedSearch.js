@@ -22,13 +22,12 @@ import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsCont
 import {
   arrAutorità,
   arrCodice,
-  arrSottonumero,
+  arrSottonumero as arrSottonumeroRaw,
   arrLegge,
   arrProvvedimento,
   arrCategoriaProvvedimento,
   arrFormulario
 } from '../../utils/advancedSearch'
-
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
@@ -1091,43 +1090,94 @@ export const AdvancedSearch = function (props) {
     ]
   })
 
-  const [selectedAutorità, setSelectedAutorità] = useState(null)
+  const [selectedAutorità, setSelectedAutorità] = useState("")
 
   const handleChangeAutorità = (val) => {
     setSelectedAutorità(val)
   }
 
-  const [selectedCodice, setSelectedCodice] = useState(null)
+  const [selectedCodice, setSelectedCodice] = useState("")
 
   const handleChangeCodice = (val) => {
     setSelectedCodice(val)
   }
 
-  const [selectedSottonumero, setSelectedSottonumero] = useState(null)
+  const [selectedSottonumero, setSelectedSottonumero] = useState("")
 
   const handleChangeSottonumero = (val) => {
     setSelectedSottonumero(val)
   }
 
-  const [selectedLegge, setSelectedLegge] = useState(null)
+  const [arrSottonumero, setArrSottonumero] = useState(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })))
+
+  const handleChangeArrSottonumero = (arr) => {
+    setArrSottonumero(arr)
+  }
+
+  const handleAddSottonumero = (val) => {
+    console.log("handleAddSottonumero - val:", val)
+    if (selectedSottonumero === "") {
+      console.log("handleChangeSelectVal - empty string case - val: ", val)
+      const newItem = arrSottonumero.find(opt => opt.value === val)
+      handleChangeSottonumero([newItem])
+    } else {
+      console.log("handleChangeSelectVal - array case - val: ", val)
+      const newItem = arrSottonumero.find(opt => opt.value === val)
+      console.log("newItem:", newItem)
+      handleChangeSottonumero([...arrSottonumero, newItem])
+    }
+    //[CHECKPOINT] Al primo giro inserisce correttamente e rimuove dai selectable. Al secondo giro li inserisce tutti. 
+    //setto selected a true
+    handleChangeArrSottonumero([...arrSottonumero].map(opt => {
+      if (opt.value === val) {
+        opt.selected = !opt.selected
+      }
+      return opt
+    }))
+
+  }
+
+  const handleRemoveSottonumero = (val) => {
+    console.log("handleRemoveMultiSelectVal - val:", val)
+    const updatedArrSottonumero = [...arrSottonumero].filter(el => el.value !== val)
+    handleChangeSottonumero(updatedArrSottonumero)
+    //setto selected a false
+    handleChangeArrSottonumero([...arrSottonumero].map(opt => {
+      if (opt.value === val) {
+        opt.selected = !opt.selected
+      }
+      return opt
+    }))
+  }
+
+
+
+
+
+
+
+
+
+
+  const [selectedLegge, setSelectedLegge] = useState("")
 
   const handleChangeLegge = (val) => {
     setSelectedLegge(val)
   }
 
-  const [selectedProvvedimento, setSelectedProvvedimento] = useState(null)
+  const [selectedProvvedimento, setSelectedProvvedimento] = useState("")
 
   const handleChangeProvvedimento = (val) => {
     setSelectedProvvedimento(val)
   }
 
-  const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState(null)
+  const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState("")
 
   const handleChangeCategoriaProvvedimento = (val) => {
     setSelectedCategoriaProvvedimento(val)
   }
 
-  const [selectedFormulario, setSelectedFormulario] = useState(null)
+  const [selectedFormulario, setSelectedFormulario] = useState("")
 
   const handleChangeFormulario = (val) => {
     setSelectedFormulario(val)
@@ -1219,6 +1269,7 @@ export const AdvancedSearch = function (props) {
           {(props.shownTab === "giurisprudenza") &&
             <FilterByAutorità
               arrAutorità={arrAutorità}
+              selectedAutorità={selectedAutorità}
               handleChangeAutorità={handleChangeAutorità}
             />}
           {/* Filtro per Formulario */}
@@ -1232,9 +1283,12 @@ export const AdvancedSearch = function (props) {
             || props.shownTab === "formulari") &&
             <FilterByCodice
               arrCodice={arrCodice}
+              selectedCodice={selectedCodice}
               handleChangeCodice={handleChangeCodice}
               arrSottonumero={arrSottonumero}
-              handleChangeSottonumero={handleChangeSottonumero}
+              selectedSottonumero={selectedSottonumero}
+              handleAddSottonumero={handleAddSottonumero}
+              handleRemoveSottonumero={handleRemoveSottonumero}
             />}
           {/* Filtro per Legge */}
           {(props.shownTab === "giurisprudenza"

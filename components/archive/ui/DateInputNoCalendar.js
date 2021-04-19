@@ -59,7 +59,6 @@ export const DateInputNoCalendar = function ({
 
     const currentDate = new Date
     const currentYear = (Number(currentDate.getYear()) + 1900)
-    console.log("currentYear:", currentYear)
 
     return (
         <Form.Group className={formGroupClass}>

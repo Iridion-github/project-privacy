@@ -27,7 +27,7 @@ export const FilterByCodice = function (props) {
                 isDisabled={false}
                 selectableOptions={props.arrCodice}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedCodice}
               />
             </Col>
             <Col md={3} className="pl-2 pr-2">
@@ -49,14 +49,14 @@ export const FilterByCodice = function (props) {
               <MultiSelect
                 validationFunc={() => true}
                 label={"Sottonumero"}
-                onChange={props.handleChangeSottonumero}
-                onRemove={() => { }}
+                onChange={props.handleAddSottonumero}
+                onRemove={props.handleRemoveSottonumero}
                 isDisabled={false}
                 selectableOptions={props.arrSottonumero}
                 placeholder={"-"}
                 //getOptionValue={col => col}
                 //getOptionStyle={col => ({ color: `${col} !important` })}
-                selectedItems={props.arrSottonumero.slice(1, 6)}
+                selectedItems={props.selectedSottonumero}
                 firstColSpan={4}
                 secondColSpan={8}
               //onRemoveAll ={()=>{}}

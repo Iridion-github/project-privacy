@@ -28,7 +28,7 @@ export const FilterByAutorità = function (props) {
                 isDisabled={false}
                 selectableOptions={props.arrAutorità}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedAutorità}
               />
             </Col>
             <Col md={5} className="pl-2 pr-2 align-items-start">
