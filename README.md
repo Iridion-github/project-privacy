@@ -1,4 +1,5 @@
 ## Checkpoint
+- [CHECKPOINT] Al primo giro inserisce correttamente e rimuove dai selectable. Al secondo giro li inserisce tutti. 
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
 
 
