@@ -22,14 +22,14 @@ export const FilterByLegge = function (props) {
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
             <Col md={6} className="pl-0 pr-2">
               <Select
-                validationFunc={() => true}
+                validationFunc={props.handleChangeLegge}
                 label={"Legge"}
                 onChange={props.handleChangeLegge}
                 isDisabled={false}
                 selectableOptions={props.arrLegge}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedLegge}
               />
             </Col>
             <Col md={4} className="pl-2 pr-2">

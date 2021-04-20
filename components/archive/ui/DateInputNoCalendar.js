@@ -14,8 +14,10 @@ export const DateInputNoCalendar = function ({
     validationFunc = () => true,
     label = "",
     textmuted = false,
-    value = new Date,
-    onChange = val => val,
+    selectedDay = "",
+    selectedMonth = "",
+    selectedYear = "",
+    onChange = null,
     isDisabled = false,
     withTime = false,
     dateFormat = 'dd/MM/yyyy',
@@ -36,7 +38,9 @@ export const DateInputNoCalendar = function ({
         validationFunc,
         label,
         textmuted,
-        value,
+        selectedDay,
+        selectedMonth,
+        selectedYear,
         onChange,
         isDisabled,
         withTime,
@@ -48,13 +52,6 @@ export const DateInputNoCalendar = function ({
         minDate,
         readOnly,
         required,
-    }
-
-    const handleChange = (val) => {
-        if (validationFunc(val)) {
-            onChange(val)
-            return
-        }
     }
 
     const currentDate = new Date
@@ -70,9 +67,9 @@ export const DateInputNoCalendar = function ({
                         colSpan={12}
                         placeholderText={"GG"}
                         textmuted={""}
-                        value={""}
-                        onChange={() => { }}
-                        validationFunc={() => num >= 1 && num <= 31}
+                        value={props.selectedDay}
+                        onChange={(event) => props.onChange("day", event.target.value)}
+                        validationFunc={() => props.selectedDay >= 1 && props.selectedDay <= 31}
                     />
                 </Col>
                 <Col md={4} className="pl-1 pr-1">
@@ -81,9 +78,9 @@ export const DateInputNoCalendar = function ({
                         formGroupClass="w-100"
                         placeholderText={"MM"}
                         textmuted={""}
-                        value={""}
-                        onChange={() => { }}
-                        validationFunc={() => num >= 1 && num <= 12}
+                        value={props.selectedMonth}
+                        onChange={(event) => props.onChange("month", event.target.value)}
+                        validationFunc={() => props.selectedMonth >= 1 && props.selectedMonth <= 12}
                     />
                 </Col>
                 <Col md={4} className="pl-1 pr-0">
@@ -92,9 +89,9 @@ export const DateInputNoCalendar = function ({
                         formGroupClass="w-100"
                         placeholderText={"AAAA"}
                         textmuted={""}
-                        value={""}
-                        onChange={() => { }}
-                        validationFunc={() => num >= 1800 && num <= currentYear}
+                        value={props.selectedYear}
+                        onChange={(event) => props.onChange("year", event.target.value)}
+                        validationFunc={() => props.selectedYear >= 1800 && props.selectedYear <= currentYear}
                     />
                 </Col>
             </Row>

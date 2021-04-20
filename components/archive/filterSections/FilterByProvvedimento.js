@@ -29,7 +29,7 @@ export const FilterByProvvedimento = function (props) {
                 selectableOptions={props.arrProvvedimento}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedProvvedimento}
               />
             </Col>
             <Col md={5} className="pl-2 pr-0">
@@ -84,17 +84,17 @@ export const FilterByProvvedimento = function (props) {
               <MultiSelect
                 validationFunc={() => true}
                 label={"Sottonumero"}
-                onChange={props.handleChangeSottonumero}
-                onRemove={() => { }}
+                onChange={props.handleAddSottonumero}
+                onRemove={props.handleRemoveSottonumero}
                 isDisabled={false}
                 selectableOptions={props.arrSottonumero}
                 placeholder={"-"}
                 //getOptionValue={col => col}
                 //getOptionStyle={col => ({ color: `${col} !important` })}
-                selectedItems={props.arrSottonumero.slice(1, 6)}
+                selectedItems={props.arrSottonumero.filter(el => el.selected === true)}
                 firstColSpan={4}
                 secondColSpan={8}
-              //onRemoveAll ={()=>{}}
+                onRemoveAll={() => props.handleRemoveSottonumero("REMOVE_ALL")}
               />
             </Col>
 
@@ -109,7 +109,7 @@ export const FilterByProvvedimento = function (props) {
                 selectableOptions={props.arrCategoriaProvvedimento}
                 placeholder={"-"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedCategoriaProvvedimento}
               />
             </Col>
             <Col md={3} className="pl-2 pr-2">

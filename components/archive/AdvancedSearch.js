@@ -28,20 +28,10 @@ import {
   arrCategoriaProvvedimento,
   arrFormulario
 } from '../../utils/advancedSearch'
+import { el } from 'date-fns/locale'
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
-
-  const incrementDate = (dateInput, increment) => {
-    const dateFormatTotime = new Date(dateInput);
-    const increasedDate = new Date(dateFormatTotime.getTime() + (increment * 86400000));
-    return increasedDate;
-  }
-
-  const today = new Date
-  const tomorrow = incrementDate(today, 1)
-  const [startEs, setStartEs] = useState(today)
-  const [endEs, setEndEs] = useState(tomorrow)
 
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
@@ -1090,6 +1080,62 @@ export const AdvancedSearch = function (props) {
     ]
   })
 
+  const [selectedOpzioneTestuale, setSelectedOpzioneTestuale] = useState("Contengono almeno 1 delle parole")
+
+  const handleChangeOpzioneTestuale = (val) => {
+    setSelectedOpzioneTestuale(val)
+  }
+
+  //Stato di Date (da -> a)
+
+  const [startDate, setStartDate] = useState("")
+
+  const handleChangeStartDate = (val) => {
+    setStartDate(val)
+  }
+
+  const [endDate, setEndDate] = useState("")
+
+  const handleChangeEndDate = (val) => {
+    setEndDate(val)
+  }
+
+  //Stato di Data (singola) in Autorità
+
+  const [dataFiltroAutorità, setDataFiltroAutorità] = useState({
+    day: "",
+    month: "",
+    year: ""
+  })
+
+  const handleChangeDataFiltroAutorità = (which, val) => {
+    //[CHECKPOINT] Questo handler non scatta quando si prova a modificare una data. Indagare.
+    console.log("handleChangeDataFiltroAutorità - which:", which, "val:", val)
+    const newState = { ...dataFiltroAutorità }
+    newState[which] = val
+    setDataFiltroAutorità(newState)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [selectedAutorità, setSelectedAutorità] = useState("")
 
   const handleChangeAutorità = (val) => {
@@ -1102,12 +1148,6 @@ export const AdvancedSearch = function (props) {
     setSelectedCodice(val)
   }
 
-  const [selectedSottonumero, setSelectedSottonumero] = useState("")
-
-  const handleChangeSottonumero = (val) => {
-    setSelectedSottonumero(val)
-  }
-
   const [arrSottonumero, setArrSottonumero] = useState(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })))
 
   const handleChangeArrSottonumero = (arr) => {
@@ -1115,48 +1155,38 @@ export const AdvancedSearch = function (props) {
   }
 
   const handleAddSottonumero = (val) => {
-    console.log("handleAddSottonumero - val:", val)
-    if (selectedSottonumero === "") {
-      console.log("handleChangeSelectVal - empty string case - val: ", val)
-      const newItem = arrSottonumero.find(opt => opt.value === val)
-      handleChangeSottonumero([newItem])
-    } else {
-      console.log("handleChangeSelectVal - array case - val: ", val)
-      const newItem = arrSottonumero.find(opt => opt.value === val)
-      console.log("newItem:", newItem)
-      handleChangeSottonumero([...arrSottonumero, newItem])
-    }
-    //[CHECKPOINT] Al primo giro inserisce correttamente e rimuove dai selectable. Al secondo giro li inserisce tutti. 
-    //setto selected a true
     handleChangeArrSottonumero([...arrSottonumero].map(opt => {
       if (opt.value === val) {
-        opt.selected = !opt.selected
+        opt.selected = true
       }
       return opt
     }))
-
   }
 
   const handleRemoveSottonumero = (val) => {
-    console.log("handleRemoveMultiSelectVal - val:", val)
-    const updatedArrSottonumero = [...arrSottonumero].filter(el => el.value !== val)
-    handleChangeSottonumero(updatedArrSottonumero)
-    //setto selected a false
-    handleChangeArrSottonumero([...arrSottonumero].map(opt => {
-      if (opt.value === val) {
-        opt.selected = !opt.selected
-      }
-      return opt
-    }))
+    if (val === "REMOVE_ALL") {
+      handleChangeArrSottonumero([...arrSottonumero].map(el => ({ ...el, selected: false })))
+    } else {
+      handleChangeArrSottonumero([...arrSottonumero].map(opt => {
+        if (opt.value === val) {
+          opt.selected = false
+        }
+        return opt
+      }))
+    }
   }
 
+  const [selectedSezione, setSelectedSezione] = useState("")
 
+  const handleChangeSezione = (val) => {
+    setSelectedSezione(val)
+  }
 
+  const [selectedRegione, setSelectedRegione] = useState("")
 
-
-
-
-
+  const handleChangeRegione = (val) => {
+    setSelectedRegione(val)
+  }
 
 
   const [selectedLegge, setSelectedLegge] = useState("")
@@ -1255,7 +1285,10 @@ export const AdvancedSearch = function (props) {
       <Jumbotron className="w-100 pt-4 pb-4">
         <Form>
           {/* Comportamento ricerca testuale: parole/sequenza/lista */}
-          <FilterByTesto />
+          <FilterByTesto
+            selectedOpzioneTestuale={selectedOpzioneTestuale}
+            handleChangeOpzioneTestuale={handleChangeOpzioneTestuale}
+          />
           {/* Comportamento ricerca testuale: titolo/contenuto */}
           {(props.shownTab === "noteedottrina"
             || props.shownTab === "formulari") && <FilterByTitoloVsContenuto />}
@@ -1264,18 +1297,31 @@ export const AdvancedSearch = function (props) {
             props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina"
-          ) && <FilterByData />}
+          ) && <FilterByData
+              startDate={startDate}
+              handleChangeStartDate={handleChangeStartDate}
+              endDate={endDate}
+              handleChangeEndDate={handleChangeEndDate}
+            />}
           {/* Filtro per Autorità */}
           {(props.shownTab === "giurisprudenza") &&
             <FilterByAutorità
               arrAutorità={arrAutorità}
               selectedAutorità={selectedAutorità}
               handleChangeAutorità={handleChangeAutorità}
+              dataFiltroAutorità={dataFiltroAutorità}
+              handleChangeDataFiltroAutorità={handleChangeDataFiltroAutorità}
+              selectedSezione={selectedSezione}
+              handleChangeSezione={handleChangeSezione}
+              selectedRegione={selectedRegione}
+              handleChangeRegione={handleChangeRegione}
             />}
           {/* Filtro per Formulario */}
           {(props.shownTab === "formulari") &&
             <FilterByFormulario
               arrFormulario={arrFormulario}
+              handleChangeFormulario={handleChangeFormulario}
+              selectedFormulario={selectedFormulario}
               handleChangeFormulario={handleChangeFormulario}
             />}
           {/* Filtro per Codice */}
@@ -1286,7 +1332,6 @@ export const AdvancedSearch = function (props) {
               selectedCodice={selectedCodice}
               handleChangeCodice={handleChangeCodice}
               arrSottonumero={arrSottonumero}
-              selectedSottonumero={selectedSottonumero}
               handleAddSottonumero={handleAddSottonumero}
               handleRemoveSottonumero={handleRemoveSottonumero}
             />}
@@ -1296,6 +1341,8 @@ export const AdvancedSearch = function (props) {
             <FilterByLegge
               arrLegge={arrLegge}
               handleChangeLegge={handleChangeLegge}
+              selectedLegge={selectedLegge}
+              handleChangeLegge={handleChangeLegge}
             />}
           {(props.shownTab === "noteedottrina") && <FilterByAutore />}
           {/* Filtro per Provvedimento */}
@@ -1304,8 +1351,13 @@ export const AdvancedSearch = function (props) {
               arrProvvedimento={arrProvvedimento}
               handleChangeProvvedimento={handleChangeProvvedimento}
               arrSottonumero={arrSottonumero}
-              handleChangeSottonumero={handleChangeSottonumero}
+              handleAddSottonumero={handleAddSottonumero}
+              handleRemoveSottonumero={handleRemoveSottonumero}
               arrCategoriaProvvedimento={arrCategoriaProvvedimento}
+              handleChangeCategoriaProvvedimento={handleChangeCategoriaProvvedimento}
+              selectedProvvedimento={selectedProvvedimento}
+              handleChangeProvvedimento={handleChangeProvvedimento}
+              selectedCategoriaProvvedimento={selectedCategoriaProvvedimento}
               handleChangeCategoriaProvvedimento={handleChangeCategoriaProvvedimento}
             />}
           {/* Filtro per Gazzetta Ufficiale */}

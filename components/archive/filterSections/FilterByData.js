@@ -21,25 +21,25 @@ export const FilterByData = function (props) {
         //dateFormat={} //Mai passarlo come null o "", causa bugs di Datepicker.js
         //start
         label1={"Da:"}
-        value_1={new Date}
-        //datepickerClassName_1={null}
+        value_1={props.startDate}
+        datepickerClassName_1={"text-center"}
         //calendarClassName_1={null}
-        onChange_1={val => val}
+        onChange_1={props.handleChangeStartDate}
         withTime_1={false}
         //isDisabled_1={false}
         filterDate_1={() => true}
         //locale_1={null}
-        maxDate_1={new Date} //maxDate_1 e value_2 devono sempre essere bindati alla stessa variabile di stato!
+        maxDate_1={props.endDate} //maxDate_1 e value_2 devono sempre essere bindati alla stessa variabile di stato!
         //minDate_1={new Date}
         readOnly_1={false}
         required_1={false}
         //excludeDates_1={null}
         //end
         label2={"A:"}
-        value_2={new Date} //
-        datepickerClassName_2={null}
+        value_2={props.endDate} //
+        datepickerClassName_2={"text-center"}
         calendarClassName_2={null}
-        onChange_2={val => val}
+        onChange_2={props.handleChangeEndDate}
         withTime_2={false}
         isDisabled_2={false}
         filterDate_2={() => true}

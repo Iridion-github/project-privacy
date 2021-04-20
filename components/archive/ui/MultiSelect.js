@@ -73,7 +73,6 @@ export const MultiSelect = function (props) {
           {(selectedItems && selectedItems.length > 0) &&
             <Row className="w-100 ml-0 mr-0">
               <Col md={10} className="pl-0 pr-0">
-                {console.log("selectedItems:", selectedItems)}
                 {selectedItems.map(opt => (
                   <Badge
                     variant="info"

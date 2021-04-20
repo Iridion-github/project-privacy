@@ -37,8 +37,10 @@ export const FilterByAutorità = function (props) {
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
-                value={new Date()}
-                onChange={val => val}
+                selectedDay={props.dataFiltroAutorità.day}
+                selectedMonth={props.dataFiltroAutorità.month}
+                selectedYear={props.dataFiltroAutorità.year}
+                onChange={props.handleChangeDataFiltroAutorità}
                 validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
@@ -68,19 +70,19 @@ export const FilterByAutorità = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Sezione"}
-                onChange={val => val}
+                onChange={props.handleChangeSezione}
                 isDisabled={false}
                 selectableOptions={["-", "I", "II", "III", "IV", "V", "VI", "VII", "Feriali", "Unite"]}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedSezione}
               />
             </Col>
             <Col md={4} className="pl-2 pr-2">
               <Select
                 validationFunc={() => true}
                 label={"Regione"}
-                onChange={val => val}
+                onChange={props.handleChangeRegione}
                 isDisabled={false}
                 selectableOptions={[
                   "-",
@@ -106,7 +108,7 @@ export const FilterByAutorità = function (props) {
                   "Veneto"]}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedRegione}
               />
             </Col>
             <Col md={4} className="pl-2 pr-0">

@@ -4,6 +4,7 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
+import { Select } from '../ui/Select'
 
 
 export const FilterByTesto = function (props) {
@@ -16,18 +17,17 @@ export const FilterByTesto = function (props) {
             <h5>I risultati della Ricerca:</h5>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0">
-            <Form.Group className="justify-content-center" controlId="">
-              <Form.Control
-                size="sm"
-                as="select"
-                className=""
-                onChange={val => val}
-              >
-                <option>Contengono almeno 1 delle parole</option>
-                <option>Contengono tutte le parole</option>
-                <option>Contengono l'esatta frase</option>
-              </Form.Control>
-            </Form.Group>
+            <Select
+              validationFunc={() => true}
+              label={""}
+              onChange={props.handleChangeOpzioneTestuale}
+              isDisabled={false}
+              selectableOptions={[
+                "Contengono almeno 1 delle parole",
+                "Contengono tutte le parole",
+                "Contengono l'esatta frase"]}
+              defaultValue={props.selectedOpzioneTestuale}
+            />
           </Row>
         </Col>
       </Row>

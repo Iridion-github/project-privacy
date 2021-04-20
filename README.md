@@ -1,5 +1,5 @@
 ## Checkpoint
-- [CHECKPOINT] Al primo giro inserisce correttamente e rimuove dai selectable. Al secondo giro li inserisce tutti. 
+- [CHECKPOINT] Questo handler non scatta quando si prova a modificare una data. Indagare.
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
 
 

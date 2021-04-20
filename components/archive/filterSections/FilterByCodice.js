@@ -56,10 +56,10 @@ export const FilterByCodice = function (props) {
                 placeholder={"-"}
                 //getOptionValue={col => col}
                 //getOptionStyle={col => ({ color: `${col} !important` })}
-                selectedItems={props.selectedSottonumero}
+                selectedItems={props.arrSottonumero.filter(el => el.selected === true)}
                 firstColSpan={4}
                 secondColSpan={8}
-              //onRemoveAll ={()=>{}}
+                onRemoveAll={() => props.handleRemoveSottonumero("REMOVE_ALL")}
               />
             </Col>
           </Row>

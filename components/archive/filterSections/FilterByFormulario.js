@@ -26,7 +26,7 @@ export const FilterByFormulario = function (props) {
                 selectableOptions={props.arrFormulario}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.selectedFormulario}
               />
             </Col>
           </Row>
