@@ -5,6 +5,7 @@ import {
   Form
 } from 'react-bootstrap'
 import { Select } from '../ui/Select'
+import { ReactSelect } from '../ui/ReactSelect'
 import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
 import { NumberInput } from '../ui/NumberInput'
 import { TextInput } from '../ui/TextInput'
@@ -58,9 +59,9 @@ export const FilterByAutorità = function (props) {
                 colSpan={8}
                 label={"Num."}
                 //placeholderText={""}
-                value={""}
-                onChange={event => event.target.value}
-                validationFunc={() => true}
+                value={props.numAutorità}
+                onChange={props.handleChangeNumAutorità}
+                validationFunc={num => num >= 0 && num <= 9999}
                 isDisabled={false}
               />
             </Col>
@@ -112,11 +113,32 @@ export const FilterByAutorità = function (props) {
               />
             </Col>
             <Col md={4} className="pl-2 pr-0">
+              <ReactSelect
+                isMulti={false}
+                //validationFunc={null}
+                label={"Città"}
+                textmuted={""}
+                onChange={props.handleChangeCittàAutorità}
+                isDisabled={false}
+                selectableOptions={[
+                  { label: "1", value: "1" },
+                  { label: "2", value: "2" },
+                  { label: "3", value: "3" },
+                  { label: "11", value: "11" },
+                  { label: "22", value: "22" },
+                  { label: "33", value: "33" }
+                ]}
+                defaultValue={""}
+                placeholder={"Seleziona una città"}
+              //getOptionValue={null}
+              //getOptionStyle={null}
+              //getCustomTheme={null}
+              />
               <TextInput
                 label={"Città"}
                 //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
+                value={props.cittàAutorità}
+                onChange={props.handleChangeCittàAutorità}
               />
             </Col>
           </Row>

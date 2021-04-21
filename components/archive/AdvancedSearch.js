@@ -1109,15 +1109,36 @@ export const AdvancedSearch = function (props) {
   })
 
   const handleChangeDataFiltroAutorità = (which, val) => {
-    //[CHECKPOINT] Questo handler non scatta quando si prova a modificare una data. Indagare.
-    console.log("handleChangeDataFiltroAutorità - which:", which, "val:", val)
     const newState = { ...dataFiltroAutorità }
-    newState[which] = val
+    if (
+      which === "day" && val === "0"
+      || which === "month" && val === "0"
+      || which === "year" && val === "0"
+      || which === "year" && val === "1799") {
+      newState[which] = ""
+    } else {
+      newState[which] = val
+    }
+
+
     setDataFiltroAutorità(newState)
   }
 
+  const [numAutorità, setNumAutorità] = useState("")
 
+  const handleChangeNumAutorità = (val) => {
+    if (val === "0") {
+      setNumAutorità("")
+    } else {
+      setNumAutorità(val)
+    }
+  }
 
+  const [cittàAutorità, setCittàAutorità] = useState("")
+
+  const handleChangeCittàAutorità = (val) => {
+    setCittàAutorità(val)
+  }
 
 
 
@@ -1311,10 +1332,14 @@ export const AdvancedSearch = function (props) {
               handleChangeAutorità={handleChangeAutorità}
               dataFiltroAutorità={dataFiltroAutorità}
               handleChangeDataFiltroAutorità={handleChangeDataFiltroAutorità}
+              numAutorità={numAutorità}
+              handleChangeNumAutorità={handleChangeNumAutorità}
               selectedSezione={selectedSezione}
               handleChangeSezione={handleChangeSezione}
               selectedRegione={selectedRegione}
               handleChangeRegione={handleChangeRegione}
+              cittàAutorità={cittàAutorità}
+              handleChangeCittàAutorità={handleChangeCittàAutorità}
             />}
           {/* Filtro per Formulario */}
           {(props.shownTab === "formulari") &&

@@ -57,6 +57,22 @@ export const DateInputNoCalendar = function ({
     const currentDate = new Date
     const currentYear = (Number(currentDate.getYear()) + 1900)
 
+    const validateDay = (num) => {
+        return num >= 0 && num <= 31
+    }
+
+    const validateMonth = (num) => {
+        return num >= 0 && num <= 12
+    }
+
+    const validateYear = (num) => {
+        if (num.length < 4) {
+            return num >= 0 && num <= currentYear
+        } else {
+            return num >= 1800
+        }
+    }
+
     return (
         <Form.Group className={formGroupClass}>
             <Form.Label className={formLabelClass}>{label}</Form.Label>
@@ -68,8 +84,8 @@ export const DateInputNoCalendar = function ({
                         placeholderText={"GG"}
                         textmuted={""}
                         value={props.selectedDay}
-                        onChange={(event) => props.onChange("day", event.target.value)}
-                        validationFunc={() => props.selectedDay >= 1 && props.selectedDay <= 31}
+                        onChange={num => props.onChange("day", num)}
+                        validationFunc={validateDay}
                     />
                 </Col>
                 <Col md={4} className="pl-1 pr-1">
@@ -79,8 +95,8 @@ export const DateInputNoCalendar = function ({
                         placeholderText={"MM"}
                         textmuted={""}
                         value={props.selectedMonth}
-                        onChange={(event) => props.onChange("month", event.target.value)}
-                        validationFunc={() => props.selectedMonth >= 1 && props.selectedMonth <= 12}
+                        onChange={num => props.onChange("month", num)}
+                        validationFunc={validateMonth}
                     />
                 </Col>
                 <Col md={4} className="pl-1 pr-0">
@@ -90,8 +106,8 @@ export const DateInputNoCalendar = function ({
                         placeholderText={"AAAA"}
                         textmuted={""}
                         value={props.selectedYear}
-                        onChange={(event) => props.onChange("year", event.target.value)}
-                        validationFunc={() => props.selectedYear >= 1800 && props.selectedYear <= currentYear}
+                        onChange={num => props.onChange("year", num)}
+                        validationFunc={validateYear}
                     />
                 </Col>
             </Row>

@@ -1,5 +1,5 @@
 ## Checkpoint
-- [CHECKPOINT] Questo handler non scatta quando si prova a modificare una data. Indagare.
+- [CHECKPOINT] Cominciato con l'uso di react-select. Per ora si fallisce nel fargli prendere un tema.
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
 
 
@@ -86,17 +86,6 @@
 -------------------- [PANNELLI DA VALUTARE] --------------------
 - CATEGORIA: Molto probabilmente verrebbe inglobato da Autorità, vedere alla fine se vale la pena inserirlo.
 - TIPO FILE (extension):  Molto probabilmente risulterebbe inutile, vedere alla fine se vale la pena inserirlo (poichè già implementato).
-
-
----------------------------------[ COMPONENTI NECESSARI ]---------------------------------
-- TextInput [O]
-- Select [O]
-- MultiSelect [O]
-- NumberInput [O]
-- DateInput (+ yearOnly) [O]
-- DateIntervalInput (+ yearOnly) [O]
-- CustomAutosuggest [O]
-
 
 -------------------------------------- [STRUTTURA del MENU FINALE di RICERCA AVANZATA] --------------------------------------
 
@@ -1342,8 +1331,10 @@ presso il Garante per la protezione dei dati personali
 - Questa ricerca non trova il file: "Dec. (UE) del Consiglio del 18 gennaio 2016, n. 2016/77 (G.U. 23 gennaio 2016, n. L 16). Conferma la posizione adottata a nome dell’Unione europea in sede di 10a conferenza ministeriale dell’Organizzazione mondiale del commercio con riguardo alle questioni della concorrenza all’esportazione e dello sviluppo." Ed abbiamo beccato il problema: ...(G.U. 23 gennaio 2016, n. L 16).[QUI] Conferma la posizione adottata... => Evidentemente il docx elabora quello spazio in modo particolare (non ho ancora capito in cosa viene convertito di preciso), quindi in caso di ricerca di frasi molto lunghe, andranno specificate ben più accortezze nell'algoritmo.
 
 
-## Note
-- [AggiunteUtili] Tutti i componenti calendario dovrebbero essere dotati di reset button
-- [Domande] Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
-- [Style] Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
-- [Archive] Avvicinarsi il più possibile al funzionamento di https://dejure.it/, sia per stile che per filtri di ricerca.
+## Implementazioni Possibili 
+- I text input di città dovrebbero diventare select con searchbar.
+- Tutti i componenti calendario dovrebbero essere dotati di reset button
+## Domande
+- Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
+## Style 
+- Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.
