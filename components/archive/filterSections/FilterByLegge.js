@@ -20,7 +20,7 @@ export const FilterByLegge = function (props) {
             <h5>Filtra per Legge:</h5>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={6} className="pl-0 pr-2">
+            <Col md={5} className="pl-0 pr-2">
               <Select
                 validationFunc={props.handleChangeLegge}
                 label={"Legge"}
@@ -32,15 +32,16 @@ export const FilterByLegge = function (props) {
                 defaultValue={props.selectedLegge}
               />
             </Col>
-            <Col md={4} className="pl-2 pr-2">
+            <Col md={5} className="pl-2 pr-2">
               <DateInputNoCalendar
                 formGroupClass={""}
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
-                value={new Date()}
-                onChange={val => val}
-                validationFunc={el => el}
+                selectedDay={props.dataFiltroLegge.day}
+                selectedMonth={props.dataFiltroLegge.month}
+                selectedYear={props.dataFiltroLegge.year}
+                onChange={props.handleChangeDataFiltroLegge}
                 isDisabled={false}
                 calendarClassName={""}
                 datepickerClassName={""}
@@ -52,29 +53,29 @@ export const FilterByLegge = function (props) {
             </Col>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={4} className="pl-0 pr-2">
+            <Col md={3} className="pl-0 pr-2">
               <NumberInput
                 formGroupClass={""}
                 formLabelClass={""}
                 colSpan={8}
-                label={"Art."}
+                label={"Articolo"}
                 //placeholderText={""}
-                value={""}
-                onChange={event => event.target.value}
-                validationFunc={() => true}
+                value={props.artLegge}
+                onChange={props.handleChangeArtLegge}
+                validationFunc={num => num >= 0 && num <= 9999}
                 isDisabled={false}
               />
             </Col>
-            <Col md={4} className="pl-2 pr-0">
+            <Col md={3} className="pl-2 pr-0">
               <NumberInput
                 formGroupClass={""}
                 formLabelClass={""}
                 colSpan={8}
                 label={"Numero"}
                 //placeholderText={""}
-                value={""}
-                onChange={event => event.target.value}
-                validationFunc={() => true}
+                value={props.numLegge}
+                onChange={props.handleChangeNumLegge}
+                validationFunc={num => num >= 0 && num <= 9999}
                 isDisabled={false}
               />
             </Col>

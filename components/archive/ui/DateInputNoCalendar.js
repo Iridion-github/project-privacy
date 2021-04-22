@@ -11,7 +11,6 @@ export const DateInputNoCalendar = function ({
     formLabelClass = "",
     calendarClassName = "",
     datepickerClassName = "",
-    validationFunc = () => true,
     label = "",
     textmuted = false,
     selectedDay = "",
@@ -35,7 +34,6 @@ export const DateInputNoCalendar = function ({
         formLabelClass,
         calendarClassName,
         datepickerClassName,
-        validationFunc,
         label,
         textmuted,
         selectedDay,
@@ -69,7 +67,7 @@ export const DateInputNoCalendar = function ({
         if (num.length < 4) {
             return num >= 0 && num <= currentYear
         } else {
-            return num >= 1800
+            return num >= 1800 && num <= currentYear
         }
     }
 

@@ -36,12 +36,12 @@ export const FilterByProvvedimento = function (props) {
               <Select
                 validationFunc={() => true}
                 label={"Tipo"}
-                onChange={() => { }}
+                onChange={props.handleChangeTipoProvv}
                 isDisabled={false}
                 selectableOptions={["vigente", "testo in GU"]}
                 //placeholder={"placeholder"}
                 //getOptionValue={col => col}
-                defaultValue={""}
+                defaultValue={props.tipoProvv}
               />
             </Col>
           </Row>
@@ -52,9 +52,10 @@ export const FilterByProvvedimento = function (props) {
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
-                value={new Date()}
-                onChange={val => val}
-                validationFunc={el => el}
+                selectedDay={props.dataFiltroProvv.day}
+                selectedMonth={props.dataFiltroProvv.month}
+                selectedYear={props.dataFiltroProvv.year}
+                onChange={props.handleChangeDataFiltroProvv}
                 isDisabled={false}
                 calendarClassName={""}
                 datepickerClassName={""}
@@ -64,23 +65,7 @@ export const FilterByProvvedimento = function (props) {
                 locale={"it"}
               />
             </Col>
-            <Col md={2} className="pl-2 pr-2">
-              <NumberInput
-                label={"Num."}
-                //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
-              />
-            </Col>
-            <Col md={2} className="pl-2 pr-2">
-              <NumberInput
-                label={"Art."}
-                //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
-              />
-            </Col>
-            <Col md={3} className="pl-2 pr-2">
+            <Col md={7} className="pl-2 pr-2">
               <MultiSelect
                 validationFunc={() => true}
                 label={"Sottonumero"}
@@ -97,10 +82,37 @@ export const FilterByProvvedimento = function (props) {
                 onRemoveAll={() => props.handleRemoveSottonumero("REMOVE_ALL")}
               />
             </Col>
-
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
-            <Col md={7} className="pl-2 pr-2">
+            <Col md={3} className="pl-0 pr-2">
+              <NumberInput
+                formGroupClass={""}
+                formLabelClass={""}
+                colSpan={8}
+                label={"Articolo"}
+                //placeholderText={""}
+                value={props.artProvv}
+                onChange={props.handleChangeArtProvv}
+                validationFunc={num => num >= 0 && num <= 9999}
+                isDisabled={false}
+              />
+            </Col>
+            <Col md={3} className="pl-2 pr-0">
+              <NumberInput
+                formGroupClass={""}
+                formLabelClass={""}
+                colSpan={8}
+                label={"Numero"}
+                //placeholderText={""}
+                value={props.numProvv}
+                onChange={props.handleChangeNumProvv}
+                validationFunc={num => num >= 0 && num <= 9999}
+                isDisabled={false}
+              />
+            </Col>
+          </Row>
+          <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
+            <Col md={7} className="pl-0 pr-2">
               <Select
                 validationFunc={() => true}
                 label={"Argomento"}
@@ -116,8 +128,8 @@ export const FilterByProvvedimento = function (props) {
               <TextInput
                 label={"Allegato"}
                 //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
+                value={props.allegatoProvv}
+                onChange={props.handleChangeAllegatoProvv}
               />
             </Col>
           </Row>

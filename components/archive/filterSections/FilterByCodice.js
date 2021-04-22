@@ -35,11 +35,11 @@ export const FilterByCodice = function (props) {
                 formGroupClass={""}
                 formLabelClass={""}
                 colSpan={8}
-                label={"Art."}
+                label={"Articolo"}
                 //placeholderText={""}
-                value={""}
-                onChange={() => { }}
-                validationFunc={() => true}
+                value={props.artCodice}
+                onChange={props.handleChangeArtCodice}
+                validationFunc={num => num >= 0 && num <= 9999}
                 isDisabled={false}
               />
             </Col>

@@ -1,5 +1,5 @@
 ## Checkpoint
-- [CHECKPOINT] Cominciato con l'uso di react-select. Per ora si fallisce nel fargli prendere un tema.
+- [CHECKPOINT] Creazione dello stato completo di AdvancedSearch. Arrivati sino al tab "Note e Dottrina", ancora da fare.
 - Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
 
 

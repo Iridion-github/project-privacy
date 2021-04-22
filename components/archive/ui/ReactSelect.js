@@ -8,18 +8,19 @@ import Select from 'react-select'
 
 export const ReactSelect = function (props) {
 
-    //[CHECKPOINT] Cominciato con l'uso di react-select. Per ora si fallisce nel fargli prendere un tema.
-
-    const getStandardTheme = (theme) => ({
-        ...theme,
-        //borderRadius: 0,
-        colors: {
-            ...theme.colors,
-            text: 'red',
-            //primary25: 'hotpink',
-            //primary: 'black',
+    const getStandardTheme = (theme) => {
+        //console.log("full theme:", theme)
+        return {
+            ...theme,
+            //borderRadius: 100,
+            colors: {
+                ...theme.colors,
+                primary: '#17a2b8',
+                //primary25: 'hotpink',
+                //primary: 'black',
+            }
         }
-    })
+    }
 
     const {
         formGroupClass = "",

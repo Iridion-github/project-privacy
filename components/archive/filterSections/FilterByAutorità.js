@@ -42,7 +42,6 @@ export const FilterByAutorità = function (props) {
                 selectedMonth={props.dataFiltroAutorità.month}
                 selectedYear={props.dataFiltroAutorità.year}
                 onChange={props.handleChangeDataFiltroAutorità}
-                validationFunc={el => el}
                 isDisabled={false}
                 calendarClassName={""}
                 datepickerClassName={""}
@@ -57,7 +56,7 @@ export const FilterByAutorità = function (props) {
                 formGroupClass={""}
                 formLabelClass={""}
                 colSpan={8}
-                label={"Num."}
+                label={"Numero"}
                 //placeholderText={""}
                 value={props.numAutorità}
                 onChange={props.handleChangeNumAutorità}
@@ -120,25 +119,12 @@ export const FilterByAutorità = function (props) {
                 textmuted={""}
                 onChange={props.handleChangeCittàAutorità}
                 isDisabled={false}
-                selectableOptions={[
-                  { label: "1", value: "1" },
-                  { label: "2", value: "2" },
-                  { label: "3", value: "3" },
-                  { label: "11", value: "11" },
-                  { label: "22", value: "22" },
-                  { label: "33", value: "33" }
-                ]}
+                selectableOptions={props.arrCittà}
                 defaultValue={""}
                 placeholder={"Seleziona una città"}
               //getOptionValue={null}
               //getOptionStyle={null}
               //getCustomTheme={null}
-              />
-              <TextInput
-                label={"Città"}
-                //placeholderText={"prova placeholder"}
-                value={props.cittàAutorità}
-                onChange={props.handleChangeCittàAutorità}
               />
             </Col>
           </Row>

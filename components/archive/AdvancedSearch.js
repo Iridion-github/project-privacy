@@ -26,9 +26,10 @@ import {
   arrLegge,
   arrProvvedimento,
   arrCategoriaProvvedimento,
-  arrFormulario
+  arrFormulario,
+  arrCittà as arrCittàRaw
 } from '../../utils/advancedSearch'
-import { el } from 'date-fns/locale'
+
 
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
@@ -1119,8 +1120,6 @@ export const AdvancedSearch = function (props) {
     } else {
       newState[which] = val
     }
-
-
     setDataFiltroAutorità(newState)
   }
 
@@ -1134,12 +1133,147 @@ export const AdvancedSearch = function (props) {
     }
   }
 
+  const [arrCittà, setArrCittà] = useState(arrCittàRaw.map(el => ({ value: el, label: el })))
+
   const [cittàAutorità, setCittàAutorità] = useState("")
 
-  const handleChangeCittàAutorità = (val) => {
-    setCittàAutorità(val)
+  const handleChangeCittàAutorità = (opt) => {
+    setCittàAutorità(opt.value)
   }
 
+  const [artCodice, setArtCodice] = useState("")
+
+  const handleChangeArtCodice = (val) => {
+    if (val === "0") {
+      setArtCodice("")
+    } else {
+      setArtCodice(val)
+    }
+  }
+
+  const [dataFiltroLegge, setDataFiltroLegge] = useState({
+    day: "",
+    month: "",
+    year: ""
+  })
+
+  const handleChangeDataFiltroLegge = (which, val) => {
+    const newState = { ...dataFiltroLegge }
+    if (
+      which === "day" && val === "0"
+      || which === "month" && val === "0"
+      || which === "year" && val === "0"
+      || which === "year" && val === "1799") {
+      newState[which] = ""
+    } else {
+      newState[which] = val
+    }
+    setDataFiltroLegge(newState)
+  }
+
+  const [artLegge, setArtLegge] = useState("")
+
+  const handleChangeArtLegge = (val) => {
+    if (val === "0") {
+      setArtLegge("")
+    } else {
+      setArtLegge(val)
+    }
+  }
+
+  const [numLegge, setNumLegge] = useState("")
+
+  const handleChangeNumLegge = (val) => {
+    if (val === "0") {
+      setNumLegge("")
+    } else {
+      setNumLegge(val)
+    }
+  }
+
+  const [tipoProvv, setTipoProvv] = useState("vigente")
+
+  const handleChangeTipoProvv = (val) => {
+    setTipoProvv(val)
+  }
+
+  const [dataFiltroProvv, setDataFiltroProvv] = useState({
+    day: "",
+    month: "",
+    year: ""
+  })
+
+  const handleChangeDataFiltroProvv = (which, val) => {
+    const newState = { ...dataFiltroProvv }
+    if (
+      which === "day" && val === "0"
+      || which === "month" && val === "0"
+      || which === "year" && val === "0"
+      || which === "year" && val === "1799") {
+      newState[which] = ""
+    } else {
+      newState[which] = val
+    }
+    setDataFiltroProvv(newState)
+  }
+
+  const [artProvv, setArtProvv] = useState("")
+
+  const handleChangeArtProvv = (val) => {
+    if (val === "0") {
+      setArtProvv("")
+    } else {
+      setArtProvv(val)
+    }
+  }
+
+  const [numProvv, setNumProvv] = useState("")
+
+  const handleChangeNumProvv = (val) => {
+    if (val === "0") {
+      setNumProvv("")
+    } else {
+      setNumProvv(val)
+    }
+  }
+
+  const [allegatoProvv, setAllegatoProvv] = useState("")
+
+  const handleChangeAllegatoProvv = (val) => {
+    setAllegatoProvv(val)
+  }
+
+  const [dataFiltroGazz, setDataFiltroGazz] = useState({
+    day: "",
+    month: "",
+    year: ""
+  })
+
+  const handleChangeDataFiltroGazz = (which, val) => {
+    const newState = { ...dataFiltroGazz }
+    if (
+      which === "day" && val === "0"
+      || which === "month" && val === "0"
+      || which === "year" && val === "0"
+      || which === "year" && val === "1799") {
+      newState[which] = ""
+    } else {
+      newState[which] = val
+    }
+    setDataFiltroGazz(newState)
+  }
+
+  const [numGazz, setNumGazz] = useState("")
+
+  const handleChangeNumGazz = (val) => {
+    if (val === "0") {
+      setNumGazz("")
+    } else {
+      setNumGazz(val)
+    }
+  }
+
+  //[CHECKPOINT] Creazione dello stato completo di AdvancedSearch. Arrivati sino al tab "Note e Dottrina", ancora da fare.
 
 
 
@@ -1339,6 +1473,7 @@ export const AdvancedSearch = function (props) {
               selectedRegione={selectedRegione}
               handleChangeRegione={handleChangeRegione}
               cittàAutorità={cittàAutorità}
+              arrCittà={arrCittà}
               handleChangeCittàAutorità={handleChangeCittàAutorità}
             />}
           {/* Filtro per Formulario */}
@@ -1359,6 +1494,8 @@ export const AdvancedSearch = function (props) {
               arrSottonumero={arrSottonumero}
               handleAddSottonumero={handleAddSottonumero}
               handleRemoveSottonumero={handleRemoveSottonumero}
+              artCodice={artCodice}
+              handleChangeArtCodice={handleChangeArtCodice}
             />}
           {/* Filtro per Legge */}
           {(props.shownTab === "giurisprudenza"
@@ -1368,6 +1505,12 @@ export const AdvancedSearch = function (props) {
               handleChangeLegge={handleChangeLegge}
               selectedLegge={selectedLegge}
               handleChangeLegge={handleChangeLegge}
+              dataFiltroLegge={dataFiltroLegge}
+              handleChangeDataFiltroLegge={handleChangeDataFiltroLegge}
+              numLegge={numLegge}
+              handleChangeNumLegge={handleChangeNumLegge}
+              artLegge={artLegge}
+              handleChangeArtLegge={handleChangeArtLegge}
             />}
           {(props.shownTab === "noteedottrina") && <FilterByAutore />}
           {/* Filtro per Provvedimento */}
@@ -1384,9 +1527,25 @@ export const AdvancedSearch = function (props) {
               handleChangeProvvedimento={handleChangeProvvedimento}
               selectedCategoriaProvvedimento={selectedCategoriaProvvedimento}
               handleChangeCategoriaProvvedimento={handleChangeCategoriaProvvedimento}
+              tipoProvv={tipoProvv}
+              handleChangeTipoProvv={handleChangeTipoProvv}
+              dataFiltroProvv={dataFiltroProvv}
+              handleChangeDataFiltroProvv={handleChangeDataFiltroProvv}
+              numProvv={numProvv}
+              handleChangeNumProvv={handleChangeNumProvv}
+              artProvv={artProvv}
+              handleChangeArtProvv={handleChangeArtProvv}
+              allegatoProvv={allegatoProvv}
+              handleChangeAllegatoProvv={handleChangeAllegatoProvv}
             />}
           {/* Filtro per Gazzetta Ufficiale */}
-          {(props.shownTab === "normativa") && <FilterByGazzettaUfficiale />}
+          {(props.shownTab === "normativa") &&
+            <FilterByGazzettaUfficiale
+              dataFiltroGazz={dataFiltroGazz}
+              handleChangeDataFiltroGazz={handleChangeDataFiltroGazz}
+              numGazz={numGazz}
+              handleChangeNumGazz={handleChangeNumGazz}
+            />}
           {/* Filtro per tipo di File (forse da scartare) */}
           {/*(props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"FilterByText

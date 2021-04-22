@@ -23,9 +23,10 @@ export const FilterByGazzettaUfficiale = function (props) {
                 formLabelClass={""}
                 label={"Data"}
                 placeholderText={""}
-                value={new Date()}
-                onChange={val => val}
-                validationFunc={el => el}
+                selectedDay={props.dataFiltroGazz.day}
+                selectedMonth={props.dataFiltroGazz.month}
+                selectedYear={props.dataFiltroGazz.year}
+                onChange={props.handleChangeDataFiltroGazz}
                 isDisabled={false}
                 calendarClassName={""}
                 datepickerClassName={""}
@@ -37,10 +38,15 @@ export const FilterByGazzettaUfficiale = function (props) {
             </Col>
             <Col md={2} className="pl-2 pr-2">
               <NumberInput
-                label={"Num."}
-                //placeholderText={"prova placeholder"}
-                value={""}
-                onChange={(event) => event.target.value}
+                formGroupClass={""}
+                formLabelClass={""}
+                colSpan={8}
+                label={"Numero"}
+                //placeholderText={""}
+                value={props.numGazz}
+                onChange={props.handleChangeNumGazz}
+                validationFunc={num => num >= 0 && num <= 9999}
+                isDisabled={false}
               />
             </Col>
           </Row>
