@@ -1,5 +1,10 @@
 ## Checkpoint
 - [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
+- [ToDo]
+- Recuperata la Lista Codici di Luigi. Aggiornare AdvancedSearch.
+- Recuperata la Lista Testi Unici di Luigi. Aggiornare AdvancedSearch.
+- [Richieste/Domande_per_Luigi]
+- Qual è il tag del Ministero degli affari esteri e della cooperazione internazionale ?
 - [Note]
 - Questa funzione (getMinifiedFilterState) era stata ideata per il sistema tag precedente, ed è anche buggata. 
 - Questa funzione (getMinifiedFilterState) deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
@@ -1125,7 +1130,8 @@ presso il Garante per la protezione dei dati personali
 - VAL =    Valle d'Aosta
 - VENE = Veneto
 
-[MINISTERI] ---> tutte le diciture sono da aggiornare / sostituire
+[MINISTERI]
+- ??? = Ministero degli affari esteri e della cooperazione internazionale 
 - MEF = Ministero dell’economia e delle finanze
 - MIAGR = Ministero delle politiche agricole, alimentari e forestali
 - MIAMB = Ministero della transizione ecologica

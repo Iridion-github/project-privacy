@@ -4,7 +4,12 @@ import { PdfReader } from "pdfreader"  //pacchetto usato per leggere i pdf
 import fs from 'fs'//pacchetto usato per leggere docx files
 import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
-import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf
+//import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
+import libre from 'libreoffice-convert' //pacchetto usato per convertire i docx files in pdf (linux version)
+
+const environment = "linux"
+
+const envSlash = (environment === "windows") ? "\\" : "/"
 
 // ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
 export default async (req, res) => {
@@ -18,7 +23,7 @@ export default async (req, res) => {
   const todayUTC = todayDate.toUTCString()
   const readFileName = todayUTC.slice(0, 16)
   try {
-    const mappedArchiveRaw = await fs.readFileSync("mappedArchive\\" + readFileName + ".json")
+    const mappedArchiveRaw = await fs.readFileSync("mappedArchive" + envSlash + readFileName + ".json")
     mappedArchive = JSON.parse(mappedArchiveRaw)
     isArchiveMapped = true
     dataToFilter.push(...mappedArchive)
@@ -39,8 +44,8 @@ export default async (req, res) => {
           yield {
             fullpath: fullpath,
             linuxfullpath: slash(fullpath),
-            relativepath: fullpath.split("public\\")[1],
-            linuxpath: slash(fullpath.split("public\\")[1]),
+            relativepath: fullpath.split("public" + envSlash)[1],
+            linuxpath: slash(fullpath.split("public" + envSlash)[1]),
             filename: dirent.name
           }
         }
@@ -89,7 +94,7 @@ export default async (req, res) => {
             } else if (docx) {
               //[Docx procedure] (mammoth)
               const options = {}
-              mammoth.convertToHtml({ path: 'public\\' + fileObj.relativepath }, options).then((mammothResult) => {
+              mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
                 if (mammothResult.messages.length > 0) {
                   for (let x; x < mammothResult.messages.length; x++) {
                     console.log("\n\n Errors:", mammothResult.messages[x], '\n\n')
@@ -107,7 +112,7 @@ export default async (req, res) => {
             } else if (doc) { //[Doc procedure] (WordExtractor)
               const getDocContent = async (fileObj) => {
                 const docExtractor = new WordExtractor()
-                const extractedContent = await docExtractor.extract('public\\' + fileObj.relativepath).then(function (doc) {
+                const extractedContent = await docExtractor.extract('public' + envSlash + fileObj.relativepath).then(function (doc) {
                   resolveSingle({ //resolving singleResult Promise
                     fullpath: fileObj.fullpath,
                     linuxfullpath: fileObj.linuxfullpath,
@@ -142,7 +147,7 @@ export default async (req, res) => {
             const todayDate = new Date()
             const todayUTC = todayDate.toUTCString()
             const writeFileName = todayUTC.slice(0, 16)
-            await fs.writeFileSync("mappedArchive\\" + writeFileName + ".json", mappedArchiveStr)
+            await fs.writeFileSync("mappedArchive" + envSlash + writeFileName + ".json", mappedArchiveStr)
             console.log("|||||||||||||||||||||||| finished writing json file")
             resolveContainer(analyzedFiles) //resolving containerResult Promise
             //analyzedFiles is ready
