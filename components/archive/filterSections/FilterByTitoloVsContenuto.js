@@ -4,6 +4,7 @@ import {
   Card,
   Form
 } from 'react-bootstrap'
+import { Select } from '../ui/Select'
 
 
 export const FilterByTitoloVsContenuto = function (props) {
@@ -16,18 +17,23 @@ export const FilterByTitoloVsContenuto = function (props) {
             <h5>Il testo dev'essere presente:</h5>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0">
-            <Form.Group className="justify-content-center" controlId="">
-              <Form.Control
-                size="sm"
-                as="select"
-                className=""
-                onChange={val => val}
-              >
-                <option>Solo nel titolo dei documenti</option>
-                <option>Solo nel contenuto dei documenti</option>
-                <option>In entrambi</option>
-              </Form.Control>
-            </Form.Group>
+            <Col md={6} className="pl-0 pr-0">
+              <Select
+                //validationFunc={() => true}
+                label={""}
+                onChange={props.handleWhereToSearch}
+                isDisabled={false}
+                selectableOptions={[
+                  "In qualsiasi punto del documento",
+                  "Solo nel titolo del documento",
+                  "Solo nel contenuto del documento",
+                  "Sia nel Titolo che nel Corpo del documento"
+                ]}
+                //placeholder={"placeholder"}
+                //getOptionValue={col => col}
+                defaultValue={props.whereToSearch}
+              />
+            </Col>
           </Row>
         </Col>
       </Row>

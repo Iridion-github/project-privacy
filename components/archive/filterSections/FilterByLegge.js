@@ -22,7 +22,7 @@ export const FilterByLegge = function (props) {
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
             <Col md={5} className="pl-0 pr-2">
               <Select
-                validationFunc={props.handleChangeLegge}
+                //validationFunc={() => true}
                 label={"Legge"}
                 onChange={props.handleChangeLegge}
                 isDisabled={false}

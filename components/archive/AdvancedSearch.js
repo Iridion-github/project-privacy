@@ -34,6 +34,12 @@ import {
 export const AdvancedSearch = function (props) {
   const siteLanguage = useLanguage() //context
 
+  const [previousTab, setPreviousTab] = useState(props.shownTab)
+
+  const handleChangePreviousTab = (targetTab) => {
+    setPreviousTab(targetTab)
+  }
+
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
     if (Array.isArray(newFilterState[propsArr[0]])) {
@@ -1102,7 +1108,6 @@ export const AdvancedSearch = function (props) {
   }
 
   //Stato di Data (singola) in Autorità
-
   const [dataFiltroAutorità, setDataFiltroAutorità] = useState({
     day: "",
     month: "",
@@ -1273,23 +1278,12 @@ export const AdvancedSearch = function (props) {
     }
   }
 
-  //[CHECKPOINT] Creazione dello stato completo di AdvancedSearch. Arrivati sino al tab "Note e Dottrina", ancora da fare.
+  //Stato del Filtro per Autore in "Note e Dottrina". Per ora è solo un text input, in futuro potrebe diventare un Autosuggest
+  const [autoreNoteDottr, setAutoreNoteDottr] = useState("")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const handleChangeAutoreNoteDottr = (val) => {
+    setAutoreNoteDottr(val)
+  }
 
   const [selectedAutorità, setSelectedAutorità] = useState("")
 
@@ -1368,7 +1362,20 @@ export const AdvancedSearch = function (props) {
     setSelectedFormulario(val)
   }
 
+  const [whereToSearch, setWhereToSearch] = useState("")
+
+  const handleWhereToSearch = (val) => {
+    setWhereToSearch(val)
+  }
+
   const getMinifiedFilterState = (original) => {
+    /* 
+    [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
+    [Note]
+    - Questa funzione (getMinifiedFilterState) era stata ideata per il sistema tag precedente, ed è anche buggata. 
+    - Questa funzione (getMinifiedFilterState) deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
+    - Anche la finissimo, ci serve ancora il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi. Ognuno deve avere una corrispondenza.
+    */
     const newFilterState = { ...original }
     console.log("newFilterState - pre filter func:", newFilterState) //buggato, non rimuovere!
     const externalProps = Object.keys(original)
@@ -1387,7 +1394,7 @@ export const AdvancedSearch = function (props) {
     console.log("newFilterState - after removing the false booleans:", newFilterState) //buggato, non rimuovere!
 
 
-    //[Checkpoint] funziona male, rimuove fin troppo. Da rivedere.
+    //[BUG] funziona male, rimuove fin troppo. Da rivedere.
     Object.keys(newFilterState).forEach(prop => {
       if (Array.isArray(newFilterState[prop])) {
         if (newFilterState[prop].length === 0) {
@@ -1431,8 +1438,61 @@ export const AdvancedSearch = function (props) {
     }
   }
 
+  const resetAdvancedSearch = () => {
+    handleChangeAllegatoProvv("")
+    handleAddSottonumero("")
+    handleChangeArrSottonumero(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })))
+    handleChangeArtCodice("")
+    handleChangeArtLegge("")
+    handleChangeArtProvv("")
+    handleChangeAutoreNoteDottr("")
+    handleChangeAutorità("")
+    handleChangeCategoriaProvvedimento("")
+    handleChangeCittàAutorità("")
+    handleChangeCodice("")
+    handleChangeDataFiltroAutorità({
+      day: "",
+      month: "",
+      year: ""
+    })
+    handleChangeDataFiltroGazz({
+      day: "",
+      month: "",
+      year: ""
+    })
+    handleChangeDataFiltroLegge({
+      day: "",
+      month: "",
+      year: ""
+    })
+    handleChangeDataFiltroProvv({
+      day: "",
+      month: "",
+      year: ""
+    })
+    handleChangeEndDate("")
+    handleChangeFormulario("")
+    handleChangeLegge("")
+    handleChangeNumAutorità("")
+    handleChangeNumGazz("")
+    handleChangeNumLegge("")
+    handleChangeNumProvv("")
+    handleChangeOpzioneTestuale("")
+    handleChangeProvvedimento("")
+    handleChangeRegione("")
+    handleChangeSezione("")
+    handleChangeStartDate("")
+    handleChangeTipoProvv("")
+    handleWhereToSearch("In qualsiasi punto del documento")
+  }
+
   useEffect(() => {
     //code to execute at every state update
+    if (previousTab !== props.shownTab) {
+      console.log("Tab changed, resetting state!")
+      resetAdvancedSearch()
+      handleChangePreviousTab(props.shownTab)
+    }
   })
 
   return (
@@ -1446,7 +1506,11 @@ export const AdvancedSearch = function (props) {
           />
           {/* Comportamento ricerca testuale: titolo/contenuto */}
           {(props.shownTab === "noteedottrina"
-            || props.shownTab === "formulari") && <FilterByTitoloVsContenuto />}
+            || props.shownTab === "formulari") &&
+            <FilterByTitoloVsContenuto
+              whereToSearch={whereToSearch}
+              handleWhereToSearch={handleWhereToSearch}
+            />}
           {/* Filtro per Data */}
           {(
             props.shownTab === "giurisprudenza"
@@ -1512,7 +1576,11 @@ export const AdvancedSearch = function (props) {
               artLegge={artLegge}
               handleChangeArtLegge={handleChangeArtLegge}
             />}
-          {(props.shownTab === "noteedottrina") && <FilterByAutore />}
+          {(props.shownTab === "noteedottrina") &&
+            <FilterByAutore
+              autoreNoteDottr={autoreNoteDottr}
+              handleChangeAutoreNoteDottr={handleChangeAutoreNoteDottr}
+            />}
           {/* Filtro per Provvedimento */}
           {(props.shownTab === "normativa") &&
             <FilterByProvvedimento

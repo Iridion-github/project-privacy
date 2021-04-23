@@ -1,6 +1,10 @@
 ## Checkpoint
-- [CHECKPOINT] Creazione dello stato completo di AdvancedSearch. Arrivati sino al tab "Note e Dottrina", ancora da fare.
-- Stiamo inserendo le liste delle voci selezionabili in modo hard-coded e non su db. Non sono ancora presenti gli onchange ed un corrispettivo stato reale di advancedSearch.
+- [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
+- [Note]
+- Questa funzione (getMinifiedFilterState) era stata ideata per il sistema tag precedente, ed è anche buggata. 
+- Questa funzione (getMinifiedFilterState) deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
+- Anche la finissimo, ci serve ancora il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi. Ognuno deve avere una corrispondenza.
+- Tutte le liste di AdvancedSearch sono hard-coded e non presenti su db. Capire se sensato. 
 
 
 -------------------- [PANNELLI OK] --------------------

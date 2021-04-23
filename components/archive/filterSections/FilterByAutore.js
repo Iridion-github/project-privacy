@@ -21,8 +21,8 @@ export const FilterByAutore = function (props) {
                 label={"Autore"}
                 formGroupClass="text-center"
                 placeholderText={"Nome e Cognome"}
-                value={""}
-                onChange={(event) => event.target.value}
+                value={props.autoreNoteDottr}
+                onChange={props.handleChangeAutoreNoteDottr}
               />
             </Col>
           </Row>

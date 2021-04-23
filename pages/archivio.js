@@ -28,6 +28,10 @@ export default function archivio(props) {
   const [showPdfModal, setShowPdfModal] = useState(null)
   const [shownTab, setShownTab] = useState("giurisprudenza")
 
+  const handleChangeShownTab = (targetTab) => {
+    setShownTab(targetTab)
+  }
+
   const openPdfViewer = (path, buffer) => {
     path ? setShowPdfModal(path) : setShowPdfModal(buffer)
   }
@@ -108,7 +112,7 @@ export default function archivio(props) {
               block
               className="mt-0"
               variant={(shownTab === "giurisprudenza") ? "info" : "outline-info"}
-              onClick={() => setShownTab("giurisprudenza")}
+              onClick={() => handleChangeShownTab("giurisprudenza")}
             >
               <h4>Giurisprudenza</h4>
             </Button>
@@ -116,7 +120,7 @@ export default function archivio(props) {
               block
               className="mt-0"
               variant={(shownTab === "normativa") ? "info" : "outline-info"}
-              onClick={() => setShownTab("normativa")}
+              onClick={() => handleChangeShownTab("normativa")}
             >
               <h4>Normativa</h4>
             </Button>
@@ -124,7 +128,7 @@ export default function archivio(props) {
               block
               className="mt-0"
               variant={(shownTab === "noteedottrina") ? "info" : "outline-info"}
-              onClick={() => setShownTab("noteedottrina")}
+              onClick={() => handleChangeShownTab("noteedottrina")}
             >
               <h4>Note e Dottrina</h4>
             </Button>
@@ -132,7 +136,7 @@ export default function archivio(props) {
               block
               className="mt-0"
               variant={(shownTab === "formulari") ? "info" : "outline-info"}
-              onClick={() => setShownTab("formulari")}
+              onClick={() => handleChangeShownTab("formulari")}
             >
               <h4>Formulari</h4>
             </Button>
