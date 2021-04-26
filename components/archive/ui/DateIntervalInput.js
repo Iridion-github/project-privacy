@@ -34,6 +34,7 @@ export const DateIntervalInput = function ({
   readOnly_1 = false,
   required_1 = false,
   excludeDates_1 = [],
+  removeStartDate = null,
   //end
   label2 = "",
   value_2 = new Date,
@@ -49,12 +50,14 @@ export const DateIntervalInput = function ({
   readOnly_2 = false,
   required_2 = false,
   excludeDates_2 = [],
+  removeEndDate = null,
 }) {
 
   return (
     <>
       <Row className="w-100 ml-0 mr-0">
         {(label && label.length > 0) ? <h5 className={formLabelClass + " w-100 text-center"}>{label}</h5> : ""}
+
         {(label1 && label1.length > 0) ? (
           <Col md={6} className="pl-1 pr-1 justify-content-center">
             <h5 className={"w-100 text-center mb-0"}>{label1}</h5>
@@ -65,6 +68,7 @@ export const DateIntervalInput = function ({
             <h5 className={"w-100 text-center mb-0"}>{label2}</h5>
           </Col>
         ) : ""}
+
       </Row>
       <Row className="w-100 justify-content-center ml-0 mr-0">
         <Col md={colSpan_1} className="pl-1 pr-1">
@@ -83,6 +87,7 @@ export const DateIntervalInput = function ({
             minDate={minDate_1}
             readOnly={readOnly_1}
             required={required_1}
+            removeDate={removeStartDate}
           />
         </Col>
         <Col md={colSpan_2} className="pl-1 pr-1">
@@ -101,6 +106,7 @@ export const DateIntervalInput = function ({
             minDate={minDate_2}
             readOnly={readOnly_2}
             required={required_2}
+            removeDate={removeEndDate}
           />
         </Col>
       </Row>

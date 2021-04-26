@@ -1,15 +1,20 @@
-## Checkpoint
-- [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
-- [ToDo]
-- Recuperata la Lista Codici di Luigi. Aggiornare AdvancedSearch.
-- Recuperata la Lista Testi Unici di Luigi. Aggiornare AdvancedSearch.
-- [Richieste/Domande_per_Luigi]
+## [Checkpoint]
+## [ToDo]
+- Finire la funzione "getMinifiedFilterState", che era stata ideata per il sistema tag precedente, ed è anche buggata. 
+- La funzione "getMinifiedFilterState" deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
+- Anche la finissimo, ci serve chiarire del tutto il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi (IND. qualcosa?).
+## [Richieste/Domande_per_Luigi]
 - Qual è il tag del Ministero degli affari esteri e della cooperazione internazionale ?
-- [Note]
-- Questa funzione (getMinifiedFilterState) era stata ideata per il sistema tag precedente, ed è anche buggata. 
-- Questa funzione (getMinifiedFilterState) deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
-- Anche la finissimo, ci serve ancora il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi. Ognuno deve avere una corrispondenza.
-- Tutte le liste di AdvancedSearch sono hard-coded e non presenti su db. Capire se sensato. 
+## [Note]
+- Tutte le liste di AdvancedSearch sono hard-coded e non presenti su db. Capire se sostenibile.
+## [Known_Issues]
+Alcune ricerche non trovano il target, esempi:
+- "... del 18 gennaio 2016, n. 2016/77 (G.U. 23 gennaio 2016, n. L 16). Conferma la posizione adottata a nome dell’Unione europea in sede di 10a conferenza ministeriale ..." Ed abbiamo beccato il problema: "...(G.U. 23 gennaio 2016, n. L 16).[QUI] Conferma la posizione adottata..." => Evidentemente il docx elabora quello spazio in modo particolare (non ho ancora capito in cosa viene convertito di preciso), quindi in caso di ricerca di frasi molto lunghe, andranno specificate ben più accortezze nell'algoritmo. 
+- "...articoli 37 e 38 del decreto legislativo...", non riesce a portare al target pdf, ce la fa se si rimuove la parola "legislativo", perchè pare che la prima 'i' della parola venga riconosciuta come un carattere strano.
+## Implementazioni Possibili 
+- ?
+## Domande
+- Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 
 
 -------------------- [PANNELLI OK] --------------------
@@ -314,25 +319,36 @@ presso il Garante per la protezione dei dati personali
   - Ufficio europeo brevetti
   - Vicariato Urbe
 
-[___FILTRA_PER_CODICE___](copiata da Dejure perchè ci sfuggiva cosa intendesse Luigi con "LISTA GIÀ FORNITA")
-  - Codice Civile
-  - Codice di Procedura Civile
-  - Codice Penale
-  - Codice di Procedura Penale
-  - Codice della Navigazione
-  - Costituzione della Repubblica
-  - Codice Penale Militare di Guerra
-  - Codice Penale Militare di Pace
-  - Disp. Att. Codice Procedura Penale
-  - Disp. Att. Trans. Codice Civile
-  - Disp. Att. Trans. Codice Procedura Civile
-  - Disp. Coord. Trans. Att. Codici Penali Militari
-  - Disp. Coord. Trans. Codice Penale
-  - Disposizioni finali della Costituzione
-  - Disposizioni sulla legge in generale (Preleggi)
-  - Regolamento Codice della Navigazione
-  - Regolamento Codice Procedura Penale
-  - Regolamento per la navigazione interna
+[___FILTRA_PER_CODICE___](Fornita da Luigi)
+- Codice antimafia
+- Codice civile
+- Codice dei beni culturali e del paesaggio
+- Codice dei contratti pubblici
+- Codice del consumo
+- Codice del processo amministrativo
+- Codice del processo tributario
+- Codice del terzo settore
+- Codice del turismo
+- Codice della crisi d’impresa e dell’insolvenza
+- Codice della nautica da diporto
+- Codice della navigazione
+- Codice della proprietà industriale
+- Codice della protezione civile
+- Codice della sicurezza in ambito lavorativo
+- Codice della strada
+- Codice delle assicurazioni private
+- Codice delle comunicazioni elettroniche
+- Codice delle pari opportunità
+- Codice dell’ambiente
+- Codice dell’amministrazione digitale
+- Codice dell’ordinamento militare
+- Codice di giustizia contabile
+- Codice di procedura civile
+- Codice di procedura penale
+- Codice in materia di protezione dei dati personali
+- Codice penale
+- Codice penale militare di guerra
+- Codice penale militare di pace
 
   
 [___FILTRA_PER_LEGGE___](copiata da Dejure)
@@ -788,6 +804,50 @@ presso il Garante per la protezione dei dati personali
 - Form. Crisi d'Impresa           
 - Form. Responsabilità Civile           
 - Form. Famiglia
+
+[__FILTRA_PER_TESTO_UNICO__](Fornita da Luigi)
+- Testo unico accise
+- Testo unico apprendistato
+- Testo unico avvocatura dello Stato
+- Testo unico bancario
+- Testo unico boschi e foreste
+- Testo unico commercio
+- Testo unico degli impiegati civili dello Stato
+- Testo unico dei servizi di media audiovisivi e radiofonici
+- Testo unico delle disposizioni sulla promulgazione delle leggi
+- Testo unico delle leggi sugli interventi nel Mezzogiorno
+- Testo unico delle leggi sulla Corte dei Conti
+- Testo unico delle leggi sulla pesca
+- Testo unico delle leggi sulle acque e sugli impianti elettrici
+- Testo unico documentazione amministrativa
+- Testo unico edilizia
+- Testo unico elettorale del Senato della Repubblica
+- Testo unico elettorale della Camera dei deputati
+- Testo unico enti locali
+- Testo unico espropriazione
+- Testo unico finanziario
+- Testo unico immigrazione
+- Testo unico imposta registro
+- Testo unico imposte sui redditi
+- Testo unico in materia di casellario giudiziale
+- Testo unico in materia di pensioni di guerra
+- Testo unico in materia di piante officinali
+- Testo unico in materia doganale
+- Testo unico in materia postale
+- Testo unico IVA
+- Testo unico leggi di pubblica sicurezza
+- Testo unico maternità e paternità
+- Testo unico pubblico impiego
+- Testo unico scuola
+- Testo unico società a partecipazione pubblica
+- Testo unico spese di giustizia
+- Testo unico stupefacenti
+- Testo unico su sequestro, pignoramento e cessione degli stipendi dei pubblici dipendenti
+- Testo unico successioni e donazioni
+- Testo unico sull'assicurazione degli infortuni sul lavoro
+- Testo unico sulle imposte ipotecaria e catastale
+- Testo unico sulle leggi sanitarie
+
 
 [___CLASSIFICAZIONE___]
 
@@ -1335,16 +1395,3 @@ presso il Garante per la protezione dei dati personali
 
 [IMPORTANTI secondo il signor LUIGI]
 ???
-
-
-## Known Issues
-- Questa ricerca non trova il file: "Dec. (UE) del Consiglio del 18 gennaio 2016, n. 2016/77 (G.U. 23 gennaio 2016, n. L 16). Conferma la posizione adottata a nome dell’Unione europea in sede di 10a conferenza ministeriale dell’Organizzazione mondiale del commercio con riguardo alle questioni della concorrenza all’esportazione e dello sviluppo." Ed abbiamo beccato il problema: ...(G.U. 23 gennaio 2016, n. L 16).[QUI] Conferma la posizione adottata... => Evidentemente il docx elabora quello spazio in modo particolare (non ho ancora capito in cosa viene convertito di preciso), quindi in caso di ricerca di frasi molto lunghe, andranno specificate ben più accortezze nell'algoritmo.
-
-
-## Implementazioni Possibili 
-- I text input di città dovrebbero diventare select con searchbar.
-- Tutti i componenti calendario dovrebbero essere dotati di reset button
-## Domande
-- Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
-## Style 
-- Al signor Gaetano piace https://www.altalex.com/, emularne parzialmente lo stile.

@@ -19,6 +19,7 @@ import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento'
 import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Argomenti (da rivedere)
 import { FilterByTesto } from './filterSections/FilterByTesto' //Comportamento ricerca testuale
 import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto'
+import { FilterByTestoUnico } from './filterSections/FilterByTestoUnico'
 import {
   arrAutorità,
   arrCodice,
@@ -27,7 +28,8 @@ import {
   arrProvvedimento,
   arrCategoriaProvvedimento,
   arrFormulario,
-  arrCittà as arrCittàRaw
+  arrCittà as arrCittàRaw,
+  arrTestoUnico
 } from '../../utils/advancedSearch'
 
 
@@ -1101,10 +1103,18 @@ export const AdvancedSearch = function (props) {
     setStartDate(val)
   }
 
+  const removeStartDate = () => {
+    handleChangeStartDate("")
+  }
+
   const [endDate, setEndDate] = useState("")
 
   const handleChangeEndDate = (val) => {
     setEndDate(val)
+  }
+
+  const removeEndDate = () => {
+    handleChangeEndDate("")
   }
 
   //Stato di Data (singola) in Autorità
@@ -1368,6 +1378,12 @@ export const AdvancedSearch = function (props) {
     setWhereToSearch(val)
   }
 
+  const [selectedTestoUnico, setSelectedTestoUnico] = useState("")
+
+  const handleChangeTestoUnico = (val) => {
+    setSelectedTestoUnico(val)
+  }
+
   const getMinifiedFilterState = (original) => {
     /* 
     [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
@@ -1484,6 +1500,7 @@ export const AdvancedSearch = function (props) {
     handleChangeStartDate("")
     handleChangeTipoProvv("")
     handleWhereToSearch("In qualsiasi punto del documento")
+    handleChangeTestoUnico("")
   }
 
   useEffect(() => {
@@ -1519,8 +1536,10 @@ export const AdvancedSearch = function (props) {
           ) && <FilterByData
               startDate={startDate}
               handleChangeStartDate={handleChangeStartDate}
+              removeStartDate={removeStartDate}
               endDate={endDate}
               handleChangeEndDate={handleChangeEndDate}
+              removeEndDate={removeEndDate}
             />}
           {/* Filtro per Autorità */}
           {(props.shownTab === "giurisprudenza") &&
@@ -1614,6 +1633,14 @@ export const AdvancedSearch = function (props) {
               numGazz={numGazz}
               handleChangeNumGazz={handleChangeNumGazz}
             />}
+          {/*Filtro per Testo Unico*/}
+          {(props.shownTab === "giurisprudenza") &&
+            <FilterByTestoUnico
+              selectedTestoUnico={selectedTestoUnico}
+              arrTestoUnico={arrTestoUnico}
+              handleChangeTestoUnico={handleChangeTestoUnico}
+            />
+          }
           {/* Filtro per tipo di File (forse da scartare) */}
           {/*(props.shownTab === "giurisprudenza"
             || props.shownTab === "normativa"FilterByText

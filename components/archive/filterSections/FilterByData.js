@@ -34,6 +34,7 @@ export const FilterByData = function (props) {
         readOnly_1={false}
         required_1={false}
         //excludeDates_1={null}
+        removeStartDate={props.removeStartDate}
         //end
         label2={"A:"}
         value_2={props.endDate} //
@@ -49,6 +50,7 @@ export const FilterByData = function (props) {
         readOnly_2={false}
         required_2={false}
         excludeDates_2={null}
+        removeEndDate={props.removeEndDate}
       />
     </Card>
   )

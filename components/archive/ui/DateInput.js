@@ -7,7 +7,8 @@ setDefaultLocale('it');
 import {
   Form,
   Row,
-  Col
+  Col,
+  Badge
 } from 'react-bootstrap'
 
 export const DateInput = function ({
@@ -15,11 +16,11 @@ export const DateInput = function ({
   formLabelClass = "",
   calendarClassName = "",
   datepickerClassName = "",
-  colSpan = 12,
+  colSpan = 6,
   validationFunc = () => true,
   label = "",
   textmuted = false,
-  value = new Date,
+  value = "",
   onChange = val => val,
   isDisabled = false,
   withTime = false,
@@ -31,6 +32,7 @@ export const DateInput = function ({
   minDate = undefined,
   readOnly = false,
   required = true,
+  removeDate = null
 }) {
 
   const props = {
@@ -54,6 +56,7 @@ export const DateInput = function ({
     minDate,
     readOnly,
     required,
+    removeDate
   }
 
   const handleChange = (val) => {
@@ -66,24 +69,38 @@ export const DateInput = function ({
   return (
     <Form.Group className={formGroupClass}>
       <Form.Label className={formLabelClass}>{label}</Form.Label>
-      <Row className="w-100 ml-0 mr-0">
+      <Row className="w-100 ml-0 mr-0 justify-content-center">
         <Col md={colSpan} className="pl-1 pr-1">
-          <DatePicker
-            selected={value}
-            className={datepickerClassName + " datepicker-input"} //input-class
-            calendarClassName={calendarClassName}
-            onChange={date => handleChange(date)}
-            showTimeInput={withTime}
-            dateFormat={dateFormat}
-            disabled={isDisabled ? true : false}
-            excludeDates={excludeDates}
-            filterDate={filterDate}
-            locale={locale}
-            maxDate={maxDate}
-            minDate={minDate}
-            readOnly={readOnly}
-            required={required}
-          />
+          <Row className="w-100 ml-0 mr-0 justify-content-center">
+            <Col md={typeof value === "object" ? 11 : 12} className="pl-1 pr-1">
+              <DatePicker
+                selected={value}
+                className={datepickerClassName + " datepicker-input"} //input-class
+                calendarClassName={calendarClassName}
+                onChange={date => handleChange(date)}
+                showTimeInput={withTime}
+                dateFormat={dateFormat}
+                disabled={isDisabled ? true : false}
+                excludeDates={excludeDates}
+                filterDate={filterDate}
+                locale={locale}
+                maxDate={maxDate}
+                minDate={minDate}
+                readOnly={readOnly}
+                required={required}
+              />
+            </Col>
+            {(value && typeof value === "object") &&
+              <Col md={1} className="pl-1 pr-1 text-right">
+                <Badge
+                  className="pt-1 pb-1 clickable-badge"
+                  variant="danger"
+                  onClick={removeDate}>
+                  <i className="text-center align-items-center fas fa-times-circle"></i>
+                </Badge>
+              </Col>
+            }
+          </Row>
         </Col>
       </Row>
       {textmuted && <Form.Text className="text-muted">

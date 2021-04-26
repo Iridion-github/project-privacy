@@ -482,3 +482,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .border-red {
   border: 1px solid red !important;
 }
+
+.clickable-badge {
+  cursor: pointer;
+}
