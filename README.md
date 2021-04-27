@@ -1,10 +1,14 @@
 ## [Checkpoint]
+- [Checkpoint] Dopo aver deepcopiato gli oggetti, funziona. Continuare da getMinifiedFilterState.
 ## [ToDo]
 - Finire la funzione "getMinifiedFilterState", che era stata ideata per il sistema tag precedente, ed è anche buggata. 
 - La funzione "getMinifiedFilterState" deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
 - Anche la finissimo, ci serve chiarire del tutto il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi (IND. qualcosa?).
 ## [Richieste/Domande_per_Luigi]
 - Qual è il tag del Ministero degli affari esteri e della cooperazione internazionale ?
+
+## [Richieste/Domande_per_Gaetano]
+- Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 ## [Note]
 - Tutte le liste di AdvancedSearch sono hard-coded e non presenti su db. Capire se sostenibile.
 ## [Known_Issues]
@@ -13,8 +17,6 @@ Alcune ricerche non trovano il target, esempi:
 - "...articoli 37 e 38 del decreto legislativo...", non riesce a portare al target pdf, ce la fa se si rimuove la parola "legislativo", perchè pare che la prima 'i' della parola venga riconosciuta come un carattere strano.
 ## Implementazioni Possibili 
 - ?
-## Domande
-- Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 
 
 -------------------- [PANNELLI OK] --------------------
@@ -1392,6 +1394,3 @@ presso il Garante per la protezione dei dati personali
 - PERIT =  Periti Industriali
 - PORTI =  Portinai
 - PSI =  Psicologi
-
-[IMPORTANTI secondo il signor LUIGI]
-???

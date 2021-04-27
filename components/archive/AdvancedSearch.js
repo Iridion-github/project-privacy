@@ -45,14 +45,19 @@ export const AdvancedSearch = function (props) {
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
     if (Array.isArray(newFilterState[propsArr[0]])) {
+      console.log("toggleInclude was called --> 1° case")
       newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked = !newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked
     } else if (Array.isArray(newFilterState[propsArr[0]][propsArr[1]])) {
+      console.log("toggleInclude was called --> 2° case")
       newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked = !newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked
     } else {
-      console.log("ERROR: This should NEVER be printed.")
+      console.log("toggleInclude was called --> 3° case")
+      console.log("ERROR: This case should NEVER happen.")
     }
     setFiltersState(newFilterState)
   }
+
+  console.log("about to declare filtersState")
 
   const [filtersState, setFiltersState] = useState({
     byExtension: [
@@ -1089,6 +1094,8 @@ export const AdvancedSearch = function (props) {
     ]
   })
 
+  console.log("just declared filtersState:", filtersState)
+
   const [selectedOpzioneTestuale, setSelectedOpzioneTestuale] = useState("Contengono almeno 1 delle parole")
 
   const handleChangeOpzioneTestuale = (val) => {
@@ -1384,33 +1391,51 @@ export const AdvancedSearch = function (props) {
     setSelectedTestoUnico(val)
   }
 
-  const getMinifiedFilterState = (original) => {
-    /* 
-    [Checkpoint] Lo stato di AdvancedSearch è completo e funzionante.
-    [Note]
-    - Questa funzione (getMinifiedFilterState) era stata ideata per il sistema tag precedente, ed è anche buggata. 
-    - Questa funzione (getMinifiedFilterState) deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
-    - Anche la finissimo, ci serve ancora il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi. Ognuno deve avere una corrispondenza.
-    */
-    const newFilterState = { ...original }
-    console.log("newFilterState - pre filter func:", newFilterState) //buggato, non rimuovere!
-    const externalProps = Object.keys(original)
-    console.log("these are the externalProps", externalProps) //buggato, non rimuovere!
+  const getMinifiedFilterState = (startObject) => {
+    console.log("startObject:", startObject)
+    const oldFilterState = JSON.parse(JSON.stringify(startObject))
+    const newFilterState = JSON.parse(JSON.stringify(startObject))
+    console.log("Original state object:", oldFilterState)
+    const externalProps = Object.keys(oldFilterState)
+
     for (let x = 0; x < externalProps.length; x++) {
-      if (Array.isArray(original[externalProps[x]])) {
-        newFilterState[externalProps[x]] = original[externalProps[x]].filter(el => el.checked === true)
-      } else {
-        const internalProps = Object.keys(original[externalProps[x]])
-        console.log("Analyzing:", externalProps[x], " - it contains these props: ", internalProps) //buggato, non rimuovere!
-        for (let y = 0; y < internalProps.length; y++) {
-          newFilterState[externalProps[x]] = original[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
-        }
+
+      if (externalProps[x] === "byAuthority" || externalProps[x] === "byExtension") {
+        console.log("1° case - Pre edit:", newFilterState[externalProps[x]])
+        const editedArr = oldFilterState[externalProps[x]].filter(el => el.checked === true)
+        newFilterState[externalProps[x]] = editedArr
+        console.log("1° case - Post edit:", editedArr)
       }
+
+      if (externalProps[x] === "bySubject") {
+        const internalProps = Object.keys(oldFilterState[externalProps[x]])
+        console.log("2° case - internalProps:", internalProps)
+
+        //Lascio negli array, solo gli oggetti che hanno checked: true
+        for (let y = 0; y < internalProps.length; y++) {
+          const editedArr = oldFilterState[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
+          console.log("2° case - trying to convert this:", newFilterState[externalProps[x]][internalProps[y]], "into this: ", editedArr)
+          newFilterState[externalProps[x]][internalProps[y]] = editedArr
+        }
+
+        //Elimino gli array vuoti
+        for (let y = 0; y < internalProps.length; y++) {
+          const emptyArr = oldFilterState[externalProps[x]][internalProps[y]].length === 0
+          if (emptyArr) {
+            const parent = oldFilterState[externalProps[x]]
+            console.log("removing empty arr from this parent:", parent)
+            delete newFilterState[externalProps[x]][internalProps[y]]
+          }
+
+        }
+
+
+      }
+
     }
-    console.log("newFilterState - after removing the false booleans:", newFilterState) //buggato, non rimuovere!
 
-
-    //[BUG] funziona male, rimuove fin troppo. Da rivedere.
+    //[Checkpoint] Dopo aver deepcopiato gli oggetti, funziona. Continuare da qui.
+    /*
     Object.keys(newFilterState).forEach(prop => {
       if (Array.isArray(newFilterState[prop])) {
         if (newFilterState[prop].length === 0) {
@@ -1424,13 +1449,16 @@ export const AdvancedSearch = function (props) {
         }
       }
     })
-    console.log("newFilterState - after removing the empty arr:", newFilterState) //buggato, non rimuovere!
+    */
+    console.log("oldFilterState object:", oldFilterState)
+    console.log("newFilterState object:", newFilterState)
     return newFilterState
   }
 
   const submitAdvancedSearch = async () => {
     try {
       props.setLoading(true)
+      console.log("submitAdvancedSearch - filtersState:", filtersState)
       const minifiedFilterState = getMinifiedFilterState(filtersState)
       const filtersStateStr = JSON.stringify(minifiedFilterState)
       const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${props.searchInput}&activeFilters=${filtersStateStr}`, {
@@ -1505,6 +1533,8 @@ export const AdvancedSearch = function (props) {
 
   useEffect(() => {
     //code to execute at every state update
+    const timestamp = Date.now()
+    console.log(timestamp, " - State changed! filtersState:", filtersState)
     if (previousTab !== props.shownTab) {
       console.log("Tab changed, resetting state!")
       resetAdvancedSearch()
@@ -1662,19 +1692,19 @@ export const AdvancedSearch = function (props) {
             || props.shownTab === "normativa"
             || props.shownTab === "noteedottrina") &&
             <FilterBySubject
-              zoneGeogList={filtersState?.bySubject?.byZoneGeog}
-              ministeriList={filtersState?.bySubject?.byMinistero}
-              economiaList={filtersState?.bySubject?.byEconomia}
-              tasseImposteList={filtersState?.bySubject?.byTasse}
-              lavoroList={filtersState?.bySubject?.byLavoro}
-              produzConsumList={filtersState?.bySubject?.byProduzione}
-              sanitàList={filtersState?.bySubject?.bySanità}
-              forzeOrdineList={filtersState?.bySubject?.byForzeOrdine}
-              istruzioneList={filtersState?.bySubject?.byIstruzione}
-              beniPrimariList={filtersState?.bySubject?.byBeniPrimari}
-              beniSecondariList={filtersState?.bySubject?.byBeniSecondari}
-              intrattenimList={filtersState?.bySubject?.byIntrattenimento}
-              impieghiList={filtersState?.bySubject?.byImpieghi}
+              zoneGeogList={filtersState.bySubject.byZoneGeog}
+              ministeriList={filtersState.bySubject.byMinistero}
+              economiaList={filtersState.bySubject.byEconomia}
+              tasseImposteList={filtersState.bySubject.byTasse}
+              lavoroList={filtersState.bySubject.byLavoro}
+              produzConsumList={filtersState.bySubject.byProduzione}
+              sanitàList={filtersState.bySubject.bySanità}
+              forzeOrdineList={filtersState.bySubject.byForzeOrdine}
+              istruzioneList={filtersState.bySubject.byIstruzione}
+              beniPrimariList={filtersState.bySubject.byBeniPrimari}
+              beniSecondariList={filtersState.bySubject.byBeniSecondari}
+              intrattenimList={filtersState.bySubject.byIntrattenimento}
+              impieghiList={filtersState.bySubject.byImpieghi}
             />
           }
         </Form>

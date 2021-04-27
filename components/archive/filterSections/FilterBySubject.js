@@ -12,7 +12,7 @@ export const FilterBySubject = function (props) {
 
   const getDoubleColList = (list) => {
     const arrResult = []
-    list.forEach((el, i) => {
+    list && list.forEach((el, i) => {
       if (i % 2 === 0) {
         const currentEl = list[i]
         const nextEl = list[i + 1] ? list[i + 1] : null
