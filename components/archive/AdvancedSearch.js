@@ -82,360 +82,435 @@ export const AdvancedSearch = function (props) {
         {
           label: "Abruzzo",
           checked: false,
+          tag: "ABOR",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Abruzzo"])
         },
         {
           label: "Basilicata",
           checked: false,
+          tag: "BASI",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Basilicata"])
         },
         {
           label: "Calabria",
           checked: false,
+          tag: "CALAB",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Calabria"])
         },
         {
           label: "Campania",
           checked: false,
+          tag: "CAMPA",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Campania"])
         },
         {
           label: "Emilia Romagna",
           checked: false,
+          tag: "EMILI",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Emilia Romagna"])
         },
         {
           label: "Friuli Venezia Giulia",
           checked: false,
+          tag: "FRIU",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Friuli Venezia Giulia"])
         },
         {
           label: "Lazio",
           checked: false,
+          tag: "LAZ",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Lazio"])
         },
         {
           label: "Liguria",
           checked: false,
+          tag: "LIG",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Liguria"])
         },
         {
           label: "Lombardia",
           checked: false,
+          tag: "LOMB",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Lombardia"])
         },
         {
           label: "Marche",
           checked: false,
+          tag: "MAR",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Marche"])
         },
         {
           label: "Molise",
           checked: false,
+          tag: "MOLI",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Molise"])
         },
         {
           label: "Piemonte",
           checked: false,
+          tag: "PIEMO",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Piemonte"])
         },
         {
           label: "Puglia",
           checked: false,
+          tag: "PUGL",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Puglia"])
         },
         {
           label: "Sardegna",
           checked: false,
+          tag: "SARD",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Sardegna"])
         },
         {
           label: "Sicilia",
           checked: false,
+          tag: "SICIL",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Sicilia"])
         },
         {
           label: "Toscana",
           checked: false,
+          tag: "TOSC",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Toscana"])
         },
         {
           label: "Trentino Alto Adige",
           checked: false,
+          tag: "TRENT",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Trentino Alto Adige"])
         },
         {
           label: "Umbria",
           checked: false,
+          tag: "UMBR",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Umbria"])
         },
         {
           label: "Valle d'Aosta",
           checked: false,
+          tag: "VAL",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Valle d'Aosta"])
         },
         {
           label: "Veneto",
           checked: false,
+          tag: "VENE",
           onChange: () => toggleInclude(["bySubject", "byZoneGeog", "Veneto"])
         }
       ],
       byMinistero: [
-        {
-          label: "Ministeri in genere",
-          checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Ministeri in genere"])
-        },
+
+
+
+
         {
           label: "Affari Esteri",
           checked: false,
+          tag: null, //[MEMO] Missing tag!
           onChange: () => toggleInclude(["bySubject", "byMinistero", "Affari Esteri"])
         },
         {
-          label: "Agricoltura e Foreste",
+          label: "Economia e Finanze",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Agricoltura e Foreste"])
+          tag: "MEF",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Economia e Finanze"])
         },
         {
-          label: "Ambiente",
+          label: "Politiche Agricole-Alimentari-Forestali",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Ambiente"])
+          tag: "MIAGR",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Politiche Agricole-Alimentari-Forestali"])
         },
         {
-          label: "Beni Culturali",
+          label: "Transizione Ecologica",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Beni Culturali"])
+          tag: "MIAMB",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Transizione Ecologica"])
         },
         {
-          label: "Bilancio e Programmazione Economica",
+          label: "Cultura",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Bilancio e Programmazione Economica"])
-        },
-        {
-          label: "Commercio con l'Estero",
-          checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Commercio con l'Estero"])
+          tag: "MICUL",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Cultura"])
         },
         {
           label: "Difesa",
           checked: false,
+          tag: "MIDIF",
           onChange: () => toggleInclude(["bySubject", "byMinistero", "Difesa"])
         },
         {
-          label: "Finanze",
+          label: "Disabilità",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Finanze"])
+          tag: "MIDISA",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Disabilità"])
         },
         {
-          label: "Grazia e Giustizia",
+          label: "Pari Opportunità e Famiglia",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Grazia e Giustizia"])
+          tag: "MIFAM",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Pari Opportunità e Famiglia"])
         },
         {
-          label: "Lavori Pubblici",
+          label: "Politiche Giovanili",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Lavori Pubblici"])
+          tag: "MIGIOV",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Politiche Giovanili"])
         },
         {
-          label: "Lavoro e Previdenza Sociale",
+          label: "Giustizia",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Lavoro e Previdenza Sociale"])
+          tag: "MIGIUS",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Giustizia"])
         },
         {
-          label: "Industria, Commercio e Artigianato",
+          label: "Politiche Sociali",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Industria, Commercio e Artigianato"])
+          tag: "MILAV",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Politiche Sociali"])
         },
         {
-          label: "Interni",
+          label: "Infrastrutture e Mobilità sostenibili",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Interni"])
+          tag: "MINFR",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Infrastrutture e Mobilità sostenibili"])
         },
         {
-          label: "Marina Mercantile",
+          label: "Interno",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Marina Mercantile"])
+          tag: "MINT",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Interno"])
         },
         {
-          label: "Partecipazioni Statali",
+          label: "Pubblica Amministrazione",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Partecipazioni Statali"])
+          tag: "MIPA",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Pubblica Amministrazione"])
         },
         {
-          label: "Poste e Telecomunicazioni",
+          label: "Rapporti con il Parlamento",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Poste e Telecomunicazioni"])
+          tag: "MIPARL",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Rapporti con il Parlamento"])
         },
         {
-          label: "Pubblica Istruzione",
+          label: "Affari Regionali e Autonomie",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Pubblica Istruzione"])
+          tag: "MIREG",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Affari Regionali e Autonomie"])
         },
         {
-          label: "Sanità",
+          label: "Salute",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Sanità"])
+          tag: "MISAL",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Salute"])
         },
         {
-          label: "Tesoro",
+          label: "Sviluppo Economico",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Tesoro"])
+          tag: "MISE",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Sviluppo Economico"])
         },
         {
-          label: "Trasporti",
+          label: "Istruzione",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Trasporti"])
+          tag: "MISTR",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Istruzione"])
         },
         {
-          label: "Turismo e Spettacolo",
+          label: "Sud e Coesione Territoriale",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Turismo e Spettacolo"])
+          tag: "MISUD",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Sud e Coesione Territoriale"])
         },
         {
-          label: "Università e Ricerca Scientifica",
+          label: "Innovazione Tecnologica e Transizione Digitale",
           checked: false,
-          onChange: () => toggleInclude(["bySubject", "byMinistero", "Università e Ricerca Scientifica"])
+          tag: "MITECN",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Innovazione Tecnologica e Transizione Digitale"])
+        },
+        {
+          label: "Turismo",
+          checked: false,
+          tag: "MITUR",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Turismo"])
+        },
+        {
+          label: "Università e Ricerca",
+          checked: false,
+          tag: "MIUR",
+          onChange: () => toggleInclude(["bySubject", "byMinistero", "Università e Ricerca"])
         }
       ],
       byEconomia: [
         {
           label: "Agenti di commercio",
           checked: false,
+          tag: "AGENT",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Agenti di commercio"])
         },
         {
           label: "Assegni e Cambiali",
           checked: false,
+          tag: "ASSE",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Assegni e Cambiali"])
         },
         {
           label: "Banca d'Italia",
           checked: false,
+          tag: "BAITA",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Banca d'Italia"])
         },
         {
           label: "Banche",
           checked: false,
+          tag: "BANCH",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Banche"])
         },
         {
           label: "Beni di Stati Esteri",
           checked: false,
+          tag: "BENI",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Beni di Stati Esteri"])
         },
         {
           label: "Bot, CCT e Debito Pubblico",
           checked: false,
+          tag: "BOT",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Bot, CCT e Debito Pubblico"])
         },
         {
           label: "Cambi, Valute e Capitali stranieri",
           checked: false,
+          tag: "CAMBI",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Cambi, Valute e Capitali stranieri"])
         },
         {
           label: "Cassa Depositi e Prestiti",
           checked: false,
+          tag: "CASS",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Cassa Depositi e Prestiti"])
         },
         {
           label: "Commercialisti",
           checked: false,
+          tag: "COMM",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Commercialisti"])
         },
         {
           label: "Consiglio Nazionale dell'Economia e del Lavoro",
           checked: false,
+          tag: "CNEL",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Consiglio Nazionale dell'Economia e del Lavoro"])
         },
         {
           label: "Credito Edilizio e Fondiario",
           checked: false,
+          tag: "CRED",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Credito Edilizio e Fondiario"])
         },
         {
           label: "Credito all'Esportazione",
           checked: false,
+          tag: "CRESP",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Credito all'Esportazione"])
         },
         {
           label: "Esportazioni e Importazioni",
           checked: false,
+          tag: ["ESDOG", "ESGEN"],
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Esportazioni e Importazioni"])
         },
         {
           label: "Fallimento",
           checked: false,
+          tag: "FALL",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Fallimento"])
         },
         {
           label: "Fondi Comuni di Investimento",
           checked: false,
+          tag: "FONDI",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Fondi Comuni di Investimento"])
         },
         {
           label: "Industria, Commercio, Artigianato",
           checked: false,
+          tag: ["INGEN", "INCAM", "INCRE"],
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Industria, Commercio, Artigianato"])
         },
         {
           label: "Istituto Poligrafico e Zecca dello Stato",
           checked: false,
+          tag: "ISPOL",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Istituto Poligrafico e Zecca dello Stato"])
         },
         {
           label: "Iva",
           checked: false,
+          tag: "IVA",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Iva"])
         },
         {
           label: "Leasing",
           checked: false,
+          tag: "LEAS",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Leasing"])
         },
         {
           label: "Moneta",
           checked: false,
+          tag: "MONE",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Moneta"])
         },
         {
           label: "Monopoli di Stato",
           checked: false,
+          tag: "MONOP",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Monopoli di Stato"])
         },
         {
           label: "Pensioni dei Dipendenti Civili e Militari dello Stato",
           checked: false,
+          tag: "PECIV",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Pensioni dei Dipendenti Civili e Militari dello Stato"])
         },
         {
           label: "Pensioni di Guerra",
           checked: false,
+          tag: "PEGUE",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Pensioni di Guerra"])
         },
         {
           label: "Prezzi",
           checked: false,
+          tag: "PREZZ",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Prezzi"])
         },
         {
           label: "Redditi (Imposte sui)",
           checked: false,
+          tag: "REDD",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Redditi (Imposte sui)"])
         },
         {
           label: "Uffici finanziari",
           checked: false,
+          tag: "UFIN",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Uffici finanziari"])
         },
         {
           label: "Vendite Mobiliari Internazionali",
           checked: false,
+          tag: "VENDI",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Vendite Mobiliari Internazionali"])
         },
         {
           label: "Vitalizi",
           checked: false,
+          tag: "VITA",
           onChange: () => toggleInclude(["bySubject", "byEconomia", "Vitalizi"])
         }
       ],
@@ -443,86 +518,103 @@ export const AdvancedSearch = function (props) {
         {
           label: "Bollo (Imposta di)",
           checked: false,
+          tag: "BOL",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Bollo (Imposta di)"])
         },
         {
           label: "Concessioni (tasse sulle)",
           checked: false,
+          tag: "CONCE",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Concessioni (tasse sulle)"])
         },
         {
           label: "Imposta Complementare",
           checked: false,
+          tag: "IMCOM",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta Complementare"])
         },
         {
           label: "Imposta di Consumo",
           checked: false,
+          tag: "IMCON",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta di Consumo"])
         },
         {
           label: "Imposta di Entrata",
           checked: false,
+          tag: "IMENT",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta di Entrata"])
         },
         {
           label: "Imposta Fabbricati",
           checked: false,
+          tag: "IMCAS",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta Fabbricati"])
         },
         {
           label: "Imposta Fondiaria",
           checked: false,
+          tag: "IMFON",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta Fondiaria"])
         },
         {
           label: "Imposta di Ricchezza Mobile",
           checked: false,
+          tag: "IMRIC",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposta di Ricchezza Mobile"])
         },
         {
           label: "Imposte di Fabbricazione",
           checked: false,
+          tag: "IMFAB",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposte di Fabbricazione"])
         },
         {
           label: "Imposte Erariali e di Consumo",
           checked: false,
+          tag: "IMERA",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposte Erariali e di Consumo"])
         },
         {
           label: "Imposte e Tasse in Genere",
           checked: false,
+          tag: "IMGEN",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposte e Tasse in Genere"])
         },
         {
           label: "Imposte Ipotecarie e Catastali",
           checked: false,
+          tag: "IMIPO",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Imposte Ipotecarie e Catastali"])
         },
         {
           label: "Redditi (Imposte sui)",
           checked: false,
+          tag: "REDD",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Redditi (Imposte sui)"])
         },
         {
           label: "Registro (Imposta di)",
           checked: false,
+          tag: "REGIS",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Registro (Imposta di)"])
         },
         {
           label: "Spettacoli (Imposta sugli)",
           checked: false,
+          tag: "SPIMP",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Spettacoli (Imposta sugli)"])
         },
         {
           label: "Successioni (Imposta sulle)",
           checked: false,
+          tag: "SUCC",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Successioni (Imposta sulle)"])
         },
         {
           label: "Tasse Automobilistiche",
           checked: false,
+          tag: "TASS",
           onChange: () => toggleInclude(["bySubject", "byTasse", "Tasse Automobilistiche"])
         }
       ],
@@ -530,46 +622,55 @@ export const AdvancedSearch = function (props) {
         {
           label: "Agricoltura (Lavoro)",
           checked: false,
+          tag: "AGLAV",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Agricoltura (Lavoro)"])
         },
         {
           label: "Consiglio Nazionale dell'Economia e del Lavoro",
           checked: false,
+          tag: "CNEL",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Consiglio Nazionale dell'Economia e del Lavoro"])
         },
         {
           label: "Consorzi e Imprese Cooperative",
           checked: false,
+          tag: "CONSO",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Consorzi e Imprese Cooperative"])
         },
         {
           label: "Consulenti del Lavoro",
           checked: false,
+          tag: "CONSU",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Consulenti del Lavoro"])
         },
         {
           label: "Impiego Pubblico",
           checked: false,
+          tag: "IMPI",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Impiego Pubblico"])
         },
         {
           label: "Lavoro",
           checked: false,
+          tag: "LAV",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Lavoro"])
         },
         {
           label: "Ministero Lavori Pubblici",
           checked: false,
+          tag: "MILAV",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Ministero Lavori Pubblici"])
         },
         {
           label: "Ministero  Lavoro e Previdenza Sociale",
           checked: false,
+          tag: "MIPRE",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Ministero  Lavoro e Previdenza Sociale"])
         },
         {
           label: "Occupazione",
           checked: false,
+          tag: "OCCU",
           onChange: () => toggleInclude(["bySubject", "byLavoro", "Occupazione"])
         },
       ],
@@ -577,106 +678,127 @@ export const AdvancedSearch = function (props) {
         {
           label: "Acque pubbliche",
           checked: false,
+          tag: "ACPUB",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Acque pubbliche"])
         },
         {
           label: "Agricoltura (generalità)",
           checked: false,
+          tag: "AGGEN",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (generalità)"])
         },
         {
           label: "Agricoltura (Lavoro)",
           checked: false,
+          tag: "AGLAV",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (Lavoro)"])
         },
         {
           label: "Agricoltura (Prodotti)",
           checked: false,
+          tag: "AGPRO",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (Prodotti)"])
         },
         {
           label: "Agricoltura (Contratti)",
           checked: false,
+          tag: "AGCON",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (Contratti)"])
         },
         {
           label: "Agricoltura (Credito)",
           checked: false,
+          tag: "AGCRE",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (Credito)"])
         },
         {
           label: "Agricoltura (Antiparassitari)",
           checked: false,
+          tag: "AGANT",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agricoltura (Antiparassitari)"])
         },
         {
           label: "Agronomi",
           checked: false,
+          tag: "AGRO",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Agronomi"])
         },
         {
           label: "Alimenti (Diritto agli)",
           checked: false,
+          tag: "ALIM",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Diritto agli)"])
         },
         {
           label: "Alimenti (Confezionamento)",
           checked: false,
+          tag: "ALCON",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Confezionamento)"])
         },
         {
           label: "Alimenti (Doc e Marchi)",
           checked: false,
+          tag: "ADOC",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Doc e Marchi)"])
         },
         {
           label: "Alimenti (Additivi, Coloranti e Sofisticazioni)",
           checked: false,
+          tag: "ALADD",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Additivi, Coloranti e Sofisticazioni)"])
         },
         {
           label: "Alimenti (Origine Animale)",
           checked: false,
+          tag: "ALANI",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Origine Animale)"])
         },
         {
           label: "Alimenti (Origine Vegetale)",
           checked: false,
+          tag: "ALVEG",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Origine Vegetale)"])
         },
         {
           label: "Alimenti (Prima Infanzia e Prodotti Dietetici)",
           checked: false,
+          tag: "ALINF",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Alimenti (Prima Infanzia e Prodotti Dietetici)"])
         },
         {
           label: "Bevande (Confezionamento)",
           checked: false,
+          tag: "BECON",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Bevande (Confezionamento)"])
         },
         {
           label: "Bevande (Doc e Marchi)",
           checked: false,
+          tag: "BEDOC",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Bevande (Doc e Marchi)"])
         },
         {
           label: "Bevande (Additivi, coloranti, sofisticazioni)",
           checked: false,
+          tag: "BEADD",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Bevande (Additivi, coloranti, sofisticazioni)"])
         },
         {
           label: "Bevande (Alcoliche)",
           checked: false,
+          tag: "BEALC",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Bevande (Alcoliche)"])
         },
         {
           label: "Bevande (Analcoliche)",
           checked: false,
+          tag: "BEANA",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Bevande (Analcoliche)"])
         },
         {
           label: "Spiriti",
           checked: false,
+          tag: "SPIRI",
           onChange: () => toggleInclude(["bySubject", "byProduzione", "Spiriti"])
         },
       ],
@@ -684,61 +806,73 @@ export const AdvancedSearch = function (props) {
         {
           label: "Aborto",
           checked: false,
+          tag: "ABOR",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Aborto"])
         },
         {
           label: "Alcolismo",
           checked: false,
+          tag: "ALCOL",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Alcolismo"])
         },
         {
           label: "Croce Rossa Italiana",
           checked: false,
+          tag: "CRI",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Croce Rossa Italiana"])
         },
         {
           label: "Ministero Sanità",
           checked: false,
+          tag: "MISAN",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Ministero Sanità"])
         },
         {
           label: "Portatori di Handicap",
           checked: false,
+          tag: "PORTA",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Portatori di Handicap"])
         },
         {
           label: "Sanità, Sanitari, etc. (Generalità)",
           checked: false,
+          tag: "SAGEN",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Generalità)"])
         },
         {
           label: "Sanità, Sanitari, etc. (Personale)",
           checked: false,
+          tag: "SAPER",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Personale)"])
         },
         {
           label: "Sanità, Sanitari, etc. (Igiene)",
           checked: false,
+          tag: "SAIGI",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Igiene)"])
         },
         {
           label: "Sanità, Sanitari, etc. (Medicinali)",
           checked: false,
+          tag: "SAMED",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Medicinali)"])
         },
         {
           label: "Sanità, Sanitari, etc. (Farmacie e Farmacisti)",
           checked: false,
+          tag: "SAFAR",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Farmacie e Farmacisti)"])
         },
         {
           label: "Sanità, Sanitari, etc. (Malattie)",
           checked: false,
+          tag: "SAMAL",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Sanità, Sanitari, etc. (Malattie)"])
         },
         {
           label: "Stupefacenti",
           checked: false,
+          tag: "STUP",
           onChange: () => toggleInclude(["bySubject", "bySanità", "Stupefacenti"])
         }
       ],
@@ -746,46 +880,55 @@ export const AdvancedSearch = function (props) {
         {
           label: "Carabinieri",
           checked: false,
+          tag: "CARA",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Carabinieri"])
         },
         {
           label: "Codici Penali Militari",
           checked: false,
+          tag: "FACOD",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Codici Penali Militari"])
         },
         {
           label: "Forze Armate (Generalità)",
           checked: false,
+          tag: "FAGEN",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Forze Armate (Generalità)"])
         },
         {
           label: "Forze Armate (Personale)",
           checked: false,
+          tag: "FAPER",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Forze Armate (Personale)"])
         },
         {
           label: "Guardia di Finanza",
           checked: false,
+          tag: "GUARD",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Guardia di Finanza"])
         },
         {
           label: "Pensioni dei Dipendenti Civili e Militari dello Stato",
           checked: false,
+          tag: "PECIV",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Pensioni dei Dipendenti Civili e Militari dello Stato"])
         },
         {
           label: "Pubblica Sicurezza",
           checked: false,
+          tag: "PS",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Pubblica Sicurezza"])
         },
         {
           label: "Servizi Segreti",
           checked: false,
+          tag: "SERV",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Servizi Segreti"])
         },
         {
           label: "Vigili del Fuoco",
           checked: false,
+          tag: "VIGI",
           onChange: () => toggleInclude(["bySubject", "byForzeOrdine", "Vigili del Fuoco"])
         },
       ],
@@ -793,56 +936,67 @@ export const AdvancedSearch = function (props) {
         {
           label: "Cultura e Beni Culturali",
           checked: false,
+          tag: "CULT",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Cultura e Beni Culturali"])
         },
         {
           label: "Istruzione (Generalità)",
           checked: false,
+          tag: "ISGEN",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Generalità)"])
         },
         {
           label: "Istruzione (Personale)",
           checked: false,
+          tag: "ISPER",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Personale)"])
         },
         {
           label: "Istruzione (Artistica e Musicale)",
           checked: false,
+          tag: "ISART",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Artistica e Musicale)"])
         },
         {
           label: "Istruzione (Elementare e Materna)",
           checked: false,
+          tag: "ISELE",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Elementare e Materna)"])
         },
         {
           label: "Istruzione (Media e Secondaria)",
           checked: false,
+          tag: "ISMED",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Media e Secondaria)"])
         },
         {
           label: "Istruzione (Professionale e Tecnica)",
           checked: false,
+          tag: "ISPRO",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Professionale e Tecnica)"])
         },
         {
           label: "Istruzione (Superiore)",
           checked: false,
+          tag: "ISSUP",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Superiore)"])
         },
         {
           label: "Istruzione (all'Estero)",
           checked: false,
+          tag: "ISEST",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (all'Estero)"])
         },
         {
           label: "Istruzione (Privata)",
           checked: false,
+          tag: "ISPRI",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Istruzione (Privata)"])
         },
         {
           label: "Ministero Pubblica Istruzione",
           checked: false,
+          tag: "MIIST",
           onChange: () => toggleInclude(["bySubject", "byIstruzione", "Ministero Pubblica Istruzione"])
         }
       ],
@@ -850,26 +1004,31 @@ export const AdvancedSearch = function (props) {
         {
           label: "Acque potabili e acquedotti",
           checked: false,
+          tag: "ACPOT",
           onChange: () => toggleInclude(["bySubject", "byBeniPrimari", "Acque potabili e acquedotti"])
         },
         {
           label: "Energia Elettrica",
           checked: false,
+          tag: "ENEL",
           onChange: () => toggleInclude(["bySubject", "byBeniPrimari", "Energia Elettrica"])
         },
         {
           label: "Passaporti e Carte di Identità",
           checked: false,
+          tag: "PASS",
           onChange: () => toggleInclude(["bySubject", "byBeniPrimari", "Passaporti e Carte di Identità"])
         },
         {
           label: "Riscaldamento",
           checked: false,
+          tag: "RISC",
           onChange: () => toggleInclude(["bySubject", "byBeniPrimari", "Riscaldamento"])
         },
         {
           label: "Strade",
           checked: false,
+          tag: "STRA",
           onChange: () => toggleInclude(["bySubject", "byBeniPrimari", "Strade"])
         }
       ],
@@ -877,101 +1036,121 @@ export const AdvancedSearch = function (props) {
         {
           label: "Ascensori, Montacarichi e Scale Mobili",
           checked: false,
+          tag: "ASCEN",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Ascensori, Montacarichi e Scale Mobili"])
         },
         {
           label: "Bevande (Confezionamento)",
           checked: false,
+          tag: "BECON",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Bevande (Confezionamento)"])
         },
         {
           label: "Bevande (Doc e Marchi)",
           checked: false,
+          tag: "BEDOC",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Bevande (Doc e Marchi)"])
         },
         {
           label: "Bevande (Additivi, coloranti, sofisticazioni)",
           checked: false,
+          tag: "BEADD",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Bevande (Additivi, coloranti, sofisticazioni)"])
         },
         {
           label: "Bevande (Alcoliche)",
           checked: false,
+          tag: "BEALC",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Bevande (Alcoliche)"])
         },
         {
           label: "Bevande (Analcoliche)",
           checked: false,
+          tag: "BEANA",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Bevande (Analcoliche)"])
         },
         {
           label: "Cartine per Sigarette",
           checked: false,
+          tag: "CART",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Cartine per Sigarette"])
         },
         {
           label: "Fiammiferi",
           checked: false,
+          tag: "FIAM",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Fiammiferi"])
         },
         {
           label: "Francobolli, Cartoline e altri valori postali",
           checked: false,
+          tag: "FRANC",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Francobolli, Cartoline e altri valori postali"])
         },
         {
           label: "Oggetti e sostanze non alimentari",
           checked: false,
+          tag: "OGGE",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Oggetti e sostanze non alimentari"])
         },
         {
           label: "Pesca",
           checked: false,
+          tag: "PESC",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Pesca"])
         },
         {
           label: "Pietre e Metalli Preziosi",
           checked: false,
+          tag: "PIETR",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Pietre e Metalli Preziosi"])
         },
         {
           label: "Prostituzione",
           checked: false,
+          tag: "PROST",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Prostituzione"])
         },
         {
           label: "Pubblicità",
           checked: false,
+          tag: "PUB",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Pubblicità"])
         },
         {
           label: "Sepolture",
           checked: false,
+          tag: "SEP",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Sepolture"])
         },
         {
           label: "Stupefacenti",
           checked: false,
+          tag: "STUP",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Stupefacenti"])
         },
         {
           label: "Trasporti (Generalità)",
           checked: false,
+          tag: "TRGEN",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", ""])
         },
         {
           label: "Trasporti  (Marittimi e Aerei)",
           checked: false,
+          tag: "TRMAR",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", ""])
         },
         {
           label: "Trasporti  (Personale)",
           checked: false,
+          tag: "TRPER",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Trasporti  (Personale)"])
         },
         {
           label: "Trasporti  Internazionali",
           checked: false,
+          tag: "TRINT",
           onChange: () => toggleInclude(["bySubject", "byBeniSecondari", "Trasporti  Internazionali"])
         },
       ],
@@ -979,66 +1158,79 @@ export const AdvancedSearch = function (props) {
         {
           label: "Acque termali e terme",
           checked: false,
+          tag: "ACTER",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Acque termali e terme"])
         },
         {
           label: "Alberghi, Pensioni, Locande, etc.",
           checked: false,
+          tag: "ALB",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Alberghi, Pensioni, Locande, etc."])
         },
         {
           label: "Alpinismo",
           checked: false,
+          tag: "ALPIN",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Alpinismo"])
         },
         {
           label: "Boschi e Foreste",
           checked: false,
+          tag: "BOSC",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Boschi e Foreste"])
         },
         {
           label: "Caccia",
           checked: false,
+          tag: "CACCI",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Caccia"])
         },
         {
           label: "Esposizioni, Mostre, Fiere e Mercati",
           checked: false,
+          tag: "ESPOS",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Esposizioni, Mostre, Fiere e Mercati"])
         },
         {
           label: "Porti, Fari, Spiagge, Pilotaggio",
           checked: false,
+          tag: "FARI",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Porti, Fari, Spiagge, Pilotaggio"])
         },
         {
           label: "Giochi e Concorsi",
           checked: false,
+          tag: "GIOC",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Giochi e Concorsi"])
         },
         {
           label: "Spettacoli",
           checked: false,
+          tag: "SPET",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Spettacoli"])
         },
         {
           label: "Spettacoli (Imposta sugli)",
           checked: false,
+          tag: "SPIMP",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Spettacoli (Imposta sugli)"])
         },
         {
           label: "Spiriti",
           checked: false,
+          tag: "SPIRI",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Spiriti"])
         },
         {
           label: "Sport",
           checked: false,
+          tag: "SPORT",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Sport"])
         },
         {
           label: "Turismo",
           checked: false,
+          tag: "TURI",
           onChange: () => toggleInclude(["bySubject", "byIntrattenimento", "Turismo"])
         },
       ],
@@ -1046,41 +1238,49 @@ export const AdvancedSearch = function (props) {
         {
           label: "Barbieri e Parrucchieri",
           checked: false,
+          tag: "BARB",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Barbieri e Parrucchieri"])
         },
         {
           label: "Consulenti del Lavoro",
           checked: false,
+          tag: "CONSU",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Consulenti del Lavoro"])
         },
         {
           label: "Facchinaggio",
           checked: false,
+          tag: "FACC",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Facchinaggio"])
         },
         {
           label: "Interprete",
           checked: false,
+          tag: "INTE",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Interprete"])
         },
         {
           label: "Notariato",
           checked: false,
+          tag: "NOTA",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Notariato"])
         },
         {
           label: "Periti Industriali",
           checked: false,
+          tag: "PERIT",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Periti Industriali"])
         },
         {
           label: "Portinai",
           checked: false,
+          tag: "PORTI",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Portinai"])
         },
         {
           label: "Psicologi",
           checked: false,
+          tag: "PSI",
           onChange: () => toggleInclude(["bySubject", "byImpieghi", "Psicologi"])
         },
       ]
@@ -1088,6 +1288,7 @@ export const AdvancedSearch = function (props) {
     byAuthority: [
       {
         label: "indCorteCost",
+        tag: ".ind corte",
         checked: false,
         onChange: () => toggleInclude(["byAuthority", "indCorteCost"])
       }
@@ -1392,32 +1593,25 @@ export const AdvancedSearch = function (props) {
   }
 
   const getMinifiedFilterState = (startObject) => {
-    console.log("startObject:", startObject)
     const oldFilterState = JSON.parse(JSON.stringify(startObject))
     const newFilterState = JSON.parse(JSON.stringify(startObject))
-    console.log("Original state object:", oldFilterState)
     const externalProps = Object.keys(oldFilterState)
-
     for (let x = 0; x < externalProps.length; x++) {
-
       if (externalProps[x] === "byAuthority" || externalProps[x] === "byExtension") {
         console.log("1° case - Pre edit:", newFilterState[externalProps[x]])
         const editedArr = oldFilterState[externalProps[x]].filter(el => el.checked === true)
         newFilterState[externalProps[x]] = editedArr
         console.log("1° case - Post edit:", editedArr)
       }
-
       if (externalProps[x] === "bySubject") {
         const internalProps = Object.keys(oldFilterState[externalProps[x]])
         console.log("2° case - internalProps:", internalProps)
-
         //Lascio negli array, solo gli oggetti che hanno checked: true
         for (let y = 0; y < internalProps.length; y++) {
           const editedArr = oldFilterState[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
           console.log("2° case - trying to convert this:", newFilterState[externalProps[x]][internalProps[y]], "into this: ", editedArr)
           newFilterState[externalProps[x]][internalProps[y]] = editedArr
         }
-
         //Elimino gli array vuoti
         for (let y = 0; y < internalProps.length; y++) {
           const emptyArr = oldFilterState[externalProps[x]][internalProps[y]].length === 0
@@ -1426,32 +1620,31 @@ export const AdvancedSearch = function (props) {
             console.log("removing empty arr from this parent:", parent)
             delete newFilterState[externalProps[x]][internalProps[y]]
           }
-
         }
-
-
       }
-
     }
-
-    //[Checkpoint] Dopo aver deepcopiato gli oggetti, funziona. Continuare da qui.
-    /*
     Object.keys(newFilterState).forEach(prop => {
       if (Array.isArray(newFilterState[prop])) {
+        //newFilterState[prop] is an array
         if (newFilterState[prop].length === 0) {
+          //delete empty array on the first level
           delete newFilterState[prop]
-        } else {
-          newFilterState[prop].forEach((subEl, ind) => {
-            if (Array.isArray(subEl) && subEl.length === 0) {
-              newFilterState[prop] = newFilterState[prop].filter((e, i) => i !== ind)
-            }
-          })
         }
+      } else {
+        //newFilterState[prop] is an object
+        const innerObject = newFilterState[prop]
+        console.log("innerObject:", innerObject)
+        Object.keys(innerObject).forEach(subProp => {
+          console.log("Analyzing this subProp:", subProp, "whose value is:", innerObject[subProp])
+          if (innerObject[subProp].length === 0) {
+            //delete empty array on the second level
+            delete innerObject[subProp]
+          }
+        })
       }
     })
-    */
-    console.log("oldFilterState object:", oldFilterState)
-    console.log("newFilterState object:", newFilterState)
+    console.log("filterState before filter:", oldFilterState)
+    console.log("filterState after filter:", newFilterState)
     return newFilterState
   }
 

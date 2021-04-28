@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- [Checkpoint] Dopo aver deepcopiato gli oggetti, funziona. Continuare da getMinifiedFilterState.
+- [Checkpoint] Finita getMinifiedFilterState, per ora. Vedere cosa ci può fornire di contenuti il signor Gaetano.
 ## [ToDo]
 - Finire la funzione "getMinifiedFilterState", che era stata ideata per il sistema tag precedente, ed è anche buggata. 
 - La funzione "getMinifiedFilterState" deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
@@ -1172,18 +1172,18 @@ presso il Garante per la protezione dei dati personali
 - BASI = Basilicata
 - CALAB = Calabria
 - CAMPA = Campania
-- CIVAT = Città del Vaticano (Stato della)
+- (CIVAT = Città del Vaticano (Stato della))
 - EMILI =  Emilia Romagna
 - FRIU = Friuli Venezia Giulia
 - LAZ = Lazio
 - LIG = Liguria
 - LOMB = Lombardia
 - MAR = Marche
-- MEZ = Mezzogiorno
+- (MEZ = Mezzogiorno)
 - MOLI = Molise
 - PIEMO =  Piemonte
 - PUGL =  Puglia
-- SANMA =  San Marino
+- (SANMA =  San Marino)
 - SARD =  Sardegna
 - SICIL = Sicilia
 - TOSC =   Toscana
@@ -1213,7 +1213,7 @@ presso il Garante per la protezione dei dati personali
 - MISE = Ministero dello sviluppo economico
 - MISTR = Ministero dell’istruzione
 - MISUD = Ministero per il sud e la coesione territoriale
-- MITECN = Ministero per l’innovazione tecnologica e la transizione di gitale
+- MITECN = Ministero per l’innovazione tecnologica e la transizione digitale
 - MITUR = Ministero del turismo
 - MIUR = Ministero dell’università e della ricerca
 

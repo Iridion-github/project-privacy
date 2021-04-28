@@ -302,6 +302,10 @@ a {
   transition: 0.3s;
 }
 
+.card-darker-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
 .resulting-article-container {
   min-height: 50vh;
 }

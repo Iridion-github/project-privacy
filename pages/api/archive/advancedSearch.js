@@ -19,6 +19,7 @@ export default async (req, res) => {
   let mappedArchive //variabile array dei dati dell'archivio mappato
   const searchterms = req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null
   const activeFilters = JSON.parse(req.query.activeFilters)
+  console.log("BACKEND - advancedSearch activeFilters:", activeFilters.bySubject.byZoneGeog)
   const filesToAnalyze = []
   const dataToFilter = []
   const todayDate = new Date()
@@ -175,14 +176,39 @@ export default async (req, res) => {
       if (!activeFilters.includeDocx && d.filename.includes(".docx")) return false
       if (!activeFilters.includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false
       //Eventuali affinamenti del filtro andranno qui 
-      const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase()
-      let result = null
-      if (activeFilters.indCorteCost) {
-        let target = ".ind corte".replace(/[^\w\s]/gi, '')
-        result = cleanContent.includes(target)
-      } else {
-        result = cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+      const cleanContent = d.content.replace(/[^\w\s]/gi, '')//.toLowerCase()
+      //Se il file non contiene la query di ricerca, result parte da false
+      let result = cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+      if (result === true) return result
+
+      //Ciclo che cerca i tag di byAuthority, appena uno viene trovato, esce per risparmiare tempo
+      if (activeFilters.byAuthority.length > 0) {
+        for (let x = 0; x < activeFilters.byAuthority.length; x++) {
+          let tag = activeFilters.byAuthority[x].tag.replace(/[^\w\s]/gi, '')
+          result = cleanContent.toLowerCase().includes(tag)
+          if (result === true) return result
+        }
       }
+
+      //Ciclo che cerca i tag di bySubject, appena uno viene trovato, esce per risparmiare tempo
+      if (Object.keys(activeFilters.bySubject).length > 0) {
+        for (let x = 0; x < activeFilters.bySubject.length; x++) {
+          //Qui vanno aggiunti tutti i comportamenti dei filtri di bySubject, riproducendo questo blocco if
+          if (Array.isArray(activeFilters.bySubject[x].tag)) {
+            let tags = activeFilters.bySubject[x].tag
+            for (let y = 0; y < tags.length; y++) {
+              let tag = tags[y].replace(/[^\w\s]/gi, '')
+              result = cleanContent.includes(tag)
+              if (result === true) return result
+            }
+          } else {
+            let tag = activeFilters.bySubject[x].tag.replace(/[^\w\s]/gi, '')
+            result = cleanContent.includes(tag)
+            if (result === true) return result
+          }
+        }
+      }
+
       return result
     } else {
       return false

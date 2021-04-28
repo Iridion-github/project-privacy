@@ -68,7 +68,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -94,7 +94,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -124,7 +124,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -151,7 +151,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -182,7 +182,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -209,7 +209,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -240,7 +240,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -267,7 +267,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -298,7 +298,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -325,7 +325,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -356,7 +356,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -383,7 +383,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
@@ -414,7 +414,7 @@ export const FilterBySubject = function (props) {
               <Accordion
                 defaultActiveKey={null}
               >
-                <Card>
+                <Card className="card-darker-shadow">
                   <Accordion.Toggle
                     as={Button}
                     variant="info"
