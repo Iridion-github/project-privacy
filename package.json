@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "eject": "react-scripts eject",
-    "export": "next export"
+    "export": "next export",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
