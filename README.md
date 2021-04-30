@@ -1,5 +1,7 @@
 ## [Checkpoint]
-- [Checkpoint] Finita getMinifiedFilterState, per ora. Vedere cosa ci può fornire di contenuti il signor Gaetano.
+- [Checkpoint] Se trovassi il modo di avere l'id dell'articolo nel getInitianProps di [articleId], avrei risolto.
+## [Deployment]
+- Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
 - Finire la funzione "getMinifiedFilterState", che era stata ideata per il sistema tag precedente, ed è anche buggata. 
 - La funzione "getMinifiedFilterState" deve mandare al server solo i filtri settati, non le stringhe vuote o i null.

@@ -14,7 +14,7 @@ import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-export default function articoli({ DBarticles, articleTopics }) {
+function articoli({ DBarticles, articleTopics }) {
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
@@ -23,7 +23,8 @@ export default function articoli({ DBarticles, articleTopics }) {
 
   const handleOpenedArticle = (articleId) => {
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
-    router.push(fullRoute, undefined, { shallow: false })
+    setOpenedArticle(articles.find(art => art.id === articleId))
+    router.push(fullRoute)
   }
 
   const searchTopic = async (topic, lang) => {
@@ -119,6 +120,19 @@ export default function articoli({ DBarticles, articleTopics }) {
   )
 }
 
+articoli.getInitialProps = async (context) => {
+  const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
+  const resArticle = await fetch(apiUrlArticle)
+  const DBarticles = await resArticle.json()
+  const apiUrlTopics = "http://" + context.req.headers.host + "/api/articleTopics"
+  const resArticleTopics = await fetch(apiUrlTopics)
+  const articleTopics = await resArticleTopics.json()
+  return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
+}
+
+export default articoli
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
   const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
   const resArticle = await fetch(apiUrlArticle)
@@ -128,3 +142,4 @@ export async function getServerSideProps(context) {
   const articleTopics = await resArticleTopics.json()
   return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } }
 }
+*/

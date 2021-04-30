@@ -11,6 +11,9 @@ export default async (req, res) => {
     body
   } = req
 
+  console.log("API - req:", req)
+  console.log("API - res:", res)
+
   let targetArticle = await Article.findOne({ id: id })
   if (!targetArticle) {
     return res.status(400).json({ success: false, error: "No article found for that id!" })

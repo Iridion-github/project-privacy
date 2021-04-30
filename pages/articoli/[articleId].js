@@ -16,13 +16,14 @@ import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/artic
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
 
-export default function articoli({ glossarywords, DBarticles }) {
+function articoli({ glossarywords, DBarticles }) {
+  console.log("glossarywords:", glossarywords)
+  console.log("DBarticles:", DBarticles)
   const siteLanguage = useLanguage() //context
   const router = useRouter()
   const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
-  const [openedArticle, setOpenedArticle] = useState(null)
-  const [shouldRenderComponent, setShouldRenderComponent] = useState(null)
+  const [openedArticle, setOpenedArticle] = useState(articleId)
 
   const handleOpenedArticle = (id) => {
     const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
@@ -30,17 +31,15 @@ export default function articoli({ glossarywords, DBarticles }) {
     setOpenedArticle(id)
   }
 
-  let relatedArticles = shouldRenderComponent ? getRelatedArticles(articleId, articles, siteLanguage) : []
+  let relatedArticles = getRelatedArticles(articleId, articles, siteLanguage)
 
   useEffect(() => {
-    if (!openedArticle) {
+    if (articles.length === 0) {
+      console.log("useEffect - articles is empty!")
       if (DBarticles.map(el => el.id).includes(articleId)) {
         setOpenedArticle(articleId)
-      } else {
-        setShouldRenderComponent(false)
       }
     }
-    if (!shouldRenderComponent) setShouldRenderComponent(DBarticles.map(el => el.id).includes(articleId))
   })
 
   return (
@@ -50,25 +49,26 @@ export default function articoli({ glossarywords, DBarticles }) {
       />
       {/* Navbar */}
       <Navigation />
-      {(openedArticle && shouldRenderComponent) &&
+      {console.log("About to render breadcrumbs, articles:", articles)}
+      {(openedArticle && articles.length > 0) &&
         <Breadcrumbs
           breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[siteLanguage].title)}
         />
       }
-      {shouldRenderComponent === false &&
+      {!openedArticle &&
         <Breadcrumbs
           breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", siteLanguage)}
         />
       }
       {/* Page Content */}
       <main className={styles.main}>
-        {shouldRenderComponent === false &&
+        {!openedArticle &&
           <ErrorComponent />
         }
         <Row className="w-100">
           <Col md={3} className="">
           </Col>
-          {(openedArticle && shouldRenderComponent) &&
+          {(openedArticle && articles.length > 0) &&
             <>
               <Col md={6} className="justify-content-center">
                 <ArticleRead
@@ -94,7 +94,30 @@ export default function articoli({ glossarywords, DBarticles }) {
   )
 }
 
+articoli.getInitialProps = async (context) => {
+  let propsObj = { DBarticles: [], glossarywords: [] }
+  console.log("context - looking for articleId:", context)
+  if (!context.req) {
+    console.log("prova - looking for articleId:", prova)
+    //location.replace(location.href + "/" + "0")
+    //[CHECKPOINT] Se trovassi il modo di avere l'id dell'articolo già qui, avrei risolto.
+  } else {
+    //api of glossary
+    const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"
+    const resGlossaryword = await fetch(apiUrlGlossary)
+    const glossarywords = await resGlossaryword.json()
+    //api of all articles (for the related articles)
+    const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
+    const resArticle = await fetch(apiUrlArticle)
+    const DBarticles = await resArticle.json()
+    propsObj = { DBarticles: DBarticles.data, glossarywords: glossarywords.data }
+  }
+  return propsObj
+}
 
+export default articoli
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps({ req }) {
   //api of glossary
   const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"
@@ -106,3 +129,4 @@ export async function getServerSideProps({ req }) {
   const DBarticles = await resArticle.json()
   return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } }
 }
+*/

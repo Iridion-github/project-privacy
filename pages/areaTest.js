@@ -12,7 +12,9 @@ import { Results } from '../components/areaTest/Results'
 import { Footer } from '../components/layout/Footer'
 
 
-export default function areaTest({ tests }) {
+function areaTest({ tests }) {
+
+  console.log("areaTest - tests:", tests)
 
   const [selectedTopic, setSelectedTopic] = useState(null)
 
@@ -66,9 +68,20 @@ export default function areaTest({ tests }) {
   )
 }
 
+areaTest.getInitialProps = async (context) => {
+  const apiUrl = "http://" + context.req.headers.host + "/api/test"
+  const res = await fetch(apiUrl)
+  const { data } = await res.json()
+  return { tests: data }
+}
+
+export default areaTest
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/test"
   const res = await fetch(apiUrl)
   const { data } = await res.json()
   return { props: { tests: data } }
 }
+*/
