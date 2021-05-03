@@ -13,8 +13,10 @@ export const FilterByTesto = function (props) {
     <Card className="pt-2 pb-2 mb-2">
       <Row className="w-100 ml-0 mr-0">
         <Col md={12} className="justify-content-center">
-          <Row className="w-100 justify-content-center ml-0 mr-0">
-            <h5>I risultati della Ricerca:</h5>
+          <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
+            <Card.Header>
+              <h5>I risultati della Ricerca:</h5>
+            </Card.Header>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0">
             <Select

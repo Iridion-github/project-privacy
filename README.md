@@ -6,8 +6,9 @@
 - Finire la funzione "getMinifiedFilterState", che era stata ideata per il sistema tag precedente, ed è anche buggata. 
 - La funzione "getMinifiedFilterState" deve mandare al server solo i filtri settati, non le stringhe vuote o i null.
 - Anche la finissimo, ci serve chiarire del tutto il nesso logico trai dati settati nella ricerca ed i tag dei documenti di Luigi (IND. qualcosa?).
-## [Richieste/Domande_per_Luigi]
+## [Richieste/Domande_per_Luigi] (luigithebrain@gmail.com)
 - Qual è il tag del Ministero degli affari esteri e della cooperazione internazionale ?
+- Classificazione totale dei collegamenti del filtro avanzato di ricerca ai tag. 
 
 ## [Richieste/Domande_per_Gaetano]
 - Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
@@ -19,6 +20,44 @@ Alcune ricerche non trovano il target, esempi:
 - "...articoli 37 e 38 del decreto legislativo...", non riesce a portare al target pdf, ce la fa se si rimuove la parola "legislativo", perchè pare che la prima 'i' della parola venga riconosciuta come un carattere strano.
 ## Implementazioni Possibili 
 - ?
+
+## Filtro 
+Il filtro per autorità deve mostrare l'estratto 
+Per i provvedimenti, nel titolo:
+- C00X = Legge Costituzionale
+- D.Lgs. = Decreto Legislativo
+- L. = Legge
+- Cm = (decreto del) Presidente del Consiglio dei Ministri
+- Dec. = Decisione
+- Db. = Delibera
+- Delib. = Deliberazione
+- Dr.  = Direttiva
+- Om. = Ordinanza Ministeriale
+- Reg. = Regolamento
+- Racc. = Raccomandazione
+- Par. = Parere
+- Dm. = Decreto Ministeriale
+- Ord.P.C.M = Ordinanza del Presidente del Consiglio
+- Provv. Anac = Provvedimento Anac
+- Reg. Anac = Regolamento Anac
+- CP = codice Penale
+- CC = Codice civile
+- CPC = Codice di Procedura Civile
+- CPP = Codice di Procedura Penale
+- Ord. ing. = Ordinanza ingiunzione
+- Pr = Decreto del Presidente della Repubblica
+
+Eliminare 'Tipo' dal filtro per Provvedimento.
+L'articolo è il numeretto in grassetto (che contiene a sua volta altri numeretti, che sono i comma, attenzione.).
+
+
+
+
+
+
+[Filtra per Data]e[I risultati della ricerca]
+Devono apparire solo in caso ci sia una ricerca testuale
+
 
 
 -------------------- [PANNELLI OK] --------------------
@@ -1188,14 +1227,14 @@ presso il Garante per la protezione dei dati personali
 - (SANMA =  San Marino)
 - SARD =  Sardegna
 - SICIL = Sicilia
-- TOSC =   Toscana
-- TRENT =  Trentino Alto Adige
-- UMBR =   Umbria
-- VAL =    Valle d'Aosta
+- TOSC = Toscana
+- TRENT = Trentino Alto Adige
+- UMBR = Umbria
+- VAL = Valle d'Aosta
 - VENE = Veneto
 
 [MINISTERI]
-- ??? = Ministero degli affari esteri e della cooperazione internazionale 
+- MIAF = Ministero degli affari esteri e della cooperazione internazionale 
 - MEF = Ministero dell’economia e delle finanze
 - MIAGR = Ministero delle politiche agricole, alimentari e forestali
 - MIAMB = Ministero della transizione ecologica
