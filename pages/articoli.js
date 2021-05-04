@@ -121,10 +121,12 @@ function articoli({ DBarticles, articleTopics }) {
 }
 
 articoli.getInitialProps = async (context) => {
-  const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
+  const environment = "http://" + context.req.headers.host
+  //const environment = "https://project-privacy-d803e.web.app"
+  const apiUrlArticle = environment + "/api/article"
   const resArticle = await fetch(apiUrlArticle)
   const DBarticles = await resArticle.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/articleTopics"
+  const apiUrlTopics = environment + "/api/articleTopics"
   const resArticleTopics = await fetch(apiUrlTopics)
   const articleTopics = await resArticleTopics.json()
   return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }

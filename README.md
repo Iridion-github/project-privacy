@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- [Checkpoint] Se trovassi il modo di avere l'id dell'articolo nel getInitianProps di [articleId], avrei risolto.
+- Completato il refactor da getServersideProps a getInitialProps. Ancora non abbiamo capito come deployare un sito non statico.
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
