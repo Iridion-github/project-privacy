@@ -45,19 +45,14 @@ export const AdvancedSearch = function (props) {
   const toggleInclude = (propsArr) => {
     const newFilterState = { ...filtersState }
     if (Array.isArray(newFilterState[propsArr[0]])) {
-      console.log("toggleInclude was called --> 1° case")
       newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked = !newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked
     } else if (Array.isArray(newFilterState[propsArr[0]][propsArr[1]])) {
-      console.log("toggleInclude was called --> 2° case")
       newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked = !newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked
     } else {
-      console.log("toggleInclude was called --> 3° case")
       console.log("ERROR: This case should NEVER happen.")
     }
     setFiltersState(newFilterState)
   }
-
-  console.log("about to declare filtersState")
 
   const [filtersState, setFiltersState] = useState({
     byExtension: [
@@ -1295,8 +1290,6 @@ export const AdvancedSearch = function (props) {
     ]
   })
 
-  console.log("just declared filtersState:", filtersState)
-
   const [selectedOpzioneTestuale, setSelectedOpzioneTestuale] = useState("Contengono almeno 1 delle parole")
 
   const handleChangeOpzioneTestuale = (val) => {
@@ -1598,18 +1591,14 @@ export const AdvancedSearch = function (props) {
     const externalProps = Object.keys(oldFilterState)
     for (let x = 0; x < externalProps.length; x++) {
       if (externalProps[x] === "byAuthority" || externalProps[x] === "byExtension") {
-        console.log("1° case - Pre edit:", newFilterState[externalProps[x]])
         const editedArr = oldFilterState[externalProps[x]].filter(el => el.checked === true)
         newFilterState[externalProps[x]] = editedArr
-        console.log("1° case - Post edit:", editedArr)
       }
       if (externalProps[x] === "bySubject") {
         const internalProps = Object.keys(oldFilterState[externalProps[x]])
-        console.log("2° case - internalProps:", internalProps)
         //Lascio negli array, solo gli oggetti che hanno checked: true
         for (let y = 0; y < internalProps.length; y++) {
           const editedArr = oldFilterState[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
-          console.log("2° case - trying to convert this:", newFilterState[externalProps[x]][internalProps[y]], "into this: ", editedArr)
           newFilterState[externalProps[x]][internalProps[y]] = editedArr
         }
         //Elimino gli array vuoti
@@ -1617,7 +1606,6 @@ export const AdvancedSearch = function (props) {
           const emptyArr = oldFilterState[externalProps[x]][internalProps[y]].length === 0
           if (emptyArr) {
             const parent = oldFilterState[externalProps[x]]
-            console.log("removing empty arr from this parent:", parent)
             delete newFilterState[externalProps[x]][internalProps[y]]
           }
         }
@@ -1633,9 +1621,7 @@ export const AdvancedSearch = function (props) {
       } else {
         //newFilterState[prop] is an object
         const innerObject = newFilterState[prop]
-        console.log("innerObject:", innerObject)
         Object.keys(innerObject).forEach(subProp => {
-          console.log("Analyzing this subProp:", subProp, "whose value is:", innerObject[subProp])
           if (innerObject[subProp].length === 0) {
             //delete empty array on the second level
             delete innerObject[subProp]
@@ -1643,8 +1629,6 @@ export const AdvancedSearch = function (props) {
         })
       }
     })
-    console.log("filterState before filter:", oldFilterState)
-    console.log("filterState after filter:", newFilterState)
     return newFilterState
   }
 
@@ -1727,9 +1711,7 @@ export const AdvancedSearch = function (props) {
   useEffect(() => {
     //code to execute at every state update
     const timestamp = Date.now()
-    console.log(timestamp, " - State changed! filtersState:", filtersState)
     if (previousTab !== props.shownTab) {
-      console.log("Tab changed, resetting state!")
       resetAdvancedSearch()
       handleChangePreviousTab(props.shownTab)
     }

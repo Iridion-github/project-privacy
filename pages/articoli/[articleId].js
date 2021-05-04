@@ -33,7 +33,6 @@ function articoli({ glossarywords, DBarticles }) {
 
   useEffect(() => {
     if (articles.length === 0) {
-      console.log("useEffect - articles is empty!")
       if (DBarticles.map(el => el.id).includes(articleId)) {
         setOpenedArticle(articleId)
       }
@@ -47,7 +46,6 @@ function articoli({ glossarywords, DBarticles }) {
       />
       {/* Navbar */}
       <Navigation />
-      {console.log("About to render breadcrumbs, articles:", articles)}
       {(openedArticle && articles.length > 0) &&
         <Breadcrumbs
           breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[siteLanguage].title)}

@@ -31,7 +31,6 @@ function recensione({ glossarywords, DBreviews }) {
 
   useEffect(() => {
     if (reviews.length === 0) {
-      console.log("useEffect - reviews is empty!")
       if (DBreviews.map(el => el.id).includes(reviewId)) {
         setOpenedReview(reviewId)
       }

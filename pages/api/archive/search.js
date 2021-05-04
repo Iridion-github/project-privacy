@@ -28,7 +28,7 @@ export default async (req, res) => {
     isArchiveMapped = true
     dataToFilter.push(...mappedArchive)
   } catch (mappedArchiveMissing) {
-    console.log(mappedArchiveMissing)
+    console.log("No mapped archive for today yet!")
     isArchiveMapped = false
   }
 

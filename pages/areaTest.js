@@ -13,17 +13,10 @@ import { Footer } from '../components/layout/Footer'
 
 
 function areaTest({ tests }) {
-
-  console.log("areaTest - tests:", tests)
-
   const [selectedTopic, setSelectedTopic] = useState(null)
-
   const [selectedTest, setSelectedTest] = useState(null)
-
   const [showResults, setShowResults] = useState(false)
-
   const [results, setResults] = useState([])
-
   const siteLanguage = useLanguage() //context
 
   return (
