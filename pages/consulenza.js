@@ -14,7 +14,7 @@ import { Footer } from '../components/layout/Footer'
 import { ConsultationChoice } from '../components/consultation/ConsultationChoice'
 import { ConsultationCard } from '../components/consultation/ConsultationCard'
 
-export default function consulenza(props) {
+function consulenza(props) {
   const siteLanguage = useLanguage() //context
 
   const translate = (lang, data) => {
@@ -72,9 +72,20 @@ export default function consulenza(props) {
   )
 }
 
+consulenza.getInitialProps = async (context) => {
+  const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
+  const resConsult = await fetch(apiUrl)
+  const consultations = await resConsult.json()
+  return { consultations: consultations.data }
+}
+
+export default consulenza
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
   const resConsult = await fetch(apiUrl)
   const consultations = await resConsult.json()
   return { props: { consultations: consultations.data } }
 }
+*/

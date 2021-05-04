@@ -14,7 +14,7 @@ import { ReviewsList } from "../components/reviews/ReviewsList"
 import { ReviewsLeftMenu } from "../components/reviews/ReviewsLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-export default function recensioniBibliografiche({ DBreviews, reviewTopics }) {
+function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   const siteLanguage = useLanguage() //context
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(null)
@@ -119,6 +119,19 @@ export default function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   )
 }
 
+recensioniBibliografiche.getInitialProps = async (context) => {
+  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
+  const resReview = await fetch(apiUrlReview)
+  const DBreviews = await resReview.json()
+  const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
+  const resReviewTopics = await fetch(apiUrlTopics)
+  const reviewTopics = await resReviewTopics.json()
+  return { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data }
+}
+
+export default recensioniBibliografiche
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
   const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
   const resReview = await fetch(apiUrlReview)
@@ -128,3 +141,4 @@ export async function getServerSideProps(context) {
   const reviewTopics = await resReviewTopics.json()
   return { props: { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data } }
 }
+*/

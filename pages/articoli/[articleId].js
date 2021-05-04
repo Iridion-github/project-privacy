@@ -17,8 +17,6 @@ import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
 
 function articoli({ glossarywords, DBarticles }) {
-  console.log("glossarywords:", glossarywords)
-  console.log("DBarticles:", DBarticles)
   const siteLanguage = useLanguage() //context
   const router = useRouter()
   const { articleId } = router.query
@@ -95,12 +93,23 @@ function articoli({ glossarywords, DBarticles }) {
 }
 
 articoli.getInitialProps = async (context) => {
+
+  const getArticleId = async (rawStr) => {
+    let articleId = rawStr.split('/articoli/')[1]
+    if (articleId.includes('/')) {
+      articleId = articleId.split('/')[1].split('/')[1]
+    }
+    return articleId
+  }
+
   let propsObj = { DBarticles: [], glossarywords: [] }
-  console.log("context - looking for articleId:", context)
   if (!context.req) {
-    console.log("prova - looking for articleId:", prova)
-    //location.replace(location.href + "/" + "0")
-    //[CHECKPOINT] Se trovassi il modo di avere l'id dell'articolo già qui, avrei risolto.
+    const articleId = await getArticleId(context.asPath)
+    if (location.href.includes("articoli/")) {
+      location.replace(articleId)
+    } else {
+      location.replace("articoli/" + articleId)
+    }
   } else {
     //api of glossary
     const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"

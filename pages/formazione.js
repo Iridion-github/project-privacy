@@ -11,7 +11,7 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 
-export default function formazione(props) {
+function formazione(props) {
   const siteLanguage = useLanguage() //context
 
   return (
@@ -37,6 +37,17 @@ export default function formazione(props) {
   )
 }
 
+formazione.getInitialProps = async (context) => {
+  //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
+  //const resLessons = await fetch(apiUrl)
+  //const lessons = await resLessons.json()
+  //return { lessons: lessons.data }
+  return { props: { lessons: [] } }
+}
+
+export default formazione
+
+/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
   //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
   //const resLessons = await fetch(apiUrl)
@@ -44,3 +55,4 @@ export async function getServerSideProps(context) {
   //return { lessons: lessons.data }
   return { props: { lessons: [] } }
 }
+*/
