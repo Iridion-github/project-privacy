@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- Completato il refactor da getServersideProps a getInitialProps. Ancora non abbiamo capito come deployare un sito non statico.
+- Creazione del branch deployment-netlify
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
