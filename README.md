@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- Creazione del branch deployment-netlify
+- Creazione del branch deployment-vercel
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
