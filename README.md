@@ -10,6 +10,8 @@
 ## [Note]
 - 
 ## [Known_Issues]
--
+- Cambiare lingua e clickare un link riporta alla lingua originale (ita).
+- Articoli - filtro per argomenti crasha tutto
+- Scroll-up btn è lento in culo
 ## Implementazioni Possibili 
 - ?
