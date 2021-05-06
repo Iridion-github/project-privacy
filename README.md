@@ -1,5 +1,6 @@
 ## [Checkpoint]
 - Creazione del branch deployment-vercel
+- C'mon man, deploy THIS
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
