@@ -37,15 +37,15 @@ const contatti = function () {
                       <tbody>
                         <tr>
                           <td><b>{siteLanguage === "ita" ? "Indirizzo" : "Address"}:</b></td>
-                          <td>Via Fregene 33 - 00183 {siteLanguage === "ita" ? "Roma" : "Rome"} (RM)</td>
+                          <td>{"Non Disponibile - 00000" /*Via Fregene 33 - 00183*/}{/*siteLanguage === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
                         </tr>
                         <tr>
                           <td><b>{siteLanguage === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
-                          <td>335-236564</td>
+                          <td>{"Non Disponibile" /*335-236564*/}</td>
                         </tr>
                         <tr>
                           <td><b>Email:</b></td>
-                          <td>mastrogae@gmail.com</td>
+                          <td>{"Non Disponibile" /*mastrogae@gmail.com*/}</td>
                         </tr>
                         <tr>
                           <td><b>{siteLanguage === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
