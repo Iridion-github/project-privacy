@@ -81,7 +81,7 @@ consulenza.getInitialProps = async (context) => {
 
 export default consulenza
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
   const resConsult = await fetch(apiUrl)

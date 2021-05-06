@@ -47,7 +47,7 @@ formazione.getInitialProps = async (context) => {
 
 export default formazione
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
   //const resLessons = await fetch(apiUrl)

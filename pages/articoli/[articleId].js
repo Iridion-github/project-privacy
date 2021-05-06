@@ -124,7 +124,7 @@ articoli.getInitialProps = async (context) => {
 
 export default articoli
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps({ req }) {
   //api of glossary
   const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"

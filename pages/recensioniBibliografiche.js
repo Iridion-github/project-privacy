@@ -131,7 +131,7 @@ recensioniBibliografiche.getInitialProps = async (context) => {
 
 export default recensioniBibliografiche
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
   const resReview = await fetch(apiUrlReview)

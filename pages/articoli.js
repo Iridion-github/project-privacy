@@ -134,7 +134,7 @@ articoli.getInitialProps = async (context) => {
 
 export default articoli
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
   const resArticle = await fetch(apiUrlArticle)

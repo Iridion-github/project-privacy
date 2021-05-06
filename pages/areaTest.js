@@ -70,7 +70,7 @@ areaTest.getInitialProps = async (context) => {
 
 export default areaTest
 
-/* //Rimozione di getServerSideProps per deployare su Firebase
+/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/test"
   const res = await fetch(apiUrl)
