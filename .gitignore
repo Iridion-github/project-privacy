@@ -32,7 +32,5 @@ yarn-error.log*
 
 # vercel
 .vercel
-/mappedArchive
-/public/archive
 
 package-lock.json
