@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default (async (req, res) => {\n  return res.status(400).json({\n    success: false,\n    error: \"API [Index] doesn't expect requests for now!\"\n  });\n});","map":null,"metadata":{},"sourceType":"module"}
