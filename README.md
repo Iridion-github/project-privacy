@@ -1,6 +1,5 @@
 ## [Checkpoint]
-- Creazione del branch deployment-vercel
-- C'mon man, deploy THIS
+- Fixing bugs
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
@@ -12,6 +11,5 @@
 ## [Known_Issues]
 - Cambiare lingua e clickare un link riporta alla lingua originale (ita).
 - Articoli - filtro per argomenti crasha tutto
-- Scroll-up btn è lento in culo
 ## Implementazioni Possibili 
 - ?

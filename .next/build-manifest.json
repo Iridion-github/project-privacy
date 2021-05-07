@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/articoli.js"
     ],
-    "/contatti": [
+    "/articoli/[articleId]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/contatti.js"
+      "static/chunks/pages/articoli/[articleId].js"
     ]
   },
   "ampFirstPages": []

@@ -3,5 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/articoli": "pages/articoli.js",
-  "/contatti": "pages/contatti.js"
+  "/articoli/[articleId]": "pages/articoli/[articleId].js",
+  "/api/glossaryword": "pages/api/glossaryword.js",
+  "/api/articleTopics": "pages/api/articleTopics.js",
+  "/api/article": "pages/api/article.js"
 }

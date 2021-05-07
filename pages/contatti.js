@@ -37,7 +37,7 @@ const contatti = function () {
                       <tbody>
                         <tr>
                           <td><b>{siteLanguage === "ita" ? "Indirizzo" : "Address"}:</b></td>
-                          <td>{"Non Disponibile - 00000" /*Via Fregene 33 - 00183*/}{/*siteLanguage === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
+                          <td>{"Non Disponibile" /*Via Fregene 33 - 00183*/}{/*siteLanguage === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
                         </tr>
                         <tr>
                           <td><b>{siteLanguage === "ita" ? "Telefono" : "Phone Numbers"}</b></td>

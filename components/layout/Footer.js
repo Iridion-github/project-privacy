@@ -13,10 +13,17 @@ export const Footer = function () {
   const router = useRouter()
   const siteLanguage = useLanguage() //context
   const scrollToTopSmoothly = () => {
-    if (window.scrollY > 0) {
+    let currentHeight = window.scrollY
+    let heigthReduction = window.scrollY / 50
+    if (heigthReduction < 7.5) heigthReduction = 7.5
+    let targetHeight = currentHeight - heigthReduction
+    if (currentHeight >= 1) {
+      console.log("currentHeight:", currentHeight)
+      console.log("heigthReduction:", heigthReduction)
+      console.log("targetHeight:", targetHeight)
       window.scrollTo({
-        top: window.scrollY - Math.ceil(window.scrollY / 10),
-        behavior: 'smooth'
+        top: targetHeight,
+        //behavior: 'smooth'
       })
       setTimeout(scrollToTopSmoothly, 10)
     }
