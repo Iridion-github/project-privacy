@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- Fixing bugs
+- Reverting once more all getInitialProps to getServerSideProps whenever an api is necessary.
 ## [Deployment]
 - Abbiamo fallito con: Vercel, Travis (solo siti statici).
 ## [ToDo]
