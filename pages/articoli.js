@@ -120,7 +120,8 @@ function articoli(props) {
   )
 }
 
-/*
+/* 
+//getInitialProps Version
 articoli.getInitialProps = async (context) => {
   const environment = "http://" + context.req.headers.host
   //const environment = "https://project-privacy-d803e.web.app"
@@ -134,6 +135,7 @@ articoli.getInitialProps = async (context) => {
 }
 */
 
+//getServerSideProps Version
 export async function getServerSideProps(context) {
   const environment = "http://" + context.req.headers.host
   //const environment = "https://project-privacy-d803e.web.app"
