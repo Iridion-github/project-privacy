@@ -14,11 +14,11 @@ import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 
-function articoli({ DBarticles, articleTopics }) {
+function articoli(props) {
+  const { DBarticles, articleTopics } = props
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
-
   const router = useRouter()
 
   const handleOpenedArticle = (articleId) => {
@@ -98,7 +98,7 @@ function articoli({ DBarticles, articleTopics }) {
             />
           </Col>
           <Col md={6} className="justify-content-center">
-            {openedArticle === null &&
+            {(openedArticle === null || openedArticle === undefined) &&
               <ArticlesList
                 allArticles={articles}
                 setOpenedArticle={handleOpenedArticle}
@@ -120,6 +120,7 @@ function articoli({ DBarticles, articleTopics }) {
   )
 }
 
+/*
 articoli.getInitialProps = async (context) => {
   const environment = "http://" + context.req.headers.host
   //const environment = "https://project-privacy-d803e.web.app"
@@ -131,17 +132,18 @@ articoli.getInitialProps = async (context) => {
   const articleTopics = await resArticleTopics.json()
   return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
 }
+*/
 
-export default articoli
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
-  const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
+  const environment = "http://" + context.req.headers.host
+  //const environment = "https://project-privacy-d803e.web.app"
+  const apiUrlArticle = environment + "/api/article"
   const resArticle = await fetch(apiUrlArticle)
   const DBarticles = await resArticle.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/articleTopics"
+  const apiUrlTopics = environment + "/api/articleTopics"
   const resArticleTopics = await fetch(apiUrlTopics)
   const articleTopics = await resArticleTopics.json()
   return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } }
 }
-*/
+
+export default articoli

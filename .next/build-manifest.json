@@ -28,11 +28,6 @@
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/articoli.js"
-    ],
-    "/articoli/[articleId]": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/articoli/[articleId].js"
     ]
   },
   "ampFirstPages": []
