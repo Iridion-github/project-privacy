@@ -1,7 +1,7 @@
 ## [Checkpoint]
 - Reverting once more all getInitialProps to getServerSideProps whenever an api is necessary.
 ## [Deployment]
-- Abbiamo fallito con: Vercel, Travis (solo siti statici).
+- Vercel: https://vercel.com/iridion-github/project-privacy
 ## [ToDo]
 - 
 ## [Richieste/Domande_per_Gaetano]
