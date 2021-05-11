@@ -1,11 +1,9 @@
 import mongoose from 'mongoose'
 
 const connection = {}
-const dbUser = process.env.dbUser
-const dbPassword = process.env.dbPassword
+const dbUser = process.env.DB_USER
+const dbPassword = process.env.DB_USER_PASSWORD
 const dbName = process.env.DB_NAME
-
-console.log(`dbUser:${dbUser}, dbPassword${dbPassword}, dbName${dbName}`)
 
 async function dbConnect() {
   if (connection.isConnected) {
