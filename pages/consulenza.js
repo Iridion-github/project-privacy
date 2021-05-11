@@ -72,20 +72,11 @@ function consulenza(props) {
   )
 }
 
-consulenza.getInitialProps = async (context) => {
-  const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
-  const resConsult = await fetch(apiUrl)
-  const consultations = await resConsult.json()
-  return { consultations: consultations.data }
-}
-
-export default consulenza
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/consultation"
   const resConsult = await fetch(apiUrl)
   const consultations = await resConsult.json()
   return { props: { consultations: consultations.data } }
 }
-*/
+
+export default consulenza

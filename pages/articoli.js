@@ -13,18 +13,21 @@ import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
+import { Loading } from '../components/layout/Loading'
 
 function articoli(props) {
   const { DBarticles, articleTopics } = props
   const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleOpenedArticle = (articleId) => {
+    setLoading(true)
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
-    setOpenedArticle(articles.find(art => art.id === articleId))
     router.push(fullRoute)
+    //setOpenedArticle(articles.find(art => art.id === articleId))
   }
 
   const searchTopic = async (topic, lang) => {
@@ -83,6 +86,7 @@ function articoli(props) {
       {/* Navbar */}
       <Navigation />
       <Breadcrumbs />
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100 mb-5">
@@ -120,22 +124,6 @@ function articoli(props) {
   )
 }
 
-/* 
-//getInitialProps Version
-articoli.getInitialProps = async (context) => {
-  const environment = "http://" + context.req.headers.host
-  //const environment = "https://project-privacy-d803e.web.app"
-  const apiUrlArticle = environment + "/api/article"
-  const resArticle = await fetch(apiUrlArticle)
-  const DBarticles = await resArticle.json()
-  const apiUrlTopics = environment + "/api/articleTopics"
-  const resArticleTopics = await fetch(apiUrlTopics)
-  const articleTopics = await resArticleTopics.json()
-  return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
-}
-*/
-
-//getServerSideProps Version
 export async function getServerSideProps(context) {
   const environment = "http://" + context.req.headers.host
   //const environment = "https://project-privacy-d803e.web.app"

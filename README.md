@@ -1,5 +1,6 @@
 ## [Checkpoint]
-- Reverting once more all getInitialProps to getServerSideProps whenever an api is necessary.
+- Added spinner loader to pages: Articoli, RecensioniBibliografiche.
+
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [ToDo]

@@ -15,6 +15,8 @@ import { ReviewReadRightPanel } from "../../components/reviews/ReviewReadRightPa
 import { getBreadcrumbsForReviews } from '../../utils/reviews'
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
+import { Loading } from '../../components/layout/Loading'
+
 
 function recensione({ glossarywords, DBreviews }) {
   const siteLanguage = useLanguage() //context
@@ -22,14 +24,19 @@ function recensione({ glossarywords, DBreviews }) {
   const { reviewId } = router.query
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(reviewId)
+  const [loading, setLoading] = useState(true)
 
   const handleOpenedReview = (id) => {
+    setLoading(true)
     const fullRoute = id !== null ? '/recensioniBibliografiche/' + id : '/recensioniBibliografiche/'
     router.push(fullRoute)
     setOpenedReview(id)
   }
 
   useEffect(() => {
+    if (loading === true) {
+      setLoading(false)
+    }
     if (reviews.length === 0) {
       if (DBreviews.map(el => el.id).includes(reviewId)) {
         setOpenedReview(reviewId)
@@ -54,6 +61,7 @@ function recensione({ glossarywords, DBreviews }) {
           breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliografiche", siteLanguage)}
         />
       }
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         {!openedReview &&
@@ -85,39 +93,6 @@ function recensione({ glossarywords, DBreviews }) {
   )
 }
 
-recensione.getInitialProps = async (context) => {
-
-  const getReviewId = async (rawStr) => {
-    let reviewId = rawStr.split('/recensioniBibliografiche/')[1]
-    if (reviewId.includes('/')) {
-      reviewId = reviewId.split('/')[1].split('/')[1]
-    }
-    return reviewId
-  }
-
-  let propsObj = { DBreviews: [], glossarywords: [] }
-  if (!context.req) {
-    const reviewId = await getReviewId(context.asPath)
-    if (location.href.includes("recensioniBibliografiche/")) {
-      location.replace(reviewId)
-    } else {
-      location.replace("recensioniBibliografiche/" + reviewId)
-    }
-  } else {
-    const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"
-    const resGlossaryword = await fetch(apiUrlGlossary)
-    const glossarywords = await resGlossaryword.json()
-    const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
-    const resReview = await fetch(apiUrlReview)
-    const DBreviews = await resReview.json()
-    propsObj = { DBreviews: DBreviews.data, glossarywords: glossarywords.data }
-  }
-  return propsObj
-}
-
-export default recensione
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"
   const resGlossaryword = await fetch(apiUrlGlossary)
@@ -127,4 +102,5 @@ export async function getServerSideProps(context) {
   const DBreviews = await resReview.json()
   return { props: { DBreviews: DBreviews.data, glossarywords: glossarywords.data } }
 }
-*/
+
+export default recensione

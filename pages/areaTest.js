@@ -61,20 +61,11 @@ function areaTest({ tests }) {
   )
 }
 
-areaTest.getInitialProps = async (context) => {
-  const apiUrl = "http://" + context.req.headers.host + "/api/test"
-  const res = await fetch(apiUrl)
-  const { data } = await res.json()
-  return { tests: data }
-}
-
-export default areaTest
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/test"
   const res = await fetch(apiUrl)
   const { data } = await res.json()
   return { props: { tests: data } }
 }
-*/
+
+export default areaTest

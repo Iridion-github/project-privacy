@@ -13,15 +13,17 @@ import { Footer } from '../components/layout/Footer'
 import { ReviewsList } from "../components/reviews/ReviewsList"
 import { ReviewsLeftMenu } from "../components/reviews/ReviewsLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
+import { Loading } from '../components/layout/Loading'
 
 function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   const siteLanguage = useLanguage() //context
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(null)
-
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleOpenedReview = (reviewId) => {
+    setLoading(true)
     const fullRoute = reviewId !== null ? '/recensioniBibliografiche/' + reviewId : '/recensioniBibliografiche/'
     router.push(fullRoute)
   }
@@ -82,6 +84,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
       {/* Navbar */}
       <Navigation />
       <Breadcrumbs />
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100 mb-5">
@@ -119,26 +122,16 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   )
 }
 
-recensioniBibliografiche.getInitialProps = async (context) => {
-  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
-  const resReview = await fetch(apiUrlReview)
-  const DBreviews = await resReview.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
-  const resReviewTopics = await fetch(apiUrlTopics)
-  const reviewTopics = await resReviewTopics.json()
-  return { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data }
-}
-
-export default recensioniBibliografiche
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
-  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
+  const environment = "http://" + context.req.headers.host
+  //const environment = "https://project-privacy-d803e.web.app"
+  const apiUrlReview = environment + "/api/review"
   const resReview = await fetch(apiUrlReview)
   const DBreviews = await resReview.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
+  const apiUrlTopics = environment + "/api/reviewTopics"
   const resReviewTopics = await fetch(apiUrlTopics)
   const reviewTopics = await resReviewTopics.json()
   return { props: { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data } }
 }
-*/
+
+export default recensioniBibliografiche

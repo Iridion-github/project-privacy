@@ -37,17 +37,6 @@ function formazione(props) {
   )
 }
 
-formazione.getInitialProps = async (context) => {
-  //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
-  //const resLessons = await fetch(apiUrl)
-  //const lessons = await resLessons.json()
-  //return { lessons: lessons.data }
-  return { props: { lessons: [] } }
-}
-
-export default formazione
-
-/* //Rimozione di getServerSideProps per deployare
 export async function getServerSideProps(context) {
   //const apiUrl = "http://" + context.req.headers.host + "/api/learning"
   //const resLessons = await fetch(apiUrl)
@@ -55,4 +44,4 @@ export async function getServerSideProps(context) {
   //return { lessons: lessons.data }
   return { props: { lessons: [] } }
 }
-*/
+export default formazione
