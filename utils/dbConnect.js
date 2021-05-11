@@ -5,7 +5,7 @@ const dbUser = process.env.dbUser
 const dbPassword = process.env.dbPassword
 const dbName = process.env.DB_NAME
 
-throw new Error(`dbUser:${dbUser}, dbPassword${dbPassword}, dbName${dbName}`)
+console.log(`dbUser:${dbUser}, dbPassword${dbPassword}, dbName${dbName}`)
 
 async function dbConnect() {
   if (connection.isConnected) {
