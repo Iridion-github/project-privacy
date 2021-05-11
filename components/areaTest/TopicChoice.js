@@ -24,21 +24,7 @@ export const TopicChoice = function (props) {
                     props.setSelectedTest(1)
                   }}
                 >
-                  Test 1
-                  </Button>
-              </Col>
-              <Col className="mb-2">
-                <Button
-                  disabled //Non c'è ancora questo test
-                  size="lg"
-                  variant="info"
-                  block
-                  onClick={() => {
-                    props.setSelectedTopic("Test 2")
-                    props.setSelectedTest(null)
-                  }}
-                >
-                  Test 2
+                  Test da Internet
                   </Button>
               </Col>
               <Col className="mb-2">
@@ -59,24 +45,28 @@ export const TopicChoice = function (props) {
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
-                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("anticorruzione")}
+                  onClick={() => {
+                    props.setSelectedTopic("Modulo 4")
+                    props.setSelectedTest(2)
+                  }}
                 >
-                  Anticorruzione e Trasparenza
+                  Modulo 4
                   </Button>
               </Col>
               <Col className="mb-2">
                 <Button
-                  disabled //Non c'è ancora questo test
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("privacy")}
+                  onClick={() => {
+                    props.setSelectedTopic("Modulo 5")
+                    props.setSelectedTest(3)
+                  }}
                 >
-                  Privacy
+                  Modulo 5
                   </Button>
               </Col>
             </Row>
@@ -87,9 +77,9 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("antiriciclaggio")}
+                  onClick={() => props.setSelectedTopic("Test Placeholder")}
                 >
-                  Antiriciclaggio
+                  Test Placeholder
                   </Button>
               </Col>
               <Col className="mb-2">
@@ -98,9 +88,9 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("responsabilitàAmministrativa")}
+                  onClick={() => props.setSelectedTopic("Test Placeholder")}
                 >
-                  Responsabilità amministrativa delle persone giuridiche
+                  Test Placeholder
                   </Button>
               </Col>
             </Row>
