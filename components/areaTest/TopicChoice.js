@@ -41,8 +41,49 @@ export const TopicChoice = function (props) {
                   </Button>
               </Col>
             </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Privacy Specialist (24 ore)")
+                    props.setSelectedTest(6)
+                  }}
+                >
+                  Privacy Specialist (24 ore)
+                  </Button>
+              </Col>
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Data Protection Officer (80 ore)")
+                    props.setSelectedTest(5)
+                  }}
+                >
+                  Data Protection Officer (80 ore)
+                  </Button>
+              </Col>
+            </Row>
             <h4 className="text-center">I Nostri Test</h4>
             <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.setSelectedTopic("Modulo 3")
+                    props.setSelectedTest(4)
+                  }}
+                >
+                  Modulo 3
+                  </Button>
+              </Col>
               <Col className="mb-2">
                 <Button
                   size="lg"

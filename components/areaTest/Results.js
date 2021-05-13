@@ -9,10 +9,11 @@ import { ResultRow } from './ResultRow'
 import { ContactsBtn } from '../buttons/ContactsBtn'
 export const Results = function (props) {
 
+  console.log("Results - props:", props)
+
   const getUserAnswerText = (answers) => {
-    const userAnswers = []
-    answers.forEach(elem => { if (elem.selected === true) userAnswers.push(elem) })
-    return userAnswers
+    const userAnswer = answers.find(ans => ans.selected === true) ? answers.find(ans => ans.selected === true).text : " - "
+    return userAnswer
   }
 
   const getCorrectAnswer = (answers) => {
