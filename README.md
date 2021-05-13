@@ -1,5 +1,5 @@
 ## [Checkpoint]
-- Iniziato adattamento e inserimento di tutti i test nel db. Importati sinora: [Modulo 4, Modulo 5] 
+- Iniziato adattamento e inserimento di tutti i test nel db. Importati sinora: [Modulo 4, Modulo 5, Modulo 3, Test 80 ore, Test 24 ore] 
 - Fixare bug dei risultati
 
 ## [Deployment]
