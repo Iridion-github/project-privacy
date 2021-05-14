@@ -20,7 +20,7 @@ export const Quiz = function (props) {
           <Button
             block
             variant="info"
-            onClick={() => props.setSelectedTopic(null)}
+            onClick={() => props.handleChangeSelectedTopic(null)}
           >
             <i className="fas fa-long-arrow-alt-left mr-2"></i>
             I Test
@@ -73,7 +73,7 @@ export const Quiz = function (props) {
               variant="success"
               onClick={() => {
                 props.setShowResults(true)
-                props.setSelectedTopic(null)
+                props.handleChangeSelectedTopic(null)
                 props.setResults(allUserAnswers)
               }}
             >

@@ -19,6 +19,15 @@ function areaTest({ tests }) {
   const [results, setResults] = useState([])
   const siteLanguage = useLanguage() //context
 
+  const handleChangeSelectedTopic = (testTitle) => {
+    setSelectedTopic(testTitle)
+  }
+
+  const handleChangeSelectedTest = (testTitle) => {
+    const testToSelect = tests.find(test => test.title.toLowerCase().trim() === testTitle.toLowerCase().trim())
+    setSelectedTest(testToSelect)
+  }
+
   return (
     <div className={styles.container}>
       <Header
@@ -32,15 +41,15 @@ function areaTest({ tests }) {
           {/* Scelta Quiz */}
           {(selectedTopic === null && showResults === false) &&
             <TopicChoice
-              setSelectedTopic={setSelectedTopic}
-              setSelectedTest={setSelectedTest}
+              handleChangeSelectedTopic={handleChangeSelectedTopic}
+              handleChangeSelectedTest={handleChangeSelectedTest}
             />}
           {/* Fine Scelta Quiz */}
           {/* Quiz */}
           {selectedTopic && <Quiz
             selectedTopic={selectedTopic}
-            selectedTest={tests[selectedTest]}
-            setSelectedTopic={setSelectedTopic}
+            selectedTest={selectedTest}
+            handleChangeSelectedTopic={handleChangeSelectedTopic}
             setShowResults={setShowResults}
             setResults={setResults}
           />}
@@ -48,7 +57,7 @@ function areaTest({ tests }) {
           {/* Risultati */}
           {showResults && <Results
             selectedTopic={selectedTopic}
-            selectedTest={tests[selectedTest]}
+            selectedTest={selectedTest}
             setShowResults={setShowResults}
             results={results}
           />}

@@ -12,7 +12,7 @@ export const TopicChoice = function (props) {
         <Card className="w-100 p-2 grey-border" border="">
           <Card.Img variant="top" src="" />
           <Card.Body>
-            <h4 className="text-center">Test di verifica dell'Apprendimento</h4>
+            <h4 className="text-center">Verifica dell'Apprendimento</h4>
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
@@ -20,8 +20,8 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Test 1")
-                    props.setSelectedTest(1)
+                    props.handleChangeSelectedTopic("Test da Internet")
+                    props.handleChangeSelectedTest("Test da Internet")
                   }}
                 >
                   Test da Internet
@@ -33,8 +33,8 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Test Debug")
-                    props.setSelectedTest(0)
+                    props.handleChangeSelectedTopic("Test Debug")
+                    props.handleChangeSelectedTest("Test Debug")
                   }}
                 >
                   Test Debug
@@ -48,28 +48,14 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Privacy Specialist (24 ore)")
-                    props.setSelectedTest(6)
+                    props.handleChangeSelectedTopic("Privacy Specialist (24 ore)")
+                    props.handleChangeSelectedTest("Privacy Specialist (24 ore)")
                   }}
                 >
                   Privacy Specialist (24 ore)
                   </Button>
               </Col>
-              <Col className="mb-2">
-                <Button
-                  size="lg"
-                  variant="info"
-                  block
-                  onClick={() => {
-                    props.setSelectedTopic("Data Protection Officer (80 ore)")
-                    props.setSelectedTest(5)
-                  }}
-                >
-                  Data Protection Officer (80 ore)
-                  </Button>
-              </Col>
             </Row>
-            <h4 className="text-center">I Nostri Test</h4>
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
@@ -77,8 +63,39 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Modulo 3")
-                    props.setSelectedTest(4)
+                    props.handleChangeSelectedTopic("Manager Privacy (60 ore)")
+                    props.handleChangeSelectedTest("Manager Privacy (60 ore)")
+                  }}
+                >
+                  Manager Privacy (60 ore)
+                  </Button>
+              </Col>
+            </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeSelectedTopic("Data Protection Officer (80 ore)")
+                    props.handleChangeSelectedTest("Data Protection Officer (80 ore)")
+                  }}
+                >
+                  Data Protection Officer (80 ore)
+                  </Button>
+              </Col>
+            </Row>
+            <h4 className="text-center">Per Modulo</h4>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeSelectedTopic("Modulo 3")
+                    props.handleChangeSelectedTest("Modulo 3")
                   }}
                 >
                   Modulo 3
@@ -90,8 +107,8 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Modulo 4")
-                    props.setSelectedTest(2)
+                    props.handleChangeSelectedTopic("Modulo 4")
+                    props.handleChangeSelectedTest("Modulo 4")
                   }}
                 >
                   Modulo 4
@@ -103,8 +120,8 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.setSelectedTopic("Modulo 5")
-                    props.setSelectedTest(3)
+                    props.handleChangeSelectedTopic("Modulo 5")
+                    props.handleChangeSelectedTest("Modulo 5")
                   }}
                 >
                   Modulo 5
@@ -118,7 +135,7 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("Test Placeholder")}
+                  onClick={() => props.handleChangeSelectedTopic("Test Placeholder")}
                 >
                   Test Placeholder
                   </Button>
@@ -129,7 +146,7 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.setSelectedTopic("Test Placeholder")}
+                  onClick={() => props.handleChangeSelectedTopic("Test Placeholder")}
                 >
                   Test Placeholder
                   </Button>
