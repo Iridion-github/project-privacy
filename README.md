@@ -7,7 +7,7 @@
 ## [Richieste/Domande_per_Gaetano]
 - Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
 ## [Note]
-- 
+- Prepararsi a migrare il DB o a creare un user che consenta ad Ale l'accesso NON AL CLUSTER ma a quel db.
 ## [Known_Issues/Bugs]
 - [Articoli] Selezionare un topic fa partire il loader e non lo blocca.
 - [AreaTest] Quando si va oltre i 60 minuti, il timer si fotte.
