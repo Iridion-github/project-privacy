@@ -1,5 +1,5 @@
 ## [ToDo]
-- [AreaTest] Far apparire la percentuale di risposte corrette nella schermata dei risultati.
+- [Styling] Rimosso d-flex dal container principale. Fixare allineamenti e grandezze sballate. Nelle pagine troppo poco alte, il footer si stacca dal fondo della pagina. Controllare ogni view.
 ## [Checkpoint]
 - Inserimento Test completato
 ## [Deployment]

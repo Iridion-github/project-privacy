@@ -486,3 +486,18 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .clickable-badge {
   cursor: pointer;
 }
+
+.test-header {
+  /* position: absolute !important;
+  top: 15% !important; */
+}
+
+.test-timer-container {
+  /* position: relative !important;
+  top: 15% !important; */
+}
+
+.test-body {
+  /* position: relative !important;
+  top: 15% !important; */
+}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Row,
   Col,
@@ -7,9 +8,52 @@ import {
 } from 'react-bootstrap'
 import { ResultRow } from './ResultRow'
 import { ContactsBtn } from '../buttons/ContactsBtn'
+
+
 export const Results = function (props) {
 
-  console.log("Results - props:", props)
+  //Unanswered questions count as wrong too
+  const initAnsweredQuestions = () => {
+    const answered = { wrong: [], correct: [] }
+    for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
+      let target = { ...props.dataBeforeCorrection[x] }
+      let foundCorrect = false
+      for (let y = 0; y < target.answers.length; y++) {
+        if (!foundCorrect) {
+          let subTarget = { ...target.answers[y] }
+          if (subTarget.selected === true && subTarget.value === true) {
+            foundCorrect = true
+            answered.correct.push(target)
+          } else if (y === target.answers.length - 1 && !foundCorrect) {
+            answered.wrong.push(target)
+          }
+        }
+      }
+    }
+    return answered
+  }
+
+  const initUnansweredQuestions = () => {
+    const unanswered = []
+    for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
+      let target = { ...props.dataBeforeCorrection[x] }
+      const selectedArr = target.answers.map(el => el.selected)
+      if (!selectedArr.includes(true)) {
+        unanswered.push(target)
+      }
+    }
+    return unanswered
+  }
+
+  const [correctAnswers, setCorrectAnswers] = useState(initAnsweredQuestions().correct)
+  const [unansweredQuestions, setUnansweredQuestions] = useState(initUnansweredQuestions())
+  const [wrongAnswers, setWrongAnswers] = useState(initAnsweredQuestions().wrong)
+  const [correctnessPercentage, setCorrectnessPercentage] = useState(Number(Number(100 * correctAnswers.length / props.dataBeforeCorrection.length).toFixed(1)))
+
+  console.log("correctAnswers:", correctAnswers)
+  console.log("unansweredQuestions:", unansweredQuestions)
+  console.log("wrongAnswers:", wrongAnswers)
+  console.log("correctnessPercentage:", correctnessPercentage)
 
   const getUserAnswerText = (answers) => {
     const userAnswer = answers.find(ans => ans.selected === true) ? answers.find(ans => ans.selected === true).text : " - "
@@ -59,7 +103,7 @@ export const Results = function (props) {
           <Card className="w-100 p-2 grey-border justify-content-center" >
             <Card.Img variant="top" src="" />
             <Card.Body>
-              <Card.Title className="text-center">Risultati del Test: </Card.Title>
+              <Card.Title className="text-center">Risposte corrette: {correctAnswers.length} su {props.dataBeforeCorrection.length} ({correctnessPercentage}%) </Card.Title>
               <Row className="mb-4">
                 <Col>
                   <Table striped bordered hover size="sm">
@@ -76,7 +120,7 @@ export const Results = function (props) {
                     [PROMEMORIA]
                     L'elem di props.result.map() è un oggetto che contiene text (testo della domanda) ed answers: un array che contiene oggetti con le props[text, selected, value].
                   */}
-                      {props.results.map((elem, index) => (
+                      {props.dataBeforeCorrection.map((elem, index) => (
                         <ResultRow
                           key={index}
                           questionNumber={index + 1}

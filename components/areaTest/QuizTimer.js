@@ -7,7 +7,7 @@ import Timer from 'react-compound-timer'
 
 export const QuizTimer = function (props) {
   return (
-    <Row className="w-100 justify-content-center align-items-center text-center">
+    <Row className="w-100 ml-0 mr-0 justify-content-center align-items-center text-center">
       <Col offset={8} md={4}>
         <Timer
           initialTime={props.milliseconds}

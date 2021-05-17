@@ -16,7 +16,7 @@ function areaTest({ tests }) {
   const [selectedTopic, setSelectedTopic] = useState(null)
   const [selectedTest, setSelectedTest] = useState(null)
   const [showResults, setShowResults] = useState(false)
-  const [results, setResults] = useState([])
+  const [dataBeforeCorrection, setDataBeforeCorrection] = useState([])
   const siteLanguage = useLanguage() //context
 
   const handleChangeSelectedTopic = (testTitle) => {
@@ -37,7 +37,7 @@ function areaTest({ tests }) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Row className="w-100 m-auto">
+        <Row className="w-100 ml-0 mr-0">
           {/* Scelta Quiz */}
           {(selectedTopic === null && showResults === false) &&
             <TopicChoice
@@ -51,7 +51,7 @@ function areaTest({ tests }) {
             selectedTest={selectedTest}
             handleChangeSelectedTopic={handleChangeSelectedTopic}
             setShowResults={setShowResults}
-            setResults={setResults}
+            setDataBeforeCorrection={setDataBeforeCorrection}
           />}
           {/* Fine Quiz */}
           {/* Risultati */}
@@ -59,7 +59,7 @@ function areaTest({ tests }) {
             selectedTopic={selectedTopic}
             selectedTest={selectedTest}
             setShowResults={setShowResults}
-            results={results}
+            dataBeforeCorrection={dataBeforeCorrection}
           />}
           {/* Fine Risultati */}
         </Row>
