@@ -1,7 +1,7 @@
 ## [ToDo]
-- [Styling] Rimosso d-flex dal container principale. Fixare allineamenti e grandezze sballate. Nelle pagine troppo poco alte, il footer si stacca dal fondo della pagina. Controllare ogni view.
+- [Styling] 
 ## [Checkpoint]
-- Inserimento Test completato
+- Inserimento Quiz completato
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -10,7 +10,7 @@
 - Prepararsi a migrare il DB o a creare un user che consenta ad Ale l'accesso NON AL CLUSTER ma a quel db.
 ## [Known_Issues/Bugs]
 - [Articoli] Selezionare un topic fa partire il loader e non lo blocca.
-- [AreaTest] Quando si va oltre i 60 minuti, il timer si fotte.
+- [AreaQuiz] Quando si va oltre i 60 minuti, il timer si fotte.
 - [All] Cambiare lingua e clickare un link riporta alla lingua originale (ita).
 - [Articoli+RecensioniBibliografiche] Il filtro per argomenti fa partire lo spinner loader ad oltranza.
 ## Implementazioni Possibili/Utili e Migliorie

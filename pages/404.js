@@ -2,10 +2,7 @@ import styles from '../styles/Home.module.css'
 import { useLanguage } from '../context/siteLanguageContext' //context
 import { useRouter } from 'next/router'
 import {
-  Row,
-  Col,
-  Card,
-  Button
+  Container
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -25,7 +22,9 @@ export default function errorPage(props) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <ErrorComponent />
+        <Container className="justify-content-center mt-4 p-4">
+          <ErrorComponent />
+        </Container>
       </main>
       {/* Footer */}
       <Footer />

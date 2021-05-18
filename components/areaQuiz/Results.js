@@ -50,11 +50,6 @@ export const Results = function (props) {
   const [wrongAnswers, setWrongAnswers] = useState(initAnsweredQuestions().wrong)
   const [correctnessPercentage, setCorrectnessPercentage] = useState(Number(Number(100 * correctAnswers.length / props.dataBeforeCorrection.length).toFixed(1)))
 
-  console.log("correctAnswers:", correctAnswers)
-  console.log("unansweredQuestions:", unansweredQuestions)
-  console.log("wrongAnswers:", wrongAnswers)
-  console.log("correctnessPercentage:", correctnessPercentage)
-
   const getUserAnswerText = (answers) => {
     const userAnswer = answers.find(ans => ans.selected === true) ? answers.find(ans => ans.selected === true).text : " - "
     return userAnswer
@@ -87,14 +82,14 @@ export const Results = function (props) {
           <Button
             block
             variant="info"
-            onClick={() => props.setShowResults(false)}
+            onClick={() => props.getQuizChoiceView()}
           >
             <i className="fas fa-long-arrow-alt-left mr-2"></i>
-            I Test
+            I Quiz
           </Button>
         </Col>
         <Col md={2}>
-          <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: {props.selectedTopic}</div>
+          <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Argomento: {props.selectedQuiz.title}</div>
         </Col>
       </Row>
 
@@ -112,7 +107,7 @@ export const Results = function (props) {
                         <th scope="col" key="1">Domanda</th>
                         <th scope="col" key="2">Tua Risposta</th>
                         <th scope="col" key="3">Risposta Corretta</th>
-                        {props.selectedTest.pointsSystem && <th scope="col" key="4">Punti</th>}
+                        {props.selectedQuiz.pointsSystem && <th scope="col" key="4">Punti</th>}
                       </tr>
                     </thead>
                     <tbody>
@@ -128,7 +123,7 @@ export const Results = function (props) {
                           correctAnswer={getCorrectAnswer(elem.answers)}
                           userAnswer={getUserAnswerText(elem.answers)}
                           color={getUserCorrectAnswer(elem.answers).length > 0 ? "green" : "red"}
-                          points={props.selectedTest.pointsSystem ? getPoints(elem.answers) : null}
+                          points={props.selectedQuiz.pointsSystem ? getPoints(elem.answers) : null}
                         />
                       ))}
                     </tbody>

@@ -12,7 +12,7 @@ export function ErrorComponent(props) {
   const router = useRouter()
 
   return (
-    <Card className="w-75 p-2 no-border">
+    <Card className="p-2">
       <Card.Title className="text-center"><h2>{siteLanguage === "ita" ? "Errore 404" : "Error 404"}</h2></Card.Title>
       <Card.Img className="error-img" variant="top" src="/standardError.png" />
       <Card.Body>

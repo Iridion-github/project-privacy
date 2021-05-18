@@ -88,9 +88,8 @@ function Home() {
       </div>
       {/* Homepage Content */}
       <main className={styles.main}>
-        {/* Empty div to test scrolling 
-        <div style={{ height: "3000px;" }}></div>
-        */}
+        {/* Empty div to avoid footer going up while no content to show */}
+        {/* <div style={{ height: "90px" }}></div>*/}
       </main>
       {/* Footer */}
       <Footer />

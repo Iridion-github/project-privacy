@@ -5,7 +5,8 @@ import {
   Row,
   Col,
   Card,
-  Button
+  Button,
+  Container
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -23,13 +24,15 @@ function formazione(props) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="p-2 responsive-width-card">
-          <Card.Img className="black-border" variant="top" src="consulenza.png" />
-          <Card.Body>
-            Formazione: la struttura sarà molto simile a Consulenza.
+        <Container className="justify-content-center p-0">
+          <Card className=" w-100 p-2 responsive-width-card">
+            <Card.Img className="black-border" variant="top" src="consulenza.png" />
+            <Card.Body>
+              Formazione: la struttura sarà molto simile a Consulenza.
           </Card.Body>
-          <Card.Footer className="text-center"></Card.Footer>
-        </Card>
+            <Card.Footer className="text-center"></Card.Footer>
+          </Card>
+        </Container>
       </main>
       {/* Footer */}
       <Footer />

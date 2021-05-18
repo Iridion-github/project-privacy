@@ -5,7 +5,7 @@ import {
   Button
 } from 'react-bootstrap'
 
-export const TopicChoice = function (props) {
+export const QuizChoice = function (props) {
   return (
     <Row className="w-100 align-items-center m-auto">
       <Col md={{ span: 4, offset: 4 }} className="align-items-center m-auto">
@@ -19,12 +19,9 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => {
-                    props.handleChangeSelectedTopic("Test da Internet")
-                    props.handleChangeSelectedTest("Test da Internet")
-                  }}
+                  onClick={() => props.handleChangeQuizToPresent("Test da Internet")}
                 >
-                  Test da Internet
+                  Quiz da Internet
                   </Button>
               </Col>
               <Col className="mb-2">
@@ -32,12 +29,9 @@ export const TopicChoice = function (props) {
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => {
-                    props.handleChangeSelectedTopic("Test Debug")
-                    props.handleChangeSelectedTest("Test Debug")
-                  }}
+                  onClick={() => props.handleChangeQuizToPresent("Test Debug")}
                 >
-                  Test Debug
+                  Quiz Debug
                   </Button>
               </Col>
             </Row>
@@ -48,8 +42,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Privacy Specialist (24 ore)")
-                    props.handleChangeSelectedTest("Privacy Specialist (24 ore)")
+                    props.handleChangeQuizToPresent("Privacy Specialist (24 ore)")
                   }}
                 >
                   Privacy Specialist (24 ore)
@@ -63,8 +56,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Manager Privacy (60 ore)")
-                    props.handleChangeSelectedTest("Manager Privacy (60 ore)")
+                    props.handleChangeQuizToPresent("Manager Privacy (60 ore)")
                   }}
                 >
                   Manager Privacy (60 ore)
@@ -78,8 +70,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Data Protection Officer (80 ore)")
-                    props.handleChangeSelectedTest("Data Protection Officer (80 ore)")
+                    props.handleChangeQuizToPresent("Data Protection Officer (80 ore)")
                   }}
                 >
                   Data Protection Officer (80 ore)
@@ -94,8 +85,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Modulo 3")
-                    props.handleChangeSelectedTest("Modulo 3")
+                    props.handleChangeQuizToPresent("Modulo 3")
                   }}
                 >
                   Modulo 3
@@ -107,8 +97,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Modulo 4")
-                    props.handleChangeSelectedTest("Modulo 4")
+                    props.handleChangeQuizToPresent("Modulo 4")
                   }}
                 >
                   Modulo 4
@@ -120,8 +109,7 @@ export const TopicChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeSelectedTopic("Modulo 5")
-                    props.handleChangeSelectedTest("Modulo 5")
+                    props.handleChangeQuizToPresent("Modulo 5")
                   }}
                 >
                   Modulo 5
@@ -131,24 +119,24 @@ export const TopicChoice = function (props) {
             <Row>
               <Col className="mb-2">
                 <Button
-                  disabled //Non c'è ancora questo test
+                  disabled //Non c'è ancora questo quiz
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.handleChangeSelectedTopic("Test Placeholder")}
+                  onClick={() => props.handleChangeQuizToPresent("Quiz Placeholder")}
                 >
-                  Test Placeholder
+                  Quiz Placeholder
                   </Button>
               </Col>
               <Col className="mb-2">
                 <Button
-                  disabled //Non c'è ancora questo test
+                  disabled //Non c'è ancora questo quiz
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.handleChangeSelectedTopic("Test Placeholder")}
+                  onClick={() => props.handleChangeQuizToPresent("Quiz Placeholder")}
                 >
-                  Test Placeholder
+                  Quiz Placeholder
                   </Button>
               </Col>
             </Row>

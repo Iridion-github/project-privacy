@@ -28,7 +28,7 @@ export const Navigation = function () {
                 <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"}>{siteLanguage === "ita" ? "Chi Sono" : "Who I Am"}</Nav.Link>
                 <Nav.Link href="/formazione" className={styles.navbarText}>{siteLanguage === "ita" ? "Formazione" : "Training"}</Nav.Link>
                 <Nav.Link href="/consulenza" className={styles.navbarText}>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}</Nav.Link>
-                <Nav.Link href="/areaTest" className={styles.navbarText}>{siteLanguage === "ita" ? "Area Test" : "Test Area"}</Nav.Link>
+                <Nav.Link href="/areaQuiz" className={styles.navbarText}>{siteLanguage === "ita" ? "Area Quiz" : "Quiz Area"}</Nav.Link>
                 <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>{siteLanguage === "ita" ? "Recensioni Bibliografiche" : "Bibliographic Reviews"}</Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText}>{siteLanguage === "ita" ? "Articoli" : "Articles"}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText}>{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Nav.Link>

@@ -6,7 +6,14 @@ html, body {
   padding: 0;
   margin: 0;
   font-family: 'Calibri', sans-serif !important;
+  position:relative;
   /*font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 20px; /* Set same as footer's height */
 }
 
 a {
@@ -487,17 +494,17 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
   cursor: pointer;
 }
 
-.test-header {
+.quiz-header {
   /* position: absolute !important;
   top: 15% !important; */
 }
 
-.test-timer-container {
+.quiz-timer-container {
   /* position: relative !important;
   top: 15% !important; */
 }
 
-.test-body {
+.quiz-body {
   /* position: relative !important;
   top: 15% !important; */
 }

@@ -6,7 +6,8 @@ import {
   Row,
   Col,
   Card,
-  Button
+  Button,
+  Container
 } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
@@ -32,39 +33,41 @@ function consulenza(props) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Card className="p-2 responsive-width-card">
-          <Card.Img className="black-border" variant="top" src="consulenza.png" />
-          <Card.Body>
-            <Row>
-              <Col md={3}>
-                {consultation &&
-                  <Button
-                    variant="info"
-                    onClick={() => setConsultation(null)}
-                  >
-                    <i className="fas fa-long-arrow-alt-left mr-2"></i>
-                    {siteLanguage === "ita" ? "Torna Indietro" : "Back to Selection"}
-                  </Button>}
-              </Col>
-              <Col md={6}>
-                <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
-              </Col>
-            </Row>
-            {!consultation &&
-              <ConsultationChoice
-                consultations={props.consultations}
-                setConsultation={setConsultation}
-              />
-            }
-            {consultation &&
-              <ConsultationCard
-                consultation={consultation}
-                setConsultation={setConsultation}
-              />
-            }
-          </Card.Body>
-          <Card.Footer className="text-center"></Card.Footer>
-        </Card>
+        <Container className="justify-content-center p-0">
+          <Card className="w-100 p-2 responsive-width-card">
+            <Card.Img className="black-border" variant="top" src="consulenza.png" />
+            <Card.Body>
+              <Row>
+                <Col md={3}>
+                  {consultation &&
+                    <Button
+                      variant="info"
+                      onClick={() => setConsultation(null)}
+                    >
+                      <i className="fas fa-long-arrow-alt-left mr-2"></i>
+                      {siteLanguage === "ita" ? "Torna Indietro" : "Back to Selection"}
+                    </Button>}
+                </Col>
+                <Col md={6}>
+                  <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
+                </Col>
+              </Row>
+              {!consultation &&
+                <ConsultationChoice
+                  consultations={props.consultations}
+                  setConsultation={setConsultation}
+                />
+              }
+              {consultation &&
+                <ConsultationCard
+                  consultation={consultation}
+                  setConsultation={setConsultation}
+                />
+              }
+            </Card.Body>
+            <Card.Footer className="text-center"></Card.Footer>
+          </Card>
+        </Container>
       </main>
       {/* Footer */}
       <Footer />

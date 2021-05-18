@@ -7,14 +7,14 @@ import Timer from 'react-compound-timer'
 
 export const QuizTimer = function (props) {
   return (
-    <Row className="w-100 ml-0 mr-0 justify-content-center align-items-center text-center">
+    <Row className="w-100 ml-0 mr-0 mt-2 justify-content-center align-items-center text-center">
       <Col offset={8} md={4}>
         <Timer
           initialTime={props.milliseconds}
           direction="backward"
         >
           {({ getTime }) => (
-            <Card className="w-100 justify-content-center align-items-center text-center">
+            <Card className="w-100 p-4 justify-content-center align-items-center text-center">
               {(getTime() <= 0) && (
                 <Row className="w-100 justify-content-center align-items-center text-center">
                   <Col>
