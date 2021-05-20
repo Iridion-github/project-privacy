@@ -26,7 +26,7 @@ a {
 }
 
 .bg-standard-blue {
-  background-color: rgb(131, 203, 221) !important;
+  background-color: #83CBDD !important;
 }
 
 .bg-lighter-blue {
@@ -507,4 +507,8 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .quiz-body {
   /* position: relative !important;
   top: 15% !important; */
+}
+
+.red-alert-text {
+  color: red !important
 }
