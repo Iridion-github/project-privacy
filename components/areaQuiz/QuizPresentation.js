@@ -10,8 +10,6 @@ import {
 
 export const QuizPresentation = function (props) {
 
-  console.log("props.quizOnShow:", props.quizOnShow)
-
   return (
     <Row className="w-100 ml-0 mr-0">
       <Row className="w-100 mb-3 ml-0 mr-0 quiz-header">

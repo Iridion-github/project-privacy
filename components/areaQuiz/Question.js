@@ -15,6 +15,8 @@ export const Question = function (props) {
           allUserAnswers={props.allUserAnswers}
           selectedAnswersList={props.allUserAnswers[props.questionNumber - 1].answers}
           setSelectedAnswersList={props.setAllUserAnswers}
+          timesUp={props.timesUp}
+          setTimesUp={props.setTimesUp}
         />
       </Card.Body>
     </Card >

@@ -18,9 +18,6 @@ export const Footer = function () {
     if (heigthReduction < 7.5) heigthReduction = 7.5
     let targetHeight = currentHeight - heigthReduction
     if (currentHeight >= 1) {
-      console.log("currentHeight:", currentHeight)
-      console.log("heigthReduction:", heigthReduction)
-      console.log("targetHeight:", targetHeight)
       window.scrollTo({
         top: targetHeight,
         //behavior: 'smooth'

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Row,
   Col,
@@ -8,8 +7,6 @@ import { QuizTimer } from './QuizTimer'
 import { Question } from './Question'
 
 export const Quiz = function (props) {
-  const [questionCounter, setQuestionCounter] = useState(1)
-  const [allUserAnswers, setAllUserAnswers] = useState(props.selectedQuiz.questions)
 
   return (
     <Row className="w-100 ml-0 mr-0">
@@ -34,6 +31,10 @@ export const Quiz = function (props) {
         <Row className="w-100 ml-0 mr-0 d-flex align-items-center">
           <QuizTimer
             milliseconds={props.selectedQuiz.timeLimit}
+            setShowResults={props.setShowResults}
+            timesUp={props.timesUp}
+            setTimesUp={props.setTimesUp}
+            handleShowResults={props.handleShowResults}
           />
         </Row>
       </Row>
@@ -45,12 +46,13 @@ export const Quiz = function (props) {
             <Col md={{ span: 3 }} className="">
             </Col>
             <Col md={{ span: 1 }} className="d-flex align-items-center justify-content-end">
-              {(questionCounter > 1) &&
+              {(props.questionCounter > 1) &&
                 <Button
                   block
                   size="lg"
                   variant="info"
-                  onClick={() => setQuestionCounter(questionCounter - 1)}
+                  disabled={props.timesUp}
+                  onClick={() => props.setQuestionCounter(props.questionCounter - 1)}
                 >
                   <i className="fas fa-long-arrow-alt-left"></i>
                 </Button>
@@ -58,33 +60,34 @@ export const Quiz = function (props) {
             </Col>
             <Col md={4} className="">
               <Question
-                questionNumber={questionCounter}
-                question={props.selectedQuiz.questions[questionCounter - 1].text}
-                answers={props.selectedQuiz.questions[questionCounter - 1].answers}
-                allUserAnswers={allUserAnswers}
-                setAllUserAnswers={setAllUserAnswers}
+                questionNumber={props.questionCounter}
+                question={props.selectedQuiz.questions[props.questionCounter - 1].text}
+                answers={props.selectedQuiz.questions[props.questionCounter - 1].answers}
+                allUserAnswers={props.allUserAnswers}
+                setAllUserAnswers={props.setAllUserAnswers}
+                timesUp={props.timesUp}
+                setTimesUp={props.setTimesUp}
               />
             </Col>
             <Col md={1} className="d-flex align-items-center justify-content-start">
-              {(questionCounter < props.selectedQuiz.questions.length) &&
+              {(props.questionCounter < props.selectedQuiz.questions.length) &&
                 <Button
                   block
                   size="lg"
                   variant="info"
-                  onClick={() => setQuestionCounter(questionCounter + 1)}
+                  disabled={props.timesUp}
+                  onClick={() => props.setQuestionCounter(props.questionCounter + 1)}
                 >
                   <i className="fas fa-long-arrow-alt-right"></i>
                 </Button>
               }
-              {(questionCounter === props.selectedQuiz.questions.length) &&
+              {(props.questionCounter === props.selectedQuiz.questions.length) &&
                 <Button
                   block
                   className="pt-3 pb-3"
                   variant="success"
-                  onClick={() => {
-                    props.setShowResults(true)
-                    props.setDataBeforeCorrection(allUserAnswers)
-                  }}
+                  disabled={props.timesUp}
+                  onClick={() => props.handleShowResults(true)}
                 >
                   Risultati <i className="fas fa-tasks ml-3"></i>
                 </Button>

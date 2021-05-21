@@ -21,6 +21,7 @@ export const Answers = function (props) {
       size="lg"
       variant={selected ? "info" : "outline-info"}
       block
+      disabled={props.timesUp}
       onClick={() => selectAnswer(answerNumber - 1)}
     >
       { letters[answerNumber - 1] + ") "

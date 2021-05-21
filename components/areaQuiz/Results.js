@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Row,
   Col,
@@ -12,7 +12,7 @@ import { ContactsBtn } from '../buttons/ContactsBtn'
 
 export const Results = function (props) {
 
-  //Unanswered questions count as wrong too
+  //memo: Unanswered questions count as wrong too
   const initAnsweredQuestions = () => {
     const answered = { wrong: [], correct: [] }
     for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
@@ -72,6 +72,10 @@ export const Results = function (props) {
     answers.forEach(elem => { if (elem.value === true && elem.selected === true) points += elem.points })
     return points
   }
+
+  useEffect(() => {
+    props.setTimesUp(false)
+  }, [props.timesUp])
 
   return (
     <Row className="w-100 text-center align-items-center justify-content-center m-auto">

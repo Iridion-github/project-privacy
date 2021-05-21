@@ -18,6 +18,8 @@ function areaQuiz({ quizzes }) {
   const [selectedQuiz, setSelectedQuiz] = useState(null)
   const [showResults, setShowResults] = useState(false)
   const [dataBeforeCorrection, setDataBeforeCorrection] = useState([])
+  const [timesUp, setTimesUp] = useState(false)
+  const [questionCounter, setQuestionCounter] = useState(1)
   const siteLanguage = useLanguage() //context
 
   const getQuizChoiceView = () => {
@@ -25,6 +27,7 @@ function areaQuiz({ quizzes }) {
     setSelectedQuiz(null)
     setShowResults(false)
     setDataBeforeCorrection([])
+    setQuestionCounter(1)
   }
 
   const handleChangeQuizToPresent = (title) => {
@@ -43,6 +46,15 @@ function areaQuiz({ quizzes }) {
     setSelectedQuiz(quiz)
   }
 
+  const handleShowResults = () => {
+    setDataBeforeCorrection(selectedQuiz.questions)
+    setShowResults(true)
+  }
+
+  const handleUpdateUserAnswers = (updatedQuestions) => {
+    const quizWithUpdatedAnswers = { ...selectedQuiz, questions: updatedQuestions }
+    setSelectedQuiz(quizWithUpdatedAnswers)
+  }
 
   return (
     <div className={styles.container}>
@@ -73,8 +85,14 @@ function areaQuiz({ quizzes }) {
           {(selectedQuiz && showResults === false) && <Quiz
             selectedQuiz={selectedQuiz}
             setShowResults={setShowResults}
-            setDataBeforeCorrection={setDataBeforeCorrection}
             getQuizChoiceView={getQuizChoiceView}
+            timesUp={timesUp}
+            setTimesUp={setTimesUp}
+            questionCounter={questionCounter}
+            setQuestionCounter={setQuestionCounter}
+            allUserAnswers={selectedQuiz?.questions}
+            setAllUserAnswers={handleUpdateUserAnswers}
+            handleShowResults={handleShowResults}
           />}
           {/* Fine Quiz */}
           {/* Risultati */}
@@ -83,6 +101,8 @@ function areaQuiz({ quizzes }) {
             setShowResults={setShowResults}
             dataBeforeCorrection={dataBeforeCorrection}
             getQuizChoiceView={getQuizChoiceView}
+            timesUp={timesUp}
+            setTimesUp={setTimesUp}
           />}
           {/* Fine Risultati */}
         </Row>
