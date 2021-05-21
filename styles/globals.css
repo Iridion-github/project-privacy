@@ -512,3 +512,28 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 .red-alert-text {
   color: red !important
 }
+
+.topic-filter-header {
+  height: 50px;
+}
+
+.remove-topic-filter-btn {
+  font-size: .750rem;
+  position: absolute;
+  right: 3%;
+  top: 2%;
+}
+
+@media all and (max-width: 500px) {
+  .topic-filter-header {
+    height: 70px;
+  }
+  .remove-topic-filter-btn {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-left: auto; 
+    margin-right: auto; 
+  }
+}

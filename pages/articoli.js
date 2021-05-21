@@ -27,7 +27,7 @@ function articoli(props) {
     setLoading(true)
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
     router.push(fullRoute)
-    //setOpenedArticle(articles.find(art => art.id === articleId))
+    setLoading(false)
   }
 
   const searchTopic = async (topic, lang) => {

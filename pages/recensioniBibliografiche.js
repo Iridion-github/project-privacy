@@ -26,6 +26,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
     setLoading(true)
     const fullRoute = reviewId !== null ? '/recensioniBibliografiche/' + reviewId : '/recensioniBibliografiche/'
     router.push(fullRoute)
+    setLoading(false)
   }
 
   const searchTopic = async (topic, lang) => {

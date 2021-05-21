@@ -13,26 +13,25 @@ export const ArticlesLeftMenu = function (props) {
   const siteLanguage = useLanguage() //context
   return (
     <Row className="justify-content-center mb-2">
-      <Row className="mobile-compatible w-100 mt-1">
+      <Row className="mobile-compatible w-100 mt-1 pl-3">
         <Col>
           <Card className="bg-standard-blue">
-            <Card.Header>
+            <Card.Header className="topic-filter-header">
               <Row>
-                <Col>
+                <Col md={12} className="text-center">
                   {siteLanguage === "ita" ? "Argomenti" : "Topics"}
                 </Col>
-                <Col className="text-right">
-                  {props.filteredByTopic &&
-                    <Button
-                      size="sm"
-                      className=""
-                      variant="danger"
-                      onClick={() => props.removeTopicFilter()}
-                    >
-                      <i className="fas fa-times-circle"></i>
-                    </Button>
-                  }
-                </Col>
+                {props.filteredByTopic === true &&
+                  <Button
+                    size="sm"
+                    className="remove-topic-filter-btn"
+                    variant="danger"
+                    onClick={() => props.removeTopicFilter()}
+                  >
+                    {siteLanguage === "ita" ? "Rimuovi Filtro" : "Remove Filter"}
+                    <i className="ml-2 fas fa-times-circle"></i>
+                  </Button>
+                }
               </Row>
             </Card.Header>
             <ListGroup variant="flush">

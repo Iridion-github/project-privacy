@@ -1,7 +1,8 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- A timer scaduto, dopo 3 secondi si viene portati ai Results. Migliorata la logica dello stato dell'intera sezione areaQuiz.
+- Fixato il bug dello spinner loader eterno in Articoli e RecensioniBibliografiche
+- Migliorato e reso responsive il layout del removeTopicFiltersBtn
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -10,6 +11,5 @@
 - 
 ## [Known_Issues/Bugs]
 - [All] Cambiare lingua e clickare un link riporta alla lingua originale (ita).
-- [Articoli+RecensioniBibliografiche] Il filtro per argomenti fa partire lo spinner loader ad oltranza.
 ## Implementazioni Possibili/Utili e Migliorie
 - ?
