@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
@@ -16,9 +16,10 @@ import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/artic
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
 import { Loading } from '../../components/layout/Loading'
+import { useAppContext } from "../../context/contextLib"
 
 function articoli({ glossarywords, DBarticles }) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
   const router = useRouter()
   const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
@@ -32,7 +33,7 @@ function articoli({ glossarywords, DBarticles }) {
     setOpenedArticle(id)
   }
 
-  let relatedArticles = getRelatedArticles(articleId, articles, siteLanguage)
+  let relatedArticles = getRelatedArticles(articleId, articles, currentLang)
 
   useEffect(() => {
     if (loading === true) {
@@ -48,18 +49,21 @@ function articoli({ glossarywords, DBarticles }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Articoli" : "Articles"}
+        title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {(openedArticle && articles.length > 0) &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[siteLanguage].title)}
+          breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[currentLang].title)}
         />
       }
       {!openedArticle &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", siteLanguage)}
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", currentLang)}
         />
       }
       {loading && <Loading />}

@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import { useLanguage } from '../context/siteLanguageContext' //context
 import { useRouter } from 'next/router'
 import {
   Container
@@ -8,18 +7,22 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ErrorComponent } from '../components/layout/ErrorComponent'
+const { currentLang, changeSiteLang } = useAppContext()
 
 export default function errorPage(props) {
-  const siteLanguage = useLanguage() //context
   const router = useRouter()
+  const { currentLang } = useAppContext()
 
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Errore 404 - Pagina non trovata" : "Error 404 - Page not found"}
+        title={currentLang === "ita" ? "Errore 404 - Pagina non trovata" : "Error 404 - Page not found"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center mt-4 p-4">

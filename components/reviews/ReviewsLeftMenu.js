@@ -1,4 +1,4 @@
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -10,7 +10,7 @@ import { ReviewsTagRow } from './ReviewsTagRow'
 
 
 export const ReviewsLeftMenu = function (props) {
-  const siteLanguage = useLanguage() //context
+
   return (
     <Row className="justify-content-center mb-2">
       <Row className="mobile-compatible w-100 mt-1">
@@ -19,7 +19,7 @@ export const ReviewsLeftMenu = function (props) {
             <Card.Header>
               <Row>
                 <Col>
-                  {siteLanguage === "ita" ? "Argomenti" : "Topics"}
+                  {props.currentLang === "ita" ? "Argomenti" : "Topics"}
                 </Col>
                 <Col className="text-right">
                   {props.filteredByTopic &&
@@ -39,8 +39,8 @@ export const ReviewsLeftMenu = function (props) {
               {props.allTopics.map(tag => (
                 <ReviewsTagRow
                   key={tag.id}
-                  tagName={siteLanguage === "ita" ? tag.name.ita : tag.name.eng}
-                  siteLanguage={siteLanguage}
+                  tagName={props.currentLang === "ita" ? tag.name.ita : tag.name.eng}
+                  currentLang={props.currentLang}
                   searchTopic={props.searchTopic}
                 />
               ))}

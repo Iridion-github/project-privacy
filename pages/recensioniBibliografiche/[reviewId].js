@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
@@ -16,10 +16,11 @@ import { getBreadcrumbsForReviews } from '../../utils/reviews'
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
 import { Loading } from '../../components/layout/Loading'
+import { useAppContext } from "../../context/contextLib";
 
 
 function recensione({ glossarywords, DBreviews }) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
   const router = useRouter()
   const { reviewId } = router.query
   const [reviews, setReviews] = useState(DBreviews)
@@ -47,18 +48,21 @@ function recensione({ glossarywords, DBreviews }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Recensioni" : "Reviews"}
+        title={currentLang === "ita" ? "Recensioni" : "Reviews"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {(openedReview && reviews.length > 0) &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(art => art.id === openedReview)[siteLanguage].title)}
+          breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(art => art.id === openedReview)[currentLang].title)}
         />
       }
       {reviews.length === 0 &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliografiche", siteLanguage)}
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliografiche", currentLang)}
         />
       }
       {loading && <Loading />}

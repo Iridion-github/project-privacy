@@ -1,4 +1,4 @@
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap'
 
 export const RelatedArticlePreview = function (props) {
-  const siteLanguage = useLanguage() //context
+
   const getNecessarySubtitle = (article, lang) => {
     return article[lang].title.length < 90 ? (
       <p className="mt-1 mb-0 related-article-preview-subtitle">{lang === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}</p>
@@ -25,8 +25,8 @@ export const RelatedArticlePreview = function (props) {
             <Image className="related-article-preview-img black-border" variant="top" src={props.article.previewImg} />
           </Col>
           <Col sm={8}>
-            <Card.Title className="mb-0 related-article-preview-title">{siteLanguage === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
-            {getNecessarySubtitle(props.article, siteLanguage)}
+            <Card.Title className="mb-0 related-article-preview-title">{props.currentLang === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
+            {getNecessarySubtitle(props.article, props.currentLang)}
           </Col>
         </Row>
       </Card.Header>

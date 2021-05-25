@@ -1,20 +1,24 @@
 import styles from '../styles/Home.module.css'
-import { useLanguage } from '../context/siteLanguageContext' //context
+
 import { Carousel } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-
+import { useAppContext } from "../context/contextLib"
 
 function Home() {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
+
   return (
     <div className={styles.container}>
       <Header
         title="Home"
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Homepage Slides */}
       <div className={styles.carouselContainer}>
         <Carousel className="d-block carouselStyle">
@@ -33,10 +37,10 @@ function Home() {
             </picture>
             <Carousel.Caption>
               <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
               <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -55,10 +59,10 @@ function Home() {
             </picture>
             <Carousel.Caption>
               <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
               <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -77,10 +81,10 @@ function Home() {
             </picture>
             <Carousel.Caption>
               <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
               <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>

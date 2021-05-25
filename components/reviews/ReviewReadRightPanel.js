@@ -1,4 +1,4 @@
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col
@@ -7,12 +7,10 @@ import { ReviewReadRightPanelElement } from './ReviewReadRightPanelElement'
 
 export const ReviewReadRightPanel = function (props) {
 
-  const siteLanguage = useLanguage() //context
-
   return (
     <>
       <Row className="justify-content-center">
-        <h1>{siteLanguage === "ita" ? "Recensioni Correlati" : "Related Reviews"}</h1>
+        <h1>{props.currentLang === "ita" ? "Recensioni Correlati" : "Related Reviews"}</h1>
       </Row>
       <Row>
         <Col>

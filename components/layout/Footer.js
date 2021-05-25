@@ -1,5 +1,4 @@
 import styles from '../../styles/Home.module.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 import { useRouter } from 'next/router'
 import {
   Navbar,
@@ -8,10 +7,11 @@ import {
   Image,
   Button
 } from 'react-bootstrap'
+import { useAppContext } from '../../context/contextLib'
 
 export const Footer = function () {
+  const { currentLang } = useAppContext()
   const router = useRouter()
-  const siteLanguage = useLanguage() //context
   const scrollToTopSmoothly = () => {
     let currentHeight = window.scrollY
     let heigthReduction = window.scrollY / 50
@@ -31,7 +31,7 @@ export const Footer = function () {
         <Col xs={{ span: 4 }} className={styles.footerText + " text-dark"}>
         </Col>
         <Col md={{ span: 3 }} className={styles.footerText + " text-dark"}>
-          {siteLanguage === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
+          {currentLang === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
         </Col>
         <Col
           onClick={() => router.push('/')}

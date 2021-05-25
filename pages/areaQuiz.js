@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
-import { useLanguage } from '../context/siteLanguageContext' //context
+
 import {
   Row
 } from 'react-bootstrap'
@@ -11,6 +11,7 @@ import { QuizPresentation } from '../components/areaQuiz/QuizPresentation'
 import { Quiz } from '../components/areaQuiz/Quiz'
 import { Results } from '../components/areaQuiz/Results'
 import { Footer } from '../components/layout/Footer'
+import { useAppContext } from "../context/contextLib"
 
 
 function areaQuiz({ quizzes }) {
@@ -20,7 +21,7 @@ function areaQuiz({ quizzes }) {
   const [dataBeforeCorrection, setDataBeforeCorrection] = useState([])
   const [timesUp, setTimesUp] = useState(false)
   const [questionCounter, setQuestionCounter] = useState(1)
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
 
   const getQuizChoiceView = () => {
     setQuizOnShow(null)
@@ -59,10 +60,13 @@ function areaQuiz({ quizzes }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Area Quiz" : "Quiz Area"}
+        title={currentLang === "ita" ? "Area Quiz" : "Quiz Area"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100 ml-0 mr-0">

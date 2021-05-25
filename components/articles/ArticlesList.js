@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLanguage } from '../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
@@ -11,9 +10,6 @@ import { MyPagination } from "../layout/MyPagination"
 
 
 export const ArticlesList = function (props) {
-
-  const siteLanguage = useLanguage() //context
-
   const [currentPage, setCurrentPage] = useState(1)
   const [elementsPerPage, setElementsPerPage] = useState(6)
   const [elementsPerRow, setElementsPerRow] = useState(2)
@@ -28,7 +24,7 @@ export const ArticlesList = function (props) {
       }
       return articles
     }, [])
-    : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).reduce(function (articles, acc, i) {
+    : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
         articles[articles.length - 1].push(acc)
       } else {
@@ -52,14 +48,14 @@ export const ArticlesList = function (props) {
     <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
-          <h1>{siteLanguage === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
+          <h1>{props.currentLang === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
         </Col>
         <Col sm={6} className="justify-content-end mb-1 flex-row">
           <Form inline className="justify-content-end w-100 p-0 flex-row">
             <Form.Group className="w-100" controlId="formBasicEmail">
               <Form.Control
                 type="text"
-                placeholder={siteLanguage === "ita" ? "Cerca" : "Search"}
+                placeholder={props.currentLang === "ita" ? "Cerca" : "Search"}
                 onChange={event => searchInputOnChange(event.target.value)}
                 className="w-75 inline-form-custom" />
               <Button
@@ -75,11 +71,11 @@ export const ArticlesList = function (props) {
       </Row>
       { visibleRows.length > 0 &&
         <MyPagination
-          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
+          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, props.currentLang).length / elementsPerPage)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           elementsPerPage={elementsPerPage}
-          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
+          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).length}
         />
       }
       <Row className="w-100 mobile-compatible m-auto">
@@ -91,17 +87,17 @@ export const ArticlesList = function (props) {
                 key={i}
                 articles={row}
               />
-            ) : <Row className="w-100 text-center justify-content-center">{(siteLanguage === "ita") ? "Nessun risultato trovato" : "No result found"}</Row>
+            ) : <Row className="w-100 text-center justify-content-center">{(props.currentLang === "ita") ? "Nessun risultato trovato" : "No result found"}</Row>
           }
         </Col>
       </Row>
       { visibleRows.length > 0 &&
         <MyPagination
-          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length / elementsPerPage)}
+          totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, currentLang).length / elementsPerPage)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           elementsPerPage={elementsPerPage}
-          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, siteLanguage).length}
+          totalElements={!props.filtered ? props.allArticles.length : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).length}
         />
       }
     </Row>

@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 import {
   Row,
   Col
@@ -14,14 +14,15 @@ import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
 import { Loading } from '../components/layout/Loading'
+import { useAppContext } from "../context/contextLib"
 
 function articoli(props) {
   const { DBarticles, articleTopics } = props
-  const siteLanguage = useLanguage() //context
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { currentLang, changeSiteLang } = useAppContext()
 
   const handleOpenedArticle = (articleId) => {
     setLoading(true)
@@ -81,10 +82,13 @@ function articoli(props) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Articoli" : "Articles"}
+        title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       <Breadcrumbs />
       {loading && <Loading />}
       {/* Page Content */}

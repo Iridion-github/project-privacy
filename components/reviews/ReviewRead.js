@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import stringToHTML from 'html-react-parser'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -15,7 +15,7 @@ import { datePrettifier } from '../../utils/date'
 
 
 export const ReviewRead = function (props) {
-  const siteLanguage = useLanguage() //context
+
   const [language, setLanguage] = useState("ita")
   return (
     <Row className="w-100 m-auto">
@@ -25,7 +25,7 @@ export const ReviewRead = function (props) {
           variant="info"
           href="/recensioniBibliografiche"
         >
-          <i className="fas fa-long-arrow-alt-left mr-2"></i> {siteLanguage === "ita" ? "Torna alle Recensioni" : "Back to Reviews"}
+          <i className="fas fa-long-arrow-alt-left mr-2"></i> {props.currentLang === "ita" ? "Torna alle Recensioni" : "Back to Reviews"}
         </Button>
         <Card.Header className="pb-0">
           <Row>
@@ -64,7 +64,7 @@ export const ReviewRead = function (props) {
                   md={6}
                   className="fake-navbar-item pr-0"
                 >
-                  <strong>{siteLanguage === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.review.date, language, true)}
+                  <strong>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.review.date, language, true)}
                 </Col>
               </Row>
             </Col>

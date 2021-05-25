@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -11,24 +11,29 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { EmailForm } from '../components/form/EmailForm'
 import { Footer } from '../components/layout/Footer'
+import { useAppContext } from "../context/contextLib"
 
 
 const contatti = function () {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
+
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Contatti" : "Contacts"}
+        title={currentLang === "ita" ? "Contatti" : "Contacts"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
           <Card className="w-100 pt-2 pb-2">
             <Card.Img variant="top" src="contatti.png" />
             <Card.Body>
-              <Card.Title className="text-center">{siteLanguage === "ita" ? "Contatti" : "Contacts"}</Card.Title>
+              <Card.Title className="text-center">{currentLang === "ita" ? "Contatti" : "Contacts"}</Card.Title>
               <Row>
                 <Col md={6}>
                   <Row>
@@ -38,11 +43,11 @@ const contatti = function () {
                         </thead>
                         <tbody>
                           <tr>
-                            <td><b>{siteLanguage === "ita" ? "Indirizzo" : "Address"}:</b></td>
-                            <td>{"Non Disponibile" /*Via Fregene 33 - 00183*/}{/*siteLanguage === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
+                            <td><b>{currentLang === "ita" ? "Indirizzo" : "Address"}:</b></td>
+                            <td>{"Non Disponibile" /*Via Fregene 33 - 00183*/}{/*currentLang === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
                           </tr>
                           <tr>
-                            <td><b>{siteLanguage === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
+                            <td><b>{currentLang === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
                             <td>{"Non Disponibile" /*335-236564*/}</td>
                           </tr>
                           <tr>
@@ -50,7 +55,7 @@ const contatti = function () {
                             <td>{"Non Disponibile" /*mastrogae@gmail.com*/}</td>
                           </tr>
                           <tr>
-                            <td><b>{siteLanguage === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
+                            <td><b>{currentLang === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
                             <td>00000000000</td>
                           </tr>
                         </tbody>
@@ -78,7 +83,7 @@ const contatti = function () {
               </Row>
             </Card.Body>
             <Card.Footer className="text-center">
-              <small className="text-muted">{siteLanguage === "ita" ? "Aggiornato al" : "Last updated"}: 19/01/2020</small>
+              <small className="text-muted">{currentLang === "ita" ? "Aggiornato al" : "Last updated"}: 19/01/2020</small>
             </Card.Footer>
           </Card>
         </Container>

@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import path from 'path'
-import { useLanguage } from '../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -14,9 +14,10 @@ import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ConsultationChoice } from '../components/consultation/ConsultationChoice'
 import { ConsultationCard } from '../components/consultation/ConsultationCard'
+import { useAppContext } from "../context/contextLib"
 
 function consulenza(props) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
 
   const translate = (lang, data) => {
     return data[lang]
@@ -27,10 +28,13 @@ function consulenza(props) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Consulenza" : "Privacy Advice"}
+        title={currentLang === "ita" ? "Consulenza" : "Privacy Advice"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
@@ -45,17 +49,18 @@ function consulenza(props) {
                       onClick={() => setConsultation(null)}
                     >
                       <i className="fas fa-long-arrow-alt-left mr-2"></i>
-                      {siteLanguage === "ita" ? "Torna Indietro" : "Back to Selection"}
+                      {currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
                     </Button>}
                 </Col>
                 <Col md={6}>
-                  <Card.Title className="text-center"> <h1>{siteLanguage === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[siteLanguage].title : ""}</h1></Card.Title>
+                  <Card.Title className="text-center"> <h1>{currentLang === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[currentLang].title : ""}</h1></Card.Title>
                 </Col>
               </Row>
               {!consultation &&
                 <ConsultationChoice
                   consultations={props.consultations}
                   setConsultation={setConsultation}
+                  currentLang={currentLang}
                 />
               }
               {consultation &&

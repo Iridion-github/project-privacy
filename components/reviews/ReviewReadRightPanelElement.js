@@ -1,4 +1,4 @@
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -7,7 +7,6 @@ import {
 } from 'react-bootstrap'
 
 export const ReviewReadRightPanelElement = function (props) {
-  const siteLanguage = useLanguage() //context
 
   return (
     <Card

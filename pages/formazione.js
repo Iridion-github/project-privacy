@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
-import { useLanguage } from '../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -11,17 +11,21 @@ import {
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
+import { useAppContext } from "../context/contextLib"
 
 function formazione(props) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
 
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Consulenza" : "Privacy Advice"}
+        title={currentLang === "ita" ? "Consulenza" : "Privacy Advice"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
