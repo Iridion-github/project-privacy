@@ -22,6 +22,7 @@ export const ArticleRead = function (props) {
           className=""
           variant="info"
           href="/articoli"
+          suppressHydrationWarning
         >
           <i className="fas fa-long-arrow-alt-left mr-2"></i> {props.currentLang === "ita" ? "Torna agli Articoli" : "Back to Articles"}
         </Button>

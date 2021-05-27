@@ -12,7 +12,7 @@ export const ConsultationCard = function (props) {
   return (
     <>
       <Row>
-        <Col md={{ span: 8, offset: 2 }} className="">
+        <Col md={{ span: 8, offset: 2 }} className="" suppressHydrationWarning>
           {stringToHTML(props.consultation[props.currentLang].content)}
         </Col>
       </Row>

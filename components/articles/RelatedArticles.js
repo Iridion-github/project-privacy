@@ -10,7 +10,7 @@ export const RelatedArticles = function (props) {
   return (
     <>
       <Row className="justify-content-center">
-        <h1>{props.currentLang === "ita" ? "Articoli Correlati" : "Related Articles"}</h1>
+        <h1 suppressHydrationWarning>{props.currentLang === "ita" ? "Articoli Correlati" : "Related Articles"}</h1>
       </Row>
       <Row>
         <Col>
@@ -19,6 +19,7 @@ export const RelatedArticles = function (props) {
               key={i}
               setOpenedArticle={props.setOpenedArticle}
               article={art}
+              currentLang={props.currentLang}
             />
           )}
         </Col>

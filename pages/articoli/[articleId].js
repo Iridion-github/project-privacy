@@ -83,12 +83,14 @@ function articoli({ glossarywords, DBarticles }) {
                   allArticles={articles}
                   setOpenedArticle={handleOpenedArticle}
                   glossarywords={glossarywords}
+                  currentLang={currentLang}
                 />
               </Col>
               <Col md={3} className="">
                 <RelatedArticles
                   relatedArticles={relatedArticles}
                   setOpenedArticle={handleOpenedArticle}
+                  currentLang={currentLang}
                 />
               </Col>
             </>

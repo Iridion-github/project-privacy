@@ -24,6 +24,7 @@ export const ReviewRead = function (props) {
           className=""
           variant="info"
           href="/recensioniBibliografiche"
+          suppressHydrationWarning
         >
           <i className="fas fa-long-arrow-alt-left mr-2"></i> {props.currentLang === "ita" ? "Torna alle Recensioni" : "Back to Reviews"}
         </Button>
@@ -64,7 +65,7 @@ export const ReviewRead = function (props) {
                   md={6}
                   className="fake-navbar-item pr-0"
                 >
-                  <strong>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.review.date, language, true)}
+                  <strong suppressHydrationWarning>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.review.date, language, true)}
                 </Col>
               </Row>
             </Col>

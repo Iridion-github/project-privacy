@@ -30,7 +30,7 @@ export const Footer = function () {
       <Row className="w-100">
         <Col xs={{ span: 4 }} className={styles.footerText + " text-dark"}>
         </Col>
-        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"}>
+        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"} suppressHydrationWarning>
           {currentLang === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
         </Col>
         <Col

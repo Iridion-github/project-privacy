@@ -82,6 +82,7 @@ function recensione({ glossarywords, DBreviews }) {
                   allReviews={reviews}
                   setOpenedReview={handleOpenedReview}
                   glossarywords={glossarywords}
+                  currentLang={currentLang}
                 />
               </Col>
               <Col md={3} className="">

@@ -7,46 +7,44 @@ import {
   Image,
   Button
 } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 export const Navigation = function (props) {
 
-  const btnLabelsInit = {
-    chiSono: "",
-    formazione: "",
-    consulenza: "",
-    areaQuiz: "",
-    recensioniBibliografiche: "",
-    articoli: "",
-    contatti: ""
+  console.log("props:", props)
+
+  const btnLabels = {
+    chiSono: {
+      ita: "Chi Sono",
+      eng: "Who I Am",
+    },
+    formazione: {
+      ita: "Formazione",
+      eng: "Training",
+    },
+    consulenza: {
+      ita: "Consulenza",
+      eng: "Consultation",
+    },
+    areaQuiz: {
+      ita: "Area Quiz",
+      eng: "Quiz Area",
+    },
+    recensioniBibliografiche: {
+      ita: "Recensioni Bibliografiche",
+      eng: "Bibliographic Reviews",
+    },
+    articoli: {
+      ita: "Articoli",
+      eng: "Articles",
+    },
+    contatti: {
+      ita: "Contatti",
+      eng: "Contacts",
+    }
   }
 
-  const [btnLabels, setBtnLabels] = useState(btnLabelsInit);
-
-  useEffect(() => {
-    const itaLabels = {
-      chiSono: "Chi Sono",
-      formazione: "Formazione",
-      consulenza: "Consulenza",
-      areaQuiz: "Area Quiz",
-      recensioniBibliografiche: "Recensioni Bibliografiche",
-      articoli: "Articoli",
-      contatti: "Contatti",
-    }
-
-    const engLabels = {
-      chiSono: "Who I Am",
-      formazione: "Training",
-      consulenza: "Consultation",
-      areaQuiz: "Quiz Area",
-      recensioniBibliografiche: "Bibliographic Reviews",
-      articoli: "Articles",
-      contatti: "Contacts",
-    }
-
-    const targetLabels = (props.currentLang === "ita") ? itaLabels : engLabels
-    setBtnLabels(targetLabels)
-  }, [props.currentLang])
+  console.log("btnLabels.formazione:", btnLabels.formazione[props.currentLang])
 
   return (
     <>
@@ -60,13 +58,13 @@ export const Navigation = function (props) {
                   <Image src="/editedLogo.png" className={styles.navbarLogo + " h-100"} />
                 </Nav.Link>
                 <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
-                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"}>{btnLabels.chiSono} </  Nav.Link>
-                <Nav.Link href="/formazione" className={styles.navbarText}>{btnLabels.formazione}</Nav.Link>
-                <Nav.Link href="/consulenza" className={styles.navbarText}>{btnLabels.consulenza}</Nav.Link>
-                <Nav.Link href="/areaQuiz" className={styles.navbarText}>{btnLabels.areaQuiz}</Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>{btnLabels.recensioniBibliografiche}</Nav.Link>
-                <Nav.Link href="/articoli" className={styles.navbarText}>{btnLabels.articoli}</Nav.Link>
-                <Nav.Link href="/contatti" className={styles.navbarText}>{btnLabels.contatti}</Nav.Link>
+                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} suppressHydrationWarning>{btnLabels.chiSono[props.currentLang]} </  Nav.Link>
+                <Nav.Link href="/formazione" className={styles.navbarText} suppressHydrationWarning>{btnLabels.formazione[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/consulenza" className={styles.navbarText} suppressHydrationWarning>{btnLabels.consulenza[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/areaQuiz" className={styles.navbarText} suppressHydrationWarning>{btnLabels.areaQuiz[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} suppressHydrationWarning>{btnLabels.recensioniBibliografiche[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/articoli" className={styles.navbarText} suppressHydrationWarning>{btnLabels.articoli[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/contatti" className={styles.navbarText} suppressHydrationWarning>{btnLabels.contatti[props.currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button

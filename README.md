@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Fixato il bug delle lingue. Nuovo problema riscontrato con il textHydration che odia l'operatore ternario: segnala una differenza tra client-side e server-side rendering come warning, per tutti i (tantissimi) casi in cui si usa un operatore ternario per definire la stringa da stampare. Capire che approccio adottare.
+- Adottata la soluzione: suppressHydrationWarning, prop inclusa ogni volta che si utilizza un operatore ternario nel render per printare una stringa bilingue.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,6 +9,6 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
-- [All] textHydration odia l'operatore ternario: segnala una differenza tra client-side e server-side rendering come warning, per tutti i (tantissimi) casi in cui si usa un operatore ternario per definire la stringa da stampare. 
+- [Articles|BibliographicReviews] I token/badge del tag sforano il contenitore
 ## Implementazioni Possibili/Utili e Migliorie
 - 
