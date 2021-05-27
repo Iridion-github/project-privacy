@@ -13,17 +13,28 @@ import { datePrettifier } from '../../utils/date'
 export const ArticlePreview = function (props) {
   const [language, setLanguage] = useState("ita")
 
+  const dateObj = datePrettifier(props.article.date, language)
+
   return (
     <Card className="w-100 mb-4 grey-border">
       <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#ita">
-          <Nav.Item>
-            <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="/bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="/bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
-          </Nav.Item>
-        </Nav>
+        <Row className="w-100 p-0 m-0">
+          <Col md={4} className="p-0">
+            <Nav variant="tabs" defaultActiveKey="#ita">
+              <Nav.Item>
+                <Nav.Link active={language === "ita"} href="#ita" onClick={() => setLanguage("ita")}><Image src="/bandiere/ita.png" className="black-border flag-icon" /></Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link active={language === "eng"} href="#eng" onClick={() => setLanguage("eng")} > <Image src="/bandiere/GB.png" className="black-border flag-icon" /></Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col md={8} className="p-0 m-0 text-right">
+            <small className="text-muted">
+              {dateObj.weekday}{" "}{dateObj.day}{" "}{dateObj.month}{" "}{dateObj.year}
+            </small>
+          </Col>
+        </Row>
       </Card.Header>
       <Card.Body>
         <Card.Img className="article-preview-img" variant="top" src={props.article.previewImg} />
@@ -41,20 +52,17 @@ export const ArticlePreview = function (props) {
           </Button>
         </Row>
       </Card.Body>
-      <Card.Footer>
-        <Row>
-          <Col md={5} className="pr-0">
+      <Card.Footer className="pt-1 pb-1">
+        <Row className="ml-0 mr-0">
+          <Col md={6} className="pr-0">
             <small className="text-muted">
               {props.article.authors.map((author, i) => {
                 return (<Row key={i}>{props.article.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>)
               })}
             </small>
           </Col>
-          <Col md={3} className="p-0">
-            <span className="text-muted"> {props.article[language].tags.map(tag => <Badge variant="info" className="mr-1" key={tag}>{tag}</Badge>)}</span>
-          </Col>
-          <Col md={4} className="text-right p-0">
-            <small className="text-muted"> {datePrettifier(props.article.date, language)} </small>
+          <Col md={6} className="p-0 text-right">
+            <span className="text-muted"> {props.article[language].tags.map(tag => <Badge variant="info" className="ml-1" key={tag}>{tag}</Badge>)}</span>
           </Col>
         </Row>
       </Card.Footer>

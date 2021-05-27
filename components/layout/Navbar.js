@@ -11,8 +11,6 @@ import { useEffect } from 'react'
 
 export const Navigation = function (props) {
 
-  console.log("props:", props)
-
   const btnLabels = {
     chiSono: {
       ita: "Chi Sono",
@@ -43,8 +41,6 @@ export const Navigation = function (props) {
       eng: "Contacts",
     }
   }
-
-  console.log("btnLabels.formazione:", btnLabels.formazione[props.currentLang])
 
   return (
     <>

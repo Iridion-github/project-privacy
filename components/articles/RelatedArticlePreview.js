@@ -9,13 +9,10 @@ import {
 export const RelatedArticlePreview = function (props) {
 
   const getNecessarySubtitle = (article, lang) => {
-    console.log("function - lang:", lang)
     return article[lang].title.length < 90 ? (
       <p className="mt-1 mb-0 related-article-preview-subtitle">{lang === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}</p>
     ) : ""
   }
-
-  console.log("RelatedArticlePreview - props:", props)
 
   return (
     <Card
