@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Adottata la soluzione: suppressHydrationWarning, prop inclusa ogni volta che si utilizza un operatore ternario nel render per printare una stringa bilingue.
+- Fixato il css di articles. Applicare la stessa struttura anche in reviews.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,6 +9,6 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
-- [Articles|BibliographicReviews] I token/badge del tag sforano il contenitore
+- [Articles|Reviews](TODO) Fixato il css di articles. Applicare la stessa struttura anche in reviews.
 ## Implementazioni Possibili/Utili e Migliorie
 - 
