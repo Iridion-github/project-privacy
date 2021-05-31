@@ -1,8 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Fixed 404 page bug for articler/review with unexpected id.
-- Fixed 404 page bug for unexpected urls.
+- 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -11,5 +10,6 @@
 - 
 ## [Known_Issues/Bugs]
 - [All] Nella versione online il cambio lingua non è persistente. Il motivo è che Vercel non setta il cookie. Indagare.
+- [ErrorPage] In article/review è ordinata e corretta, mentre in caso scatti per pagine inesistenti non ha width 100%. Fixare.
 ## Implementazioni Possibili/Utili e Migliorie
 - 
