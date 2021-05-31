@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-
 import {
   Row,
   Col
@@ -23,6 +22,8 @@ function articoli(props) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { currentLang, changeSiteLang } = useAppContext()
+
+  console.log("articoli - currentLang:", currentLang)
 
   const handleOpenedArticle = (articleId) => {
     setLoading(true)
