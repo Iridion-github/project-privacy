@@ -9,7 +9,7 @@ export const ArticlesTagRow = function (props) {
       <Button
         block
         variant="info"
-        onClick={() => props.searchTopic(props.tagName, props.siteLanguage)}>
+        onClick={() => props.searchTopic(props.tagName, props.currentLang)}>
         {props.tagName}
       </Button>
     </ListGroup.Item>

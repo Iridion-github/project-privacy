@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
 import {
   Row,
   Col
@@ -13,18 +12,24 @@ import { Footer } from '../components/layout/Footer'
 import { ArticlesList } from "../components/articles/ArticlesList"
 import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
+import { Loading } from '../components/layout/Loading'
+import { useAppContext } from "../context/contextLib"
 
-function articoli({ DBarticles, articleTopics }) {
-  const siteLanguage = useLanguage() //context
+function articoli(props) {
+  const { DBarticles, articleTopics } = props
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(null)
-
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { currentLang, changeSiteLang } = useAppContext()
+
+  console.log("articoli - currentLang:", currentLang)
 
   const handleOpenedArticle = (articleId) => {
+    setLoading(true)
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/'
-    setOpenedArticle(articles.find(art => art.id === articleId))
     router.push(fullRoute)
+    setLoading(false)
   }
 
   const searchTopic = async (topic, lang) => {
@@ -78,11 +83,15 @@ function articoli({ DBarticles, articleTopics }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Articoli" : "Articles"}
+        title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       <Breadcrumbs />
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100 mb-5">
@@ -95,10 +104,11 @@ function articoli({ DBarticles, articleTopics }) {
               setSearchInput={setSearchInput}
               filteredByTopic={filteredByTopic}
               removeTopicFilter={removeTopicFilter}
+              currentLang={currentLang}
             />
           </Col>
           <Col md={6} className="justify-content-center">
-            {openedArticle === null &&
+            {(openedArticle === null || openedArticle === undefined) &&
               <ArticlesList
                 allArticles={articles}
                 setOpenedArticle={handleOpenedArticle}
@@ -107,6 +117,7 @@ function articoli({ DBarticles, articleTopics }) {
                 setFiltered={setFiltered}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                currentLang={currentLang}
               />
             }
           </Col>
@@ -120,7 +131,7 @@ function articoli({ DBarticles, articleTopics }) {
   )
 }
 
-articoli.getInitialProps = async (context) => {
+export async function getServerSideProps(context) {
   const environment = "http://" + context.req.headers.host
   //const environment = "https://project-privacy-d803e.web.app"
   const apiUrlArticle = environment + "/api/article"
@@ -129,19 +140,7 @@ articoli.getInitialProps = async (context) => {
   const apiUrlTopics = environment + "/api/articleTopics"
   const resArticleTopics = await fetch(apiUrlTopics)
   const articleTopics = await resArticleTopics.json()
-  return { DBarticles: DBarticles.data, articleTopics: articleTopics.data }
+  return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } }
 }
 
 export default articoli
-
-/* //Rimozione di getServerSideProps per deployare su Firebase
-export async function getServerSideProps(context) {
-  const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
-  const resArticle = await fetch(apiUrlArticle)
-  const DBarticles = await resArticle.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/articleTopics"
-  const resArticleTopics = await fetch(apiUrlTopics)
-  const articleTopics = await resArticleTopics.json()
-  return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } }
-}
-*/

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useLanguage } from '../../../context/siteLanguageContext' //context
 import {
   Row,
   Col,
@@ -11,7 +10,7 @@ import {
 
 
 export const PdfViewer = function (props) {
-  const siteLanguage = useLanguage() //context
+
   const [pdf, setPdf] = useState(null)
   const [init, setInit] = useState(false)
   const [maxPageNum, setMaxPageNum] = useState(null)

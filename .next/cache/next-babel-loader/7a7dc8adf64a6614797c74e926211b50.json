@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const whichToUpdate = (body, obj) => {\n  const propsNames = Object.keys(body);\n  const propsValues = Object.values(body);\n\n  for (let x = 0; x < propsNames.length; x++) {\n    if (obj[propsNames[x]]) {\n      obj[propsNames[x]] = propsValues[x];\n    }\n  }\n\n  return obj;\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useLanguage, useLanguageUpdate } from '../context/siteLanguageContext' //context
+
 import {
   Row,
   Col
@@ -13,17 +13,21 @@ import { Footer } from '../components/layout/Footer'
 import { ReviewsList } from "../components/reviews/ReviewsList"
 import { ReviewsLeftMenu } from "../components/reviews/ReviewsLeftMenu"
 import { removeDuplicatesById, includesAll } from '../utils/arrays'
+import { Loading } from '../components/layout/Loading'
+import { useAppContext } from "../context/contextLib"
 
 function recensioniBibliografiche({ DBreviews, reviewTopics }) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
   const [reviews, setReviews] = useState(DBreviews)
   const [openedReview, setOpenedReview] = useState(null)
-
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleOpenedReview = (reviewId) => {
+    setLoading(true)
     const fullRoute = reviewId !== null ? '/recensioniBibliografiche/' + reviewId : '/recensioniBibliografiche/'
     router.push(fullRoute)
+    setLoading(false)
   }
 
   const searchTopic = async (topic, lang) => {
@@ -31,9 +35,9 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
     setFilteredByTopic(true)
     const result = []
     if (topic !== "") {
-      DBreviews.forEach(art => {
-        if (includesAll(art[lang].topic, topic, Array.isArray(art[lang].topic)).length > 0) {
-          result.push(art)
+      DBreviews.forEach(rev => {
+        if (includesAll(rev[lang].topic, topic, Array.isArray(rev[lang].topic)).length > 0) {
+          result.push(rev)
         }
       })
     }
@@ -77,11 +81,15 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Recensioni Bibliografiche" : "Bibliographic Reviews"}
+        title={currentLang === "ita" ? "Recensioni Bibliografiche" : "Bibliographic Reviews"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       <Breadcrumbs />
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         <Row className="w-100 mb-5">
@@ -94,6 +102,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
               setSearchInput={setSearchInput}
               filteredByTopic={filteredByTopic}
               removeTopicFilter={removeTopicFilter}
+              currentLang={currentLang}
             />
           </Col>
           <Col md={6} className="justify-content-center">
@@ -106,6 +115,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
                 setFiltered={setFiltered}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                currentLang={currentLang}
               />
             }
           </Col>
@@ -119,26 +129,16 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   )
 }
 
-recensioniBibliografiche.getInitialProps = async (context) => {
-  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
-  const resReview = await fetch(apiUrlReview)
-  const DBreviews = await resReview.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
-  const resReviewTopics = await fetch(apiUrlTopics)
-  const reviewTopics = await resReviewTopics.json()
-  return { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data }
-}
-
-export default recensioniBibliografiche
-
-/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps(context) {
-  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
+  const environment = "http://" + context.req.headers.host
+  //const environment = "https://project-privacy-d803e.web.app"
+  const apiUrlReview = environment + "/api/review"
   const resReview = await fetch(apiUrlReview)
   const DBreviews = await resReview.json()
-  const apiUrlTopics = "http://" + context.req.headers.host + "/api/reviewTopics"
+  const apiUrlTopics = environment + "/api/reviewTopics"
   const resReviewTopics = await fetch(apiUrlTopics)
   const reviewTopics = await resReviewTopics.json()
   return { props: { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data } }
 }
-*/
+
+export default recensioniBibliografiche

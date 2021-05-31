@@ -1,1 +1,0 @@
-{"ast":null,"code":"// Next.js API route support: https://nextjs.org/docs/api-routes/introduction\nimport Cors from 'cors';\nconst cors = Cors({\n  methods: ['GET', 'HEAD']\n});\nexport default function getHandler(req, res) {\n  res.json({\n    data: \"prova\"\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -46,8 +46,22 @@ export const datePrettifier = (inputDate, lang, shorter) => {
   const mese = mesi[rawDate.getMonth()]
   const month = months[rawDate.getMonth()]
   const year = rawDate.getFullYear()
+  // let result = (lang === "ita")
+  //   ? (shorter ? "" : giornoSettimana + ' ') + day + ' ' + mese + ' ' + year
+  //   : (shorter ? "" : weekday + ' ') + month + ' ' + day + ' ' + year
   let result = (lang === "ita")
-    ? (shorter ? "" : giornoSettimana + ', ') + day + ' ' + mese + ' ' + year
-    : (shorter ? "" : weekday + ', ') + month + ' ' + day + ' ' + year
+    ? {
+      weekday: shorter ? "" : giornoSettimana,
+      day: day,
+      month: mese,
+      year: year,
+    }
+    :
+    {
+      weekday: shorter ? "" : weekday,
+      day: day,
+      month: month,
+      year: year,
+    }
   return result
 }

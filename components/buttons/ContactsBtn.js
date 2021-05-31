@@ -1,13 +1,12 @@
 import {
   Button
 } from 'react-bootstrap'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import { useRouter } from 'next/router'
 
 
 export const ContactsBtn = function (props) {
   const router = useRouter()
-  const siteLanguage = useLanguage()
 
   return (
     <Button
@@ -15,7 +14,7 @@ export const ContactsBtn = function (props) {
       variant="info"
       onClick={() => router.push("/contatti")}
     >
-      {siteLanguage === "ita" ? "I miei Contatti" : "My Contacts"}
+      {props.currentLang === "ita" ? "I miei Contatti" : "My Contacts"}
       <i className="far fa-share-square ml-2"></i>
     </Button>
   )

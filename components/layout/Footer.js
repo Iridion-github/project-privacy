@@ -1,5 +1,4 @@
 import styles from '../../styles/Home.module.css'
-import { useLanguage, useLanguageUpdate } from '../../context/siteLanguageContext' //context
 import { useRouter } from 'next/router'
 import {
   Navbar,
@@ -8,15 +7,20 @@ import {
   Image,
   Button
 } from 'react-bootstrap'
+import { useAppContext } from '../../context/contextLib'
 
 export const Footer = function () {
+  const { currentLang } = useAppContext()
   const router = useRouter()
-  const siteLanguage = useLanguage() //context
   const scrollToTopSmoothly = () => {
-    if (window.scrollY > 0) {
+    let currentHeight = window.scrollY
+    let heigthReduction = window.scrollY / 50
+    if (heigthReduction < 7.5) heigthReduction = 7.5
+    let targetHeight = currentHeight - heigthReduction
+    if (currentHeight >= 1) {
       window.scrollTo({
-        top: window.scrollY - Math.ceil(window.scrollY / 10),
-        behavior: 'smooth'
+        top: targetHeight,
+        //behavior: 'smooth'
       })
       setTimeout(scrollToTopSmoothly, 10)
     }
@@ -26,8 +30,8 @@ export const Footer = function () {
       <Row className="w-100">
         <Col xs={{ span: 4 }} className={styles.footerText + " text-dark"}>
         </Col>
-        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"}>
-          {siteLanguage === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
+        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"} suppressHydrationWarning>
+          {currentLang === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
         </Col>
         <Col
           onClick={() => router.push('/')}

@@ -1,20 +1,24 @@
 import styles from '../styles/Home.module.css'
-import { useLanguage } from '../context/siteLanguageContext' //context
+
 import { Carousel } from 'react-bootstrap'
 import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
-
+import { useAppContext } from "../context/contextLib"
 
 function Home() {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
+
   return (
     <div className={styles.container}>
       <Header
         title="Home"
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {/* Homepage Slides */}
       <div className={styles.carouselContainer}>
         <Carousel className="d-block carouselStyle">
@@ -32,11 +36,11 @@ function Home() {
               />
             </picture>
             <Carousel.Caption>
-              <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+              <h2 className={styles.title} suppressHydrationWarning>
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
-              <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+              <span className={styles.description} suppressHydrationWarning>
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -54,11 +58,11 @@ function Home() {
               />
             </picture>
             <Carousel.Caption>
-              <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+              <h2 className={styles.title} suppressHydrationWarning>
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
-              <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+              <span className={styles.description} suppressHydrationWarning>
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -76,11 +80,11 @@ function Home() {
               />
             </picture>
             <Carousel.Caption>
-              <h2 className={styles.title}>
-                {siteLanguage === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+              <h2 className={styles.title} suppressHydrationWarning>
+                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
               </h2>
-              <span className={styles.description}>
-                {siteLanguage === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+              <span className={styles.description} suppressHydrationWarning>
+                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
               </span>
             </Carousel.Caption>
           </Carousel.Item>
@@ -88,9 +92,8 @@ function Home() {
       </div>
       {/* Homepage Content */}
       <main className={styles.main}>
-        {/* Empty div to test scrolling 
-        <div style={{ height: "3000px;" }}></div>
-        */}
+        {/* Empty div to avoid footer going up while no content to show */}
+        {/* <div style={{ height: "90px" }}></div>*/}
       </main>
       {/* Footer */}
       <Footer />

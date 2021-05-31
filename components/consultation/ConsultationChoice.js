@@ -1,4 +1,4 @@
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col
@@ -6,7 +6,7 @@ import {
 import { ConsultationChoiceBtn } from './ConsultationChoiceBtn'
 
 export const ConsultationChoice = function (props) {
-  const siteLanguage = useLanguage() //context //per ora inutilizzato qui, ma work in progress
+
   return (
     <Row className="m-0 p-0">
       <Col md={{ span: 8, offset: 2 }} className="p-0">
@@ -19,6 +19,7 @@ export const ConsultationChoice = function (props) {
               <ConsultationChoiceBtn
                 consultation={consult}
                 setConsultation={props.setConsultation}
+                currentLang={props.currentLang}
               />
             </Col>
           ))}

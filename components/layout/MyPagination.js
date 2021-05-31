@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import {
   Row,
   Col,
@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap'
 
 export const MyPagination = function (props) {
-  const siteLanguage = useLanguage() //context
+
   const [targetPage, setTargetPage] = useState("")
 
   const lastPage = props.totalPages
@@ -42,7 +42,7 @@ export const MyPagination = function (props) {
                   onChange={(event) => setTargetPage(event.target.value)}
                   size="sm"
                   type="number"
-                  placeholder={siteLanguage === "ita" ? "Vai a" : "Go to"}
+                  placeholder={props.currentLang === "ita" ? "Vai a" : "Go to"}
                   className="small-input" />
                 <Button
                   disabled={targetPage === ""}
@@ -61,7 +61,7 @@ export const MyPagination = function (props) {
       <Col sm={5} className="m-auto text-right">
         <p className="ml-3 text-muted small-text pt-2 pr-5">
           {
-            siteLanguage === "ita"
+            props.currentLang === "ita"
               ? (firstShownArticleIndex + " - " + lastShownArticleIndex + " di " + props.totalElements + " articoli")
               : (firstShownArticleIndex + " - " + lastShownArticleIndex + " of " + props.totalElements + " articles")
           }

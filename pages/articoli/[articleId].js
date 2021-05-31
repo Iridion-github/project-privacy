@@ -1,5 +1,5 @@
 import styles from '../../styles/Home.module.css'
-import { useLanguage } from '../../context/siteLanguageContext' //context
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
@@ -15,23 +15,30 @@ import { RelatedArticles } from "../../components/articles/RelatedArticles"
 import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/articles'
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
+import { Loading } from '../../components/layout/Loading'
+import { useAppContext } from "../../context/contextLib"
 
 function articoli({ glossarywords, DBarticles }) {
-  const siteLanguage = useLanguage() //context
+  const { currentLang, changeSiteLang } = useAppContext()
   const router = useRouter()
   const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
   const [openedArticle, setOpenedArticle] = useState(articleId)
+  const [loading, setLoading] = useState(true)
 
   const handleOpenedArticle = (id) => {
+    setLoading(true)
     const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
     router.push(fullRoute)
     setOpenedArticle(id)
   }
 
-  let relatedArticles = getRelatedArticles(articleId, articles, siteLanguage)
+  let relatedArticles = getRelatedArticles(articleId, articles, currentLang)
 
   useEffect(() => {
+    if (loading === true) {
+      setLoading(false)
+    }
     if (articles.length === 0) {
       if (DBarticles.map(el => el.id).includes(articleId)) {
         setOpenedArticle(articleId)
@@ -42,20 +49,24 @@ function articoli({ glossarywords, DBarticles }) {
   return (
     <div className={styles.container}>
       <Header
-        title={siteLanguage === "ita" ? "Articoli" : "Articles"}
+        title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
-      <Navigation />
+      <Navigation
+        currentLang={currentLang}
+        changeSiteLang={changeSiteLang}
+      />
       {(openedArticle && articles.length > 0) &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[siteLanguage].title)}
+          breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[currentLang].title)}
         />
       }
       {!openedArticle &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", siteLanguage)}
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Articolo inesistente", eng: "No such article" }, "/articoli", currentLang)}
         />
       }
+      {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         {!openedArticle &&
@@ -72,12 +83,14 @@ function articoli({ glossarywords, DBarticles }) {
                   allArticles={articles}
                   setOpenedArticle={handleOpenedArticle}
                   glossarywords={glossarywords}
+                  currentLang={currentLang}
                 />
               </Col>
               <Col md={3} className="">
                 <RelatedArticles
                   relatedArticles={relatedArticles}
                   setOpenedArticle={handleOpenedArticle}
+                  currentLang={currentLang}
                 />
               </Col>
             </>
@@ -90,41 +103,6 @@ function articoli({ glossarywords, DBarticles }) {
   )
 }
 
-articoli.getInitialProps = async (context) => {
-
-  const getArticleId = async (rawStr) => {
-    let articleId = rawStr.split('/articoli/')[1]
-    if (articleId.includes('/')) {
-      articleId = articleId.split('/')[1].split('/')[1]
-    }
-    return articleId
-  }
-
-  let propsObj = { DBarticles: [], glossarywords: [] }
-  if (!context.req) {
-    const articleId = await getArticleId(context.asPath)
-    if (location.href.includes("articoli/")) {
-      location.replace(articleId)
-    } else {
-      location.replace("articoli/" + articleId)
-    }
-  } else {
-    //api of glossary
-    const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"
-    const resGlossaryword = await fetch(apiUrlGlossary)
-    const glossarywords = await resGlossaryword.json()
-    //api of all articles (for the related articles)
-    const apiUrlArticle = "http://" + context.req.headers.host + "/api/article"
-    const resArticle = await fetch(apiUrlArticle)
-    const DBarticles = await resArticle.json()
-    propsObj = { DBarticles: DBarticles.data, glossarywords: glossarywords.data }
-  }
-  return propsObj
-}
-
-export default articoli
-
-/* //Rimozione di getServerSideProps per deployare su Firebase
 export async function getServerSideProps({ req }) {
   //api of glossary
   const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"
@@ -136,4 +114,5 @@ export async function getServerSideProps({ req }) {
   const DBarticles = await resArticle.json()
   return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } }
 }
-*/
+
+export default articoli
