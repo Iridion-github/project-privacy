@@ -35,9 +35,9 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
     setFilteredByTopic(true)
     const result = []
     if (topic !== "") {
-      DBreviews.forEach(art => {
-        if (includesAll(art[lang].topic, topic, Array.isArray(art[lang].topic)).length > 0) {
-          result.push(art)
+      DBreviews.forEach(rev => {
+        if (includesAll(rev[lang].topic, topic, Array.isArray(rev[lang].topic)).length > 0) {
+          result.push(rev)
         }
       })
     }
@@ -102,6 +102,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
               setSearchInput={setSearchInput}
               filteredByTopic={filteredByTopic}
               removeTopicFilter={removeTopicFilter}
+              currentLang={currentLang}
             />
           </Col>
           <Col md={6} className="justify-content-center">
@@ -114,6 +115,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
                 setFiltered={setFiltered}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                currentLang={currentLang}
               />
             }
           </Col>

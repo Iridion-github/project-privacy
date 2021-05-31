@@ -16,7 +16,7 @@ export const ArticlesLeftMenu = function (props) {
           <Card className="bg-standard-blue">
             <Card.Header className="topic-filter-header">
               <Row>
-                <Col md={12} className="text-center">
+                <Col suppressHydrationWarning md={12} className="text-center">
                   {props.currentLang === "ita" ? "Argomenti" : "Topics"}
                 </Col>
                 {props.filteredByTopic === true &&

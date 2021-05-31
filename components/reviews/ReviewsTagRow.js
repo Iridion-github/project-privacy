@@ -9,7 +9,9 @@ export const ReviewsTagRow = function (props) {
       <Button
         block
         variant="info"
-        onClick={() => props.searchTopic(props.tagName, props.currentLang)}>
+        onClick={() => props.searchTopic(props.tagName, props.currentLang)}
+        suppressHydrationWarning
+      >
         {props.tagName}
       </Button>
     </ListGroup.Item>

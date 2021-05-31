@@ -16,23 +16,22 @@ export const ReviewsLeftMenu = function (props) {
       <Row className="mobile-compatible w-100 mt-1">
         <Col>
           <Card className="bg-standard-blue">
-            <Card.Header>
+            <Card.Header className="topic-filter-header">
               <Row>
-                <Col>
+                <Col suppressHydrationWarning md={12} className="text-center">
                   {props.currentLang === "ita" ? "Argomenti" : "Topics"}
                 </Col>
-                <Col className="text-right">
-                  {props.filteredByTopic &&
-                    <Button
-                      size="sm"
-                      className=""
-                      variant="danger"
-                      onClick={() => props.removeTopicFilter()}
-                    >
-                      <i className="fas fa-times-circle"></i>
-                    </Button>
-                  }
-                </Col>
+                {props.filteredByTopic === true &&
+                  <Button
+                    size="sm"
+                    className="remove-topic-filter-btn"
+                    variant="danger"
+                    onClick={() => props.removeTopicFilter()}
+                  >
+                    {props.currentLang === "ita" ? "Rimuovi Filtro" : "Remove Filter"}
+                    <i className="ml-2 fas fa-times-circle"></i>
+                  </Button>
+                }
               </Row>
             </Card.Header>
             <ListGroup variant="flush">

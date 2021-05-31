@@ -15,8 +15,8 @@ import { datePrettifier } from '../../utils/date'
 
 
 export const ReviewRead = function (props) {
-
   const [language, setLanguage] = useState("ita")
+  const dateObj = datePrettifier(props.review.date, language, false)
   return (
     <Row className="w-100 m-auto">
       <Card className="w-100 mb-4 p-1 grey-border">
@@ -65,7 +65,7 @@ export const ReviewRead = function (props) {
                   md={6}
                   className="fake-navbar-item pr-0"
                 >
-                  <strong suppressHydrationWarning>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.review.date, language, true)}
+                  <strong>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {dateObj.weekday}{" "}{dateObj.day}{" "}{dateObj.month}{" "}{dateObj.year}
                 </Col>
               </Row>
             </Col>

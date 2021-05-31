@@ -49,12 +49,13 @@ export const ReviewsList = function (props) {
     <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
-          <h1>{props.currentLang === "ita" ? "Ultime Recensioni" : "Latest Reviews"}</h1>
+          <h1 suppressHydrationWarning>{props.currentLang === "ita" ? "Ultime Recensioni" : "Latest Reviews"}</h1>
         </Col>
         <Col sm={6} className="justify-content-end mb-1 flex-row">
           <Form inline className="justify-content-end w-100 p-0 flex-row">
             <Form.Group className="w-100" controlId="formBasicEmail">
               <Form.Control
+                suppressHydrationWarning
                 type="text"
                 placeholder={props.currentLang === "ita" ? "Cerca" : "Search"}
                 onChange={event => searchInputOnChange(event.target.value)}

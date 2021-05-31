@@ -15,6 +15,7 @@ import { datePrettifier } from '../../utils/date'
 
 export const ArticleRead = function (props) {
   const [language, setLanguage] = useState("ita")
+  const dateObj = datePrettifier(props.article.date, language, false)
   return (
     <Row className="w-100 m-auto">
       <Card className="w-100 mb-4 p-1 grey-border">
@@ -63,7 +64,7 @@ export const ArticleRead = function (props) {
                   md={6}
                   className="fake-navbar-item pr-0"
                 >
-                  <strong>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {datePrettifier(props.article.date, language, true)}
+                  <strong>{props.currentLang === "ita" ? "Data: " : "Date: "}</strong> {dateObj.weekday}{" "}{dateObj.day}{" "}{dateObj.month}{" "}{dateObj.year}
                 </Col>
               </Row>
             </Col>

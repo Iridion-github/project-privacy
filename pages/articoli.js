@@ -103,6 +103,7 @@ function articoli(props) {
               setSearchInput={setSearchInput}
               filteredByTopic={filteredByTopic}
               removeTopicFilter={removeTopicFilter}
+              currentLang={currentLang}
             />
           </Col>
           <Col md={6} className="justify-content-center">
@@ -115,6 +116,7 @@ function articoli(props) {
                 setFiltered={setFiltered}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
+                currentLang={currentLang}
               />
             }
           </Col>
