@@ -1,7 +1,8 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Merged Deploy into Main, trying to include all the upgrades while preserving Archive. Comment to differentiate from main.
+- Fixed 404 page bug for articler/review with unexpected id.
+- Fixed 404 page bug for unexpected urls.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,6 +10,6 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
--
+- [All] Nella versione online il cambio lingua non è persistente. Il motivo è che Vercel non setta il cookie. Indagare.
 ## Implementazioni Possibili/Utili e Migliorie
 - 

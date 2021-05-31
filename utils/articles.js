@@ -4,6 +4,7 @@ export const getRelatedArticles = (openedArticleId, allArticles, lang) => {
   let result = []
   for (let x = 0; x < allArticles.length && result.length < 5; x++) {
     if (
+      allArticles[x][lang].tags.some(x => allArticles.find(y => y.id === openedArticleId)) &&
       allArticles[x][lang].tags.some(x => allArticles.find(y => y.id === openedArticleId)[lang].tags.includes(x))
       && openedArticleId !== allArticles[x].id
     ) {

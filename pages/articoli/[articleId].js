@@ -23,7 +23,7 @@ function articoli({ glossarywords, DBarticles }) {
   const router = useRouter()
   const { articleId } = router.query
   const [articles, setArticles] = useState(DBarticles)
-  const [openedArticle, setOpenedArticle] = useState(articleId)
+  const [openedArticle, setOpenedArticle] = useState(articles.find(art => art.id === articleId) ? articleId : null)
   const [loading, setLoading] = useState(true)
 
   const handleOpenedArticle = (id) => {
