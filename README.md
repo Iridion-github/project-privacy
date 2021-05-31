@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Fixato il css di articles. Applicare la stessa struttura anche in reviews.
+- Fixato il css di reviews.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,6 +9,6 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
-- [Articles|Reviews](TODO) Fixato il css di articles. Applicare la stessa struttura anche in reviews.
+-
 ## Implementazioni Possibili/Utili e Migliorie
 - 
