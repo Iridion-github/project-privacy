@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Fixato il css di reviews.
+- Bugfix in Articles & BibliographicReviews
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
