@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Fixed language stuck to ita in Articles only
+- Merged Deploy into Main, trying to include all the upgrades while preserving Archive. Comment to differentiate from main.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
