@@ -24,7 +24,7 @@ function recensione({ glossarywords, DBreviews }) {
   const router = useRouter()
   const { reviewId } = router.query
   const [reviews, setReviews] = useState(DBreviews)
-  const [openedReview, setOpenedReview] = useState(reviewId)
+  const [openedReview, setOpenedReview] = useState(reviews.find(rev => rev.id === reviewId) ? reviewId : null)
   const [loading, setLoading] = useState(true)
 
   const handleOpenedReview = (id) => {

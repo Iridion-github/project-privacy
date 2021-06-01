@@ -48,7 +48,7 @@ export const ArticlesList = function (props) {
     <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
-          <h1>{props.currentLang === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
+          <h1 suppressHydrationWarning>{props.currentLang === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
         </Col>
         <Col sm={6} className="justify-content-end mb-1 flex-row">
           <Form inline className="justify-content-end w-100 p-0 flex-row">
@@ -57,7 +57,9 @@ export const ArticlesList = function (props) {
                 type="text"
                 placeholder={props.currentLang === "ita" ? "Cerca" : "Search"}
                 onChange={event => searchInputOnChange(event.target.value)}
-                className="w-75 inline-form-custom" />
+                className="w-75 inline-form-custom"
+                suppressHydrationWarning
+              />
               <Button
                 variant={!props.filtered ? "info" : "danger"}
                 disabled={props.searchInput.length < 3}

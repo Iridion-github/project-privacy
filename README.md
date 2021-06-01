@@ -1,7 +1,7 @@
 ## [ToDo]
-- 
+- Continuare con lo sviluppo dell'Archivio (materiale Luigi in mail).
 ## [Checkpoint]
-- Making a manual Merge. Fucking git, I swear.
+- Manual merge apparently worked. Check for anomalies.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]

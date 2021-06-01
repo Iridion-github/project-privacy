@@ -10,10 +10,9 @@ import { ReviewsTagRow } from './ReviewsTagRow'
 
 
 export const ReviewsLeftMenu = function (props) {
-
   return (
     <Row className="justify-content-center mb-2">
-      <Row className="mobile-compatible w-100 mt-1">
+      <Row className="mobile-compatible w-100 mt-1 pl-3">
         <Col>
           <Card className="bg-standard-blue">
             <Card.Header className="topic-filter-header">

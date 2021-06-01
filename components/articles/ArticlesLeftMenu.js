@@ -25,6 +25,7 @@ export const ArticlesLeftMenu = function (props) {
                     className="remove-topic-filter-btn"
                     variant="danger"
                     onClick={() => props.removeTopicFilter()}
+                    suppressHydrationWarning
                   >
                     {props.currentLang === "ita" ? "Rimuovi Filtro" : "Remove Filter"}
                     <i className="ml-2 fas fa-times-circle"></i>
