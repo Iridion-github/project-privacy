@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
   Row,
-  Col
+  Col,
+  Container
 } from 'react-bootstrap'
 import { Header } from '../../components/layout/Header'
 import { Navigation } from '../../components/layout/Navbar'
@@ -70,7 +71,9 @@ function articoli({ glossarywords, DBarticles }) {
       {/* Page Content */}
       <main className={styles.main}>
         {!openedArticle &&
-          <ErrorComponent />
+          <Container className="justify-content-center p-0">
+            <ErrorComponent />
+          </Container>
         }
         <Row className="w-100">
           <Col md={3} className="">

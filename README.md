@@ -9,7 +9,6 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
-- [All] Nella versione online il cambio lingua non è persistente. Il motivo è che Vercel non setta il cookie. Indagare.
-- [ErrorPage] In article/review è ordinata e corretta, mentre in caso scatti per pagine inesistenti non ha width 100%. Fixare.
+- [All] Nella versione online il cambio lingua non è persistente. Il motivo è che Vercel non setta il cookie. Al momento non pare risolvibile.
 ## Implementazioni Possibili/Utili e Migliorie
 - 

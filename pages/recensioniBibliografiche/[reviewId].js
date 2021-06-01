@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import {
   Row,
-  Col
+  Col,
+  Container
 } from 'react-bootstrap'
 import { Header } from '../../components/layout/Header'
 import { Navigation } from '../../components/layout/Navbar'
@@ -16,7 +17,7 @@ import { getBreadcrumbsForReviews } from '../../utils/reviews'
 import { getBreadcrumbsForErrors } from '../../utils/errors'
 import { ErrorComponent } from '../../components/layout/ErrorComponent'
 import { Loading } from '../../components/layout/Loading'
-import { useAppContext } from "../../context/contextLib";
+import { useAppContext } from "../../context/contextLib"
 
 
 function recensione({ glossarywords, DBreviews }) {
@@ -57,19 +58,21 @@ function recensione({ glossarywords, DBreviews }) {
       />
       {(openedReview && reviews.length > 0) &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(art => art.id === openedReview)[currentLang].title)}
+          breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(rev => rev.id === openedReview)[currentLang].title)}
         />
       }
-      {reviews.length === 0 &&
+      {!openedReview &&
         <Breadcrumbs
-          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliografiche", currentLang)}
+          breadcrumbsList={getBreadcrumbsForErrors({ ita: "Recensione inesistente", eng: "No such review" }, "/recensioniBibliogragiche", currentLang)}
         />
       }
       {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
         {!openedReview &&
-          <ErrorComponent />
+          <Container className="justify-content-center p-0">
+            <ErrorComponent />
+          </Container>
         }
         <Row className="w-100">
           <Col md={3} className="">
