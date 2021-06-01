@@ -39,6 +39,10 @@ export const Navigation = function (props) {
     contatti: {
       ita: "Contatti",
       eng: "Contacts",
+    },
+    archivio: {
+      ita: "Archivio",
+      eng: "Archive",
     }
   }
 
@@ -61,6 +65,7 @@ export const Navigation = function (props) {
                 <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} suppressHydrationWarning>{btnLabels.recensioniBibliografiche[props.currentLang]}</Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText} suppressHydrationWarning>{btnLabels.articoli[props.currentLang]}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText} suppressHydrationWarning>{btnLabels.contatti[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/archivio" className={styles.navbarText} suppressHydrationWarning>{btnLabels.archivio[props.currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button

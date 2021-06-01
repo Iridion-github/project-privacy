@@ -83,6 +83,7 @@ function articoli(props) {
   return (
     <div className={styles.container}>
       <Header
+        suppressHydrationWarning
         title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}

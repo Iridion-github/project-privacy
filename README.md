@@ -1,7 +1,7 @@
 ## [ToDo]
 - 
 ## [Checkpoint]
-- Merged Deploy into Main, trying to include all the upgrades while preserving Archive. Comment to differentiate from vercel-deploy.
+- Making a manual Merge. Fucking git, I swear.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]

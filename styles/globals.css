@@ -537,3 +537,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
     margin-right: auto; 
   }
 }
+
+.archive-result-container {
+  max-width: 835px !important;
+}

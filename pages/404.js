@@ -7,11 +7,11 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ErrorComponent } from '../components/layout/ErrorComponent'
-const { currentLang, changeSiteLang } = useAppContext()
+import { useAppContext } from "../../context/contextLib"
 
 export default function errorPage(props) {
   const router = useRouter()
-  const { currentLang } = useAppContext()
+  const { currentLang, changeSiteLang } = useAppContext()
 
   return (
     <div className={styles.container}>
@@ -26,7 +26,9 @@ export default function errorPage(props) {
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center mt-4 p-4">
-          <ErrorComponent />
+          <ErrorComponent
+            currentLang={currentLang}
+          />
         </Container>
       </main>
       {/* Footer */}
