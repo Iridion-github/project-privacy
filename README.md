@@ -1,7 +1,7 @@
 ## [ToDo]
-- Continuare con lo sviluppo dell'Archivio (materiale Luigi in mail).
+- Continuare con lo sviluppo dell'Archivio sbattendo il muso sul backend.
 ## [Checkpoint]
-- Manual merge apparently worked. Check for anomalies.
+- Sometimes fileObj.relativepath is undefined. Or maybe it's fileObj itself, check it out from here. (advancedSearch line 75)
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]

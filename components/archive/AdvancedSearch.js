@@ -1635,8 +1635,30 @@ export const AdvancedSearch = function (props) {
   const submitAdvancedSearch = async () => {
     try {
       props.setLoading(true)
-      console.log("submitAdvancedSearch - filtersState:", filtersState)
       const minifiedFilterState = getMinifiedFilterState(filtersState)
+      //Inizio compilazione del filtro per Provvedimento
+      const filterByProvvedimento = {}
+      if (selectedProvvedimento !== "") filterByProvvedimento.provv = selectedProvvedimento
+      if (tipoProvv) filterByProvvedimento.tipo = tipoProvv
+      if (dataFiltroProvv.day || dataFiltroProvv.month || dataFiltroProvv.year) filterByProvvedimento.data = {
+        day: null,
+        month: null,
+        year: null
+      }
+      if (dataFiltroProvv.day) filterByProvvedimento.data.day = dataFiltroProvv.day
+      if (dataFiltroProvv.month) filterByProvvedimento.data.month = dataFiltroProvv.month
+      if (dataFiltroProvv.year) filterByProvvedimento.data.year = dataFiltroProvv.year
+      if (arrSottonumero.filter(el => el.selected === true).length > 0) filterByProvvedimento.arrSottonumero = arrSottonumero.filter(el => el.selected === true)
+      if (artProvv) filterByProvvedimento.articolo = artProvv
+      if (numProvv) filterByProvvedimento.numero = numProvv
+      if (selectedCategoriaProvvedimento) filterByProvvedimento.categoria = selectedCategoriaProvvedimento
+      if (allegatoProvv) filterByProvvedimento.allegato = allegatoProvv
+      //Fine compilazione del filtro per Provvedimento
+      //Se filterByProvvedimento ha almeno una voce (oltre alla data, oggetto pieno di prop settate a null di default) lo addo al filterState
+      if (Object.keys(filterByProvvedimento).length > 0) {
+        minifiedFilterState.byProvvedimento = filterByProvvedimento
+      }
+      console.log("minifiedFilterState before becoming string:", minifiedFilterState)
       const filtersStateStr = JSON.stringify(minifiedFilterState)
       const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${props.searchInput}&activeFilters=${filtersStateStr}`, {
         method: 'GET',

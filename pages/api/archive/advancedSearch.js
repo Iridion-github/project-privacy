@@ -19,7 +19,7 @@ export default async (req, res) => {
   let mappedArchive //variabile array dei dati dell'archivio mappato
   const searchterms = req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null
   const activeFilters = JSON.parse(req.query.activeFilters)
-  console.log("BACKEND - advancedSearch activeFilters:", activeFilters.bySubject.byZoneGeog)
+  console.log("BACKEND - advancedSearch activeFilters:", activeFilters)
   const filesToAnalyze = []
   const dataToFilter = []
   const todayDate = new Date()
@@ -55,7 +55,12 @@ export default async (req, res) => {
       }
     }
     (() => {
-      for (const f of getFiles('public/archive')) {
+      let startDirectory = 'public/archive'
+      console.log("Object.keys(activeFilters):", Object.keys(activeFilters))
+      if (Object.keys(activeFilters).includes("byProvvedimento")) {
+        console.log("We gotta search a Provv!")
+      }
+      for (const f of getFiles(startDirectory)) {
         filesToAnalyze.push(f)
       }
     })()
@@ -65,6 +70,10 @@ export default async (req, res) => {
       try {
         const analyzedFiles = []
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
+
+
+          //[Checkpoint] Sometimes fileObj.relativepath is undefined. Or maybe it's fileObj itself, check it out from here.
+          console.log("Sometimes fileObj.relativepath is undefined. Or maybe it's fileObj itself, check it out from here.")
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf")
           const docx = fileObj.fullpath.toLowerCase().includes(".docx")
           const doc = fileObj.fullpath.toLowerCase().includes(".doc")

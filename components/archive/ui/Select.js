@@ -43,10 +43,10 @@ export const Select = function (props) {
             custom>
             {selectableOptions.map(el => <option
               style={getOptionStyle(el)}
-              key={el}
+              key={el.tag ? el.tag : el}
               value={getOptionValue(el)}
             >
-              {el}
+              {el.label ? el.label : el}
             </option>
             )}
           </Form.Control>

@@ -29,8 +29,8 @@ export const FilterByProvvedimento = function (props) {
                 onChange={props.handleChangeProvvedimento}
                 isDisabled={false}
                 selectableOptions={props.arrProvvedimento}
-                //placeholder={"placeholder"}
-                //getOptionValue={col => col}
+                placeholder={"placeholder"}
+                getOptionValue={opt => opt.tag}
                 defaultValue={props.selectedProvvedimento}
               />
             </Col>
