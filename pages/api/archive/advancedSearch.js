@@ -6,6 +6,7 @@ import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
 import libre from 'libreoffice-convert' //pacchetto usato per convertire i docx files in pdf (linux version)
+import { Console } from 'console'
 
 const environment = "linux"
 
@@ -19,12 +20,17 @@ export default async (req, res) => {
   let mappedArchive //variabile array dei dati dell'archivio mappato
   const searchterms = req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null
   const activeFilters = JSON.parse(req.query.activeFilters)
-  console.log("BACKEND - advancedSearch activeFilters:", activeFilters)
+  const includePdf = activeFilters.byExtension.find(obj => obj.label === "Pdf").checked
+  const includeDoc = activeFilters.byExtension.find(obj => obj.label === "Doc").checked
+  const includeDocx = activeFilters.byExtension.find(obj => obj.label === "Docx").checked
   const filesToAnalyze = []
   const dataToFilter = []
   const todayDate = new Date()
   const todayUTC = todayDate.toUTCString()
   const readFileName = todayUTC.slice(0, 16)
+  console.log("activeFilters:", activeFilters)
+  const mustBeProvv = Object.keys(activeFilters).includes("byProvvedimento")
+
   try {
     const mappedArchiveRaw = await fs.readFileSync("mappedArchive" + envSlash + readFileName + ".json")
     mappedArchive = JSON.parse(mappedArchiveRaw)
@@ -47,7 +53,7 @@ export default async (req, res) => {
           yield {
             fullpath: fullpath,
             linuxfullpath: slash(fullpath),
-            relativepath: fullpath.split("public", envSlash)[1],
+            relativepath: fullpath.split("public" + envSlash)[1],
             linuxpath: slash(fullpath.split("public" + envSlash)[1]),
             filename: dirent.name
           }
@@ -56,10 +62,6 @@ export default async (req, res) => {
     }
     (() => {
       let startDirectory = 'public/archive'
-      console.log("Object.keys(activeFilters):", Object.keys(activeFilters))
-      if (Object.keys(activeFilters).includes("byProvvedimento")) {
-        console.log("We gotta search a Provv!")
-      }
       for (const f of getFiles(startDirectory)) {
         filesToAnalyze.push(f)
       }
@@ -71,22 +73,32 @@ export default async (req, res) => {
         const analyzedFiles = []
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
 
-
-          //[Checkpoint] Sometimes fileObj.relativepath is undefined. Or maybe it's fileObj itself, check it out from here.
-          console.log("Sometimes fileObj.relativepath is undefined. Or maybe it's fileObj itself, check it out from here.")
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf")
           const docx = fileObj.fullpath.toLowerCase().includes(".docx")
           const doc = fileObj.fullpath.toLowerCase().includes(".doc")
+          const isProvv = fileObj.fullpath.includes(envSlash + "Provvedimenti" + envSlash)
 
           //singleResult Promise starts pending
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
+            if (!isProvv && mustBeProvv) {
+              //[Checkpoint] Qui non ci arriva con la ricerca avanzata, selezionando un filtro per provv. Indagare.
+              console.log("Si cerca un provv. Questo file NON è un provv. e verrà ignorato")
+              resolveSingle({}) //se è richiesto un provvedimento ed il file attuale NON lo è, non lo analizzo neanche
+            }
+
             if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
-              if (!activeFilters.includePdf) resolveSingle({})
+              if (!includePdf) {
+                console.log("Questo file è un pdf. Il filtro pdf è disattivato, il file verrà ignorato")
+                resolveSingle({})
+              } //se è un pdf e l'activeFilters non vuole pdf, esco
               const pdfBuffer = fs.readFileSync(fileObj.fullpath)
               const getPdfContent = async () => {
                 const pdfContentArray = []
                 await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
-                  if (err) return rejectSingle(err) //rejecting singleResult Promise
+                  if (err) {
+                    console.log("PdfReader - Error:", err)
+                    return rejectSingle(err) //rejecting singleResult Promise
+                  }
                   if (!item) { //Condizione d'uscita da parseFileItems()
                     return resolveSingle({ //resolving singleResult Promise
                       fullpath: fileObj.fullpath,
@@ -105,7 +117,7 @@ export default async (req, res) => {
               }
               getPdfContent()
             } else if (docx) {
-              if (!activeFilters.includeDocx) resolveSingle({})
+              if (!includeDocx) resolveSingle({})
               //[Docx procedure] (mammoth)
               const options = {}
               mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
@@ -124,7 +136,7 @@ export default async (req, res) => {
                 })
               })
             } else if (doc) {
-              if (!activeFilters.includeDoc) resolveSingle({})
+              if (!includeDoc) resolveSingle({})
               //[Doc procedure] (WordExtractor)
               const getDocContent = async (fileObj) => {
                 const docExtractor = new WordExtractor()
@@ -144,6 +156,7 @@ export default async (req, res) => {
               rejectSingle("File is not pdf, docx or doc!") //rejecting singleResult Promise
             }
           }).then(singleResult => {
+            //console.log("singleResult.content.slice(0,500)", singleResult.content.slice(0, 500))
             return singleResult
           })
           //singleResult Promise resolved/rejected
@@ -181,17 +194,17 @@ export default async (req, res) => {
 
   const filteredDocs = dataToFilter.filter(d => {
     if (d.content) {
-      if (!activeFilters.includePdf && d.filename.includes(".pdf")) return false
-      if (!activeFilters.includeDocx && d.filename.includes(".docx")) return false
-      if (!activeFilters.includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false
+      if (!includePdf && d.filename.includes(".pdf")) return false
+      if (!includeDocx && d.filename.includes(".docx")) return false
+      if (!includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false
       //Eventuali affinamenti del filtro andranno qui 
       const cleanContent = d.content.replace(/[^\w\s]/gi, '')//.toLowerCase()
       //Se il file non contiene la query di ricerca, result parte da false
-      let result = cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase())
+      let result = cleanContent.includes(searchterms?.replace(/[^\w\s]/gi, '').toLowerCase())
       if (result === true) return result
 
       //Ciclo che cerca i tag di byAuthority, appena uno viene trovato, esce per risparmiare tempo
-      if (activeFilters.byAuthority.length > 0) {
+      if (activeFilters.byAuthority?.length > 0) {
         for (let x = 0; x < activeFilters.byAuthority.length; x++) {
           let tag = activeFilters.byAuthority[x].tag.replace(/[^\w\s]/gi, '')
           result = cleanContent.toLowerCase().includes(tag)
@@ -252,7 +265,7 @@ export default async (req, res) => {
             }
           })
         } else {
-          console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x])
+          console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x].fullpath)
         }
       }).then(libreResult => {
         return libreResult

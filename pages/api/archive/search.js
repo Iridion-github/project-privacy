@@ -160,7 +160,6 @@ export default async (req, res) => {
         rejectContainer(errContainer) //rejecting containerResult Promise
       }
     }).then(async (containerResult) => {
-      console.log("containerResult:", containerResult)
       await dataToFilter.push(...containerResult)
       return containerResult
     })//containerResult Promise resolved/rejected
@@ -204,7 +203,7 @@ export default async (req, res) => {
             }
           })
         } else {
-          console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x])
+          console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x].fullpath)
         }
       }).then(libreResult => {
         return libreResult
