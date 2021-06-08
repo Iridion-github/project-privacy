@@ -6,7 +6,6 @@ import mammoth from 'mammoth' //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor" //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
 import libre from 'libreoffice-convert' //pacchetto usato per convertire i docx files in pdf (linux version)
-import { Console } from 'console'
 
 const environment = "linux"
 
@@ -24,7 +23,7 @@ export default async (req, res) => {
   const includeDoc = activeFilters.byExtension.find(obj => obj.label === "Doc").checked
   const includeDocx = activeFilters.byExtension.find(obj => obj.label === "Docx").checked
   const filesToAnalyze = []
-  const dataToFilter = []
+  let dataToFilter = []
   const todayDate = new Date()
   const todayUTC = todayDate.toUTCString()
   const readFileName = todayUTC.slice(0, 16)
@@ -80,9 +79,11 @@ export default async (req, res) => {
 
           //singleResult Promise starts pending
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
+            console.log("isProvv:", isProvv)
+            console.log("mustBeProvv:", mustBeProvv)
             if (!isProvv && mustBeProvv) {
               //[Checkpoint] Qui non ci arriva con la ricerca avanzata, selezionando un filtro per provv. Indagare.
-              console.log("Si cerca un provv. Questo file NON è un provv. e verrà ignorato")
+              console.log("Si cerca un provv. Questo file NON è un provv. e verrà ignorato. File:", fileObj.fullpath)
               resolveSingle({}) //se è richiesto un provvedimento ed il file attuale NON lo è, non lo analizzo neanche
             }
 
@@ -188,21 +189,29 @@ export default async (req, res) => {
         rejectContainer(errContainer) //rejecting containerResult Promise
       }
     }).then((containerResult) => {
+      console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.")
+      dataToFilter = [...containerResult]
       return containerResult
     })//containerResult Promise resolved/rejected
   }
+
+  console.log("dataToFilter:", dataToFilter)
 
   const filteredDocs = dataToFilter.filter(d => {
     if (d.content) {
       if (!includePdf && d.filename.includes(".pdf")) return false
       if (!includeDocx && d.filename.includes(".docx")) return false
       if (!includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false
+
+      console.log("Now analyzing file:", d.fullpath)
+
       //Eventuali affinamenti del filtro andranno qui 
       const cleanContent = d.content.replace(/[^\w\s]/gi, '')//.toLowerCase()
       //Se il file non contiene la query di ricerca, result parte da false
       let result = cleanContent.includes(searchterms?.replace(/[^\w\s]/gi, '').toLowerCase())
       if (result === true) return result
 
+      console.log("About to check tags byAuthority")
       //Ciclo che cerca i tag di byAuthority, appena uno viene trovato, esce per risparmiare tempo
       if (activeFilters.byAuthority?.length > 0) {
         for (let x = 0; x < activeFilters.byAuthority.length; x++) {
@@ -211,7 +220,9 @@ export default async (req, res) => {
           if (result === true) return result
         }
       }
+      console.log("Finished checking tags byAuthority")
 
+      console.log("About to check tags bySubject")
       //Ciclo che cerca i tag di bySubject, appena uno viene trovato, esce per risparmiare tempo
       if (Object.keys(activeFilters.bySubject).length > 0) {
         for (let x = 0; x < activeFilters.bySubject.length; x++) {
@@ -230,6 +241,7 @@ export default async (req, res) => {
           }
         }
       }
+      console.log("Finished checking tags byAuthority")
 
       return result
     } else {

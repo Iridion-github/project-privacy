@@ -1639,6 +1639,7 @@ export const AdvancedSearch = function (props) {
       //Inizio compilazione del filtro per Provvedimento
       const filterByProvvedimento = {}
       if (selectedProvvedimento !== "") filterByProvvedimento.provv = selectedProvvedimento
+      console.log("tipoProvv should this should never be undefined/null/empty_string:", tipoProvv) //this should never be undefined/null/""
       if (tipoProvv) filterByProvvedimento.tipo = tipoProvv
       if (dataFiltroProvv.day || dataFiltroProvv.month || dataFiltroProvv.year) filterByProvvedimento.data = {
         day: null,

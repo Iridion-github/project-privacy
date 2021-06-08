@@ -7,7 +7,7 @@ import { Header } from '../components/layout/Header'
 import { Navigation } from '../components/layout/Navbar'
 import { Footer } from '../components/layout/Footer'
 import { ErrorComponent } from '../components/layout/ErrorComponent'
-import { useAppContext } from "../../context/contextLib"
+import { useAppContext } from "../context/contextLib"
 
 export default function errorPage(props) {
   const router = useRouter()

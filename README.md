@@ -1,7 +1,7 @@
 ## [ToDo]
 - Continuare con lo sviluppo dell'Archivio sbattendo il muso sul backend.
 ## [Checkpoint]
-- Non stampa neppure i console.log (advancedSearch - Line 84)
+- Ora archive è in grado di creare la mappatura e nella stessa iterazione cercarvi all'interno. 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,7 +9,7 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
--
+- [archive] Ciò che simple search riesce a trovare, non viene trovato invece da advancedSearch, anche se non si inserisce alcun campo specifico. 
 ## Implementazioni Possibili/Utili e Migliorie
 
 
