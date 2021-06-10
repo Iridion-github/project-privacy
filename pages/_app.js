@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
     if (currentLang !== cookies.currentLang) {
       setCookie("currentLang", currentLang)
     }
-  })
+  }, [currentLang])
 
   return (
     <AppContext.Provider value={{ currentLang, changeSiteLang }}>

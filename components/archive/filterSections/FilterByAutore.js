@@ -3,8 +3,8 @@ import {
   Col,
   Card,
   Form
-} from 'react-bootstrap'
-import { TextInput } from '../ui/TextInput'
+} from 'react-bootstrap';
+import { TextInput } from '../ui/TextInput';
 
 export const FilterByAutore = function (props) {
 
@@ -14,7 +14,7 @@ export const FilterByAutore = function (props) {
         <Col md={12} className="justify-content-center pl-0 pr-0">
           <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
             <Card.Header>
-              <h5>Filtra per Autore:</h5>
+              <h5>Filtra per Autore</h5>
             </Card.Header>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
@@ -31,5 +31,5 @@ export const FilterByAutore = function (props) {
         </Col>
       </Row>
     </Card>
-  )
-}
+  );
+};

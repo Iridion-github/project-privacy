@@ -3,8 +3,8 @@ import {
   Col,
   Card,
   Form
-} from 'react-bootstrap'
-import { DateIntervalInput } from '../ui/DateIntervalInput'
+} from 'react-bootstrap';
+import { DateIntervalInput } from '../ui/DateIntervalInput';
 
 
 export const FilterByData = function (props) {
@@ -13,7 +13,7 @@ export const FilterByData = function (props) {
     <Card className="pt-2 pb-2 mb-2">
       <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
         <Card.Header>
-          <h5>Filtra per Data:</h5>
+          <h5>Filtra per Data</h5>
         </Card.Header>
       </Row>
       <Row className="w-100 justify-content-center ml-0 mr-0">
@@ -60,5 +60,5 @@ export const FilterByData = function (props) {
         />
       </Row>
     </Card>
-  )
-}
+  );
+};

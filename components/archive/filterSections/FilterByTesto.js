@@ -3,8 +3,8 @@ import {
   Col,
   Card,
   Form
-} from 'react-bootstrap'
-import { Select } from '../ui/Select'
+} from 'react-bootstrap';
+import { Select } from '../ui/Select';
 
 
 export const FilterByTesto = function (props) {
@@ -34,5 +34,5 @@ export const FilterByTesto = function (props) {
         </Col>
       </Row>
     </Card>
-  )
-}
+  );
+};

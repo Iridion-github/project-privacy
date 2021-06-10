@@ -1,24 +1,24 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import {
   Button,
   Col,
   Form,
   Jumbotron,
   Row
-} from 'react-bootstrap'
-import { FilterByAutore } from './filterSections/FilterByAutore'
-import { FilterByAutorità } from './filterSections/FilterByAutorità'
-import { FilterByCodice } from './filterSections/FilterByCodice'
-import { FilterByData } from './filterSections/FilterByData'
-import { FilterByFormulario } from './filterSections/FilterByFormulario'
-import { FilterByGazzettaUfficiale } from './filterSections/FilterByGazzettaUfficiale'
-import { FilterByLegge } from './filterSections/FilterByLegge'
-import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento'
-import { FilterBySubject } from './filterSections/FilterBySubject' //Filtro per Argomenti (da rivedere)
-import { FilterByTesto } from './filterSections/FilterByTesto' //Comportamento ricerca testuale
-import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto'
-import { FilterByTestoUnico } from './filterSections/FilterByTestoUnico'
+} from 'react-bootstrap';
+import { FilterByAutore } from './filterSections/FilterByAutore';
+import { FilterByAutorità } from './filterSections/FilterByAutorità';
+import { FilterByCodice } from './filterSections/FilterByCodice';
+import { FilterByData } from './filterSections/FilterByData';
+import { FilterByFormulario } from './filterSections/FilterByFormulario';
+import { FilterByGazzettaUfficiale } from './filterSections/FilterByGazzettaUfficiale';
+import { FilterByLegge } from './filterSections/FilterByLegge';
+import { FilterByProvvedimento } from './filterSections/FilterByProvvedimento';
+import { FilterBySubject } from './filterSections/FilterBySubject'; //Filtro per Argomenti (da rivedere)
+import { FilterByTesto } from './filterSections/FilterByTesto'; //Comportamento ricerca testuale
+import { FilterByTitoloVsContenuto } from './filterSections/FilterByTitoloVsContenuto';
+import { FilterByTestoUnico } from './filterSections/FilterByTestoUnico';
 import {
   arrAutorità,
   arrCodice,
@@ -29,30 +29,30 @@ import {
   arrFormulario,
   arrCittà as arrCittàRaw,
   arrTestoUnico
-} from '../../utils/advancedSearch'
-import { useAppContext } from "../../context/contextLib"
+} from '../../utils/advancedSearch';
+import { useAppContext } from "../../context/contextLib";
 
 
 export const AdvancedSearch = function (props) {
-  const { currentLang, changeSiteLang } = useAppContext()
+  const { currentLang, changeSiteLang } = useAppContext();
 
-  const [previousTab, setPreviousTab] = useState(props.shownTab)
+  const [previousTab, setPreviousTab] = useState(props.shownTab);
 
   const handleChangePreviousTab = (targetTab) => {
-    setPreviousTab(targetTab)
-  }
+    setPreviousTab(targetTab);
+  };
 
   const toggleInclude = (propsArr) => {
-    const newFilterState = { ...filtersState }
+    const newFilterState = { ...filtersState };
     if (Array.isArray(newFilterState[propsArr[0]])) {
-      newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked = !newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked
+      newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked = !newFilterState[propsArr[0]].find(el => el.label === propsArr[1]).checked;
     } else if (Array.isArray(newFilterState[propsArr[0]][propsArr[1]])) {
-      newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked = !newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked
+      newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked = !newFilterState[propsArr[0]][propsArr[1]].find(el => el.label === propsArr[2]).checked;
     } else {
-      console.log("ERROR: This case should NEVER happen.")
+      console.log("ERROR: This case should NEVER happen.");
     }
-    setFiltersState(newFilterState)
-  }
+    setFiltersState(newFilterState);
+  };
 
   const [filtersState, setFiltersState] = useState({
     byExtension: [
@@ -1288,325 +1288,325 @@ export const AdvancedSearch = function (props) {
         onChange: () => toggleInclude(["byAuthority", "indCorteCost"])
       }
     ]
-  })
+  });
 
-  const [selectedOpzioneTestuale, setSelectedOpzioneTestuale] = useState("Contengono almeno 1 delle parole")
+  const [selectedOpzioneTestuale, setSelectedOpzioneTestuale] = useState("Contengono almeno 1 delle parole");
 
   const handleChangeOpzioneTestuale = (val) => {
-    setSelectedOpzioneTestuale(val)
-  }
+    setSelectedOpzioneTestuale(val);
+  };
 
   //Stato di Date (da -> a)
 
-  const [startDate, setStartDate] = useState("")
+  const [startDate, setStartDate] = useState("");
 
   const handleChangeStartDate = (val) => {
-    setStartDate(val)
-  }
+    setStartDate(val);
+  };
 
   const removeStartDate = () => {
-    handleChangeStartDate("")
-  }
+    handleChangeStartDate("");
+  };
 
-  const [endDate, setEndDate] = useState("")
+  const [endDate, setEndDate] = useState("");
 
   const handleChangeEndDate = (val) => {
-    setEndDate(val)
-  }
+    setEndDate(val);
+  };
 
   const removeEndDate = () => {
-    handleChangeEndDate("")
-  }
+    handleChangeEndDate("");
+  };
 
   //Stato di Data (singola) in Autorità
   const [dataFiltroAutorità, setDataFiltroAutorità] = useState({
     day: "",
     month: "",
     year: ""
-  })
+  });
 
   const handleChangeDataFiltroAutorità = (which, val) => {
-    const newState = { ...dataFiltroAutorità }
+    const newState = { ...dataFiltroAutorità };
     if (
       which === "day" && val === "0"
       || which === "month" && val === "0"
       || which === "year" && val === "0"
       || which === "year" && val === "1799") {
-      newState[which] = ""
+      newState[which] = "";
     } else {
-      newState[which] = val
+      newState[which] = val;
     }
-    setDataFiltroAutorità(newState)
-  }
+    setDataFiltroAutorità(newState);
+  };
 
-  const [numAutorità, setNumAutorità] = useState("")
+  const [numAutorità, setNumAutorità] = useState("");
 
   const handleChangeNumAutorità = (val) => {
     if (val === "0") {
-      setNumAutorità("")
+      setNumAutorità("");
     } else {
-      setNumAutorità(val)
+      setNumAutorità(val);
     }
-  }
+  };
 
-  const [arrCittà, setArrCittà] = useState(arrCittàRaw.map(el => ({ value: el, label: el })))
+  const [arrCittà, setArrCittà] = useState(arrCittàRaw.map(el => ({ value: el, label: el })));
 
-  const [cittàAutorità, setCittàAutorità] = useState("")
+  const [cittàAutorità, setCittàAutorità] = useState("");
 
   const handleChangeCittàAutorità = (opt) => {
-    setCittàAutorità(opt.value)
-  }
+    setCittàAutorità(opt.value);
+  };
 
-  const [artCodice, setArtCodice] = useState("")
+  const [artCodice, setArtCodice] = useState("");
 
   const handleChangeArtCodice = (val) => {
     if (val === "0") {
-      setArtCodice("")
+      setArtCodice("");
     } else {
-      setArtCodice(val)
+      setArtCodice(val);
     }
-  }
+  };
 
   const [dataFiltroLegge, setDataFiltroLegge] = useState({
     day: "",
     month: "",
     year: ""
-  })
+  });
 
   const handleChangeDataFiltroLegge = (which, val) => {
-    const newState = { ...dataFiltroLegge }
+    const newState = { ...dataFiltroLegge };
     if (
       which === "day" && val === "0"
       || which === "month" && val === "0"
       || which === "year" && val === "0"
       || which === "year" && val === "1799") {
-      newState[which] = ""
+      newState[which] = "";
     } else {
-      newState[which] = val
+      newState[which] = val;
     }
-    setDataFiltroLegge(newState)
-  }
+    setDataFiltroLegge(newState);
+  };
 
-  const [artLegge, setArtLegge] = useState("")
+  const [artLegge, setArtLegge] = useState("");
 
   const handleChangeArtLegge = (val) => {
     if (val === "0") {
-      setArtLegge("")
+      setArtLegge("");
     } else {
-      setArtLegge(val)
+      setArtLegge(val);
     }
-  }
+  };
 
-  const [numLegge, setNumLegge] = useState("")
+  const [numLegge, setNumLegge] = useState("");
 
   const handleChangeNumLegge = (val) => {
     if (val === "0") {
-      setNumLegge("")
+      setNumLegge("");
     } else {
-      setNumLegge(val)
+      setNumLegge(val);
     }
-  }
+  };
 
-  const [tipoProvv, setTipoProvv] = useState("vigente")
+  const [tipoProvv, setTipoProvv] = useState("vigente");
 
   const handleChangeTipoProvv = (val) => {
-    setTipoProvv(val)
-  }
+    setTipoProvv(val);
+  };
 
   const [dataFiltroProvv, setDataFiltroProvv] = useState({
     day: "",
     month: "",
     year: ""
-  })
+  });
 
   const handleChangeDataFiltroProvv = (which, val) => {
-    const newState = { ...dataFiltroProvv }
+    const newState = { ...dataFiltroProvv };
     if (
       which === "day" && val === "0"
       || which === "month" && val === "0"
       || which === "year" && val === "0"
       || which === "year" && val === "1799") {
-      newState[which] = ""
+      newState[which] = "";
     } else {
-      newState[which] = val
+      newState[which] = val;
     }
-    setDataFiltroProvv(newState)
-  }
+    setDataFiltroProvv(newState);
+  };
 
-  const [artProvv, setArtProvv] = useState("")
+  const [artProvv, setArtProvv] = useState("");
 
   const handleChangeArtProvv = (val) => {
     if (val === "0") {
-      setArtProvv("")
+      setArtProvv("");
     } else {
-      setArtProvv(val)
+      setArtProvv(val);
     }
-  }
+  };
 
-  const [numProvv, setNumProvv] = useState("")
+  const [numProvv, setNumProvv] = useState("");
 
   const handleChangeNumProvv = (val) => {
     if (val === "0") {
-      setNumProvv("")
+      setNumProvv("");
     } else {
-      setNumProvv(val)
+      setNumProvv(val);
     }
-  }
+  };
 
-  const [allegatoProvv, setAllegatoProvv] = useState("")
+  const [allegatoProvv, setAllegatoProvv] = useState("");
 
   const handleChangeAllegatoProvv = (val) => {
-    setAllegatoProvv(val)
-  }
+    setAllegatoProvv(val);
+  };
 
   const [dataFiltroGazz, setDataFiltroGazz] = useState({
     day: "",
     month: "",
     year: ""
-  })
+  });
 
   const handleChangeDataFiltroGazz = (which, val) => {
-    const newState = { ...dataFiltroGazz }
+    const newState = { ...dataFiltroGazz };
     if (
       which === "day" && val === "0"
       || which === "month" && val === "0"
       || which === "year" && val === "0"
       || which === "year" && val === "1799") {
-      newState[which] = ""
+      newState[which] = "";
     } else {
-      newState[which] = val
+      newState[which] = val;
     }
-    setDataFiltroGazz(newState)
-  }
+    setDataFiltroGazz(newState);
+  };
 
-  const [numGazz, setNumGazz] = useState("")
+  const [numGazz, setNumGazz] = useState("");
 
   const handleChangeNumGazz = (val) => {
     if (val === "0") {
-      setNumGazz("")
+      setNumGazz("");
     } else {
-      setNumGazz(val)
+      setNumGazz(val);
     }
-  }
+  };
 
   //Stato del Filtro per Autore in "Note e Dottrina". Per ora è solo un text input, in futuro potrebe diventare un Autosuggest
-  const [autoreNoteDottr, setAutoreNoteDottr] = useState("")
+  const [autoreNoteDottr, setAutoreNoteDottr] = useState("");
 
   const handleChangeAutoreNoteDottr = (val) => {
-    setAutoreNoteDottr(val)
-  }
+    setAutoreNoteDottr(val);
+  };
 
-  const [selectedAutorità, setSelectedAutorità] = useState("")
+  const [selectedAutorità, setSelectedAutorità] = useState("");
 
   const handleChangeAutorità = (val) => {
-    setSelectedAutorità(val)
-  }
+    setSelectedAutorità(val);
+  };
 
-  const [selectedCodice, setSelectedCodice] = useState("")
+  const [selectedCodice, setSelectedCodice] = useState("");
 
   const handleChangeCodice = (val) => {
-    setSelectedCodice(val)
-  }
+    setSelectedCodice(val);
+  };
 
-  const [arrSottonumero, setArrSottonumero] = useState(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })))
+  const [arrSottonumero, setArrSottonumero] = useState(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })));
 
   const handleChangeArrSottonumero = (arr) => {
-    setArrSottonumero(arr)
-  }
+    setArrSottonumero(arr);
+  };
 
   const handleAddSottonumero = (val) => {
     handleChangeArrSottonumero([...arrSottonumero].map(opt => {
       if (opt.value === val) {
-        opt.selected = true
+        opt.selected = true;
       }
-      return opt
-    }))
-  }
+      return opt;
+    }));
+  };
 
   const handleRemoveSottonumero = (val) => {
     if (val === "REMOVE_ALL") {
-      handleChangeArrSottonumero([...arrSottonumero].map(el => ({ ...el, selected: false })))
+      handleChangeArrSottonumero([...arrSottonumero].map(el => ({ ...el, selected: false })));
     } else {
       handleChangeArrSottonumero([...arrSottonumero].map(opt => {
         if (opt.value === val) {
-          opt.selected = false
+          opt.selected = false;
         }
-        return opt
-      }))
+        return opt;
+      }));
     }
-  }
+  };
 
-  const [selectedSezione, setSelectedSezione] = useState("")
+  const [selectedSezione, setSelectedSezione] = useState("");
 
   const handleChangeSezione = (val) => {
-    setSelectedSezione(val)
-  }
+    setSelectedSezione(val);
+  };
 
-  const [selectedRegione, setSelectedRegione] = useState("")
+  const [selectedRegione, setSelectedRegione] = useState("");
 
   const handleChangeRegione = (val) => {
-    setSelectedRegione(val)
-  }
+    setSelectedRegione(val);
+  };
 
 
-  const [selectedLegge, setSelectedLegge] = useState("")
+  const [selectedLegge, setSelectedLegge] = useState("");
 
   const handleChangeLegge = (val) => {
-    setSelectedLegge(val)
-  }
+    setSelectedLegge(val);
+  };
 
-  const [selectedProvvedimento, setSelectedProvvedimento] = useState("")
+  const [selectedProvvedimento, setSelectedProvvedimento] = useState("");
 
   const handleChangeProvvedimento = (val) => {
-    setSelectedProvvedimento(val)
-  }
+    setSelectedProvvedimento(val);
+  };
 
-  const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState("")
+  const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState("");
 
   const handleChangeCategoriaProvvedimento = (val) => {
-    setSelectedCategoriaProvvedimento(val)
-  }
+    setSelectedCategoriaProvvedimento(val);
+  };
 
-  const [selectedFormulario, setSelectedFormulario] = useState("")
+  const [selectedFormulario, setSelectedFormulario] = useState("");
 
   const handleChangeFormulario = (val) => {
-    setSelectedFormulario(val)
-  }
+    setSelectedFormulario(val);
+  };
 
-  const [whereToSearch, setWhereToSearch] = useState("")
+  const [whereToSearch, setWhereToSearch] = useState("");
 
   const handleWhereToSearch = (val) => {
-    setWhereToSearch(val)
-  }
+    setWhereToSearch(val);
+  };
 
-  const [selectedTestoUnico, setSelectedTestoUnico] = useState("")
+  const [selectedTestoUnico, setSelectedTestoUnico] = useState("");
 
   const handleChangeTestoUnico = (val) => {
-    setSelectedTestoUnico(val)
-  }
+    setSelectedTestoUnico(val);
+  };
 
   const getMinifiedFilterState = (startObject) => {
-    const oldFilterState = JSON.parse(JSON.stringify(startObject))
-    const newFilterState = JSON.parse(JSON.stringify(startObject))
-    const externalProps = Object.keys(oldFilterState)
+    const oldFilterState = JSON.parse(JSON.stringify(startObject));
+    const newFilterState = JSON.parse(JSON.stringify(startObject));
+    const externalProps = Object.keys(oldFilterState);
     for (let x = 0; x < externalProps.length; x++) {
       if (externalProps[x] === "byAuthority" || externalProps[x] === "byExtension") {
-        const editedArr = oldFilterState[externalProps[x]].filter(el => el.checked === true)
-        newFilterState[externalProps[x]] = editedArr
+        const editedArr = oldFilterState[externalProps[x]].filter(el => el.checked === true);
+        newFilterState[externalProps[x]] = editedArr;
       }
       if (externalProps[x] === "bySubject") {
-        const internalProps = Object.keys(oldFilterState[externalProps[x]])
+        const internalProps = Object.keys(oldFilterState[externalProps[x]]);
         //Lascio negli array, solo gli oggetti che hanno checked: true
         for (let y = 0; y < internalProps.length; y++) {
-          const editedArr = oldFilterState[externalProps[x]][internalProps[y]].filter(el => el.checked === true)
-          newFilterState[externalProps[x]][internalProps[y]] = editedArr
+          const editedArr = oldFilterState[externalProps[x]][internalProps[y]].filter(el => el.checked === true);
+          newFilterState[externalProps[x]][internalProps[y]] = editedArr;
         }
         //Elimino gli array vuoti
         for (let y = 0; y < internalProps.length; y++) {
-          const emptyArr = oldFilterState[externalProps[x]][internalProps[y]].length === 0
+          const emptyArr = oldFilterState[externalProps[x]][internalProps[y]].length === 0;
           if (emptyArr) {
-            const parent = oldFilterState[externalProps[x]]
-            delete newFilterState[externalProps[x]][internalProps[y]]
+            const parent = oldFilterState[externalProps[x]];
+            delete newFilterState[externalProps[x]][internalProps[y]];
           }
         }
       }
@@ -1616,54 +1616,54 @@ export const AdvancedSearch = function (props) {
         //newFilterState[prop] is an array
         if (newFilterState[prop].length === 0) {
           //delete empty array on the first level
-          delete newFilterState[prop]
+          delete newFilterState[prop];
         }
       } else {
         //newFilterState[prop] is an object
-        const innerObject = newFilterState[prop]
+        const innerObject = newFilterState[prop];
         Object.keys(innerObject).forEach(subProp => {
           if (innerObject[subProp].length === 0) {
             //delete empty array on the second level
-            delete innerObject[subProp]
+            delete innerObject[subProp];
           }
-        })
+        });
       }
-    })
-    return newFilterState
-  }
+    });
+    return newFilterState;
+  };
 
   const submitAdvancedSearch = async () => {
     try {
-      props.setLoading(true)
-      const minifiedFilterState = getMinifiedFilterState(filtersState)
+      props.setLoading(true);
+      const minifiedFilterState = getMinifiedFilterState(filtersState);
       //Inizio compilazione del filtro per Provvedimento
-      const filterByProvvedimento = {}
-      if (selectedProvvedimento !== "") filterByProvvedimento.provv = selectedProvvedimento
-      console.log("tipoProvv should this should never be undefined/null/empty_string:", tipoProvv) //this should never be undefined/null/""
-      if (tipoProvv) filterByProvvedimento.tipo = tipoProvv
+      const filterByProvvedimento = {};
+      if (selectedProvvedimento !== "") filterByProvvedimento.provv = selectedProvvedimento;
+      console.log("tipoProvv should this should never be undefined/null/empty_string:", tipoProvv); //this should never be undefined/null/""
+      if (tipoProvv) filterByProvvedimento.tipo = tipoProvv;
       if (dataFiltroProvv.day || dataFiltroProvv.month || dataFiltroProvv.year) filterByProvvedimento.data = {
         day: null,
         month: null,
         year: null
-      }
-      if (dataFiltroProvv.day) filterByProvvedimento.data.day = dataFiltroProvv.day
-      if (dataFiltroProvv.month) filterByProvvedimento.data.month = dataFiltroProvv.month
-      if (dataFiltroProvv.year) filterByProvvedimento.data.year = dataFiltroProvv.year
-      if (arrSottonumero.filter(el => el.selected === true).length > 0) filterByProvvedimento.arrSottonumero = arrSottonumero.filter(el => el.selected === true)
-      if (artProvv) filterByProvvedimento.articolo = artProvv
-      if (numProvv) filterByProvvedimento.numero = numProvv
-      if (selectedCategoriaProvvedimento) filterByProvvedimento.categoria = selectedCategoriaProvvedimento
-      if (allegatoProvv) filterByProvvedimento.allegato = allegatoProvv
+      };
+      if (dataFiltroProvv.day) filterByProvvedimento.data.day = dataFiltroProvv.day;
+      if (dataFiltroProvv.month) filterByProvvedimento.data.month = dataFiltroProvv.month;
+      if (dataFiltroProvv.year) filterByProvvedimento.data.year = dataFiltroProvv.year;
+      if (arrSottonumero.filter(el => el.selected === true).length > 0) filterByProvvedimento.arrSottonumero = arrSottonumero.filter(el => el.selected === true);
+      if (artProvv) filterByProvvedimento.articolo = artProvv;
+      if (numProvv) filterByProvvedimento.numero = numProvv;
+      if (selectedCategoriaProvvedimento) filterByProvvedimento.categoria = selectedCategoriaProvvedimento;
+      if (allegatoProvv) filterByProvvedimento.allegato = allegatoProvv;
       //Fine compilazione del filtro per Provvedimento
       //Se filterByProvvedimento ha almeno una voce (oltre alla data, oggetto pieno di prop settate a null di default) lo addo al filterState
       if (Object.keys(filterByProvvedimento).length > 1) {
-        console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento)
-        minifiedFilterState.byProvvedimento = filterByProvvedimento
+        console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
+        minifiedFilterState.byProvvedimento = filterByProvvedimento;
       } else {
-        console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento)
+        console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
       }
-      console.log("minifiedFilterState before becoming string:", minifiedFilterState)
-      const filtersStateStr = JSON.stringify(minifiedFilterState)
+      console.log("minifiedFilterState before becoming string:", minifiedFilterState);
+      const filtersStateStr = JSON.stringify(minifiedFilterState);
       const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${props.searchInput}&activeFilters=${filtersStateStr}`, {
         method: 'GET',
         headers: {
@@ -1672,77 +1672,199 @@ export const AdvancedSearch = function (props) {
         }
       })
         .then(response => {
-          console.log("1 - response:", response)
-          return response.json()
+          console.log("1 - response:", response);
+          return response.json();
         })
         .then(async response => {
-          console.log("2 - response:", response)
-          props.handleSetSearchResult(response.data.filteredDocs)
-          props.handleSetSearched(props.searchInput, filtersState)
-          props.setLoading(false)
-        })
+          console.log("2 - response:", response);
+          props.handleSetSearchResult(response.data.filteredDocs);
+          props.handleSetSearched(props.searchInput, filtersState);
+          props.setLoading(false);
+        });
     } catch (error) {
-      console.log("submitAdvancedSearch error:", error)
+      console.log("submitAdvancedSearch error:", error);
     }
-  }
+  };
 
-  const resetAdvancedSearch = () => {
-    handleChangeAllegatoProvv("")
-    handleAddSottonumero("")
-    handleChangeArrSottonumero(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })))
-    handleChangeArtCodice("")
-    handleChangeArtLegge("")
-    handleChangeArtProvv("")
-    handleChangeAutoreNoteDottr("")
-    handleChangeAutorità("")
-    handleChangeCategoriaProvvedimento("")
-    handleChangeCittàAutorità("")
-    handleChangeCodice("")
+  const resetAllegatoProvv = () => {
+    handleChangeAllegatoProvv("");
+  };
+
+  const resetAddSottonumero = () => {
+    handleAddSottonumero("");
+  };
+
+  const resetArrSottonumero = () => {
+    handleChangeArrSottonumero(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })));
+  };
+
+  const resetArtCodice = () => {
+    handleChangeArtCodice("");
+  };
+
+  const resetArtLegge = () => {
+    handleChangeArtLegge("");
+  };
+
+  const resetArtProvv = () => {
+    handleChangeArtProvv("");
+  };
+
+  const resetAutoreNoteDottr = () => {
+    handleChangeAutoreNoteDottr("");
+  };
+
+  const resetAutorità = () => {
+    handleChangeAutorità("");
+  };
+
+  const resetCategoriaProvvedimento = () => {
+    handleChangeCategoriaProvvedimento("");
+  };
+
+  const resetCittàAutorità = () => {
+    handleChangeCittàAutorità("");
+  };
+
+  const resetCodice = () => {
+    handleChangeCodice("");
+  };
+
+  const resetDataFiltroAutorità = () => {
     handleChangeDataFiltroAutorità({
       day: "",
       month: "",
       year: ""
-    })
+    });
+  };
+
+  const resetDataFiltroGazz = () => {
     handleChangeDataFiltroGazz({
       day: "",
       month: "",
       year: ""
-    })
+    });
+  };
+
+  const resetDataFiltroLegge = () => {
     handleChangeDataFiltroLegge({
       day: "",
       month: "",
       year: ""
-    })
+    });
+  };
+
+  const resetDataFiltroProvv = () => {
     handleChangeDataFiltroProvv({
       day: "",
       month: "",
       year: ""
-    })
-    handleChangeEndDate("")
-    handleChangeFormulario("")
-    handleChangeLegge("")
-    handleChangeNumAutorità("")
-    handleChangeNumGazz("")
-    handleChangeNumLegge("")
-    handleChangeNumProvv("")
-    handleChangeOpzioneTestuale("")
-    handleChangeProvvedimento("")
-    handleChangeRegione("")
-    handleChangeSezione("")
-    handleChangeStartDate("")
-    handleChangeTipoProvv("")
-    handleWhereToSearch("In qualsiasi punto del documento")
-    handleChangeTestoUnico("")
-  }
+    });
+  };
+
+  const resetEndDate = () => {
+    handleChangeEndDate("");
+  };
+
+  const resetFormulario = () => {
+    handleChangeFormulario("");
+  };
+
+  const resetLegge = () => {
+    handleChangeLegge("");
+  };
+
+  const resetNumAutorità = () => {
+    handleChangeNumAutorità("");
+  };
+
+  const resetNumGazz = () => {
+    handleChangeNumGazz("");
+  };
+
+  const resetNumLegge = () => {
+    handleChangeNumLegge("");
+  };
+
+  const resetNumProvv = () => {
+    handleChangeNumProvv("");
+  };
+
+  const resetOpzioneTestuale = () => {
+    handleChangeOpzioneTestuale("");
+  };
+
+  const resetProvvedimento = () => {
+    handleChangeProvvedimento("");
+  };
+
+  const resetRegione = () => {
+    handleChangeRegione("");
+  };
+
+  const resetSezione = () => {
+    handleChangeSezione("");
+  };
+
+  const resetStartDate = () => {
+    handleChangeStartDate("");
+  };
+
+  const resetTipoProvv = () => {
+    handleChangeTipoProvv("");
+  };
+
+  const resetWhereToSearch = () => {
+    handleWhereToSearch("In qualsiasi punto del documento");
+  };
+
+  const resetTestoUnico = () => {
+    handleChangeTestoUnico("");
+  };
+
+  //[Checkpoint] Mancano i reset-filtri divisi in sezione. Per esempio "resetFiltroProvv" che contiene: [resetProvv, resetTipoProvv, resetDataProvv, resetSottonumeroProvv, resetArticoloProvv, resetNumeroProvv, resetArgomentoProvv, resetAllegatoProvv]
+
+  const resetAdvancedSearch = () => {
+    resetAllegatoProvv();
+    resetAddSottonumero();
+    resetArrSottonumero();
+    resetArtCodice();
+    resetArtLegge();
+    resetArtProvv();
+    resetAutoreNoteDottr();
+    resetAutorità();
+    resetCategoriaProvvedimento();
+    resetCittàAutorità();
+    resetCodice();
+    resetDataFiltroAutorità();
+    resetDataFiltroGazz();
+    resetDataFiltroLegge();
+    resetDataFiltroProvv();
+    resetEndDate();
+    resetFormulario();
+    resetLegge();
+    resetNumAutorità();
+    resetNumGazz();
+    resetNumLegge();
+    resetNumProvv();
+    resetOpzioneTestuale();
+    resetProvvedimento();
+    resetRegione();
+    resetSezione();
+    resetStartDate();
+    resetTipoProvv();
+    resetWhereToSearch();
+    resetTestoUnico();
+  };
 
   useEffect(() => {
     //code to execute at every state update
-    const timestamp = Date.now()
+    const timestamp = Date.now();
     if (previousTab !== props.shownTab) {
-      resetAdvancedSearch()
-      handleChangePreviousTab(props.shownTab)
+      resetAdvancedSearch();
+      handleChangePreviousTab(props.shownTab);
     }
-  })
+  });
 
   return (
     <Row className="w-100 mt-2 ml-0 mr-0">
@@ -1856,6 +1978,7 @@ export const AdvancedSearch = function (props) {
               handleChangeArtProvv={handleChangeArtProvv}
               allegatoProvv={allegatoProvv}
               handleChangeAllegatoProvv={handleChangeAllegatoProvv}
+              reset
             />}
           {/* Filtro per Gazzetta Ufficiale */}
           {(props.shownTab === "normativa") &&
@@ -1923,8 +2046,8 @@ export const AdvancedSearch = function (props) {
         </Row>
       </Jumbotron>
     </Row >
-  )
-}
+  );
+};
 
 
 

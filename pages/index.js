@@ -19,81 +19,79 @@ function Home() {
         currentLang={currentLang}
         changeSiteLang={changeSiteLang}
       />
-      {/* Homepage Slides */}
-      <div className={styles.carouselContainer}>
-        <Carousel className="d-block carouselStyle">
-          <Carousel.Item interval={2000}>
-            <picture>
-              <source
-                media="(max-width: 650px)"
-                srcSet="contatti.png"
-                alt="img alternativa mobile view"
-              />
-              <img
-                className="d-block"
-                src="slides/1stSlide.png"
-                alt="First slide"
-              />
-            </picture>
-            <Carousel.Caption>
-              <h2 className={styles.title} suppressHydrationWarning>
-                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
-              </h2>
-              <span className={styles.description} suppressHydrationWarning>
-                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
-              </span>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item interval={2000}>
-            <picture>
-              <source
-                media="(max-width: 650px)"
-                srcSet="contatti.png"
-                alt="img alternativa mobile view"
-              />
-              <img
-                className="d-block"
-                src="slides/2ndSlide.png"
-                alt="Second slide"
-              />
-            </picture>
-            <Carousel.Caption>
-              <h2 className={styles.title} suppressHydrationWarning>
-                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
-              </h2>
-              <span className={styles.description} suppressHydrationWarning>
-                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
-              </span>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item interval={2000}>
-            <picture>
-              <source
-                media="(max-width: 650px)"
-                srcSet="contatti.png"
-                alt="img alternativa mobile view"
-              />
-              <img
-                className="d-block"
-                src="slides/3rdSlide.png"
-                alt="Third slide"
-              />
-            </picture>
-            <Carousel.Caption>
-              <h2 className={styles.title} suppressHydrationWarning>
-                {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
-              </h2>
-              <span className={styles.description} suppressHydrationWarning>
-                {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
-              </span>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-      </div>
-      {/* Homepage Content */}
-      <main className={styles.main}>
-        {/* Empty div to avoid footer going up while no content to show */}
-        {/* <div style={{ height: "90px" }}></div>*/}
+      <main className="m-0 p-0">
+        {/* Homepage Slides */}
+        <div className={styles.carouselContainer}>
+          <Carousel className="d-block carouselStyle">
+            <Carousel.Item interval={2000}>
+              <picture>
+                <source
+                  media="(max-width: 650px)"
+                  srcSet="contatti.png"
+                  alt="img alternativa mobile view"
+                />
+                <img
+                  className="d-block w-100"
+                  src="slides/1stSlide.png"
+                  alt="First slide"
+                />
+              </picture>
+              <Carousel.Caption>
+                <h2 className={styles.title} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                </h2>
+                <span className={styles.description} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={2000}>
+              <picture>
+                <source
+                  media="(max-width: 650px)"
+                  srcSet="contatti.png"
+                  alt="img alternativa mobile view"
+                />
+                <img
+                  className="d-block w-100"
+                  src="slides/2ndSlide.png"
+                  alt="Second slide"
+                />
+              </picture>
+              <Carousel.Caption>
+                <h2 className={styles.title} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                </h2>
+                <span className={styles.description} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={2000}>
+              <picture>
+                <source
+                  media="(max-width: 650px)"
+                  srcSet="contatti.png"
+                  alt="img alternativa mobile view"
+                />
+                <img
+                  className="d-block w-100"
+                  src="slides/3rdSlide.png"
+                  alt="Third slide"
+                />
+              </picture>
+              <Carousel.Caption>
+                <h2 className={styles.title} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                </h2>
+                <span className={styles.description} suppressHydrationWarning>
+                  {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+        </div>
+        {/* Homepage Content */}
       </main>
       {/* Footer */}
       <Footer />

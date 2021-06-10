@@ -2,13 +2,14 @@ import {
   Row,
   Col,
   Card,
-  Form
-} from 'react-bootstrap'
-import { Select } from '../ui/Select'
-import { MultiSelect } from '../ui/MultiSelect'
-import { DateInputNoCalendar } from '../ui/DateInputNoCalendar'
-import { TextInput } from '../ui/TextInput'
-import { NumberInput } from '../ui/NumberInput'
+  Form,
+  Button
+} from 'react-bootstrap';
+import { Select } from '../ui/Select';
+import { MultiSelect } from '../ui/MultiSelect';
+import { DateInputNoCalendar } from '../ui/DateInputNoCalendar';
+import { TextInput } from '../ui/TextInput';
+import { NumberInput } from '../ui/NumberInput';
 
 
 export const FilterByProvvedimento = function (props) {
@@ -18,7 +19,19 @@ export const FilterByProvvedimento = function (props) {
         <Col md={12} className="justify-content-center pl-0 pr-0">
           <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
             <Card.Header>
-              <h5>Filtra per Provvedimento:</h5>
+              <Row className="w-100 ml-0 mr-0">
+                <h5>Filtra per Provvedimento</h5>
+              </Row>
+              <Row className="w-100 ml-0 mr-0 justify-content-center">
+                <Button
+                  variant="warning"
+                  small
+                  className="reset-filter-btn"
+                  onClick={ }
+                >
+                  Pulisci Filtro
+                </Button>
+              </Row>
             </Card.Header>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
@@ -224,5 +237,5 @@ export const FilterByProvvedimento = function (props) {
         </Col>
       </Row>
     </Card >
-  )
-}
+  );
+};

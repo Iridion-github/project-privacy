@@ -5,17 +5,17 @@ import {
   Form,
   Accordion,
   Button
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 
 export const FilterBySubject = function (props) {
 
   const getDoubleColList = (list) => {
-    const arrResult = []
+    const arrResult = [];
     list && list.forEach((el, i) => {
       if (i % 2 === 0) {
-        const currentEl = list[i]
-        const nextEl = list[i + 1] ? list[i + 1] : null
+        const currentEl = list[i];
+        const nextEl = list[i + 1] ? list[i + 1] : null;
         const firstCol = (
           <Col className="pl-2 pr-0">
             <Form.Group className="form-check-input-container">
@@ -29,7 +29,7 @@ export const FilterBySubject = function (props) {
               />
             </Form.Group>
           </Col>
-        )
+        );
         const secondCol = nextEl ? (
           <Col className="pl-2 pr-0">
             <Form.Group className="form-check-input-container">
@@ -43,18 +43,18 @@ export const FilterBySubject = function (props) {
               />
             </Form.Group>
           </Col>
-        ) : ""
+        ) : "";
         const result = (
           <Row key={i} className="w-100 justify-content-center ml-0 mr-0 pl-2 pr-2">
             {firstCol}
             {secondCol ? secondCol : ""}
           </Row>
-        )
-        arrResult.push(result)
+        );
+        arrResult.push(result);
       }
-    })
-    return arrResult
-  }
+    });
+    return arrResult;
+  };
 
   return (
     <Card className="pt-2 pb-2 mb-2">
@@ -62,7 +62,7 @@ export const FilterBySubject = function (props) {
         <Col md={12} className="justify-content-center">
           <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
             <Card.Header>
-              <h5>Filtra per Argomento:</h5>
+              <h5>Filtra per Argomento</h5>
             </Card.Header>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0 pl-2 pr-2">
@@ -444,5 +444,5 @@ export const FilterBySubject = function (props) {
         </Col>
       </Row>
     </Card>
-  )
-}
+  );
+};

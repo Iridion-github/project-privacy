@@ -7,7 +7,6 @@ import {
   Image,
   Button
 } from 'react-bootstrap'
-import { useEffect } from 'react'
 
 export const Navigation = function (props) {
 

@@ -3,7 +3,7 @@ import {
   Col,
   Card,
   Form
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 
 export const FilterByExtension = function (props) {
@@ -14,7 +14,7 @@ export const FilterByExtension = function (props) {
         <Col md={6}>
           <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
             <Card.Header>
-              <h5>Filtra per Tipo File:</h5>
+              <h5>Filtra per Tipo File</h5>
             </Card.Header>
           </Row>
           <Row className="w-100 justify-content-center ml-0 mr-0">
@@ -65,5 +65,5 @@ export const FilterByExtension = function (props) {
         </Col>
       </Row>
     </Card>
-  )
-}
+  );
+};

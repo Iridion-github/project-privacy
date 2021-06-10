@@ -23,6 +23,8 @@ function consulenza(props) {
     return data[lang]
   }
 
+  console.log("currentLang:", currentLang)
+
   const [consultation, setConsultation] = useState(null)
 
   return (
