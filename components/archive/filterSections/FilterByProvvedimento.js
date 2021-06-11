@@ -10,6 +10,7 @@ import { MultiSelect } from '../ui/MultiSelect';
 import { DateInputNoCalendar } from '../ui/DateInputNoCalendar';
 import { TextInput } from '../ui/TextInput';
 import { NumberInput } from '../ui/NumberInput';
+import { ResetFilter } from '../btn/ResetFilter';
 
 
 export const FilterByProvvedimento = function (props) {
@@ -23,14 +24,9 @@ export const FilterByProvvedimento = function (props) {
                 <h5>Filtra per Provvedimento</h5>
               </Row>
               <Row className="w-100 ml-0 mr-0 justify-content-center">
-                <Button
-                  variant="warning"
-                  small
-                  className="reset-filter-btn"
-                  onClick={ }
-                >
-                  Pulisci Filtro
-                </Button>
+                <ResetFilter
+                  onResetFilter={props.resetFilterSection}
+                />
               </Row>
             </Card.Header>
           </Row>

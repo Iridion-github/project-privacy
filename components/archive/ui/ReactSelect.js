@@ -2,8 +2,8 @@ import {
     Form,
     Row,
     Col
-} from 'react-bootstrap'
-import Select from 'react-select'
+} from 'react-bootstrap';
+import Select from 'react-select';
 
 
 export const ReactSelect = function (props) {
@@ -19,8 +19,8 @@ export const ReactSelect = function (props) {
                 //primary25: 'hotpink',
                 //primary: 'black',
             }
-        }
-    }
+        };
+    };
 
     const {
         formGroupClass = "",
@@ -33,18 +33,21 @@ export const ReactSelect = function (props) {
         isDisabled = false,
         selectableOptions = [],
         defaultValue = "",
+        value = "",
         placeholder,
-        getOptionValue = el => (el && el !== "") ? el : null,
+        getOptionValue = el => (el && el !== "") ? el : "",
         getOptionStyle = () => ({}),
         getCustomTheme = null
-    } = props
+    } = props;
 
     const handleChange = (val) => {
         if (validationFunc(val)) {
-            onChange(val)
-            return
+            onChange(val);
+            return;
         }
-    }
+    };
+
+    console.log("getOptionValue:", getOptionValue);
 
     return (
         <Form.Group className={formGroupClass}>
@@ -56,6 +59,7 @@ export const ReactSelect = function (props) {
                         options={selectableOptions}
                         disabled={isDisabled}
                         defaultValue={defaultValue}
+                        //inputValue={value}
                         placeholder={placeholder}
                         onChange={handleChange}
                         getOptionValue={getOptionValue}
@@ -67,5 +71,5 @@ export const ReactSelect = function (props) {
                 {textmuted}
             </Form.Text>}
         </Form.Group>
-    )
-}
+    );
+};

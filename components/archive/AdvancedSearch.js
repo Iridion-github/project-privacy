@@ -1536,10 +1536,10 @@ export const AdvancedSearch = function (props) {
     }
   };
 
-  const [selectedSezione, setSelectedSezione] = useState("");
+  const [selectedSezioneAutorità, setSelectedSezioneAutorità] = useState("");
 
-  const handleChangeSezione = (val) => {
-    setSelectedSezione(val);
+  const handleChangeSezioneAutorità = (val) => {
+    setSelectedSezioneAutorità(val);
   };
 
   const [selectedRegione, setSelectedRegione] = useState("");
@@ -1657,12 +1657,12 @@ export const AdvancedSearch = function (props) {
       //Fine compilazione del filtro per Provvedimento
       //Se filterByProvvedimento ha almeno una voce (oltre alla data, oggetto pieno di prop settate a null di default) lo addo al filterState
       if (Object.keys(filterByProvvedimento).length > 1) {
-        console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
+        //console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
         minifiedFilterState.byProvvedimento = filterByProvvedimento;
       } else {
-        console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
+        //console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
       }
-      console.log("minifiedFilterState before becoming string:", minifiedFilterState);
+      //console.log("minifiedFilterState before becoming string:", minifiedFilterState);
       const filtersStateStr = JSON.stringify(minifiedFilterState);
       const resJson = await fetch(`http://localhost:3000/api/archive/advancedSearch?searchterms=${props.searchInput}&activeFilters=${filtersStateStr}`, {
         method: 'GET',
@@ -1690,12 +1690,13 @@ export const AdvancedSearch = function (props) {
     handleChangeAllegatoProvv("");
   };
 
-  const resetAddSottonumero = () => {
-    handleAddSottonumero("");
-  };
+  //SHOULD not exist. Maybe.
+  // const resetAddSottonumero = () => {
+  //   handleAddSottonumero("");
+  // };
 
   const resetArrSottonumero = () => {
-    handleChangeArrSottonumero(arrSottonumeroRaw.map(el => ({ value: el, label: el, selected: false })));
+    handleChangeArrSottonumero(arrSottonumero.map(el => ({ ...el, selected: false })));
   };
 
   const resetArtCodice = () => {
@@ -1723,7 +1724,7 @@ export const AdvancedSearch = function (props) {
   };
 
   const resetCittàAutorità = () => {
-    handleChangeCittàAutorità("");
+    setCittàAutorità("");
   };
 
   const resetCodice = () => {
@@ -1731,7 +1732,7 @@ export const AdvancedSearch = function (props) {
   };
 
   const resetDataFiltroAutorità = () => {
-    handleChangeDataFiltroAutorità({
+    setDataFiltroAutorità({
       day: "",
       month: "",
       year: ""
@@ -1739,7 +1740,7 @@ export const AdvancedSearch = function (props) {
   };
 
   const resetDataFiltroGazz = () => {
-    handleChangeDataFiltroGazz({
+    setDataFiltroGazz({
       day: "",
       month: "",
       year: ""
@@ -1747,7 +1748,7 @@ export const AdvancedSearch = function (props) {
   };
 
   const resetDataFiltroLegge = () => {
-    handleChangeDataFiltroLegge({
+    setDataFiltroLegge({
       day: "",
       month: "",
       year: ""
@@ -1755,7 +1756,7 @@ export const AdvancedSearch = function (props) {
   };
 
   const resetDataFiltroProvv = () => {
-    handleChangeDataFiltroProvv({
+    setDataFiltroProvv({
       day: "",
       month: "",
       year: ""
@@ -1798,12 +1799,12 @@ export const AdvancedSearch = function (props) {
     handleChangeProvvedimento("");
   };
 
-  const resetRegione = () => {
+  const resetSelectedRegione = () => {
     handleChangeRegione("");
   };
 
-  const resetSezione = () => {
-    handleChangeSezione("");
+  const resetSezioneAutorità = () => {
+    handleChangeSezioneAutorità("");
   };
 
   const resetStartDate = () => {
@@ -1822,11 +1823,43 @@ export const AdvancedSearch = function (props) {
     handleChangeTestoUnico("");
   };
 
+  const resetFilterState = () => {
+    const initialState = { ...filtersState };
+    const arraysOfPropsToReset = Object.values(initialState.bySubject);
+    console.log("initialState.bySubject before for:", initialState.bySubject);
+    for (let x = 0; x < arraysOfPropsToReset.length; x++) {
+      const arrayName = Object.keys(initialState.bySubject)[x];
+      const resettedArray = arraysOfPropsToReset[x].map(el => ({ ...el, checked: false }));
+      initialState.bySubject[arrayName] = resettedArray;
+    }
+    console.log("initialState.bySubject after for:", initialState.bySubject);
+    setFiltersState(initialState);
+  };
+
   //[Checkpoint] Mancano i reset-filtri divisi in sezione. Per esempio "resetFiltroProvv" che contiene: [resetProvv, resetTipoProvv, resetDataProvv, resetSottonumeroProvv, resetArticoloProvv, resetNumeroProvv, resetArgomentoProvv, resetAllegatoProvv]
+  const resetFilterByProvvedimento = () => {
+    resetAllegatoProvv();
+    resetArtProvv();
+    resetCategoriaProvvedimento();
+    resetDataFiltroProvv();
+    resetNumProvv();
+    resetProvvedimento();
+    resetTipoProvv();
+    resetArrSottonumero();
+  };
+
+  const resetFilterByAutorità = () => {
+    resetAutorità();
+    resetDataFiltroAutorità();
+    resetNumAutorità();
+    resetSezioneAutorità();
+    resetCittàAutorità();
+    resetSelectedRegione();
+  };
 
   const resetAdvancedSearch = () => {
     resetAllegatoProvv();
-    resetAddSottonumero();
+    //resetAddSottonumero(); //SHOULD not exist. Maybe.
     resetArrSottonumero();
     resetArtCodice();
     resetArtLegge();
@@ -1849,12 +1882,13 @@ export const AdvancedSearch = function (props) {
     resetNumProvv();
     resetOpzioneTestuale();
     resetProvvedimento();
-    resetRegione();
+    resetSelectedRegione();
     resetSezione();
     resetStartDate();
     resetTipoProvv();
     resetWhereToSearch();
     resetTestoUnico();
+    resetFilterState();
   };
 
   useEffect(() => {
@@ -1905,13 +1939,14 @@ export const AdvancedSearch = function (props) {
               handleChangeDataFiltroAutorità={handleChangeDataFiltroAutorità}
               numAutorità={numAutorità}
               handleChangeNumAutorità={handleChangeNumAutorità}
-              selectedSezione={selectedSezione}
-              handleChangeSezione={handleChangeSezione}
+              selectedSezione={selectedSezioneAutorità}
+              handleChangeSezione={handleChangeSezioneAutorità}
               selectedRegione={selectedRegione}
               handleChangeRegione={handleChangeRegione}
               cittàAutorità={cittàAutorità}
               arrCittà={arrCittà}
               handleChangeCittàAutorità={handleChangeCittàAutorità}
+              resetFilterSection={resetFilterByAutorità}
             />}
           {/* Filtro per Formulario */}
           {(props.shownTab === "formulari") &&
@@ -1978,7 +2013,7 @@ export const AdvancedSearch = function (props) {
               handleChangeArtProvv={handleChangeArtProvv}
               allegatoProvv={allegatoProvv}
               handleChangeAllegatoProvv={handleChangeAllegatoProvv}
-              reset
+              resetFilterSection={resetFilterByProvvedimento}
             />}
           {/* Filtro per Gazzetta Ufficiale */}
           {(props.shownTab === "normativa") &&

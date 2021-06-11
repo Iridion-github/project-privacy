@@ -1,7 +1,7 @@
 ## [ToDo]
-- [Checkpoint] Mancano i reset-filtri divisi in sezione. AdvancedSearch line 1825.
+- [Checkpoint] Mancano molti reset-filtri divisi in sezione (AdvancedSearch).
 ## [Checkpoint]
-- AdvancedSearch riesce finalmente ad ottenere lo stesso risultato di SimpleSearch in caso di ricerca esclusiva per searchTerms.
+- [AdvancedSearch->FilterByAutorità->ReactSelect] Lo state di ReactSelect è MOLTO strano. Secondo ReactDevTools la funzione di reset effettivamente rende stringa vuota il value della select ... però in qualche modo esso persiste e non viene svuotato. Indagare.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
@@ -9,8 +9,9 @@
 ## [Note]
 - 
 ## [Known_Issues/Bugs]
-- [archive] Ciò che simple search riesce a trovare, non viene trovato invece da advancedSearch, anche se non si inserisce alcun campo specifico. 
-- La conversione dei files in archivio è incredibilmente lenta. Si parla di 5->15 minuti di attesa.
+- [Archive] Ciò che simple search riesce a trovare, non viene trovato invece da advancedSearch, anche se non si inserisce alcun campo specifico. 
+- [Archive] La conversione dei files in archivio è incredibilmente lenta. Si parla di 5->15 minuti di attesa.
+- [Archive] In filterByAutorità la selezione di una regione non limita in nessun modo la selezione della città, e viceversa.
 
 ## Implementazioni Possibili/Utili e Migliorie
 
