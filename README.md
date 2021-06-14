@@ -1,7 +1,9 @@
 ## [ToDo]
-- [Checkpoint] Mancano molti reset-filtri divisi in sezione (AdvancedSearch).
-## [Checkpoint]
 - [AdvancedSearch->FilterByAutorità->ReactSelect] Lo state di ReactSelect è MOLTO strano. Secondo ReactDevTools la funzione di reset effettivamente rende stringa vuota il value della select ... però in qualche modo esso persiste e non viene svuotato. Indagare.
+
+## [Checkpoint]
+- [AdvancedSearch] Finito di creare i reset-filters per intera sezione.
+- 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]

@@ -3,10 +3,11 @@ import {
   Col,
   Card,
   Form
-} from 'react-bootstrap'
-import { Select } from '../ui/Select'
-import { MultiSelect } from '../ui/MultiSelect'
-import { NumberInput } from '../ui/NumberInput'
+} from 'react-bootstrap';
+import { Select } from '../ui/Select';
+import { MultiSelect } from '../ui/MultiSelect';
+import { NumberInput } from '../ui/NumberInput';
+import { ResetFilter } from '../btn/ResetFilter';
 
 
 export const FilterByCodice = function (props) {
@@ -17,7 +18,14 @@ export const FilterByCodice = function (props) {
         <Col md={12} className="justify-content-center pl-0 pr-0">
           <Row className="w-100 justify-content-center ml-0 mr-0 mb-4">
             <Card.Header>
-              <h5>Filtra per Codice:</h5>
+              <Row className="w-100 ml-0 mr-0">
+                <h5>Filtra per Codice</h5>
+              </Row>
+              <Row className="w-100 ml-0 mr-0 justify-content-center">
+                <ResetFilter
+                  onResetFilter={props.resetFilterSection}
+                />
+              </Row>
             </Card.Header>
           </Row>
           <Row className="w-100 ml-0 mr-0 pl-4 pr-4">
@@ -68,5 +76,5 @@ export const FilterByCodice = function (props) {
         </Col>
       </Row>
     </Card >
-  )
-}
+  );
+};

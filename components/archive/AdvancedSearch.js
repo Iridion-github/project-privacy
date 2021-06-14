@@ -1857,9 +1857,21 @@ export const AdvancedSearch = function (props) {
     resetSelectedRegione();
   };
 
+  const resetFilterByCodice = () => {
+    resetCodice();
+    resetArtCodice();
+    resetArrSottonumero();
+  };
+
+  const resetFilterByLegge = () => {
+    resetLegge();
+    resetDataFiltroLegge();
+    resetArtLegge();
+    resetNumLegge();
+  };
+
   const resetAdvancedSearch = () => {
     resetAllegatoProvv();
-    //resetAddSottonumero(); //SHOULD not exist. Maybe.
     resetArrSottonumero();
     resetArtCodice();
     resetArtLegge();
@@ -1883,7 +1895,7 @@ export const AdvancedSearch = function (props) {
     resetOpzioneTestuale();
     resetProvvedimento();
     resetSelectedRegione();
-    resetSezione();
+    resetSezioneAutorità();
     resetStartDate();
     resetTipoProvv();
     resetWhereToSearch();
@@ -1968,6 +1980,7 @@ export const AdvancedSearch = function (props) {
               handleRemoveSottonumero={handleRemoveSottonumero}
               artCodice={artCodice}
               handleChangeArtCodice={handleChangeArtCodice}
+              resetFilterSection={resetFilterByCodice}
             />}
           {/* Filtro per Legge */}
           {(props.shownTab === "giurisprudenza"
@@ -1983,6 +1996,7 @@ export const AdvancedSearch = function (props) {
               handleChangeNumLegge={handleChangeNumLegge}
               artLegge={artLegge}
               handleChangeArtLegge={handleChangeArtLegge}
+              resetFilterSection={resetFilterByLegge}
             />}
           {(props.shownTab === "noteedottrina") &&
             <FilterByAutore
