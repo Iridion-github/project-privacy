@@ -65,7 +65,7 @@ export const arrAutorità = [
     "Ufficio centrale referendum",
     "Ufficio europeo brevetti",
     "Vicariato Urbe"
-]
+];
 
 export const arrCodice = [
     "-",
@@ -98,7 +98,7 @@ export const arrCodice = [
     "Codice penale",
     "Codice penale militare di guerra",
     "Codice penale militare di pace"
-]
+];
 
 export const arrSottonumero = [
     "bis",
@@ -134,7 +134,7 @@ export const arrSottonumero = [
     "tricies bis",
     "tricies ter",
     "tricies quater"
-]
+];
 
 export const arrLegge = [
     "-",
@@ -146,9 +146,10 @@ export const arrLegge = [
     "Leggi regionali",
     "Provvedimenti CE",
     "Trattati internazionali",
-]
+];
 
 export const arrProvvedimento = [
+    { label: "-", tag: null },
     { label: "Accordo", tag: "Acc." },
     { label: "Avviso", tag: "Avv." },
     { label: "Decreto Legge", tag: "D.L." },
@@ -201,7 +202,7 @@ export const arrProvvedimento = [
     { label: "Regolamento della Camera dei Deputati", tag: "Reg. Camera" },
     { label: "Regolamento della Corte costituzionale", tag: "Reg. Corte cost." },
     { label: "Regolamento parlamentare", tag: "Reg. Parl." }
-]
+];
 
 export const arrCategoriaProvvedimento = [
     "-",
@@ -548,7 +549,7 @@ export const arrCategoriaProvvedimento = [
     "Voluntary disclosure 1",
     "Voluntary disclosure 2",
     "Whisteblowing"
-]
+];
 
 export const arrFormulario = [
     "-",
@@ -568,7 +569,7 @@ export const arrFormulario = [
     "Form. Crisi d'Impresa",
     "Form. Responsabilità Civile",
     "Form. Famiglia",
-]
+];
 
 const arrCittàRaw = [
     "Vittoria",
@@ -1521,17 +1522,17 @@ const arrCittàRaw = [
     "Scampia",
     "San Pietro a Patierno",
     "San Lorenzo",
-]
+];
 
 export const arrCittà = arrCittàRaw.sort((a, b) => {
     if (a < b) {
-        return -1
+        return -1;
     } else if (a > b) {
-        return 1
+        return 1;
     } else {
-        return 0
+        return 0;
     }
-})
+});
 
 export const arrTestoUnico = [
     "-",
@@ -1576,4 +1577,4 @@ export const arrTestoUnico = [
     "Testo unico sull'assicurazione degli infortuni sul lavoro",
     "Testo unico sulle imposte ipotecaria e catastale",
     "Testo unico sulle leggi sanitarie"
-]
+];

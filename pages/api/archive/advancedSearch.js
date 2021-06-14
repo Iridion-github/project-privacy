@@ -75,31 +75,9 @@ export default async (req, res) => {
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf");
           const docx = fileObj.fullpath.toLowerCase().includes(".docx");
           const doc = fileObj.fullpath.toLowerCase().includes(".doc");
-          //Commento queste righe perchè è molto probabile non abbia alcun senso evitare di mappare i files che non superino condizioni
-          //const isProvv = fileObj.fullpath.includes(envSlash + "Provvedimenti" + envSlash);
-
           //singleResult Promise starts pending
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
-
-            //Commento queste righe perchè è molto probabile non abbia alcun senso evitare di mappare i files che non superino condizioni
-            /*
-            console.log("isProvv:", isProvv);
-            console.log("mustBeProvv:", mustBeProvv);
-            if (!isProvv && mustBeProvv) {
-              //[Checkpoint] Qui non ci arriva con la ricerca avanzata, selezionando un filtro per provv. Indagare.
-              console.log("Si cerca un provv. Questo file NON è un provv. e verrà ignorato. File:", fileObj.fullpath);
-              resolveSingle({}); //se è richiesto un provvedimento ed il file attuale NON lo è, non lo analizzo neanche
-            }
-            */
-
             if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
-              //Commento queste righe perchè è molto probabile non abbia alcun senso evitare di mappare i files che non superino condizioni
-              /*
-                if (!includePdf) {
-                  console.log("Questo file è un pdf. Il filtro pdf è disattivato, il file verrà ignorato");
-                  resolveSingle({});
-                } //se è un pdf e l'activeFilters non vuole pdf, esco
-                */
               const pdfBuffer = fs.readFileSync(fileObj.fullpath);
               const getPdfContent = async () => {
                 const pdfContentArray = [];
@@ -126,10 +104,6 @@ export default async (req, res) => {
               };
               getPdfContent();
             } else if (docx) {
-              //Commento queste righe perchè è molto probabile non abbia alcun senso evitare di mappare i files che non superino condizioni
-              /*
-                if (!includeDocx) resolveSingle({});
-                */
               //[Docx procedure] (mammoth)
               const options = {};
               mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
@@ -148,10 +122,6 @@ export default async (req, res) => {
                 });
               });
             } else if (doc) {
-              //Commento queste righe perchè è molto probabile non abbia alcun senso evitare di mappare i files che non superino condizioni
-              /*
-                if (!includeDoc) resolveSingle({});
-                */
               //[Doc procedure] (WordExtractor)
               const getDocContent = async (fileObj) => {
                 const docExtractor = new WordExtractor();
@@ -219,6 +189,23 @@ export default async (req, res) => {
       if (mustBeProvv && !d.fullpath.includes(envSlash + "Provvedimenti" + envSlash)) {
         console.log("I'm looking for a provv, this file is not a provv, out we go!");
         return false;
+      } else if (mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
+        console.log("activeFilters:", activeFilters);
+        //byProvvedimento: { provv: 'Acc.', tipo: 'vigente' }
+        const contentIncipit = d.content.slice(0, 500);
+        console.log("contentIncipit:", contentIncipit);
+        const conditions = {
+          tag: contentIncipit.includes(activeFilters.byProvvedimento.provv),
+          tipo: true, //difficile da capire, chiedere a Luigi
+          data: true, //Qui ci si schianta hard, dopo
+          sottonumero: true,
+          articolo: true,
+          numero: true,
+          argomento: true,
+          allegato: true
+        };
+        //Controllo che nei primi 500 chars del documento sia presente il tag
+        return !Object.values(conditions).every(bool => bool === true);
       }
 
       console.log("Started analyzing file:", d.fullpath);

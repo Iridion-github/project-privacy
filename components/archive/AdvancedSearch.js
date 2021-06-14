@@ -1558,7 +1558,11 @@ export const AdvancedSearch = function (props) {
   const [selectedProvvedimento, setSelectedProvvedimento] = useState("");
 
   const handleChangeProvvedimento = (val) => {
-    setSelectedProvvedimento(val);
+    if (val === "-") {
+      resetProvvedimento();
+    } else {
+      setSelectedProvvedimento(val);
+    }
   };
 
   const [selectedCategoriaProvvedimento, setSelectedCategoriaProvvedimento] = useState("");
@@ -1659,10 +1663,10 @@ export const AdvancedSearch = function (props) {
       //Fine compilazione del filtro per Provvedimento
       //Se filterByProvvedimento ha almeno una voce (oltre alla data, oggetto pieno di prop settate a null di default) lo addo al filterState
       if (Object.keys(filterByProvvedimento).length > 1) {
-        //console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
+        console.log("adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
         minifiedFilterState.byProvvedimento = filterByProvvedimento;
       } else {
-        //console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
+        console.log("NOT adding byProvvedimento to activeFilters. filterByProvvedimento:", filterByProvvedimento);
       }
       //console.log("minifiedFilterState before becoming string:", minifiedFilterState);
       const filtersStateStr = JSON.stringify(minifiedFilterState);
