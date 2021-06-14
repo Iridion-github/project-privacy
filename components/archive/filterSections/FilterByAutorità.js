@@ -121,8 +121,8 @@ export const FilterByAutorità = function (props) {
               />
             </Col>
             <Col md={4} className="pl-2 pr-0">
-              {console.log("filterByAutorità - props.cittàAutorità", props.cittàAutorità)}
               <ReactSelect
+                key={props.keyForReset}
                 isMulti={false}
                 //validationFunc={null}
                 label={"Città"}
@@ -130,7 +130,7 @@ export const FilterByAutorità = function (props) {
                 onChange={props.handleChangeCittàAutorità}
                 isDisabled={false}
                 selectableOptions={props.arrCittà}
-                defaultValue={""}
+                defaultValue={props.arrCittà[0]}
                 value={props.cittàAutorità}
                 placeholder={"Seleziona una città"}
               //getOptionValue={opt => opt}

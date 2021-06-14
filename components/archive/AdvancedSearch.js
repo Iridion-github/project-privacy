@@ -1349,7 +1349,7 @@ export const AdvancedSearch = function (props) {
     }
   };
 
-  const [arrCittà, setArrCittà] = useState(arrCittàRaw.map(el => ({ value: el, label: el })));
+  const [arrCittà, setArrCittà] = useState([{ value: "", label: "-" }, ...arrCittàRaw.map(el => ({ value: el, label: el }))]);
 
   const [cittàAutorità, setCittàAutorità] = useState("");
 
@@ -1585,6 +1585,8 @@ export const AdvancedSearch = function (props) {
     setSelectedTestoUnico(val);
   };
 
+  const [keyForReset, setKeyForReset] = useState(true);
+
   const getMinifiedFilterState = (startObject) => {
     const oldFilterState = JSON.parse(JSON.stringify(startObject));
     const newFilterState = JSON.parse(JSON.stringify(startObject));
@@ -1690,11 +1692,6 @@ export const AdvancedSearch = function (props) {
     handleChangeAllegatoProvv("");
   };
 
-  //SHOULD not exist. Maybe.
-  // const resetAddSottonumero = () => {
-  //   handleAddSottonumero("");
-  // };
-
   const resetArrSottonumero = () => {
     handleChangeArrSottonumero(arrSottonumero.map(el => ({ ...el, selected: false })));
   };
@@ -1725,6 +1722,7 @@ export const AdvancedSearch = function (props) {
 
   const resetCittàAutorità = () => {
     setCittàAutorità("");
+    setKeyForReset(!keyForReset);
   };
 
   const resetCodice = () => {
@@ -1959,6 +1957,7 @@ export const AdvancedSearch = function (props) {
               arrCittà={arrCittà}
               handleChangeCittàAutorità={handleChangeCittàAutorità}
               resetFilterSection={resetFilterByAutorità}
+              keyForReset={keyForReset}
             />}
           {/* Filtro per Formulario */}
           {(props.shownTab === "formulari") &&

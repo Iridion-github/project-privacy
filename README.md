@@ -1,9 +1,9 @@
 ## [ToDo]
-- [AdvancedSearch->FilterByAutorità->ReactSelect] Lo state di ReactSelect è MOLTO strano. Secondo ReactDevTools la funzione di reset effettivamente rende stringa vuota il value della select ... però in qualche modo esso persiste e non viene svuotato. Indagare.
+- 
 
 ## [Checkpoint]
-- [AdvancedSearch] Finito di creare i reset-filters per intera sezione.
-- 
+- [AdvancedSearch->FilterByAutorità->ReactSelect] Lo state di ReactSelect è MOLTO strano. Sebbene la funzione di reset effettivamente renda stringa vuota il value della select, in qualche modo esso persiste e non viene svuotato. Inoltre, anche se TOTALMENTE SCOLLEGATO dallo state, ReactSelect in modi misteriosi ne tiene traccia e si adatta di conseguenza. Per resettare sono stato costretto a dedicare una chiave al componente, e la funzione di resetCittà, oltre a resettare quella prop dello state, cambia il valore della key, forza un refresh del componente.
+
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 ## [Richieste/Domande_per_Gaetano]
