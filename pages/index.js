@@ -1,13 +1,16 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 
-import { Carousel } from 'react-bootstrap'
-import { Header } from '../components/layout/Header'
-import { Navigation } from '../components/layout/Navbar'
-import { Footer } from '../components/layout/Footer'
-import { useAppContext } from "../context/contextLib"
+import { Carousel } from 'react-bootstrap';
+import { Header } from '../components/layout/Header';
+import { Navigation } from '../components/layout/Navbar';
+import { Footer } from '../components/layout/Footer';
+import { useAppContext } from "../context/contextLib";
 
 function Home() {
-  const { currentLang, changeSiteLang } = useAppContext()
+  const {
+    currentLang,
+    changeSiteLang,
+  } = useAppContext();
 
   return (
     <div className={styles.container}>
@@ -15,10 +18,7 @@ function Home() {
         title="Home"
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       <main className="m-0 p-0">
         {/* Homepage Slides */}
         <div className={styles.carouselContainer}>
@@ -96,7 +96,7 @@ function Home() {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

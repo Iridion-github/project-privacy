@@ -1,4 +1,4 @@
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.css';
 import {
   Row,
   Col,
@@ -6,9 +6,21 @@ import {
   Nav,
   Image,
   Button
-} from 'react-bootstrap'
+} from 'react-bootstrap';
+import { useAppContext } from '../../context/contextLib';
+import { LogInBtn } from '../buttons/LogInBtn';
+import { LogOutBtn } from '../buttons/LogOutBtn';
+import { GoRegisterBtn } from '../buttons/GoRegisterBtn';
 
-export const Navigation = function (props) {
+export const Navigation = function () {
+
+  const {
+    currentLang,
+    changeSiteLang,
+    loggedUser,
+    logInUser,
+    logOutUser
+  } = useAppContext();
 
   const btnLabels = {
     chiSono: {
@@ -43,7 +55,7 @@ export const Navigation = function (props) {
       ita: "Archivio",
       eng: "Archive",
     }
-  }
+  };
 
   return (
     <>
@@ -57,18 +69,18 @@ export const Navigation = function (props) {
                   <Image src="/editedLogo.png" className={styles.navbarLogo + " h-100"} />
                 </Nav.Link>
                 <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
-                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} suppressHydrationWarning>{btnLabels.chiSono[props.currentLang]} </  Nav.Link>
-                <Nav.Link href="/formazione" className={styles.navbarText} suppressHydrationWarning>{btnLabels.formazione[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/consulenza" className={styles.navbarText} suppressHydrationWarning>{btnLabels.consulenza[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/areaQuiz" className={styles.navbarText} suppressHydrationWarning>{btnLabels.areaQuiz[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} suppressHydrationWarning>{btnLabels.recensioniBibliografiche[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/articoli" className={styles.navbarText} suppressHydrationWarning>{btnLabels.articoli[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/contatti" className={styles.navbarText} suppressHydrationWarning>{btnLabels.contatti[props.currentLang]}</Nav.Link>
-                <Nav.Link href="/archivio" className={styles.navbarText} suppressHydrationWarning>{btnLabels.archivio[props.currentLang]}</Nav.Link>
+                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} suppressHydrationWarning>{btnLabels.chiSono[currentLang]} </  Nav.Link>
+                <Nav.Link href="/formazione" className={styles.navbarText} suppressHydrationWarning>{btnLabels.formazione[currentLang]}</Nav.Link>
+                <Nav.Link href="/consulenza" className={styles.navbarText} suppressHydrationWarning>{btnLabels.consulenza[currentLang]}</Nav.Link>
+                <Nav.Link href="/areaQuiz" className={styles.navbarText} suppressHydrationWarning>{btnLabels.areaQuiz[currentLang]}</Nav.Link>
+                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} suppressHydrationWarning>{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
+                <Nav.Link href="/articoli" className={styles.navbarText} suppressHydrationWarning>{btnLabels.articoli[currentLang]}</Nav.Link>
+                <Nav.Link href="/contatti" className={styles.navbarText} suppressHydrationWarning>{btnLabels.contatti[currentLang]}</Nav.Link>
+                <Nav.Link href="/archivio" className={styles.navbarText} suppressHydrationWarning>{btnLabels.archivio[currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button
-                      onClick={() => props.changeSiteLang("ita")}
+                      onClick={() => changeSiteLang("ita")}
                       variant=""
                       active={false}
                       className="p-0 flag-icon-btn mr-1"
@@ -78,7 +90,7 @@ export const Navigation = function (props) {
                   </Col>
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button
-                      onClick={() => props.changeSiteLang("eng")}
+                      onClick={() => changeSiteLang("eng")}
                       variant=""
                       active={false}
                       className="p-0 flag-icon-btn"
@@ -91,7 +103,23 @@ export const Navigation = function (props) {
             </Navbar.Collapse>
           </Navbar >
         </Col>
+        <Col md={{ span: 1 }} className="h-100 ml-0 mr-0">
+          <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">
+            {!loggedUser &&
+              <LogInBtn
+                onClick={logInUser}
+              />}
+          </Row>
+          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
+            {loggedUser && <LogOutBtn
+              onClick={logOutUser}
+            />}
+          </Row>
+          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
+            {!loggedUser && <GoRegisterBtn />}
+          </Row>
+        </Col>
       </Row>
     </>
-  )
-}
+  );
+};

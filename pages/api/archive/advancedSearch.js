@@ -187,7 +187,6 @@ export default async (req, res) => {
       if (!includeDocx && d.filename.includes(".docx")) return false;
       if (!includeDoc && d.filename.includes(".doc") && d.filename.split(".doc")[1].length === 0) return false;
       if (mustBeProvv && !d.fullpath.includes(envSlash + "Provvedimenti" + envSlash)) {
-        console.log("I'm looking for a provv, this file is not a provv, out we go!");
         return false;
       } else if (mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
         console.log("activeFilters:", activeFilters);

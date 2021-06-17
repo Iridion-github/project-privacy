@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
+import { useEffect, useState } from 'react';
+import styles from '../styles/Home.module.css';
 import {
   Row,
   Col,
@@ -7,64 +7,64 @@ import {
   Form,
   Button,
   ButtonGroup
-} from 'react-bootstrap'
-import { Header } from '../components/layout/Header'
-import { Navigation } from '../components/layout/Navbar'
-import { Loading } from '../components/layout/Loading'
-import { Footer } from '../components/layout/Footer'
-import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer'
-import { AdvancedSearch } from '../components/archive/AdvancedSearch'
-import { CustomAutoSuggest } from '../components/archive/ui/CustomAutoSuggest'
-import { useAppContext } from "../context/contextLib"
+} from 'react-bootstrap';
+import { Header } from '../components/layout/Header';
+import { Navigation } from '../components/layout/Navbar';
+import { Loading } from '../components/layout/Loading';
+import { Footer } from '../components/layout/Footer';
+import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer';
+import { AdvancedSearch } from '../components/archive/AdvancedSearch';
+import { CustomAutoSuggest } from '../components/archive/ui/CustomAutoSuggest';
+import { useAppContext } from "../context/contextLib";
 
 export default function archivio(props) {
-  const { currentLang, changeSiteLang } = useAppContext()
-  const [searchInput, setSearchInput] = useState("")
-  const [isAdvanced, setIsAdvanced] = useState(false)
-  const [searched, setSearched] = useState(false)
-  const [advancedSearched, setAdvancedSearched] = useState(false)
-  const [searchResult, setSearchResult] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [showPdfModal, setShowPdfModal] = useState(null)
-  const [shownTab, setShownTab] = useState("giurisprudenza")
+  const { currentLang, changeSiteLang } = useAppContext();
+  const [searchInput, setSearchInput] = useState("");
+  const [isAdvanced, setIsAdvanced] = useState(false);
+  const [searched, setSearched] = useState(false);
+  const [advancedSearched, setAdvancedSearched] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(null);
+  const [shownTab, setShownTab] = useState("giurisprudenza");
 
   const handleChangeShownTab = (targetTab) => {
-    setShownTab(targetTab)
-  }
+    setShownTab(targetTab);
+  };
 
   const openPdfViewer = (path, buffer) => {
-    path ? setShowPdfModal(path) : setShowPdfModal(buffer)
-  }
+    path ? setShowPdfModal(path) : setShowPdfModal(buffer);
+  };
 
   const closePdfViewer = () => {
-    setShowPdfModal(null)
-  }
+    setShowPdfModal(null);
+  };
 
   const handleSetSearchResult = (searchResBefore) => {
-    setSearchResult(searchResBefore)
-  }
+    setSearchResult(searchResBefore);
+  };
 
   const openAdvancedSearch = () => {
-    setIsAdvanced(true)
-  }
+    setIsAdvanced(true);
+  };
 
   const closeAdvancedSearch = () => {
-    setIsAdvanced(false)
-  }
+    setIsAdvanced(false);
+  };
 
   const handleSetSearched = (searchedString, advancedFilters) => {
     if (!advancedFilters) {
-      setSearched(searchedString)
+      setSearched(searchedString);
     } else {
-      setAdvancedSearched(advancedFilters)
-      if (searchedString && searchedString.length > 0) setSearched(searchedString)
+      setAdvancedSearched(advancedFilters);
+      if (searchedString && searchedString.length > 0) setSearched(searchedString);
     }
-  }
+  };
 
   const submitSearch = async (input) => {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
-      setLoading(true)
+      setLoading(true);
       const resJson = await fetch(`http://localhost:3000/api/archive/search?searchterms=${input}`, {
         method: 'GET',
         headers: {
@@ -74,24 +74,24 @@ export default function archivio(props) {
       })
         .then(response => response.json())
         .then(async response => {
-          handleSetSearchResult(response.data.filteredDocs)
-          handleSetSearched(searchInput)
-          setLoading(false)
-        })
+          handleSetSearchResult(response.data.filteredDocs);
+          handleSetSearched(searchInput);
+          setLoading(false);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const cleanInput = searchInput.replace(/[^\w\s]/gi, '')
-    submitSearch(cleanInput)
-  }
+    event.preventDefault();
+    const cleanInput = searchInput.replace(/[^\w\s]/gi, '');
+    submitSearch(cleanInput);
+  };
 
   useEffect(() => {
     //console.log("useEffect console.log:")
-  })
+  });
 
 
   return (
@@ -101,10 +101,7 @@ export default function archivio(props) {
         title={currentLang === "ita" ? "Archivio" : "Archive"}
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       {loading && <Loading />}
       {/* Page Content */}
       <main className={styles.main}>
@@ -261,7 +258,7 @@ export default function archivio(props) {
                                 variant="info"
                                 className="ml-1 py-0 px-1"
                                 onClick={() => {
-                                  openPdfViewer(null, el.buffer)
+                                  openPdfViewer(null, el.buffer);
                                 }}
                               >
                                 <i className="fas fa-eye"></i>
@@ -300,5 +297,5 @@ export default function archivio(props) {
       {/* Footer */}
       < Footer />
     </div >
-  )
+  );
 }

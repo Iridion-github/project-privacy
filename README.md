@@ -1,7 +1,9 @@
 ## [ToDo]
-- [advancedSearch] Back to smashing face onto backend.
+- [Registration/Login/Logout] Started implementation. Plan and develop backend first! [__app] line 19.
+- [advancedSearch] Smashed face into a mountain, probably game over.
 
 ## [Checkpoint]
+- [__app] line 19.
 - [advancedSearch] line 200
 
 ## [Deployment]

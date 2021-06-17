@@ -1,5 +1,5 @@
-import styles from '../styles/Home.module.css'
-import { useState } from 'react'
+import styles from '../styles/Home.module.css';
+import { useState } from 'react';
 
 import {
   Row,
@@ -7,14 +7,14 @@ import {
   Card,
   Button,
   Container
-} from 'react-bootstrap'
-import { Header } from '../components/layout/Header'
-import { Navigation } from '../components/layout/Navbar'
-import { Footer } from '../components/layout/Footer'
-import { useAppContext } from "../context/contextLib"
+} from 'react-bootstrap';
+import { Header } from '../components/layout/Header';
+import { Navigation } from '../components/layout/Navbar';
+import { Footer } from '../components/layout/Footer';
+import { useAppContext } from "../context/contextLib";
 
 function formazione(props) {
-  const { currentLang, changeSiteLang } = useAppContext()
+  const { currentLang, changeSiteLang } = useAppContext();
 
   return (
     <div className={styles.container}>
@@ -22,10 +22,7 @@ function formazione(props) {
         title={currentLang === "ita" ? "Consulenza" : "Privacy Advice"}
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
@@ -41,7 +38,7 @@ function formazione(props) {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
@@ -49,6 +46,6 @@ export async function getServerSideProps(context) {
   //const resLessons = await fetch(apiUrl)
   //const lessons = await resLessons.json()
   //return { lessons: lessons.data }
-  return { props: { lessons: [] } }
+  return { props: { lessons: [] } };
 }
-export default formazione
+export default formazione;

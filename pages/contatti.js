@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 
 import {
   Row,
@@ -6,16 +6,16 @@ import {
   Card,
   Table,
   Container
-} from 'react-bootstrap'
-import { Header } from '../components/layout/Header'
-import { Navigation } from '../components/layout/Navbar'
-import { EmailForm } from '../components/form/EmailForm'
-import { Footer } from '../components/layout/Footer'
-import { useAppContext } from "../context/contextLib"
+} from 'react-bootstrap';
+import { Header } from '../components/layout/Header';
+import { Navigation } from '../components/layout/Navbar';
+import { EmailForm } from '../components/form/EmailForm';
+import { Footer } from '../components/layout/Footer';
+import { useAppContext } from "../context/contextLib";
 
 
 const contatti = function () {
-  const { currentLang, changeSiteLang } = useAppContext()
+  const { currentLang, changeSiteLang } = useAppContext();
 
   return (
     <div className={styles.container}>
@@ -24,10 +24,7 @@ const contatti = function () {
         title={currentLang === "ita" ? "Contatti" : "Contacts"}
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
@@ -92,7 +89,7 @@ const contatti = function () {
       {/* Footer */}
       < Footer />
     </div >
-  )
-}
+  );
+};
 
-export default contatti
+export default contatti;
