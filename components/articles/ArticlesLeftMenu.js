@@ -4,8 +4,8 @@ import {
   Card,
   ListGroup,
   Button
-} from 'react-bootstrap'
-import { ArticlesTagRow } from './ArticlesTagRow'
+} from 'react-bootstrap';
+import { ArticlesTagRow } from './ArticlesTagRow';
 
 
 export const ArticlesLeftMenu = function (props) {
@@ -16,7 +16,7 @@ export const ArticlesLeftMenu = function (props) {
           <Card className="bg-standard-blue">
             <Card.Header className="topic-filter-header">
               <Row>
-                <Col suppressHydrationWarning md={12} className="text-center">
+                <Col md={12} className="text-center">
                   {props.currentLang === "ita" ? "Argomenti" : "Topics"}
                 </Col>
                 {props.filteredByTopic === true &&
@@ -25,7 +25,7 @@ export const ArticlesLeftMenu = function (props) {
                     className="remove-topic-filter-btn"
                     variant="danger"
                     onClick={() => props.removeTopicFilter()}
-                    suppressHydrationWarning
+
                   >
                     {props.currentLang === "ita" ? "Rimuovi Filtro" : "Remove Filter"}
                     <i className="ml-2 fas fa-times-circle"></i>
@@ -47,5 +47,5 @@ export const ArticlesLeftMenu = function (props) {
         </Col>
       </Row>
     </Row>
-  )
-}
+  );
+};

@@ -1,61 +1,61 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import {
   Row,
   Col,
   Button,
   Form
-} from 'react-bootstrap'
-import { ReviewsRow } from "./ReviewsRow"
-import { MyPagination } from "../layout/MyPagination"
+} from 'react-bootstrap';
+import { ReviewsRow } from "./ReviewsRow";
+import { MyPagination } from "../layout/MyPagination";
 
 
 export const ReviewsList = function (props) {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [elementsPerPage, setElementsPerPage] = useState(6)
-  const [elementsPerRow, setElementsPerRow] = useState(2)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [elementsPerPage, setElementsPerPage] = useState(6);
+  const [elementsPerRow, setElementsPerRow] = useState(2);
 
 
   const reviewsRows = !props.filtered
     ? props.allReviews.reduce(function (reviews, acc, i) {
       if (i % elementsPerRow) {
-        reviews[reviews.length - 1].push(acc)
+        reviews[reviews.length - 1].push(acc);
       } else {
-        reviews.push([acc])
+        reviews.push([acc]);
       }
-      return reviews
+      return reviews;
     }, [])
     : props.searchFilter(props.allReviews, props.searchInput, props.currentLang).reduce(function (reviews, acc, i) {
       if (i % elementsPerRow) {
-        reviews[reviews.length - 1].push(acc)
+        reviews[reviews.length - 1].push(acc);
       } else {
-        reviews.push([acc])
+        reviews.push([acc]);
       }
-      return reviews
-    }, [])
+      return reviews;
+    }, []);
 
-  const visibleRows = reviewsRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow))
+  const visibleRows = reviewsRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow));
 
   const searchInputOnChange = (value) => {
     if (value.length < 3) {
-      props.setSearchInput(value)
-      props.setFiltered(false)
+      props.setSearchInput(value);
+      props.setFiltered(false);
     } else {
-      props.setSearchInput(value)
+      props.setSearchInput(value);
     }
-  }
+  };
 
   return (
     <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
-          <h1 suppressHydrationWarning>{props.currentLang === "ita" ? "Ultime Recensioni" : "Latest Reviews"}</h1>
+          <h1 >{props.currentLang === "ita" ? "Ultime Recensioni" : "Latest Reviews"}</h1>
         </Col>
         <Col sm={6} className="justify-content-end mb-1 flex-row">
           <Form inline className="justify-content-end w-100 p-0 flex-row">
             <Form.Group className="w-100" controlId="formBasicEmail">
               <Form.Control
-                suppressHydrationWarning
+
                 type="text"
                 placeholder={props.currentLang === "ita" ? "Cerca" : "Search"}
                 onChange={event => searchInputOnChange(event.target.value)}
@@ -103,5 +103,5 @@ export const ReviewsList = function (props) {
         />
       }
     </Row>
-  )
-}
+  );
+};

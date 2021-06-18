@@ -1,7 +1,7 @@
 import {
   ListGroup,
   Button
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 export const ReviewsTagRow = function (props) {
   return (
@@ -10,10 +10,10 @@ export const ReviewsTagRow = function (props) {
         block
         variant="info"
         onClick={() => props.searchTopic(props.tagName, props.currentLang)}
-        suppressHydrationWarning
+
       >
         {props.tagName}
       </Button>
     </ListGroup.Item>
-  )
-}
+  );
+};

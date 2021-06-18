@@ -37,10 +37,10 @@ function Home() {
                 />
               </picture>
               <Carousel.Caption>
-                <h2 className={styles.title} suppressHydrationWarning>
+                <h2 className={styles.title} >
                   {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
                 </h2>
-                <span className={styles.description} suppressHydrationWarning>
+                <span className={styles.description} >
                   {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
                 </span>
               </Carousel.Caption>
@@ -59,10 +59,10 @@ function Home() {
                 />
               </picture>
               <Carousel.Caption>
-                <h2 className={styles.title} suppressHydrationWarning>
+                <h2 className={styles.title} >
                   {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
                 </h2>
-                <span className={styles.description} suppressHydrationWarning>
+                <span className={styles.description} >
                   {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
                 </span>
               </Carousel.Caption>
@@ -81,10 +81,10 @@ function Home() {
                 />
               </picture>
               <Carousel.Caption>
-                <h2 className={styles.title} suppressHydrationWarning>
+                <h2 className={styles.title} >
                   {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
                 </h2>
-                <span className={styles.description} suppressHydrationWarning>
+                <span className={styles.description} >
                   {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
                 </span>
               </Carousel.Caption>

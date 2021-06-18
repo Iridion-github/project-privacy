@@ -54,6 +54,10 @@ export const Navigation = function () {
     archivio: {
       ita: "Archivio",
       eng: "Archive",
+    },
+    registrazione: {
+      ita: "Registrazione",
+      eng: "Register",
     }
   };
 
@@ -69,14 +73,14 @@ export const Navigation = function () {
                   <Image src="/editedLogo.png" className={styles.navbarLogo + " h-100"} />
                 </Nav.Link>
                 <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
-                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} suppressHydrationWarning>{btnLabels.chiSono[currentLang]} </  Nav.Link>
-                <Nav.Link href="/formazione" className={styles.navbarText} suppressHydrationWarning>{btnLabels.formazione[currentLang]}</Nav.Link>
-                <Nav.Link href="/consulenza" className={styles.navbarText} suppressHydrationWarning>{btnLabels.consulenza[currentLang]}</Nav.Link>
-                <Nav.Link href="/areaQuiz" className={styles.navbarText} suppressHydrationWarning>{btnLabels.areaQuiz[currentLang]}</Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} suppressHydrationWarning>{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
-                <Nav.Link href="/articoli" className={styles.navbarText} suppressHydrationWarning>{btnLabels.articoli[currentLang]}</Nav.Link>
-                <Nav.Link href="/contatti" className={styles.navbarText} suppressHydrationWarning>{btnLabels.contatti[currentLang]}</Nav.Link>
-                <Nav.Link href="/archivio" className={styles.navbarText} suppressHydrationWarning>{btnLabels.archivio[currentLang]}</Nav.Link>
+                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} >{btnLabels.chiSono[currentLang]} </  Nav.Link>
+                <Nav.Link href="/formazione" className={styles.navbarText} >{btnLabels.formazione[currentLang]}</Nav.Link>
+                <Nav.Link href="/consulenza" className={styles.navbarText} >{btnLabels.consulenza[currentLang]}</Nav.Link>
+                <Nav.Link href="/areaQuiz" className={styles.navbarText} >{btnLabels.areaQuiz[currentLang]}</Nav.Link>
+                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} >{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
+                <Nav.Link href="/articoli" className={styles.navbarText} >{btnLabels.articoli[currentLang]}</Nav.Link>
+                <Nav.Link href="/contatti" className={styles.navbarText} >{btnLabels.contatti[currentLang]}</Nav.Link>
+                <Nav.Link href="/archivio" className={styles.navbarText} >{btnLabels.archivio[currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button
@@ -116,7 +120,10 @@ export const Navigation = function () {
             />}
           </Row>
           <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
-            {!loggedUser && <GoRegisterBtn />}
+            {!loggedUser && <GoRegisterBtn
+              href="/registrazione"
+              text={btnLabels.registrazione[currentLang]}
+            />}
           </Row>
         </Col>
       </Row>

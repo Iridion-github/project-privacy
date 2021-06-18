@@ -5,7 +5,9 @@ import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { AppContext } from '../context/contextLib';
 
-function MyApp({ Component, pageProps }) {
+function MyApp(props) {
+  const { Component, pageProps } = props;
+
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const languageCookie = cookies.currentLang;
   const loggedUserCookie = cookies.loggedUser;

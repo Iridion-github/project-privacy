@@ -1,9 +1,9 @@
 ## [ToDo]
-- [Registration/Login/Logout] Started implementation. Plan and develop backend first! [__app] line 19.
+- [Registration/Login/Logout] Progressing with Login,Users and Registration. 
 - [advancedSearch] Smashed face into a mountain, probably game over.
 
 ## [Checkpoint]
-- [__app] line 19.
+- [registrazione] everywhere there's stuff to check
 - [advancedSearch] line 200
 
 ## [Deployment]

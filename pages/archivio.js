@@ -97,7 +97,7 @@ export default function archivio(props) {
   return (
     <div className={styles.container}>
       <Header
-        suppressHydrationWarning
+
         title={currentLang === "ita" ? "Archivio" : "Archive"}
       />
       {/* Navbar */}
@@ -143,7 +143,7 @@ export default function archivio(props) {
               </Button>
             </ButtonGroup>
             <Card.Body>
-              <Card.Title suppressHydrationWarning className="text-center">{currentLang === "ita" ? "Archivio" : "Archive"}</Card.Title>
+              <Card.Title className="text-center">{currentLang === "ita" ? "Archivio" : "Archive"}</Card.Title>
               <Row className="p-3 justify-content-center ml-0">
                 <Form
                   onSubmit={(event) => handleSubmit(event)}
@@ -157,7 +157,7 @@ export default function archivio(props) {
                           <Form.Control
                             size="lg"
                             type="text"
-                            suppressHydrationWarning
+
                             placeholder={currentLang === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
                             value={searchInput}
                             onChange={event => setSearchInput(event.target.value)}
@@ -289,7 +289,7 @@ export default function archivio(props) {
 
 
             <Card.Footer className="text-center">
-              <small suppressHydrationWarning className="text-muted">{currentLang === "ita" ? "Archivio aggiornato al" : "Archive last updated"}: 26/01/2020</small>
+              <small className="text-muted">{currentLang === "ita" ? "Archivio aggiornato al" : "Archive last updated"}: 26/01/2020</small>
             </Card.Footer>
           </Card>
         </Row>

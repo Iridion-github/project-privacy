@@ -30,7 +30,7 @@ function consulenza(props) {
   return (
     <div className={styles.container}>
       <Header
-        suppressHydrationWarning
+
         title={currentLang === "ita" ? "Consulenza" : "Privacy Advice"}
       />
       {/* Navbar */}
@@ -47,14 +47,14 @@ function consulenza(props) {
                     <Button
                       variant="info"
                       onClick={() => setConsultation(null)}
-                      suppressHydrationWarning
+
                     >
                       <i className="fas fa-long-arrow-alt-left mr-2"></i>
                       {currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
                     </Button>}
                 </Col>
                 <Col md={6}>
-                  <Card.Title className="text-center"> <h1 suppressHydrationWarning>{currentLang === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[currentLang].title : ""}</h1></Card.Title>
+                  <Card.Title className="text-center"> <h1 >{currentLang === "ita" ? "Consulenza" : "Consultation"}{consultation ? ": " + consultation[currentLang].title : ""}</h1></Card.Title>
                 </Col>
               </Row>
               {!consultation &&

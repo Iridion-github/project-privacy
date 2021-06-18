@@ -23,9 +23,6 @@ function articoli(props) {
   const router = useRouter();
   const { currentLang, changeSiteLang } = useAppContext();
 
-
-  console.log("currentLang:", currentLang);
-
   const handleOpenedArticle = (articleId) => {
     setLoading(true);
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/';
@@ -84,7 +81,7 @@ function articoli(props) {
   return (
     <div className={styles.container}>
       <Header
-        suppressHydrationWarning
+
         title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}

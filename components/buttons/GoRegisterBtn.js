@@ -10,9 +10,10 @@ export const GoRegisterBtn = function (props) {
     <Button
       variant="info"
       size="sm"
-      src={"/Registration"}
+      href={props.href}
+
     >
-      Register
+      {props.text}
     </Button>
   );
 };

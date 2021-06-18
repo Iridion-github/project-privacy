@@ -20,7 +20,7 @@ const contatti = function () {
   return (
     <div className={styles.container}>
       <Header
-        suppressHydrationWarning
+
         title={currentLang === "ita" ? "Contatti" : "Contacts"}
       />
       {/* Navbar */}
@@ -31,7 +31,7 @@ const contatti = function () {
           <Card className="w-100 pt-2 pb-2">
             <Card.Img variant="top" src="contatti.png" />
             <Card.Body>
-              <Card.Title className="text-center" suppressHydrationWarning>{currentLang === "ita" ? "Contatti" : "Contacts"}</Card.Title>
+              <Card.Title className="text-center" >{currentLang === "ita" ? "Contatti" : "Contacts"}</Card.Title>
               <Row>
                 <Col md={6}>
                   <Row>
@@ -41,11 +41,11 @@ const contatti = function () {
                         </thead>
                         <tbody>
                           <tr>
-                            <td><b suppressHydrationWarning>{currentLang === "ita" ? "Indirizzo" : "Address"}:</b></td>
+                            <td><b >{currentLang === "ita" ? "Indirizzo" : "Address"}:</b></td>
                             <td>{"Non Disponibile" /*Via Fregene 33 - 00183*/}{/*currentLang === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
                           </tr>
                           <tr>
-                            <td><b suppressHydrationWarning>{currentLang === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
+                            <td><b >{currentLang === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
                             <td>{"Non Disponibile" /*335-236564*/}</td>
                           </tr>
                           <tr>
@@ -53,7 +53,7 @@ const contatti = function () {
                             <td>{"Non Disponibile" /*mastrogae@gmail.com*/}</td>
                           </tr>
                           <tr>
-                            <td><b suppressHydrationWarning>{currentLang === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
+                            <td><b >{currentLang === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
                             <td>00000000000</td>
                           </tr>
                         </tbody>
@@ -76,12 +76,13 @@ const contatti = function () {
                   </Row>
                 </Col>
                 <Col md={{ span: 6 }}>
-                  <EmailForm />
+                  <EmailForm
+                    currentLang={currentLang} />
                 </Col>
               </Row>
             </Card.Body>
             <Card.Footer className="text-center">
-              <small className="text-muted" suppressHydrationWarning>{currentLang === "ita" ? "Aggiornato al" : "Last updated"}: 19/01/2020</small>
+              <small className="text-muted" >{currentLang === "ita" ? "Aggiornato al" : "Last updated"}: 19/01/2020</small>
             </Card.Footer>
           </Card>
         </Container>
