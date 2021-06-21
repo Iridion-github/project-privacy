@@ -4,7 +4,7 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] line 200
+- [advancedSearch] line 209 - Ultima speranza. Altrimenti si è costretti ai marcatori.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

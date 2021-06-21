@@ -190,7 +190,7 @@ export default async (req, res) => {
         return false;
       } else if (mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
         console.log("activeFilters:", activeFilters);
-        //byProvvedimento: { provv: 'Acc.', tipo: 'vigente' }
+        //byProvvedimento: { provv: 'Acc.', tipo: 'vigente', articolo: '4' }
         const contentIncipit = d.content.slice(0, 500);
         console.log("contentIncipit:", contentIncipit);
         const conditions = {
@@ -204,7 +204,17 @@ export default async (req, res) => {
           allegato: true
         };
         //Controllo che nei primi 500 chars del documento sia presente il tag
-        return !Object.values(conditions).every(bool => bool === true);
+
+        /*
+        [Checkpoint] C'è un modo di distinguere una serie tipo <b>spazio/indentazione + numero + .<b> da numero + . in plain javascript? 
+        Ricontrollare come analizziamo i documenti, potrebbe esserci un modo usando 
+        - mammoth; //pacchetto usato per convertire i docx in html
+        - word-extractor; //pacchetto usato per leggere i doc files
+        - libreoffice/libreoffice-convert; //pacchetto usato per convertire i docx files in pdf (windows version)
+        */
+        //d.content ???
+
+        return !Object.values(conditions).every(bool => bool === true); //questo è da cambiare
       }
 
       console.log("Started analyzing file:", d.fullpath);
