@@ -5,9 +5,12 @@ import fs from 'fs';//pacchetto usato per leggere docx files
 import mammoth from 'mammoth'; //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
-import libre from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
+import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
+import { convertToDocx } from './convert';
 
 const environment = "linux";
+
+const convertDocToDocx = true;
 
 const envSlash = (environment === "windows") ? "\\" : "/";
 
@@ -27,7 +30,7 @@ export default async (req, res) => {
   const todayDate = new Date();
   const todayUTC = todayDate.toUTCString();
   const readFileName = todayUTC.slice(0, 16);
-  console.log("activeFilters:", activeFilters);
+  //console.log("activeFilters:", activeFilters);
   const mustBeProvv = Object.keys(activeFilters).includes("byProvvedimento");
 
   try {
@@ -70,6 +73,11 @@ export default async (req, res) => {
     const containerResult = await new Promise((resolveContainer, rejectContainer) => {
       try {
         const analyzedFiles = [];
+
+        //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
+        convertToDocx(filesToAnalyze, ['pdf']);
+        //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
+
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
 
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf");
@@ -157,15 +165,16 @@ export default async (req, res) => {
           if (analyzedFiles.length === filesToAnalyze.length) {
             //Qui dovrebbe salvare il json di containerResult
             const mappedArchiveStr = JSON.stringify([...analyzedFiles]);
-            console.log("|||||||||||||||||||||||| started writing a json file representing the archive");
+            //console.log("|||||||||||||||||||||||| started writing a json file representing the archive");
             const todayDate = new Date();
             const todayUTC = todayDate.toUTCString();
             const writeFileName = todayUTC.slice(0, 16);
-            await fs.writeFileSync("mappedArchive" + envSlash + writeFileName + ".json", mappedArchiveStr);
-            console.log("|||||||||||||||||||||||| finished writing json file");
+            //[MEMO] ho disattivato la creazione del mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
+            //await fs.writeFileSync("mappedArchive" + envSlash + writeFileName + ".json", mappedArchiveStr);
+            //console.log("|||||||||||||||||||||||| finished writing json file");
             resolveContainer(analyzedFiles); //resolving containerResult Promise
           } else {
-            console.log("(analyzedFiles.length !== filesToAnalyze.length) fileIndex attuale:", fileIndex);
+            //console.log("(analyzedFiles.length !== filesToAnalyze.length) fileIndex attuale:", fileIndex);
           }
         });
       } catch (errContainer) {
@@ -173,7 +182,7 @@ export default async (req, res) => {
         rejectContainer(errContainer); //rejecting containerResult Promise
       }
     }).then((containerResult) => {
-      console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
+      //console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
       dataToFilter = [...containerResult];
       return containerResult;
     });//containerResult Promise resolved/rejected
@@ -189,10 +198,10 @@ export default async (req, res) => {
       if (mustBeProvv && !d.fullpath.includes(envSlash + "Provvedimenti" + envSlash)) {
         return false;
       } else if (mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
-        console.log("activeFilters:", activeFilters);
+        //console.log("activeFilters:", activeFilters);
         //byProvvedimento: { provv: 'Acc.', tipo: 'vigente', articolo: '4' }
         const contentIncipit = d.content.slice(0, 500);
-        console.log("contentIncipit:", contentIncipit);
+        //console.log("contentIncipit:", contentIncipit);
         const conditions = {
           tag: contentIncipit.includes(activeFilters.byProvvedimento.provv),
           tipo: true, //difficile da capire, chiedere a Luigi
@@ -217,33 +226,33 @@ export default async (req, res) => {
         return !Object.values(conditions).every(bool => bool === true); //questo è da cambiare
       }
 
-      console.log("Started analyzing file:", d.fullpath);
+      //console.log("Started analyzing file:", d.fullpath);
 
       //Eventuali affinamenti del filtro andranno qui 
       const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase();
       //Se il file non contiene la query di ricerca, result parte da false
       let result = cleanContent.includes(searchterms?.replace(/[^\w\s]/gi, '').toLowerCase());
       if (result === true) {
-        console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching nel content");
+        //console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching nel content");
         return result;
       }
-      console.log("Content of file:", d.fullpath, " does NOT include searchterms");
+      //console.log("Content of file:", d.fullpath, " does NOT include searchterms");
 
-      console.log("About to check tags byAuthority");
+      //console.log("About to check tags byAuthority");
       //Ciclo che cerca i tag di byAuthority, appena uno viene trovato, esce per risparmiare tempo
       if (activeFilters.byAuthority?.length > 0) {
         for (let x = 0; x < activeFilters.byAuthority.length; x++) {
           let tag = activeFilters.byAuthority[x].tag.replace(/[^\w\s]/gi, '');
           result = cleanContent.toLowerCase().includes(tag);
           if (result === true) {
-            console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags byAuthority");
+            //console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags byAuthority");
             return result;
           }
         }
       }
-      console.log("File:", d.fullpath, " does NOT include searched byAuthority tags");
+      //console.log("File:", d.fullpath, " does NOT include searched byAuthority tags");
 
-      console.log("About to check tags bySubject");
+      //console.log("About to check tags bySubject");
       //Ciclo che cerca i tag di bySubject, appena uno viene trovato, esce per risparmiare tempo
       if (Object.keys(activeFilters.bySubject).length > 0) {
         for (let x = 0; x < activeFilters.bySubject.length; x++) {
@@ -254,7 +263,7 @@ export default async (req, res) => {
               let tag = tags[y].replace(/[^\w\s]/gi, '');
               result = cleanContent.includes(tag);
               if (result === true) {
-                console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject");
+                //console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject");
                 return result;
               }
             }
@@ -262,13 +271,13 @@ export default async (req, res) => {
             let tag = activeFilters.bySubject[x].tag.replace(/[^\w\s]/gi, '');
             result = cleanContent.includes(tag);
             if (result === true) {
-              console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject (nel content, non come tag)");
+              //console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject (nel content, non come tag)");
               return result;
             }
           }
         }
       }
-      console.log("File:", d.fullpath, " does NOT include searched bySubject tags");
+      //console.log("File:", d.fullpath, " does NOT include searched bySubject tags");
 
       return result;
     } else {
@@ -279,7 +288,7 @@ export default async (req, res) => {
   const checkIfConversionNeeded = (fileObjArr) => {
     const names = fileObjArr.map(el => el.filename);
     const conversionNeeded = names.some(name => (name.includes(".docx") || name.includes(".doc")));
-    console.log("conversionNeeded ?", conversionNeeded);
+    //console.log("conversionNeeded ?", conversionNeeded);
     return conversionNeeded;
   };
 
@@ -287,22 +296,21 @@ export default async (req, res) => {
     let convertedDocs = [];
     conversionFinished = false;
 
-    console.log("Starting conversion process");
-
+    //console.log("Starting conversion process");
     for (let x = 0; x < filteredDocs.length; x++) {
       const d = filteredDocs[x];
       const libreResult = await new Promise((resolveLibre, rejectLibre) => {
         if (d && d.filename) {
-          const extend = '.pdf';
+          const extend = convertDocToDocx ? '.docx' : '.pdf';
           const enterPath = d.fullpath;
-          const outputPath = d.filename.includes(".docx") ? d.fullpath.split('.docx')[0] + extend : d.fullpath.split('.doc')[0] + extend;
+          //const outputPath = d.filename.includes(".docx") ? d.fullpath.split('.docx')[0] + extend : d.fullpath.split('.doc')[0] + extend;
           const file = fs.readFileSync(enterPath);
-          libre.convert(file, extend, undefined, async (err, done) => {
+          libreConvert.convert(file, extend, undefined, async (err, done) => {
             if (err) {
               console.log(`\n\n Error converting file: ${err} \n\n`);
               rejectLibre(err);
             } else {
-              console.log("successfully converted file:", enterPath);
+              //console.log("successfully converted file:", enterPath);
               // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
               //await fs.writeFileSync(outputPath, done)
               resolveLibre(done);
@@ -318,7 +326,7 @@ export default async (req, res) => {
       let mapResult = {};
 
       if (libreResult && libreResult.byteLength) {
-        console.log("if (libreResult && libreResult.byteLength)");
+        //console.log("if (libreResult && libreResult.byteLength)");
         mapResult = {
           fullpath: d.fullpath,
           filename: d.filename,
@@ -328,7 +336,7 @@ export default async (req, res) => {
           buffer: libreResult
         };
       } else {
-        console.log("if NOT (libreResult && libreResult.byteLength)");
+        //console.log("if NOT (libreResult && libreResult.byteLength)");
         mapResult = {
           fullpath: d.fullpath,
           filename: d.filename,
@@ -348,7 +356,7 @@ export default async (req, res) => {
       convertedDocs = await updateConvertedDocs(convertedDocs, filteredDocs);
     }
 
-    console.log("Finished conversion process");
+    //console.log("Finished conversion process");
 
     (function forceWait() {
       if (!conversionFinished) {

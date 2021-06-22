@@ -1,10 +1,11 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
-- [advancedSearch] Smashed face into a mountain, probably game over.
+- [advancedSearch] Smashing face harder into the mountain, sooner or later it might crumble. 
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] line 209 - Ultima speranza. Altrimenti si è costretti ai marcatori.
+- [advancedSearch] (line 78) Managed to convert all doc files to docx. Struggling with pdf -> docx).
+- [convert] (line 58) Managed to convert all doc files to docx. Struggling with pdf -> docx).
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
@@ -15,11 +16,11 @@
 
 ## [Richieste/Domande_per_Gaetano]
 - Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.
-## [Note]
-- 
+## [Note/Memo]
+- Attenzione, ho disattivato la creazione del mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
 ## [Known_Issues/Bugs]
 - [Archive] La CONVERSIONE dei files in archivio è incredibilmente lenta. Si parla di 5->15 minuti di attesa. Potrebbe rendere impossibile il progetto.
-- [Archive] In filterByAutorità la selezione di una regione non limita in nessun modo la selezione della città, e viceversa.
+- [Archive] In filterByAutorità la selezione di una regione non limita in nessun modo la selezione della città, e viceversa. E' stupido.
 
 ## Implementazioni Possibili/Utili e Migliorie
 
