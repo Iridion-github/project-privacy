@@ -1,11 +1,11 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
-- [advancedSearch] Smashing face harder into the mountain, sooner or later it might crumble. 
+- [advancedSearch] Ottimo progresso. Problemi con la nomenclatura dei file. 
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
 - [advancedSearch] (line 78) Managed to convert all doc files to docx. Struggling with pdf -> docx).
-- [convert] (line 58) Managed to convert all doc files to docx. Struggling with pdf -> docx).
+- [convert] (line 59 & node_modules/pdf2html/index - line 66) La conversione ad html fallisce con tutti i file che hanno un certo pattern nel nome. Creare uno script, che elimini quel pattern da tutti i file.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
