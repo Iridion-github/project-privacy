@@ -1,11 +1,11 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
-- [advancedSearch] Ottimo progresso. Problemi con la nomenclatura dei file. 
+- [advancedSearch] Ottimo progresso. Problemi con la creazione di file identici ma con nome formattato. 
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
 - [advancedSearch] (line 78) Managed to convert all doc files to docx. Struggling with pdf -> docx).
-- [convert] (line 59 & node_modules/pdf2html/index - line 66) La conversione ad html fallisce con tutti i file che hanno un certo pattern nel nome. Creare uno script, che elimini quel pattern da tutti i file.
+- [convert] (line 111 & node_modules/pdf2html/index - line 66) Line 145 di convert.js appare in console prima della creazione del file a line 117. Bisogna forzare un'attesa che si assicuri che il nuovo file sia creato prima di andare avanti. Forse con un'altra Promise.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

@@ -2,7 +2,7 @@ import fs from 'fs';//pacchetto usato per leggere docx files
 import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
 import pdf2html from 'pdf2html'; //pacchetto usato per per convertire i pdf files in HTML
 
-export const convertToDocx = async (originalFiles, whichToConvert) => {
+export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => {
   try {
     let docxFiles = originalFiles.filter(file => file.fullpath.includes('.docx'));
     let docFiles = originalFiles.filter(file => !file.fullpath.includes('.docx') && file.fullpath.includes('.doc'));
@@ -56,36 +56,105 @@ export const convertToDocx = async (originalFiles, whichToConvert) => {
       const pdfToHtml = [];
       //[pdf2html (?)]
       console.log("Starting conversion  (.pdf ---> .docx)");
-      //La conversione ad html fallisce con tutti i file che hanno un certo pattern nel nome. 
-      //Creare uno script, che elimini quel pattern da tutti i file.
 
       for (let x = 0; x < pdfFiles.length; x++) {
         const d = pdfFiles[x];
-
         const conversionToHtml = await new Promise((resolveHtml, rejectHtml) => {
           if (d && d.filename) {
-            try {
-              const startExt = '.pdf';
-              const targetExt = '.docx';
-              const enterPath = d.fullpath;
-              const outputPath = d.fullpath.split(startExt)[0] + targetExt;
-              pdf2html.html(enterPath, async (err, done) => {
-                if (err) {
-                  console.log(`\n\n Failure converting pdf file: ${enterPath} \n\n`);
+            //part 1 - rename the files
+            const startExt = '.pdf';
+            const targetExt = '.pdf';
+            const previousEnterPath = d.fullpath;
+            const fullPathNoExt = d.fullpath.split(startExt)[0];
+            const lastIsTargetArr = fullPathNoExt.split(envSlash);
+            const firstIsTargetArr = lastIsTargetArr.reverse();
+            const previousName = firstIsTargetArr[0];
+
+            const getCorrectName = (name) => {
+              const result = name.replace(/\s/g, '');
+              console.log("getCorrectName - previousName:", previousName);
+              console.log("getCorrectName - formattedName:", result);
+              return result;
+            };
+
+            const getCorrectPath = (path) => {
+              const fullLenght = path.length;
+              const lengthToRemove = previousName.length + startExt.length;
+              const lengthToPreserve = fullLenght - lengthToRemove;
+              const noFilenamePath = path.slice(0, lengthToPreserve);
+              const result = noFilenamePath + formattedName + startExt;
+              console.log("getCorrectPath - fullLenght:", fullLenght);
+              console.log("getCorrectPath - lengthToRemove:", lengthToRemove);
+              console.log("getCorrectPath - lengthToPreserve:", lengthToPreserve);
+              console.log("getCorrectPath - noFilenamePath:", noFilenamePath);
+              console.log("getCorrectPath - previousPath:", path);
+              console.log("getCorrectPath - formattedPath:", result);
+              return result;
+            };
+
+            const formattedName = getCorrectName(previousName);
+            const formattedEnterPath = getCorrectPath(previousEnterPath);
+            const buffer = fs.readFileSync(previousEnterPath);
+
+            //process: creation of files with newly formatted name
+            console.log("process: creation of files with newly formatted name");
+            libreConvert.convert(buffer, targetExt, undefined, async (err, done) => {
+              if (err) {
+                console.log(`\n\n ERROR: Pdf process - libreConvert.convert phase 1 - doc file: ${formattedEnterPath} \n\n`);
+                console.log('Error:', err);
+                rejectHtml(err);
+                return;
+              } else {
+                try {
+
+
+                  //[Checkpoint] Questo metodo non finisce in un loop eterno, ma stampa un botto di errori (non bloccanti)
+
+                  let finishedCreatingFile = false;
+                  //console.log("Starting deletion of file:", previousEnterPath);
+                  //await fs.unlinkSync(previousEnterPath);
+                  console.log("Starting file creation - outputPath", formattedEnterPath);
+                  fs.writeFileSync(formattedEnterPath, done); //BISOGNA FORZARE L'ATTESA DELLA FINE DI QUESTO
+                  finishedCreatingFile = fs.readFileSync(formattedEnterPath)
+                    (function forceWait() {
+                      if (!finishedCreatingFile) {
+                        console.log("File creation not finished for:", formattedEnterPath);
+                        setTimeout(forceWait, 1000);
+                      } else {
+                        return;
+                      }
+                    })();
+
+
+
+
+
+                } catch (err) {
+                  console.log(`\n\n ERROR: Pdf process - libreConvert.convert phase 2 - doc file: ${formattedEnterPath} \n\n`);
                   console.log('Error:', err);
-                  rejectHtml("err:", err);
-                  //rejectHtml({ ...err, cmd: "REMOVED_CMD_FOR_CONSOLE" });
-                } else {
-                  console.log("successfully converted pdf file:", enterPath);
-                  //done è l'html, non devo scriverci un file, ma conservare il dato
-                  //await fs.writeFileSync(outputPath, done);                
-                  const descrObj = { start: enterPath, html: done };
-                  resolveHtml(descrObj);
                 }
-              });
-            } catch (errPdfToHtml) {
-              console.log("Errore durante pdf --> html: ", errPdfToHtml);
-            }
+                //done è il BLOB
+                resolveHtml(done);
+              }
+            });
+
+            //process: extraction of pdf file content to html 
+            console.log("process: extraction of pdf file content to html ");
+            pdf2html.html(formattedEnterPath, async (err, done) => {
+              if (err) {
+                console.log(`\n\n ERROR: Pdf process - pdf2html.html phase 1 - doc file: ${formattedEnterPath} \n\n`);
+                console.log('Error:', err);
+                //Exception in thread "main" java.io.FileNotFoundException: /home/iridion/Desktop/Repos/Freelancer/project-privacy/public/archive/Giurisprudenza/Libri/MassimarioGarante2015-2016.pdf (No such file or directory)
+                rejectHtml("err:", err);
+              } else {
+                console.log("successfully converted pdf file:", formattedEnterPath);
+                //done è l'html, non devo scriverci un file, ma conservare il dato
+                //await fs.writeFileSync(outputPath, done);                
+                const descrObj = { start: formattedEnterPath, html: done };
+                await pdfToHtml.push(descrObj);
+                resolveHtml(descrObj);
+              }
+            });
           } else {
             console.log("Error - d or d.filename are undefined or null for this file: ", pdfFiles[x].fullpath);
           }

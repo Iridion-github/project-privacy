@@ -75,7 +75,7 @@ export default async (req, res) => {
         const analyzedFiles = [];
 
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
-        convertToDocx(filesToAnalyze, ['pdf']);
+        convertToDocx(filesToAnalyze, ['pdf'], envSlash);
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
 
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
