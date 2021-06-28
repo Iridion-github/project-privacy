@@ -5,7 +5,11 @@
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
 - [advancedSearch] (line 78) Managed to convert all doc files to docx. Struggling with pdf -> docx).
-- [convert] (line 111 & node_modules/pdf2html/index - line 66) Line 145 di convert.js appare in console prima della creazione del file a line 117. Bisogna forzare un'attesa che si assicuri che il nuovo file sia creato prima di andare avanti. Forse con un'altra Promise.
+- [convert] 
+    (files) Controllare che i file creati per il rename siano perfetti
+    (line 71) Controlla checkpoint
+    (line 79) Non rinominiamo i file che vanno bene!
+    (line 161) Far funzionare la conversione in html
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
