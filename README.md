@@ -1,15 +1,12 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
-- [advancedSearch] Ottimo progresso. Problemi con la creazione di file identici ma con nome formattato. 
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] (line 78) Managed to convert all doc files to docx. Struggling with pdf -> docx).
-- [convert] 
-    (files) Controllare che i file creati per il rename siano perfetti
-    (line 71) Controlla checkpoint
-    (line 79) Non rinominiamo i file che vanno bene!
-    (line 161) Far funzionare la conversione in html
+- [advancedSearch] Managed to convert all doc files to docx.
+- [advancedSearch] Managed to rename and recreate all the fucky files.
+- [convert] Line 184 LibreConvert is being a bitch
+- [LibreConvert] Line 71 tempDir is fucking things up I suspect 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

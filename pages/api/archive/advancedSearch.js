@@ -70,14 +70,16 @@ export default async (req, res) => {
     })();
 
     //containerResult Promise starts pending
-    const containerResult = await new Promise((resolveContainer, rejectContainer) => {
+    const containerResult = await new Promise(async (resolveContainer, rejectContainer) => {
       try {
         const analyzedFiles = [];
 
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
         console.log("advancedSearch - Entering convertToDocx");
-        convertToDocx(filesToAnalyze, ['pdf'], envSlash);
+        await convertToDocx(filesToAnalyze, ['pdf'], envSlash);
         console.log("advancedSearch - Exited convertToDocx");
+        resolveContainer(true); //[MEMO] to remove
+
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
 
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
@@ -185,10 +187,17 @@ export default async (req, res) => {
       }
     }).then((containerResult) => {
       //console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
+      return true; //[MEMO] To remove
       dataToFilter = [...containerResult];
       return containerResult;
     });//containerResult Promise resolved/rejected
   }
+
+  //[MEMO] To remove
+  return res.status(200).json({
+    success: true,
+    data: { filteredDocs: [] }
+  });
 
   //console.log("dataToFilter:", dataToFilter);
 
