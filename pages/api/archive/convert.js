@@ -29,6 +29,7 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
             const outputPath = d.fullpath.split(startExt)[0] + targetExt;
             const buffer = fs.readFileSync(enterPath);
             console.log("Successfully read - doc file:", enterPath);
+            console.log("buffer 1 bytelength:", buffer.byteLength);
             libreConvert.convert(buffer, targetExt, undefined, async (err, done) => {
               if (err) {
                 console.log(`\n\n Failure converting doc file: ${enterPath} \n\n`);
@@ -107,6 +108,7 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
               if (formattedName !== previousName) {
                 console.log("This file needs to be renamed:", previousName);
                 const buffer = await fs.readFileSync(previousEnterPath);
+                console.log("buffer 2 bytelength:", buffer.byteLength);
 
                 console.log("process: creation of files with newly formatted name");
                 libreConvert.convert(buffer, targetExt, undefined, async (err, done) => {
@@ -177,11 +179,12 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
 
               //libreconvert version
               const pdfEnterPath = renamePromise;
-              const docOutputPath = pdfEnterPath.substring(0, pdfEnterPath.length - 4) + '.txt';
+              const docOutputPath = pdfEnterPath.substring(0, pdfEnterPath.length - 4) + '.docx';
               console.log("Serving to pdf->doc converter this enterPath:", pdfEnterPath);
               console.log("Serving to pdf->doc converter this outputPath:", docOutputPath);
               const buffer = await fs.readFileSync(pdfEnterPath);
-              libreConvert.convert(buffer, 'txt', undefined, async (err, done) => {
+              console.log("buffer 3 bytelength:", buffer.byteLength);
+              libreConvert.convert(buffer, '.docx', undefined, async (err, done) => {
                 if (err) {
                   console.log(`\n\n Failure converting pdf to doc for file: ${pdfEnterPath} \n\n`);
                   console.log('Error:', err);

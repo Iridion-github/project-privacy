@@ -1,12 +1,12 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
+- [advancedSearch] Riuscire a leggere le text decorations per poter fare pin-point dei tags e delle diciture.
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] Managed to convert all doc files to docx.
-- [advancedSearch] Managed to rename and recreate all the fucky files.
 - [convert] Line 184 LibreConvert is being a bitch
 - [LibreConvert] Line 71 tempDir is fucking things up I suspect 
+- - [advancedSearch] line 97: PdfReader().parseFileItems NON è in grado di leggere le text decorations, ma forse PdfReader è dotato di altri strumenti che ne sono in grado!
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

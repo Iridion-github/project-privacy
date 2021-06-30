@@ -75,10 +75,10 @@ export default async (req, res) => {
         const analyzedFiles = [];
 
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
-        console.log("advancedSearch - Entering convertToDocx");
-        await convertToDocx(filesToAnalyze, ['pdf'], envSlash);
-        console.log("advancedSearch - Exited convertToDocx");
-        resolveContainer(true); //[MEMO] to remove
+        //console.log("advancedSearch - Entering convertToDocx");
+        //await convertToDocx(filesToAnalyze, ['pdf'], envSlash);
+        //console.log("advancedSearch - Exited convertToDocx");
+        //resolveContainer(true); //[MEMO] to remove
 
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
 
@@ -91,8 +91,10 @@ export default async (req, res) => {
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
             if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
               const pdfBuffer = fs.readFileSync(fileObj.fullpath);
+              //pdf content extraction - start
               const getPdfContent = async () => {
                 const pdfContentArray = [];
+                //[CHECKPOINT] PdfReader().parseFileItems NON è in grado di leggere le text decorations, ma forse PdfReader è dotato di altri strumenti che ne sono in grado!
                 await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
                   if (err) {
                     console.log("PdfReader - Error:", err);
@@ -109,12 +111,14 @@ export default async (req, res) => {
                     });
                   }
                   if (item.text) { //Per ogni frammento del pdf, pusho in pdfContentArray.
+                    console.log("This is a so-called item inside a pdf file:", item);
                     pdfContentArray.push(item.text);
                     return true;
                   }
                 });
               };
               getPdfContent();
+              //pdf content extraction - end
             } else if (docx) {
               //[Docx procedure] (mammoth)
               const options = {};
@@ -194,10 +198,12 @@ export default async (req, res) => {
   }
 
   //[MEMO] To remove
+  /*
   return res.status(200).json({
     success: true,
     data: { filteredDocs: [] }
   });
+  */
 
   //console.log("dataToFilter:", dataToFilter);
 
@@ -213,6 +219,14 @@ export default async (req, res) => {
         //byProvvedimento: { provv: 'Acc.', tipo: 'vigente', articolo: '4' }
         const contentIncipit = d.content.slice(0, 500);
         //console.log("contentIncipit:", contentIncipit);
+
+        //Look for specific syntax in original xml - start
+        /*
+        const enterPath = d.fullpath;
+        const buffer = fs.readFileSync(enterPath);
+        */
+        //Look for specific syntax in original xml - end
+
         const conditions = {
           tag: contentIncipit.includes(activeFilters.byProvvedimento.provv),
           tipo: true, //difficile da capire, chiedere a Luigi
