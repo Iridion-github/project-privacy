@@ -7,6 +7,7 @@ import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc 
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
 import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
 import { convertToDocx } from './convert';
+import { findArticolo } from './findFormattedText';
 
 const environment = "linux";
 
@@ -83,18 +84,15 @@ export default async (req, res) => {
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
 
         filesToAnalyze.forEach(async (fileObj, fileIndex) => {
-
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf");
           const docx = fileObj.fullpath.toLowerCase().includes(".docx");
           const doc = fileObj.fullpath.toLowerCase().includes(".doc");
           //singleResult Promise starts pending
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
             if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
-              const pdfBuffer = fs.readFileSync(fileObj.fullpath);
               //pdf content extraction - start
               const getPdfContent = async () => {
                 const pdfContentArray = [];
-                //[CHECKPOINT] PdfReader().parseFileItems NON è in grado di leggere le text decorations, ma forse PdfReader è dotato di altri strumenti che ne sono in grado!
                 await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
                   if (err) {
                     console.log("PdfReader - Error:", err);
@@ -111,7 +109,6 @@ export default async (req, res) => {
                     });
                   }
                   if (item.text) { //Per ogni frammento del pdf, pusho in pdfContentArray.
-                    console.log("This is a so-called item inside a pdf file:", item);
                     pdfContentArray.push(item.text);
                     return true;
                   }
@@ -157,7 +154,7 @@ export default async (req, res) => {
               rejectSingle("File is not pdf, docx or doc!"); //rejecting singleResult Promise
             }
           }).then(singleResult => {
-            //console.log("singleResult.content.slice(0,500)", singleResult.content.slice(0, 500))
+            console.log("singleResult has resolved");
             return singleResult;
           });
           //singleResult Promise resolved/rejected
@@ -190,24 +187,16 @@ export default async (req, res) => {
         rejectContainer(errContainer); //rejecting containerResult Promise
       }
     }).then((containerResult) => {
-      //console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
-      return true; //[MEMO] To remove
+      console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
       dataToFilter = [...containerResult];
       return containerResult;
     });//containerResult Promise resolved/rejected
   }
 
-  //[MEMO] To remove
-  /*
-  return res.status(200).json({
-    success: true,
-    data: { filteredDocs: [] }
-  });
-  */
+  console.log("dataToFilter.filter() process start");
 
-  //console.log("dataToFilter:", dataToFilter);
-
-  const filteredDocs = dataToFilter.filter(d => {
+  const filteredDocs = dataToFilter.filter(async d => {
+    console.log("Line 199 - d.content?", !!d.content);
     if (d.content) {
       if (!includePdf && d.filename.includes(".pdf")) return false;
       if (!includeDocx && d.filename.includes(".docx")) return false;
@@ -219,11 +208,24 @@ export default async (req, res) => {
         //byProvvedimento: { provv: 'Acc.', tipo: 'vigente', articolo: '4' }
         const contentIncipit = d.content.slice(0, 500);
         //console.log("contentIncipit:", contentIncipit);
+        const enterPath = d.fullpath;
+
+        //Ricerca Articolo specifico - start
+        const requiredFormat = {
+          bold: true,
+          italic: false,
+          size: null,
+          prevChar: null,
+          nextChar: ".",
+        };
+        const target = "104";
+        console.log("Entering findArticolo");
+        await findArticolo({ enterPath, target, requiredFormat });
+        console.log("Exited findArticolo");
+        //Ricerca Articolo specifico - end
 
         //Look for specific syntax in original xml - start
-        /*
-        const enterPath = d.fullpath;
-        const buffer = fs.readFileSync(enterPath);
+        /*        
         */
         //Look for specific syntax in original xml - end
 
@@ -321,26 +323,32 @@ export default async (req, res) => {
     let convertedDocs = [];
     conversionFinished = false;
 
-    //console.log("Starting conversion process");
+    console.log("Starting conversion process");
     for (let x = 0; x < filteredDocs.length; x++) {
       const d = filteredDocs[x];
-      const libreResult = await new Promise((resolveLibre, rejectLibre) => {
+      const libreResult = await new Promise(async (resolveLibre, rejectLibre) => {
         if (d && d.filename) {
           const extend = convertDocToDocx ? '.docx' : '.pdf';
           const enterPath = d.fullpath;
           //const outputPath = d.filename.includes(".docx") ? d.fullpath.split('.docx')[0] + extend : d.fullpath.split('.doc')[0] + extend;
-          const file = fs.readFileSync(enterPath);
-          libreConvert.convert(file, extend, undefined, async (err, done) => {
-            if (err) {
-              console.log(`\n\n Error converting file: ${err} \n\n`);
-              rejectLibre(err);
-            } else {
-              //console.log("successfully converted file:", enterPath);
-              // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
-              //await fs.writeFileSync(outputPath, done)
-              resolveLibre(done);
-            }
-          });
+          const undone = await fs.readFileSync(enterPath);
+          console.log("conversion process - extend", extend);
+          console.log("conversion process - enterPath", enterPath);
+          console.log("conversion process - undone.byteLength", undone.byteLength);
+          //[CHECKPOINT]Errori brutti qui
+          if (!d.fullpath.includes(".pdf")) { //[MEMO] Rimuovere!
+            libreConvert.convert(undone, extend, undefined, async (err, done) => {
+              if (err) {
+                console.log(`\n\n Error converting file: ${enterPath} \n\n`);
+                rejectLibre(err);
+              } else {
+                //console.log("successfully converted file:", enterPath);
+                // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
+                //await fs.writeFileSync(outputPath, done)
+                resolveLibre(done);
+              }
+            });
+          }
         } else {
           console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x].fullpath);
         }

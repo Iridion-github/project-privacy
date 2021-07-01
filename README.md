@@ -4,9 +4,7 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [convert] Line 184 LibreConvert is being a bitch
-- [LibreConvert] Line 71 tempDir is fucking things up I suspect 
-- - [advancedSearch] line 97: PdfReader().parseFileItems NON è in grado di leggere le text decorations, ma forse PdfReader è dotato di altri strumenti che ne sono in grado!
+- [advancedSearch] line 338 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
