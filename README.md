@@ -4,7 +4,7 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] line 338 
+- [advancedSearch] line 334 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
