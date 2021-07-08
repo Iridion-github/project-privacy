@@ -31,16 +31,16 @@ export default async (req, res) => {
   const todayDate = new Date();
   const todayUTC = todayDate.toUTCString();
   const readFileName = todayUTC.slice(0, 16);
-  //console.log("activeFilters:", activeFilters);
+  console.log("activeFilters:", activeFilters);
   const mustBeProvv = Object.keys(activeFilters).includes("byProvvedimento");
 
   try {
     const mappedArchiveRaw = await fs.readFileSync("mappedArchive" + envSlash + readFileName + ".json");
     mappedArchive = JSON.parse(mappedArchiveRaw);
     isArchiveMapped = true;
-    dataToFilter.push(...mappedArchive);
+    await dataToFilter.push(...mappedArchive);
   } catch (mappedArchiveMissing) {
-    console.log("No mappedArchive for present day, need to create.");
+    console.log("mappedArchiveMissing");
     isArchiveMapped = false;
   }
 
@@ -63,113 +63,115 @@ export default async (req, res) => {
         }
       }
     }
-    (() => {
+    (async () => {
       let startDirectory = 'public/archive';
       for (const f of getFiles(startDirectory)) {
         filesToAnalyze.push(f);
       }
     })();
 
-    //containerResult Promise starts pending
-    const containerResult = await new Promise((resolveContainer, rejectContainer) => {
+    const getDataToFilter = async () => {
+      console.log("entering function: getDataToFilter");
       try {
-        const analyzedFiles = [];
-
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
         //console.log("advancedSearch - Entering convertToDocx");
         //await convertToDocx(filesToAnalyze, ['pdf'], envSlash);
         //console.log("advancedSearch - Exited convertToDocx");
-        //resolveContainer(true); //[MEMO] to remove
+        //return true; //[MEMO] to remove
 
         //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
-
-        filesToAnalyze.forEach(async (fileObj, fileIndex) => {
+        const analyzedFiles = await filesToAnalyze.map(async (fileObj, fileIndex) => {
+          const lastFile = fileIndex === filesToAnalyze.length - 1;
           const pdf = fileObj.fullpath.toLowerCase().includes(".pdf");
           const docx = fileObj.fullpath.toLowerCase().includes(".docx");
           const doc = fileObj.fullpath.toLowerCase().includes(".doc");
-          //singleResult Promise starts pending
-          const singleResult = await new Promise((resolveSingle, rejectSingle) => {
+
+          const getSingleResult = async () => {
+            console.log("entering function: getSingleResult");
             if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
               //pdf content extraction - start
               const getPdfContent = async () => {
+                console.log("entering function: getPdfContent");
                 const pdfContentArray = [];
-                await new PdfReader().parseFileItems(fileObj.fullpath, (err, item) => {
+                await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
+                  //console.log("entering function: parseFileItems");
                   if (err) {
                     console.log("PdfReader - Error:", err);
-                    return rejectSingle(err); //rejecting singleResult Promise
                   }
                   if (!item) { //Condizione d'uscita da parseFileItems()
-                    return resolveSingle({ //resolving singleResult Promise
+                    //console.log("exiting function: parseFileItems");
+                    return {
                       fullpath: fileObj.fullpath,
                       linuxfullpath: fileObj.linuxfullpath,
                       filename: fileObj.filename,
                       relativepath: fileObj.relativepath,
                       linuxpath: fileObj.linuxpath,
-                      content: pdfContentArray.join(" ")
-                    });
+                      content: await pdfContentArray.join(" ")
+                    };
                   }
                   if (item.text) { //Per ogni frammento del pdf, pusho in pdfContentArray.
-                    pdfContentArray.push(item.text);
-                    return true;
+                    await pdfContentArray.push(item.text);
                   }
                 });
               };
-              getPdfContent();
+              const pdfContentResult = await getPdfContent();
+              console.log("exiting function: getSingleResult - return value length:", pdfContentResult.length);
+              return pdfContentResult;
               //pdf content extraction - end
             } else if (docx) {
               //[Docx procedure] (mammoth)
               const options = {};
-              mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
+              const docxContentResult = await mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
+                console.log("entering function: mammoth.convertToHtml");
                 if (mammothResult.messages.length > 0) {
                   for (let x; x < mammothResult.messages.length; x++) {
                     console.log("\n\n Errors:", mammothResult.messages[x], '\n\n');
                   }
                 }
-                return resolveSingle({ //resolving singleResult Promise
+                return {
                   fullpath: fileObj.fullpath,
                   linuxfullpath: fileObj.linuxfullpath,
                   filename: fileObj.filename,
                   relativepath: fileObj.relativepath,
                   linuxpath: fileObj.linuxpath,
                   content: mammothResult.value
-                });
+                };
               });
+              console.log("exiting function: getSingleResult - return value fullpath: ", docxContentResult.fullpath);
+              return docxContentResult;
             } else if (doc) {
               //[Doc procedure] (WordExtractor)
               const getDocContent = async (fileObj) => {
+                console.log("entering function: getDocContent");
                 const docExtractor = new WordExtractor();
                 const extractedContent = await docExtractor.extract('public' + envSlash + fileObj.relativepath).then(function (doc) {
-                  resolveSingle({ //resolving singleResult Promise
+                  return {
                     fullpath: fileObj.fullpath,
                     linuxfullpath: fileObj.linuxfullpath,
                     filename: fileObj.filename,
                     relativepath: fileObj.relativepath,
                     linuxpath: fileObj.linuxpath,
                     content: JSON.stringify(doc.getBody())
-                  });
+                  };
                 });
+                console.log("exiting function: getDocContent - return value fullpath:", extractedContent.fullpath);
+                return extractedContent;
               };
-              getDocContent(fileObj);
+              const docContentResult = await getDocContent(fileObj);
+              console.log("exiting function: getSingleResult - docContentResult.fullpath:", docContentResult.fullpath);
+              return docContentResult;
             } else {
-              rejectSingle("File is not pdf, docx or doc!"); //rejecting singleResult Promise
+              console.log("File is not pdf, docx or doc!");
+              return;
             }
-          }).then(singleResult => {
-            console.log("singleResult has resolved");
-            return singleResult;
-          });
-          //singleResult Promise resolved/rejected
+          };
 
-          await analyzedFiles.push({
-            fullpath: fileObj.fullpath,
-            filename: fileObj.filename,
-            relativepath: fileObj.relativepath,
-            linuxpath: fileObj.linuxpath,
-            content: (singleResult && singleResult.content) ? singleResult.content : ""
-          });
+          const singleResult = await getSingleResult();
 
-          if (analyzedFiles.length === filesToAnalyze.length) {
+          if (lastFile) {
+            console.log("This is the last File");
             //Qui dovrebbe salvare il json di containerResult
-            const mappedArchiveStr = JSON.stringify([...analyzedFiles]);
+            const mappedArchiveStr = JSON.stringify([...analyzedFiles, singleResult]);
             //console.log("|||||||||||||||||||||||| started writing a json file representing the archive");
             const todayDate = new Date();
             const todayUTC = todayDate.toUTCString();
@@ -177,33 +179,88 @@ export default async (req, res) => {
             //[MEMO] ho disattivato la creazione del mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
             //await fs.writeFileSync("mappedArchive" + envSlash + writeFileName + ".json", mappedArchiveStr);
             //console.log("|||||||||||||||||||||||| finished writing json file");
-            resolveContainer(analyzedFiles); //resolving containerResult Promise
-          } else {
-            //console.log("(analyzedFiles.length !== filesToAnalyze.length) fileIndex attuale:", fileIndex);
           }
+
+          console.log("exiting function: getDataToFilter - fullpath: ", fileObj.fullpath);
+          return {
+            fullpath: fileObj.fullpath,
+            filename: fileObj.filename,
+            relativepath: fileObj.relativepath,
+            linuxpath: fileObj.linuxpath,
+            content: (singleResult && singleResult.content) ? singleResult.content : ""
+          };
+
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return analyzedFiles;
       } catch (errContainer) {
-        console.log("rejectContainer with error:", errContainer);
-        rejectContainer(errContainer); //rejecting containerResult Promise
+        console.log("error:", errContainer);
+        return;
       }
-    }).then((containerResult) => {
-      console.log("Done mapping archive. Setting value of dataToFilter to same value of containerResult.");
-      dataToFilter = [...containerResult];
-      return containerResult;
-    });//containerResult Promise resolved/rejected
-  }
 
-  console.log("dataToFilter.filter() process start");
+    };
 
-  const filteredDocs = await new Promise(async (resolveFilter, rejectFilter) => {
+    dataToFilter = await getDataToFilter();
+  };
 
-
-
-
-
-    let isLastCycle = false;
+  const getFilteredDocs = async () => {
+    console.log("entering function: getFilteredDocs");
+    console.log("dataToFilter.length:", dataToFilter.length);
     const filteredArr = await dataToFilter.filter(async (d, filterIndex) => {
-      isLastCycle = filterIndex === dataToFilter.length - 1;
       if (d.content) {
         if (!includePdf && d.filename.includes(".pdf")) return false;
         if (!includeDocx && d.filename.includes(".docx")) return false;
@@ -211,10 +268,7 @@ export default async (req, res) => {
         if (mustBeProvv && !d.fullpath.includes(envSlash + "Provvedimenti" + envSlash)) {
           return false;
         } else if (mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
-          console.log("activeFilters:", activeFilters);
-          //byProvvedimento: { provv: 'Acc.', tipo: 'vigente', articolo: '4' }
           const contentIncipit = d.content.slice(0, 500);
-          //console.log("contentIncipit:", contentIncipit);
           const enterPath = d.fullpath;
 
           //Ricerca Articolo specifico - start
@@ -227,26 +281,10 @@ export default async (req, res) => {
           };
           const target = activeFilters.byProvvedimento.articolo;
 
-
-          const resultsByArticle = await new Promise(async (resolveByArticle, rejectByArticle) => {
-            console.log(">>>>>>>>>>>>>>>>>>>>>> Entering findArticolo");
-            let results = await findArticolo({ enterPath, target, requiredFormat });
-            console.log(">>>>>>>>>>>>>>>>>>>>>> Exited findArticolo");
-            if (canContinue) { resolveByArticle(results); } else {
-              console.log();
-            }
-          }).then((results) => {
-            console.log("resultsByArticle Promise - results:", results);
-            return results;
-          });
-
-
-
-
+          console.log(">>>>>>>>>>>>>>>>>>>>>> Entering findArticolo");
+          const resultsByArticle = await findArticolo({ enterPath, target, requiredFormat });
+          console.log(">>>>>>>>>>>>>>>>>>>>>> Exited findArticolo");
           //Ricerca Articolo specifico - end
-
-
-
 
           const conditions = {
             tag: contentIncipit.includes(activeFilters.byProvvedimento.provv),
@@ -271,7 +309,7 @@ export default async (req, res) => {
           console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching nel content");
           return result;
         }
-        console.log("Content of file:", d.fullpath, " does NOT include searchterms");
+        console.log("File:", d.fullpath, " does NOT include searchterms");
 
         //Ciclo che cerca i tag di byAuthority, appena uno viene trovato, esce per risparmiare tempo
         if (activeFilters.byAuthority?.length > 0) {
@@ -320,69 +358,55 @@ export default async (req, res) => {
         return false;
       }
     });
+    const consoleFormattedArr = await filteredArr.map(el => ({ ...el, content: "CENSORED" }));
+    //[Checkpoint] Beccare il punto che non rispetta la sincronia forzata dagli await. Salire da qui.
+    console.log("filteredArr (formatted):", consoleFormattedArr); /*[MEMO]Questo è già fottuto:
+    dataToFilter.length: 11
+filteredArr (formatted): [
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' },
+  { content: 'CENSORED' }
+]
+    */
+    console.log("exiting function: getFilteredDocs - filteredArr.length", filteredArr.length);
+    return filteredArr;
+  };
 
+  //console.log("About to call getFilteredDocs - filesToAnalyze:", filesToAnalyze); [MEMO] Questo è ok
 
+  const filteredDocs = await getFilteredDocs();
 
-
-
-
-
-
-
-
-    if (isLastCycle) {
-      /*[CHECKPOINT] Qui ci entra che non è stato stampato neanche un >>>>>>>>>>>>>>>>>>>>>> Exited findArticolo. 
-      Bisogna trovare il modo di far rispettare la sincronia di alcuni eventi, a costo di refactorare l'intero codice di
-      advanced search*/
-      console.log("isLastCycle = true | filteredArr:", filteredArr.map(el => ({ ...el, content: "CENSORED" })));
-      resolveFilter(filteredArr);
-    } else {
-      console.log("isLastCycle = false");
-    }
-  }).then((resolvedArr) => {
-    console.log("If it prints this while isLastCycle is false, we got a problem.");
-    console.log("resolvedArr.length:", resolvedArr.length);
-    return resolvedArr;
-  });
-
-
-
-
-
-
-
-
-
-  //[MEMO] Remove the next 5 lines
-  console.log("About to return res.status(200)");
-  return res.status(200).json({
-    success: true,
-    data: { filteredDocs: [] }
-  });
-
-  console.log("------------------- starting conversion phase -------------------");
-
-  const checkIfConversionNeeded = (fileObjArr) => {
-    const names = fileObjArr.map(el => el.filename);
-    const conversionNeeded = names.some(name => (name.includes(".docx") || name.includes(".doc")));
-    console.log("conversionNeeded ?", conversionNeeded);
+  const checkIfConversionNeeded = async (fileObjArr) => {
+    console.log("entering function: checkIfConversionNeeded");
+    const names = await fileObjArr.map(el => el.filename);
+    const conversionNeeded = await names.some(name => (name.includes(".docx") || name.includes(".doc")));
+    console.log("is conversion needed ?", conversionNeeded);
     return conversionNeeded;
   };
 
-  if (checkIfConversionNeeded(filteredDocs)) {
+  if (await checkIfConversionNeeded(filteredDocs)) {
     let convertedDocs = [];
     conversionFinished = false;
 
     console.log("Starting conversion process");
     for (let x = 0; x < filteredDocs.length; x++) {
       const d = filteredDocs[x];
-      const libreResult = await new Promise(async (resolveLibre, rejectLibre) => {
+
+      const getLibreResult = async () => {
         if (d && d.filename) {
           const extend = '.pdf';
           const enterPath = d.fullpath;
           //const outputPath = d.filename.includes(".docx") ? d.fullpath.split('.docx')[0] + extend : d.fullpath.split('.doc')[0] + extend;
           const undone = await fs.readFileSync(enterPath);
-          console.log("conversion process - extend", extend);
+          //console.log("conversion process - extend", extend);
           console.log("conversion process - enterPath", enterPath);
           console.log("conversion process - undone.byteLength", undone.byteLength);
           libreConvert.convert(undone, extend, undefined, (err, done) => {
@@ -393,15 +417,15 @@ export default async (req, res) => {
               console.log("successfully converted file:", enterPath);
               // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
               //await fs.writeFileSync(outputPath, done)
-              resolveLibre(done);
+              return done;
             }
           });
         } else {
           console.log("Error - Caso inaspettato con questo file: ", filteredDocs[x].fullpath);
         }
-      }).then(libreResult => {
-        return libreResult;
-      });
+      };
+
+      const libreResult = await getLibreResult();
 
       let mapResult = {};
 
@@ -416,7 +440,8 @@ export default async (req, res) => {
           buffer: libreResult
         };
       } else {
-        console.log("if NOT (libreResult && libreResult.byteLength)");
+        console.log("libreResult && libreResult.byteLength is FALSE.");
+        console.log("libreResult:", libreResult);
         mapResult = {
           fullpath: d.fullpath,
           filename: d.filename,
