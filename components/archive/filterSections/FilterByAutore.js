@@ -1,8 +1,7 @@
 import {
   Row,
   Col,
-  Card,
-  Form
+  Card
 } from 'react-bootstrap';
 import { TextInput } from '../ui/TextInput';
 
