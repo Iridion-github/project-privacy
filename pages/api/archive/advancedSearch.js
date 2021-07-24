@@ -1,13 +1,14 @@
 import path, { resolve } from 'path';
 import slash from 'slash';
-import { PdfReader } from "pdfreader";  //pacchetto usato per leggere i pdf 
 import fs from 'fs';//pacchetto usato per leggere docx files
 import mammoth from 'mammoth'; //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
 import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
+import { forceWaitWithCondition } from '../../../utils/async';
 import { convertToDocx } from './convert';
 import { findArticolo } from './findFormattedText';
+import { getPdfContent } from './pdfUtils';
 
 const environment = "linux";
 const convertDocToDocx = true;
@@ -38,9 +39,18 @@ export default async (req, res) => {
     isConversionNeeded: undefined,
   };
 
+  const updateGlobalState = (prop, val) => {
+    globalState[prop] = val;
+  };
+
   const analyzedFilesState = {
     singleResult: undefined,
     allResults: undefined,
+  };
+
+
+  const updateAnalyzedFilesState = (prop, val) => {
+    analyzedFilesState[prop] = val;
   };
 
   const getDataToFilterState = {
@@ -50,17 +60,25 @@ export default async (req, res) => {
     doc: undefined,
   };
 
-  const getPdfContentState = {
-    pdfContentArray: []
+  const updateGetDataToFilterState = (prop, val) => {
+    getDataToFilterState[prop] = val;
   };
 
   const getSingleResultState = {
     pdfContentResult: undefined
   };
 
+  const updateGetSingleResultState = (prop, val) => {
+    getSingleResultState[prop] = val;
+  };
+
   const docxState = {
     options: {},
     docxContentResult: undefined,
+  };
+
+  const updateDocxState = (prop, val) => {
+    docxState[prop] = val;
   };
 
   const docState = {
@@ -69,13 +87,25 @@ export default async (req, res) => {
     docContentResult: undefined,
   };
 
+  const updateDocState = (prop, val) => {
+    docState[prop] = val;
+  };
+
   const getFilteredDocsState = {
     filteredArr: undefined
+  };
+
+  const updateGetFilteredDocsState = (prop, val) => {
+    getFilteredDocsState[prop] = val;
   };
 
   const contentState = {
     cleanContent: undefined,
     result: undefined,
+  };
+
+  const updateContentState = (prop, val) => {
+    contentState[prop] = val;
   };
 
   const byProvvedimentoState = {
@@ -87,8 +117,16 @@ export default async (req, res) => {
     conditions: undefined,
   };
 
+  const updateByProvvedimentoState = (prop, val) => {
+    byProvvedimentoState[prop] = val;
+  };
+
   const authorityTagsState = {
     tag: undefined,
+  };
+
+  const updateAuthorityTagsState = (prop, val) => {
+    authorityTagsState[prop] = val;
   };
 
   const bySubjectState = {
@@ -96,9 +134,17 @@ export default async (req, res) => {
     tag: undefined,
   };
 
+  const updateBySubjectState = (prop, val) => {
+    bySubjectState[prop] = val;
+  };
+
   const conversionNeededState = {
     names: undefined,
     conversionNeeded: undefined,
+  };
+
+  const updateConversionNeededState = (prop, val) => {
+    conversionNeededState[prop] = val;
   };
 
   const conversionState = {
@@ -108,34 +154,43 @@ export default async (req, res) => {
     mapResult: undefined,
   };
 
+  const updateConversionState = (prop, val) => {
+    conversionState[prop] = val;
+  };
+
   const libreResultState = {
     extend: undefined,
     enterPath: undefined,
     undone: undefined,
     outputPath: undefined,
   };
+
+  const updateLibreResultState = (prop, val) => {
+    libreResultState[prop] = val;
+  };
+
   //All states [end]
 
-  globalState.conversionFinished = true;
-  globalState.isArchiveMapped = undefined; //variabile bool che ci dirà se c'è una versione di oggi dell'archivio mappato
-  globalState.mappedArchive = undefined; //variabile array dei dati dell'archivio mappato
-  globalState.searchterms = req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null;
-  globalState.activeFilters = JSON.parse(req.query.activeFilters);
-  globalState.includePdf = globalState.activeFilters.byExtension.find(obj => obj.label === "Pdf").checked;
-  globalState.includeDoc = globalState.activeFilters.byExtension.find(obj => obj.label === "Doc").checked;
-  globalState.includeDocx = globalState.activeFilters.byExtension.find(obj => obj.label === "Docx").checked;
-  globalState.filesToAnalyze = [];
-  globalState.dataToFilter = [];
-  globalState.todayDate = new Date();
-  globalState.todayUTC = globalState.todayDate.toUTCString();
-  globalState.readFileName = globalState.todayUTC.slice(0, 16);
-  globalState.mustBeProvv = Object.keys(globalState.activeFilters).includes("byProvvedimento");
+  await updateGlobalState("conversionFinished", true);
+  await updateGlobalState("isArchiveMapped", undefined);//variabile bool che ci dirà se c'è una versione di oggi dell'archivio mappato
+  await updateGlobalState("mappedArchive", undefined);//variabile array dei dati dell'archivio mappato  
+  await updateGlobalState("searchterms", req.query.searchterms && req.query.searchterms.length > 0 ? req.query.searchterms : null);
+  await updateGlobalState("activeFilters", JSON.parse(req.query.activeFilters));
+  await updateGlobalState("includePdf", globalState.activeFilters.byExtension.find(obj => obj.label === "Pdf").checked);
+  await updateGlobalState("includeDoc", globalState.activeFilters.byExtension.find(obj => obj.label === "Doc").checked);
+  await updateGlobalState("includeDocx", globalState.activeFilters.byExtension.find(obj => obj.label === "Docx").checked);
+  await updateGlobalState("filesToAnalyze", []);
+  await updateGlobalState("dataToFilter", []);
+  await updateGlobalState("todayDate", new Date());
+  await updateGlobalState("todayUTC", globalState.todayDate.toUTCString());
+  await updateGlobalState("readFileName", globalState.todayUTC.slice(0, 16));
+  await updateGlobalState("mustBeProvv", Object.keys(globalState.activeFilters).includes("byProvvedimento"));
 
   const getIsArchiveMapped = async () => {
     try {
-      globalState.mappedArchiveRaw = await fs.readFileSync("globalState.mappedArchive" + envSlash + globalState.readFileName + ".json");
-      globalState.mappedArchive = JSON.parse(globalState.mappedArchiveRaw);
-      await globalState.dataToFilter.push(...globalState.mappedArchive);
+      await updateGlobalState("mappedArchiveRaw", await fs.readFileSync("globalState.mappedArchive" + envSlash + globalState.readFileName + ".json"));
+      await updateGlobalState("mappedArchive", JSON.parse(globalState.mappedArchiveRaw));
+      await updateGlobalState("dataToFilter", [...globalState.dataToFilter, ...globalState.mappedArchive]);
       return true;
     } catch (mappedArchiveMissing) {
       return false;
@@ -143,7 +198,7 @@ export default async (req, res) => {
   };
 
   console.log("[1] calculating globalState.isArchiveMapped value");
-  globalState.isArchiveMapped = await getIsArchiveMapped();
+  await updateGlobalState("isArchiveMapped", await getIsArchiveMapped());
 
   if (!globalState.isArchiveMapped) {
     console.log("[1.A] archive needs mapping");
@@ -183,103 +238,56 @@ export default async (req, res) => {
       //console.log("advancedSearch - Exited convertToDocx");
       //return true; //[MEMO] to remove
 
-      //Ogni volta che l'archivio viene aggiornato, va eseguito questo script per ottenere la versione docx di tutti i files
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       const getAnalyzedFiles = async (filesToAnalyze) => {
-        analyzedFilesState.allResults = [];
+        await updateAnalyzedFilesState("allResults", []);
         for (let x = 0; x < filesToAnalyze.length - 1; x++) {
           const fileObj = filesToAnalyze[x];
           const fileIndex = x;
 
-          getDataToFilterState.lastFile = fileIndex === globalState.filesToAnalyze.length - 1;
-          getDataToFilterState.pdf = fileObj.fullpath.toLowerCase().includes(".pdf");
-          getDataToFilterState.docx = fileObj.fullpath.toLowerCase().includes(".docx");
-          getDataToFilterState.doc = fileObj.fullpath.toLowerCase().includes(".doc");
+          await updateGetDataToFilterState("lastFile", fileIndex === globalState.filesToAnalyze.length - 1);
+          await updateGetDataToFilterState("pdf", fileObj.fullpath.toLowerCase().includes(".pdf"));
+          await updateGetDataToFilterState("docx", fileObj.fullpath.toLowerCase().includes(".docx"));
+          await updateGetDataToFilterState("doc", fileObj.fullpath.toLowerCase().includes(".doc"));
 
           const getSingleResult = async () => {
             console.log("[2.1] entered function: getSingleResult()");
             if (getDataToFilterState.pdf) { //[Pdf procedure] (PdfReader + manual array push)
               //pdf content extraction - start
               console.log("[2.1.A] enter pdf case");
-              const getPdfContent = async () => {
-                console.log("[2.1.A.1] enter function: PdfReader().parseFileItems");
-                await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
-                  //console.log("entering function: parseFileItems");
-                  if (err) {
-                    //[MEMO] forse conviene uscire cmq in caso di errore
-                    console.log("[2.1.A.1] exit function: PdfReader().parseFileItems with error:", err);
-                    return {
-                      fullpath: fileObj.fullpath,
-                      linuxfullpath: fileObj.linuxfullpath,
-                      filename: fileObj.filename,
-                      relativepath: fileObj.relativepath,
-                      linuxpath: fileObj.linuxpath,
-                      content: await getPdfContentState.pdfContentArray.join(" ")
-                    };
-                  }
-                  if (!item) { //Condizione d'uscita da parseFileItems()
-                    console.log("[2.1.A.1] exit function: PdfReader().parseFileItems");
-                    return {
-                      fullpath: fileObj.fullpath,
-                      linuxfullpath: fileObj.linuxfullpath,
-                      filename: fileObj.filename,
-                      relativepath: fileObj.relativepath,
-                      linuxpath: fileObj.linuxpath,
-                      content: await getPdfContentState.pdfContentArray.join(" ")
-                    };
-                  }
-                  if (item.text) { //Per ogni frammento del pdf, pusho in getPdfContentState.pdfContentArray.
-                    const updatedPdfContentArray = async (arr, newElem) => {
-                      await arr.push(newElem);
-                    };
-                    await updatedPdfContentArray(getPdfContentState.pdfContentArray, item.text);
-                  }
-                });
-                console.log("[2.1.A] exit function: getPdfContent");
-              };
 
               console.log("[2.1.A] enter function: getPdfContent");
-              getSingleResultState.pdfContentResult = await getPdfContent();
+              await getPdfContent({
+                fileObj: fileObj,
+                which: "pdfTextExtract",
+                updateGetSingleResultState: updateGetSingleResultState,
+                updateGlobalState: updateGlobalState
+              });
 
+              (function forceWaitPdfContent() {
+                if (!globalState.getPdfContentHasFinished) {
+                  console.log("getPdfContent isn't finished, looping");
+                  setTimeout(forceWaitPdfContent, 1000);
+                } else {
+                  console.log("---------------- getPdfContent is finished - globalState.pdfContentResult", globalState.pdfContentResult);
+                }
+              })();
+
+              console.log("getSingleResultState.pdfContentResult:", getSingleResultState.pdfContentResult);
               console.log("[2.1] exit function: getSingleResult()");
               return getSingleResultState.pdfContentResult;
               //pdf content extraction - end
             } else if (getDataToFilterState.docx) {
-              console.log("[2.1.B] docx case");
+              //console.log("[2.1.B] docx case");
               //[Docx procedure] (mammoth)
 
-              docxState.docxContentResult = await mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, docxState.options).then((mammothResult) => {
-                console.log("entering function: mammoth.convertToHtml");
+              await updateDocxState("docxContentResult", await mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, docxState.options).then((mammothResult) => {
+                //console.log("entering function: mammoth.convertToHtml");
                 if (mammothResult.messages.length > 0) {
                   for (let x; x < mammothResult.messages.length; x++) {
-                    console.log("\n\n Errors:", mammothResult.messages[x], '\n\n');
+                    // console.log("\n\n Errors:", mammothResult.messages[x], '\n\n');
                   }
                 }
-                console.log("[2.1.B] exit mammoth.convertToHtml");
+                //console.log("[2.1.B] exit mammoth.convertToHtml");
                 return {
                   fullpath: fileObj.fullpath,
                   linuxfullpath: fileObj.linuxfullpath,
@@ -288,17 +296,18 @@ export default async (req, res) => {
                   linuxpath: fileObj.linuxpath,
                   content: mammothResult.value
                 };
-              });
-              console.log("[2.1] exit getSingleResult");
+              }));
+              //console.log("[2.1] exit getSingleResult");
               return docxState.docxContentResult;
+
             } else if (getDataToFilterState.doc) {
-              console.log("[2.1.C] enter doc case");
+              // console.log("[2.1.C] enter doc case");
               //[Doc procedure] (WordExtractor)
               const getDocContent = async (fileObj) => {
-                docState.docExtractor = new WordExtractor();
-                console.log("[2.1.C.1] enter docExtractor.extract");
-                docState.extractedContent = await docState.docExtractor.extract('public' + envSlash + fileObj.relativepath).then(function (doc) {
-                  console.log("[2.1.C.1] exit docExtractor.extract");
+                await updateDocState("docExtractor", new WordExtractor());
+                //console.log("[2.1.C.1] enter docExtractor.extract");
+                await updateDocState("extractedContent", await docState.docExtractor.extract('public' + envSlash + fileObj.relativepath).then(function (doc) {
+                  //console.log("[2.1.C.1] exit docExtractor.extract");
                   return {
                     fullpath: fileObj.fullpath,
                     linuxfullpath: fileObj.linuxfullpath,
@@ -307,14 +316,14 @@ export default async (req, res) => {
                     linuxpath: fileObj.linuxpath,
                     content: JSON.stringify(doc.getBody())
                   };
-                });
-                console.log("[2.1.C] exit getDocContent");
+                }));
+                //console.log("[2.1.C] exit getDocContent");
                 return docState.extractedContent;
               };
 
-              console.log("[2.1.C] enter getDocContent");
-              docState.docContentResult = await getDocContent(fileObj);
-              console.log("[2.1.C] exit getSingleResult");
+              // console.log("[2.1.C] enter getDocContent");
+              await updateDocState("docContentResult", await getDocContent(fileObj));
+              // console.log("[2.1.C] exit getSingleResult");
               return docState.docContentResult;
             } else {
               console.log("[2.1.D] error case: File is not pdf, docx or doc!");
@@ -322,7 +331,17 @@ export default async (req, res) => {
             }
           };
 
-          analyzedFilesState.singleResult = await getSingleResult();
+          await updateAnalyzedFilesState("singleResult", await getSingleResult());
+
+          (function forceWaitSingleResult() {
+            if (!analyzedFilesState.singleResult) {
+              console.log("singleResult isn't ready, looping");
+              setTimeout(forceWaitSingleResult, 1000);
+            } else {
+              //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  analyzedFilesState.singleResult:", analyzedFilesState.singleResult); //ok
+            }
+          })();
+
           const newResult = {
             fullpath: fileObj.fullpath,
             filename: fileObj.filename,
@@ -331,54 +350,35 @@ export default async (req, res) => {
             content: (analyzedFilesState.singleResult && analyzedFilesState.singleResult.content) ? analyzedFilesState.singleResult.content : ""
           };
 
-          analyzedFilesState.allResults = [...analyzedFilesState.allResults, newResult];
-          console.log("updating analyzedFilesState.allResults - analyzedFilesState.allResults.length:", analyzedFilesState.allResults.length);
-          console.log("analyzedFilesState.allResults last element:", analyzedFilesState.allResults[analyzedFilesState.allResults.length - 1]);
+          //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults.length BEFORE update:", analyzedFilesState.allResults.length); //ok
+          await updateAnalyzedFilesState("allResults", [...analyzedFilesState.allResults, newResult]);
+          // console.log("updating analyzedFilesState.allResults - analyzedFilesState.allResults.length:", analyzedFilesState.allResults.length);
+          // console.log("analyzedFilesState.allResults last element:", analyzedFilesState.allResults[analyzedFilesState.allResults.length - 1]);
+          //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults.length AFTER update:", analyzedFilesState.allResults.length); //ok
+
+          /*
+          [Checkpoint] La length della lista qui sopra pare essere corretta. Utilizzare il metodo del forceWait (vedasi line 336)
+          per assicurarsi che ogni fase del processo non venga superata prima del suo completamento. L'obiettivo è che
+          il console.log di consoleFormattedArr non mostri mai "MISSING" al content, ma sempre "PRESENT BUT CENSORED".
+          */
         };
 
         //Qui dovrebbe salvare il json di containerResult
-        globalState.mappedArchiveStr = JSON.stringify([...analyzedFilesState.allResults]);
+        await updateGlobalState("mappedArchiveStr", JSON.stringify([...analyzedFilesState.allResults]));
         //console.log("|||||||||||||||||||||||| started writing a json file representing the archive");
-        globalState.todayDate = new Date();
-        globalState.todayUTC = globalState.todayDate.toUTCString();
+
+        await updateGlobalState("todayDate", new Date());
+        await updateGlobalState("todayUTC", globalState.todayDate.toUTCString());
         const writeFileName = globalState.todayUTC.slice(0, 16);
         //[MEMO] ho disattivato la creazione del globalState.mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
         //await fs.writeFileSync("globalState.mappedArchive" + envSlash + writeFileName + ".json", globalState.mappedArchiveStr);
         //console.log("|||||||||||||||||||||||| finished writing json file");
 
-        console.log("getAnalyzedFiles returns analyzedFilesState.allResults, whose length is:", analyzedFilesState.allResults.length);
+        //console.log("getAnalyzedFiles returns analyzedFilesState.allResults, whose length is:", analyzedFilesState.allResults.length);
         return analyzedFilesState.allResults;
       };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      globalState.analyzedFiles = await getAnalyzedFiles(globalState.filesToAnalyze);
+      await updateGlobalState("analyzedFiles", await getAnalyzedFiles(globalState.filesToAnalyze));
 
       console.log("[after getAnalyzedFiles returns] globalState.analyzedFiles.length", globalState.analyzedFiles.length);
 
@@ -392,13 +392,12 @@ export default async (req, res) => {
   };
 
   console.log("[2] calculating globalState.dataToFilter value");
-  globalState.dataToFilter = await getDataToFilter();
+  await updateGlobalState("dataToFilter", await getDataToFilter());
 
   const getFilteredDocs = async () => {
     console.log("entering function: getFilteredDocs");
 
-    //console.log("===================================== globalState.dataToFilter:", globalState.dataToFilter); //all pending
-    getFilteredDocsState.filteredArr = await globalState.dataToFilter.filter(async (d, filterIndex) => {
+    await updateGetFilteredDocsState("filteredArr", await globalState.dataToFilter.filter(async (d, filterIndex) => {
       if (d.content) {
 
         if (!globalState.includePdf && d.filename.includes(".pdf")) return false;
@@ -407,19 +406,19 @@ export default async (req, res) => {
         if (globalState.mustBeProvv && !d.fullpath.includes(envSlash + "Provvedimenti" + envSlash)) {
           return false;
         } else if (globalState.mustBeProvv) { //Sottofiltro esclusivo per i Provvedimenti. 
-          byProvvedimentoState.contentIncipit = d.content.slice(0, 500);
-          byProvvedimentoState.enterPath = d.fullpath;
+
+          await updateByProvvedimentoState("contentIncipit", d.content.slice(0, 500));
+          await updateByProvvedimentoState("enterPath", d.fullpath);
 
           //Ricerca Articolo specifico - start
-          byProvvedimentoState.requiredFormat = {
+          await updateByProvvedimentoState("requiredFormat", {
             bold: true,
             italic: false,
             size: null,
             prevChar: null,
             nextChar: ".",
-          };
-          byProvvedimentoState.target = globalState.activeFilters.byProvvedimento.articolo;
-
+          });
+          await updateByProvvedimentoState("target", globalState.activeFilters.byProvvedimento.articolo);
 
           //[MEMO] Funzione da completare: findArticolo
           // console.log(">>>>>>>>>>>>>>>>>>>>>> Entering findArticolo");
@@ -431,7 +430,7 @@ export default async (req, res) => {
           // console.log(">>>>>>>>>>>>>>>>>>>>>> Exited findArticolo");
           //Ricerca Articolo specifico - end
 
-          byProvvedimentoState.conditions = {
+          await updateByProvvedimentoState("conditions", {
             tag: byProvvedimentoState.contentIncipit.includes(globalState.activeFilters.byProvvedimento.provv),
             tipo: true, //difficile da capire, chiedere a Luigi
             data: true, //Qui ci si schianta hard, dopo
@@ -440,16 +439,17 @@ export default async (req, res) => {
             numero: true,
             argomento: true,
             allegato: true
-          };
+          });
           //Controllo che nei primi 500 chars del documento sia presente il tag
           return !Object.values(byProvvedimentoState.conditions).every(bool => bool === true); //questo è da cambiare
         }
 
         console.log("Started analyzing file:", d.fullpath);
         //Eventuali affinamenti del filtro andranno qui 
-        contentState.cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase();
+        await updateContentState("cleanContent", d.content.replace(/[^\w\s]/gi, '').toLowerCase());
+
         //Se il file non contiene la query di ricerca, result parte da false
-        contentState.result = cleanContent.includes(globalState.searchterms?.replace(/[^\w\s]/gi, '').toLowerCase());
+        await updateContentState("result", contentState.cleanContent.includes(globalState.searchterms?.replace(/[^\w\s]/gi, '').toLowerCase()));
         if (contentState.result === true) {
           console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching nel content");
           return contentState.result;
@@ -461,8 +461,8 @@ export default async (req, res) => {
           console.log("Checking tags byAuthority.");
           for (let x = 0; x < globalState.activeFilters.byAuthority.length; x++) {
 
-            authorityTagsState.tag = globalState.activeFilters.byAuthority[x].tag.replace(/[^\w\s]/gi, '');
-            contentState.result = contentState.cleanContent.toLowerCase().includes(tag);
+            await updateAuthorityTagsState("tag", globalState.activeFilters.byAuthority[x].tag.replace(/[^\w\s]/gi, ''));
+            await updateContentState("result", contentState.cleanContent.toLowerCase().includes(tag));
             if (contentState.result === true) {
               console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags byAuthority");
               return contentState.result;
@@ -478,18 +478,20 @@ export default async (req, res) => {
           for (let x = 0; x < globalState.activeFilters.bySubject.length; x++) {
             //Qui vanno aggiunti tutti i comportamenti dei filtri di bySubject, riproducendo questo blocco if
             if (Array.isArray(globalState.activeFilters.bySubject[x].tag)) {
-              bySubjectState.tags = globalState.activeFilters.bySubject[x].tag;
+
+              await updateBySubjectState("tags", globalState.activeFilters.bySubject[x].tag);
               for (let y = 0; y < bySubjectState.tags.length; y++) {
-                bySubjectState.tag = bySubjectState.tags[y].replace(/[^\w\s]/gi, '');
-                contentState.result = cleanContent.includes(tag);
+                await updateBySubjectState("tag", bySubjectState.tags[y].replace(/[^\w\s]/gi, ''));
+
+                await updateContentState("result", contentState.cleanContent.includes(tag));
                 if (contentState.result === true) {
                   console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject");
                   return contentState.result;
                 }
               }
             } else {
-              bySubjectState.tag = globalState.activeFilters.bySubject[x].tag.replace(/[^\w\s]/gi, '');
-              contentState.result = cleanContent.includes(tag);
+              await updateBySubjectState("tag", globalState.activeFilters.bySubject[x].tag.replace(/[^\w\s]/gi, ''));
+              await updateContentState("result", contentState.cleanContent.includes(tag));
               if (contentState.result === true) {
                 console.log("Stopped analyzing file:", d.fullpath, " perchè trovato un matching in tags bySubject (nel content, non come tag)");
                 return contentState.result;
@@ -503,61 +505,44 @@ export default async (req, res) => {
       } else {
         return false;
       }
-    });
+    }));
     //console.log("getFilteredDocsState.filteredArr (formatted):", getFilteredDocsState.filteredArr);
-    const consoleFormattedArr = await getFilteredDocsState.filteredArr.map(el => ({ ...el, content: "CENSORED" }));
-    //[Checkpoint] Beccare il punto che non rispetta la sincronia forzata dagli await. Salire da qui.
-    /*[MEMO]Questo è già fottuto:
-        globalState.dataToFilter.length: 11
-        getFilteredDocsState.filteredArr (formatted): [
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' },
-        { content: 'CENSORED' }
-        ]
-   */
-    //console.log("exiting function: getFilteredDocs - getFilteredDocsState.filteredArr.length", getFilteredDocsState.filteredArr.length);
+    const consoleFormattedArr = await getFilteredDocsState.filteredArr.map(el => ({ ...el, content: el.content.length ? "PRESENT BUT CENSORED" : "MISSING" }));
+    console.log("consoleFormattedArr:", consoleFormattedArr);
+    console.log("exiting function: getFilteredDocs - getFilteredDocsState.filteredArr.length", getFilteredDocsState.filteredArr.length);
     return getFilteredDocsState.filteredArr;
   };
 
   console.log("[3] calculating globalState.filteredDocs value");
-  globalState.filteredDocs = await getFilteredDocs();
-
+  await updateGlobalState("filteredDocs", await getFilteredDocs());
 
   const checkIfConversionNeeded = async (fileObjArr) => {
     console.log("entering function: checkIfConversionNeeded");
 
-    conversionNeededState.names = await fileObjArr.map(el => el.filename);
-    conversionNeededState.conversionNeeded = await conversionNeededState.names.some(name => (name.includes(".docx") || name.includes(".doc")));
+    await updateConversionNeededState("names", await fileObjArr.map(el => el.filename));
+    await updateConversionNeededState("conversionNeeded", await conversionNeededState.names.some(name => (name.includes(".docx") || name.includes(".doc"))));
     console.log("is conversion needed ?", conversionNeededState.conversionNeeded);
     return conversionNeededState.conversionNeeded;
   };
 
   console.log("[4] calculating globalState.isConversionNeeded value");
-  globalState.isConversionNeeded = await checkIfConversionNeeded(globalState.filteredDocs);
+  await updateGlobalState("isConversionNeeded", await checkIfConversionNeeded(globalState.filteredDocs));
 
   if (globalState.isConversionNeeded) {
 
-    conversionState.convertedDocs = [];
-    globalState.conversionFinished = false;
+    await updateConversionState("convertedDocs", []);
+    await updateGlobalState("conversionFinished", false);
 
     console.log("Starting conversion process");
     for (let x = 0; x < globalState.filteredDocs.length; x++) {
-      conversionState.document = globalState.filteredDocs[x];
+      await updateConversionState("document", globalState.filteredDocs[x]);
 
       const getLibreResult = async () => {
         if (conversionState.document && conversionState.document.filename) {
-          libreResultState.extend = '.pdf';
-          libreResultState.enterPath = conversionState.document.fullpath;
+          await updateLibreResultState("extend", '.pdf');
+          await updateLibreResultState("enterPath", conversionState.document.fullpath);
           //libreResultState.outputPath = conversionState.document.filename.includes(".docx") ? conversionState.document.fullpath.split('.docx')[0] + libreResultState.extend : conversionState.document.fullpath.split('.doc')[0] + libreResultState.extend;
-          libreResultState.undone = await fs.readFileSync(libreResultState.enterPath);
+          await updateLibreResultState("undone", await fs.readFileSync(libreResultState.enterPath));
           //console.log("conversion process - libreResultState.extend", libreResultState.extend);
           console.log("conversion process - libreResultState.enterPath", libreResultState.enterPath);
           console.log("conversion process - libreResultState.undone.byteLength", libreResultState.undone.byteLength);
@@ -577,53 +562,48 @@ export default async (req, res) => {
         }
       };
 
-      conversionState.libreResult = await getLibreResult();
-
-      conversionState.mapResult = {};
+      await updateConversionState("libreResult", await getLibreResult());
+      await updateConversionState("mapResult", {});
 
       if (conversionState.libreResult && conversionState.libreResult.byteLength) {
         console.log("if (conversionState.libreResult && conversionState.libreResult.byteLength)");
-        conversionState.mapResult = {
+        await updateConversionState("mapResult", {
           fullpath: conversionState.document.fullpath,
           filename: conversionState.document.filename,
           relativepath: conversionState.document.relativepath,
           linuxpath: conversionState.document.linuxpath,
           content: conversionState.document.filename.includes(".docx") ? conversionState.document.content : "", //[memo] prob useless
           buffer: conversionState.libreResult
-        };
+        });
       } else {
         console.log("conversionState.libreResult && conversionState.libreResult.byteLength is FALSE.");
         console.log("conversionState.libreResult:", conversionState.libreResult);
-        conversionState.mapResult = {
+        await updateConversionState("mapResult", {
           fullpath: conversionState.document.fullpath,
           filename: conversionState.document.filename,
           relativepath: conversionState.document.relativepath,
           linuxpath: conversionState.document.linuxpath,
           content: conversionState.document.filename.includes(".docx") ? conversionState.document.content : "" //[memo] prob useless
-        };
+        });
       }
 
-      const updateConvertedDocs = (convertedArr, originalArr) => {
-        const resultArr = [...convertedArr, conversionState.mapResult];
+      const updateConvertedDocs = async (convertedArr, originalArr) => {
+        const resultArr = await [...convertedArr, conversionState.mapResult];
         if (resultArr.length === originalArr.length) {
-          globalState.conversionFinished = true;
+          await updateGlobalState("conversionFinished", true);
         }
         return resultArr;
       };
-      conversionState.convertedDocs = await updateConvertedDocs(conversionState.convertedDocs, globalState.filteredDocs);
+      updateConversionState("convertedDocs", await updateConvertedDocs(conversionState.convertedDocs, globalState.filteredDocs));
     }
 
     console.log("Finished conversion process");
-    /*[Checkpoint] 
-    Finire di refattorizzare tutto. Qui ci arriva, ma in console si denotano dei logs tipo:
-    [2.1.A.1] exit function: PdfReader().parseFileItems
-    legati a processi che si sarebbero dovuti concludere da un pezzo.
-    Inoltre advancedSearch non ritorna dati, o li ritorna errati, facendo crashare il frontend.
-*/
 
-    (function forceWait() {
+    console.log("globalState.filteredDocs.length:", globalState.filteredDocs.length);
+
+    (function forceWaitFinal() {
       if (!globalState.conversionFinished) {
-        setTimeout(forceWait, 1000);
+        setTimeout(forceWaitFinal, 1000);
       } else {
         return res.status(200).json({ //Success - Trovato qualcosa per i globalState.searchterms immessi, e nessun errore.
           success: true,
