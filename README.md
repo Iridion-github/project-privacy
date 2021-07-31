@@ -1,10 +1,11 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
 - [advancedSearch] Riuscire a leggere le text decorations per poter fare pin-point dei tags e delle diciture.
+- [archive] Prima di ritornare la lista, evitare i doppioni con un filtro.
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] line 360 
+- [setAnalyzedFiles] line 48 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

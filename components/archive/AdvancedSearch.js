@@ -1838,7 +1838,7 @@ export const AdvancedSearch = function (props) {
     setFiltersState(initialState);
   };
 
-  //[Checkpoint] Mancano i reset-filtri divisi in sezione. Per esempio "resetFiltroProvv" che contiene: [resetProvv, resetTipoProvv, resetDataProvv, resetSottonumeroProvv, resetArticoloProvv, resetNumeroProvv, resetArgomentoProvv, resetAllegatoProvv]
+  //[Memo] Mancano i reset-filtri divisi in sezione. Per esempio "resetFiltroProvv" che contiene: [resetProvv, resetTipoProvv, resetDataProvv, resetSottonumeroProvv, resetArticoloProvv, resetNumeroProvv, resetArgomentoProvv, resetAllegatoProvv]
   const resetFilterByProvvedimento = () => {
     resetAllegatoProvv();
     resetArtProvv();
@@ -2092,7 +2092,7 @@ export const AdvancedSearch = function (props) {
               className="ml-1"
               onClick={() => submitAdvancedSearch()}
             > Ricerca Avanzata
-            <i className="fas fa-search ml-2"></i>
+              <i className="fas fa-search ml-2"></i>
             </Button>
           </Col>
         </Row>

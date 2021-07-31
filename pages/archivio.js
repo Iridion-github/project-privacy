@@ -142,7 +142,7 @@ export default function archivio(props) {
                 <h4>Formulari</h4>
               </Button>
             </ButtonGroup>
-            <Card.Body>
+            <Card.Body className="justify-items-center justify-content-center">
               <Card.Title className="text-center">{currentLang === "ita" ? "Archivio" : "Archive"}</Card.Title>
               <Row className="p-3 justify-content-center ml-0">
                 <Form
@@ -210,72 +210,74 @@ export default function archivio(props) {
                 }
               </Row>
               {((searched && searchResult && searchResult.length > 0) || (advancedSearched)) && (
-                <Row className="mt-4 p-3 justify-content-center archive-result-container">
-                  {(searched && searchResult && searchResult.length > 0 && !advancedSearched) &&
-                    <>
+                <Row className="m-0 mt-4 p-3 w-100 justify-content-center">
+                  <Row className="m-0 archive-result-container">
+                    {(searched && searchResult && searchResult.length > 0 && !advancedSearched) &&
+                      <>
+                        <Col md={12}>
+                          <h4 className="text-center">Nell'Archivio
+                            {searchResult.length === 1 ? " è presente " : " sono presenti "}
+                            {searchResult.length}
+                            {searchResult.length === 1 ? " Documento " : " Documenti "}
+                            {(searched && searchResult && searchResult.length > 0) && searchResult.length === 1 ? " contenente" : " contenenti"}: </h4>
+                        </Col>
+                        <Col md={12}>
+                          <p className="text-center">"{searched}" </p>
+                        </Col>
+                      </>
+                    }
+                    {(advancedSearched && searchResult && searchResult.length > 0 && !searched) &&
                       <Col md={12}>
                         <h4 className="text-center">Nell'Archivio
-                  {searchResult.length === 1 ? " è presente " : " sono presenti "}
+                          {searchResult.length === 1 ? " è presente " : " sono presenti "}
                           {searchResult.length}
                           {searchResult.length === 1 ? " Documento " : " Documenti "}
-                          {(searched && searchResult && searchResult.length > 0) && searchResult.length === 1 ? " contenente" : " contenenti"}: </h4>
+                          {searchResult.length === 1 ? " che soddisfa " : " che soddisfano "}
+                          i filtri di ricerca.
+                        </h4>
                       </Col>
-                      <Col md={12}>
-                        <p className="text-center">"{searched}" </p>
-                      </Col>
-                    </>
-                  }
-                  {(advancedSearched && searchResult && searchResult.length > 0 && !searched) &&
+                    }
                     <Col md={12}>
-                      <h4 className="text-center">Nell'Archivio
-                  {searchResult.length === 1 ? " è presente " : " sono presenti "}
-                        {searchResult.length}
-                        {searchResult.length === 1 ? " Documento " : " Documenti "}
-                        {searchResult.length === 1 ? " che soddisfa " : " che soddisfano "}
-                      i filtri di ricerca.
-                      </h4>
+                      <ul>
+                        {searchResult.map((el, i) => (
+                          <li key={i}>
+                            <>
+                              {el.filename}
+                              {(el.filename && el.filename.includes(".pdf")) && //pdf files viewer btn
+                                <Button
+                                  size="sm"
+                                  variant="info"
+                                  className="ml-1 py-0 px-1"
+                                  onClick={() => openPdfViewer(el.relativepath)}
+                                >
+                                  <i className="fas fa-eye"></i>
+                                </Button>
+                              }
+                              {(el.filename && (el.filename.includes(".docx") || el.filename.includes(".doc"))) && //docx files viewer btn
+                                <Button
+                                  size="sm"
+                                  variant="info"
+                                  className="ml-1 py-0 px-1"
+                                  onClick={() => {
+                                    openPdfViewer(null, el.buffer);
+                                  }}
+                                >
+                                  <i className="fas fa-eye"></i>
+                                </Button>
+                              }
+                              <PdfViewer
+                                path={el.relativepath}
+                                buffer={el.buffer}
+                                filename={el.filename}
+                                show={showPdfModal === el.relativepath || showPdfModal === el.buffer}
+                                onClose={closePdfViewer}
+                              />
+                            </>
+                          </li>
+                        ))}
+                      </ul>
                     </Col>
-                  }
-                  <Col md={12}>
-                    <ul>
-                      {searchResult.map((el, i) => (
-                        <li key={i}>
-                          <>
-                            {el.filename}
-                            {(el.filename && el.filename.includes(".pdf")) && //pdf files viewer btn
-                              <Button
-                                size="sm"
-                                variant="info"
-                                className="ml-1 py-0 px-1"
-                                onClick={() => openPdfViewer(el.relativepath)}
-                              >
-                                <i className="fas fa-eye"></i>
-                              </Button>
-                            }
-                            {(el.filename && (el.filename.includes(".docx") || el.filename.includes(".doc"))) && //docx files viewer btn
-                              <Button
-                                size="sm"
-                                variant="info"
-                                className="ml-1 py-0 px-1"
-                                onClick={() => {
-                                  openPdfViewer(null, el.buffer);
-                                }}
-                              >
-                                <i className="fas fa-eye"></i>
-                              </Button>
-                            }
-                            <PdfViewer
-                              path={el.relativepath}
-                              buffer={el.buffer}
-                              filename={el.filename}
-                              show={showPdfModal === el.relativepath || showPdfModal === el.buffer}
-                              onClose={closePdfViewer}
-                            />
-                          </>
-                        </li>
-                      ))}
-                    </ul>
-                  </Col>
+                  </Row>
                 </Row>
               )}
 

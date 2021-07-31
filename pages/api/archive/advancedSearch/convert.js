@@ -7,30 +7,21 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
     let docxFiles = originalFiles.filter(file => file.fullpath.includes('.docx'));
     let docFiles = originalFiles.filter(file => !file.fullpath.includes('.docx') && file.fullpath.includes('.doc'));
     let pdfFiles = originalFiles.filter(file => !file.fullpath.includes('.docx') && file.fullpath.includes('.pdf')); //per ora ignoriamo i pdf
-    //console.log("These are all the files: ", originalFiles.map(f => f.fullpath));
-    //console.log("These files are all docx: ", docxFiles.map(f => f.fullpath));
-    //console.log("These files are all doc: ", docFiles.map(f => f.fullpath));
-    //console.log("These files are all pdf: ", pdfFiles.map(f => f.fullpath));
 
     //Process start: .doc ---> .docx
-    console.log("Process start: .doc ---> .docx");
     if (whichToConvert.includes('doc')) {
-      console.log("Starting conversion  (.doc ---> .docx)");
       const docToDocx = [];
       //for loop che finisce quando tutti i doc files hanno un corrispondente docx
       for (let x = 0; x < docFiles.length; x++) {
         const d = docFiles[x];
         //Outside Promise 1 - start
         const convertPromise = await new Promise(async (resolveLibre, rejectLibre) => {
-          console.log("Outside Promise 1 has started");
           if (d && d.filename) {
             const startExt = '.doc';
             const targetExt = '.docx';
             const enterPath = d.fullpath;
             const outputPath = d.fullpath.split(startExt)[0] + targetExt;
             const buffer = fs.readFileSync(enterPath);
-            console.log("Successfully read - doc file:", enterPath);
-            console.log("buffer 1 bytelength:", buffer.byteLength);
             libreConvert.convert(buffer, targetExt, undefined, async (err, done) => {
               if (err) {
                 console.log(`\n\n Failure converting doc file: ${enterPath} \n\n`);
@@ -48,7 +39,6 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
             console.log("Error - Caso inaspettato con questo doc file: ", docFiles[x].fullpath);
           }
         }).then(convertedListElem => {
-          console.log("Outside Promise 1 has ended - convertPromise returns:", convertedListElem);
           //Outside Promise 1 - end
           docToDocx.push(convertedListElem);
           return convertedListElem;
@@ -56,7 +46,6 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
       }
     }
     //Process end: .doc ---> .docx
-    console.log("Process end: .doc ---> .docx");
 
     //Process start: .pdf ---> .docx
     // if (whichToConvert.includes('pdf')) {
@@ -263,11 +252,9 @@ export const convertToDocx = async (originalFiles, whichToConvert, envSlash) => 
 
     // }
     //Process end: .pdf ---> .docx
-    console.log(".pdf ---> .docx process ended");
 
   } catch (error) {
     console.log("GENERIC FAILURE - Error:", error);
   }
-
 
 };

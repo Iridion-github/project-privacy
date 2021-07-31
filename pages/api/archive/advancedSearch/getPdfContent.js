@@ -1,6 +1,6 @@
 import { PdfReader } from "pdfreader";  //pacchetto 1 usato per leggere i pdf 
 import pdfTextExtract from "pdf-text-extract"; //pacchetto 2 usato per leggere i pdf
-import { forceWait } from "../../../utils/async";
+import { forceWait } from "../../../../utils/async";
 
 export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState, updateGlobalState }) => {
 
@@ -9,7 +9,6 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
     const parserCallback = async ({ mode, error, item, fileObj }) => {
 
       if (mode === "error") {
-        console.log("[2.1.A.1] exit function: PdfReader().parseFileItems with error:", error);
         //[memo] L'errore dovrebbe tornare qualcosa di specifico, non questo
         return {
           fullpath: fileObj.fullpath,
@@ -45,7 +44,6 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
         await parserCallback({ mode: 'error', error: err, item: item, fileObj: fileObj });
       }
       else if (!item) {
-        console.log("[2.1.A.1] exit function: PdfReader().parseFileItems");
         return await parserCallback({ mode: 'exit', error: null, item: null, fileObj: fileObj });
       }
       else if (item.text) {
@@ -53,12 +51,10 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
       }
     });
 
-    console.log("8888888888888888888888888888888 - parserReturnValue:", parserReturnValue);
-
     if (parserReturnValue) {
-      console.log("[2.1.A] parserReturnValue is NOT null - exit function: getPdfContent");
+      console.log("parserReturnValue is NOT null");
     } else {
-      console.log("[2.1.A] parserReturnValue is null - exit function: getPdfContent");
+      console.log("parserReturnValue is null");
     }
   }
 
@@ -67,8 +63,7 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
     await updateGlobalState("getPdfContentHasFinished", false);
 
     const extractCallback = async ({ pages, fileObj }) => {
-      //console.log("extractCallback - pages[0]:", pages[0]);
-      await updateGetSingleResultState("pdfContentResult", {
+      return await updateGetSingleResultState("pdfContentResult", {
         fullpath: fileObj.fullpath,
         linuxfullpath: fileObj.linuxfullpath,
         filename: fileObj.filename,
@@ -81,18 +76,17 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
     pdfTextExtract(fileObj.fullpath, { splitPages: false }, async function (err, pages) {
       if (err) {
         console.log("pdfTextExtract - ERROR:", error);
-        await updateGlobalState("getPdfContentHasFinished", true);
-        return;
+        return null;
       }
       //[memo] qui ci andrà parseFileItems()
-      await extractCallback({ pages: pages, fileObj: fileObj });
+      const extractCallbackReturnValue = await extractCallback({ pages: pages, fileObj: fileObj });
       await console.log("pdfTextExtract - pages.length:", pages.length);
       await updateGlobalState("getPdfContentHasFinished", true);
+      return extractCallbackReturnValue;
     });
 
   }
 
-  console.log("[2.1.A] exit function: getPdfContent");
   forceWait(1000);
 
 };

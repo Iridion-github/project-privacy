@@ -540,6 +540,7 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
 
 .archive-result-container {
   max-width: 835px !important;
+  justify-self: center;
 }
 
 .reset-filter-btn {
