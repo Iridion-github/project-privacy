@@ -110,7 +110,3 @@ export const getArticleSegment = (textRaw, targetArts) => {
   console.log("finalResult:", finalResult);
   //return finalResult;
 };
-
-const document = "";
-
-getArticleSegment(document, "4");
