@@ -20,7 +20,6 @@ const contatti = function () {
   return (
     <div className={styles.container}>
       <Header
-
         title={currentLang === "ita" ? "Contatti" : "Contacts"}
       />
       {/* Navbar */}

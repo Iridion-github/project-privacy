@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   Row,
   Col,
@@ -14,9 +14,8 @@ export const ArticlesList = function (props) {
   const [elementsPerPage, setElementsPerPage] = useState(6);
   const [elementsPerRow, setElementsPerRow] = useState(2);
 
-
-  const articlesRows = !props.filtered
-    ? props.allArticles.reduce(function (articles, acc, i) {
+  const articlesRows = useMemo(
+    () => !props.filtered ? props.allArticles.reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
         articles[articles.length - 1].push(acc);
       } else {
@@ -24,25 +23,30 @@ export const ArticlesList = function (props) {
       }
       return articles;
     }, [])
-    : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).reduce(function (articles, acc, i) {
-      if (i % elementsPerRow) {
-        articles[articles.length - 1].push(acc);
-      } else {
-        articles.push([acc]);
-      }
-      return articles;
-    }, []);
+      : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).reduce(function (articles, acc, i) {
+        if (i % elementsPerRow) {
+          articles[articles.length - 1].push(acc);
+        } else {
+          articles.push([acc]);
+        }
+        return articles;
+      }, []),
+    [elementsPerRow]
+  );
 
-  const visibleRows = articlesRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow));
+  const visibleRows = useMemo(
+    () => articlesRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow)),
+    [articlesRows, currentPage, elementsPerPage, elementsPerRow]
+  );
 
-  const searchInputOnChange = (value) => {
+  const searchInputOnChange = useCallback((value) => {
     if (value.length < 3) {
       props.setSearchInput(value);
       props.setFiltered(false);
     } else {
       props.setSearchInput(value);
     }
-  };
+  }, []);
 
   return (
     <Row className="">
@@ -71,7 +75,7 @@ export const ArticlesList = function (props) {
           </Form>
         </Col>
       </Row>
-      { visibleRows.length > 0 &&
+      {visibleRows.length > 0 &&
         <MyPagination
           totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, props.currentLang).length / elementsPerPage)}
           currentPage={currentPage}
@@ -93,7 +97,7 @@ export const ArticlesList = function (props) {
           }
         </Col>
       </Row>
-      { visibleRows.length > 0 &&
+      {visibleRows.length > 0 &&
         <MyPagination
           totalPages={!props.filtered ? Math.ceil(props.allArticles.length / elementsPerPage) : Math.ceil(props.searchFilter(props.allArticles, props.searchInput, currentLang).length / elementsPerPage)}
           currentPage={currentPage}

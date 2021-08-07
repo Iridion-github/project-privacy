@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Row,
   Col,
@@ -12,8 +12,8 @@ import { datePrettifier } from '../../utils/date';
 
 export const ArticlePreview = function (props) {
   const [language, setLanguage] = useState("ita");
-  const dateObj = datePrettifier(props.article.date, language);
-  const previewImgSrc = (props.article.previewImg && props.article.previewImg.length) ? props.article.previewImg : "/articoli/url-preview-img-1.png";
+  const dateObj = useMemo(() => datePrettifier(props.article.date, language), [language]);
+  const previewImgSrc = useMemo(() => (props.article.previewImg && props.article.previewImg.length) ? props.article.previewImg : "/articoli/url-preview-img-1.png", []);
 
   return (
     <Card className="w-100 mb-4 grey-border">

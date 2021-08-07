@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import stringToHTML from 'html-react-parser';
 import {
   Row,
@@ -15,7 +15,7 @@ import { datePrettifier } from '../../utils/date';
 
 export const ArticleRead = function (props) {
   const [language, setLanguage] = useState("ita");
-  const dateObj = datePrettifier(props.article.date, language, false);
+  const dateObj = useMemo(() => datePrettifier(props.article.date, language, false), [language]);
   return (
     <Row className="w-100 m-auto">
       <Card className="w-100 mb-4 p-1 grey-border">

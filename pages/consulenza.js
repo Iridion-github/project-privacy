@@ -18,11 +18,6 @@ import { useAppContext } from "../context/contextLib";
 
 function consulenza(props) {
   const { currentLang, changeSiteLang } = useAppContext();
-
-  const translate = (lang, data) => {
-    return data[lang];
-  };
-
   const [consultation, setConsultation] = useState(null);
 
   return (

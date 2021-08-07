@@ -1,18 +1,19 @@
 
+import { useCallback } from 'react';
 import {
   Row,
   Col,
   Card,
   Image
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 export const RelatedArticlePreview = function (props) {
 
-  const getNecessarySubtitle = (article, lang) => {
+  const getNecessarySubtitle = useCallback((article, lang) => {
     return article[lang].title.length < 90 ? (
       <p className="mt-1 mb-0 related-article-preview-subtitle">{lang === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}</p>
-    ) : ""
-  }
+    ) : "";
+  }, []);
 
   return (
     <Card
@@ -31,5 +32,5 @@ export const RelatedArticlePreview = function (props) {
         </Row>
       </Card.Header>
     </Card >
-  )
-}
+  );
+};

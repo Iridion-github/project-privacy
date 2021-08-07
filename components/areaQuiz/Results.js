@@ -1,81 +1,81 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react';
 import {
   Row,
   Col,
   Card,
   Button,
   Table
-} from 'react-bootstrap'
-import { ResultRow } from './ResultRow'
-import { ContactsBtn } from '../buttons/ContactsBtn'
+} from 'react-bootstrap';
+import { ResultRow } from './ResultRow';
+import { ContactsBtn } from '../buttons/ContactsBtn';
 
 
 export const Results = function (props) {
 
   //memo: Unanswered questions count as wrong too
-  const initAnsweredQuestions = () => {
-    const answered = { wrong: [], correct: [] }
+  const initAnsweredQuestions = useCallback(() => {
+    const answered = { wrong: [], correct: [] };
     for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
-      let target = { ...props.dataBeforeCorrection[x] }
-      let foundCorrect = false
+      let target = { ...props.dataBeforeCorrection[x] };
+      let foundCorrect = false;
       for (let y = 0; y < target.answers.length; y++) {
         if (!foundCorrect) {
-          let subTarget = { ...target.answers[y] }
+          let subTarget = { ...target.answers[y] };
           if (subTarget.selected === true && subTarget.value === true) {
-            foundCorrect = true
-            answered.correct.push(target)
+            foundCorrect = true;
+            answered.correct.push(target);
           } else if (y === target.answers.length - 1 && !foundCorrect) {
-            answered.wrong.push(target)
+            answered.wrong.push(target);
           }
         }
       }
     }
-    return answered
-  }
+    return answered;
+  }, []);
 
-  const initUnansweredQuestions = () => {
-    const unanswered = []
+  const initUnansweredQuestions = useCallback(() => {
+    const unanswered = [];
     for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
-      let target = { ...props.dataBeforeCorrection[x] }
-      const selectedArr = target.answers.map(el => el.selected)
+      let target = { ...props.dataBeforeCorrection[x] };
+      const selectedArr = target.answers.map(el => el.selected);
       if (!selectedArr.includes(true)) {
-        unanswered.push(target)
+        unanswered.push(target);
       }
     }
-    return unanswered
-  }
+    return unanswered;
+  }, []);
 
-  const [correctAnswers, setCorrectAnswers] = useState(initAnsweredQuestions().correct)
-  const [unansweredQuestions, setUnansweredQuestions] = useState(initUnansweredQuestions())
-  const [wrongAnswers, setWrongAnswers] = useState(initAnsweredQuestions().wrong)
-  const [correctnessPercentage, setCorrectnessPercentage] = useState(Number(Number(100 * correctAnswers.length / props.dataBeforeCorrection.length).toFixed(1)))
+  const [correctAnswers, setCorrectAnswers] = useState(initAnsweredQuestions().correct);
+  const [unansweredQuestions, setUnansweredQuestions] = useState(initUnansweredQuestions());
+  const [wrongAnswers, setWrongAnswers] = useState(initAnsweredQuestions().wrong);
+  const [correctnessPercentage, setCorrectnessPercentage] = useState(Number(Number(100 * correctAnswers.length / props.dataBeforeCorrection.length).toFixed(1)));
 
-  const getUserAnswerText = (answers) => {
-    const userAnswer = answers.find(ans => ans.selected === true) ? answers.find(ans => ans.selected === true).text : " - "
-    return userAnswer
-  }
+  const getUserAnswerText = useCallback((answers) => {
+    const userAnswer = answers.find(ans => ans.selected === true) ? answers.find(ans => ans.selected === true).text : " - ";
+    return userAnswer;
+  }, []);
 
-  const getCorrectAnswer = (answers) => {
-    const rightAnswers = []
-    answers.forEach(elem => { if (elem.value === true) rightAnswers.push(elem) })
-    return rightAnswers
-  }
+  const getCorrectAnswer = useCallback((answers) => {
+    const rightAnswers = [];
+    answers.forEach(elem => { if (elem.value === true) rightAnswers.push(elem); });
+    return rightAnswers;
+  }, []);
 
-  const getUserCorrectAnswer = (answers) => {
-    const rightSelectedAnswers = []
-    answers.forEach(elem => { if (elem.value === true && elem.selected === true) rightSelectedAnswers.push(elem) })
-    return rightSelectedAnswers
-  }
+  const getUserCorrectAnswer = useCallback((answers) => {
+    const rightSelectedAnswers = [];
+    answers.forEach(elem => { if (elem.value === true && elem.selected === true) rightSelectedAnswers.push(elem); });
+    return rightSelectedAnswers;
+  }, []);
 
-  const getPoints = (answers) => {
-    let points = 0
-    answers.forEach(elem => { if (elem.value === true && elem.selected === true) points += elem.points })
-    return points
-  }
+  const getPoints = useCallback((answers) => {
+    let points = 0;
+    answers.forEach(elem => { if (elem.value === true && elem.selected === true) points += elem.points; });
+    return points;
+  }, []);
 
   useEffect(() => {
-    props.setTimesUp(false)
-  }, [props.timesUp])
+    props.setTimesUp(false);
+  }, [props.timesUp]);
 
   return (
     <Row className="w-100 text-center align-items-center justify-content-center m-auto">
@@ -142,5 +142,5 @@ export const Results = function (props) {
         </Col>
       </Row>
     </Row >
-  )
-}
+  );
+};

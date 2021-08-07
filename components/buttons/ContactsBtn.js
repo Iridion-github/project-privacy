@@ -1,13 +1,11 @@
 import {
   Button
-} from 'react-bootstrap'
-
-import { useRouter } from 'next/router'
+} from 'react-bootstrap';
+import { useRouter } from 'next/router';
 
 
 export const ContactsBtn = function (props) {
-  const router = useRouter()
-
+  const router = useRouter();
   return (
     <Button
       size="lg"
@@ -17,5 +15,5 @@ export const ContactsBtn = function (props) {
       {props.currentLang === "ita" ? "I miei Contatti" : "My Contacts"}
       <i className="far fa-share-square ml-2"></i>
     </Button>
-  )
-}
+  );
+};

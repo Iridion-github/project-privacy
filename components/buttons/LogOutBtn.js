@@ -1,8 +1,7 @@
 import {
-  Row,
-  Col,
   Button
 } from 'react-bootstrap';
+
 
 export const LogOutBtn = function (props) {
   return (

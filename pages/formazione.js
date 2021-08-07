@@ -16,7 +16,6 @@ import { useAppContext } from "../context/contextLib";
 function formazione(props) {
   const { currentLang, changeSiteLang } = useAppContext();
 
-
   return (
     <div className={styles.container}>
       <Header

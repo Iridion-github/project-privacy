@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   Row,
@@ -22,14 +22,15 @@ function articoli(props) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { currentLang, changeSiteLang } = useAppContext();
-  const handleOpenedArticle = (articleId) => {
+
+  const handleOpenedArticle = useCallback((articleId) => {
     setLoading(true);
     const fullRoute = articleId !== null ? '/articoli/' + articleId : '/articoli/';
     router.push(fullRoute);
     setLoading(false);
-  };
+  }, []);
 
-  const searchTopic = async (topic, lang) => {
+  const searchTopic = useCallback(async (topic, lang) => {
     handleOpenedArticle(null);
     setFilteredByTopic(true);
     const result = [];
@@ -41,15 +42,15 @@ function articoli(props) {
       });
     }
     setArticles(result);
-  };
+  }, []);
 
-  const removeTopicFilter = () => {
+  const removeTopicFilter = useCallback(() => {
     handleOpenedArticle(null);
     setFilteredByTopic(false);
     setArticles(DBarticles);
-  };
+  }, []);
 
-  const searchFilter = (articles, input, lang) => {
+  const searchFilter = useCallback((articles, input, lang) => {
     const searchTerms = input.toLowerCase().split(" ");
     const found = [];
     if (input !== "") {
@@ -71,7 +72,7 @@ function articoli(props) {
     }
     const result = removeDuplicatesById(found);
     return result;
-  };
+  }, []);
 
   const [filtered, setFiltered] = useState(false);
   const [filteredByTopic, setFilteredByTopic] = useState(false);
@@ -80,7 +81,6 @@ function articoli(props) {
   return (
     <div className={styles.container}>
       <Header
-
         title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}

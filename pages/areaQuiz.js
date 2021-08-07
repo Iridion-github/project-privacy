@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import {
   Row
@@ -23,39 +23,39 @@ function areaQuiz({ quizzes }) {
   const [questionCounter, setQuestionCounter] = useState(1);
   const { currentLang, changeSiteLang } = useAppContext();
 
-  const getQuizChoiceView = () => {
+  const getQuizChoiceView = useCallback(() => {
     setQuizOnShow(null);
     setSelectedQuiz(null);
     setShowResults(false);
     setDataBeforeCorrection([]);
     setQuestionCounter(1);
-  };
+  }, []);
 
-  const handleChangeQuizToPresent = (title) => {
+  const handleChangeQuizToPresent = useCallback((title) => {
     if (title) {
       const quizToShow = quizzes.find(quiz => quiz.title.toLowerCase() === title.toLowerCase());
       setQuizOnShow(quizToShow);
     } else {
       setQuizOnShow(null);
     }
-  };
+  }, []);
 
-  const handleChangeSelectedQuiz = (quiz) => {
+  const handleChangeSelectedQuiz = useCallback((quiz) => {
     if (!quiz) {
       setQuizOnShow(null);
     }
     setSelectedQuiz(quiz);
-  };
+  }, []);
 
-  const handleShowResults = () => {
+  const handleShowResults = useCallback(() => {
     setDataBeforeCorrection(selectedQuiz.questions);
     setShowResults(true);
-  };
+  }, []);
 
-  const handleUpdateUserAnswers = (updatedQuestions) => {
+  const handleUpdateUserAnswers = useCallback((updatedQuestions) => {
     const quizWithUpdatedAnswers = { ...selectedQuiz, questions: updatedQuestions };
     setSelectedQuiz(quizWithUpdatedAnswers);
-  };
+  }, []);
 
   return (
     <div className={styles.container}>

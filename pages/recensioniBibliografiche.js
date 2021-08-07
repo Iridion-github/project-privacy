@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   Row,
@@ -22,14 +22,14 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleOpenedReview = (reviewId) => {
+  const handleOpenedReview = useCallback((reviewId) => {
     setLoading(true);
     const fullRoute = reviewId !== null ? '/recensioniBibliografiche/' + reviewId : '/recensioniBibliografiche/';
     router.push(fullRoute);
     setLoading(false);
-  };
+  }, []);
 
-  const searchTopic = async (topic, lang) => {
+  const searchTopic = useCallback(async (topic, lang) => {
     handleOpenedReview(null);
     setFilteredByTopic(true);
     const result = [];
@@ -41,15 +41,15 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
       });
     }
     setReviews(result);
-  };
+  }, []);
 
-  const removeTopicFilter = () => {
+  const removeTopicFilter = useCallback(() => {
     handleOpenedReview(null);
     setFilteredByTopic(false);
     setReviews(DBreviews);
-  };
+  });
 
-  const searchFilter = (reviews, input, lang) => {
+  const searchFilter = useCallback((reviews, input, lang) => {
     const searchTerms = input.toLowerCase().split(" ");
     const found = [];
     if (input !== "") {
@@ -71,7 +71,7 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
     }
     const result = removeDuplicatesById(found);
     return result;
-  };
+  }, []);
 
   const [filtered, setFiltered] = useState(false);
   const [filteredByTopic, setFilteredByTopic] = useState(false);

@@ -1,8 +1,8 @@
 import {
   Row,
   Col
-} from 'react-bootstrap'
-import { ArticlePreview } from "./ArticlePreview"
+} from 'react-bootstrap';
+import { ArticlePreview } from "./ArticlePreview";
 
 
 export const ArticlesRow = function (props) {
@@ -18,5 +18,5 @@ export const ArticlesRow = function (props) {
         </Col>
       ))}
     </Row>
-  )
-}
+  );
+};
