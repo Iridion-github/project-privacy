@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import stringToHTML from 'html-react-parser'
+import { useState } from 'react';
+import stringToHTML from 'html-react-parser';
 import {
   Row,
   Col,
@@ -8,14 +8,14 @@ import {
   ButtonToolbar,
   ButtonGroup,
   Image
-} from 'react-bootstrap'
-import { ArticleContent } from './ArticleContent'
-import { datePrettifier } from '../../utils/date'
+} from 'react-bootstrap';
+import { ArticleContent } from './ArticleContent';
+import { datePrettifier } from '../../utils/date';
 
 
 export const ArticleRead = function (props) {
-  const [language, setLanguage] = useState("ita")
-  const dateObj = datePrettifier(props.article.date, language, false)
+  const [language, setLanguage] = useState("ita");
+  const dateObj = datePrettifier(props.article.date, language, false);
   return (
     <Row className="w-100 m-auto">
       <Card className="w-100 mb-4 p-1 grey-border">
@@ -23,7 +23,6 @@ export const ArticleRead = function (props) {
           className=""
           variant="info"
           href="/articoli"
-          suppressHydrationWarning
         >
           <i className="fas fa-long-arrow-alt-left mr-2"></i> {props.currentLang === "ita" ? "Torna agli Articoli" : "Back to Articles"}
         </Button>
@@ -57,7 +56,7 @@ export const ArticleRead = function (props) {
                       : (props.article.authors.length < 2) ? "Author: " : "Authors: "}
                   </strong>
                   {props.article.authors.map((author, i) => {
-                    return i > 0 ? stringToHTML(`<span className="pb-1"> | </span> ${author}`) : author
+                    return i > 0 ? stringToHTML(`<span className="pb-1"> | </span> ${author}`) : author;
                   })}
                 </Col>
                 <Col
@@ -106,5 +105,5 @@ export const ArticleRead = function (props) {
         </Card.Body>
       </Card >
     </Row>
-  )
-}
+  );
+};

@@ -537,3 +537,16 @@ textarea:hover, textarea:active, textarea:focus, label:focus, .datepicker-input,
     margin-right: auto; 
   }
 }
+
+.archive-result-container {
+  max-width: 835px !important;
+  justify-self: center;
+}
+
+.reset-filter-btn {
+  font-size: 0.6rem !important; 
+  padding-left: 0.4rem !important;
+  padding-right: 0.4rem !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+}

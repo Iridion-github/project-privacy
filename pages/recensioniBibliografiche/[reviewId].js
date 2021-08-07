@@ -1,50 +1,50 @@
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.css';
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   Row,
   Col,
   Container
-} from 'react-bootstrap'
-import { Header } from '../../components/layout/Header'
-import { Navigation } from '../../components/layout/Navbar'
-import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
-import { Footer } from '../../components/layout/Footer'
-import { ReviewRead } from "../../components/reviews/ReviewRead"
-import { ReviewReadRightPanel } from "../../components/reviews/ReviewReadRightPanel"
-import { getBreadcrumbsForReviews } from '../../utils/reviews'
-import { getBreadcrumbsForErrors } from '../../utils/errors'
-import { ErrorComponent } from '../../components/layout/ErrorComponent'
-import { Loading } from '../../components/layout/Loading'
+} from 'react-bootstrap';
+import { Header } from '../../components/layout/Header';
+import { Navigation } from '../../components/layout/Navbar';
+import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
+import { Footer } from '../../components/layout/Footer';
+import { ReviewRead } from "../../components/reviews/ReviewRead";
+import { ReviewReadRightPanel } from "../../components/reviews/ReviewReadRightPanel";
+import { getBreadcrumbsForReviews } from '../../utils/reviews';
+import { getBreadcrumbsForErrors } from '../../utils/errors';
+import { ErrorComponent } from '../../components/layout/ErrorComponent';
+import { Loading } from '../../components/layout/Loading';
 import { useAppContext } from "../../context/contextLib"
 
 
 function recensione({ glossarywords, DBreviews }) {
-  const { currentLang, changeSiteLang } = useAppContext()
-  const router = useRouter()
-  const { reviewId } = router.query
-  const [reviews, setReviews] = useState(DBreviews)
-  const [openedReview, setOpenedReview] = useState(reviews.find(rev => rev.id === reviewId) ? reviewId : null)
-  const [loading, setLoading] = useState(true)
+  const { currentLang, changeSiteLang } = useAppContext();
+  const router = useRouter();
+  const { reviewId } = router.query;
+  const [reviews, setReviews] = useState(DBreviews);
+  const [openedReview, setOpenedReview] = useState(reviews.find(rev => rev.id === reviewId) ? reviewId : null);
+  const [loading, setLoading] = useState(true);
 
   const handleOpenedReview = (id) => {
-    setLoading(true)
-    const fullRoute = id !== null ? '/recensioniBibliografiche/' + id : '/recensioniBibliografiche/'
-    router.push(fullRoute)
-    setOpenedReview(id)
-  }
+    setLoading(true);
+    const fullRoute = id !== null ? '/recensioniBibliografiche/' + id : '/recensioniBibliografiche/';
+    router.push(fullRoute);
+    setOpenedReview(id);
+  };
 
   useEffect(() => {
     if (loading === true) {
-      setLoading(false)
+      setLoading(false);
     }
     if (reviews.length === 0) {
       if (DBreviews.map(el => el.id).includes(reviewId)) {
-        setOpenedReview(reviewId)
+        setOpenedReview(reviewId);
       }
     }
-  })
+  });
 
   return (
     <div className={styles.container}>
@@ -52,10 +52,7 @@ function recensione({ glossarywords, DBreviews }) {
         title={currentLang === "ita" ? "Recensioni" : "Reviews"}
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       {(openedReview && reviews.length > 0) &&
         <Breadcrumbs
           breadcrumbsList={getBreadcrumbsForReviews(openedReview, reviews.find(rev => rev.id === openedReview)[currentLang].title)}
@@ -98,17 +95,17 @@ function recensione({ glossarywords, DBreviews }) {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
-  const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword"
-  const resGlossaryword = await fetch(apiUrlGlossary)
-  const glossarywords = await resGlossaryword.json()
-  const apiUrlReview = "http://" + context.req.headers.host + "/api/review"
-  const resReview = await fetch(apiUrlReview)
-  const DBreviews = await resReview.json()
-  return { props: { DBreviews: DBreviews.data, glossarywords: glossarywords.data } }
+  const apiUrlGlossary = "http://" + context.req.headers.host + "/api/glossaryword";
+  const resGlossaryword = await fetch(apiUrlGlossary);
+  const glossarywords = await resGlossaryword.json();
+  const apiUrlReview = "http://" + context.req.headers.host + "/api/review";
+  const resReview = await fetch(apiUrlReview);
+  const DBreviews = await resReview.json();
+  return { props: { DBreviews: DBreviews.data, glossarywords: glossarywords.data } };
 }
 
-export default recensione
+export default recensione;

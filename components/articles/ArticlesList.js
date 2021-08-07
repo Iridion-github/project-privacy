@@ -1,54 +1,54 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Row,
   Col,
   Button,
   Form
-} from 'react-bootstrap'
-import { ArticlesRow } from "./ArticlesRow"
-import { MyPagination } from "../layout/MyPagination"
+} from 'react-bootstrap';
+import { ArticlesRow } from "./ArticlesRow";
+import { MyPagination } from "../layout/MyPagination";
 
 
 export const ArticlesList = function (props) {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [elementsPerPage, setElementsPerPage] = useState(6)
-  const [elementsPerRow, setElementsPerRow] = useState(2)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [elementsPerPage, setElementsPerPage] = useState(6);
+  const [elementsPerRow, setElementsPerRow] = useState(2);
 
 
   const articlesRows = !props.filtered
     ? props.allArticles.reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
-        articles[articles.length - 1].push(acc)
+        articles[articles.length - 1].push(acc);
       } else {
-        articles.push([acc])
+        articles.push([acc]);
       }
-      return articles
+      return articles;
     }, [])
     : props.searchFilter(props.allArticles, props.searchInput, props.currentLang).reduce(function (articles, acc, i) {
       if (i % elementsPerRow) {
-        articles[articles.length - 1].push(acc)
+        articles[articles.length - 1].push(acc);
       } else {
-        articles.push([acc])
+        articles.push([acc]);
       }
-      return articles
-    }, [])
+      return articles;
+    }, []);
 
-  const visibleRows = articlesRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow))
+  const visibleRows = articlesRows.filter((elem, index) => (index >= (currentPage * elementsPerPage / elementsPerRow) - elementsPerPage / elementsPerRow) && (index < currentPage * elementsPerPage / elementsPerRow));
 
   const searchInputOnChange = (value) => {
     if (value.length < 3) {
-      props.setSearchInput(value)
-      props.setFiltered(false)
+      props.setSearchInput(value);
+      props.setFiltered(false);
     } else {
-      props.setSearchInput(value)
+      props.setSearchInput(value);
     }
-  }
+  };
 
   return (
     <Row className="">
       <Row className="w-100 m-auto">
         <Col md={6}>
-          <h1>{props.currentLang === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
+          <h1 >{props.currentLang === "ita" ? "Ultimi Articoli" : "Latest Articles"}</h1>
         </Col>
         <Col sm={6} className="justify-content-end mb-1 flex-row">
           <Form inline className="justify-content-end w-100 p-0 flex-row">
@@ -57,7 +57,9 @@ export const ArticlesList = function (props) {
                 type="text"
                 placeholder={props.currentLang === "ita" ? "Cerca" : "Search"}
                 onChange={event => searchInputOnChange(event.target.value)}
-                className="w-75 inline-form-custom" />
+                className="w-75 inline-form-custom"
+
+              />
               <Button
                 variant={!props.filtered ? "info" : "danger"}
                 disabled={props.searchInput.length < 3}
@@ -101,5 +103,5 @@ export const ArticlesList = function (props) {
         />
       }
     </Row>
-  )
-}
+  );
+};

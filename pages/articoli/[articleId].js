@@ -1,51 +1,51 @@
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.css';
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   Row,
   Col,
   Container
-} from 'react-bootstrap'
-import { Header } from '../../components/layout/Header'
-import { Navigation } from '../../components/layout/Navbar'
-import { Breadcrumbs } from '../../components/layout/Breadcrumbs'
-import { Footer } from '../../components/layout/Footer'
-import { ArticleRead } from "../../components/articles/ArticleRead"
-import { RelatedArticles } from "../../components/articles/RelatedArticles"
-import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/articles'
-import { getBreadcrumbsForErrors } from '../../utils/errors'
-import { ErrorComponent } from '../../components/layout/ErrorComponent'
-import { Loading } from '../../components/layout/Loading'
-import { useAppContext } from "../../context/contextLib"
+} from 'react-bootstrap';
+import { Header } from '../../components/layout/Header';
+import { Navigation } from '../../components/layout/Navbar';
+import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
+import { Footer } from '../../components/layout/Footer';
+import { ArticleRead } from "../../components/articles/ArticleRead";
+import { RelatedArticles } from "../../components/articles/RelatedArticles";
+import { getRelatedArticles, getBreadcrumbsForArticles } from '../../utils/articles';
+import { getBreadcrumbsForErrors } from '../../utils/errors';
+import { ErrorComponent } from '../../components/layout/ErrorComponent';
+import { Loading } from '../../components/layout/Loading';
+import { useAppContext } from "../../context/contextLib";
 
 function articoli({ glossarywords, DBarticles }) {
-  const { currentLang, changeSiteLang } = useAppContext()
-  const router = useRouter()
-  const { articleId } = router.query
-  const [articles, setArticles] = useState(DBarticles)
-  const [openedArticle, setOpenedArticle] = useState(articles.find(art => art.id === articleId) ? articleId : null)
-  const [loading, setLoading] = useState(true)
+  const { currentLang, changeSiteLang } = useAppContext();
+  const router = useRouter();
+  const { articleId } = router.query;
+  const [articles, setArticles] = useState(DBarticles);
+  const [openedArticle, setOpenedArticle] = useState(articles.find(art => art.id === articleId) ? articleId : null);
+  const [loading, setLoading] = useState(true);
 
   const handleOpenedArticle = (id) => {
-    setLoading(true)
-    const fullRoute = id !== null ? '/articoli/' + id : '/articoli/'
-    router.push(fullRoute)
-    setOpenedArticle(id)
-  }
+    setLoading(true);
+    const fullRoute = id !== null ? '/articoli/' + id : '/articoli/';
+    router.push(fullRoute);
+    setOpenedArticle(id);
+  };
 
-  let relatedArticles = getRelatedArticles(articleId, articles, currentLang)
+  let relatedArticles = getRelatedArticles(articleId, articles, currentLang);
 
   useEffect(() => {
     if (loading === true) {
-      setLoading(false)
+      setLoading(false);
     }
     if (articles.length === 0) {
       if (DBarticles.map(el => el.id).includes(articleId)) {
-        setOpenedArticle(articleId)
+        setOpenedArticle(articleId);
       }
     }
-  })
+  });
 
   return (
     <div className={styles.container}>
@@ -53,10 +53,7 @@ function articoli({ glossarywords, DBarticles }) {
         title={currentLang === "ita" ? "Articoli" : "Articles"}
       />
       {/* Navbar */}
-      <Navigation
-        currentLang={currentLang}
-        changeSiteLang={changeSiteLang}
-      />
+      <Navigation />
       {(openedArticle && articles.length > 0) &&
         <Breadcrumbs
           breadcrumbsList={getBreadcrumbsForArticles(openedArticle, articles.find(art => art.id === openedArticle)[currentLang].title)}
@@ -103,19 +100,19 @@ function articoli({ glossarywords, DBarticles }) {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps({ req }) {
   //api of glossary
-  const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword"
-  const resGlossaryword = await fetch(apiUrlGlossary)
-  const glossarywords = await resGlossaryword.json()
+  const apiUrlGlossary = "http://" + req.headers.host + "/api/glossaryword";
+  const resGlossaryword = await fetch(apiUrlGlossary);
+  const glossarywords = await resGlossaryword.json();
   //api of all articles (for the related articles)
-  const apiUrlArticle = "http://" + req.headers.host + "/api/article"
-  const resArticle = await fetch(apiUrlArticle)
-  const DBarticles = await resArticle.json()
-  return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } }
+  const apiUrlArticle = "http://" + req.headers.host + "/api/article";
+  const resArticle = await fetch(apiUrlArticle);
+  const DBarticles = await resArticle.json();
+  return { props: { DBarticles: DBarticles.data, glossarywords: glossarywords.data } };
 }
 
-export default articoli
+export default articoli;

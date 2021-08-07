@@ -2,15 +2,15 @@
 import {
   Row,
   Col
-} from 'react-bootstrap'
-import { RelatedArticlePreview } from './RelatedArticlePreview'
+} from 'react-bootstrap';
+import { RelatedArticlePreview } from './RelatedArticlePreview';
 
 export const RelatedArticles = function (props) {
 
   return (
     <>
       <Row className="justify-content-center">
-        <h1 suppressHydrationWarning>{props.currentLang === "ita" ? "Articoli Correlati" : "Related Articles"}</h1>
+        <h1 >{props.currentLang === "ita" ? "Articoli Correlati" : "Related Articles"}</h1>
       </Row>
       <Row>
         <Col>
@@ -25,5 +25,5 @@ export const RelatedArticles = function (props) {
         </Col>
       </Row>
     </>
-  )
-}
+  );
+};

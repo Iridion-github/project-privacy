@@ -1,36 +1,36 @@
-import styles from '../../styles/Home.module.css'
-import { useRouter } from 'next/router'
+import styles from '../../styles/Home.module.css';
+import { useRouter } from 'next/router';
 import {
   Navbar,
   Row,
   Col,
   Image,
   Button
-} from 'react-bootstrap'
-import { useAppContext } from '../../context/contextLib'
+} from 'react-bootstrap';
+import { useAppContext } from '../../context/contextLib';
 
 export const Footer = function () {
-  const { currentLang } = useAppContext()
-  const router = useRouter()
+  const { currentLang } = useAppContext();
+  const router = useRouter();
   const scrollToTopSmoothly = () => {
-    let currentHeight = window.scrollY
-    let heigthReduction = window.scrollY / 50
-    if (heigthReduction < 7.5) heigthReduction = 7.5
-    let targetHeight = currentHeight - heigthReduction
+    let currentHeight = window.scrollY;
+    let heigthReduction = window.scrollY / 50;
+    if (heigthReduction < 7.5) heigthReduction = 7.5;
+    let targetHeight = currentHeight - heigthReduction;
     if (currentHeight >= 1) {
       window.scrollTo({
         top: targetHeight,
         //behavior: 'smooth'
-      })
-      setTimeout(scrollToTopSmoothly, 10)
+      });
+      setTimeout(scrollToTopSmoothly, 10);
     }
-  }
+  };
   return (
     <Navbar sticky="bottom" bg="standard-blue" expand="lg" className={styles.footer}>
       <Row className="w-100">
         <Col xs={{ span: 4 }} className={styles.footerText + " text-dark"}>
         </Col>
-        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"} suppressHydrationWarning>
+        <Col md={{ span: 3 }} className={styles.footerText + " text-dark"} >
           {currentLang === "ita" ? "Gaetano Mastropierro - Consulenza Privacy" : "Gaetano Mastropierro - Privacy Consultation"}
         </Col>
         <Col
@@ -50,5 +50,5 @@ export const Footer = function () {
         </Col>
       </Row>
     </Navbar>
-  )
-}
+  );
+};

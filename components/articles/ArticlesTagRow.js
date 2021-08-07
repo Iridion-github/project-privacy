@@ -1,7 +1,7 @@
 import {
   ListGroup,
   Button
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 export const ArticlesTagRow = function (props) {
   return (
@@ -9,9 +9,11 @@ export const ArticlesTagRow = function (props) {
       <Button
         block
         variant="info"
-        onClick={() => props.searchTopic(props.tagName, props.currentLang)}>
+        onClick={() => props.searchTopic(props.tagName, props.currentLang)}
+
+      >
         {props.tagName}
       </Button>
     </ListGroup.Item>
-  )
-}
+  );
+};

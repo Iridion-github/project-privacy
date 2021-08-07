@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import stringToHTML from 'html-react-parser'
+import { useState } from 'react';
+import stringToHTML from 'html-react-parser';
 
 import {
   Row,
@@ -9,14 +9,14 @@ import {
   ButtonToolbar,
   ButtonGroup,
   Image
-} from 'react-bootstrap'
-import { ReviewContent } from './ReviewContent'
-import { datePrettifier } from '../../utils/date'
+} from 'react-bootstrap';
+import { ReviewContent } from './ReviewContent';
+import { datePrettifier } from '../../utils/date';
 
 
 export const ReviewRead = function (props) {
-  const [language, setLanguage] = useState("ita")
-  const dateObj = datePrettifier(props.review.date, language, false)
+  const [language, setLanguage] = useState("ita");
+  const dateObj = datePrettifier(props.review.date, language, false);
   return (
     <Row className="w-100 m-auto">
       <Card className="w-100 mb-4 p-1 grey-border">
@@ -24,7 +24,7 @@ export const ReviewRead = function (props) {
           className=""
           variant="info"
           href="/recensioniBibliografiche"
-          suppressHydrationWarning
+
         >
           <i className="fas fa-long-arrow-alt-left mr-2"></i> {props.currentLang === "ita" ? "Torna alle Recensioni" : "Back to Reviews"}
         </Button>
@@ -58,7 +58,7 @@ export const ReviewRead = function (props) {
                       : (props.review.authors.length < 2) ? "Author: " : "Authors: "}
                   </strong>
                   {props.review.authors.map((author, i) => {
-                    return i > 0 ? stringToHTML(`<span className="pb-1"> | </span> ${author}`) : author
+                    return i > 0 ? stringToHTML(`<span className="pb-1"> | </span> ${author}`) : author;
                   })}
                 </Col>
                 <Col
@@ -107,5 +107,5 @@ export const ReviewRead = function (props) {
         </Card.Body>
       </Card >
     </Row>
-  )
-}
+  );
+};

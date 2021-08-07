@@ -1,11 +1,10 @@
 
 import {
   Row,
-  Col,
   Form,
   Button
-} from 'react-bootstrap'
-import { useState } from 'react'
+} from 'react-bootstrap';
+import { useState } from 'react';
 
 
 
@@ -26,9 +25,9 @@ export const EmailForm = function (props) {
       and declare to have read, understood and 
       accepted the privacy policy.`
     }
-  ]
+  ];
 
-  const [postData, setPostData] = useState({})
+  const [postData, setPostData] = useState({});
 
   return (
     <Form
@@ -68,5 +67,5 @@ export const EmailForm = function (props) {
         </Button>
       </Row>
     </Form>
-  )
-}
+  );
+};

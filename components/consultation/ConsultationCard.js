@@ -1,10 +1,10 @@
 import {
   Row,
   Col
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
-import stringToHTML from 'html-react-parser'
-import { ContactsBtn } from '../buttons/ContactsBtn'
+import stringToHTML from 'html-react-parser';
+import { ContactsBtn } from '../buttons/ContactsBtn';
 
 
 export const ConsultationCard = function (props) {
@@ -12,7 +12,7 @@ export const ConsultationCard = function (props) {
   return (
     <>
       <Row>
-        <Col md={{ span: 8, offset: 2 }} className="" suppressHydrationWarning>
+        <Col md={{ span: 8, offset: 2 }} className="" >
           {stringToHTML(props.consultation[props.currentLang].content)}
         </Col>
       </Row>
@@ -20,5 +20,5 @@ export const ConsultationCard = function (props) {
         <ContactsBtn />
       </Row>
     </>
-  )
-}
+  );
+};

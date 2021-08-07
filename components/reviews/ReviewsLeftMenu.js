@@ -5,20 +5,19 @@ import {
   Card,
   ListGroup,
   Button
-} from 'react-bootstrap'
-import { ReviewsTagRow } from './ReviewsTagRow'
+} from 'react-bootstrap';
+import { ReviewsTagRow } from './ReviewsTagRow';
 
 
 export const ReviewsLeftMenu = function (props) {
-
   return (
     <Row className="justify-content-center mb-2">
-      <Row className="mobile-compatible w-100 mt-1">
+      <Row className="mobile-compatible w-100 mt-1 pl-3">
         <Col>
           <Card className="bg-standard-blue">
             <Card.Header className="topic-filter-header">
               <Row>
-                <Col suppressHydrationWarning md={12} className="text-center">
+                <Col md={12} className="text-center">
                   {props.currentLang === "ita" ? "Argomenti" : "Topics"}
                 </Col>
                 {props.filteredByTopic === true &&
@@ -48,5 +47,5 @@ export const ReviewsLeftMenu = function (props) {
         </Col>
       </Row>
     </Row>
-  )
-}
+  );
+};

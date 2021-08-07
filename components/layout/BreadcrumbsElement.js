@@ -7,10 +7,10 @@ export const BreadcrumbsElement = function (props) {
     <a
       href={props.lastElem ? null : props.route.path}
       onClick={() => { }}
-      suppressHydrationWarning
+
     >
       {props.route.title}
     </a>
   </>
-  )
-}
+  );
+};
