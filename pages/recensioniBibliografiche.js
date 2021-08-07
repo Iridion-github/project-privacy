@@ -134,7 +134,12 @@ export async function getServerSideProps(context) {
   const apiUrlTopics = environment + "/api/reviewTopics";
   const resReviewTopics = await fetch(apiUrlTopics);
   const reviewTopics = await resReviewTopics.json();
-  return { props: { DBreviews: DBreviews.data, reviewTopics: reviewTopics.data } };
+  const orderedReviewTopics = [...reviewTopics.data].sort((a, b) => {
+    if (a.index < b.index) return -1;
+    if (a.index > b.index) return 1;
+    return 0;
+  });
+  return { props: { DBreviews: DBreviews.data, reviewTopics: orderedReviewTopics } };
 }
 
 export default recensioniBibliografiche;

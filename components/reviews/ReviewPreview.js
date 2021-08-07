@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Row,
   Col,
@@ -7,13 +7,13 @@ import {
   Image,
   Nav,
   Badge
-} from 'react-bootstrap'
-import { datePrettifier } from '../../utils/date'
+} from 'react-bootstrap';
+import { datePrettifier } from '../../utils/date';
 
 export const ReviewPreview = function (props) {
-  const [language, setLanguage] = useState("ita")
-  const dateObj = datePrettifier(props.review.date, language)
-
+  const [language, setLanguage] = useState("ita");
+  const dateObj = datePrettifier(props.review.date, language);
+  const previewImgSrc = (props.review.previewImg && props.review.previewImg.length) ? props.review.previewImg : "/recensioni/url-preview-img-1.png";
   return (
     <Card className="w-100 mb-4 grey-border">
       <Card.Header>
@@ -36,7 +36,7 @@ export const ReviewPreview = function (props) {
         </Row>
       </Card.Header>
       <Card.Body>
-        <Card.Img className="article-preview-img" variant="top" src={props.review.previewImg} />
+        <Card.Img className="article-preview-img" variant="top" src={previewImgSrc} />
         <Card.Title className="article-preview-title">{language === "ita" ? props.review.ita.title : props.review.eng.title}</Card.Title>
         <Card.Text className="article-preview-subtitle">
           {language === "ita" ? props.review.ita.subtitle : props.review.eng.subtitle}
@@ -56,7 +56,7 @@ export const ReviewPreview = function (props) {
           <Col md={6} className="pr-0">
             <small className="text-muted">
               {props.review.authors.map((author, i) => {
-                return (<Row key={i}>{props.review.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>)
+                return (<Row key={i}>{props.review.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>);
               })}
             </small>
           </Col>
@@ -66,5 +66,5 @@ export const ReviewPreview = function (props) {
         </Row>
       </Card.Footer>
     </Card >
-  )
-}
+  );
+};

@@ -38,10 +38,10 @@ function Home() {
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title} >
-                  {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                  {currentLang === "ita" ? "Consulenza Compliance e Integrata" : "Compliance and Integrated Consulting"}
                 </h2>
                 <span className={styles.description} >
-                  {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                  {currentLang === "ita" ? "Privacy | Antiriciclaggio | Responsabilità Amministrativa degli Enti" : "Privacy | Anti-money Laundering | Administrative Liability"}
                 </span>
               </Carousel.Caption>
             </Carousel.Item>
@@ -82,10 +82,10 @@ function Home() {
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title} >
-                  {currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}
+                  {currentLang === "ita" ? "Work in progress" : "Work in progress"}
                 </h2>
                 <span className={styles.description} >
-                  {currentLang === "ita" ? "Analisi e valutazione rischi" : "Risk analysis and assessment"}
+                  {currentLang === "ita" ? "Work in progress" : "Work in progress"}
                 </span>
               </Carousel.Caption>
             </Carousel.Item>

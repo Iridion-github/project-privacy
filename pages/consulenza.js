@@ -23,14 +23,11 @@ function consulenza(props) {
     return data[lang];
   };
 
-  console.log("currentLang:", currentLang);
-
   const [consultation, setConsultation] = useState(null);
 
   return (
     <div className={styles.container}>
       <Header
-
         title={currentLang === "ita" ? "Consulenza" : "Privacy Advice"}
       />
       {/* Navbar */}

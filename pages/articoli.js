@@ -135,7 +135,12 @@ export async function getServerSideProps(context) {
   const apiUrlTopics = environment + "/api/articleTopics";
   const resArticleTopics = await fetch(apiUrlTopics);
   const articleTopics = await resArticleTopics.json();
-  return { props: { DBarticles: DBarticles.data, articleTopics: articleTopics.data } };
+  const orderedArticleTopics = [...articleTopics.data].sort((a, b) => {
+    if (a.index < b.index) return -1;
+    if (a.index > b.index) return 1;
+    return 0;
+  });
+  return { props: { DBarticles: DBarticles.data, articleTopics: orderedArticleTopics } };
 }
 
 export default articoli;

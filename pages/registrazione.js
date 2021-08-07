@@ -16,7 +16,6 @@ import { useAppContext } from "../context/contextLib";
 
 const registrazione = function (props) {
   const { currentLang } = useAppContext();
-  console.log("registrazione - props:", props);
 
   return (
     <div className={styles.container}>
@@ -56,7 +55,6 @@ export async function getServerSideProps(context) {
   const apiUrlUser = environment + "/api/user";
   const resUser = await fetch(apiUrlUser);
   const DBusers = await resUser.json();
-  console.log("DBusers:", DBusers.data);
   return { props: { DBusers: DBusers.data } };
 }
 

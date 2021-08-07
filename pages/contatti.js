@@ -41,20 +41,12 @@ const contatti = function () {
                         </thead>
                         <tbody>
                           <tr>
-                            <td><b >{currentLang === "ita" ? "Indirizzo" : "Address"}:</b></td>
-                            <td>{"Non Disponibile" /*Via Fregene 33 - 00183*/}{/*currentLang === "ita" ? "Roma" : "Rome"*/}{/*(RM)*/}</td>
-                          </tr>
-                          <tr>
                             <td><b >{currentLang === "ita" ? "Telefono" : "Phone Numbers"}</b></td>
-                            <td>{"Non Disponibile" /*335-236564*/}</td>
+                            <td>{"351-5198740"}</td>
                           </tr>
                           <tr>
                             <td><b>Email:</b></td>
-                            <td>{"Non Disponibile" /*mastrogae@gmail.com*/}</td>
-                          </tr>
-                          <tr>
-                            <td><b >{currentLang === "ita" ? "Partita IVA" : "VAT number"}:</b></td>
-                            <td>00000000000</td>
+                            <td>{"gaetanomast@libero.it"}</td>
                           </tr>
                         </tbody>
                       </Table>
@@ -63,9 +55,9 @@ const contatti = function () {
                   <Row>
                     <Col md={12} className="p-3">
                       <iframe
-                        src={""/*"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.56015081952!2d12.508396296107795!3d41.88080899993093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61ebb6fa2465%3A0xbd6dcbf7a83c7e20!2sVia%20Fregene%2C%2033%2C%2000183%20Roma%20RM!5e0!3m2!1sen!2sit!4v1606502757348!5m2!1sen!2sit"*/}
+                        src={"https://maps.google.com/maps?q=rome%20italy&t=&z=11&ie=UTF8&iwloc=&output=embed"}
                         width="100%"
-                        height="100%"
+                        height="300"
                         frameBorder="0"
                         style={{ border: "1px solid black" }}
                         allowFullScreen=""

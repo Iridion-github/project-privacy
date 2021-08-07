@@ -3,7 +3,7 @@ import {
   Col,
   Card,
   Button
-} from 'react-bootstrap'
+} from 'react-bootstrap';
 
 export const QuizChoice = function (props) {
   return (
@@ -22,7 +22,7 @@ export const QuizChoice = function (props) {
                   onClick={() => props.handleChangeQuizToPresent("Test da Internet")}
                 >
                   Quiz da Internet
-                  </Button>
+                </Button>
               </Col>
               <Col className="mb-2">
                 <Button
@@ -32,7 +32,7 @@ export const QuizChoice = function (props) {
                   onClick={() => props.handleChangeQuizToPresent("Test Debug")}
                 >
                   Quiz Debug
-                  </Button>
+                </Button>
               </Col>
             </Row>
             <Row className="mb-4">
@@ -42,11 +42,11 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Privacy Specialist (24 ore)")
+                    props.handleChangeQuizToPresent("Privacy");
                   }}
                 >
-                  Privacy Specialist (24 ore)
-                  </Button>
+                  Privacy
+                </Button>
               </Col>
             </Row>
             <Row className="mb-4">
@@ -56,11 +56,11 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Manager Privacy (60 ore)")
+                    props.handleChangeQuizToPresent("Antiriciclaggio");
                   }}
                 >
-                  Manager Privacy (60 ore)
-                  </Button>
+                  Antiriciclaggio
+                </Button>
               </Col>
             </Row>
             <Row className="mb-4">
@@ -70,11 +70,26 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Data Protection Officer (80 ore)")
+                    props.handleChangeQuizToPresent("Responsabilità Amministrativa degli Enti");
                   }}
                 >
-                  Data Protection Officer (80 ore)
-                  </Button>
+                  Responsabilità Amministrativa degli Enti
+                </Button>
+              </Col>
+            </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeQuizToPresent("Anticorruzione");
+                  }}
+                  disabled
+                >
+                  Anticorruzione
+                </Button>
               </Col>
             </Row>
             <h4 className="text-center">Per Modulo</h4>
@@ -85,11 +100,12 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Modulo 3")
+                    props.handleChangeQuizToPresent("Modulo 3");
                   }}
+                  disabled
                 >
                   Modulo 3
-                  </Button>
+                </Button>
               </Col>
               <Col className="mb-2">
                 <Button
@@ -97,11 +113,12 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Modulo 4")
+                    props.handleChangeQuizToPresent("Modulo 4");
                   }}
+                  disabled
                 >
                   Modulo 4
-                  </Button>
+                </Button>
               </Col>
               <Col className="mb-2">
                 <Button
@@ -109,11 +126,12 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Modulo 5")
+                    props.handleChangeQuizToPresent("Modulo 5");
                   }}
+                  disabled
                 >
                   Modulo 5
-                  </Button>
+                </Button>
               </Col>
             </Row>
             <Row>
@@ -126,7 +144,7 @@ export const QuizChoice = function (props) {
                   onClick={() => props.handleChangeQuizToPresent("Quiz Placeholder")}
                 >
                   Quiz Placeholder
-                  </Button>
+                </Button>
               </Col>
               <Col className="mb-2">
                 <Button
@@ -137,12 +155,12 @@ export const QuizChoice = function (props) {
                   onClick={() => props.handleChangeQuizToPresent("Quiz Placeholder")}
                 >
                   Quiz Placeholder
-                  </Button>
+                </Button>
               </Col>
             </Row>
           </Card.Body>
         </Card>
       </Col>
     </Row >
-  )
-}
+  );
+};

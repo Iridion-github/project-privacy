@@ -10,7 +10,6 @@ export const ReviewsTagRow = function (props) {
         block
         variant="info"
         onClick={() => props.searchTopic(props.tagName, props.currentLang)}
-
       >
         {props.tagName}
       </Button>

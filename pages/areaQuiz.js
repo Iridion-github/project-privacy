@@ -60,7 +60,7 @@ function areaQuiz({ quizzes }) {
   return (
     <div className={styles.container}>
       <Header
-        title={currentLang === "ita" ? "Area Quiz" : "Quiz Area"}
+        title={currentLang === "ita" ? "Test" : "Tests"}
       />
       {/* Navbar */}
       <Navigation />

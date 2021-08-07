@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import {
   Row,
   Col
-} from 'react-bootstrap'
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+} from 'react-bootstrap';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 export const QuizTimer = function (props) {
 
   useEffect(() => {
     if (props.timesUp) {
-      setTimeout(() => props.handleShowResults(), 3000)
+      setTimeout(() => props.handleShowResults(), 3000);
     }
-  }, [props.timesUp])
+  }, [props.timesUp]);
 
   return (
     <Row className="w-100 ml-0 mr-0 mt-2 justify-content-center align-items-center text-center">
@@ -31,21 +31,21 @@ export const QuizTimer = function (props) {
                   size={110}
                   strokeWidth={8}
                   trailColor={"#83CBDD"}
-                  duration={5 /*props.milliseconds / 1000*/}
+                  duration={props.seconds}
                   colors={"#17a2b8"}
                 >
                   {({ remainingTime }) => {
-                    let result
+                    let result;
                     if (remainingTime > 0) {
-                      const hours = Math.floor(remainingTime / 3600)
-                      const minutes = Math.floor((remainingTime % 3600) / 60)
-                      const seconds = remainingTime % 60
-                      result = `${hours}:${minutes}:${seconds}`
+                      const hours = Math.floor(remainingTime / 3600);
+                      const minutes = Math.floor((remainingTime % 3600) / 60);
+                      const seconds = remainingTime % 60;
+                      result = `${hours}:${minutes}:${seconds}`;
                     } else {
-                      result = <div className="red-alert-text">Tempo Scaduto</div>
-                      props.setTimesUp(true)
+                      result = <div className="red-alert-text">Tempo Scaduto</div>;
+                      props.setTimesUp(true);
                     }
-                    return result
+                    return result;
                   }}
                 </CountdownCircleTimer>
 
@@ -55,5 +55,5 @@ export const QuizTimer = function (props) {
         </>
       </Col>
     </Row>
-  )
-}
+  );
+};

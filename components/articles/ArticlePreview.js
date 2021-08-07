@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Row,
   Col,
@@ -7,13 +7,13 @@ import {
   Image,
   Nav,
   Badge
-} from 'react-bootstrap'
-import { datePrettifier } from '../../utils/date'
+} from 'react-bootstrap';
+import { datePrettifier } from '../../utils/date';
 
 export const ArticlePreview = function (props) {
-  const [language, setLanguage] = useState("ita")
-
-  const dateObj = datePrettifier(props.article.date, language)
+  const [language, setLanguage] = useState("ita");
+  const dateObj = datePrettifier(props.article.date, language);
+  const previewImgSrc = (props.article.previewImg && props.article.previewImg.length) ? props.article.previewImg : "/articoli/url-preview-img-1.png";
 
   return (
     <Card className="w-100 mb-4 grey-border">
@@ -37,7 +37,7 @@ export const ArticlePreview = function (props) {
         </Row>
       </Card.Header>
       <Card.Body>
-        <Card.Img className="article-preview-img" variant="top" src={props.article.previewImg} />
+        <Card.Img className="article-preview-img" variant="top" src={previewImgSrc} />
         <Card.Title className="article-preview-title">{language === "ita" ? props.article.ita.title : props.article.eng.title}</Card.Title>
         <Card.Text className="article-preview-subtitle">
           {language === "ita" ? props.article.ita.subtitle : props.article.eng.subtitle}
@@ -57,7 +57,7 @@ export const ArticlePreview = function (props) {
           <Col md={6} className="pr-0">
             <small className="text-muted">
               {props.article.authors.map((author, i) => {
-                return (<Row key={i}>{props.article.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>)
+                return (<Row key={i}>{props.article.authors.length > 1 ? " • " + author + "\n" : " • " + author} </Row>);
               })}
             </small>
           </Col>
@@ -67,5 +67,5 @@ export const ArticlePreview = function (props) {
         </Row>
       </Card.Footer>
     </Card >
-  )
-}
+  );
+};

@@ -36,16 +36,16 @@ export const Navigation = function () {
       eng: "Consultation",
     },
     areaQuiz: {
-      ita: "Area Quiz",
-      eng: "Quiz Area",
-    },
-    recensioniBibliografiche: {
-      ita: "Recensioni Bibliografiche",
-      eng: "Bibliographic Reviews",
+      ita: "Test",
+      eng: "Tests",
     },
     articoli: {
       ita: "Articoli",
       eng: "Articles",
+    },
+    recensioniBibliografiche: {
+      ita: "Recensioni Bibliografiche",
+      eng: "Bibliographic Reviews",
     },
     contatti: {
       ita: "Contatti",
@@ -73,8 +73,8 @@ export const Navigation = function () {
                 <Nav.Link href="/formazione" className={styles.navbarText} >{btnLabels.formazione[currentLang]}</Nav.Link>
                 <Nav.Link href="/consulenza" className={styles.navbarText} >{btnLabels.consulenza[currentLang]}</Nav.Link>
                 <Nav.Link href="/areaQuiz" className={styles.navbarText} >{btnLabels.areaQuiz[currentLang]}</Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} >{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText} >{btnLabels.articoli[currentLang]}</Nav.Link>
+                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} >{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText} >{btnLabels.contatti[currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">

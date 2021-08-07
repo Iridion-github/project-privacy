@@ -107,6 +107,5 @@ export const getArticleSegment = (textRaw, targetArts) => {
       finalResult.push(result[x]);
     }
   }
-  console.log("finalResult:", finalResult);
-  //return finalResult;
+  return finalResult;
 };

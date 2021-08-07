@@ -36,7 +36,7 @@ export const ArticlesLeftMenu = function (props) {
             <ListGroup variant="flush">
               {props.allTopics.map(tag => (
                 <ArticlesTagRow
-                  key={tag.id}
+                  key={tag.index}
                   tagName={props.currentLang === "ita" ? tag.name.ita : tag.name.eng}
                   currentLang={props.currentLang}
                   searchTopic={props.searchTopic}

@@ -4,7 +4,6 @@ import User from '../../../models/User';
 dbConnect();
 
 export default async (req, res) => {
-  console.log("Users API - req.body:", req.body);
   const { method } = req;
   switch (method) {
     case "GET":
@@ -21,7 +20,6 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        console.log("req.body:", req.body);
         const newUserData = { prova: "prova" };
         const newUser = await User.create(newUserData);
         return res.status(201).json({ success: true, data: newUser });

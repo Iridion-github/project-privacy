@@ -2,9 +2,9 @@ import {
   Row,
   Col,
   Button
-} from 'react-bootstrap'
-import { QuizTimer } from './QuizTimer'
-import { Question } from './Question'
+} from 'react-bootstrap';
+import { QuizTimer } from './QuizTimer';
+import { Question } from './Question';
 
 export const Quiz = function (props) {
 
@@ -21,8 +21,8 @@ export const Quiz = function (props) {
               onClick={() => props.getQuizChoiceView()}
             >
               <i className="fas fa-long-arrow-alt-left mr-2"></i>
-            I Quiz
-          </Button>
+              I Quiz
+            </Button>
           </Col>
           <Col md={4} className="text-left">
             <div style={{ fontSize: "1.5rem", fontWeight: "600", minWidth: "285px !important" }}>Quiz: {props.selectedQuiz.title}</div>
@@ -30,7 +30,7 @@ export const Quiz = function (props) {
         </Row>
         <Row className="w-100 ml-0 mr-0 d-flex align-items-center">
           <QuizTimer
-            milliseconds={props.selectedQuiz.timeLimit}
+            seconds={props.selectedQuiz.timeLimit / 1000} //ms to s
             setShowResults={props.setShowResults}
             timesUp={props.timesUp}
             setTimesUp={props.setTimesUp}
@@ -97,5 +97,5 @@ export const Quiz = function (props) {
         </Row>
       </Row>
     </Row>
-  )
-}
+  );
+};

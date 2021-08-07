@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const ArticleTopicsSchema = new mongoose.Schema(
   {
@@ -18,8 +18,13 @@ const ArticleTopicsSchema = new mongoose.Schema(
         trim: true,
         maxlength: [30, "articleTopic name eng max length is 30!"]
       }
+    },
+    index: {
+      type: Number,
+      unique: true,
+      trim: true,
     }
   }
-)
+);
 
-export default mongoose.models.ArticleTopics || mongoose.model("ArticleTopics", ArticleTopicsSchema)
+export default mongoose.models.ArticleTopics || mongoose.model("ArticleTopics", ArticleTopicsSchema);
