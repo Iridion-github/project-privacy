@@ -51,10 +51,6 @@ export const Navigation = function () {
       ita: "Contatti",
       eng: "Contacts",
     },
-    archivio: {
-      ita: "Archivio",
-      eng: "Archive",
-    },
     registrazione: {
       ita: "Registrazione",
       eng: "Register",
@@ -80,7 +76,6 @@ export const Navigation = function () {
                 <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} >{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText} >{btnLabels.articoli[currentLang]}</Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText} >{btnLabels.contatti[currentLang]}</Nav.Link>
-                <Nav.Link href="/archivio" className={styles.navbarText} >{btnLabels.archivio[currentLang]}</Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
                     <Button
@@ -109,21 +104,21 @@ export const Navigation = function () {
         </Col>
         <Col md={{ span: 1 }} className="h-100 ml-0 mr-0">
           <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">
-            {!loggedUser &&
+            {/* {!loggedUser &&
               <LogInBtn
                 onClick={logInUser}
-              />}
+              />} */}
           </Row>
           <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
-            {loggedUser && <LogOutBtn
+            {/* {loggedUser && <LogOutBtn
               onClick={logOutUser}
-            />}
+            />} */}
           </Row>
           <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
-            {!loggedUser && <GoRegisterBtn
+            {/* {!loggedUser && <GoRegisterBtn
               href="/registrazione"
               text={btnLabels.registrazione[currentLang]}
-            />}
+            />} */}
           </Row>
         </Col>
       </Row>
