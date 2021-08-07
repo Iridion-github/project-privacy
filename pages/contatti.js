@@ -77,7 +77,8 @@ const contatti = function () {
                 </Col>
                 <Col md={{ span: 6 }}>
                   <EmailForm
-                    currentLang={currentLang} />
+                    currentLang={currentLang}
+                  />
                 </Col>
               </Row>
             </Card.Body>
