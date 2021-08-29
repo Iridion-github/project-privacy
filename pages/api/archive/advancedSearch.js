@@ -1,14 +1,3 @@
-import path from 'path';
-import slash from 'slash';
-import fs from 'fs';//pacchetto usato per leggere docx files
-import mammoth from 'mammoth'; //pacchetto usato per convertire i docx in html
-import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc files
-//import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
-import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
-import { forceWaitWithCondition } from '../../../utils/async';
-import { convertToDocx } from './advancedSearch/convert';
-import { findArticolo } from './advancedSearch/findFormattedText';
-import { getPdfContent } from './advancedSearch/getPdfContent';
 import { setDataToFilter } from './advancedSearch/setDataToFilter';
 import { initGlobalState } from './advancedSearch/initGlobalState';
 import { setIsArchiveMapped } from './advancedSearch/setIsArchiveMapped';
@@ -18,16 +7,26 @@ import { setIsConversionNeeded } from './advancedSearch/setIsConversionNeeded';
 import { convertFiles } from './advancedSearch/convertFiles';
 
 const environment = "linux";
-const convertDocToDocx = true;
 const envSlash = (environment === "windows") ? "\\" : "/";
-
-
+const refreshRate = 1000;
 
 export default async (req, res) => {
 
   //------------------------------ State Declaration ------------------------------ 
 
+  const phases = { //per ora non sono usate, ma tornerebbe utile crearvi un sistema affidabile
+    1: { name: "1-Init", done: false },
+    2: { name: "2-CheckMapArchive", done: false },
+    3: { name: "3-MapArchive", done: false },
+    4: { name: "4-SetFilterData", done: false },
+    5: { name: "5-FilterData", done: false },
+    6: { name: "6-CheckConversion", done: false },
+    7: { name: "7-Conversion", done: false },
+    8: { name: "8-ReturnToFrontend", done: false },
+  };
+
   const globalState = {
+    canGoNextPhase: undefined,
     conversionFinished: undefined,
     isArchiveMapped: undefined,
     mappedArchive: undefined,
@@ -191,28 +190,41 @@ export default async (req, res) => {
   };
 
   //------------------------------ State Initialization ------------------------------ 
-  console.log('[1] init states');
+  console.log('[1] Init states');
   await initGlobalState({
     req,
     globalState,
     updateGlobalState
   });
 
-  //------------------------------ Check if Archive is mapped ------------------------------ 
-  console.log('[2] set if archive is mapped');
+  while (!globalState.canGoNextPhase) {
+    setTimeout(() => console.log("Waiting ..."), refreshRate);
+  }
+  console.log('[2] Set isArchiveMapped bool');
+
+  //------------------------------ Check if Archive is mapped ------------------------------   
   await setIsArchiveMapped({ globalState, updateGlobalState, envSlash });
 
-  //------------------------------ Map archive ------------------------------ 
-  console.log('[3] check if mapping neeeded');
+  while (!globalState.canGoNextPhase) {
+    setTimeout(() => console.log("Waiting ..."), refreshRate);
+  }
+  console.log('[3] Check if mapping archive is needed');
+
+  //------------------------------ Map archive ------------------------------   
   if (!globalState.isArchiveMapped) {
-    console.log('[3.1] mapping needed ');
+    console.log('[3.1] Mapping archive is needed ');
     await mapArchive({ globalState, envSlash, updateGlobalState });
   } else {
-    console.log("[3.2] mapping not needed");
+    console.log("[3.2] Mapping archive is NOT needed");
   }
 
-  //------------------------------ getDataToFilter ------------------------------ 
-  console.log('[4] set data to filter');
+  while (!globalState.canGoNextPhase) {
+    setTimeout(() => console.log("Waiting ..."), refreshRate);
+  }
+  console.log('[4] Set data to filter');
+
+
+  //------------------------------ getDataToFilter ------------------------------   
   await setDataToFilter({
     envSlash,
     globalState,
@@ -233,8 +245,14 @@ export default async (req, res) => {
     console.log('error in setDataToFilter:', err);
   });
 
+  console.log("exited phase 4, canGoNextPhase ? ", globalState.canGoNextPhase);
+
+  while (!globalState.canGoNextPhase) {
+    setTimeout(() => console.log("Waiting ..."), refreshRate);
+  }
+  console.log('[5] Filter data');
+
   //------------------------------ getFilteredDocs ------------------------------ 
-  console.log('[5] filter data');
   await setFilteredDocs({
     envSlash,
     globalState,
@@ -249,8 +267,15 @@ export default async (req, res) => {
     console.log('error in setFilteredDocs:', err);
   });
 
+  (function forceWait() {
+    if (!globalState.canGoNextPhase) {
+      setTimeout(forceWait, refreshRate);
+    } else {
+      console.log('[6] Check if data conversion is needed');
+    }
+  })();
+
   //------------------------------ check if conversion needed ------------------------------ 
-  console.log('[6] check if conversion neeeded');
   await setIsConversionNeeded({
     globalState,
     updateGlobalState,
@@ -262,9 +287,16 @@ export default async (req, res) => {
     console.log('error in setIsConversionNeeded:', err);
   });
 
+  (function forceWait() {
+    if (!globalState.canGoNextPhase) {
+      setTimeout(forceWait, refreshRate);
+    } else {
+      console.log('[7] Data conversion is needed ');
+    }
+  })();
+
   //------------------------------ convert files ------------------------------ 
   if (globalState.isConversionNeeded) {
-    console.log('[6.1] conversion needed ');
     await convertFiles({
       globalState,
       updateGlobalState,
@@ -278,11 +310,18 @@ export default async (req, res) => {
       console.log('error in convertFiles:', err);
     });
   } else {
-    console.log("[6.2] conversion not needed");
+    console.log("[7] Data conversion conversion is NOT needed");
   }
 
+  (function forceWait() {
+    if (!globalState.canGoNextPhase) {
+      setTimeout(forceWait, refreshRate);
+    } else {
+      console.log("[8] Return data to frontend");
+    }
+  })();
+
   //------------------------------ return data to frontend ------------------------------ 
-  console.log("[7] return data to frontend");
   return res.status(200).json({
     success: true,
     data: { filteredDocs: (globalState.convertedDocs && globalState.convertedDocs.length) ? globalState.convertedDocs : globalState.filteredDocs }

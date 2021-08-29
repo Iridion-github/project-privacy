@@ -5,7 +5,7 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [setAnalyzedFiles] line 48 
+- [setAnalyzedFiles] line 124 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

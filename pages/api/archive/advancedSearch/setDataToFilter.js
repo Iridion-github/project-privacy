@@ -16,6 +16,7 @@ export const setDataToFilter = async ({
   updateDocxState,
 }) => {
   const getDataToFilter = async () => {
+    await updateGlobalState("canGoNextPhase", false);
     try {
       const setAnalyzedFilesReturnValue = await setAnalyzedFiles({
         envSlash,

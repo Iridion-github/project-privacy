@@ -3,6 +3,7 @@ import path from 'path';
 import slash from 'slash';
 
 export const mapArchive = async ({ globalState, envSlash, updateGlobalState }) => {
+  await updateGlobalState("canGoNextPhase", false);
   function* getFiles(dir) {
     const dirents = fs.readdirSync(dir, { withFileTypes: true });
     for (const dirent of dirents) {
@@ -28,4 +29,5 @@ export const mapArchive = async ({ globalState, envSlash, updateGlobalState }) =
       updateGlobalState("filesToAnalyze", updatedFilesToAnalyze);
     }
   })();
+  await updateGlobalState("canGoNextPhase", true);
 };

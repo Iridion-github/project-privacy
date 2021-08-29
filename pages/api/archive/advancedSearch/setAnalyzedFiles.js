@@ -20,11 +20,15 @@ export const setAnalyzedFiles = async ({
 
   const getAnalyzedFiles = async (filesToAnalyze) => {
     await updateAnalyzedFilesState("allResults", []);
-    for (let x = 0; x < filesToAnalyze.length - 1; x++) {
+    for (let x = 0; x < filesToAnalyze.length; x++) {
+      console.log("For inside getAnalyzedFiles needs " + filesToAnalyze.length + " cycles - this is cycle number:", x + 1);
+      const lastForCycle = x === Number(filesToAnalyze.length - 1);
+      console.log("x = ", x);
+      console.log("Number(filesToAnalyze.length - 1)", Number(filesToAnalyze.length - 1));
+      console.log("lastForCycle = ", lastForCycle);
+      if (lastForCycle) console.log("This is the last cycle");
       const fileObj = filesToAnalyze[x];
-      const fileIndex = x;
 
-      await updateGetDataToFilterState("lastFile", fileIndex === globalState.filesToAnalyze.length - 1);
       await updateGetDataToFilterState("pdf", fileObj.fullpath.toLowerCase().includes(".pdf"));
       await updateGetDataToFilterState("docx", fileObj.fullpath.toLowerCase().includes(".docx"));
       await updateGetDataToFilterState("doc", fileObj.fullpath.toLowerCase().includes(".doc"));
@@ -32,31 +36,16 @@ export const setAnalyzedFiles = async ({
       const getSingleResult = async () => {
         if (getDataToFilterState.pdf) { //[Pdf procedure] (PdfReader + manual array push)
           //pdf content extraction - start
-
-          const pdfContent = await getPdfContent({
+          await getPdfContent({
             fileObj: fileObj,
             which: "pdfTextExtract",
-            updateGetSingleResultState,
-            updateGlobalState,
+            updateGetSingleResultState
           }).then(returnValue => {
+            console.log("pdfContent return value:", returnValue);
             return returnValue;
           }).catch(err => {
             console.log('error in getPdfContent:', err);
           });
-
-
-          //[Checkpoint] Questo metodo per bloccarlo qui non va bene, 
-          //la console dice che loopa ma in realtà in advancedSearch ha già ritornato al frontend.
-          (function forceWaitPdfContent() {
-            if (!pdfContent) {
-              console.log("getPdfContent isn't finished, looping");
-              setTimeout(forceWaitPdfContent, 1000);
-            } else {
-              console.log("---------------- getPdfContent is finished");
-              return pdfContent;
-            }
-          })();
-
           //pdf content extraction - end
         } else if (getDataToFilterState.docx) {
           //[Docx procedure] (mammoth)
@@ -102,28 +91,15 @@ export const setAnalyzedFiles = async ({
       };
 
       const singleResult = await getSingleResult();
-
       await updateAnalyzedFilesState("singleResult", singleResult);
-
-      (function forceWaitSingleResult() {
-        if (!analyzedFilesState.singleResult) {
-          console.log("singleResult isn't ready, looping");
-          setTimeout(forceWaitSingleResult, 1000);
-        } else {
-          console.log("singleResult is ready");
-        }
-      })();
-
       const newResult = {
         fullpath: fileObj.fullpath,
         filename: fileObj.filename,
         relativepath: fileObj.relativepath,
         linuxpath: fileObj.linuxpath,
-        content: (analyzedFilesState.singleResult && analyzedFilesState.singleResult.content) ? analyzedFilesState.singleResult.content : ""
+        content: (singleResult && singleResult.content) ? singleResult.content : ""
       };
-
       console.log('setAnalyzedFiles - newResult.content.length:', newResult.content ? newResult.content.length : 'no content');
-
       //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults.length BEFORE update:", analyzedFilesState.allResults.length); //ok
       //const slicedLastElemBefore = { ...analyzedFilesState.allResults.reverse()[0], content: analyzedFilesState.allResults.reverse()[0]?.content.slice(0, 200) };
       //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults[lastelem] BEFORE update:", slicedLastElemBefore);
@@ -133,24 +109,33 @@ export const setAnalyzedFiles = async ({
       //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults.length AFTER update:", analyzedFilesState.allResults.length); //ok
       //const slicedLastElemAfter = { ...analyzedFilesState.allResults.reverse()[0], content: analyzedFilesState.allResults.reverse()[0].content.slice(0, 200) };
       //console.log("[[[[[[[[[[[[[[[[[[[[[ analyzedFilesState.allResults[lastelem] AFTER update:", slicedLastElemAfter); //ok
-
       /*
       [Memo]L'obiettivo è che il console.log di consoleFormattedArr non mostri 
       mai "MISSING" al content, ma sempre "PRESENT BUT CENSORED".
       */
+      if (lastForCycle) {
+        await updateGlobalState("canGoNextPhase", true);
+      } else {
+        await updateGlobalState("canGoNextPhase", false);
+      }
     };
+
+    /*
+    [CHECKPOINT] 
+      Il problema è che esce dal precedente for loop eseguendo solo 1 volta pdfTextExtract, che si trova dentro getPdfContent.
+      Infatti, le restanti chiamate di getPdfContent avvengono dopo aver ritornato i dati al frontend.
+    */
+
+
+
 
     //Qui dovrebbe salvare il json di containerResult
     await updateGlobalState("mappedArchiveStr", JSON.stringify([...analyzedFilesState.allResults]));
-
     await updateGlobalState("todayDate", new Date());
     await updateGlobalState("todayUTC", globalState.todayDate.toUTCString());
     const writeFileName = globalState.todayUTC.slice(0, 16);
     //[MEMO] ho disattivato la creazione del globalState.mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
     //await fs.writeFileSync("globalState.mappedArchive" + envSlash + writeFileName + ".json", globalState.mappedArchiveStr);
-
-
-
     return analyzedFilesState.allResults;
   };
 

@@ -2,8 +2,7 @@ import { PdfReader } from "pdfreader";  //pacchetto 1 usato per leggere i pdf
 import pdfTextExtract from "pdf-text-extract"; //pacchetto 2 usato per leggere i pdf
 import { forceWait } from "../../../../utils/async";
 
-export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState, updateGlobalState }) => {
-
+export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState }) => {
   if (which === "PdfReader") {
     let pdfContentArray = [];
     const parserCallback = async ({ mode, error, item, fileObj }) => {
@@ -56,37 +55,40 @@ export const getPdfContent = async ({ fileObj, which, updateGetSingleResultState
     } else {
       console.log("parserReturnValue is null");
     }
-  }
-
-  if (which === "pdfTextExtract") {
-
-    await updateGlobalState("getPdfContentHasFinished", false);
-
+  } else if (which === "pdfTextExtract") {
     const extractCallback = async ({ pages, fileObj }) => {
-      return await updateGetSingleResultState("pdfContentResult", {
-        fullpath: fileObj.fullpath,
-        linuxfullpath: fileObj.linuxfullpath,
-        filename: fileObj.filename,
-        relativepath: fileObj.relativepath,
-        linuxpath: fileObj.linuxpath,
-        content: pages,
-      });
+      const returnValue =
+        await updateGetSingleResultState("pdfContentResult", {
+          fullpath: fileObj.fullpath,
+          linuxfullpath: fileObj.linuxfullpath,
+          filename: fileObj.filename,
+          relativepath: fileObj.relativepath,
+          linuxpath: fileObj.linuxpath,
+          content: pages,
+        });
+      return returnValue;
     };
-
+    let extractCallbackReturnValue = "unset";
     pdfTextExtract(fileObj.fullpath, { splitPages: false }, async function (err, pages) {
+      console.log("pdfTextExtract starts for file:", fileObj.fullpath);
       if (err) {
         console.log("pdfTextExtract - ERROR:", error);
         return null;
       }
-      //[memo] qui ci andrà parseFileItems()
-      const extractCallbackReturnValue = await extractCallback({ pages: pages, fileObj: fileObj });
-      await console.log("pdfTextExtract - pages.length:", pages.length);
-      await updateGlobalState("getPdfContentHasFinished", true);
-      return extractCallbackReturnValue;
+      //[memo] qui ci andrà parseFileItems() prima o poi
+      extractCallbackReturnValue = await extractCallback({ pages: pages, fileObj: fileObj });
+      (function forceWait() {
+        setTimeout(function () {
+          if (extractCallbackReturnValue === "unset") {
+            console.log("Waiting ...");
+            forceWait();
+          } else if (!extractCallbackReturnValue) {
+            console.log("extractCallbackReturnValue was set as either undefined or null");
+          }
+        }, 1000);
+      })();
+      console.log("pdfTextExtract ends for file:", fileObj.fullpath);
     });
-
+    return extractCallbackReturnValue;
   }
-
-  forceWait(1000);
-
 };

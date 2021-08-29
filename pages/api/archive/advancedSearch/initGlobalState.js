@@ -3,6 +3,7 @@ export const initGlobalState = async ({
   globalState,
   updateGlobalState
 }) => {
+  await updateGlobalState("canGoNextPhase", false);
   await updateGlobalState("conversionFinished", true);
   await updateGlobalState("isArchiveMapped", undefined);//variabile bool che ci dirà se c'è una versione di oggi dell'archivio mappato
   await updateGlobalState("mappedArchive", undefined);//variabile array dei dati dell'archivio mappato  
@@ -17,4 +18,5 @@ export const initGlobalState = async ({
   await updateGlobalState("todayUTC", globalState.todayDate.toUTCString());
   await updateGlobalState("readFileName", globalState.todayUTC.slice(0, 16));
   await updateGlobalState("mustBeProvv", Object.keys(globalState.activeFilters).includes("byProvvedimento"));
+  await updateGlobalState("canGoNextPhase", true);
 }
