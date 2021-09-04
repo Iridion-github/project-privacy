@@ -1,11 +1,11 @@
 ## [ToDo]
 - [Registration/Login/Logout] Progressing with Login,Users and Registration. 
+- [advancedSearch] Spostare il processo di cleanUp a prima di setFilterData
 - [advancedSearch] Riuscire a leggere le text decorations per poter fare pin-point dei tags e delle diciture.
-- [archive] Prima di ritornare la lista, evitare i doppioni con un filtro.
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [setAnalyzedFiles] line 124 
+- [advancedSearch] line 246 - refactor
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

@@ -1,31 +1,36 @@
-import { setDataToFilter } from './advancedSearch/setDataToFilter';
-import { initGlobalState } from './advancedSearch/initGlobalState';
-import { setIsArchiveMapped } from './advancedSearch/setIsArchiveMapped';
-import { mapArchive } from './advancedSearch/mapArchive';
-import { setFilteredDocs } from './advancedSearch/setFilteredDocs';
-import { setIsConversionNeeded } from './advancedSearch/setIsConversionNeeded';
-import { convertFiles } from './advancedSearch/convertFiles';
+import { setDataToFilter } from "./advancedSearch/setDataToFilter";
+import { initGlobalState } from "./advancedSearch/initGlobalState";
+import { setIsArchiveMapped } from "./advancedSearch/setIsArchiveMapped";
+import { mapArchive } from "./advancedSearch/mapArchive";
+import { setFilteredDocs } from "./advancedSearch/setFilteredDocs";
+import { setIsConversionNeeded } from "./advancedSearch/setIsConversionNeeded";
+import { convertFiles } from "./advancedSearch/convertFiles";
+import { delay } from "../../../utils/async";
+import { cleanUpFiles } from "./advancedSearch/cleanUpFiles";
 
 const environment = "linux";
-const envSlash = (environment === "windows") ? "\\" : "/";
+const envSlash = environment === "windows" ? "\\" : "/";
 const refreshRate = 1000;
 
 export default async (req, res) => {
+  //------------------------------ State Declaration ------------------------------
 
-  //------------------------------ State Declaration ------------------------------ 
-
-  const phases = { //per ora non sono usate, ma tornerebbe utile crearvi un sistema affidabile
-    1: { name: "1-Init", done: false },
-    2: { name: "2-CheckMapArchive", done: false },
-    3: { name: "3-MapArchive", done: false },
-    4: { name: "4-SetFilterData", done: false },
-    5: { name: "5-FilterData", done: false },
-    6: { name: "6-CheckConversion", done: false },
-    7: { name: "7-Conversion", done: false },
-    8: { name: "8-ReturnToFrontend", done: false },
-  };
+  const phases = [
+    //per ora non sono usate, ma tornerebbe utile crearvi un sistema affidabile
+    { name: "Init", done: false },
+    { name: "CheckMapArchive", done: false },
+    { name: "MapArchive", done: false },
+    { name: "SetFilterData", done: false },
+    { name: "FilterData", done: false },
+    { name: "CheckConversion", done: false },
+    { name: "Conversion", done: false },
+    { name: "CleanResults", done: false },
+    { name: "ReturnToFrontend", done: false },
+  ];
 
   const globalState = {
+    phases: phases,
+    currentPhase: 0,
     canGoNextPhase: undefined,
     conversionFinished: undefined,
     isArchiveMapped: undefined,
@@ -74,7 +79,7 @@ export default async (req, res) => {
   };
 
   const getSingleResultState = {
-    pdfContentResult: undefined
+    pdfContentResult: undefined,
   };
 
   const updateGetSingleResultState = async (prop, val) => {
@@ -104,7 +109,7 @@ export default async (req, res) => {
   };
 
   const getFilteredDocsState = {
-    filteredArr: undefined
+    filteredArr: undefined,
   };
 
   const updateGetFilteredDocsState = async (prop, val) => {
@@ -189,42 +194,62 @@ export default async (req, res) => {
     return libreResultState[prop];
   };
 
-  //------------------------------ State Initialization ------------------------------ 
-  console.log('[1] Init states');
+  const cleanUpState = {
+    filesForFrontend: undefined,
+  };
+
+  const updateCleanUpState = async (prop, val) => {
+    cleanUpState[prop] = val;
+    return cleanUpState[prop];
+  };
+
+  //------------------------------ State Initialization ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await initGlobalState({
     req,
     globalState,
-    updateGlobalState
+    updateGlobalState,
   });
 
   while (!globalState.canGoNextPhase) {
-    setTimeout(() => console.log("Waiting ..."), refreshRate);
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
   }
-  console.log('[2] Set isArchiveMapped bool');
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ Check if Archive is mapped ------------------------------   
+  //------------------------------ Check if Archive is mapped ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await setIsArchiveMapped({ globalState, updateGlobalState, envSlash });
 
   while (!globalState.canGoNextPhase) {
-    setTimeout(() => console.log("Waiting ..."), refreshRate);
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
   }
-  console.log('[3] Check if mapping archive is needed');
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ Map archive ------------------------------   
+  //------------------------------ Map archive ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   if (!globalState.isArchiveMapped) {
-    console.log('[3.1] Mapping archive is needed ');
+    console.log("[3.1] Mapping archive is needed ");
     await mapArchive({ globalState, envSlash, updateGlobalState });
   } else {
     console.log("[3.2] Mapping archive is NOT needed");
   }
 
   while (!globalState.canGoNextPhase) {
-    setTimeout(() => console.log("Waiting ..."), refreshRate);
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
   }
-  console.log('[4] Set data to filter');
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
+  /*
+  [CHECKPOINT]
+  Il prossimo obiettivo è spostare il cleanUp dei duplicati qui. 
+  Altrimenti si spreca potenza di calcolo
+*/
 
-  //------------------------------ getDataToFilter ------------------------------   
+  //------------------------------ getDataToFilter ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await setDataToFilter({
     envSlash,
     globalState,
@@ -239,20 +264,22 @@ export default async (req, res) => {
     updateDocState,
     docxState,
     updateDocxState,
-  }).then(returnValue => {
-    return returnValue;
-  }).catch(err => {
-    console.log('error in setDataToFilter:', err);
-  });
-
-  console.log("exited phase 4, canGoNextPhase ? ", globalState.canGoNextPhase);
+  })
+    .then(returnValue => {
+      return returnValue;
+    })
+    .catch(err => {
+      console.log("error in setDataToFilter:", err);
+    });
 
   while (!globalState.canGoNextPhase) {
-    setTimeout(() => console.log("Waiting ..."), refreshRate);
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
   }
-  console.log('[5] Filter data');
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ getFilteredDocs ------------------------------ 
+  //------------------------------ getFilteredDocs ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await setFilteredDocs({
     envSlash,
     globalState,
@@ -261,41 +288,43 @@ export default async (req, res) => {
     updateGetFilteredDocsState,
     byProvvedimentoState,
     updateByProvvedimentoState,
-  }).then(returnValue => {
-    return returnValue;
-  }).catch(err => {
-    console.log('error in setFilteredDocs:', err);
-  });
+  })
+    .then(returnValue => {
+      return returnValue;
+    })
+    .catch(err => {
+      console.log("error in setFilteredDocs:", err);
+    });
 
-  (function forceWait() {
-    if (!globalState.canGoNextPhase) {
-      setTimeout(forceWait, refreshRate);
-    } else {
-      console.log('[6] Check if data conversion is needed');
-    }
-  })();
+  while (!globalState.canGoNextPhase) {
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
+  }
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ check if conversion needed ------------------------------ 
+  //------------------------------ check if conversion needed ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await setIsConversionNeeded({
     globalState,
     updateGlobalState,
     conversionNeededState,
     updateConversionNeededState,
-  }).then(returnValue => {
-    return returnValue;
-  }).catch(err => {
-    console.log('error in setIsConversionNeeded:', err);
-  });
+  })
+    .then(returnValue => {
+      return returnValue;
+    })
+    .catch(err => {
+      console.log("error in setIsConversionNeeded:", err);
+    });
 
-  (function forceWait() {
-    if (!globalState.canGoNextPhase) {
-      setTimeout(forceWait, refreshRate);
-    } else {
-      console.log('[7] Data conversion is needed ');
-    }
-  })();
+  while (!globalState.canGoNextPhase) {
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
+  }
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ convert files ------------------------------ 
+  //------------------------------ convert files ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   if (globalState.isConversionNeeded) {
     await convertFiles({
       globalState,
@@ -304,27 +333,48 @@ export default async (req, res) => {
       updateConversionState,
       libreResultState,
       updateLibreResultState,
-    }).then(returnValue => {
-      return returnValue;
-    }).catch(err => {
-      console.log('error in convertFiles:', err);
-    });
+    })
+      .then(returnValue => {
+        return returnValue;
+      })
+      .catch(err => {
+        console.log("error in convertFiles:", err);
+      });
   } else {
     console.log("[7] Data conversion conversion is NOT needed");
   }
 
-  (function forceWait() {
-    if (!globalState.canGoNextPhase) {
-      setTimeout(forceWait, refreshRate);
-    } else {
-      console.log("[8] Return data to frontend");
-    }
-  })();
+  while (!globalState.canGoNextPhase) {
+    console.log("Waiting for next phase ...");
+    delay(refreshRate);
+  }
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ return data to frontend ------------------------------ 
+  //------------------------------ clean up files ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  await cleanUpFiles({
+    globalState,
+    updateGlobalState,
+    conversionState,
+    updateCleanUpState,
+  })
+    .then(returnValue => {
+      return returnValue;
+    })
+    .catch(err => {
+      console.log("error in convertFiles:", err);
+    });
+
+  while (!globalState.canGoNextPhase) {
+    //  console.log("Waiting for next phase ...:", globalState.currentPhase + 1);
+    delay(refreshRate);
+  }
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
+
+  //------------------------------ return data to frontend ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   return res.status(200).json({
     success: true,
-    data: { filteredDocs: (globalState.convertedDocs && globalState.convertedDocs.length) ? globalState.convertedDocs : globalState.filteredDocs }
+    data: { filteredDocs: cleanUpState.filesForFrontend },
   });
-
 };
