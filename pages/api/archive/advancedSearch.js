@@ -16,7 +16,6 @@ export default async (req, res) => {
   //------------------------------ State Declaration ------------------------------
 
   const phases = [
-    //per ora non sono usate, ma tornerebbe utile crearvi un sistema affidabile
     { name: "Init", done: false },
     { name: "CheckMapArchive", done: false },
     { name: "MapArchive", done: false },
@@ -194,15 +193,6 @@ export default async (req, res) => {
     return libreResultState[prop];
   };
 
-  const cleanUpState = {
-    filesForFrontend: undefined,
-  };
-
-  const updateCleanUpState = async (prop, val) => {
-    cleanUpState[prop] = val;
-    return cleanUpState[prop];
-  };
-
   //------------------------------ State Initialization ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await initGlobalState({
@@ -242,11 +232,25 @@ export default async (req, res) => {
   }
   updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  /*
-  [CHECKPOINT]
-  Il prossimo obiettivo è spostare il cleanUp dei duplicati qui. 
-  Altrimenti si spreca potenza di calcolo
-*/
+  //------------------------------ clean up files ------------------------------
+  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  await cleanUpFiles({
+    globalState,
+    updateGlobalState,
+    conversionState,
+  })
+    .then(returnValue => {
+      return returnValue;
+    })
+    .catch(err => {
+      console.log("error in convertFiles:", err);
+    });
+
+  while (!globalState.canGoNextPhase) {
+    //  console.log("Waiting for next phase ...:", globalState.currentPhase + 1);
+    delay(refreshRate);
+  }
+  updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
   //------------------------------ getDataToFilter ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
@@ -350,31 +354,10 @@ export default async (req, res) => {
   }
   updateGlobalState("currentPhase", globalState.currentPhase + 1);
 
-  //------------------------------ clean up files ------------------------------
-  console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
-  await cleanUpFiles({
-    globalState,
-    updateGlobalState,
-    conversionState,
-    updateCleanUpState,
-  })
-    .then(returnValue => {
-      return returnValue;
-    })
-    .catch(err => {
-      console.log("error in convertFiles:", err);
-    });
-
-  while (!globalState.canGoNextPhase) {
-    //  console.log("Waiting for next phase ...:", globalState.currentPhase + 1);
-    delay(refreshRate);
-  }
-  updateGlobalState("currentPhase", globalState.currentPhase + 1);
-
   //------------------------------ return data to frontend ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   return res.status(200).json({
     success: true,
-    data: { filteredDocs: cleanUpState.filesForFrontend },
+    data: { filteredDocs: conversionState.convertedDocs.length ? conversionState.convertedDocs : globalState.filteredDocs },
   });
 };
