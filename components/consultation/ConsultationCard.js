@@ -1,23 +1,18 @@
-import {
-  Row,
-  Col
-} from 'react-bootstrap';
+import { Row, Col } from "react-bootstrap";
 
-import stringToHTML from 'html-react-parser';
-import { ContactsBtn } from '../buttons/ContactsBtn';
-
+import stringToHTML from "html-react-parser";
+import { ContactsBtn } from "../buttons/ContactsBtn";
 
 export const ConsultationCard = function (props) {
-
   return (
     <>
       <Row>
-        <Col md={{ span: 8, offset: 2 }} className="" >
+        <Col md={{ span: 8, offset: 2 }} className="">
           {stringToHTML(props.consultation[props.currentLang].content)}
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <ContactsBtn />
+        <ContactsBtn currentLang={props.currentLang} />
       </Row>
     </>
   );

@@ -1,26 +1,12 @@
-import styles from '../../styles/Home.module.css';
-import {
-  Row,
-  Col,
-  Navbar,
-  Nav,
-  Image,
-  Button
-} from 'react-bootstrap';
-import { useAppContext } from '../../context/contextLib';
-import { LogInBtn } from '../buttons/LogInBtn';
-import { LogOutBtn } from '../buttons/LogOutBtn';
-import { GoRegisterBtn } from '../buttons/GoRegisterBtn';
+import styles from "../../styles/Home.module.css";
+import { Row, Col, Navbar, Nav, Image, Button } from "react-bootstrap";
+import { useAppContext } from "../../context/contextLib";
+import { LogInBtn } from "../buttons/LogInBtn";
+import { LogOutBtn } from "../buttons/LogOutBtn";
+import { GoRegisterBtn } from "../buttons/GoRegisterBtn";
 
 export const Navigation = function () {
-
-  const {
-    currentLang,
-    changeSiteLang,
-    loggedUser,
-    logInUser,
-    logOutUser
-  } = useAppContext();
+  const { currentLang, changeSiteLang, loggedUser, logInUser, logOutUser } = useAppContext();
 
   const btnLabels = {
     chiSono: {
@@ -29,7 +15,7 @@ export const Navigation = function () {
     },
     formazione: {
       ita: "Formazione",
-      eng: "Training",
+      eng: "Learning",
     },
     consulenza: {
       ita: "Consulenza",
@@ -54,7 +40,7 @@ export const Navigation = function () {
     registrazione: {
       ita: "Registrazione",
       eng: "Register",
-    }
+    },
   };
 
   return (
@@ -68,39 +54,45 @@ export const Navigation = function () {
                 <Nav.Link className={styles.navbarLogoContainer + " h-100"} href="/">
                   <Image src="/editedLogo.png" className={styles.navbarLogo + " h-100"} />
                 </Nav.Link>
-                <Nav.Link className={styles.navbarText} href="/">Home</Nav.Link>
-                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"} >{btnLabels.chiSono[currentLang]} </  Nav.Link>
-                <Nav.Link href="/formazione" className={styles.navbarText} >{btnLabels.formazione[currentLang]}</Nav.Link>
-                <Nav.Link href="/consulenza" className={styles.navbarText} >{btnLabels.consulenza[currentLang]}</Nav.Link>
-                <Nav.Link href="/areaQuiz" className={styles.navbarText} >{btnLabels.areaQuiz[currentLang]}</Nav.Link>
-                <Nav.Link href="/articoli" className={styles.navbarText} >{btnLabels.articoli[currentLang]}</Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText} >{btnLabels.recensioniBibliografiche[currentLang]}</Nav.Link>
-                <Nav.Link href="/contatti" className={styles.navbarText} >{btnLabels.contatti[currentLang]}</Nav.Link>
+                <Nav.Link className={styles.navbarText} href="/">
+                  Home
+                </Nav.Link>
+                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"}>
+                  {btnLabels.chiSono[currentLang]}{" "}
+                </Nav.Link>
+                <Nav.Link href="/formazione" className={styles.navbarText}>
+                  {btnLabels.formazione[currentLang]}
+                </Nav.Link>
+                <Nav.Link href="/consulenza" className={styles.navbarText}>
+                  {btnLabels.consulenza[currentLang]}
+                </Nav.Link>
+                <Nav.Link href="/areaQuiz" className={styles.navbarText}>
+                  {btnLabels.areaQuiz[currentLang]}
+                </Nav.Link>
+                <Nav.Link href="/articoli" className={styles.navbarText}>
+                  {btnLabels.articoli[currentLang]}
+                </Nav.Link>
+                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>
+                  {btnLabels.recensioniBibliografiche[currentLang]}
+                </Nav.Link>
+                <Nav.Link href="/contatti" className={styles.navbarText}>
+                  {btnLabels.contatti[currentLang]}
+                </Nav.Link>
                 <Row className="bg-standard-blue justify-content-center align-items-center navbar-flag-row">
                   <Col className="align-items-center p-0 flag-icon-container">
-                    <Button
-                      onClick={() => changeSiteLang("ita")}
-                      variant=""
-                      active={false}
-                      className="p-0 flag-icon-btn mr-1"
-                    >
+                    <Button onClick={() => changeSiteLang("ita")} variant="" active={false} className="p-0 flag-icon-btn mr-1">
                       <Image src="/bandiere/ita.png" className={"black-border flag-icon " + styles.responsiveFlagIcon} />
                     </Button>
                   </Col>
                   <Col className="align-items-center p-0 flag-icon-container">
-                    <Button
-                      onClick={() => changeSiteLang("eng")}
-                      variant=""
-                      active={false}
-                      className="p-0 flag-icon-btn"
-                    >
+                    <Button onClick={() => changeSiteLang("eng")} variant="" active={false} className="p-0 flag-icon-btn">
                       <Image src="/bandiere/GB.png" className={"black-border flag-icon " + styles.responsiveFlagIcon} />
                     </Button>
                   </Col>
                 </Row>
               </Nav>
             </Navbar.Collapse>
-          </Navbar >
+          </Navbar>
         </Col>
         <Col md={{ span: 1 }} className="h-100 ml-0 mr-0">
           <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">
