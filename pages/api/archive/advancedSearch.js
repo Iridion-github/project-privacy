@@ -19,11 +19,11 @@ export default async (req, res) => {
     { name: "Init", done: false },
     { name: "CheckMapArchive", done: false },
     { name: "MapArchive", done: false },
+    { name: "CleanResults", done: false },
     { name: "SetFilterData", done: false },
     { name: "FilterData", done: false },
     { name: "CheckConversion", done: false },
     { name: "Conversion", done: false },
-    { name: "CleanResults", done: false },
     { name: "ReturnToFrontend", done: false },
   ];
 
@@ -286,6 +286,7 @@ export default async (req, res) => {
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
   await setFilteredDocs({
     envSlash,
+    refreshRate,
     globalState,
     updateGlobalState,
     getFilteredDocsState,

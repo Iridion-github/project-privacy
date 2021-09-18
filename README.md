@@ -1,11 +1,10 @@
 ## [ToDo]
-- [Registration/Login/Logout] Progressing with Login,Users and Registration. 
-- [advancedSearch] Spostare il processo di cleanUp a prima di setFilterData
+- [Registration/Login/Logout] Progressing with Login, Users and Registration. 
 - [advancedSearch] Riuscire a leggere le text decorations per poter fare pin-point dei tags e delle diciture.
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [advancedSearch] line 246 - refactor
+- [findFormattedText] Solito problema del, codice non finisce del tutto il suo lavoro prima di ritornare al frontend. Sicuramente ha a che fare col fatto che si sta lavorando all'interno di un filterLoop che inizia a line 15 di setFilteredDocs. Oltretutto a volte in console stampa l'error "non posso leggere .text di undefined" dentro findFormattedText, seppur quel caso dovrebbe essere previsto dai casi (il codice commentato serve a nascondere l'errore) 
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
