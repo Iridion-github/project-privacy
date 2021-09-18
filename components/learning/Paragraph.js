@@ -13,7 +13,7 @@ export const Paragraph = props => {
     calculatedSpan.span = 10;
     calculatedSpan.offset = 2;
   }
-  let calculatedClassName = "chisono-text p-0";
+  let calculatedClassName = "chisiamo-text p-0";
   if (props.orientation === "center") calculatedClassName + " text-center justify-content-center";
 
   return (

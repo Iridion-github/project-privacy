@@ -295,14 +295,14 @@ function formazione(props) {
                 ))}
 
                 {/* <Col md={{ span: 12 }} className="text-justify-desktop-only">
-                  <p className="chisono-text">
+                  <p className="chisiamo-text">
                     {currentLang === "ita"
                       ? "La normativa sulla tutela dei dati personali, la normativa sulla salute e sicurezza sui posti di lavoro, la disciplina sulla responsabilità degli enti, la disciplina antiriciclaggio e sull'anticorruzione, rappresentano esempi tipici in cui il legislatore ha imposto un vero e proprio obbligo di adeguato formazione dei “soggetti obbligati” e dei suoi dipendenti. In tale contesto non si deve commettere l'errore di progettare l'attività formativa in relazione alle esigenze individuali della singola funzione aziendale."
                       : "The legislation on the protection of personal data, the legislation on health and safety in the workplace, the regulations on the liability of entities, the anti-money laundering and anti-corruption regulations, represent typical examples in which the legislator has imposed a real obligation of adequate training of 'obliged parties' and its employees. In this context, one must not make the mistake of planning the training activity in relation to the individual needs of the individual company function."}
                   </p>
                 </Col>
                 <Col md={{ span: 12 }} className="text-justify-desktop-only">
-                  <p className="chisono-text">
+                  <p className="chisiamo-text">
                     {currentLang === "ita"
                       ? " La formazione, infatti, è una funzione aziendale trasversale che deve intercettare in modo integrato le esigenze di compliance che interessano contemporaneamente differenti ambiti normativi (che si richiamano tra loro) e differenti attori e organi di controllo aziendali. È evidente, quindi, la necessità, e soprattutto l'utilità, di realizzare sessioni formative in cui i docenti sappiano fornire ai “discendenti” gli spunti di collegamento e riflessione tra gli adempimenti relativi alle varie normative che non devono essere considerati in modo separato ma come un sistema organico e integrato."
                       : "Learning, in fact, is a transversal corporate function that must intercept in an integrated way the compliance needs that simultaneously affect different regulatory areas (which refer to each other) and different actors and corporate control bodies. It is therefore evident the need, and above all the usefulness, of carrying out training sessions in which teachers are able to provide the 'descendants' with the points of connection and reflection between the obligations relating to the various regulations that must not be considered separately but as an organic and integrated system."}

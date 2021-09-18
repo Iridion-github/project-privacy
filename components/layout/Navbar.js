@@ -9,9 +9,9 @@ export const Navigation = function () {
   const { currentLang, changeSiteLang, loggedUser, logInUser, logOutUser } = useAppContext();
 
   const btnLabels = {
-    chiSono: {
-      ita: "Chi Sono",
-      eng: "Who I Am",
+    chiSiamo: {
+      ita: "Chi Siamo",
+      eng: "Who we are",
     },
     formazione: {
       ita: "Formazione",
@@ -57,8 +57,8 @@ export const Navigation = function () {
                 <Nav.Link className={styles.navbarText} href="/">
                   Home
                 </Nav.Link>
-                <Nav.Link href="/chiSono" className={styles.navbarText + " align-items-center"}>
-                  {btnLabels.chiSono[currentLang]}{" "}
+                <Nav.Link href="/chiSiamo" className={styles.navbarText + " align-items-center"}>
+                  {btnLabels.chiSiamo[currentLang]}{" "}
                 </Nav.Link>
                 <Nav.Link href="/formazione" className={styles.navbarText}>
                   {btnLabels.formazione[currentLang]}
