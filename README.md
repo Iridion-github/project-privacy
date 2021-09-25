@@ -4,14 +4,13 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [findFormattedText] Solito problema del, codice non finisce del tutto il suo lavoro prima di ritornare al frontend. Sicuramente ha a che fare col fatto che si sta lavorando all'interno di un filterLoop che inizia a line 15 di setFilteredDocs. Oltretutto a volte in console stampa l'error "non posso leggere .text di undefined" dentro findFormattedText, seppur quel caso dovrebbe essere previsto dai casi (il codice commentato serve a nascondere l'errore) 
+- [findFormattedText] Solito problema del "codice non finisce del tutto il suo lavoro prima di ritornare al frontend". Probabilmente ha a che fare col fatto che si sta lavorando all'interno di un filterLoop che inizia a line 15 di setFilteredDocs. Come al solito parseFileItems fa lo stronzo e anche basandosi su https://stackoverflow.com/questions/62768038/await-not-efficient-in-asynchronous-function non si risolve, perchè i console.log mostrano che quelli DOPO il processo avvengono dopo che il frontend ha già avuto indietro i dati.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 
 ## [Richieste/Domande_per_Luigi]
 - [FiltroPerProvvedimento] Il tipo di provvedimento (vigente, testo in GU) come si differenzia ?
-- [Tutto] La ricerca avanzata che punta al ritrovamento di segmenti di testo è letteralmente inattuabile. Questo comprende un sacco di filtri specifici; per esempio nella categoria Provvedimento annullerebbe la realizzazione di ricerca per: Articolo, Numero, Sottonumero. Bisogna assicurarsi che a Luigi sia chiara questa cosa, e chiedere se valuta comunque proficua la realizzazione del progetto o no.
 
 ## [Richieste/Domande_per_Gaetano]
 - Attualmente la breadcrumbs bar appare solo se ci si trova in un articolo/recensione, chiedere se preferisce che sia presente anche direttamente nella sezione esterna di articoli e reviews.

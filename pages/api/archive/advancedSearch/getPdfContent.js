@@ -86,7 +86,7 @@ export const getPdfContent = async ({ fileObj, which, getSingleResultState, upda
       while (extractCallbackReturnValue === "unset") {
         await delay(refreshRate);
       }
-      console.log(`pdfTextExtract COMPLETED in ${Date.now() - callTime} ms for file: ${fileObj.fullpath}`);
+      //console.log(`pdfTextExtract COMPLETED in ${Date.now() - callTime} ms for file: ${fileObj.fullpath}`);
       return extractCallbackReturnValue;
     });
 

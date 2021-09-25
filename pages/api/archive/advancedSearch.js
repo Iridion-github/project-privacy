@@ -16,15 +16,15 @@ export default async (req, res) => {
   //------------------------------ State Declaration ------------------------------
 
   const phases = [
-    { name: "Init", done: false },
-    { name: "CheckMapArchive", done: false },
-    { name: "MapArchive", done: false },
-    { name: "CleanResults", done: false },
-    { name: "SetFilterData", done: false },
-    { name: "FilterData", done: false },
-    { name: "CheckConversion", done: false },
-    { name: "Conversion", done: false },
-    { name: "ReturnToFrontend", done: false },
+    { name: "Init", done: false, descr: "Inizializzazione di tutti gli stati e proprietà" },
+    { name: "CheckMapArchive", done: false, descr: "Controlla se è necessario mappare l'archivio" },
+    { name: "MapArchive", done: false, descr: "Mappa l'archivio" },
+    { name: "CleanResults", done: false, descr: "Ripulisce dai doppioni" },
+    { name: "SetFilterData", done: false, descr: "Prepara i file all'essere sottoposti ai filtri" },
+    { name: "FilterData", done: false, descr: "Sottopone i file ai filtri" },
+    { name: "CheckConversion", done: false, descr: "Controlla se è necessario convertire l'estensione di alcuni file" },
+    { name: "Conversion", done: false, descr: "Converte i file che non hanno un estensione supportata dal viewer" },
+    { name: "ReturnToFrontend", done: false, descr: "Manda i file al frontend" },
   ];
 
   const globalState = {
@@ -48,6 +48,7 @@ export default async (req, res) => {
     analyzedFiles: undefined,
     filteredDocs: undefined,
     isConversionNeeded: undefined,
+    isDoneParseFileItems: undefined,
   };
 
   const updateGlobalState = async (prop, val) => {
@@ -293,13 +294,7 @@ export default async (req, res) => {
     updateGetFilteredDocsState,
     byProvvedimentoState,
     updateByProvvedimentoState,
-  })
-    .then(returnValue => {
-      return returnValue;
-    })
-    .catch(err => {
-      console.log("error in setFilteredDocs:", err);
-    });
+  });
 
   while (!globalState.canGoNextPhase) {
     console.log("Waiting for next phase ...");

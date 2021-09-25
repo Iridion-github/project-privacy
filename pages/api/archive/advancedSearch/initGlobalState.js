@@ -15,4 +15,5 @@ export const initGlobalState = async ({ req, globalState, updateGlobalState }) =
   await updateGlobalState("readFileName", globalState.todayUTC.slice(0, 16));
   await updateGlobalState("mustBeProvv", Object.keys(globalState.activeFilters).includes("byProvvedimento"));
   await updateGlobalState("canGoNextPhase", true);
+  await updateGlobalState("isDoneParseFileItems", false);
 };
