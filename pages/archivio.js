@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/Home.module.css';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Button,
-  ButtonGroup
-} from 'react-bootstrap';
-import { Header } from '../components/layout/Header';
-import { Navigation } from '../components/layout/Navbar';
-import { Loading } from '../components/layout/Loading';
-import { Footer } from '../components/layout/Footer';
-import { PdfViewer } from '../components/fileViewers/pdf/PdfViewer';
-import { AdvancedSearch } from '../components/archive/AdvancedSearch';
-import { CustomAutoSuggest } from '../components/archive/ui/CustomAutoSuggest';
+import { useEffect, useState } from "react";
+import styles from "../styles/Home.module.css";
+import { Row, Col, Card, Form, Button, ButtonGroup } from "react-bootstrap";
+import { Header } from "../components/layout/Header";
+import { Navigation } from "../components/layout/Navbar";
+import { Loading } from "../components/layout/Loading";
+import { Footer } from "../components/layout/Footer";
+import { PdfViewer } from "../components/fileViewers/pdf/PdfViewer";
+import { AdvancedSearch } from "../components/archive/AdvancedSearch";
 import { useAppContext } from "../context/contextLib";
 
 export default function archivio(props) {
@@ -28,7 +20,7 @@ export default function archivio(props) {
   const [showPdfModal, setShowPdfModal] = useState(null);
   const [shownTab, setShownTab] = useState("giurisprudenza");
 
-  const handleChangeShownTab = (targetTab) => {
+  const handleChangeShownTab = targetTab => {
     setShownTab(targetTab);
   };
 
@@ -40,7 +32,7 @@ export default function archivio(props) {
     setShowPdfModal(null);
   };
 
-  const handleSetSearchResult = (searchResBefore) => {
+  const handleSetSearchResult = searchResBefore => {
     setSearchResult(searchResBefore);
   };
 
@@ -61,16 +53,16 @@ export default function archivio(props) {
     }
   };
 
-  const submitSearch = async (input) => {
+  const submitSearch = async input => {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
       setLoading(true);
       const resJson = await fetch(`http://localhost:3000/api/archive/search?searchterms=${input}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          key: 'Access-Control-Allow-Origin',
-          value: '*'
-        }
+          key: "Access-Control-Allow-Origin",
+          value: "*",
+        },
       })
         .then(response => response.json())
         .then(async response => {
@@ -83,23 +75,17 @@ export default function archivio(props) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const cleanInput = searchInput.replace(/[^\w\s]/gi, '');
+    const cleanInput = searchInput.replace(/[^\w\s]/gi, "");
     submitSearch(cleanInput);
   };
 
-  useEffect(() => {
-    //console.log("useEffect console.log:")
-  });
-
+  useEffect(() => {});
 
   return (
     <div className={styles.container}>
-      <Header
-
-        title={currentLang === "ita" ? "Archivio" : "Archive"}
-      />
+      <Header title={currentLang === "ita" ? "Archivio" : "Archive"} />
       {/* Navbar */}
       <Navigation />
       {loading && <Loading />}
@@ -109,47 +95,23 @@ export default function archivio(props) {
           <Card className="p-2 fixed-width-card">
             <Card.Img variant="top" src="archiveImg.png" />
             <ButtonGroup className="mt-5 mb-3 w-100">
-              <Button
-                block
-                className="mt-0"
-                variant={(shownTab === "giurisprudenza") ? "info" : "outline-info"}
-                onClick={() => handleChangeShownTab("giurisprudenza")}
-              >
+              <Button block className="mt-0" variant={shownTab === "giurisprudenza" ? "info" : "outline-info"} onClick={() => handleChangeShownTab("giurisprudenza")}>
                 <h4>Giurisprudenza</h4>
               </Button>
-              <Button
-                block
-                className="mt-0"
-                variant={(shownTab === "normativa") ? "info" : "outline-info"}
-                onClick={() => handleChangeShownTab("normativa")}
-              >
+              <Button block className="mt-0" variant={shownTab === "normativa" ? "info" : "outline-info"} onClick={() => handleChangeShownTab("normativa")}>
                 <h4>Normativa</h4>
               </Button>
-              <Button
-                block
-                className="mt-0"
-                variant={(shownTab === "noteedottrina") ? "info" : "outline-info"}
-                onClick={() => handleChangeShownTab("noteedottrina")}
-              >
+              <Button block className="mt-0" variant={shownTab === "noteedottrina" ? "info" : "outline-info"} onClick={() => handleChangeShownTab("noteedottrina")}>
                 <h4>Note e Dottrina</h4>
               </Button>
-              <Button
-                block
-                className="mt-0"
-                variant={(shownTab === "formulari") ? "info" : "outline-info"}
-                onClick={() => handleChangeShownTab("formulari")}
-              >
+              <Button block className="mt-0" variant={shownTab === "formulari" ? "info" : "outline-info"} onClick={() => handleChangeShownTab("formulari")}>
                 <h4>Formulari</h4>
               </Button>
             </ButtonGroup>
             <Card.Body className="justify-items-center justify-content-center">
               <Card.Title className="text-center">{currentLang === "ita" ? "Archivio" : "Archive"}</Card.Title>
               <Row className="p-3 justify-content-center ml-0">
-                <Form
-                  onSubmit={(event) => handleSubmit(event)}
-                  inline
-                  className="w-100 p-0"
-                >
+                <Form onSubmit={event => handleSubmit(event)} inline className="w-100 p-0">
                   <Form.Group className="w-100 justify-content-center">
                     <Col md={9} className="text-right pl-0 pr-0">
                       <Row className="w-100">
@@ -157,7 +119,6 @@ export default function archivio(props) {
                           <Form.Control
                             size="lg"
                             type="text"
-
                             placeholder={currentLang === "ita" ? "Cerca nell'Archivio Legislativo" : "Search in our Legislation Archive"}
                             value={searchInput}
                             onChange={event => setSearchInput(event.target.value)}
@@ -165,25 +126,14 @@ export default function archivio(props) {
                           />
                         </Col>
                         <Col md={1} className="pl-0 pr-0">
-                          <Button
-                            block
-                            variant={"info"}
-                            disabled={searchInput.length < 10}
-                            type="submit"
-                            size="lg"
-                            className="">
+                          <Button block variant={"info"} disabled={searchInput.length < 10} type="submit" size="lg" className="">
                             <i className="fas fa-search"></i>
                           </Button>
                         </Col>
                       </Row>
                     </Col>
                     <Col md={3} className="pl-0 pr-0">
-                      <Button
-                        variant={"info"}
-                        className="ml-1 w-100"
-                        size="lg"
-                        onClick={isAdvanced ? () => closeAdvancedSearch() : () => openAdvancedSearch()}
-                      >
+                      <Button variant={"info"} className="ml-1 w-100" size="lg" onClick={isAdvanced ? () => closeAdvancedSearch() : () => openAdvancedSearch()}>
                         <Row className="m-0 w-100">
                           <Col md={10} className="pr-0 pl-0">
                             <span className="kinda-small-text">Ricerca Avanzata</span>
@@ -198,7 +148,7 @@ export default function archivio(props) {
                 </Form>
               </Row>
               <Row className="p-3 justify-content-center">
-                {isAdvanced &&
+                {isAdvanced && (
                   <AdvancedSearch
                     shownTab={shownTab}
                     loading={loading}
@@ -207,64 +157,63 @@ export default function archivio(props) {
                     handleSetSearched={handleSetSearched}
                     handleSetSearchResult={handleSetSearchResult}
                   />
-                }
+                )}
               </Row>
-              {((searched && searchResult && searchResult.length > 0) || (advancedSearched)) && (
+              {((searched && searchResult && searchResult.length > 0) || advancedSearched) && (
                 <Row className="m-0 mt-4 p-3 w-100 justify-content-center">
                   <Row className="m-0 archive-result-container">
-                    {(searched && searchResult && searchResult.length > 0 && !advancedSearched) &&
+                    {searched && searchResult && searchResult.length > 0 && !advancedSearched && (
                       <>
                         <Col md={12}>
-                          <h4 className="text-center">Nell'Archivio
+                          <h4 className="text-center">
+                            Nell'Archivio
                             {searchResult.length === 1 ? " è presente " : " sono presenti "}
                             {searchResult.length}
                             {searchResult.length === 1 ? " Documento " : " Documenti "}
-                            {(searched && searchResult && searchResult.length > 0) && searchResult.length === 1 ? " contenente" : " contenenti"}: </h4>
+                            {searched && searchResult && searchResult.length > 0 && searchResult.length === 1 ? " contenente" : " contenenti"}:{" "}
+                          </h4>
                         </Col>
                         <Col md={12}>
                           <p className="text-center">"{searched}" </p>
                         </Col>
                       </>
-                    }
-                    {(advancedSearched && searchResult && searchResult.length > 0 && !searched) &&
+                    )}
+                    {advancedSearched && searchResult && searchResult.length > 0 && !searched && (
                       <Col md={12}>
-                        <h4 className="text-center">Nell'Archivio
+                        <h4 className="text-center">
+                          Nell'Archivio
                           {searchResult.length === 1 ? " è presente " : " sono presenti "}
                           {searchResult.length}
                           {searchResult.length === 1 ? " Documento " : " Documenti "}
-                          {searchResult.length === 1 ? " che soddisfa " : " che soddisfano "}
-                          i filtri di ricerca.
+                          {searchResult.length === 1 ? " che soddisfa " : " che soddisfano "}i filtri di ricerca.
                         </h4>
                       </Col>
-                    }
+                    )}
                     <Col md={12}>
                       <ul>
                         {searchResult.map((el, i) => (
                           <li key={i}>
                             <>
                               {el.filename}
-                              {(el.filename && el.filename.includes(".pdf")) && //pdf files viewer btn
-                                <Button
-                                  size="sm"
-                                  variant="info"
-                                  className="ml-1 py-0 px-1"
-                                  onClick={() => openPdfViewer(el.relativepath)}
-                                >
-                                  <i className="fas fa-eye"></i>
-                                </Button>
-                              }
-                              {(el.filename && (el.filename.includes(".docx") || el.filename.includes(".doc"))) && //docx files viewer btn
-                                <Button
-                                  size="sm"
-                                  variant="info"
-                                  className="ml-1 py-0 px-1"
-                                  onClick={() => {
-                                    openPdfViewer(null, el.buffer);
-                                  }}
-                                >
-                                  <i className="fas fa-eye"></i>
-                                </Button>
-                              }
+                              {el.filename &&
+                                el.filename.includes(".pdf") && ( //pdf files viewer btn
+                                  <Button size="sm" variant="info" className="ml-1 py-0 px-1" onClick={() => openPdfViewer(el.relativepath)}>
+                                    <i className="fas fa-eye"></i>
+                                  </Button>
+                                )}
+                              {el.filename &&
+                                (el.filename.includes(".docx") || el.filename.includes(".doc")) && ( //docx files viewer btn
+                                  <Button
+                                    size="sm"
+                                    variant="info"
+                                    className="ml-1 py-0 px-1"
+                                    onClick={() => {
+                                      openPdfViewer(null, el.buffer);
+                                    }}
+                                  >
+                                    <i className="fas fa-eye"></i>
+                                  </Button>
+                                )}
                               <PdfViewer
                                 path={el.relativepath}
                                 buffer={el.buffer}
@@ -281,23 +230,27 @@ export default function archivio(props) {
                 </Row>
               )}
 
-              {(searched && searchResult && searchResult.length === 0) && (
+              {searched && !searchResult.length && (
                 <Row className="mt-4 p-3 justify-content-center archive-result-container">
-                  <h4>Nessun documento contenente: " {searched} "</h4>
+                  <h4>Nessun documento contenente: "{searched}"</h4>
                 </Row>
               )}
 
+              {advancedSearched && !searchResult.length && (
+                <Row className="mt-4 p-3 justify-content-center archive-result-container">
+                  <h4>Nessun documento rispetta i parametri di ricerca.</h4>
+                </Row>
+              )}
             </Card.Body>
-
 
             <Card.Footer className="text-center">
               <small className="text-muted">{currentLang === "ita" ? "Archivio aggiornato al" : "Archive last updated"}: 26/01/2020</small>
             </Card.Footer>
           </Card>
         </Row>
-      </main >
+      </main>
       {/* Footer */}
-      < Footer />
-    </div >
+      <Footer />
+    </div>
   );
 }

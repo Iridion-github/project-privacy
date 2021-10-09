@@ -40,6 +40,7 @@ export const getPdfContent = async ({ fileObj, which, getSingleResultState, upda
       }
     };
 
+    console.log("getPdfContent - enterpath:", fileObj.fullpath);
     const parserReturnValue = await new PdfReader().parseFileItems(fileObj.fullpath, async function (err, item) {
       if (err) {
         await parserCallback({ mode: "error", error: err, item: item, fileObj: fileObj });

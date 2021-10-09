@@ -1,8 +1,7 @@
-import { awaitCondition } from "../../../../utils/async";
 import { findArticolo } from "./findFormattedText";
 
-export const setFilteredDocs = ({ envSlash, refreshRate, globalState, updateGlobalState }) => {
-  const getFilteredDocs = () => {
+export const setFilteredDocs = async ({ envSlash, refreshRate, globalState, updateGlobalState }) => {
+  const getFilteredDocs = async () => {
     let dataToFilter = [...globalState.dataToFilter];
     let filteredArr;
     console.log("BEFORE FILTER - globalState.dataToFilter.length is:", globalState.dataToFilter.length);
@@ -36,36 +35,33 @@ export const setFilteredDocs = ({ envSlash, refreshRate, globalState, updateGlob
         //if momentaneo  per testare se almeno coi pdf funziona, da rimuovere
         if (d.filename.includes(".pdf")) {
           console.log(">>>>>>>>>>>>>>>>>>>>>> Start updating resultsByArticle <<<<<<<<<<<<<<<<<<<<<<<");
-
-          let includesArticle = null;
-          return findArticolo({
+          const results = findArticolo({
             enterPath,
             target,
             requiredFormat,
             refreshRate,
             globalState,
             updateGlobalState,
-          }).then(resultsByArticle => {
-            console.log("then - resultsByArticle:", resultsByArticle);
-            includesArticle = false;
-            if (resultsByArticle.length > 0) includesArticle = true;
-            console.log(`>>>>>>>>>>>>>>>>>>>>>> DONE updating resultsByArticle. includesArticle: ${includesArticle} <<<<<<<<<<<<<<<<<<<<<<<`);
-            return includesArticle;
           });
+          const includesArticle = results.length > 0;
+          console.log(`>>>>>>>>>>>>>>>>>>>>>> DONE updating resultsByArticle. includesArticle: ${includesArticle} <<<<<<<<<<<<<<<<<<<<<<<`);
+          return includesArticle;
         }
         //[MEMO] Funzione da completare: findArticolo - end
-        const conditions = {
-          tag: contentIncipit.includes(globalState.activeFilters.byProvvedimento.provv),
-          tipo: true, //difficile da capire, chiedere a Luigi
-          data: true, //Qui ci si schianta hard, dopo
-          sottonumero: true,
-          articolo: true,
-          numero: true,
-          argomento: true,
-          allegato: true,
-        };
-        //Controllo che nei primi 500 chars del documento sia presente il tag
-        return !Object.values(conditions).every(bool => bool === true); //questo è da cambiare
+
+        /* Commentato per bugfixare findArticolo() */
+        // const conditions = {
+        //   tag: contentIncipit.includes(globalState.activeFilters.byProvvedimento.provv),
+        //   tipo: true, //difficile da capire, chiedere a Luigi
+        //   data: true, //Qui ci si schianta hard, dopo
+        //   sottonumero: true,
+        //   articolo: true,
+        //   numero: true,
+        //   argomento: true,
+        //   allegato: true,
+        // };
+        // //Controllo che nei primi 500 chars del documento sia presente il tag
+        // return !Object.values(conditions).every(bool => bool === true); //questo è da cambiare
       }
 
       //Eventuali affinamenti del filtro andranno qui
@@ -126,5 +122,6 @@ export const setFilteredDocs = ({ envSlash, refreshRate, globalState, updateGlob
     // console.log("consoleFormattedArr:", consoleFormattedArr);
     return filteredArr;
   };
-  updateGlobalState("filteredDocs", getFilteredDocs());
+  const filteredDocs = await getFilteredDocs();
+  updateGlobalState("filteredDocs", filteredDocs);
 };

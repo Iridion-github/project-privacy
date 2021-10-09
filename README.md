@@ -4,7 +4,13 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [findFormattedText] Solito problema del "codice non finisce del tutto il suo lavoro prima di ritornare al frontend". Probabilmente ha a che fare col fatto che si sta lavorando all'interno di un filterLoop che inizia a line 15 di setFilteredDocs. Come al solito parseFileItems fa lo stronzo e anche basandosi su https://stackoverflow.com/questions/62768038/await-not-efficient-in-asynchronous-function non si risolve, perchè i console.log mostrano che quelli DOPO il processo avvengono dopo che il frontend ha già avuto indietro i dati.
+- [findFormattedText] Solito problema dell'asincronia non rispettata. Questi logs appaiono dopo il ritorno al frontend:
+    conversionState.convertedDocs: undefined
+    globalState.filteredDocs []
+    returning this: []
+    >>> exit case - parsedResults:  <<<
+    >>> exit case - parsedResults:  <<<
+
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

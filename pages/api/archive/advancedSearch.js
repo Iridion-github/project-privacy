@@ -255,6 +255,8 @@ export default async (req, res) => {
 
   //------------------------------ getDataToFilter ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  console.log("conversionState.convertedDocs:", conversionState.convertedDocs);
+  console.log("globalState.filteredDocs", globalState.filteredDocs);
   await setDataToFilter({
     envSlash,
     globalState,
@@ -285,6 +287,8 @@ export default async (req, res) => {
 
   //------------------------------ getFilteredDocs ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  console.log("conversionState.convertedDocs:", conversionState.convertedDocs);
+  console.log("globalState.filteredDocs", globalState.filteredDocs);
   await setFilteredDocs({
     envSlash,
     refreshRate,
@@ -304,6 +308,8 @@ export default async (req, res) => {
 
   //------------------------------ check if conversion needed ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  console.log("conversionState.convertedDocs:", conversionState.convertedDocs);
+  console.log("globalState.filteredDocs", globalState.filteredDocs);
   await setIsConversionNeeded({
     globalState,
     updateGlobalState,
@@ -325,6 +331,8 @@ export default async (req, res) => {
 
   //------------------------------ convert files ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  console.log("conversionState.convertedDocs:", conversionState.convertedDocs);
+  console.log("globalState.filteredDocs", globalState.filteredDocs);
   if (globalState.isConversionNeeded) {
     await convertFiles({
       globalState,
@@ -352,8 +360,11 @@ export default async (req, res) => {
 
   //------------------------------ return data to frontend ------------------------------
   console.log(`[${globalState.currentPhase}] ${phases[globalState.currentPhase].name}`);
+  console.log("conversionState.convertedDocs:", conversionState.convertedDocs);
+  console.log("globalState.filteredDocs", globalState.filteredDocs);
+  console.log("returning this:", !!conversionState.convertedDocs ? conversionState.convertedDocs : globalState.filteredDocs);
   return res.status(200).json({
     success: true,
-    data: { filteredDocs: conversionState.convertedDocs.length ? conversionState.convertedDocs : globalState.filteredDocs },
+    data: { filteredDocs: !!conversionState.convertedDocs ? conversionState.convertedDocs : globalState.filteredDocs },
   });
 };
