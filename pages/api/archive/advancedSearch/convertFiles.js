@@ -1,69 +1,57 @@
-import fs from 'fs';//pacchetto usato per leggere docx files
-import libreConvert from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
+import fs from "fs"; //pacchetto usato per leggere docx files
+import libreConvert from "libreoffice-convert"; //pacchetto usato per convertire i docx files in pdf (linux version)
 
-export const convertFiles = async ({
-  globalState,
-  updateGlobalState,
-  conversionState,
-  updateConversionState,
-  libreResultState,
-  updateLibreResultState,
-}) => {
-  await updateConversionState("convertedDocs", []);
-  await updateGlobalState("conversionFinished", false);
-  for (let x = 0; x < globalState.filteredDocs.length; x++) {
-    await updateConversionState("document", globalState.filteredDocs[x]);
+export const convertFiles = async ({ state, updateState }) => {
+  await updateState("conversion", "convertedDocs", []);
+  for (let x = 0; x < state.global.filteredDocs.length; x++) {
+    await updateState("conversion", "document", state.global.filteredDocs[x]);
 
     const getLibreResult = async () => {
-      if (conversionState.document && conversionState.document.filename) {
-        await updateLibreResultState("extend", '.pdf');
-        await updateLibreResultState("enterPath", conversionState.document.fullpath);
-        //libreResultState.outputPath = conversionState.document.filename.includes(".docx") ? conversionState.document.fullpath.split('.docx')[0] + libreResultState.extend : conversionState.document.fullpath.split('.doc')[0] + libreResultState.extend;
-        await updateLibreResultState("undone", await fs.readFileSync(libreResultState.enterPath));
-        libreConvert.convert(libreResultState.undone, libreResultState.extend, undefined, (err, done) => {
+      if (state.conversion.document && state.conversion.document.filename) {
+        await updateState("libreResult", "extend", ".pdf");
+        await updateState("libreResult", "enterPath", state.conversion.document.fullpath);
+        await updateState("libreResult", "undone", fs.readFileSync(state.libreResult.enterPath));
+        libreConvert.convert(state.libreResult.undone, state.libreResult.extend, undefined, (err, done) => {
           if (err) {
-            console.log(`\n\n Error converting file: ${libreResultState.enterPath} \n\n`);
+            console.log(`\n\n Error converting file: ${state.libreResult.enterPath} \n\n`);
             rejectLibre(err);
           } else {
             // writeFileSync funziona, crea veramente il pdf, ma sarebbe troppo pesante farlo ogni volta per tutti i file, quindi mi limito a sfruttare il buffer: done.
-            //await fs.writeFileSync(libreResultState.outputPath, done)
+            //await fs.writeFileSync(state.libreResult.outputPath, done)
             return done;
           }
         });
       } else {
-        console.log("Error - Caso inaspettato con questo file: ", globalState.filteredDocs[x].fullpath);
+        console.log("Error - Caso inaspettato con questo file: ", state.global.filteredDocs[x].fullpath);
       }
     };
 
-    await updateConversionState("libreResult", await getLibreResult());
-    await updateConversionState("mapResult", {});
+    await updateState("conversion", "libreResult", await getLibreResult());
+    await updateState("conversion", "mapResult", {});
 
-    if (conversionState.libreResult && conversionState.libreResult.byteLength) {
-      await updateConversionState("mapResult", {
-        fullpath: conversionState.document.fullpath,
-        filename: conversionState.document.filename,
-        relativepath: conversionState.document.relativepath,
-        linuxpath: conversionState.document.linuxpath,
-        content: conversionState.document.filename.includes(".docx") ? conversionState.document.content : "", //[memo] prob useless
-        buffer: conversionState.libreResult
+    if (state.conversion.libreResult && state.conversion.libreResult.byteLength) {
+      await updateState("conversion", "mapResult", {
+        fullpath: state.conversion.document.fullpath,
+        filename: state.conversion.document.filename,
+        relativepath: state.conversion.document.relativepath,
+        linuxpath: state.conversion.document.linuxpath,
+        content: state.conversion.document.filename.includes(".docx") ? state.conversion.document.content : "", //[memo] prob useless
+        buffer: state.conversion.libreResult,
       });
     } else {
-      await updateConversionState("mapResult", {
-        fullpath: conversionState.document.fullpath,
-        filename: conversionState.document.filename,
-        relativepath: conversionState.document.relativepath,
-        linuxpath: conversionState.document.linuxpath,
-        content: conversionState.document.filename.includes(".docx") ? conversionState.document.content : "" //[memo] prob useless
+      await updateState("conversion", "mapResult", {
+        fullpath: state.conversion.document.fullpath,
+        filename: state.conversion.document.filename,
+        relativepath: state.conversion.document.relativepath,
+        linuxpath: state.conversion.document.linuxpath,
+        content: state.conversion.document.filename.includes(".docx") ? state.conversion.document.content : "", //[memo] prob useless
       });
     }
 
     const updateConvertedDocs = async (convertedArr, originalArr) => {
-      const resultArr = await [...convertedArr, conversionState.mapResult];
-      if (resultArr.length === originalArr.length) {
-        await updateGlobalState("conversionFinished", true);
-      }
+      const resultArr = await [...convertedArr, state.conversion.mapResult];
       return resultArr;
     };
-    updateConversionState("convertedDocs", await updateConvertedDocs(conversionState.convertedDocs, globalState.filteredDocs));
+    updateState("conversion", "convertedDocs", await updateConvertedDocs(state.conversion.convertedDocs, state.filteredDocs));
   }
 };

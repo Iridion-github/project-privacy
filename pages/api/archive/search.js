@@ -1,19 +1,18 @@
-import path from 'path';
-import slash from 'slash';
-import { PdfReader } from "pdfreader";  //pacchetto usato per leggere i pdf 
-import fs from 'fs';//pacchetto usato per leggere docx files
-import mammoth from 'mammoth'; //pacchetto usato per convertire i docx in html
+import path from "path";
+import slash from "slash";
+import { PdfReader } from "pdfreader"; //pacchetto usato per leggere i pdf
+import fs from "fs"; //pacchetto usato per leggere docx files
+import mammoth from "mammoth"; //pacchetto usato per convertire i docx in html
 import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc files
 //import libre from 'libreoffice-convert-win' //pacchetto usato per convertire i docx files in pdf (windows version)
-import libre from 'libreoffice-convert'; //pacchetto usato per convertire i docx files in pdf (linux version)
+import libre from "libreoffice-convert"; //pacchetto usato per convertire i docx files in pdf (linux version)
 
 const environment = "linux";
 
-const envSlash = (environment === "windows") ? "\\" : "/";
+const envSlash = environment === "windows" ? "\\" : "/";
 
-// ----------------------------- [Responds with an Object for every document in Archive] -----------------------------    
+// ----------------------------- [Responds with an Object for every document in Archive] -----------------------------
 export default async (req, res) => {
-  let conversionFinished = true;
   let isArchiveMapped; //variabile bool che ci dirà se c'è una versione di oggi dell'archivio mappato
   let mappedArchive; //variabile array dei dati dell'archivio mappato
   const searchterms = req.query.searchterms;
@@ -46,13 +45,13 @@ export default async (req, res) => {
             linuxfullpath: slash(fullpath),
             relativepath: fullpath.split("public" + envSlash)[1],
             linuxpath: slash(fullpath.split("public" + envSlash)[1]),
-            filename: dirent.name
+            filename: dirent.name,
           };
         }
       }
     }
     (() => {
-      for (const f of getFiles('public/archive')) {
+      for (const f of getFiles("public/archive")) {
         filesToAnalyze.push(f);
       }
     })();
@@ -68,23 +67,27 @@ export default async (req, res) => {
 
           //singleResult Promise starts pending
           const singleResult = await new Promise((resolveSingle, rejectSingle) => {
-            if (pdf) { //[Pdf procedure] (PdfReader + manual array push)
+            if (pdf) {
+              //[Pdf procedure] (PdfReader + manual array push)
               const pdfBuffer = fs.readFileSync(fileObj.fullpath);
               const getPdfContent = async () => {
                 const pdfContentArray = [];
                 await new PdfReader().parseFileItems(fileObj.fullpath, async (err, item) => {
                   if (err) return rejectSingle(err); //rejecting singleResult Promise
-                  if (!item) { //Condizione d'uscita da parseFileItems()
-                    return resolveSingle({ //resolving singleResult Promise
+                  if (!item) {
+                    //Condizione d'uscita da parseFileItems()
+                    return resolveSingle({
+                      //resolving singleResult Promise
                       fullpath: fileObj.fullpath,
                       linuxfullpath: fileObj.linuxfullpath,
                       filename: fileObj.filename,
                       relativepath: fileObj.relativepath,
                       linuxpath: fileObj.linuxpath,
-                      content: pdfContentArray.join(" ")
+                      content: pdfContentArray.join(" "),
                     });
                   }
-                  if (item.text) { //Per ogni frammento del pdf, pusho in pdfContentArray.
+                  if (item.text) {
+                    //Per ogni frammento del pdf, pusho in pdfContentArray.
                     pdfContentArray.push(item.text);
                     return true;
                   }
@@ -94,32 +97,35 @@ export default async (req, res) => {
             } else if (docx) {
               //[Docx procedure] (mammoth)
               const options = {};
-              mammoth.convertToHtml({ path: 'public' + envSlash + fileObj.relativepath }, options).then((mammothResult) => {
+              mammoth.convertToHtml({ path: "public" + envSlash + fileObj.relativepath }, options).then(mammothResult => {
                 if (mammothResult.messages.length > 0) {
                   for (let x; x < mammothResult.messages.length; x++) {
-                    console.log("\n\n Errors:", mammothResult.messages[x], '\n\n');
+                    console.log("\n\n Errors:", mammothResult.messages[x], "\n\n");
                   }
                 }
-                return resolveSingle({ //resolving singleResult Promise
+                return resolveSingle({
+                  //resolving singleResult Promise
                   fullpath: fileObj.fullpath,
                   linuxfullpath: fileObj.linuxfullpath,
                   filename: fileObj.filename,
                   relativepath: fileObj.relativepath,
                   linuxpath: fileObj.linuxpath,
-                  content: mammothResult.value
+                  content: mammothResult.value,
                 });
               });
-            } else if (doc) { //[Doc procedure] (WordExtractor)
-              const getDocContent = async (fileObj) => {
+            } else if (doc) {
+              //[Doc procedure] (WordExtractor)
+              const getDocContent = async fileObj => {
                 const docExtractor = new WordExtractor();
-                const extractedContent = await docExtractor.extract('public' + envSlash + fileObj.relativepath).then(function (doc) {
-                  resolveSingle({ //resolving singleResult Promise
+                const extractedContent = await docExtractor.extract("public" + envSlash + fileObj.relativepath).then(function (doc) {
+                  resolveSingle({
+                    //resolving singleResult Promise
                     fullpath: fileObj.fullpath,
                     linuxfullpath: fileObj.linuxfullpath,
                     filename: fileObj.filename,
                     relativepath: fileObj.relativepath,
                     linuxpath: fileObj.linuxpath,
-                    content: JSON.stringify(doc.getBody())
+                    content: JSON.stringify(doc.getBody()),
                   });
                 });
               };
@@ -137,7 +143,7 @@ export default async (req, res) => {
             filename: fileObj.filename,
             relativepath: fileObj.relativepath,
             linuxpath: fileObj.linuxpath,
-            content: singleResult.content
+            content: singleResult.content,
           });
 
           if (analyzedFiles.length === filesToAnalyze.length) {
@@ -159,38 +165,37 @@ export default async (req, res) => {
         console.log("rejectContainer with error:", errContainer);
         rejectContainer(errContainer); //rejecting containerResult Promise
       }
-    }).then(async (containerResult) => {
+    }).then(async containerResult => {
       await dataToFilter.push(...containerResult);
       return containerResult;
-    });//containerResult Promise resolved/rejected
+    }); //containerResult Promise resolved/rejected
   }
 
   const filteredDocs = dataToFilter.filter(d => {
     if (d.content) {
       //Eventuali affinamenti del filtro andranno qui
-      const cleanContent = d.content.replace(/[^\w\s]/gi, '').toLowerCase();
-      return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, '').toLowerCase());
+      const cleanContent = d.content.replace(/[^\w\s]/gi, "").toLowerCase();
+      return cleanContent.includes(searchterms.replace(/[^\w\s]/gi, "").toLowerCase());
     } else {
       return false;
     }
   });
 
-  const checkIfConversionNeeded = (fileObjArr) => {
+  const checkIfConversionNeeded = fileObjArr => {
     const names = fileObjArr.map(el => el.filename);
-    return names.some(name => (name.includes(".docx") || name.includes(".doc")));
+    return names.some(name => name.includes(".docx") || name.includes(".doc"));
   };
 
   if (checkIfConversionNeeded(filteredDocs)) {
     let convertedDocs = [];
-    conversionFinished = false;
 
     for (let x = 0; x < filteredDocs.length; x++) {
       const d = filteredDocs[x];
       const libreResult = await new Promise((resolveLibre, rejectLibre) => {
         if (d && d.filename) {
-          const extend = '.pdf';
+          const extend = ".pdf";
           const enterPath = d.fullpath;
-          const outputPath = d.filename.includes(".docx") ? d.fullpath.split('.docx')[0] + extend : d.fullpath.split('.doc')[0] + extend;
+          const outputPath = d.filename.includes(".docx") ? d.fullpath.split(".docx")[0] + extend : d.fullpath.split(".doc")[0] + extend;
           const file = fs.readFileSync(enterPath);
           libre.convert(file, extend, undefined, async (err, done) => {
             if (err) {
@@ -218,7 +223,7 @@ export default async (req, res) => {
           relativepath: d.relativepath,
           linuxpath: d.linuxpath,
           content: d.filename.includes(".docx") ? d.content : "",
-          buffer: libreResult
+          buffer: libreResult,
         };
       } else {
         mapResult = {
@@ -226,15 +231,12 @@ export default async (req, res) => {
           filename: d.filename,
           relativepath: d.relativepath,
           linuxpath: d.linuxpath,
-          content: d.filename.includes(".docx") ? d.content : ""
+          content: d.filename.includes(".docx") ? d.content : "",
         };
       }
 
       const updateConvertedDocs = (convertedArr, originalArr) => {
         const resultArr = [...convertedArr, mapResult];
-        if (resultArr.length === originalArr.length) {
-          conversionFinished = true;
-        }
         return resultArr;
       };
 
@@ -242,19 +244,17 @@ export default async (req, res) => {
     }
 
     (function forceWait() {
-      if (!conversionFinished) {
-        setTimeout(forceWait, 1000);
-      } else {
-        return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
-          success: true,
-          data: { filteredDocs: convertedDocs }
-        });
-      }
+      return res.status(200).json({
+        //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
+        success: true,
+        data: { filteredDocs: convertedDocs },
+      });
     })();
   } else {
-    return res.status(200).json({ //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
+    return res.status(200).json({
+      //Success - Trovato qualcosa per i searchterms immessi, e nessun errore.
       success: true,
-      data: { filteredDocs: filteredDocs }
+      data: { filteredDocs: filteredDocs },
     });
   }
 };

@@ -4,7 +4,7 @@ import { delay } from "../../../../utils/async";
 
 const refreshRate = 100;
 
-export const getPdfContent = async ({ fileObj, which, getSingleResultState, updateGetSingleResultState }) => {
+export const getPdfContent = async ({ fileObj, which, state, updateState }) => {
   if (which === "PdfReader") {
     let pdfContentArray = [];
     const parserCallback = async ({ mode, error, item, fileObj }) => {
@@ -58,8 +58,8 @@ export const getPdfContent = async ({ fileObj, which, getSingleResultState, upda
     }
   } else if (which === "pdfTextExtract") {
     const extractCallback = async ({ pages, fileObj }) => {
-      await updateGetSingleResultState("pdfContentResult", null);
-      while (getSingleResultState.pdfContentResult) {
+      await updateState("getSingleResult", "pdfContentResult", null);
+      while (state.getSingleResult.pdfContentResult) {
         delay(refreshRate);
       }
       const pdfContentResultNewVal = {
@@ -70,8 +70,8 @@ export const getPdfContent = async ({ fileObj, which, getSingleResultState, upda
         linuxpath: fileObj.linuxpath,
         content: pages,
       };
-      await updateGetSingleResultState("pdfContentResult", pdfContentResultNewVal);
-      while (!getSingleResultState.pdfContentResult.content || getSingleResultState.pdfContentResult.content.length !== pages.length) {
+      await updateState("getSingleResult", "pdfContentResult", pdfContentResultNewVal);
+      while (!state.getSingleResult.pdfContentResult.content || state.getSingleResult.pdfContentResult.content.length !== pages.length) {
         delay(refreshRate);
       }
       return pdfContentResultNewVal;

@@ -4,12 +4,10 @@
 
 ## [Checkpoint]
 - [registrazione] everywhere there's stuff to check
-- [findFormattedText] Solito problema dell'asincronia non rispettata. Questi logs appaiono dopo il ritorno al frontend:
-    conversionState.convertedDocs: undefined
-    globalState.filteredDocs []
-    returning this: []
-    >>> exit case - parsedResults:  <<<
-    >>> exit case - parsedResults:  <<<
+- [findFormattedText] L'ultima volta è stata rifattorizzata ancora advancedSearch, è stata resa più semplice nello stato. Rimane il solito problema dell'asincronia non rispettata quando si fa uso di PdfReader.parseFilteItems. Questi logs appaiono dopo il ritorno al frontend:
+    >>> exit case - state.parseFileItems.parsedItems.length: 0
+    >>> exit case - state.parseFileItems.parsedItems.length: 14
+    Almeno mi sono assicurato che il filtro funzioni correttamente. Bisogna trovare un modo elegante di impedire che vada avanti il flusso senza i terribili while, sempre che esista.
 
 
 ## [Deployment]

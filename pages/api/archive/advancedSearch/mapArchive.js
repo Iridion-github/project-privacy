@@ -1,9 +1,8 @@
-import fs from 'fs'; //pacchetto usato per leggere docx files
-import path from 'path';
-import slash from 'slash';
+import fs from "fs"; //pacchetto usato per leggere docx files
+import path from "path";
+import slash from "slash";
 
-export const mapArchive = async ({ globalState, envSlash, updateGlobalState }) => {
-  await updateGlobalState("canGoNextPhase", false);
+export const mapArchive = async ({ state, envSlash, updateState }) => {
   function* getFiles(dir) {
     const dirents = fs.readdirSync(dir, { withFileTypes: true });
     for (const dirent of dirents) {
@@ -16,18 +15,17 @@ export const mapArchive = async ({ globalState, envSlash, updateGlobalState }) =
           linuxfullpath: slash(fullpath),
           relativepath: fullpath.split("public" + envSlash)[1],
           linuxpath: slash(fullpath.split("public" + envSlash)[1]),
-          filename: dirent.name
+          filename: dirent.name,
         };
         yield yieldValue;
       }
     }
   }
   (async () => {
-    let startDirectory = 'public/archive';
+    let startDirectory = "public/archive";
     for (const f of getFiles(startDirectory)) {
-      const updatedFilesToAnalyze = [...globalState.filesToAnalyze, f];
-      updateGlobalState("filesToAnalyze", updatedFilesToAnalyze);
+      const updatedFilesToAnalyze = [...state.global.filesToAnalyze, f];
+      updateState("global", "filesToAnalyze", updatedFilesToAnalyze);
     }
   })();
-  await updateGlobalState("canGoNextPhase", true);
 };

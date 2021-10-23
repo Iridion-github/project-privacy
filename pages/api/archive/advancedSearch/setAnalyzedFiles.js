@@ -2,39 +2,24 @@ import WordExtractor from "word-extractor"; //pacchetto usato per leggere i doc 
 import mammoth from "mammoth"; //pacchetto usato per convertire i docx in html
 import { getPdfContent } from "./getPdfContent";
 
-export const setAnalyzedFiles = async ({
-  envSlash,
-  globalState,
-  updateGlobalState,
-  analyzedFilesState,
-  updateAnalyzedFilesState,
-  getDataToFilterState,
-  updateGetDataToFilterState,
-  getSingleResultState,
-  updateGetSingleResultState,
-  docState,
-  updateDocState,
-  docxState,
-  updateDocxState,
-}) => {
+export const setAnalyzedFiles = async ({ envSlash, state, updateState }) => {
   const getAnalyzedFiles = async filesToAnalyze => {
-    await updateAnalyzedFilesState("allResults", []);
+    await updateState("analyzedFiles", "allResults", []);
     for (let x = 0; x < filesToAnalyze.length; x++) {
-      const lastForCycle = x === Number(filesToAnalyze.length - 1);
       const fileObj = filesToAnalyze[x];
-      await updateGetDataToFilterState("pdf", fileObj.fullpath.toLowerCase().includes(".pdf"));
-      await updateGetDataToFilterState("docx", fileObj.fullpath.toLowerCase().includes(".docx"));
-      await updateGetDataToFilterState("doc", fileObj.fullpath.toLowerCase().includes(".doc"));
+      await updateState("getDataToFilter", "pdf", fileObj.fullpath.toLowerCase().includes(".pdf"));
+      await updateState("getDataToFilter", "docx", fileObj.fullpath.toLowerCase().includes(".docx"));
+      await updateState("getDataToFilter", "doc", fileObj.fullpath.toLowerCase().includes(".doc"));
 
       const getSingleResult = async () => {
-        if (getDataToFilterState.pdf) {
+        if (state.getDataToFilter.pdf) {
           //[Pdf procedure] (PdfReader + manual array push)
           //pdf content extraction - start
           const getPdfContentReturnVal = await getPdfContent({
             fileObj: fileObj,
             which: "pdfTextExtract",
-            getSingleResultState,
-            updateGetSingleResultState,
+            state,
+            updateState,
           })
             .then(returnValue => returnValue)
             .catch(err => {
@@ -43,12 +28,13 @@ export const setAnalyzedFiles = async ({
             });
           return getPdfContentReturnVal;
           //pdf content extraction - end
-        } else if (getDataToFilterState.docx) {
+        } else if (state.getDataToFilter.docx) {
           //[Docx procedure] (mammoth)
 
-          await updateDocxState(
+          await updateState(
+            "docx",
             "docxContentResult",
-            await mammoth.convertToHtml({ path: "public" + envSlash + fileObj.relativepath }, docxState.options).then(mammothResult => {
+            await mammoth.convertToHtml({ path: "public" + envSlash + fileObj.relativepath }, state.docx.options).then(mammothResult => {
               if (mammothResult.messages.length > 0) {
                 for (let x; x < mammothResult.messages.length; x++) {}
               }
@@ -62,14 +48,15 @@ export const setAnalyzedFiles = async ({
               };
             })
           );
-          return docxState.docxContentResult;
-        } else if (getDataToFilterState.doc) {
+          return state.docx.docxContentResult;
+        } else if (state.getDataToFilter.doc) {
           //[Doc procedure] (WordExtractor)
           const getDocContent = async fileObj => {
-            await updateDocState("docExtractor", new WordExtractor());
-            await updateDocState(
+            await updateState("doc", "docExtractor", new WordExtractor());
+            await updateState(
+              "doc",
               "extractedContent",
-              await docState.docExtractor.extract("public" + envSlash + fileObj.relativepath).then(function (doc) {
+              await state.doc.docExtractor.extract("public" + envSlash + fileObj.relativepath).then(function (doc) {
                 return {
                   fullpath: fileObj.fullpath,
                   linuxfullpath: fileObj.linuxfullpath,
@@ -80,11 +67,11 @@ export const setAnalyzedFiles = async ({
                 };
               })
             );
-            return docState.extractedContent;
+            return state.doc.extractedContent;
           };
 
-          await updateDocState("docContentResult", await getDocContent(fileObj));
-          return docState.docContentResult;
+          await updateState("doc", "docContentResult", await getDocContent(fileObj));
+          return state.doc.docContentResult;
         } else {
           return "error case: File is not pdf, docx or doc!";
         }
@@ -98,30 +85,26 @@ export const setAnalyzedFiles = async ({
         linuxpath: fileObj.linuxpath,
         content: singleResult && singleResult.content ? singleResult.content : "",
       };
-      await updateAnalyzedFilesState("allResults", [...analyzedFilesState.allResults, newResult]);
-      if (lastForCycle) {
-        await updateGlobalState("canGoNextPhase", true);
-      } else {
-        await updateGlobalState("canGoNextPhase", false);
-      }
+      await updateState("analyzedFiles", "allResults", [...state.analyzedFiles.allResults, newResult]);
     }
     //Qui dovrebbe salvare il json di containerResult
-    await updateGlobalState("mappedArchiveStr", JSON.stringify([...analyzedFilesState.allResults]));
-    await updateGlobalState("todayDate", new Date());
-    await updateGlobalState("todayUTC", globalState.todayDate.toUTCString());
-    const writeFileName = globalState.todayUTC.slice(0, 16);
-    //[MEMO] ho disattivato la creazione del globalState.mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
-    //await fs.writeFileSync("globalState.mappedArchive" + envSlash + writeFileName + ".json", globalState.mappedArchiveStr);
-    return analyzedFilesState.allResults;
+    await updateState("global", "mappedArchiveStr", JSON.stringify([...state.analyzedFiles.allResults]));
+    await updateState("global", "todayDate", new Date());
+    await updateState("global", "todayUTC", state.global.todayDate.toUTCString());
+    const writeFileName = state.global.todayUTC.slice(0, 16);
+    //[MEMO] ho disattivato la creazione del state.mappedArchive per assicurarmi che lo script lo creasse sempre (necessario per convertire i doc in docx);
+    //await fs.writeFileSync("state.mappedArchive" + envSlash + writeFileName + ".json", state.mappedArchiveStr);
+    console.log("getAnalyzedFiles returns an arr whose length is:", state.analyzedFiles.allResults.length);
+    return state.analyzedFiles.allResults;
   };
 
-  const getAnalyzedFilesReturnValue = await getAnalyzedFiles(globalState.filesToAnalyze).then(returnValue => {
+  const getAnalyzedFilesReturnValue = await getAnalyzedFiles(state.global.filesToAnalyze).then(returnValue => {
     return returnValue;
   });
 
-  const updateGlobalStateReturnValue = await updateGlobalState("analyzedFiles", getAnalyzedFilesReturnValue).then(returnValue => {
+  const updateStateReturnValue = await updateState("global", "analyzedFiles", getAnalyzedFilesReturnValue).then(returnValue => {
     return returnValue;
   });
 
-  return updateGlobalStateReturnValue;
+  return updateStateReturnValue;
 };

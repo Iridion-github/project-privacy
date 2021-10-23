@@ -1,48 +1,24 @@
-import { setAnalyzedFiles } from './setAnalyzedFiles';
+import { setAnalyzedFiles } from "./setAnalyzedFiles";
 
-export const setDataToFilter = async ({
-  envSlash,
-  globalState,
-  updateGlobalState,
-  analyzedFilesState,
-  updateAnalyzedFilesState,
-  getDataToFilterState,
-  updateGetDataToFilterState,
-  getSingleResultState,
-  updateGetSingleResultState,
-  docState,
-  updateDocState,
-  docxState,
-  updateDocxState,
-}) => {
+export const setDataToFilter = async ({ envSlash, state, updateState }) => {
   const getDataToFilter = async () => {
-    await updateGlobalState("canGoNextPhase", false);
     try {
       const setAnalyzedFilesReturnValue = await setAnalyzedFiles({
         envSlash,
-        globalState,
-        updateGlobalState,
-        analyzedFilesState,
-        updateAnalyzedFilesState,
-        getDataToFilterState,
-        updateGetDataToFilterState,
-        getSingleResultState,
-        updateGetSingleResultState,
-        docState,
-        updateDocState,
-        docxState,
-        updateDocxState,
+        state,
+        updateState,
       }).then(returnValue => {
         return returnValue;
       });
       return setAnalyzedFilesReturnValue;
     } catch (error) {
-      console.log('getDataToFilter - error:', error);
+      console.log("getDataToFilter - error:", error);
     }
   };
 
-  return await updateGlobalState("dataToFilter", await getDataToFilter()).then(returnValue => {
+  const dataToFilter = await getDataToFilter();
+
+  return await updateState("global", "dataToFilter", dataToFilter).then(returnValue => {
     return returnValue;
   });
-
 };

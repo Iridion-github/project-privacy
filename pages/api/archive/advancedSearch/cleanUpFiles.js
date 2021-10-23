@@ -1,6 +1,5 @@
-export const cleanUpFiles = async ({ globalState, updateGlobalState }) => {
-  updateGlobalState("canGoNextPhase", false);
-  const files = globalState.filesToAnalyze;
+export const cleanUpFiles = async ({ state, updateState }) => {
+  const files = state.global.filesToAnalyze;
 
   const checkForDuplicates = arr => {
     for (const elem of arr) {
@@ -41,6 +40,5 @@ export const cleanUpFiles = async ({ globalState, updateGlobalState }) => {
   //   "cleanedUpFiles:",
   //   cleanedUpFiles.map(file => ({ ...file, content: "HIDDEN" }))
   // );
-  updateGlobalState("filesToAnalyze", cleanedUpFiles);
-  updateGlobalState("canGoNextPhase", true);
+  updateState("global", "filesToAnalyze", cleanedUpFiles);
 };
