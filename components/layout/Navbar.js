@@ -22,8 +22,8 @@ export const Navigation = function () {
       eng: "Consultation",
     },
     areaQuiz: {
-      ita: "Test",
-      eng: "Tests",
+      ita: "Area Quiz",
+      eng: "Quiz Area",
     },
     articoli: {
       ita: "Articoli",

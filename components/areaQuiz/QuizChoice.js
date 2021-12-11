@@ -1,9 +1,4 @@
-import {
-  Row,
-  Col,
-  Card,
-  Button
-} from 'react-bootstrap';
+import { Row, Col, Card, Button } from "react-bootstrap";
 
 export const QuizChoice = function (props) {
   return (
@@ -15,23 +10,27 @@ export const QuizChoice = function (props) {
             <h4 className="text-center">Verifica dell'Apprendimento</h4>
             <Row className="mb-4">
               <Col className="mb-2">
-                <Button
-                  size="lg"
-                  variant="info"
-                  block
-                  onClick={() => props.handleChangeQuizToPresent("Test da Internet")}
-                >
+                <Button size="lg" variant="info" block onClick={() => props.handleChangeQuizToPresent("Test da Internet")}>
                   Quiz da Internet
                 </Button>
               </Col>
+              <Col className="mb-2">
+                <Button size="lg" variant="info" block onClick={() => props.handleChangeQuizToPresent("Test Debug")}>
+                  Quiz Debug
+                </Button>
+              </Col>
+            </Row>
+            <Row className="mb-4">
               <Col className="mb-2">
                 <Button
                   size="lg"
                   variant="info"
                   block
-                  onClick={() => props.handleChangeQuizToPresent("Test Debug")}
+                  onClick={() => {
+                    props.handleChangeQuizToPresent("Responsabilità Amministrativa degli Enti");
+                  }}
                 >
-                  Quiz Debug
+                  Responsabilità Amministrativa degli Enti
                 </Button>
               </Col>
             </Row>
@@ -63,35 +62,6 @@ export const QuizChoice = function (props) {
                 </Button>
               </Col>
             </Row>
-            <Row className="mb-4">
-              <Col className="mb-2">
-                <Button
-                  size="lg"
-                  variant="info"
-                  block
-                  onClick={() => {
-                    props.handleChangeQuizToPresent("Responsabilità Amministrativa degli Enti");
-                  }}
-                >
-                  Responsabilità Amministrativa degli Enti
-                </Button>
-              </Col>
-            </Row>
-            <Row className="mb-4">
-              <Col className="mb-2">
-                <Button
-                  size="lg"
-                  variant="info"
-                  block
-                  onClick={() => {
-                    props.handleChangeQuizToPresent("Anticorruzione");
-                  }}
-                  disabled
-                >
-                  Anticorruzione
-                </Button>
-              </Col>
-            </Row>
             <h4 className="text-center">Per Modulo</h4>
             <Row className="mb-4">
               <Col className="mb-2">
@@ -102,7 +72,6 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Modulo 3");
                   }}
-                  disabled
                 >
                   Modulo 3
                 </Button>
@@ -115,7 +84,6 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Modulo 4");
                   }}
-                  disabled
                 >
                   Modulo 4
                 </Button>
@@ -128,7 +96,6 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Modulo 5");
                   }}
-                  disabled
                 >
                   Modulo 5
                 </Button>
@@ -161,6 +128,6 @@ export const QuizChoice = function (props) {
           </Card.Body>
         </Card>
       </Col>
-    </Row >
+    </Row>
   );
 };
