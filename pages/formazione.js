@@ -162,113 +162,151 @@ function formazione(props) {
     eng: [
       {
         orientation: "center",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content: "[Title] The value of learning in a normative compliance",
+        html: `<p align="center"><span style="font-size: large;"><strong> The value of learning in a normative compliance</strong></span></p>`,
       },
       {
         orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "In increasingly complex and dynamic contexts, the success factors for the various organizations (public and private) are represented by the ability to offer on the market goods and services that know how to intercept the needs of consumers and users in a new, original and efficient way.",
+        html: `<p align="left"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In increasingly complex and dynamic contexts, the success factors for the various organizations (public and private) are represented by the ability to offer on the market goods and services that know how to intercept the needs of consumers and users in a new, original and efficient way.</span></span></p>`,
       },
       {
         orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "There are different aspects that allow companies to be competitive, but what is truly indispensable today is the ability to grasp the opportunities offered by new technologies and, above all, the possibility of having motivated, capable and competent human resources. Training in this context favors a powerful mechanism of inclusion, motivation and involvement.",
+        html: `<p style="text-align: justify; padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">There are different aspects that allow companies to be competitive, but what is truly indispensable today is the ability to grasp the opportunities offered by new technologies and, above all, the possibility of having motivated, capable and competent human resources. </span></span><span style="color: #000000;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Training in this context favors a powerful mechanism of inclusion, motivation and involvement. </span></span></span></p>`,
       },
       {
         orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "Any company or professional activity must therefore undertake to educate, train and inform all those who, in various roles and functions, contribute to the achievement of organizational objectives and strategies.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Any company or professional activity must therefore undertake to educate, train and inform all those who, in various roles and functions, contribute to the achievement of organizational objectives and strategies.</span></span></p>`,
       },
       {
         orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "In this sense, the training activity must be permanent (ie with reference to the entire life cycle of the worker) and characterized by a frequency that allows to grasp the changes in internal and external contexts.",
+        html: `<p style="text-align: justify; padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In this sense, the training activity must be permanent (ie with reference to the entire life cycle of the worker) and characterized by a frequency that allows to grasp the changes in internal and external contexts.</span></span></p>`,
       },
       {
         orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "In the training field, the attention of organizations is characterized by a double need: on the one hand to keep up with the innovations that characterize company operations in the strict sense, on the other to respect the constraints and obligations imposed by the various regulations that do not they can also rarely influence management decisions.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In the training field, the attention of organizations is characterized by a double need: on the one hand to keep up with the innovations that characterize company operations in the strict sense, on the other to respect the constraints and obligations imposed by the various regulations that do not they can also rarely influence management decisions.</span></span></p>`,
       },
       {
         orientation: "center",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
-      },
-      {
-        orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "Therefore, it is necessary to provide specific training policies to evaluate, in a balanced way, the organizational needs in relation to the available resources. Obviously, always keeping in mind the consequences of a strategy that does not give due consideration to training: - a rapid obsolescence of operational processes, with a loss of efficiency and productivity - a possible liability (criminal and / or administrative) for legal breaches with loss of image and consequences on the reputational capital.",
+        html: `<p align="center"><span style="font-family: Verdana, sans-serif;">
+        <span style="font-size: medium;">Therefore, it is necessary to provide specific training policies to evaluate, in a balanced way, the organizational needs in relation to the available resources. Obviously, always keeping in mind the consequences of a strategy that does not give due consideration to training:
+        <ul style="display: table; margin: 0 auto;">
+        <li><span style="font-size: small;">a rapid obsolescence of operational processes, with a loss of efficiency and productivity</span></li>
+        <li><span style="font-size: small;">a possible liability (criminal and / or administrative) for legal breaches with loss of image and consequences on the reputational capital</span></li>
+        </span></p>`,
       },
       {
         orientation: "center",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content: "[Title] Training: obbligation or possibility?",
+        html: `<p align="center"><span style="font-size: large;"><strong>Training: obbligation or possibility?</strong></span></p>`,
       },
       {
         orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "Training generally represents a need that we can define as 'intrinsic' to organizational action, that is, it must be carried out regardless of whether a rule expressly provides for it or not.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Training generally represents a need that we can define as "intrinsic" to organizational action, that is, it must be carried out regardless of whether a rule expressly provides for it or not.</span></span></p>`,
       },
       {
         orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "In some cases, however, training is even considered as a real legal obligation or helps to create the conditions for the effectiveness of organizational models aimed at avoiding the implementation of specific violations.",
+        html: `<p style="text-align: justify; padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In some cases, however, training is even considered as a real legal obligation or helps to create the conditions for the effectiveness of organizational models aimed at avoiding the implementation of specific violations.</span></span></p>`,
       },
       {
         orientation: "left",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "The philosophy behind the training is based on the fact that all members of an organization contribute, in various capacities and with different levels of responsibility, to compliance with the various legal obligations.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">The philosophy behind the training is based on the fact that all members of an organization contribute, in various capacities and with different levels of responsibility, to compliance with the various legal obligations.</span></span></p>`,
+      },
+      {
+        orientation: "center",
+        content:
+          "Only a well-trained resource will have full awareness: - the legal obligations envisaged by the individual regulations - the technical-organizational measures that each organization has adopted - the criticalities inherent in the operations assigned to it",
+        html: `<p align="center"><span style="font-family: Verdana, sans-serif;">
+        <span style="font-size: medium;">Only a well-trained resource will have full awareness: 
+        <ul style="display: table; margin: 0 auto;">
+        <li><span style="font-size: small;">the legal obligations envisaged by the individual regulations</span></li>
+        <li><span style="font-size: small;">the technical-organizational measures that each organization has adopted</span></li>
+        <li><span style="font-size: small;">the criticalities inherent in the operations assigned to it</span></li>
+        </span></p>`,
       },
       {
         orientation: "right",
-        content: "Translation unavailable",
-        html: `Translation unavailable`,
+        content:
+          "Training makes it possible to reduce the likelihood of conduct in violation of the provisions and, ultimately, mistakes are made, with a consequent impact on the company in terms of sanctions or reputational.",
+        html: `<p style="padding-left: 120px;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"></span></span><span style="font-size: medium; font-family: Verdana, sans-serif;">Training makes it possible to reduce the likelihood of conduct in violation of the provisions and, ultimately, mistakes are made, with a consequent impact on the company in terms of sanctions or reputational.</span></p>`,
+      },
+      {
+        orientation: "left",
+        content:
+          "In these cases, training is presented as an organizational measure suitable for reducing the risk of non-compliance with regulations. The higher the risk level of a potential 'non-compliance' (and of violations), the more punctual and pervasive the training action necessary to mitigate the probability of occurrence of a threat or to limit the impact in terms severity of a negative event.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In these cases, training is presented as an </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><strong>organizational measure </strong></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">a </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">suitable for reducing the risk of non-compliance with regulations. The higher the risk level of a potential "non-compliance" (and of violations), the more punctual and pervasive the training action necessary to mitigate the probability of occurrence of a threat or to limit the impact in terms severity of a negative event.</span></span></p>`,
+      },
+      {
+        orientation: "right",
+        content:
+          "The modalities through which to carry out the training, as well as all the organizational measures, are obviously left to the discretion of the obliged subjects who, by virtue of that principle of proportionality, will have to evaluate the suitability of any action in relation to the characteristics and complexity of the structures organizations concerned, obviously without prejudice to the adequate documentation and formalization (principle of accountability) of the measures adopted.",
+        html: `<p style="padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">The modalities through which to carry out the training, as well as all the organizational measures, are obviously left to the discretion of the obliged subjects who, by virtue of that </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><em>principle of proportionality</em></span></span> <span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">, will have to evaluate the suitability of any action in relation to the characteristics and complexity of the structures organizations concerned, obviously without prejudice to the adequate documentation and formalization (principle of accountability) of the measures adopted.</span></span></p>`,
+      },
+      {
+        orientation: "left",
+        content:
+          "The legislation on the protection of personal data, the anti-money laundering and anti-corruption regulations, represent typical examples in which explicit obligations of adequate training have been imposed on the 'obliged parties' and their employees.",
+        html: `<p align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">The legislation on the protection of personal data, the anti-money laundering and anti-corruption regulations, represent typical examples in which explicit obligations of adequate training have been imposed on the "obliged parties" and their employees.</span></span></p>`,
+      },
+      {
+        orientation: "right",
+        content:
+          "Also in terms of corporate liability, although the Legislative Decree n. 231/2001 does not make any specific reference to it, employee training is an essential part of the Organization and Management Model (OMM). The commitment assumed by the entity with the OMM, to eliminate or, in any case, to minimize the risk, finds its concrete exemption capacity through the suitability and effectiveness of the model itself. To ensure this, however, it is necessary to eliminate the information shortcomings of employees who can, for example, represent organizational negligence in culpable crimes and constitute a prerequisite for any liability and sanctions (financial or disqualifying).",
+        html: `<p style="padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Also in terms of corporate liability, </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">although the &nbsp;</span></span><span style="color: #000000;"><span style="color: #3366ff;"><a style="color: #3366ff;" href="https://www.altalex.com/documents/codici-altalex/2014/04/09/responsabilita-amministrativa-delle-societa-e-degli-enti-dlgs-231" target="_blank"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><u>Legislative Decree n. 231/2001</u></span></span></a></span>&nbsp;</span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">does not make any specific reference to it, </span></span><span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">employee training is an essential part of the</span></span></span><span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><em>Organization and Management Model (OMM)</em></span></span></span> <span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">(MOG)</span></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">. </span></span><span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">The commitment assumed by the entity with the OMM, to eliminate or, in any case, to minimize the risk, finds its concrete exemption capacity through the suitability and effectiveness of the model itself. To ensure this, however, it is necessary to eliminate the information shortcomings of employees who can, for example, represent organizational negligence in culpable crimes and constitute a prerequisite for any liability and sanctions (financial or disqualifying)</span></span><span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">.</span></span></span></p>`,
+      },
+      {
+        orientation: "left",
+        content:
+          "In specific circumstances, the adoption of 'OMM 231' is expressly requested as an essential and mandatory prerequisite for participating in public tenders or for the granting of agreements with the PA.",
+        html: `<p align="justify"><span style="color: #0c0c0f;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">In specific circumstances, the adoption of "OMM 231" is expressly requested as an essential and mandatory prerequisite for participating in public tenders or for the granting of agreements with the PA.</span></span></p>`,
+      },
+      {
+        orientation: "center",
+        content: "[Title] Integrated training for integrated compliance",
+        html: `<p align="center"><span style="font-size: large;"><strong>Integrated training for integrated compliance</strong></span></p>`,
+      },
+      {
+        orientation: "left",
+        content:
+          "Training is also a transversal corporate function that must intercept in an integrated way the compliance needs that simultaneously affect different regulatory areas (which refer to each other). It is therefore evident the need, and above all the usefulness, to carry out training sessions in which teachers are able to provide the 'descendants' with points of connection and reflection between the obligations relating to the various regulations that must not be considered separately.",
+        html: `<p align="justify"><span style="color: #212529;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Training is also a transversal corporate function that must intercept in an integrated way the compliance needs that simultaneously affect different regulatory areas (which refer to each other). It is therefore evident the need, and above all the usefulness, to carry out training sessions in which teachers are able to provide the 'descendants' with points of connection and reflection between the obligations relating to the various regulations that must not be considered separately.</span></span></span></p>`,
+      },
+      {
+        orientation: "right",
+        content:
+          "Implementing a training plan according to the logic and objectives of the current recycling discipline is not easy. Simply putting a few people in the classroom to address general issues relating to anti-money laundering often does not allow for effective training and positive effects for the organization or for the reference professional.",
+        html: `<p style="padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">Implementing a training plan according to the logic and objectives of the current recycling discipline is not easy. Simply putting a few people in the classroom to address general issues relating to anti-money laundering often does not allow for effective training and positive effects for the organization or for the reference professional.</span></span></p>`,
+      },
+      {
+        orientation: "left",
+        content:
+          "MG Consulting in this context, thanks to previous professional experiences also gained in the public sphere, ensures high-level training based on integrated training projects tailored to the organizational needs of its customers and using modern teaching methods based on experiential approaches.",
+        html: `<p align="justify"><span style="color: #212529;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"></span></span></span><span style="color: #212529;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><em><strong>MG Consulting</strong></em></span></span></span> <span style="color: #212529;"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">in this context, thanks to previous professional experiences also gained in the public sphere, ensures high-level training based on integrated training projects tailored to the organizational needs of its customers and using modern teaching methods based on experiential approaches.</span></span></span></p>`,
+      },
+      {
+        orientation: "right",
+        content:
+          "In addition to a differentiated range of online or face-to-face courses, MG Consulting provides its customers with support in the drafting of policies, procedures and control systems to monitor and verify the methods of delivery of the teaching activity as planned. After having carefully assessed the training needs, we develop with a methodologically correct approach, the Planning, Programming, Delivery, Evaluation of any course",
+        html: `<p style="padding-left: 120px;" align="justify"><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">
+In addition to a differentiated range of online or face-to-face courses, MG Consulting provides its customers with support in the drafting of </span></span><strong><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">policies, procedures and </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"> </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">control systems to monitor and verify</span></span></strong> <span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"> the methods of delivery of the teaching activity as planned. After having carefully assessed the training needs, we develop with a methodologically correct approach, the </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><strong>Planning</strong></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">, la </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><strong>Programming</strong></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">, l&rsquo;</span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><strong>Delivery</strong></span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">, la </span></span><span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;"><strong>Evaluation</strong></span></span> <span style="font-family: Verdana, sans-serif;"><span style="font-size: medium;">of any course
+</span></span></p><p><br /><br /></p>`,
       },
     ],
   };
