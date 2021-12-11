@@ -16,7 +16,7 @@ function Home() {
       <main className="m-0 pb-5 p-0">
         {/* Homepage Slides */}
         <div className={styles.carouselContainer}>
-          <Carousel className="d-block carouselStyle">
+          <Carousel className="d-block">
             <Carousel.Item interval={2000}>
               <picture>
                 <source media="(max-width: 650px)" srcSet="contatti.png" alt="img alternativa mobile view" />
@@ -42,7 +42,7 @@ function Home() {
             <Carousel.Item interval={2000}>
               <picture>
                 <source media="(max-width: 650px)" srcSet="contatti.png" alt="img alternativa mobile view" />
-                <img className="d-block w-100" src="slides/3rdSlide.png" alt="Third slide" />
+                <img className="d-block w-100" src="slides/3rdSlide.png" alt="Third slide" style={{ height: "730px" }} />
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title}>{currentLang === "ita" ? "Work in progress" : "Work in progress"}</h2>
@@ -94,6 +94,12 @@ function Home() {
                       changeability of legislative changes as well as the difficulty of 
                       knowing how to read and adapt operational practices to abstract cases`}
                   </p>
+                </Col>
+                <Col md={{ span: 12, offset: 0 }} className="text-justify-desktop-only pt-3">
+                  <picture>
+                    <source media="(max-width: 650px)" srcSet="europe-with-people.png" alt="img alternativa mobile view" />
+                    <img className="d-block w-100" src="europe-with-people.png" alt="mid page img" />
+                  </picture>
                 </Col>
                 <Col md={{ span: 8, offset: 4 }} className="text-justify-desktop-only pt-3">
                   <p className="home-text-right">

@@ -320,7 +320,7 @@ In addition to a differentiated range of online or face-to-face courses, MG Cons
       <main className={styles.main}>
         <Container className="justify-content-center p-0">
           <Card className="w-100 p-2 responsive-width-card">
-            <Card.Img className="black-border" variant="top" src="consulenza.png" />
+            <Card.Img className="black-border" variant="top" src="training.png" />
             <Card.Body>
               <Row>
                 <Col md={{ span: 12 }}>
