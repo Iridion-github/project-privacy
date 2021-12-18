@@ -22,8 +22,8 @@ export const Navigation = function () {
       eng: "Consultation",
     },
     areaQuiz: {
-      ita: "Area Quiz",
-      eng: "Quiz Area",
+      ita: "Area Test",
+      eng: "Tests Area",
     },
     articoli: {
       ita: "Articoli",
@@ -66,7 +66,7 @@ export const Navigation = function () {
                 <Nav.Link href="/consulenza" className={styles.navbarText}>
                   {btnLabels.consulenza[currentLang]}
                 </Nav.Link>
-                <Nav.Link href="/areaQuiz" className={styles.navbarText}>
+                <Nav.Link href="/areaTest" className={styles.navbarText}>
                   {btnLabels.areaQuiz[currentLang]}
                 </Nav.Link>
                 <Nav.Link href="/articoli" className={styles.navbarText}>

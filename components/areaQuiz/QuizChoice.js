@@ -8,7 +8,7 @@ export const QuizChoice = function (props) {
           <Card.Img variant="top" src="" />
           <Card.Body>
             <h4 className="text-center">Verifica dell'Apprendimento</h4>
-            <Row className="mb-4">
+            {/* <Row className="mb-4">
               <Col className="mb-2">
                 <Button size="lg" variant="info" block onClick={() => props.handleChangeQuizToPresent("Test da Internet")}>
                   Quiz da Internet
@@ -19,7 +19,7 @@ export const QuizChoice = function (props) {
                   Quiz Debug
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
@@ -62,6 +62,20 @@ export const QuizChoice = function (props) {
                 </Button>
               </Col>
             </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeQuizToPresent("Anticorruzione");
+                  }}
+                >
+                  Anticorruzione
+                </Button>
+              </Col>
+            </Row>
             <h4 className="text-center">Per Modulo</h4>
             <Row className="mb-4">
               <Col className="mb-2">
@@ -73,7 +87,7 @@ export const QuizChoice = function (props) {
                     props.handleChangeQuizToPresent("Modulo 3");
                   }}
                 >
-                  Modulo 3
+                  Test 1
                 </Button>
               </Col>
               <Col className="mb-2">
@@ -85,7 +99,7 @@ export const QuizChoice = function (props) {
                     props.handleChangeQuizToPresent("Modulo 4");
                   }}
                 >
-                  Modulo 4
+                  Test 2
                 </Button>
               </Col>
               <Col className="mb-2">
@@ -97,11 +111,11 @@ export const QuizChoice = function (props) {
                     props.handleChangeQuizToPresent("Modulo 5");
                   }}
                 >
-                  Modulo 5
+                  Test 3
                 </Button>
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col className="mb-2">
                 <Button
                   disabled //Non c'è ancora questo quiz
@@ -124,7 +138,7 @@ export const QuizChoice = function (props) {
                   Quiz Placeholder
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
           </Card.Body>
         </Card>
       </Col>

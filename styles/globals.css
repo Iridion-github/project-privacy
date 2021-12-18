@@ -564,3 +564,12 @@ label:focus,
 .consultation-choice-btn {
   height: 140px;
 }
+
+.bg-red {
+  border: 1px solid red;
+  background-color: red !important;
+}
+
+.text-color-grey {
+  color: #343a40 !important;
+}

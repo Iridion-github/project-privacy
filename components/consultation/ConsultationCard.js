@@ -11,7 +11,7 @@ export const ConsultationCard = function (props) {
           {stringToHTML(props.consultation[props.currentLang].content)}
         </Col>
       </Row>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mt-5">
         <ContactsBtn currentLang={props.currentLang} />
       </Row>
     </>
