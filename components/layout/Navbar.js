@@ -95,23 +95,9 @@ export const Navigation = function () {
           </Navbar>
         </Col>
         <Col md={{ span: 1 }} className="h-100 ml-0 mr-0">
-          <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">
-            {/* {!loggedUser &&
-              <LogInBtn
-                onClick={logInUser}
-              />} */}
-          </Row>
-          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
-            {/* {loggedUser && <LogOutBtn
-              onClick={logOutUser}
-            />} */}
-          </Row>
-          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">
-            {/* {!loggedUser && <GoRegisterBtn
-              href="/registrazione"
-              text={btnLabels.registrazione[currentLang]}
-            />} */}
-          </Row>
+          <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">{!loggedUser && <LogInBtn onClick={logInUser} />}</Row>
+          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">{loggedUser && <LogOutBtn onClick={logOutUser} />}</Row>
+          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">{!loggedUser && <GoRegisterBtn href="/registrazione" text={btnLabels.registrazione[currentLang]} />}</Row>
         </Col>
       </Row>
     </>
