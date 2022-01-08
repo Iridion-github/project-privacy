@@ -20,6 +20,7 @@ export const QuizChoice = function (props) {
                 </Button>
               </Col>
             </Row> */}
+            <h4 className="text-center">Gratis</h4>
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
@@ -41,10 +42,10 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Privacy");
+                    props.handleChangeQuizToPresent("Anticorruzione");
                   }}
                 >
-                  Privacy
+                  Anticorruzione
                 </Button>
               </Col>
             </Row>
@@ -62,6 +63,7 @@ export const QuizChoice = function (props) {
                 </Button>
               </Col>
             </Row>
+            <h4 className="text-center">Premium</h4>
             <Row className="mb-4">
               <Col className="mb-2">
                 <Button
@@ -69,10 +71,38 @@ export const QuizChoice = function (props) {
                   variant="info"
                   block
                   onClick={() => {
-                    props.handleChangeQuizToPresent("Anticorruzione");
+                    props.handleChangeQuizToPresent("Responsabilità Amministrativa degli Enti (Premium)");
                   }}
                 >
-                  Anticorruzione
+                  Responsabilità Amministrativa degli Enti (Premium)
+                </Button>
+              </Col>
+            </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeQuizToPresent("Privacy (Premium)");
+                  }}
+                >
+                  Privacy (Premium)
+                </Button>
+              </Col>
+            </Row>
+            <Row className="mb-4">
+              <Col className="mb-2">
+                <Button
+                  size="lg"
+                  variant="info"
+                  block
+                  onClick={() => {
+                    props.handleChangeQuizToPresent("Antiriciclaggio (Premium)");
+                  }}
+                >
+                  Antiriciclaggio (Premium)
                 </Button>
               </Col>
             </Row>

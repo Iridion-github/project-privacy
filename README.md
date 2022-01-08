@@ -14,7 +14,7 @@
 ## [Note/Memo]
 - 
 ## [Known_Issues/Bugs]
-- 
+-
 ## Implementazioni Possibili/Utili e Migliorie
 - 
 
