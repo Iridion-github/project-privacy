@@ -21,7 +21,7 @@ function Home() {
             <Carousel.Item interval={2000}>
               <picture>
                 <source media="(max-width: 650px)" srcSet="contatti.png" alt="img alternativa mobile view" />
-                <img className="d-block w-100" src="slides/1stSlide.png" alt="First slide" />
+                <img className="d-block w-100" src="slides/1stSlide.png" alt="First slide" style={{ height: "730px" }} />
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title}>{currentLang === "ita" ? "Consulenza Compliance e Integrata" : "Compliance and Integrated Consulting"}</h2>
@@ -33,7 +33,7 @@ function Home() {
             <Carousel.Item interval={2000}>
               <picture>
                 <source media="(max-width: 650px)" srcSet="contatti.png" alt="img alternativa mobile view" />
-                <img className="d-block w-100" src="slides/2ndSlide.png" alt="Second slide" />
+                <img className="d-block w-100" src="slides/2ndSlide.png" alt="Second slide" style={{ height: "730px" }} />
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title}>{currentLang === "ita" ? "Consulenza Privacy e Antiriciclaggio" : "Privacy and Anti-Money Laundering Consultancy"}</h2>
@@ -43,7 +43,7 @@ function Home() {
             <Carousel.Item interval={2000}>
               <picture>
                 <source media="(max-width: 650px)" srcSet="contatti.png" alt="img alternativa mobile view" />
-                <img className="d-block w-100" src="slides/3rdSlide.png" alt="Third slide" style={{ height: "583px" }} />
+                <img className="d-block w-100" src="slides/3rdSlide.png" alt="Third slide" style={{ height: "730px" }} />
               </picture>
               <Carousel.Caption>
                 <h2 className={styles.title}>{currentLang === "ita" ? "Work in progress" : "Work in progress"}</h2>
