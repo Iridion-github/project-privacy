@@ -27,8 +27,8 @@ export const Footer = function () {
             <a href="/privacyPolicy" target="_blank" className={styles.footerLink}>
               Privacy Policy
             </a>
-            <a href="https://www.mgconsulenzaformazione.com/" target="_blank" className={styles.footerLink}>
-              MG Consulting
+            <a href="https://www.espertocompliance.it/" target="_blank" className={styles.footerLink}>
+              Esperto Compliance
             </a>
             <a href="/cookiePolicy" target="_blank" className={styles.footerLink}>
               Cookie policy
@@ -63,12 +63,14 @@ export const Footer = function () {
             <Image
               onClick={() => router.push("https://www.linkedin.com/in/gaetano-mastropierro-a97851186/?originalSubdomain=it")}
               href="/"
+              target="_blank"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png"
               className={styles.facebookLogo}
             />
             <Image
               onClick={() => router.push("https://www.linkedin.com/in/gaetano-mastropierro-a97851186/?originalSubdomain=it")}
               href="/"
+              target="_blank"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/LinkedIn_Logo_2013.svg/2560px-LinkedIn_Logo_2013.svg.png"
               className={styles.linkedinLogo}
             />
