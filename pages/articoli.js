@@ -11,6 +11,7 @@ import { ArticlesLeftMenu } from "../components/articles/ArticlesLeftMenu";
 import { removeDuplicatesById, includesAll } from "../utils/arrays";
 import { Loading } from "../components/layout/Loading";
 import { useAppContext } from "../context/contextLib";
+import { RightMenu } from "../components/home/RightMenu";
 
 function articoli(props) {
   const { DBarticles, articleTopics } = props;
@@ -110,7 +111,9 @@ function articoli(props) {
               />
             )}
           </Col>
-          <Col md={3} className=""></Col>
+          <Col md={3} className="">
+            <RightMenu currentLang={currentLang} />
+          </Col>
         </Row>
       </main>
       {/* Footer */}

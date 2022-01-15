@@ -6,6 +6,7 @@ import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
+import { RightMenu } from "../components/home/RightMenu";
 
 function formazione(props) {
   const { currentLang, changeSiteLang } = useAppContext();
@@ -318,21 +319,23 @@ In addition to a differentiated range of online or face-to-face courses, MG Cons
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Container className="justify-content-center p-0">
-          <Card className="w-100 p-2 responsive-width-card">
-            <Card.Img className="black-border" variant="top" src="training.png" />
-            <Card.Body>
-              <Row>
-                <Col md={{ span: 12 }}>
-                  <Card.Title className="text-center">
-                    <h1>{currentLang === "ita" ? "Formazione" : "Learning"}</h1>
-                  </Card.Title>
-                </Col>
-                {paragraphs[currentLang].map(parag => (
-                  <Paragraph orientation={parag.orientation} content={parag.content} html={parag.html} />
-                ))}
+        <Row className="w-100 m-0 p-0">
+          <Col md={{ span: 6, offset: 3 }} className="p-0">
+            <Container className="justify-content-center p-0">
+              <Card className="w-100 p-2 responsive-width-card">
+                <Card.Img className="black-border" variant="top" src="training.png" />
+                <Card.Body>
+                  <Row>
+                    <Col md={{ span: 12 }}>
+                      <Card.Title className="text-center">
+                        <h1>{currentLang === "ita" ? "Formazione" : "Learning"}</h1>
+                      </Card.Title>
+                    </Col>
+                    {paragraphs[currentLang].map(parag => (
+                      <Paragraph orientation={parag.orientation} content={parag.content} html={parag.html} />
+                    ))}
 
-                {/* <Col md={{ span: 12 }} className="text-justify-desktop-only">
+                    {/* <Col md={{ span: 12 }} className="text-justify-desktop-only">
                   <p className="chisiamo-text">
                     {currentLang === "ita"
                       ? "La normativa sulla tutela dei dati personali, la normativa sulla salute e sicurezza sui posti di lavoro, la disciplina sulla responsabilità degli enti, la disciplina antiriciclaggio e sull'anticorruzione, rappresentano esempi tipici in cui il legislatore ha imposto un vero e proprio obbligo di adeguato formazione dei “soggetti obbligati” e dei suoi dipendenti. In tale contesto non si deve commettere l'errore di progettare l'attività formativa in relazione alle esigenze individuali della singola funzione aziendale."
@@ -346,11 +349,16 @@ In addition to a differentiated range of online or face-to-face courses, MG Cons
                       : "Learning, in fact, is a transversal corporate function that must intercept in an integrated way the compliance needs that simultaneously affect different regulatory areas (which refer to each other) and different actors and corporate control bodies. It is therefore evident the need, and above all the usefulness, of carrying out training sessions in which teachers are able to provide the 'descendants' with the points of connection and reflection between the obligations relating to the various regulations that must not be considered separately but as an organic and integrated system."}
                   </p>
                 </Col> */}
-              </Row>
-            </Card.Body>
-            <Card.Footer className="text-center"></Card.Footer>
-          </Card>
-        </Container>
+                  </Row>
+                </Card.Body>
+                <Card.Footer className="text-center"></Card.Footer>
+              </Card>
+            </Container>
+          </Col>
+          <Col md={{ span: 3, offset: 0 }} className="m-0 p-0 justify-content-center">
+            <RightMenu currentLang={currentLang} />
+          </Col>
+        </Row>
       </main>
       {/* Footer */}
       <Footer />

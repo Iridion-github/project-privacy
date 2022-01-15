@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
 import { QuizChoice } from "../components/areaQuiz/QuizChoice";
@@ -10,6 +10,7 @@ import { Quiz } from "../components/areaQuiz/Quiz";
 import { Results } from "../components/areaQuiz/Results";
 import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
+import { RightMenu } from "../components/home/RightMenu";
 
 function areaQuiz({ quizzes }) {
   const [quizOnShow, setQuizOnShow] = useState(null);
@@ -64,43 +65,55 @@ function areaQuiz({ quizzes }) {
       <Navigation />
       {/* Page Content */}
       <main className={styles.main}>
-        <Row className="w-100 ml-0 mr-0">
-          {/* Scelta Quiz */}
-          {quizOnShow === null && selectedQuiz === null && showResults === false && <QuizChoice handleChangeQuizToPresent={handleChangeQuizToPresent} />}
-          {/* Fine Scelta Quiz */}
-          {/* Presentazione Quiz */}
-          {quizOnShow && selectedQuiz === null && showResults === false && (
-            <QuizPresentation quizOnShow={quizOnShow} handleChangeQuizToPresent={handleChangeQuizToPresent} handleChangeSelectedQuiz={handleChangeSelectedQuiz} getQuizChoiceView={getQuizChoiceView} />
-          )}
-          {/* Fine Presentazione Quiz */}
-          {/* Quiz */}
-          {selectedQuiz && showResults === false && (
-            <Quiz
-              selectedQuiz={selectedQuiz}
-              setShowResults={setShowResults}
-              getQuizChoiceView={getQuizChoiceView}
-              timesUp={timesUp}
-              setTimesUp={setTimesUp}
-              questionCounter={questionCounter}
-              setQuestionCounter={setQuestionCounter}
-              allUserAnswers={selectedQuiz?.questions}
-              setAllUserAnswers={handleUpdateUserAnswers}
-              handleShowResults={handleShowResults}
-            />
-          )}
-          {/* Fine Quiz */}
-          {/* Risultati */}
-          {showResults && (
-            <Results
-              selectedQuiz={selectedQuiz}
-              setShowResults={setShowResults}
-              dataBeforeCorrection={dataBeforeCorrection}
-              getQuizChoiceView={getQuizChoiceView}
-              timesUp={timesUp}
-              setTimesUp={setTimesUp}
-            />
-          )}
-          {/* Fine Risultati */}
+        <Row className="w-100 m-0 p-0">
+          <Col md={{ span: 6, offset: 3 }} className="p-0">
+            <Row className="w-100 ml-0 mr-0">
+              {/* Scelta Quiz */}
+              {quizOnShow === null && selectedQuiz === null && showResults === false && <QuizChoice handleChangeQuizToPresent={handleChangeQuizToPresent} />}
+              {/* Fine Scelta Quiz */}
+              {/* Presentazione Quiz */}
+              {quizOnShow && selectedQuiz === null && showResults === false && (
+                <QuizPresentation
+                  quizOnShow={quizOnShow}
+                  handleChangeQuizToPresent={handleChangeQuizToPresent}
+                  handleChangeSelectedQuiz={handleChangeSelectedQuiz}
+                  getQuizChoiceView={getQuizChoiceView}
+                />
+              )}
+              {/* Fine Presentazione Quiz */}
+              {/* Quiz */}
+              {selectedQuiz && showResults === false && (
+                <Quiz
+                  selectedQuiz={selectedQuiz}
+                  setShowResults={setShowResults}
+                  getQuizChoiceView={getQuizChoiceView}
+                  timesUp={timesUp}
+                  setTimesUp={setTimesUp}
+                  questionCounter={questionCounter}
+                  setQuestionCounter={setQuestionCounter}
+                  allUserAnswers={selectedQuiz?.questions}
+                  setAllUserAnswers={handleUpdateUserAnswers}
+                  handleShowResults={handleShowResults}
+                />
+              )}
+              {/* Fine Quiz */}
+              {/* Risultati */}
+              {showResults && (
+                <Results
+                  selectedQuiz={selectedQuiz}
+                  setShowResults={setShowResults}
+                  dataBeforeCorrection={dataBeforeCorrection}
+                  getQuizChoiceView={getQuizChoiceView}
+                  timesUp={timesUp}
+                  setTimesUp={setTimesUp}
+                />
+              )}
+              {/* Fine Risultati */}
+            </Row>
+          </Col>
+          <Col md={{ span: 3, offset: 0 }} className="m-0 p-0 justify-content-center">
+            <RightMenu currentLang={currentLang} />
+          </Col>
         </Row>
       </main>
       {/* Footer */}

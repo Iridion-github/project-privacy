@@ -3,7 +3,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 export const QuizChoice = function (props) {
   return (
     <Row className="w-100 align-items-center m-auto">
-      <Col md={{ span: 4, offset: 4 }} className="align-items-center m-auto">
+      <Col md={{ span: 6, offset: 3 }} className="align-items-center m-auto">
         <Card className="w-100 p-2 grey-border" border="">
           <Card.Img variant="top" src="" />
           <Card.Body>

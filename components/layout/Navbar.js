@@ -25,14 +25,6 @@ export const Navigation = function () {
       ita: "Area Test",
       eng: "Tests Area",
     },
-    articoli: {
-      ita: "Articoli",
-      eng: "Articles",
-    },
-    recensioniBibliografiche: {
-      ita: "Recensioni Bibliografiche",
-      eng: "Bibliographic Reviews",
-    },
     contatti: {
       ita: "Contatti",
       eng: "Contacts",
@@ -68,12 +60,6 @@ export const Navigation = function () {
                 </Nav.Link>
                 <Nav.Link href="/areaTest" className={styles.navbarText}>
                   {btnLabels.areaQuiz[currentLang]}
-                </Nav.Link>
-                <Nav.Link href="/articoli" className={styles.navbarText}>
-                  {btnLabels.articoli[currentLang]}
-                </Nav.Link>
-                <Nav.Link href="/recensioniBibliografiche" className={styles.navbarText}>
-                  {btnLabels.recensioniBibliografiche[currentLang]}
                 </Nav.Link>
                 <Nav.Link href="/contatti" className={styles.navbarText}>
                   {btnLabels.contatti[currentLang]}

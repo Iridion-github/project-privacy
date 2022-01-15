@@ -11,6 +11,7 @@ import { ReviewsLeftMenu } from "../components/reviews/ReviewsLeftMenu";
 import { removeDuplicatesById, includesAll } from "../utils/arrays";
 import { Loading } from "../components/layout/Loading";
 import { useAppContext } from "../context/contextLib";
+import { RightMenu } from "../components/home/RightMenu";
 
 function recensioniBibliografiche({ DBreviews, reviewTopics }) {
   const { currentLang, changeSiteLang } = useAppContext();
@@ -110,7 +111,9 @@ function recensioniBibliografiche({ DBreviews, reviewTopics }) {
               />
             )}
           </Col>
-          <Col md={3} className=""></Col>
+          <Col md={3} className="">
+            <RightMenu currentLang={currentLang} />
+          </Col>
         </Row>
       </main>
       {/* Footer */}

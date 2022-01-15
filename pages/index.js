@@ -53,7 +53,7 @@ function Home() {
           </Carousel>
         </div>
         {/* Homepage Content */}
-        <Row className="w-100 p-0 m-0">
+        <Row className="w-100 p-0 m-0 ">
           <Col md={{ span: 6, offset: 3 }} className="">
             <Container className="justify-content-center p-0 mb-5">
               <Row className="w-100 justify-content-center ml-0 mr-0">
