@@ -10,13 +10,6 @@ export const EmailForm = function (props) {
       PRIVACY STATEMENT and agree to having my personal details 
       processed using the methods indicated. `,
     },
-    {
-      ita: `Dichiaro di aver letto l'INFORMATIVA PRIVACY ed esprimo il consenso 
-      al trattamento dei dati per l'iscrizione alla newsletter GM Consulenze.`,
-      eng: `I hereby agree to be signed up to the GM Consultancy newletter 
-      and declare to have read, understood and 
-      accepted the privacy policy.`,
-    },
   ];
 
   const [isChecked, setIsChecked] = useState(false);
@@ -83,10 +76,6 @@ export const EmailForm = function (props) {
       <Form.Group controlId="formPrivacy" className="email-formgroup mb-3">
         <Form.Check suppressHydrationWarning type="checkbox" label={checkboxLabels[0][props.currentLang]} className="email-form-checkbox-label" onChange={toggleChecked} />
       </Form.Group>
-
-      {/* <Form.Group controlId="formNewsletter" className="email-formgroup">
-        <Form.Check suppressHydrationWarning type="checkbox" label={checkboxLabels[0][props.currentLang]} className="email-form-checkbox-label" />
-      </Form.Group> */}
 
       <Row className="px-3">
         <Button disabled={submitDisabled} suppressHydrationWarning block variant="info" type="submit">

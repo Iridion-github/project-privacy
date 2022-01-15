@@ -20,10 +20,19 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        console.log("BACKEND - req:", req);
+        const inputEmail = req.query.email;
+        const resultUsers = await User.find({ "email.registration": inputEmail });
+        if (resultUsers.length > 0) {
+          console.log("Trovato qualcosa:", resultUsers);
+          return res.status(201).json({ success: true, data: { canRegister: false, password: null } });
+        } else {
+          console.log("Email non usata da nessun user del db");
+          //todo: creare il sistema di generazione della password cryptata
+          const generatedEncryptedPassword = "passwordCrypataPeffinta";
+          return res.status(201).json({ success: true, data: { canRegister: true, password: generatedEncryptedPassword } });
+        }
         //const newUserData = { prova: "prova" };
         //const newUser = await User.create(newUserData);
-        return res.status(201).json({ success: true, data: { password: "password" } /*newUser*/ });
       } catch (err) {
         return res.status(400).json({ success: false, error: err });
       }
