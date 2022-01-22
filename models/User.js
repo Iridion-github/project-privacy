@@ -1,78 +1,82 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   anagraphics: {
     name: {
       type: String,
-      required: [true, 'name is required!'],
+      //required: [true, 'name is required!'],
+      required: false,
       unique: false,
-      trim: false
+      trim: false,
     },
     surname: {
       type: String,
-      required: [true, 'surname is required!'],
+      //required: [true, 'surname is required!'],
+      required: false,
       unique: false,
-      trim: false
+      trim: false,
     },
     phone: {
       registration: {
         type: String,
-        required: [true, 'registration phonenumber is required!'],
+        //required: [true, 'registration phonenumber is required!'],
+        required: false,
         unique: true,
-        trim: true
+        trim: true,
       },
       public: {
         type: String,
         required: false,
         unique: true,
-        trim: true
+        trim: true,
       },
     },
   },
   email: {
     registration: {
       type: String,
-      required: [true, 'registration email is required!'],
+      required: [true, "registration email is required!"],
       unique: true,
-      trim: true
+      trim: true,
     },
     public: {
       type: String,
       required: false,
       unique: true,
-      trim: true
+      trim: true,
     },
   },
   nickname: {
     type: String,
-    required: [true, 'nickname is required!'],
+    //required: [true, 'nickname is required!'],
+    required: false,
     unique: true,
-    trim: false
+    trim: false,
   },
   password: {
     type: String,
-    required: [true, 'password is required!'],
+    required: [true, "password is required!"],
     unique: true,
-    trim: false
+    trim: false,
   },
   role: {
     roleId: {
       type: String,
       required: false,
       unique: false,
-      trim: false
+      trim: false,
     },
     name: {
       type: String,
       required: false,
       unique: false,
-      trim: false
+      trim: false,
     },
     permissions: {
       type: String,
       required: false,
       unique: false,
-      trim: false
+      trim: false,
     },
   },
   payment_methods: {
@@ -80,46 +84,49 @@ const UserSchema = new mongoose.Schema({
       {
         cardName: {
           type: String,
-          required: [true, 'cardName is required!'],
+          //required: [true, 'cardName is required!'],
+          required: false,
           unique: false,
-          trim: false
+          trim: false,
         },
         cardType: {
           type: String,
-          required: [true, 'cardType is required!'],
+          //required: [true, 'cardType is required!'],
+          required: false,
           unique: false,
-          trim: false
+          trim: false,
         },
         cardNumber: {
           type: String,
-          required: [true, 'cardNumber is required!'],
+          //required: [true, "cardNumber is required!"],
+          required: false,
           unique: true,
-          trim: false
+          trim: false,
         },
         cardExpiration: {
           type: Date,
-          required: [true, 'cardExpiration is required!'],
+          //required: [true, "cardExpiration is required!"],
+          required: false,
           unique: false,
-          trim: false
+          trim: false,
         },
         cardSecretCode: {
           type: String,
-          required: [true, 'cardSecretCode is required!'],
+          //required: [true, "cardSecretCode is required!"],
+          required: false,
           unique: false,
-          trim: false
+          trim: false,
         },
         isDefault: {
           type: Boolean,
-          required: [true, 'isDefault is required!'],
+          //required: [true, "isDefault is required!"],
+          required: false,
           unique: false,
-          trim: false
+          trim: false,
         },
-      }
-    ]
-  }
+      },
+    ],
+  },
 });
-
-
-
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

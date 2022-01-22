@@ -21,15 +21,14 @@ export default async (req, res) => {
     case "POST":
       try {
         const inputEmail = req.query.email;
+        console.log("BACKEND - checkEmail is checking this email:", inputEmail);
         const resultUsers = await User.find({ "email.registration": inputEmail });
         if (resultUsers.length > 0) {
           console.log("Trovato qualcosa:", resultUsers);
-          return res.status(201).json({ success: true, data: { canRegister: false, password: null } });
+          return res.status(201).json({ success: true, data: { canRegister: false } });
         } else {
           console.log("Email non usata da nessun user del db");
-          //todo: creare il sistema di generazione della password cryptata
-          const generatedEncryptedPassword = "passwordCrypataPeffinta";
-          return res.status(201).json({ success: true, data: { canRegister: true, password: generatedEncryptedPassword } });
+          return res.status(201).json({ success: true, data: { canRegister: true } });
         }
         //const newUserData = { prova: "prova" };
         //const newUser = await User.create(newUserData);

@@ -1,5 +1,5 @@
 import { Row, Form, Button, Modal } from "react-bootstrap";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { Loading } from "../../components/layout/Loading";
 
 export const RegistrationForm = function (props) {
@@ -23,14 +23,38 @@ export const RegistrationForm = function (props) {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [validConfirmPassword, setValidConfirmPassword] = useState(false);
 
-  const checkAndSetEmail = useCallback(event => {
-    const em = String(event.target.value).toLowerCase();
-    setEmail(em);
-    var regex = /\S+@\S+\.\S+/;
-    const valid = regex.test(em);
-    setValidEmail(valid);
-  }, []);
+  const checkAndSetEmail = useCallback(
+    event => {
+      const em = String(event.target.value).toLowerCase();
+      console.log("setting email to:", event.target.value);
+      setEmail(em);
+      var regex = /\S+@\S+\.\S+/;
+      const valid = regex.test(em);
+      setValidEmail(valid);
+    },
+    [email, setEmail, validEmail, setValidEmail]
+  );
+
+  const handleChangePassword = useCallback(
+    event => {
+      setPassword(event.target.value);
+      setValidConfirmPassword(event.target.value === confirmPassword);
+      checkValidPassword(event.target.value);
+    },
+    [confirmPassword]
+  );
+
+  const handleChangeConfirmPassword = useCallback(
+    event => {
+      setConfirmPassword(event.target.value);
+      setValidConfirmPassword(event.target.value === password);
+    },
+    [password]
+  );
 
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
@@ -58,8 +82,7 @@ export const RegistrationForm = function (props) {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
       console.log("attemptRegistration - email:", email);
-      setLoading(true);
-      const resJson = await fetch(`http://localhost:3000/api/user/checkEmail?email=${email}`, {
+      const result = await fetch(`http://localhost:3000/api/user/checkEmail?email=${email}`, {
         method: "POST",
         headers: {
           key: "Access-Control-Allow-Origin",
@@ -68,24 +91,55 @@ export const RegistrationForm = function (props) {
       })
         .then(response => response.json())
         .then(async response => {
-          console.log("checkDbForEmail - backend response:", response);
-          if (response.data.canRegister && response.data.password) {
-            setPassword(response.data.password);
+          if (response.data.canRegister) {
             return true;
           } else {
             return false;
           }
         });
+      return result;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onClickSubmit = useCallback(() => {
+  const registerUser = async () => {
+    //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
+    try {
+      const result = await fetch(`http://localhost:3000/api/user/registerUser?email=${email}&password=${password}`, {
+        method: "POST",
+        headers: {
+          key: "Access-Control-Allow-Origin",
+          value: "*",
+        },
+      })
+        .then(response => response.json())
+        .then(async response => {
+          console.log("registerUser - response:", response);
+          if (response.success) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+      if (!!result) {
+        //modal di success
+        console.log("successfully registered");
+      } else {
+        //modal di error
+        console.log("error registering");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClickSubmit = useCallback(async () => {
     //inizia loading
     setLoading(true);
     //mandare dati al db
-    const canRegister = checkDbForEmail();
+    const canRegister = await checkDbForEmail({ email: email });
+    console.log("canRegister:", canRegister);
     setLoading(false);
     if (canRegister) {
       setIsOpenConfirmModal(true);
@@ -93,37 +147,53 @@ export const RegistrationForm = function (props) {
       setIsOpenErrorModal(true);
     }
     //il db deve controllare che la mail non sia già presente
-    //se è tutto ok genera la password e la manda nella response
     //se la response è positiva aprire modal di conferma
     //nella modal di conferma ci sarà il vero submitBtn che manderà la mail contenente i dati di accesso all'user, e la notifica della registrazione avvenuto al gestore del sito
   }, [email]);
 
-  const onConfirmRegistration = event => {
+  const onConfirmRegistration = async event => {
     //event.preventDefault();
-    console.log("onConfirmRegistration - password:", onConfirmRegistration);
     console.log("confirmed registration!");
+    await registerUser();
     /*[Checkpoint] Assicurarsi che prima di fare redirect esegua tutto il codice seguente!*/
-    //Qui bisogna di nuovo contattare il db e far si che venga creato un nuovo user con la mail di registrazione.
   };
 
+  const checkValidPassword = useCallback(value => {
+    let err = false;
+    if (value.length < 1) {
+      setValidPassword(false);
+      err = true;
+      return !err;
+    }
+    const pw = String(value).toLowerCase();
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    if (regex.test(pw)) {
+      err = false;
+    } else {
+      err = true;
+    }
+    setValidPassword(!err);
+    return !err;
+  }, []);
+
   useEffect(() => {
-    if (validEmail && isChecked) {
+    if (validEmail && isChecked && validPassword && validConfirmPassword) {
       setSubmitDisabled(false);
     } else {
       setSubmitDisabled(true);
     }
-  }, [validEmail, isChecked, setSubmitDisabled]);
+  }, [validEmail, isChecked, validPassword, validConfirmPassword]);
 
   return (
     <>
       {loading && <Loading />}
       <Form id="registration-form" action="https://formsubmit.co/alex.mastro.1989@gmail.com" method="post" className="bg-standard-blue blue-border border-radius p-3 email-form">
         {/* inizio Settings di submitForm.com */}
-        <Form.Control type="hidden" name="_captcha" value="false" />
-        {/* <Form.Control type="hidden" name="_next" value="http://localhost:3000/registrazione" /> */}
+        <Form.Control type="hidden" name="_captcha" value="true" />
+        <Form.Control type="hidden" name="_next" value="http://localhost:3000/registrazioneCompletata" />
         <Form.Control type="hidden" name="_subject" value="Un utente si è registrato sul sito" />
         <Form.Control type="text" name="_honey" style={{ display: "none" }} />
-        <Form.Control type="hidden" name="_autoresponse" value={`Conferma di avvenuta registrazione. Questi sono i tuoi dati di accesso. Email: ${email}, Password: ${password}.`} />
+        <Form.Control type="hidden" name="_autoresponse" value="Conferma di avvenuta registrazione a GmConsulting" />
         <Form.Control type="hidden" name="_template" value="table" />
         {/* fine Settings di submitForm.com */}
 
@@ -142,7 +212,7 @@ export const RegistrationForm = function (props) {
           </Modal.Footer>
         </Modal>
 
-        <Form.Group controlId="formEmail mb-0" className="email-formgroup">
+        <Form.Group controlId="formEmail mb-0" className="w-100">
           <Form.Label suppressHydrationWarning>{props.currentLang === "ita" ? "Indirizzo Email" : "Email address"}</Form.Label>
           <Form.Control type="email" placeholder="@" name="email" value={email} onChange={checkAndSetEmail} />
           <Form.Text suppressHydrationWarning className="text-dark">
@@ -150,7 +220,27 @@ export const RegistrationForm = function (props) {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="formPrivacy" className="email-formgroup mb-3">
+        <Form.Group controlId="formEmail mb-0" className="w-100">
+          <Form.Label suppressHydrationWarning>{props.currentLang === "ita" ? "Password" : "Password"}</Form.Label>
+          <Form.Control type="password" value={password} onChange={handleChangePassword} />
+          <Form.Text suppressHydrationWarning className={password.length > 0 && !validPassword ? "text-danger" : "text-dark"}>
+            {props.currentLang === "ita" ? (
+              <i>La password: deve essere lunga almeno 8 caratteri; deve contenere almeno 1 lettera, 1 numero ed 1 carattere speciale.</i>
+            ) : (
+              <i>Your password: must be at least 8 characters long, must include at least 1 letter, 1 number ed 1 special character </i>
+            )}
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formEmail mb-0" className="w-100">
+          <Form.Label suppressHydrationWarning>{props.currentLang === "ita" ? "Conferma password" : "Confirm password"}</Form.Label>
+          <Form.Control type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} />
+          <Form.Text suppressHydrationWarning className={password.length > 0 && !validConfirmPassword ? "text-danger" : "text-dark"}>
+            {props.currentLang === "ita" ? <i>Il valore dei due campi deve coincidere.</i> : <i>Values of the two fields must be the same.</i>}
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formPrivacy" className="w-100 mb-3">
           <Form.Check suppressHydrationWarning type="checkbox" label={checkboxLabels[0][props.currentLang]} className="email-form-checkbox-label" onChange={toggleChecked} />
         </Form.Group>
 
