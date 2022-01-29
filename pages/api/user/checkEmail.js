@@ -21,7 +21,6 @@ export default async (req, res) => {
     case "POST":
       try {
         const inputEmail = req.query.email;
-        console.log("BACKEND - checkEmail is checking this email:", inputEmail);
         const resultUsers = await User.find({ "email.registration": inputEmail });
         if (resultUsers.length > 0) {
           console.log("Trovato qualcosa:", resultUsers);

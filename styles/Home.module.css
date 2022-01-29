@@ -327,14 +327,43 @@
   background-color: yellow !important;
 }
 
+.bg-grey {
+  border: 1px solid #343a40;
+  background-color: #343a40 !important;
+}
+
+.text-red {
+  color: red !important;
+}
+
+.text-blue {
+  color: blue !important;
+}
+
+.text-green {
+  color: green !important;
+}
+
+.text-yellow {
+  color: yellow !important;
+}
+
+.text-grey {
+  color: #343a40 !important;
+}
+
+.text-MG-blue {
+  color: #17a2b8 !important;
+}
+
+.text-MG-dark-grey {
+  color: #343a40 !important;
+}
+
 .footerLink {
   font-size: 13px;
   margin-right: 40px;
   font-weight: 600;
-}
-
-.textColorGrey {
-  color: #343a40 !important;
 }
 
 .facebookLogo {

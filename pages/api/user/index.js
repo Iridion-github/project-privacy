@@ -20,7 +20,7 @@ export default async (req, res) => {
 
     case "POST":
       try {
-        console.log("BACKEND - req:", req);
+        //console.log("BACKEND - req:", req);
         //const newUserData = { prova: "prova" };
         //const newUser = await User.create(newUserData);
         return res.status(201).json({ success: true, data: { password: "password" } /*newUser*/ });

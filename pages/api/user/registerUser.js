@@ -9,7 +9,7 @@ export default async (req, res) => {
     const userEmail = req.query.email;
     const password = req.query.password;
     const saltRounds = 10;
-    console.log(`BACKEND - REGISTERING USER WHOSE MAIL IS: ${userEmail} AND PASS IS: ${password}`);
+    console.log(`REGISTERING USER WHOSE MAIL IS: ${userEmail} AND PASS IS: ${password}`);
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -26,7 +26,7 @@ export default async (req, res) => {
       return res.status(400).json({ success: false, error: err });
     }
   } catch (err) {
-    console.log("BACKEND - registerUser error:", err);
+    console.log("registerUser error:", err);
     return res.status(400).json({ success: false, error: err });
   }
 };

@@ -1,12 +1,12 @@
 import styles from "../../styles/Home.module.css";
 import { Row, Col, Navbar, Nav, Image, Button } from "react-bootstrap";
 import { useAppContext } from "../../context/contextLib";
-import { LogInBtn } from "../buttons/LogInBtn";
 import { LogOutBtn } from "../buttons/LogOutBtn";
 import { GoRegisterBtn } from "../buttons/GoRegisterBtn";
+import { GoLoginBtn } from "../buttons/GoLoginBtn";
 
 export const Navigation = function () {
-  const { currentLang, changeSiteLang, loggedUser, logInUser, logOutUser } = useAppContext();
+  const { currentLang, changeSiteLang, loggedUser, logOutUser } = useAppContext();
 
   const btnLabels = {
     chiSiamo: {
@@ -33,7 +33,13 @@ export const Navigation = function () {
       ita: "Registrazione",
       eng: "Register",
     },
+    login: {
+      ita: "Login",
+      eng: "Login",
+    },
   };
+
+  const isLoggedIn = loggedUser && loggedUser.email && loggedUser.email.registration;
 
   return (
     <>
@@ -80,10 +86,32 @@ export const Navigation = function () {
             </Navbar.Collapse>
           </Navbar>
         </Col>
-        <Col md={{ span: 1 }} className="h-100 ml-0 mr-0">
-          <Row className="m-0 w-100 bg-standard-blue mt-1 mb-1 justify-content-end">{!loggedUser && <LogInBtn onClick={logInUser} />}</Row>
-          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">{loggedUser && <LogOutBtn onClick={logOutUser} />}</Row>
-          <Row className="m-0 w-100 bg-standard-blue mb-1 justify-content-end">{!loggedUser && <GoRegisterBtn href="/registrazione" text={btnLabels.registrazione[currentLang]} />}</Row>
+        <Col md={{ span: 1 }} className="h-100 ml-0 mr-0 align-items-center bg-standard-blue">
+          {isLoggedIn && (
+            <Row className="m-0 w-100 h-100 align-items-center">
+              <Row className="m-0 w-100 mb-1 justify-content-end">
+                <span className="text-MG-dark-grey" style={{ fontSize: 12, marginRight: "5px" }}>
+                  {currentLang === "ita" ? "Autenticato come: " : "Authenticated as: "}
+                </span>
+                <span className="text-MG-dark-grey" style={{ fontSize: 14, fontWeight: 600 }}>
+                  {loggedUser.nickname ? loggedUser.nickname : loggedUser.email.registration}
+                </span>
+              </Row>
+              <Row className="m-0 w-100 mb-1 justify-content-end">
+                <LogOutBtn onClick={logOutUser} />
+              </Row>
+            </Row>
+          )}
+          {!isLoggedIn && (
+            <Row className="m-0 w-100 h-100 align-items-center">
+              <Row className="m-0 w-100 mt-1 mb-1 justify-content-end">
+                <GoLoginBtn href="/login" text={btnLabels.login[currentLang]} />
+              </Row>
+              <Row className="m-0 w-100 mb-1 justify-content-end">
+                <GoRegisterBtn href="/registrazione" text={btnLabels.registrazione[currentLang]} />
+              </Row>
+            </Row>
+          )}
         </Col>
       </Row>
     </>

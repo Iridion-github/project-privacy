@@ -1,6 +1,5 @@
 import { Row, Form, Button, Modal } from "react-bootstrap";
-import { useState, useCallback, useEffect, useMemo } from "react";
-import { Loading } from "../../components/layout/Loading";
+import { useState, useCallback, useEffect } from "react";
 
 export const RegistrationForm = function (props) {
   const checkboxLabels = [
@@ -13,8 +12,21 @@ export const RegistrationForm = function (props) {
     },
   ];
 
+  const defaultErrorLabel = [
+    {
+      ita: `È avvenuto un errore inaspettato, siamo spiacenti.`,
+      eng: `An unexpected error occurred, we are sorry.`,
+    },
+  ];
+
+  const errorLabels = {
+    alreadyRegisteredEmail: {
+      ita: "Questa email è già utilizzata da un utente registrato",
+      eng: "This email is already in use by another user",
+    },
+  };
+
   const [isChecked, setIsChecked] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const toggleChecked = useCallback(() => {
     setIsChecked(!isChecked);
@@ -26,11 +38,11 @@ export const RegistrationForm = function (props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [validConfirmPassword, setValidConfirmPassword] = useState(false);
+  const [currentErrorLabel, setCurrentErrorLabel] = useState("");
 
   const checkAndSetEmail = useCallback(
     event => {
       const em = String(event.target.value).toLowerCase();
-      console.log("setting email to:", event.target.value);
       setEmail(em);
       var regex = /\S+@\S+\.\S+/;
       const valid = regex.test(em);
@@ -75,13 +87,13 @@ export const RegistrationForm = function (props) {
   }, []);
 
   const onCloseErrorModal = useCallback(() => {
+    setCurrentErrorLabel("");
     setIsOpenErrorModal(false);
   }, []);
 
   const checkDbForEmail = async () => {
     //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
     try {
-      console.log("attemptRegistration - email:", email);
       const result = await fetch(`http://localhost:3000/api/user/checkEmail?email=${email}`, {
         method: "POST",
         headers: {
@@ -94,12 +106,13 @@ export const RegistrationForm = function (props) {
           if (response.data.canRegister) {
             return true;
           } else {
+            setCurrentErrorLabel(errorLabels.alreadyRegisteredEmail[props.currentLang]);
             return false;
           }
         });
       return result;
     } catch (error) {
-      console.log(error);
+      onOpenErrorModal();
     }
   };
 
@@ -115,19 +128,14 @@ export const RegistrationForm = function (props) {
       })
         .then(response => response.json())
         .then(async response => {
-          console.log("registerUser - response:", response);
           if (response.success) {
             return true;
           } else {
             return false;
           }
         });
-      if (!!result) {
-        //modal di success
-        console.log("successfully registered");
-      } else {
-        //modal di error
-        console.log("error registering");
+      if (!result) {
+        onOpenErrorModal();
       }
     } catch (error) {
       console.log(error);
@@ -135,27 +143,18 @@ export const RegistrationForm = function (props) {
   };
 
   const onClickSubmit = useCallback(async () => {
-    //inizia loading
-    setLoading(true);
-    //mandare dati al db
+    props.setLoading(true);
     const canRegister = await checkDbForEmail({ email: email });
-    console.log("canRegister:", canRegister);
-    setLoading(false);
+    props.setLoading(false);
     if (canRegister) {
       setIsOpenConfirmModal(true);
     } else {
       setIsOpenErrorModal(true);
     }
-    //il db deve controllare che la mail non sia già presente
-    //se la response è positiva aprire modal di conferma
-    //nella modal di conferma ci sarà il vero submitBtn che manderà la mail contenente i dati di accesso all'user, e la notifica della registrazione avvenuto al gestore del sito
   }, [email]);
 
   const onConfirmRegistration = async event => {
-    //event.preventDefault();
-    console.log("confirmed registration!");
     await registerUser();
-    /*[Checkpoint] Assicurarsi che prima di fare redirect esegua tutto il codice seguente!*/
   };
 
   const checkValidPassword = useCallback(value => {
@@ -186,7 +185,6 @@ export const RegistrationForm = function (props) {
 
   return (
     <>
-      {loading && <Loading />}
       <Form id="registration-form" action="https://formsubmit.co/alex.mastro.1989@gmail.com" method="post" className="bg-standard-blue blue-border border-radius p-3 email-form">
         {/* inizio Settings di submitForm.com */}
         <Form.Control type="hidden" name="_captcha" value="true" />
@@ -197,6 +195,7 @@ export const RegistrationForm = function (props) {
         <Form.Control type="hidden" name="_template" value="table" />
         {/* fine Settings di submitForm.com */}
 
+        {/* Confirmation modal */}
         <Modal show={isOpenConfirmModal} onHide={onCloseConfirmModal} backdrop="static" keyboard={false}>
           <Modal.Header closeButton>
             <Modal.Title>{props.currentLang === "ita" ? "Conferma registrazione" : "Confirm registration"}</Modal.Title>
@@ -208,6 +207,19 @@ export const RegistrationForm = function (props) {
             </Button>
             <Button form="registration-form" onClick={onConfirmRegistration} suppressHydrationWarning block variant="success" type="submit" style={{ flex: 1 }}>
               {props.currentLang === "ita" ? "Conferma registrazione" : "Confirm registration"}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Error modal */}
+        <Modal show={isOpenErrorModal} onHide={onCloseErrorModal} backdrop="static" keyboard={false}>
+          <Modal.Header>
+            <Modal.Title className="text-red">{props.currentLang === "ita" ? "Errore" : "Error"}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{currentErrorLabel ? currentErrorLabel : defaultErrorLabel[props.currentLang]}</Modal.Body>
+          <Modal.Footer>
+            <Button onClick={onCloseErrorModal} suppressHydrationWarning block variant="info" type="" style={{ flex: 1 }}>
+              {props.currentLang === "ita" ? "Chiudi" : "Close"}
             </Button>
           </Modal.Footer>
         </Modal>

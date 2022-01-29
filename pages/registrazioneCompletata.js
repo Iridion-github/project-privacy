@@ -1,13 +1,18 @@
 import styles from "../styles/Home.module.css";
-import { Row, Col, Card, Container } from "react-bootstrap";
+import { Row, Col, Card, Container, Button } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
-import { RegistrationForm } from "../components/form/RegistrationForm";
 import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 const registrazioneCompletata = function (props) {
   const { currentLang } = useAppContext();
+  const router = useRouter();
+  const handleNavigateToTests = useCallback(() => {
+    router.push("/areaTest");
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -21,11 +26,20 @@ const registrazioneCompletata = function (props) {
             <Card.Img variant="top" src="registrazione.png" />
             <Card.Body>
               <Card.Title className="text-center">
-                <h2 className="text-success text-center">{currentLang === "ita" ? "Registrazione Completata" : "User Registered"}</h2>
+                <h2 className="text-success text-center">
+                  <i className="far fa-check-circle mr-2"></i> {currentLang === "ita" ? "Registrazione Completata" : "User Registered"}
+                </h2>
               </Card.Title>
-              <Row className="justify-content-center">
+              <Row className="justify-content-center mb-4">
                 <Col md={{ span: 12 }} className="m-0 p-0">
-                  <h5 className="text-center">Registrazione avvenuta con successo, puoi procedere al login</h5>
+                  <h5 className="text-center">{currentLang === "ita" ? "Registrazione avvenuta con successo, puoi procedere al login" : "Succesfully registered, you may proceed to login"}</h5>
+                </Col>
+              </Row>
+              <Row className="justify-content-center mb-3">
+                <Col md={{ span: 12 }} className="m-0 p-0 text-center">
+                  <Button variant="info" onClick={handleNavigateToTests}>
+                    {currentLang === "ita" ? "Vai ai Test" : "Go to Tests"}
+                  </Button>
                 </Col>
               </Row>
             </Card.Body>
