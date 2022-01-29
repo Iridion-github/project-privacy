@@ -7,7 +7,7 @@
 - [Tests] Idealmente gli unici test fissi sono quelli gratis. Quelli premium devono reperire randomicamente 5 domande da una listona suddivisa per argomento (al momento nel db praticamente si tratta delle questions dei test premium). Salvare nella storage l'id delle domande affrontate per evitare di riproporle la prossima volta che lo stesso user affronta lo stesso test.
 
 ## [Checkpoint]
-- [Registration(22/01/2022)] Manca l'autologin appena finita la registrazione. 
+- [Registration(22/01/2022)] Nel DB al momento per qualche motivo non è consentito esistano 2 password identiche, evitare che ciò sia proibito. Cominciare con la categorizzazione del comportamento dell'Area Test a seconda che l'user sia loggato o meno. 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 

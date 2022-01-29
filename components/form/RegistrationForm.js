@@ -1,5 +1,6 @@
 import { Row, Form, Button, Modal } from "react-bootstrap";
 import { useState, useCallback, useEffect } from "react";
+import { useAppContext } from "../../context/contextLib";
 
 export const RegistrationForm = function (props) {
   const checkboxLabels = [
@@ -25,6 +26,8 @@ export const RegistrationForm = function (props) {
       eng: "This email is already in use by another user",
     },
   };
+
+  const { logInUser } = useAppContext();
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -129,14 +132,14 @@ export const RegistrationForm = function (props) {
         .then(response => response.json())
         .then(async response => {
           if (response.success) {
+            const newUser = response.data.newUser;
+            await logInUser(newUser);
             return true;
           } else {
+            onOpenErrorModal();
             return false;
           }
         });
-      if (!result) {
-        onOpenErrorModal();
-      }
     } catch (error) {
       console.log(error);
     }
@@ -154,6 +157,7 @@ export const RegistrationForm = function (props) {
   }, [email]);
 
   const onConfirmRegistration = async event => {
+    //event.preventDefault(); submitForm.com non funziona col preventDefault
     await registerUser();
   };
 

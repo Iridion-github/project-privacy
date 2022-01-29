@@ -45,7 +45,7 @@ export const LoginForm = function (props) {
     setIsOpenErrorModal(false);
   }, []);
 
-  const onAutoLogin = async user => {
+  const onLogin = async user => {
     logInUser(user);
     router.push("/");
   };
@@ -62,10 +62,8 @@ export const LoginForm = function (props) {
       })
         .then(response => response.json())
         .then(async response => {
-          console.log("login - response:", response);
           if (response.success) {
-            console.log("login success - loggedUser(response.data.user) :", response.data.user);
-            onAutoLogin(response.data.user);
+            onLogin(response.data.user);
             return true;
           } else {
             const errorLabel = errorLabels[response.data.error] ? errorLabels[response.data.error] : defaultErrorLabel;

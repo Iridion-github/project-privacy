@@ -20,7 +20,7 @@ export default async (req, res) => {
         password: hashedPassword,
       };
       User.create(newUserData);
-      return res.status(200).json({ success: true });
+      return res.status(200).json({ success: true, data: { newUser: newUserData } });
     } else {
       console.log(`Error generating hashed password for user whose email is:${userEmail}`);
       return res.status(400).json({ success: false, error: err });
