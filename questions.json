@@ -1,0 +1,3392 @@
+[
+  {
+    "text": "La norma in vigore dal 25 maggio 2018, è identificata come:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "D.Lgs. 81/2008",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Regolamento N°679/2016",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "D. Lgs. 196/2003",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "D.lgs N°675/96",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "La nuova normativa europea in materia di protezione dei dati si applica a:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Solo alle aziende italiane che trattano dati di cittadini europei",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Anche alle aziende extraeuropee che propongono prodotti e servizi a cittadini europei",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Solo alle aziende europee che trattano dati di aziende europee",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Solo alle aziende europee che trattano dati di cittadini europei e cittadini non europei",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "La normativa europea in ambito di protezione dei dati si applica a:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Anche ai dati per l’esercizio di attività a carattere personale o domestico",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "A trattamenti interamente o parzialmente automatizzati di dati personali e al trattamento non automatizzato di dati personali contenuti in un archivio",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "A trattamenti interamente o parzialmente automatizzati di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Solo al trattamento automatizzato dei dati",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Definizione di “dato personale” (indicare più risposte esatte):",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Un’immagine o un video di una persona",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Un audio di una persona",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "I dati trattati da un Titolare appartenenti ad interessati non identificabili dal Titolare, ma identificabili solo da altri soggetti.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "L’identificativo on line (IP) di un pc",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "I dati del GPS di un guidatore di taxi",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Il nickname in un forum",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "I dati di una persona identificabile in modo indiretto",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "I dati di valutazione di un individuo stilati da un’altra persona",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Tutti i precedenti",
+        "selected": false,
+        "value": true
+      }
+    ]
+  },
+  {
+    "text": "Viene identificato come «dato sensibile»:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Il numero di cellulare",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Lo stipendio percepito",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "La propria inclinazione sessuale",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Tutti quelli sopra citati",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Tra i seguenti, sono inoltre da considerarsi «dati sensibili»:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Il nome ed il cognome da sposato/a",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Il numero di telefono fisso",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "La propria password",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Nessuna di quelle sopra",
+        "selected": false,
+        "value": true
+      }
+    ]
+  },
+  {
+    "text": "Cosa s’intende per pseudonimizzazione?",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Il processo con cui i dati trattati non possano più essere attribuiti a un interessato specifico senza l'utilizzo di informazioni aggiuntive, a condizione che tali informazioni aggiuntive siano conservate separatamente e soggette a misure tecniche e organizzative.",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Il processo con cui i dati trattati non possano più essere attribuiti a un interessato specifico perché sono resi anonimi attraverso delle particolari tecniche informatiche sicure che impediscono la ricostruzione dell’archivio di base.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Il processo con cui i dati trattati non possano più essere attribuiti a un interessato specifico perché sono resi anonimi attraverso delle particolari tecniche informatiche o procedure organizzative.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Nessuna delle precedenti.",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Indicare quale dei seguenti non è da considerare un “trattamento di dati”?",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "L’adattamento di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "La consultazione di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Il raffronto di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "L’interconnessione di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "L’estrazione di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "La distruzione di dati personali",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Nessuna delle precedenti",
+        "selected": false,
+        "value": true
+      }
+    ]
+  },
+  {
+    "text": "Una volta data ottenuto in maniera idonea ed adeguata il consenso al trattamento dei suoi dati:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Posso utilizzare i dati dell’interessato anche per altre finalità.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Posso utilizzare i dati dell’interessato solo per finalità simili a quelle indicate nell’informativa anche se nella stessa non sono esplicitamente indicate. Non necessito di un nuovo consenso.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Non posso utilizzare i dati dell’interessato per altre finalità, nemmeno se ottengo un nuovo consenso (per il principio della Privacy by design previsto dal Regolamento 2016/679)",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Posso utilizzare i dati dell’interessato, senza ulteriore consenso, solo per finalità di archiviazione nel pubblico interesse o per finalità statistiche o di ricerca scientifica.",
+        "selected": false,
+        "value": true
+      }
+    ]
+  },
+  {
+    "text": "La minimizzazione prevede che:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "I dati cartacei siano conservati in tanti archivi di piccole dimensioni (dimensioni minime) piuttosto che in un unico archivio generale che se violato determina la perdita di tutti i dati.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Di evitare che vi sia l’identificabilità dell’interessato nel caso in cui il trattamento non lo richieda raccogliendo solo quei dati che sono strettamente necessari al trattamento.",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Comunicare i dati personali trattati a poche persone (“al minimo dei lavoratori necessari per l’esecuzione del trattamento”) così da diminuire la probabilità del rischio di diffusione dei dati.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Permettere l’accesso ai dati digitali a pochi account con il massimo dei privilegi.",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "I dati vanno conservati:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Solo per il tempo strettamente necessario per le finalità del trattamento.",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Al massimo per 10 anni, poi è necessario un nuovo consenso esplicito",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "I dati personali senza limiti, i dati sensibili al massimo per 5 anni",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Al massimo per 5 anni, poi è necessario un nuovo consenso esplicito",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Il Titolare del trattamento è:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Il soggetto che determina finalità e mezzi di trattamento ed il profilo della sicurezza",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Il soggetto che determina le finalità del trattamento",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Il soggetto che raccoglie i dati dell’interessato presso l’interessato o il altro modo",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "D. Il soggetto che determina i mezzi del trattamento e le misure di sicurezza",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Chi è, secondo il Regolamento, il «responsabile» al trattamento dei dati:. Il Responsabile del trattamento può nominare:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Il dipendente, o tirocinante o volontario, dell’ente che tratta i dati ed è responsabile di quello che succede ai dati stessi.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Sempre e solo il Rappresentante Legale dell’Ente, responsabile delle misure di sicurezza.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Una persona fisica o una persona giuridica a cui spettano le decisioni in ordine alle finalità, alle modalità e agli strumenti utilizzati, ivi compreso il profilo della sicurezza",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Una persona fisica o una persona giuridica preposto dal titolare al trattamento dei dati.",
+        "selected": false,
+        "value": true
+      }
+    ]
+  },
+  {
+    "text": "Il Responsabile del trattamento può nominare:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "altri responsabili in modo indipendente a patto che sia formalizzato per iscritto",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "altri Responsabili in forza di un’autorizzazione del Titolare ma deve sempre comunicare al Titolare i nominativi dei subresponsabili",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "altri Responsabili solo se autorizzato in modo specifico, per ogni sub responsabile, dal Titolare del trattamento",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "altri Responsabili definendo finalità diverse da quelle indicate dal Titolare",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "Il Data Protection Officer o DPO o Responsabile della Protezione dei dati deve:",
+    "relatedTests": [
+      "600af117e4632f2a44d061a1"
+    ],
+    "answers": [
+      {
+        "text": "Effettuare delle visite ispettive, su mandato del Garante della Privacy, per verificare come avvengono i trattamenti dei dati.",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "Informare e fornire consulenza al Titolare del trattamento e sorvegliare sull’osservanza del Regolamento da parte del Titolare",
+        "selected": false,
+        "value": true
+      },
+      {
+        "text": "Implementare le misure informatiche richieste dal Titolare per garantire la sicurezza dei sistemi informativi",
+        "selected": false,
+        "value": false
+      },
+      {
+        "text": "D. Gestire i dati che riceve dal Titolare e implementare le misure di sicurezza richieste dallo stesso, perseguendo le finalità definite dal Titolare e scegliendo i mezzi per perseguirle.",
+        "selected": false,
+        "value": false
+      }
+    ]
+  },
+  {
+    "text": "I soggetti pubblici possono diffondere dati personali per finalità di trasparenza: ",
+    "relatedTests": [
+      "609ac652a705f1902c9314af"
+    ],
+    "answers": [
+      {
+        "text": "Solo se è previsto con legge",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Solo se è previsto per legge o regolamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Con regolamento pubblicato della Gazzetta Ufficiale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Senza alcuna necessità di intervento normativo purchè si tratti di un ente pubblico economico",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "In tema di trasparenza la PA deve rispettare: ",
+    "relatedTests": [
+      "609ac652a705f1902c9314af"
+    ],
+    "answers": [
+      {
+        "text": "Il principio di pertinenza",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Il principio dell’accountability",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il diritto di portabilità",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Gli obblighi di comunicazione al Garante",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La pubblicazione di dati giudiziari o sensibili da parte della PA: ",
+    "relatedTests": [
+      "609ac652a705f1902c9314af"
+    ],
+    "answers": [
+      {
+        "text": "È possibile solo se è indispensabile per la finalità di rilevante interesse pubblico",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non è possibile se non con l’autorizzazione del PM competente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È possibile solo se i dati vengono indicizzati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È possibile ma devono essere rintracciabili per chi li cerca attraverso un motore di ricerca",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Le informazioni pubblicate dalla PA: ",
+    "relatedTests": [
+      "609ac652a705f1902c9314af"
+    ],
+    "answers": [
+      {
+        "text": "Devono riportare dati esatti e aggiornati",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Devono essere oscurati dopo 10 anni",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Devono essere eliminati in ogni caso dopo 3 anni",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Non possono essere oscurati prima di 5 anni anche se è cessata la finalità del trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "I componenti di organi di indirizzo politico: ",
+    "relatedTests": [
+      "609ac652a705f1902c9314af"
+    ],
+    "answers": [
+      {
+        "text": "Sono obbligati a pubblicare i dati della dichiarazione dei redditi dei loro familiari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Possono pubblicare i dati della dichiarazione dei redditi dei loro familiari solo previo consenso degli stessi",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non possono pubblicare i dati della loro dichiarazione dei redditi se non hanno il consenso dei loro familiari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Non sono obbligati a dichiarare i dati della loro dichiarazione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La responsabilità delle persone giuridiche ex Legge 231/01:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "È aggiuntiva rispetto alla responsabilità individuale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "È prevista in caso di violazioni penali alla protezione dei dati personali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Rappresenta una violazione accessoria alla tutela dei dati personali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si riferisce ai soli reati relativi alla tutela della sicurezza del lavoro",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il whistleblower:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Può essere solo un dipendente pubblico",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È colui che segnala al proprio superiore gerarchico la sussistenza di reati informatici che violano la protezione dei dati personali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È un dipendente privato o pubblico la cui identità, a seguito di una segnalazione di illeciti corruttivi, è coperta da riservatezza",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "È il dirigente di quelle persone giuridiche che impiantano modelli organizzativi di gestione e controllo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La cd “responsabilità penale degli enti” ex D.Lgs. 231/01:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Si applica anche agli enti pubblici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Prende in considerazione solo le associazioni e società con personalità giuridica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si riferisce ai reati commessi nel suo interesse",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Si applica anche agli enti pubblici non economici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’ente non risponde:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Se dimostra di aver adottato un idoneo modello di organizzazione e gestione idoneo a prevenire reati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Se dimostra di aver attuato un idoneo modello di organizzazione e gestione idoneo a prevenire reati",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Se dimostra di aver attribuito almeno formalmente gli incarichi di controllo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Se l’organismo di controllo a pianificare e programmare la formazione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "I ccdd “reati presupposto”:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Sono riferiti anche ai reati relativi alla protezione dei dati personali ex codice privacy",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si riferiscono anche ai reati informatici",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Si riferiscono solo ai ccdd reati societari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si riferiscono solo ai reati relativi alla sicurezza del lavoro",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La responsabilità dell’ente:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Sussiste solo quando l’autore del reato è stato identificato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sussiste anche quando l’autore del reato non è imputabile",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Sussiste esclusivamente quando l’autore si trova all’estero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Anche quando il procedimento penale è stato archiviato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La normativa italiana sul whistleblower:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Tutela la riservatezza del dipendente pubblico che segnala illeciti",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Disciplina i casi di incompatibilità ambientale dei dipendenti pubblici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Attribuisce poteri sanzionatori specifici al Ministro del Lavoro",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Consente alla Corte dei Conti di dichiarare l’illegittimità dell’eventuale licenziamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’eventuale adozione di misure discriminatorie verso il dipendente segnalante:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Può determinare l’intervento della Corte dei Conti in caso di mancata adozione di un modello di organizzazione e gestione da parte di un’impresa privata",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Può determinare l’irrogazione di sanzioni dell’ANAC solo in caso di dipendenti pubblici",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Può determinare l’irrogazione di sanzioni dell’ANAC sia in caso di dipendenti che privati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Assumono rilevanza solo se il dipendente viene licenziato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La cd “responsabilità penale degli enti” ex D.Lgs. 231/01:",
+    "relatedTests": [
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "Determina l’irrogazione di sanzioni penali nei confronti di coloro che hanno la direzione dell’ente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’irrogazione di sanzioni verso l’ente e verso coloro che hanno la direzione dell’ente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Determina l’irrogazione di sanzioni pecuniarie",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Determina l’irrogazione anche di sanzioni interdittive",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La non osservanza di una prescrizione contenuta in un codice di condotta:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Determina l’irrogazione di una sanzione amministrative ai sensi dell’art.166, 2° comma del codice privacy",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce presupposto per l’irrogazione di una sanzione amministrativa ai sensi dell’art.83, 5 comma del Regolamento 679/16",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce elemento da prendere in considerazione per valutare l’entità della sanzione amministrativa da irrogare",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Attribuisce all’organo di controllo il potere attivare poteri consultivi circa i trasferimenti di dati verso paesi terzi ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il D.Leg. 101/18 nel coordinare la normativa nazionale con quella comunitaria:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Ha eliminato le autorizzazioni generali incompatibili con il Regolamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Ha inserito l’istituto del data breach in tema di comunicazioni elettroniche",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Ha introdotto il regime delle autorizzazioni preventive per i dati particolari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Ha reso obbligatorio il consenso per il trattamento dei dati sensibili realizzati da giornalisti o pubblicisti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il controllo a distanza dei lavoratori con l’utilizzo di apparati di video-sorveglianza:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "È sanzionato dall’art. 83, 5 comma del Regolamento 679/16",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È sanzionato dall’art.166 del Codice privacy",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È irrogabile in mancanza di accordo sindacale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce un illecito penale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il trattamento illecito in tema di dati particolari:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Determina una violazione penale se non si è proceduto alla nomina del Responsabile della Protezione dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce un illecito amministrativo se non si è proceduto a dare comunicazione agli interessati del data breach ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce un illecito amministrativo se non si è proceduto ad osservare le prescrizioni del codice di condotta ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce un illecito amministrativo sanzionato dall’art. 83, 5 Parag. del GDPR  ",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Le Regole Deontologiche sono:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Approvate dal Garante;",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Approvate dall’ente di certificazione Accredia",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Elementi di giudizio per la quantificazione della sanzione amministrativa ex art.83, 4 Parag.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Approvate con Decreto Ministeriale del Ministro della Giustizia",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il reato di trattamento illecito ex art.167, 1 c., del Codice privacy:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Si estingue con il pagamento della sanzione amministrativa",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Concorre con un eventuale più grave reato ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si assorbe nel più grave reato concorrente",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Determina un incremento di pena del reato concorrente più grave",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La violazione di differenti prescrizioni/obblighi del GDPR rispetto allo stesso trattamento:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Determina l’irrogazione di una sanzione amministrativa per ciascuna violazione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Non consente di irrogare un ammonimento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Determina l’irrogazione della sanzione per la violazione più grave",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Determina l’irrogazione della sanzione aumentata fino al triplo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il trattamento per finalità giornalistiche:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Richiede sempre il consenso dell’interessato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si può realizzare anche senza consenso purchè nel rispetto delle regole deontologiche",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si può realizzare purchè siano rispettati i meccanismi di certificazione;",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Può essere realizzato senza solo se i fatti di cronaca siano stati resi noti dal diretto interessato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La violazione di una prescrizione contenuta in un’autorizzazione generale:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "È sanzionata con una violazione amministrativa",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "non è sanzionata in quanto è di competenza degli enti di certificazione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È un indice per valutare la gravità ai fini dell’irrogazione di una sanzione amministrativa",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Costituisce presupposto per il risarcimento per trattamento illecito",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "I dati acquisiti con trattamenti illeciti:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Sono utilizzabili nei procedimenti giudiziari secondo le norme delle pertinenti disposizioni processuali",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non sono mai utilizzabili",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sono utilizzabili solo nei procedimenti disciplinari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sono utilizzabili nei procedimenti per licenziamento per giusta causa",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Garante Italiano per la protezione dei dati personali:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "È un organo monocratico ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Dura nella sua carica sette anni prorogabili per una sola volta",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È un organo collegiale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "È un organo collegiale che è formato da 5 membri",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il D.Lgs. 101/18 ha:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Abrogato l’allegato “c” del Codice privacy",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Abrogato tutte le “Regole Deontologiche” tranne l’”A5” e l’”A7”",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Stabilito che i nuovi codici di buona condotta siano ridenominati come “Codici deontologici”",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Stabilito che i nuovi codici di buona condotta siano ridenominati come “Regole Deontologiche",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Garante può:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Accedere anche nelle abitazioni o in luoghi di privata dimora giusta autorizzazione del Presidente del Tribunale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Accedere nelle abitazioni private se non per gravissimi motivi",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Accedere nelle abitazioni private per gravissimi motivi anche di notte",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Accedere nelle abitazioni private solo previo preavviso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Le sanzioni possono essere:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Irrogate nei confronti del titolare",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Irrogate anche all’interessato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Irrogate al sub-responsabile",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Irrogate al responsabile della protezione dei dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’interessato:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Può presentare il reclamo al Presidente del Tribunale per i provvedimenti del Garante",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Può presentare ricorso gerarchico al Tar",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Adire l’autorità giudiziaria dopo aver presentato il reclamo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Presentare il reclamo o in alternativa adire all’Autorità Giudiziaria",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il titolare del trattamento:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Non può mai utilizzare le coordinate di posta elettronica dell’interessato per la cd vendita diretta",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Può sempre utilizzare le coordinate di posta elettronica dell’interessato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Può utilizzare le coordinate di posta elettronica dell’interessato se non per comunicazioni urgenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Può utilizzare le coordinate di posta elettronica dell’interessato anche senza chiedere il consenso per la cd vendita diretta",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "I dati relativi agli studenti:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Possono essere comunicati e diffusi a privati per agevolare l’inserimento professionale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non possono mai essere diffusi",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Possono essere diffusi solo previo consenso di chi ha la responsabilità genitoriale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Potranno essere diffusi solo quando il Garante avrà emanato apposite misure di garanzia",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "In caso di reati in tema di protezione dei dati personali:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Il PM informa senza ritardo il Garante",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Il PM informa l’organo di polizia giudiziaria competente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Ia Polizia giudiziaria informa subito l’Ispettorato territoriale del lavoro",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Garante informa immediatamente la Polizia giudiziaria ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La violazione dei diritti riguardanti le persone decedute:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Comporta l‘irrogazione di sanzioni di cui all’art.83, 5 parag.",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Determina una violazione delle clausole testametarie impugnabili ai fini civilistici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Nei casi di un grave nocumento agli eredi può determinare la violazione amministrativa di cui l’art.83, 4 parag.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Comporta la comunicazione alla polizia giudiziaria per la successiva denuncia all’Autorità Giudiziaria",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "In caso di curricula trasmessi dall’interessato:",
+    "relatedTests": [
+      "609d58f768ab8354e45ce402"
+    ],
+    "answers": [
+      {
+        "text": "Le informazioni privacy vengono fornite al momento del primo contatto utile",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "È necessario richiedere subito il consenso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È necessario il consenso al momento dell’assunzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il trattamento può essere considerato illecito in caso di assenza di consenso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quale delle seguenti affermazioni è corretta:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Il Nuovo Regolamento Europeo (679/2016) si applica esclusivamente alle aziende europee che trattano dati “sensibili”",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Nuovo Regolamento Europeo (679/2016) si applica alle aziende extraeuropee che propongono prodotti e servizi a cittadini/imprese europee",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Il Nuovo Regolamento Europeo (679/2016) si applica ai soli cittadini europei con regolare permesso di soggiorno",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Nuovo Regolamento Europeo (679/2016) si applica esclusivamente alle aziende europee che erogano servizi sanitari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quali, fra le seguenti affermazioni è un principio cardine stabilito dal Regolamento EU 679/2016?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Trasparenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Liceità",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Anonimato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Inconfutabilità",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “trattamento dei dati personali”:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Qualsiasi attività di raccolta e gestione dei dati personali CON IL SUPPORTO di strumenti informatici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Qualsiasi attività di raccolta e gestione dei dati personali SENZA IL SUPPORTO di strumenti informatici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Qualsiasi attività di raccolta e gestione dei dati personali CON QUALSIASI MODALITA’",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Nessuna di quelle sopra",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “INTERESSATO”:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "La persona fisica che è interessato al trattamento dei dati personali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "La persona giuridica cui si riferiscono i dati personali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "La persona fisica cui si riferiscono i dati personali",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Ogni persona che si interessa ai temi della privacy",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "All’Interessato del trattamento dei dati, deve essere data INFORMATIVA in quale dei seguenti casi:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Sempre",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Solo se trattati dati sensibili/giudiziari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Quando non è a conoscenza del trattamento personale dei dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Tutte le affermazioni cui sopra",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quale tra i seguenti casi è identificabile come “dato sensibile”",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Numero del cellulare",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Indirizzo di posta elettronica / indirizzo email",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Numero identificativo bancario (IBAN)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’appartenza sindacale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Indicare, quale fra le seguenti casistiche, rappresenta un fattore di rischio per la privacy nell’uso dei social networks?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "La possibilità di inserire annunci pubblicitari visibili dagli utenti della rete",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’invio di richieste di amicizia ad altri utenti del social network",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Perdita del controllo dei propri dati personali una volta pubblicati (online sui social network)",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "L’utilizzo dei servizi di messaggistica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "I documenti contenenti dati personali devono essere conservati:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Sotto chiave, solo se riguardano dati sensibili/giudiziari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sempre e comunque sotto chiave",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "In cartelline chiuse e anonime",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Tutte le risposte precedenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “PROFILAZIONE”:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "La tipologia di BENE/SERVIZIO acquistato dall’interessato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Qualsiasi forma di trattamento (automatizzato) di dati personali consistente nell'utilizzo di tali dati finalizzati a studiare il loro comportamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "La raccolta di informazioni relative al tipo di lavoro/appartenenza politica effettuato dalla singola persona fisica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Tutte le precedenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “Accountability”?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "La “responsabilizzazione” del Titolare/Responsabile, che devono trattare dati personali senza adottare misure di sicurezza particolari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "La “responsabilizzazione” del Titolare/Responsabile, che deve mettere in atto misure tecniche e organizzative adeguate per garantire, ed essere in grado di dimostrare, che il trattamento sia effettuato in conformità al Regolamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Alla modalità con la quale il Titolare/Responsabile effettua la contabilizzazione dei dati personali trattati in azienda",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Nessuna delle precedenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “Privacy by design”?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Pensare alla privacy gia in fase progettuale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Pensare alla privacy in fase di adeguamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Pensare alla privacy relativamente al disegno di “informative” corrette e compliance",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Pensare alla privacy ed inserire i processi all’interno dei sistemi di qualità esistenti (ISO9001:2015)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende per “Privacy By Default”?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Garantire che i dati trattati, per impostazione predefinita, siano quelli necessari per ogni specifica finalità del trattamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Implementare siti web con le form/check privacy di raccolta dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Gestire la privacy in azienda come norma COGENTE",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Trattare per default dati sensibili con apposite misure di sicurezza che vengono implementate fin dall’inizio (in fase di sviluppo)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il trasporto di documenti che contengono dati deve necessariamente avvenire in:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Contenitori standard senza chiusura",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Cassette di sicurezza / casseforti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Da parte di aziende specializzate e certificate nel trasporto dei dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Contenitori chiusi a chiave o equipollenti",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il “Titolare del trattamento” è il SOGGETTO che:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Determina finalità e mezzi di trattamento ed il profilo della sicurezza ",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Determina le finalità del trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Raccoglie i dati dell’interessato presso l’interessato o il altro modo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Determina i mezzi del trattamento e le misure di sicurezza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Chi delle seguenti figure può provvedere a modificare la PASSWORD di accesso (ai sistemi quali pc, etc.):",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Il responsabile del trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’incarico del trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il responsabile della Protezione dei Dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’utente",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quale, fra le seguenti affermazioni riguardanti le modalità di informativa su web, è corretta:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "L’informativa su web dev’essere resa preventivamente al conferimento dei dati da parte dell’interessato",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "L’informativa sul web non può essere resa in forma elettronica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’informativa su web può essere resa anche successivamente alla raccolta dei dati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’informativa su web può essere resa in forma semplificata rispetto a quella normale e per iscritto",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Ogni quanto tempo di norma vanno variate le credenziali di accesso al pc:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "La scelta del cambio va definita dall’Amministratore di Sistema a suo piacimento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Ogni mese",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Una volta l’anno",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Di norma almeno ogni 3 mesi (per il trattamento dei dati particolari/giudiziari) e ogni 6 mesi (per gli altri casi)",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "È possibile trattare I dati personali che riguardano i “minori”?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Assolutamente No è vietato dalla Carta Internazionale dei diritti del Bambino",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si, solo previo consenso prestato o autorizzato dal titolare della responsabilità genitoriale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non esiste alcuna limitazione nel trattamento dei dati dei minori",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il regolamento UE 679/2016, prevede che i dati personali devono essere solo di persone maggiorenni",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Data Protection Officer o Responsabile della Protezione dei dati, nell’esercizio delle proprie funzioni, deve:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Effettuare delle visite ispettive in collaborazione e su mandato del Garante della Privacy, per verificare come avvengono i trattamenti dei dati nelle aziende da lui monitorate",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Verificare l’applicazione del Nuovo Regolamento EU 679/2016, facilitarne l’osservanza e minimizzare il rischio di violazioni",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Implementare in accordo con L’amministratore di Sistema le misure informatiche utili a garantire la sicurezza dei sistemi informativi",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Gestire i dati che riceve dal Titolare e implementare le idonee misure di sicurezza, perseguendo le finalità definite dal Titolare e scegliendo i mezzi per perseguirle.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cos’è il “Data Breach”?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Il furto/violazione dei dati personali a seguito di intrusione non-autorizzata",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "La violazione di sicurezza che comporta accidentalmente o in modo illecito la distruzione, la perdita, la modifica, la divulgazione non autorizzata o l'accesso ai dati personali trasmessi, conservati o comunque trattati",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "La violazione che comporta accidentalmente la distruzione, la perdita non autorizzata o l'accesso ai dati personali trasmessi, conservati o comunque trattati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "La violazione che comporta in modo illecito la perdita non autorizzata dei dati personali trattati",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il risk based thinking:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Permette alle organizzazioni di individuare i fattori che potrebbero far deviare i processi ed il SGQ dai risultati pianificati.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Permette alle organizzazioni di attuare i controlli preventivi per ridurre gli effetti negativi e massimizzare le opportunità. ",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "È uno strumento di prevenzione.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Tutte le precedenti.",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quali fra le seguenti possono essere considerati “fattori esterni” dell’organizzazione?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Capacità in termini di risorse e conoscenza (tempo, persone, processi)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "I livelli di performance della struttura (outcome)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il cambiamento tecnologico",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Dimensione etica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La programmazione degli audit basata sul rischio:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Impone l’uso di specifici DPI agli auditor",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Considera l’inquinamento prodotto dagli auditor",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Richiede  di cambiare la frequenza degli audit in funzione dell’importanza dei processi",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Nessuna delle precedenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Un buon auditor deve:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Avere approfondite conoscenze specialistiche sul processo che sta auditando",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Essere o essere stato dirigente di azienda industriale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Avere una solida formazione giuridica sulla normativa ambientale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Nessuna delle precedenti",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Un Responsabile del Trattamento risponde per il danno causato dal trattamento se:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Se non ha adempiuto agli obblighi previsti per il suo ruolo dal Regolamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Se ha agito in modo leggermente diverso rispetto alle istruzioni ricevute dal Titolare del Trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Se ha agito in modo completamente contrario rispetto alle istruzioni ricevute dal Titolare del Trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Tutte le precedenti",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Cosa si intende con il termine “phishing”:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Una tecnica di sicurezza dei dati prevista dal Nuovo Regolamento Europeo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Una tecnica attraverso la quale possono essere carpite le credenziali dell’utente ed essere utilizzate per attività fraudolente",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Un particolare tipo di virus informatico che cancella tutti i dati del PC",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Un tipo di strumento software che analizza e carpisce, in modo illecito, i dati aziendali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quale fra le seguenti è considerata una misura preventiva all’uso improprio degli strumenti informatici aziendali?",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "L’adozione di sistemi di monitoraggio per controllare le e-mail inviate dai dipendenti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Uso di black list al fine di evitare l’accesso a determinati siti Internet dai computer aziendali",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "L’installazione di un rilevatore GPS sull’autoveicolo aziendale in uso ad un dipendente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’installazione di videocamere nei pressi delle aree di relax ove sono presenti dispositivi per l’erogazione di bevande e alimenti.",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L'obbligo di redigere la Valutazione d’Impatto (DPIA - Data Privacy Impact Assessment) sussiste se vengono trattati:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Dati giudiziari",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "In tutti i casi in cui il trattamento può presentare un rischio elevato per i diritti e le libertà delle persone fisiche",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "In tutti i casi in cui il trattamento non presenta un rischio elevato per i diritti e le libertà delle persone fisiche",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "In tutti i casi in cui i dati sono stati gia sottoposti a verifica da parte di un’autorità di controllo",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "A chi spetta la nomina dell'Amministratore di sistema:",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Al fornitore designato nella funzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Al Data Protection Officer",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Al Responsabile del trattamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Al titolare ed è regolata da un apposito provvedimento del garante",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il nuovo regolamento UE (679/2016) si occupa della tutela delle persone con riguardo al trattamento dei dati e della circolazione dei dati.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il beneficiario del diritto alla protezione dei dati è la persona fisica.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La libera circolazione dei dati personali è limitata all’Italia e non all’Europa.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il regolamento UE (679/2016) trova applicazione solo per i dati il cui trattamento è automatizzato.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Privacy by design significa che bisogna ridurre al minimo i rischi relativi al trattamento dei dati personali, mediante misure (tecniche e organizzative) già in fase di progettazione.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il principio della responsabilizzazione coinvolge sia il titolare sia il responsabile del trattamento.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il titolare dei dati è: la persona fisica o giuridica, l’autorità / Organismo pubblico che singolarmente o insieme ad altri, determina le finalità e i mezzi del trattamento di dati personali.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Tutte le aziende che trattano “dati sensibili” devono Nominare Obbligatoriamente un Responsabile della Protezione dei Dati personali (Data Protection Officer).",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Responsabile della Protezione dei Dati personali o Data Protection Officer deve essere Nominato entro la data del 25/05/2018.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Responsabile della Protezione dei Dati personali o Data Protection Officer deve essere necessariamente un Dipendente aziendale senza conflitto di interesse.",
+    "relatedTests": [
+      "609d65f868ab8354e45ce403",
+      "609d6b5b68ab8354e45ce404",
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Quale tra i seguenti casi sono identificabili come “dati sensibili”",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Numero del cellulare",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Indirizzo di posta elettronica / indirizzo email",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Numero identificativo bancario (IBAN)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’appartenza sindacale",
+        "selected": false,
+        "value": true,
+        "points": 4.25
+      }
+    ]
+  },
+  {
+    "text": "L’interessato non ha il diritto di opporsi alla profilazione.",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "text": "I registri, da tenere in forma scritta e in formato cartaceo, devono essere messi a disposizione dell’autorità garante per ispezioni e controlli.",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "text": "Il regolamento UE 679/2016 prevede misure di sicurezza idonee, da adottare sulla base di una valutazione dei rischi.",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": true,
+        "points": 1
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il regolamento UE 679/2016 prevede un esaustivo elenco di misure di sicurezza.",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "text": "Il regolamento UE 679/2016 prevede che il titolare del trattamento non ha l’obbligo di formare gli addetti autorizzati al trattamento dei dati.",
+    "relatedTests": [
+      "609d6b5b68ab8354e45ce404"
+    ],
+    "answers": [
+      {
+        "text": "Vero",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Falso",
+        "selected": false,
+        "value": true,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "text": "L'interessato può rivolgersi al titolare solo a mezzo:",
+    "relatedTests": [
+      "609eb5c6c8d9766e381a314c",
+      "609d65f868ab8354e45ce403"
+    ],
+    "answers": [
+      {
+        "text": "Telefono",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Lettera raccomandata, fax, e-mail o altro mezzo idoneo individuato dal Garante",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Via pec",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Semplice comunicazione via e-mail",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il D.Lgs 231/2001 sulla responsabilità degli enti per fatto illecito prevede:",
+    "relatedTests": [
+      "609eb5c6c8d9766e381a314c"
+    ],
+    "answers": [
+      {
+        "text": "Sanzioni penali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Anche sanzioni pecuniarie",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Solo sanzioni interdittive e la pubblicazione della sentenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sanzioni pecuniarie a carico dell’autore del reato presupposto",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "In quali delle seguenti condizioni l’ente va esente da responsabilità ex D.Lgs 231/2001 qualora il reato sia commesso da soggetti in posizione apicale:",
+    "relatedTests": [
+      "61d9a05a81658b2731bf02fc"
+    ],
+    "answers": [
+      {
+        "text": "I componenti dell’Organismo di Vigilanza hanno omesso o realizzato una insufficiente vigilanza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il reato è stato commesso eludendo fraudolentemente i modelli di organizzazione e gestione",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "L’organo dirigente ha adottato dopo la commissione del reato Mog idonei a prevenire il reato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’Organismo di Vigilanza non era dotato di autonomi poteri di controllo e iniziativa",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "La responsabilità dell’ente:",
+    "relatedTests": [
+      "61d9a05a81658b2731bf02fc"
+    ],
+    "answers": [
+      {
+        "text": "Non sussiste se l’autore del reato non è stato identificato",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sussiste anche se il reato si estingue per una causa diversa dall’amnistia",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Non sussiste se l’autore del reato non è imputabile",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Sussiste solo per i reati commessi sul territorio nazionale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’ente è responsabile:",
+    "relatedTests": [
+      "61d9a05a81658b2731bf02fc",
+      "609acb09a705f1902c9314b1"
+    ],
+    "answers": [
+      {
+        "text": "per i reati commessi nel suo interesse o a suo vantaggio da persone sottoposte alla direzione alla vigilanza dei soggetti in posizione apicale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Anche per i reati commessi da terzi nell’interesse dell’ente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "per i reati commessi nell’interesse di terzi da persone sottoposte alla direzione alla vigilanza dei soggetti in posizione apicale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "per i reati commessi da terzi a vantaggio di persone sottoposte alla direzione alla vigilanza dei soggetti in posizione apicale",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Le disposizioni previste dal D.lgs 231/01:",
+    "relatedTests": [
+      "61d9a05a81658b2731bf02fc"
+    ],
+    "answers": [
+      {
+        "text": "Si applica anche alle ditte individuali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Non si applicano alle società e associazioni prive di personalità giuridica",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Si applica anche agli enti pubblici non economici",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Si applicano agli enti forniti di personalità giuridica",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Tra gli organi di controllo antiriciclaggio particolare rilievo assume:",
+    "relatedTests": [
+      "61d9a45e81658b2731bf02fe"
+    ],
+    "answers": [
+      {
+        "text": "Il Nucleo Speciale frodi tecnologiche",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Nucleo Speciale di polizia valutaria",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Il Comando Unità Speciali",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Nucleo Speciale Antitrust",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Rientrano tra i soggetti obbligati ai fini antiriciclaggio:",
+    "relatedTests": [
+      "61d9a45e81658b2731bf02fe"
+    ],
+    "answers": [
+      {
+        "text": "I prestatori di servizi di portafoglio digitale",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "i componenti dell’Organismo di vigilanza ex D.lgs 231/01",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "gli avvocati limitatamente agli incarichi professionali in cui esaminano la posizione giuridica di un loro cliente per compiti di difesa in un procedimento innanzi all’autorità giudiziaria contabile",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": " i commercialisti limitatamente alle operazioni finanziarie che consistono nell’apertura o gestione dei conti bancari, libretti di deposito e conti titoli",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Nella categoria dei professionisti, quali soggetti obbligati ai fini antiriciclaggio, rientrano:",
+    "relatedTests": [
+      "61d9a45e81658b2731bf02fe"
+    ],
+    "answers": [
+      {
+        "text": "I revisori legali e le società di revisione",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "I componenti dell’Organismo di vigilanza ex 231/01",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Gli architetti e ingegneri iscritti all’albo di categoria",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "I consulenti aziendali incaricati di ristrutturazioni organizzative",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’Unità di informazione finanziaria (UIF):",
+    "relatedTests": [
+      "61d9a45e81658b2731bf02fe"
+    ],
+    "answers": [
+      {
+        "text": "Presenta al Parlamento una relazione annuale sul livello di rischio nazionale in tema di antiriciclaggio",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Svolge indagini di polizia giudiziaria su richiesta del Nucleo speciale di polizia valutaria",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Elabora le strategie di prevenzione del riciclaggio e di finanziamento del terrorismo e coordina le misure di contenimento del relativo rischio",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Emana e aggiorna periodicamente, previa presentazione al Comitato di sicurezza finanziaria, indicatori di anomalia",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Gli Organismi di autoregolamentazione:",
+    "relatedTests": [
+      "61d9a45e81658b2731bf02fe"
+    ],
+    "answers": [
+      {
+        "text": "contestano violazioni amministrative pecuniarie a fronte di violazioni gravi, ripetute o sistematiche ovvero plurime degli obblighi cui i propri iscritti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "trasmettono ai loro iscritti le segnalazioni di operazioni sospette ricevute dall’Unità di informazione finanziaria",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "sono responsabili dell'elaborazione e aggiornamento di regole tecniche, in materia di procedure e metodologie di analisi e valutazione del rischio di riciclaggio",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "ogni due anni redigono una relazione da inviare al Ministro della giustizia nella quale indicano i profili le sanzioni pecuniarie irrogate ai propri iscritti",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "il Responsabile della prevenzione della corruzione e della trasparenza:",
+    "relatedTests": [
+      "61d9a31881658b2731bf02fd"
+    ],
+    "answers": [
+      {
+        "text": "È individuato dall’organo di indirizzo, di norma tra i dirigenti di ruolo in servizio",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Esercita l’azione disciplinare verso i dipendenti che non hanno attuato correttamente le misure in materia di prevenzione della corruzione e di trasparenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "segnala all’ANAC le disfunzioni inerenti all’attuazione delle misure in materia di prevenzione della corruzione e di trasparenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "indica all’Organo di indirizzo i nominativi dei dipendenti che hanno attuato correttamente le misure in materia di prevenzione della corruzione e di trasparenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "L’organo di indirizzo:",
+    "relatedTests": [
+      "61d9a31881658b2731bf02fd"
+    ],
+    "answers": [
+      {
+        "text": "riceve la segnalazione di eventuali misure discriminatorie, dirette o indirette, nei confronti del Responsabile della prevenzione della corruzione e della trasparenza per motivi collegati, direttamente o indirettamente, allo svolgimento delle sue funzioni",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "definisce gli obiettivi strategici in materia di prevenzione della corruzione e trasparenza",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "propone al Responsabile della prevenzione e corruzione l’adozione del Piano triennale per la prevenzione della corruzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "definisce procedure appropriate per selezionare e formare, ai sensi del comma 10, i dipendenti destinati ad operare in settori particolarmente esposti alla corruzione Presenta al Parlamento una relazione annuale sul livello di rischio nazionale in tema di antiriciclaggio",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Responsabile della prevenzione della corruzione e trasparente:",
+    "relatedTests": [
+      "61d9a31881658b2731bf02fd"
+    ],
+    "answers": [
+      {
+        "text": "definisce gli obiettivi strategici in materia di prevenzione della corruzione e trasparenza",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "cura la trasmissione all’Autorità nazionale anticorruzione del Piano triennale per la prevenzione della corruzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "adotta il Piano triennale per la prevenzione della corruzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "indica agli uffici competenti all’esercizio dell’azione disciplinare i nominativi dei dipendenti che non hanno attuato correttamente le misure in materia di prevenzione della corruzione e di trasparenza",
+        "selected": false,
+        "value": true,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "Il Piano triennale per la prevenzione della corruzione e trasparenza:",
+    "relatedTests": [
+      "61d9a31881658b2731bf02fd"
+    ],
+    "answers": [
+      {
+        "text": "è adottato entro il 31 marzo di ogni anno (falso)",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "è trasmesso all’ANAC a cura del Responsabile della prevenzione della corruzione e trasparente",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Non può essere oggetto di elaborazione da parte si soggetti estranei rispetto all’amministrazione",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "contiene procedure appropriate per selezionare e formare i dipendenti destinati ad operare in settori particolarmente esposti alla corruzione",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  },
+  {
+    "text": "In caso di commissione, all’interno dell’Amministrazione, di un reato di corruzione accertata con sentenza passata in giudicato:",
+    "relatedTests": [
+      "61d9a31881658b2731bf02fd"
+    ],
+    "answers": [
+      {
+        "text": "L’organo di indirizzo risponde risponde anche di una responsabilità penale salvo che provi di avere predisposto, prima della commissione del fatto, il piano e di aver vigilato sul suo funzionamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "Il Responsabile della prevenzione della corruzione e trasparente risponde anche di una responsabilità erariale salvo che provi di avere predisposto, prima della commissione del fatto, il piano e di aver vigilato sul suo funzionamento",
+        "selected": false,
+        "value": true,
+        "points": 0
+      },
+      {
+        "text": "Il Responsabile della prevenzione della corruzione e trasparente risponde della responsabilità dirigenziale ai sensi dell’art. 21 del D.Lgs.165/2001 salvo che l’organo di indirizzo non provi di aver comunicato il piano triennale all’ANAC prima della commissione del fatto, il piano e di aver vigilato su l suo funzionamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      },
+      {
+        "text": "L’organo di indirizzo risponde del danno d’immagine salvo che provi di avere predisposto, prima della commissione del fatto, il piano e di aver vigilato sul suo funzionamento",
+        "selected": false,
+        "value": false,
+        "points": 0
+      }
+    ]
+  }
+]

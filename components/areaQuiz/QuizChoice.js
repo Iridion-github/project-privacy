@@ -1,6 +1,15 @@
+import { useEffect, useState } from "react";
 import { Row, Col, Card, Button } from "react-bootstrap";
+import { useAppContext } from "../../context/contextLib";
 
 export const QuizChoice = function (props) {
+  const { loggedUser } = useAppContext();
+  const [premiumTestsDisabled, setPremiumTestsDisabled] = useState(false);
+
+  useEffect(() => {
+    setPremiumTestsDisabled(!loggedUser ? true : false);
+  });
+
   return (
     <Row className="w-100 align-items-center m-auto">
       <Col md={{ span: 6, offset: 3 }} className="align-items-center m-auto">
@@ -73,6 +82,7 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Responsabilità Amministrativa degli Enti (Premium)");
                   }}
+                  disabled={premiumTestsDisabled}
                 >
                   Responsabilità Amministrativa degli Enti (Premium)
                 </Button>
@@ -87,6 +97,7 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Privacy (Premium)");
                   }}
+                  disabled={premiumTestsDisabled}
                 >
                   Privacy (Premium)
                 </Button>
@@ -101,6 +112,7 @@ export const QuizChoice = function (props) {
                   onClick={() => {
                     props.handleChangeQuizToPresent("Antiriciclaggio (Premium)");
                   }}
+                  disabled={premiumTestsDisabled}
                 >
                   Antiriciclaggio (Premium)
                 </Button>

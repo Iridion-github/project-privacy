@@ -1,28 +1,30 @@
-import dbConnect from '../../../utils/dbConnect'
-import Test from '../../../models/Test'
+import dbConnect from "../../../utils/dbConnect";
+import Test from "../../../models/Test";
+import TestQuestion from "../../../models/TestQuestion";
 
-dbConnect()
+dbConnect();
 
 export default async (req, res) => {
-  const { method } = req
+  const { method } = req;
   switch (method) {
     case "GET":
       try {
-        const quiz = await Test.find({})
-        res.status(200).json({ success: true, data: quiz })
+        const quizzes = await Test.find({});
+        const questions = await TestQuestion.find({});
+        res.status(200).json({ success: true, data: { quizzes, questions } });
       } catch (err) {
-        res.status(400).json({ success: false, error: err })
+        res.status(400).json({ success: false, error: err });
       }
-      break
+      break;
     case "POST":
       try {
-        const quiz = await Test.create(req.body)
-        res.status(201).json({ success: true, data: quiz })
+        const quiz = await Test.create(req.body);
+        res.status(201).json({ success: true, data: quiz });
       } catch (err) {
-        res.status(400).json({ success: false, error: err })
+        res.status(400).json({ success: false, error: err });
       }
-      break
+      break;
     default:
-      res.status(400).json({ success: false, error: "Unexpected case!" })
+      res.status(400).json({ success: false, error: "Unexpected case!" });
   }
-}
+};

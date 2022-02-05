@@ -1,6 +1,5 @@
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-
 import { Row, Col } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
@@ -12,14 +11,15 @@ import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 
-function areaQuiz({ quizzes }) {
+function areaQuiz({ quizzes, questions }) {
+  //[Checkpoint] Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
   const [quizOnShow, setQuizOnShow] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [dataBeforeCorrection, setDataBeforeCorrection] = useState([]);
   const [timesUp, setTimesUp] = useState(false);
   const [questionCounter, setQuestionCounter] = useState(1);
-  const { currentLang, changeSiteLang } = useAppContext();
+  const { currentLang } = useAppContext();
 
   const getQuizChoiceView = () => {
     setQuizOnShow(null);
@@ -31,8 +31,6 @@ function areaQuiz({ quizzes }) {
 
   const handleChangeQuizToPresent = title => {
     if (title) {
-      console.log("handleChangeQuizToPresent - title:", title);
-      console.log("handleChangeQuizToPresent - quizzes:", quizzes);
       const quizToShow = quizzes.find(quiz => quiz.title.toLowerCase() === title.toLowerCase());
       setQuizOnShow(quizToShow);
     } else {
@@ -44,7 +42,6 @@ function areaQuiz({ quizzes }) {
     if (!quiz) {
       setQuizOnShow(null);
     }
-    console.log("handleChangeSelectedQuiz - quiz:", quiz);
     setSelectedQuiz(quiz);
   };
 
@@ -125,8 +122,8 @@ function areaQuiz({ quizzes }) {
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/quiz";
   const res = await fetch(apiUrl);
-  const { data } = await res.json();
-  return { props: { quizzes: data } };
+  const { quizzes, questions } = await res.json();
+  return { props: { quizzes, questions } };
 }
 
 export default areaQuiz;

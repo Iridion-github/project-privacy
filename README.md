@@ -5,7 +5,7 @@
 - [PdfReader] Copiare il più possibile l'altro branch, per re-implementare il PdfReader che verrà usato per leggere i pdf (doc in realtà) nella sezione Normativa del <RightMenu />.
 
 ## [Checkpoint]
-- [Registration(22/01/2022)] Nel DB al momento per qualche motivo non è consentito esistano 2 password identiche, evitare che ciò sia proibito. Cominciare con la categorizzazione del comportamento dell'Area Test a seconda che l'user sia loggato o meno. 
+- [05/02/2022)] Checkpoint in areaTest: Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 
@@ -19,4 +19,4 @@
 - 
 
 ## UTILS
-- 
+-
