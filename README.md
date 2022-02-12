@@ -5,7 +5,7 @@
 - [PdfReader] Copiare il più possibile l'altro branch, per re-implementare il PdfReader che verrà usato per leggere i pdf (doc in realtà) nella sezione Normativa del <RightMenu />.
 
 ## [Checkpoint]
-- [05/02/2022)] Checkpoint in areaTest: Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
+- [05/02/2022)] Checkpoint in api -> test -> index: Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 

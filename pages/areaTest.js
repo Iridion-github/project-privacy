@@ -11,7 +11,8 @@ import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 
-function areaQuiz({ quizzes, questions }) {
+function areaQuiz({ quizzes }) {
+  console.log("quizzes:", quizzes);
   //[Checkpoint] Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
   const [quizOnShow, setQuizOnShow] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
@@ -122,8 +123,8 @@ function areaQuiz({ quizzes, questions }) {
 export async function getServerSideProps(context) {
   const apiUrl = "http://" + context.req.headers.host + "/api/quiz";
   const res = await fetch(apiUrl);
-  const { quizzes, questions } = await res.json();
-  return { props: { quizzes, questions } };
+  const { quizzes } = await res.json();
+  return { props: { quizzes } };
 }
 
 export default areaQuiz;

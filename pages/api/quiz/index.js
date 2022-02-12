@@ -9,9 +9,23 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const quizzes = await Test.find({});
-        const questions = await TestQuestion.find({});
-        res.status(200).json({ success: true, data: { quizzes, questions } });
+        const quizzes = await Test.find({ premium: false });
+        const premiumQuizzesNoQuestions = await Test.find({ premium: true });
+        //[Checkpoint] Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
+        // for(let x = 0; x < premiumQuizzes.length - 1; x++){
+        //   const currentQuizId = premiumQuizzes[x].id;
+        //   const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId});
+        //   const currentQuizQuestions = allPossibleQuestions.slice(0,4);
+        // }
+        const currentQuizId = premiumQuizzesNoQuestions[0]._id;
+        const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
+        const currentQuizQuestions = allPossibleQuestions.slice(0, 4);
+        const premiumQuizzes = premiumQuizzesNoQuestions.map(q => {
+          q.questions = currentQuizQuestions;
+          return q;
+        });
+        const allQuizzes = [...quizzes, ...premiumQuizzes];
+        res.status(200).json({ success: true, quizzes: allQuizzes });
       } catch (err) {
         res.status(400).json({ success: false, error: err });
       }
