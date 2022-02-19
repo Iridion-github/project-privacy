@@ -10,8 +10,10 @@ function MyApp(props) {
   const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
   const languageCookie = cookies.currentLang;
   const loggedUserCookie = cookies.loggedUser;
+  const quizQuestionsSeen = cookies.quizQuestionsSeen;
   const [currentLang, setCurrentLang] = useState(languageCookie ? languageCookie : "ita");
   const [loggedUser, setLoggedUser] = useState(loggedUserCookie ? loggedUserCookie : null);
+  const [currentQuizQuestionsSeen, setCurrentQuizQuestionsSeen] = useState(quizQuestionsSeen ? quizQuestionsSeen : []);
 
   const changeSiteLang = useCallback(newLang => {
     setCurrentLang(newLang);
@@ -25,6 +27,15 @@ function MyApp(props) {
     setLoggedUser(null);
   }, []);
 
+  const addToQuizQuestionsSeen = useCallback(newQuestionsIds => {
+    const updatedQuestionsSeen = [...currentQuizQuestionsSeen, ...newQuestionsIds];
+    setCurrentQuizQuestionsSeen(updatedQuestionsSeen);
+  }, []);
+
+  const resetQuizQuestionsSeen = useCallback(() => {
+    setCurrentQuizQuestionsSeen([]);
+  }, []);
+
   useEffect(() => {
     if (currentLang !== cookies.currentLang) {
       setCookie("currentLang", currentLang);
@@ -33,7 +44,10 @@ function MyApp(props) {
       setCookie("loggedUser", loggedUser);
     }
     if (!loggedUser) removeCookie("loggedUser");
-  }, [currentLang, loggedUser]);
+    if (currentQuizQuestionsSeen !== cookies.quizQuestionsSeen) {
+      setCookie("quizQuestionsSeen", currentQuizQuestionsSeen);
+    }
+  }, [currentLang, loggedUser, currentQuizQuestionsSeen]);
 
   return (
     <AppContext.Provider
@@ -43,6 +57,9 @@ function MyApp(props) {
         loggedUser,
         logInUser,
         logOutUser,
+        currentQuizQuestionsSeen,
+        addToQuizQuestionsSeen,
+        resetQuizQuestionsSeen,
       }}
     >
       <Component {...pageProps} />

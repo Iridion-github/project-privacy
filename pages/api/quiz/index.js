@@ -5,19 +5,28 @@ import TestQuestion from "../../../models/TestQuestion";
 dbConnect();
 
 export default async (req, res) => {
-  const { method } = req;
+  const { method, query } = req;
   switch (method) {
     case "GET":
       try {
-        const quizzes = await Test.find({ premium: false });
+        const freeQuizzes = await Test.find({ premium: false });
         const premiumQuizzesNoQuestions = await Test.find({ premium: true });
         const premiumQuizzesWithQuestions = [...premiumQuizzesNoQuestions];
+        const alreadyUsedQuestions = query.excludedIds ? JSON.parse(query.excludedIds) : [];
+        let shouldResetAlreadyUsedQuestions = false;
+        console.log("---------------------- alreadyUsedQuestions", alreadyUsedQuestions);
         for (let i = 0; i < premiumQuizzesWithQuestions.length; i++) {
-          console.log("######################################### Finding questions for the test titled:", premiumQuizzesWithQuestions[i].title);
           const currentQuizId = premiumQuizzesWithQuestions[i]._id;
           const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
-          //[Checkpoint] Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
-          const idRelatedQuestions = allPossibleQuestions.filter(q => q.relatedTests.includes(currentQuizId));
+          let idRelatedQuestions = allPossibleQuestions.filter(q => {
+            const pertinentQuestion = q.relatedTests.includes(currentQuizId);
+            const unusedQuestion = !alreadyUsedQuestions.includes(currentQuizId);
+            return pertinentQuestion && unusedQuestion;
+          });
+          if (idRelatedQuestions.length < 5) {
+            shouldResetAlreadyUsedQuestions = true;
+            idRelatedQuestions = allPossibleQuestions.filter(q => q.relatedTests.includes(currentQuizId));
+          }
           //[memo] rimuovere quelle presenti nella storage
           const idRelatedQuestionsNumber = idRelatedQuestions.length;
           const selectedQuestions = [];
@@ -33,8 +42,8 @@ export default async (req, res) => {
           }
           premiumQuizzesWithQuestions[i].questions = selectedQuestions;
         }
-        const allQuizzes = [...quizzes, ...premiumQuizzesWithQuestions];
-        res.status(200).json({ success: true, quizzes: allQuizzes });
+        const allQuizzes = [...freeQuizzes, ...premiumQuizzesWithQuestions];
+        res.status(200).json({ success: true, quizzes: allQuizzes, shouldResetAlreadyUsedQuestions });
       } catch (err) {
         res.status(400).json({ success: false, error: err });
       }

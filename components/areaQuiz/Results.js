@@ -2,9 +2,23 @@ import { useEffect, useState } from "react";
 import { Row, Col, Card, Button, Table } from "react-bootstrap";
 import { ResultRow } from "./ResultRow";
 import { ContactsBtn } from "../buttons/ContactsBtn";
+import { useAppContext } from "../../context/contextLib";
 
 export const Results = function (props) {
-  //memo: Unanswered questions count as wrong too
+  const { addToQuizQuestionsSeen } = useAppContext();
+
+  useEffect(() => {
+    if (props.selectedQuiz && props.selectedQuiz.premium) {
+      const idsToAdd = [];
+      for (let i = 0; i < props.selectedQuiz.questions.length; i++) {
+        const questionId = props.selectedQuiz.questions[i]._id;
+        idsToAdd.push(questionId);
+      }
+      addToQuizQuestionsSeen(idsToAdd);
+    }
+  }, [props.selectedQuiz]);
+
+  //[memo] Unanswered questions count as wrong too
   const initAnsweredQuestions = () => {
     const answered = { wrong: [], correct: [] };
     for (let x = 0; x < props.dataBeforeCorrection.length; x++) {
@@ -80,7 +94,7 @@ export const Results = function (props) {
       <Row className="w-100 mb-3">
         <Col md={{ span: 1 }} className=""></Col>
         <Col md={{ span: 2 }} className="d-flex align-items-center">
-          <Button block variant="info" onClick={() => props.getQuizChoiceView()}>
+          <Button block variant="info" onClick={() => location.reload()}>
             <i className="fas fa-long-arrow-alt-left mr-2"></i>I Quiz
           </Button>
         </Col>

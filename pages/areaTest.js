@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
@@ -11,15 +11,20 @@ import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 
-function areaQuiz({ quizzes }) {
-  //[Checkpoint] Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
+function areaQuiz({ quizzes, shouldResetAlreadyUsedQuestions }) {
   const [quizOnShow, setQuizOnShow] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [dataBeforeCorrection, setDataBeforeCorrection] = useState([]);
   const [timesUp, setTimesUp] = useState(false);
   const [questionCounter, setQuestionCounter] = useState(1);
-  const { currentLang } = useAppContext();
+  const { currentLang, resetQuizQuestionsSeen } = useAppContext();
+
+  useEffect(() => {
+    if (shouldResetAlreadyUsedQuestions) {
+      resetQuizQuestionsSeen();
+    }
+  }, [shouldResetAlreadyUsedQuestions]);
 
   const getQuizChoiceView = () => {
     setQuizOnShow(null);
@@ -120,10 +125,17 @@ function areaQuiz({ quizzes }) {
 }
 
 export async function getServerSideProps(context) {
-  const apiUrl = "http://" + context.req.headers.host + "/api/quiz";
+  let apiUrl = "http://" + context.req.headers.host + "/api/quiz";
+  let currentQuizQuestionsSeen = null;
+  if (context.req.cookies.quizQuestionsSeen) currentQuizQuestionsSeen = context.req.cookies.quizQuestionsSeen;
+  let currentQuizQuestionsSeenJSON = "";
+  if (currentQuizQuestionsSeen && currentQuizQuestionsSeen.length > 0) {
+    currentQuizQuestionsSeenJSON = JSON.stringify(currentQuizQuestionsSeen);
+    apiUrl = apiUrl + "?excludedIds=" + currentQuizQuestionsSeenJSON;
+  }
   const res = await fetch(apiUrl);
-  const { quizzes } = await res.json();
-  return { props: { quizzes } };
+  const { quizzes, shouldResetAlreadyUsedQuestions } = await res.json();
+  return { props: { quizzes, shouldResetAlreadyUsedQuestions } };
 }
 
 export default areaQuiz;
