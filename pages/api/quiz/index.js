@@ -11,20 +11,29 @@ export default async (req, res) => {
       try {
         const quizzes = await Test.find({ premium: false });
         const premiumQuizzesNoQuestions = await Test.find({ premium: true });
-        //[Checkpoint] Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
-        // for(let x = 0; x < premiumQuizzes.length - 1; x++){
-        //   const currentQuizId = premiumQuizzes[x].id;
-        //   const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId});
-        //   const currentQuizQuestions = allPossibleQuestions.slice(0,4);
-        // }
-        const currentQuizId = premiumQuizzesNoQuestions[0]._id;
-        const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
-        const currentQuizQuestions = allPossibleQuestions.slice(0, 4);
-        const premiumQuizzes = premiumQuizzesNoQuestions.map(q => {
-          q.questions = currentQuizQuestions;
-          return q;
-        });
-        const allQuizzes = [...quizzes, ...premiumQuizzes];
+        const premiumQuizzesWithQuestions = [...premiumQuizzesNoQuestions];
+        for (let i = 0; i < premiumQuizzesWithQuestions.length - 1; i++) {
+          const currentQuizId = premiumQuizzesWithQuestions[i]._id;
+          const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
+          //[Checkpoint] Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
+          const idRelatedQuestions = allPossibleQuestions.filter(q => q.relatedTests.includes(currentQuizId));
+          //[memo] rimuovere quelle presenti nella storage
+          const idRelatedQuestionsNumber = idRelatedQuestions.length;
+          const selectedQuestions = [];
+          const alreadyUsedIndexes = [];
+          for (let x = 0; x < 5; x++) {
+            let randomQuestionIndex;
+            randomQuestionIndex = Math.floor(Math.random() * idRelatedQuestionsNumber);
+            while (alreadyUsedIndexes.includes(randomQuestionIndex)) {
+              randomQuestionIndex = Math.floor(Math.random() * idRelatedQuestionsNumber);
+            }
+            alreadyUsedIndexes.push(randomQuestionIndex);
+            selectedQuestions.push(idRelatedQuestions[randomQuestionIndex]);
+          }
+          console.log(`----------- Al test "${premiumQuizzesWithQuestions[i].title}" Assegno queste domande: ${selectedQuestions}`);
+          premiumQuizzesWithQuestions[i].questions = selectedQuestions;
+        }
+        const allQuizzes = [...quizzes, ...premiumQuizzesWithQuestions];
         res.status(200).json({ success: true, quizzes: allQuizzes });
       } catch (err) {
         res.status(400).json({ success: false, error: err });
