@@ -14,7 +14,6 @@ export default async (req, res) => {
         const premiumQuizzesWithQuestions = [...premiumQuizzesNoQuestions];
         const alreadyUsedQuestions = query.excludedIds ? JSON.parse(query.excludedIds) : [];
         let shouldResetAlreadyUsedQuestions = false;
-        console.log("---------------------- alreadyUsedQuestions", alreadyUsedQuestions);
         for (let i = 0; i < premiumQuizzesWithQuestions.length; i++) {
           const currentQuizId = premiumQuizzesWithQuestions[i]._id;
           const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
