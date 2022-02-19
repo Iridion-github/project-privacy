@@ -22,8 +22,6 @@ function MyApp(props) {
   }, []);
 
   const logOutUser = useCallback(() => {
-    console.log("Logging out");
-    removeCookie("loggedUser");
     setLoggedUser(null);
   }, []);
 

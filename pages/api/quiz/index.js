@@ -12,7 +12,8 @@ export default async (req, res) => {
         const quizzes = await Test.find({ premium: false });
         const premiumQuizzesNoQuestions = await Test.find({ premium: true });
         const premiumQuizzesWithQuestions = [...premiumQuizzesNoQuestions];
-        for (let i = 0; i < premiumQuizzesWithQuestions.length - 1; i++) {
+        for (let i = 0; i < premiumQuizzesWithQuestions.length; i++) {
+          console.log("######################################### Finding questions for the test titled:", premiumQuizzesWithQuestions[i].title);
           const currentQuizId = premiumQuizzesWithQuestions[i]._id;
           const allPossibleQuestions = await TestQuestion.find({ relatedTests: currentQuizId });
           //[Checkpoint] Sistema di aggiunta domande funziona, creare la funzione di randomicità per la scelta
@@ -30,7 +31,6 @@ export default async (req, res) => {
             alreadyUsedIndexes.push(randomQuestionIndex);
             selectedQuestions.push(idRelatedQuestions[randomQuestionIndex]);
           }
-          console.log(`----------- Al test "${premiumQuizzesWithQuestions[i].title}" Assegno queste domande: ${selectedQuestions}`);
           premiumQuizzesWithQuestions[i].questions = selectedQuestions;
         }
         const allQuizzes = [...quizzes, ...premiumQuizzesWithQuestions];

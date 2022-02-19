@@ -12,7 +12,6 @@ import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 
 function areaQuiz({ quizzes }) {
-  console.log("quizzes:", quizzes);
   //[Checkpoint] Controllare che i dati quizzes e questions siano correttamente reperiti. Poi decidere dove generare i test randomici, FE o BE.
   const [quizOnShow, setQuizOnShow] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);

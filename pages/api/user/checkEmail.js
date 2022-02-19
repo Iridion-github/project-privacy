@@ -23,10 +23,8 @@ export default async (req, res) => {
         const inputEmail = req.query.email;
         const resultUsers = await User.find({ "email.registration": inputEmail });
         if (resultUsers.length > 0) {
-          console.log("Trovato qualcosa:", resultUsers);
           return res.status(201).json({ success: true, data: { canRegister: false } });
         } else {
-          console.log("Email non usata da nessun user del db");
           return res.status(201).json({ success: true, data: { canRegister: true } });
         }
         //const newUserData = { prova: "prova" };
