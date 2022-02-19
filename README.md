@@ -4,7 +4,7 @@
 - [PdfReader] Copiare il più possibile l'altro branch, per re-implementare il PdfReader che verrà usato per leggere i pdf (doc in realtà) nella sezione Normativa del <RightMenu />.
 
 ## [Checkpoint]
-- [19/02/2022)] [ToDo] Per la prossima volta: [PdfReader] Copiare il più possibile l'altro branch, per re-implementare il PdfReader che verrà usato per leggere i pdf (doc in realtà) nella sezione Normativa del <RightMenu />.
+- [19/02/2022)] [ToDo] [Checkpoint] normativa.js - PdfReader. Fixare ciò che è rotto. Copiare il più possibile l'altro branch, per re-implementare il PdfReader che verrà usato per leggere i pdf (doc in realtà) nella sezione Normativa del <RightMenu />.
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 

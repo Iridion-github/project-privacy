@@ -1,18 +1,31 @@
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
-import path from "path";
-import { Row, Col, Card, Button, Container } from "react-bootstrap";
+import { useState, useCallback, useEffect } from "react";
+import { Container, Card, Row, Col } from "react-bootstrap";
+import { useAppContext } from "../context/contextLib";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
-import { useAppContext } from "../context/contextLib";
-import { RightMenu } from "../components/home/RightMenu";
-import { NormativaChoice } from "../components/normativa/NormativaChoice";
-import { NormativaCard } from "../components/normativa/NormativaCard";
 
 function normativa(props) {
   const { currentLang, changeSiteLang } = useAppContext();
   const [normativaSelected, setNormativaSelected] = useState(null);
+  const [pdfToShow, setPdfToShow] = useState(null);
+  const [showPdfModal, setShowPdfModal] = useState(false);
+
+  const openPdfViewer = useCallback(() => {
+    setShowPdfModal(true);
+  });
+
+  const closePdfViewer = useCallback(() => {
+    setShowPdfModal(false);
+  });
+
+  useEffect(() => {
+    if(normativaSelected) {
+      setPdfToShow(normativaSelected.fileUrl);
+    } else {
+      setPdfToShow(null);
+    }
+  })
 
   return (
     <div className={styles.container}>
@@ -46,11 +59,33 @@ function normativa(props) {
                       </Card.Title>
                     </Col>
                   </Row>
-                  {!normativaSelected && <NormativaChoice normative={props.normative} setNormativa={setNormativaSelected} currentLang={currentLang} />}
-                  {normativaSelected && <NormativaCard normativa={normativaSelected} setNormativa={setNormativaSelected} currentLang={currentLang} />}
+                  {!normativaSelected && (
+                    <NormativaChoice
+                      normative={props.normative}
+                      setNormativa={setNormativaSelected}
+                      currentLang={currentLang}
+                    />
+                  )}
+                  {normativaSelected && (
+                    <NormativaCard
+                      normativa={normativaSelected}
+                      setNormativa={setNormativaSelected}
+                      currentLang={currentLang}
+                    />
+                  )}
                 </Card.Body>
                 <Card.Footer className="text-center"></Card.Footer>
               </Card>
+              {pdfToShow && (
+                <PdfViewer
+                  path={pdfToShow.relativePath}
+                  //buffer={el.buffer}
+                  filename={pdfToShow.filename}
+                  //show={showPdfModal === el.relativepath || showPdfModal === el.buffer}
+                  show={showPdfModal}
+                  onClose={closePdfViewer}
+                />
+              )}
             </Container>
           </Col>
           <Col md={{ span: 3, offset: 0 }} className="m-0 p-0 justify-content-center">
@@ -72,23 +107,23 @@ export async function getServerSideProps(context) {
     data: [
       {
         id: "0",
-        title: "Normativa 1 - Uno",
-        fileUrl: null,
+        title: "Anticorruzione",
+        fileUrl: '../public/normativa/antiriciclaggio.doc',
       },
       {
         id: "1",
-        title: "Normativa 2 - Due",
-        fileUrl: null,
+        title: "Antiriciclaggio",
+        fileUrl:'../public/normativa/antiriciclaggio.doc',
       },
       {
         id: "2",
-        title: "Normativa 3 - Tre",
-        fileUrl: null,
+        title: "Privacy",
+        fileUrl:'../public/normativa/privacy.doc',
       },
       {
         id: "3",
-        title: "Normativa 4 - Quattro",
-        fileUrl: null,
+        title: "Responsabilità degli Enti",
+        fileUrl: '../public/normativa/responsabilita_enti.doc',
       },
     ],
   };
