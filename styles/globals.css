@@ -373,7 +373,7 @@ a {
 }
 
 .pdfviewer-dialog {
-  min-width: 75% !important;
+  min-width: 50% !important;
 }
 
 @media all and (max-width: 770px) {
