@@ -1,6 +1,5 @@
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import path from "path";
 import { Row, Col, Card, Button, Container } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
