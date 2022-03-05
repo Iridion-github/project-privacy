@@ -108,7 +108,7 @@ export async function getServerSideProps(context) {
       {
         id: "0",
         title: "Anticorruzione",
-        fileUrl: "/normativa/antiriciclaggio.pdf",
+        fileUrl: "/normativa/anticorruzione.pdf",
       },
       {
         id: "1",
