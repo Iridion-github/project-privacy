@@ -5,7 +5,8 @@
 - [Perfezionamento] Mettere uno spinner loading mentre carica il pdf reader per bellezza.
 
 ## [Checkpoint]
-- [05/03/2022)] [Checkpoint] normativa.js - PdfReader completato, funziona in locale, da controllare se funziona anche deployato.
+- [19/03/2022)] [Checkpoint] Dizionario search funziona in locale. In deployed invece non visualizza neanche la pagina e crash in 500 (col vecchio sistema failava la search ma la pagina la visualizzava), indagare.
+
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
 
