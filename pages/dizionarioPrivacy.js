@@ -47,6 +47,7 @@ function dizionarioPrivacy({ dizionarioRecords, host }) {
 
   const submitSearch = async input => {
     const apiUrl = "http://" + host + "/api/dizionario";
+    console.log("apiUrl:", apiUrl);
     try {
       setLoading(true);
       const resJson = await fetch(`${apiUrl}/search?searchterms=${input}`, {
