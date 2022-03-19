@@ -617,3 +617,7 @@ label:focus,
 .text-MG-dark-grey {
   color: #343a40 !important;
 }
+
+.border-MG-blue {
+  border: 1px solid #17a2b8 !important;
+}
