@@ -8,7 +8,7 @@ import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 import { Loading } from "../components/layout/Loading";
 
-function dizionarioPrivacy({ dizionarioRecords }) {
+function dizionarioPrivacy({ dizionarioRecords, host }) {
   const { currentLang, resetQuizQuestionsSeen } = useAppContext();
 
   const [searchInput, setSearchInput] = useState("");
@@ -46,10 +46,10 @@ function dizionarioPrivacy({ dizionarioRecords }) {
   };
 
   const submitSearch = async input => {
-    //const apiUrl = "http://" + context.req.headers.host + "/api/consultation" url a seconda dell'ambiente
+    const apiUrl = "http://" + host + "/api/dizionario";
     try {
       setLoading(true);
-      const resJson = await fetch(`http://localhost:3000/api/dizionario/search?searchterms=${input}`, {
+      const resJson = await fetch(`${apiUrl}/search?searchterms=${input}`, {
         method: "GET",
         headers: {
           key: "Access-Control-Allow-Origin",
@@ -195,10 +195,10 @@ function dizionarioPrivacy({ dizionarioRecords }) {
 }
 
 export async function getServerSideProps(context) {
-  let apiUrl = "http://" + context.req.headers.host + "/api/dizionario";
+  const apiUrl = "http://" + context.req.headers.host + "/api/dizionario";
   const res = await fetch(apiUrl);
   const { data } = await res.json();
-  return { props: { dizionarioRecords: data } };
+  return { props: { dizionarioRecords: data, host: context.req.headers.host } };
 }
 
 export default dizionarioPrivacy;
