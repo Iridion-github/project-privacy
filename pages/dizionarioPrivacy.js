@@ -48,6 +48,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
   const submitSearch = async input => {
     try {
       setLoading(true);
+      console.log("submitSearch - apiUrl:", apiUrl);
       const resJson = await fetch(`${apiUrl}/search?searchterms=${input}`, {
         method: "GET",
         headers: {
@@ -194,7 +195,9 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
 }
 
 export async function getServerSideProps(context) {
-  const apiUrl = context.req.headers.referer.replace("dizionarioPrivacy", "api/dizionario");
+  const referer = context.req.headers.referer;
+  const apiUrl = referer.includes("dizionarioPrivacy") ? referer.replace("dizionarioPrivacy", "api/dizionario") : referer;
+  console.log("getServerSideProps - apiUrl:", apiUrl);
   const res = await fetch(apiUrl);
   const { data } = await res.json();
   return { props: { dizionarioRecords: data, apiUrl } };
