@@ -204,8 +204,12 @@ export async function getServerSideProps(context) {
     apiUrl = "http://" + context.req.headers.host + "/" + path;
   } else {
     //deployed connection
-    const authority = context.req.headers.authority;
-    apiUrl = "https://" + authority + path;
+    const needsScheme = host.includes("http");
+    if (needsScheme) {
+      apiUrl = "https://" + host + path;
+    } else {
+      apiUrl = authority + path;
+    }
   }
   const res = await fetch(apiUrl);
   const { data } = await res.json();
