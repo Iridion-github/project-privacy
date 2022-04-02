@@ -12,7 +12,6 @@ export default async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     if (hashedPassword) {
-      //console.log("HASHED PASS:", hashedPassword);
       const newUserData = {
         email: { registration: userEmail },
         password: hashedPassword,
