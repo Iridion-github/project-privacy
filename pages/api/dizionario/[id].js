@@ -9,7 +9,6 @@ export default async (req, res) => {
     method,
     body,
   } = req;
-
   const targetDizionariorecordsIta = await Dizionariorecord.find({ ita: { $regex: searchterms, $options: "i" } }, function (err, docs) {});
   const targetDizionariorecordsEng = await Dizionariorecord.find({ eng: { $regex: searchterms, $options: "i" } }, function (err, docs) {});
   const targetDizionariorecordsAll = [...targetDizionariorecordsIta, ...targetDizionariorecordsEng];

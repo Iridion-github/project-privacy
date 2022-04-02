@@ -48,7 +48,6 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
   const submitSearch = async input => {
     try {
       setLoading(true);
-      console.log("submitSearch - apiUrl:", apiUrl);
       const resJson = await fetch(`${apiUrl}/search?searchterms=${input}`, {
         method: "GET",
         headers: {
@@ -195,9 +194,19 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
 }
 
 export async function getServerSideProps(context) {
-  const referer = context.req.headers.referer;
-  const apiUrl = referer.includes("dizionarioPrivacy") ? referer.replace("dizionarioPrivacy", "api/dizionario") : referer;
-  console.log("getServerSideProps - apiUrl:", apiUrl);
+  //online: https://project-privacy-fzv6cyxxi-iridion-github.vercel.app/
+  //local: http://localhost:3000/dizionarioPrivacy
+  const host = context.req.headers.host;
+  const path = "api/dizionario";
+  let apiUrl;
+  if (host.includes("localhost")) {
+    //local connection
+    apiUrl = "http://" + context.req.headers.host + "/" + path;
+  } else {
+    //deployed connection
+    const authority = context.req.headers.authority;
+    apiUrl = "https://" + authority + path;
+  }
   const res = await fetch(apiUrl);
   const { data } = await res.json();
   return { props: { dizionarioRecords: data, apiUrl } };
