@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Row, Col, Card, Table, Form, Button } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
@@ -72,6 +72,15 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
     submitSearch(cleanInput);
   };
 
+  const presentationRef = useRef();
+  const [presentationRefHeight, setPresentationRefHeight] = useState();
+
+  useEffect(() => {
+    if (presentationRef.current) {
+      setPresentationRefHeight(presentationRef.current.clientHeight);
+    }
+  }, [presentationRef, presentationRef.current]);
+
   return (
     <div className={styles.container}>
       <Header title={currentLang === "ita" ? "Dizionario Privacy" : "Privacy Dictionary"} />
@@ -84,7 +93,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
           <Col md={{ span: 3, offset: 0 }}>
             {/*Presentation start*/}
             <Row className="w-100 ml-0 mr-0 p-3">
-              <Card className="grey-border">
+              <Card className="grey-border" ref={presentationRef}>
                 <Card.Img variant="top" src="./dizionario/copertinaDizionario.png" />
                 <Card.Body className="" style={{ textAlign: "justify", textJustify: "inter-word" }}>
                   <Row className="w-100 p-2 ml-0 mr-0">
@@ -122,7 +131,15 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
           </Col>
           <Col md={{ span: 6, offset: 0 }} className="p-0">
             <Row className="w-100 ml-0 mr-0 p-3">
-              <Card className="grey-border">
+              <Card
+                className="grey-border"
+                style={{
+                  width: "100%",
+                  height: presentationRefHeight ? `${presentationRefHeight}px` : "100vh",
+                  overflowX: "hidden",
+                  overflowY: "scroll",
+                }}
+              >
                 <Card.Body className="">
                   <Col md={12}>
                     <Row>
@@ -194,8 +211,6 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
 }
 
 export async function getServerSideProps(context) {
-  //online: https://project-privacy-fzv6cyxxi-iridion-github.vercel.app/
-  //local: http://localhost:3000/dizionarioPrivacy
   const host = context.req.headers.host;
   const path = "/api/dizionario";
   let apiUrl;
@@ -205,14 +220,12 @@ export async function getServerSideProps(context) {
   } else {
     //deployed connection
     const needsScheme = !host.includes("http");
-    console.log("needsScheme:", needsScheme);
     if (needsScheme) {
       apiUrl = "http://" + host + path;
     } else {
       apiUrl = host + path;
     }
   }
-  console.log("apiUrl:", apiUrl);
   const res = await fetch(apiUrl);
   const { data } = await res.json();
   return { props: { dizionarioRecords: data, apiUrl } };

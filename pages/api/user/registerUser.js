@@ -9,8 +9,6 @@ export default async (req, res) => {
     const userEmail = req.query.email;
     const password = req.query.password;
     const saltRounds = 10;
-    //console.log(`REGISTERING USER WHOSE MAIL IS: ${userEmail} AND PASS IS: ${password}`);
-
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     if (hashedPassword) {

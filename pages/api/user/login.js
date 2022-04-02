@@ -8,12 +8,9 @@ export default async (req, res) => {
   try {
     const userEmail = req.query.email;
     const inputPassword = req.query.password;
-    //console.log(`LOGGING IN USER WHOSE MAIL IS: ${userEmail} AND PASS IS: ${inputPassword}`);
-
     const resultUsers = await User.find({ "email.registration": userEmail });
     const targetUser = resultUsers[0];
     if (resultUsers.length > 0) {
-      //console.log("Trovato l'user da loggare:", targetUser);
       const userPassword = targetUser.password;
 
       function compareAsync(param1, param2) {
@@ -30,14 +27,11 @@ export default async (req, res) => {
 
       const correctPassword = await compareAsync(inputPassword, userPassword);
       if (correctPassword) {
-        //console.log("Password corretta");
         return res.status(201).json({ success: true, data: { user: targetUser } });
       } else {
-        //console.log("Password errata");
         return res.status(400).json({ success: false, data: { error: "wrongCredentials" } });
       }
     } else {
-      //console.log("Nessun user con quella mail nel db");
       return res.status(400).json({ success: false, data: { error: "wrongCredentials" } });
     }
   } catch (err) {
