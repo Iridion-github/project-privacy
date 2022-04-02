@@ -205,6 +205,7 @@ export async function getServerSideProps(context) {
   } else {
     //deployed connection
     const needsScheme = host.includes("http");
+    console.log("################# needsScheme:", needsScheme);
     if (needsScheme) {
       apiUrl = "https://" + host + path;
     } else {
