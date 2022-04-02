@@ -197,11 +197,11 @@ export async function getServerSideProps(context) {
   //online: https://project-privacy-fzv6cyxxi-iridion-github.vercel.app/
   //local: http://localhost:3000/dizionarioPrivacy
   const host = context.req.headers.host;
-  const path = "api/dizionario";
+  const path = "/api/dizionario";
   let apiUrl;
   if (host.includes("localhost")) {
     //local connection
-    apiUrl = "http://" + context.req.headers.host + "/" + path;
+    apiUrl = "http://" + context.req.headers.host + path;
   } else {
     //deployed connection
     const needsScheme = host.includes("http");
