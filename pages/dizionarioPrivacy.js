@@ -8,7 +8,7 @@ import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 import { Loading } from "../components/layout/Loading";
 
-function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
+function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
   const { currentLang, resetQuizQuestionsSeen } = useAppContext();
 
   const [searchInput, setSearchInput] = useState("");
@@ -48,7 +48,13 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
   const submitSearch = async input => {
     try {
       setLoading(true);
-      const resJson = await fetch(`${apiUrl}/search?searchterms=${input}`, {
+      let fetchApiUrl = `${apiUrl}/search?searchterms=${input}`;
+      if (isDeployedVersion) {
+        if (fetchApiUrl.includes("http") && !fetchApiUrl.includes("https")) {
+          fetchApiUrl = fetchApiUrl.replace("http", "https");
+        }
+      }
+      const resJson = await fetch(fetchApiUrl, {
         method: "GET",
         headers: {
           key: "Access-Control-Allow-Origin",
@@ -213,12 +219,15 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl }) {
 export async function getServerSideProps(context) {
   const host = context.req.headers.host;
   const path = "/api/dizionario";
+  let isDeployedVersion;
   let apiUrl;
   if (host.includes("localhost")) {
     //local connection
+    isDeployedVersion = false;
     apiUrl = "http://" + context.req.headers.host + path;
   } else {
     //deployed connection
+    isDeployedVersion = true;
     const needsScheme = !host.includes("http");
     if (needsScheme) {
       apiUrl = "http://" + host + path;
@@ -228,7 +237,7 @@ export async function getServerSideProps(context) {
   }
   const res = await fetch(apiUrl);
   const { data } = await res.json();
-  return { props: { dizionarioRecords: data, apiUrl } };
+  return { props: { dizionarioRecords: data, apiUrl, isDeployedVersion } };
 }
 
 export default dizionarioPrivacy;
