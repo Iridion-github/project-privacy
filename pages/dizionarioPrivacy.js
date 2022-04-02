@@ -205,13 +205,14 @@ export async function getServerSideProps(context) {
   } else {
     //deployed connection
     const needsScheme = host.includes("http");
-    console.log("################# needsScheme:", needsScheme);
+    console.log("needsScheme:", needsScheme);
     if (needsScheme) {
       apiUrl = "https://" + host + path;
     } else {
-      apiUrl = authority + path;
+      apiUrl = host + path;
     }
   }
+  console.log("apiUrl:", apiUrl);
   const res = await fetch(apiUrl);
   const { data } = await res.json();
   return { props: { dizionarioRecords: data, apiUrl } };
