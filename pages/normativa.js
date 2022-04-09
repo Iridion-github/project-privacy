@@ -9,10 +9,17 @@ import { NormativaCard } from "../components/normativa/NormativaCard";
 import { RightMenu } from "../components/home/RightMenu";
 import { Footer } from "../components/layout/Footer";
 import { PdfViewer } from "../components/fileViewers/pdf/PdfViewer";
+import { PdfFileList } from "../components/fileLists/PdfFileList";
 
 function normativa(props) {
   const { currentLang, changeSiteLang } = useAppContext();
   const [normativaSelected, setNormativaSelected] = useState(null);
+
+  const handleSetNormativeSelected = useCallback(norm => {
+    setNormativaSelected(norm);
+  });
+
+  const [listItemSelected, setListItemSelected] = useState(null);
   const [pdfToShow, setPdfToShow] = useState(null);
   const [showPdfModal, setShowPdfModal] = useState(false);
 
@@ -22,20 +29,41 @@ function normativa(props) {
 
   const closePdfViewer = useCallback(() => {
     setShowPdfModal(false);
-    setNormativaSelected(null);
+    deselectItem();
+  });
+
+  const selectItem = useCallback(item => {
+    setListItemSelected(item);
+  }, []);
+
+  const deselectItem = useCallback(() => {
+    setListItemSelected(null);
+  }, []);
+
+  const getHumanizedTitle = useCallback(str => {
+    switch (str) {
+      case "europea":
+        return "Europea";
+      case "nazionale":
+        return "Nazionale";
+      case "provvGarante":
+        return "Provvedimento Garante";
+      case "provvEDPB":
+        return "Provvedimento EDPB";
+    }
   });
 
   useEffect(() => {
-    if (normativaSelected) {
+    if (normativaSelected && listItemSelected) {
       const pdfToShowValue = {
-        relativePath: normativaSelected.fileUrl,
-        filename: normativaSelected.title,
+        relativePath: listItemSelected.url,
+        filename: listItemSelected.title,
       };
       setPdfToShow(pdfToShowValue);
     } else {
       setPdfToShow(null);
     }
-  }, [normativaSelected]);
+  }, [normativaSelected, listItemSelected]);
 
   return (
     <div className={styles.container}>
@@ -54,7 +82,7 @@ function normativa(props) {
                   <Row>
                     <Col md={3}>
                       {normativaSelected && (
-                        <Button variant="info" onClick={() => setNormativaSelected(null)}>
+                        <Button variant="info" onClick={() => handleSetNormativeSelected(null)}>
                           <i className="fas fa-long-arrow-alt-left mr-2"></i>
                           {currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
                         </Button>
@@ -69,9 +97,31 @@ function normativa(props) {
                       </Card.Title>
                     </Col>
                   </Row>
-                  {!normativaSelected && <NormativaChoice normative={props.normative} setNormativa={setNormativaSelected} currentLang={currentLang} />}
+                  {!normativaSelected && <NormativaChoice normative={props.normative} setNormativa={handleSetNormativeSelected} currentLang={currentLang} />}
                   {normativaSelected && (
-                    <NormativaCard normativa={normativaSelected} setNormativa={setNormativaSelected} currentLang={currentLang} openPdfViewer={openPdfViewer} normativaSelected={normativaSelected} />
+                    <Row className="w-100 m-0 p-0">
+                      {Object.keys(normativaSelected.fileUrls).map(x => {
+                        return (
+                          <Col key={x} md={{ span: 6, offset: 0 }} className="p-4">
+                            <Row className="w-100 m-0 p-0">
+                              <Col md={{ span: 12, offset: 0 }} className="text-center">
+                                <h4>{getHumanizedTitle(x)}</h4>
+                              </Col>
+                            </Row>
+                            <PdfFileList files={normativaSelected.fileUrls[x]} onFileClick={selectItem} />
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                  )}
+                  {normativaSelected && listItemSelected && (
+                    <NormativaCard
+                      normativa={normativaSelected}
+                      setNormativa={handleSetNormativeSelected}
+                      currentLang={currentLang}
+                      openPdfViewer={openPdfViewer}
+                      normativaSelected={normativaSelected}
+                    />
                   )}
                 </Card.Body>
                 <Card.Footer className="text-center"></Card.Footer>
@@ -108,22 +158,57 @@ export async function getServerSideProps(context) {
       {
         id: "0",
         title: "Anticorruzione",
-        fileUrl: "/normativa/anticorruzione.pdf",
+        fileUrls: {
+          europea: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (europea)" }],
+          nazionale: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (nazionale)" }],
+          provvGarante: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (provvGarante)" }],
+          provvEDPB: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (provvEDPB)" }],
+        },
       },
       {
         id: "1",
         title: "Antiriciclaggio",
-        fileUrl: "/normativa/antiriciclaggio.pdf",
+        fileUrls: {
+          europea: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (europea)" }],
+          nazionale: [
+            { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (nazionale)" },
+            { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+          ],
+          provvGarante: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (provvGarante)" }],
+          provvEDPB: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (provvEDPB)" }],
+        },
       },
       {
         id: "2",
         title: "Privacy",
-        fileUrl: "/normativa/privacy.pdf",
+        fileUrls: {
+          europea: [
+            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (europea)" },
+            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
+          ],
+          nazionale: [
+            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (nazionale)" },
+            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
+          ],
+          provvGarante: [
+            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (provvGarante)" },
+            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
+          ],
+          provvEDPB: [
+            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (provvEDPB)" },
+            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
+          ],
+        },
       },
       {
         id: "3",
         title: "Responsabilità degli Enti",
-        fileUrl: "/normativa/responsabilita_enti.pdf",
+        fileUrls: {
+          europea: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (europea)" }],
+          nazionale: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (nazionale)" }],
+          provvGarante: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvGarante)" }],
+          provvEDPB: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvEDPB)" }],
+        },
       },
     ],
   };

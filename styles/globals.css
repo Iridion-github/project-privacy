@@ -26,14 +26,6 @@ a {
   box-sizing: border-box;
 }
 
-.bg-standard-blue {
-  background-color: #83cbdd !important;
-}
-
-.bg-lighter-blue {
-  background-color: rgb(167, 222, 236) !important;
-}
-
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   width: 60px !important;
@@ -590,8 +582,13 @@ label:focus,
   background-color: #343a40 !important;
 }
 
+
 .text-red {
   color: red !important;
+}
+
+.text-white {
+  color: white !important;
 }
 
 .text-blue {
@@ -612,6 +609,14 @@ label:focus,
 
 .text-MG-blue {
   color: #17a2b8 !important;
+}
+
+.bg-standard-blue {
+  background-color: #83cbdd !important;
+}
+
+.bg-lighter-blue {
+  background-color: rgb(167, 222, 236) !important;
 }
 
 .text-MG-dark-grey {

@@ -3,9 +3,6 @@ import { Row, Col } from "react-bootstrap";
 import { NormativaChoiceBtn } from "./NormativaChoiceBtn";
 
 export const NormativaChoice = function (props) {
-
-  
-
   return (
     <Row className="m-0 p-0">
       <Col md={{ span: 8, offset: 2 }} className="p-0">
