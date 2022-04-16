@@ -1,22 +1,21 @@
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import path from "path";
 import { Row, Col, Card, Button, Container } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
-import { PrassiOperativaChoice } from "../components/prassiOperativa/PrassiOperativaChoice";
-import { PrassiOperativaCard } from "../components/prassiOperativa/PrassiOperativaCard";
+import { PrassiOperativeChoice } from "../components/prassiOperative/PrassiOperativeChoice";
+import { PrassiOperativeCard } from "../components/prassiOperative/PrassiOperativeCard";
 
-function prassiOperativa(props) {
+function prassiOperative(props) {
   const { currentLang, changeSiteLang } = useAppContext();
-  const [prassiOperativaSelected, setPrassiOperativaSelected] = useState(null);
+  const [prassiOperativeSelected, setPrassiOperativeSelected] = useState(null);
 
   return (
     <div className={styles.container}>
-      <Header title={currentLang === "ita" ? "Prassi Operativa" : "Operations practice"} />
+      <Header title={currentLang === "ita" ? "Prassi Operative" : "Operations practice"} />
       {/* Navbar */}
       <Navigation />
       {/* Page Content */}
@@ -30,8 +29,8 @@ function prassiOperativa(props) {
                 <Card.Body>
                   <Row>
                     <Col md={3}>
-                      {prassiOperativaSelected && (
-                        <Button variant="info" onClick={() => setPrassiOperativaSelected(null)}>
+                      {prassiOperativeSelected && (
+                        <Button variant="info" onClick={() => setPrassiOperativeSelected(null)}>
                           <i className="fas fa-long-arrow-alt-left mr-2"></i>
                           {currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
                         </Button>
@@ -40,14 +39,14 @@ function prassiOperativa(props) {
                     <Col md={6}>
                       <Card.Title className="text-center">
                         <h1>
-                          {currentLang === "ita" ? "PrassiOperativa" : "Operations practice"}
-                          {prassiOperativaSelected ? ": " + prassiOperativaSelected.title : ""}
+                          {currentLang === "ita" ? "Prassi Operative" : "Operations practice"}
+                          {prassiOperativeSelected ? ": " + prassiOperativeSelected.title : ""}
                         </h1>
                       </Card.Title>
                     </Col>
                   </Row>
-                  {!prassiOperativaSelected && <PrassiOperativaChoice prassiOperative={props.prassiOperative} setPrassiOperativa={setPrassiOperativaSelected} currentLang={currentLang} />}
-                  {prassiOperativaSelected && <PrassiOperativaCard prassiOperativa={prassiOperativaSelected} setPrassiOperativa={setPrassiOperativaSelected} currentLang={currentLang} />}
+                  {!prassiOperativeSelected && <PrassiOperativeChoice prassiOperative={props.prassiOperative} setPrassiOperative={setPrassiOperativeSelected} currentLang={currentLang} />}
+                  {prassiOperativeSelected && <PrassiOperativeCard prassiOperative={prassiOperativeSelected} setPrassiOperative={setPrassiOperativeSelected} currentLang={currentLang} />}
                 </Card.Body>
                 <Card.Footer className="text-center"></Card.Footer>
               </Card>
@@ -72,22 +71,22 @@ export async function getServerSideProps(context) {
     data: [
       {
         id: "0",
-        title: "PrassiOperativa 1 - Uno",
+        title: "Privacy",
         fileUrl: null,
       },
       {
         id: "1",
-        title: "PrassiOperativa 2 - Due",
+        title: "Antiriciclaggio",
         fileUrl: null,
       },
       {
         id: "2",
-        title: "PrassiOperativa 3 - Tre",
+        title: "Anticorruzione",
         fileUrl: null,
       },
       {
         id: "3",
-        title: "PrassiOperativa 4 - Quattro",
+        title: "Responsabilità degli enti",
         fileUrl: null,
       },
     ],
@@ -95,4 +94,4 @@ export async function getServerSideProps(context) {
   return { props: { prassiOperative: prassiOperative.data } };
 }
 
-export default prassiOperativa;
+export default prassiOperative;

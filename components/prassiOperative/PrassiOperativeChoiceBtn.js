@@ -1,12 +1,12 @@
 import { Row, Col, Button } from "react-bootstrap";
 
-export const PrassiOperativaChoiceBtn = function (props) {
-  const longTitle = props.prassiOperativa.title.length;
+export const PrassiOperativeChoiceBtn = function (props) {
+  const longTitle = props.prassiOperative.title.length;
   return (
-    <Button className="consultation-choice-btn" block variant="info" onClick={() => props.setPrassiOperativa(props.prassiOperativa)}>
+    <Button className="consultation-choice-btn" block variant="info" onClick={() => props.setPrassiOperative(props.prassiOperative)}>
       <Row>
         <Col className="text-center px-2">
-          <h3>{props.prassiOperativa.title}</h3>
+          <h3>{props.prassiOperative.title}</h3>
         </Col>
       </Row>
       {/* {!!props.consultation[props.currentLang].description && (

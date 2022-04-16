@@ -21,8 +21,8 @@ export const RightMenu = function (props) {
       ita: "Giurisprudenza",
       eng: "Jurisprudence",
     },
-    prassiOperativa: {
-      ita: "Prassi operativa",
+    prassiOperative: {
+      ita: "Prassi operative",
       eng: "Operations practice",
     },
     mappeConcettuali: {
@@ -68,8 +68,8 @@ export const RightMenu = function (props) {
               </Button>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button block variant="info" onClick={() => router.push("/prassiOperativa")}>
-                {btnLabels.prassiOperativa[props.currentLang]}
+              <Button block variant="info" onClick={() => router.push("/prassiOperative")}>
+                {btnLabels.prassiOperative[props.currentLang]}
               </Button>
             </ListGroup.Item>
             <ListGroup.Item>

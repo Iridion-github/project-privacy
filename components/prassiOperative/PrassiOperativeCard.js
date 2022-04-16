@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import { ContactsBtn } from "../buttons/ContactsBtn";
 
-export const PrassiOperativaCard = function (props) {
+export const PrassiOperativeCard = function (props) {
   return (
     <>
       <Row>

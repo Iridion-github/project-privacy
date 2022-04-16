@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useAppContext } from "../context/contextLib";
 import { Header } from "../components/layout/Header";
@@ -10,6 +10,37 @@ import { RightMenu } from "../components/home/RightMenu";
 import { Footer } from "../components/layout/Footer";
 import { PdfViewer } from "../components/fileViewers/pdf/PdfViewer";
 import { PdfFileList } from "../components/fileLists/PdfFileList";
+
+const getHumanizedTitle = str => {
+  switch (str) {
+    case "organismiSovranazionali":
+      return "Organismi Sovranazionali";
+    case "ministeroEconomiaFinanze":
+      return "Ministero Economia e Finanze";
+    case "bancaItalia":
+      return "Banca d'Italia";
+    case "unitaInformazioneFinanziaria":
+      return "Unità di Informazione Finanziaria";
+    case "guardiaFinanza":
+      return "Guardia di Finanza";
+    case "autoritaBancariaEuropea":
+      return "Autorità Bancaria Europea";
+    case "terrorismoInternazionale":
+      return "Terrorismo Internazionale";
+    case "valuteVirtuali":
+      return "Valute Virtuali";
+    case "proliferazioneArmiDistruzioneMassa":
+      return "Proliferazione Armi di Distruzione di Massa";
+    case "europea":
+      return "Europea";
+    case "nazionale":
+      return "Nazionale";
+    case "provvGarante":
+      return "Provvedimento Garante";
+    case "provvEDPB":
+      return "Provvedimento EDPB";
+  }
+};
 
 function normativa(props) {
   const { currentLang, changeSiteLang } = useAppContext();
@@ -40,18 +71,18 @@ function normativa(props) {
     setListItemSelected(null);
   }, []);
 
-  const getHumanizedTitle = useCallback(str => {
-    switch (str) {
-      case "europea":
-        return "Europea";
-      case "nazionale":
-        return "Nazionale";
-      case "provvGarante":
-        return "Provvedimento Garante";
-      case "provvEDPB":
-        return "Provvedimento EDPB";
+  const noSections = useMemo(() => {
+    if (!normativaSelected || normativaSelected.title !== "Antiriciclaggio") {
+      return false;
+    } else {
+      let filesArr = [];
+      for (let x = 1; x < Object.keys(normativaSelected.fileUrls).length; x++) {
+        const currentProp = Object.keys(normativaSelected.fileUrls)[x];
+        filesArr.push(...normativaSelected.fileUrls[currentProp]);
+      }
+      return filesArr;
     }
-  });
+  }, [normativaSelected]);
 
   useEffect(() => {
     if (normativaSelected && listItemSelected) {
@@ -100,18 +131,20 @@ function normativa(props) {
                   {!normativaSelected && <NormativaChoice normative={props.normative} setNormativa={handleSetNormativeSelected} currentLang={currentLang} />}
                   {normativaSelected && (
                     <Row className="w-100 m-0 p-0">
-                      {Object.keys(normativaSelected.fileUrls).map(x => {
-                        return (
-                          <Col key={x} md={{ span: 6, offset: 0 }} className="p-4">
-                            <Row className="w-100 m-0 p-0">
-                              <Col md={{ span: 12, offset: 0 }} className="text-center">
-                                <h4>{getHumanizedTitle(x)}</h4>
-                              </Col>
-                            </Row>
-                            <PdfFileList files={normativaSelected.fileUrls[x]} onFileClick={selectItem} />
-                          </Col>
-                        );
-                      })}
+                      {noSections && <PdfFileList files={noSections} onFileClick={selectItem} />}
+                      {!noSections &&
+                        Object.keys(normativaSelected.fileUrls).map(x => {
+                          return (
+                            <Col key={x} md={{ span: 6, offset: 0 }} className="p-4">
+                              <Row className="w-100 m-0 p-0">
+                                <Col md={{ span: 12, offset: 0 }} className="text-center">
+                                  <h4>{getHumanizedTitle(x)}</h4>
+                                </Col>
+                              </Row>
+                              <PdfFileList files={normativaSelected.fileUrls[x]} onFileClick={selectItem} />
+                            </Col>
+                          );
+                        })}
                     </Row>
                   )}
                   {normativaSelected && listItemSelected && (
@@ -169,13 +202,18 @@ export async function getServerSideProps(context) {
         id: "1",
         title: "Antiriciclaggio",
         fileUrls: {
-          europea: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (europea)" }],
-          nazionale: [
-            { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (nazionale)" },
-            { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+          organismiSovranazionali: [
+            { id: "organismiSovranazionali", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("organismiSovranazionali") },
+            { id: "regolamento_UE_2016_679", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
           ],
-          provvGarante: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (provvGarante)" }],
-          provvEDPB: [{ id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio 1 (provvEDPB)" }],
+          ministeroEconomiaFinanze: [{ id: "ministeroEconomiaFinanze", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("ministeroEconomiaFinanze") }],
+          bancaItalia: [{ id: "bancaItalia", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("bancaItalia") }],
+          unitaInformazioneFinanziaria: [{ id: "unitaInformazioneFinanziaria", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("unitaInformazioneFinanziaria") }],
+          guardiaFinanza: [{ id: "guardiaFinanza", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("guardiaFinanza") }],
+          autoritaBancariaEuropea: [{ id: "autoritaBancariaEuropea", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("autoritaBancariaEuropea") }],
+          terrorismoInternazionale: [{ id: "terrorismoInternazionale", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("terrorismoInternazionale") }],
+          valuteVirtuali: [{ id: "valuteVirtuali", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("valuteVirtuali") }],
+          proliferazioneArmiDistruzioneMassa: [{ id: "proliferazioneArmiDistruzioneMassa", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("proliferazioneArmiDistruzioneMassa") }],
         },
       },
       {
@@ -208,6 +246,26 @@ export async function getServerSideProps(context) {
           nazionale: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (nazionale)" }],
           provvGarante: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvGarante)" }],
           provvEDPB: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvEDPB)" }],
+        },
+      },
+      {
+        id: "4",
+        title: '"Codice" di consumo',
+        fileUrls: {
+          europea: [],
+          nazionale: [],
+          provvGarante: [],
+          provvEDPB: [],
+        },
+      },
+      {
+        id: "5",
+        title: "Contrasto alla criminalità organizzata",
+        fileUrls: {
+          europea: [],
+          nazionale: [],
+          provvGarante: [],
+          provvEDPB: [],
         },
       },
     ],
