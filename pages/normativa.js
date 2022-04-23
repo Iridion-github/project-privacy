@@ -1,11 +1,10 @@
 import styles from "../styles/Home.module.css";
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useAppContext } from "../context/contextLib";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
 import { NormativaChoice } from "../components/normativa/NormativaChoice";
-import { NormativaCard } from "../components/normativa/NormativaCard";
 import { RightMenu } from "../components/home/RightMenu";
 import { Footer } from "../components/layout/Footer";
 import { PdfViewer } from "../components/fileViewers/pdf/PdfViewer";
@@ -43,58 +42,55 @@ const getHumanizedTitle = str => {
 };
 
 function normativa(props) {
-  const { currentLang, changeSiteLang } = useAppContext();
+  const { currentLang } = useAppContext();
   const [normativaSelected, setNormativaSelected] = useState(null);
-
   const handleSetNormativeSelected = useCallback(norm => {
     setNormativaSelected(norm);
   });
 
-  const [listItemSelected, setListItemSelected] = useState(null);
-  const [pdfToShow, setPdfToShow] = useState(null);
-  const [showPdfModal, setShowPdfModal] = useState(false);
-
-  const openPdfViewer = useCallback(() => {
-    setShowPdfModal(true);
+  const [subSectionSelected, setSubSectionSelected] = useState(null);
+  const handleSetSubsectionSelected = useCallback(subSect => {
+    setSubSectionSelected(subSect);
   });
 
+  const [fileSelected, setFileSelected] = useState(null);
+  const handleSetFileSelected = useCallback(file => {
+    setFileSelected(file);
+  });
+
+  const handleGoBackBtn = () => {
+    if (normativaSelected && !subSectionSelected) {
+      handleSetNormativeSelected(null);
+    } else if (normativaSelected && subSectionSelected) {
+      handleSetSubsectionSelected(null);
+    }
+  };
+
+  const [pdfToShow, setPdfToShow] = useState(null);
+
   const closePdfViewer = useCallback(() => {
-    setShowPdfModal(false);
     deselectItem();
   });
 
-  const selectItem = useCallback(item => {
-    setListItemSelected(item);
+  const selectItem = useCallback(fileElem => {
+    handleSetFileSelected(fileElem);
   }, []);
 
   const deselectItem = useCallback(() => {
-    setListItemSelected(null);
+    handleSetFileSelected(null);
   }, []);
 
-  const noSections = useMemo(() => {
-    if (!normativaSelected || normativaSelected.title !== "Antiriciclaggio") {
-      return false;
-    } else {
-      let filesArr = [];
-      for (let x = 1; x < Object.keys(normativaSelected.fileUrls).length; x++) {
-        const currentProp = Object.keys(normativaSelected.fileUrls)[x];
-        filesArr.push(...normativaSelected.fileUrls[currentProp]);
-      }
-      return filesArr;
-    }
-  }, [normativaSelected]);
-
   useEffect(() => {
-    if (normativaSelected && listItemSelected) {
+    if (normativaSelected && subSectionSelected && fileSelected) {
       const pdfToShowValue = {
-        relativePath: listItemSelected.url,
-        filename: listItemSelected.title,
+        relativePath: fileSelected.url,
+        filename: fileSelected.title,
       };
       setPdfToShow(pdfToShowValue);
     } else {
       setPdfToShow(null);
     }
-  }, [normativaSelected, listItemSelected]);
+  }, [normativaSelected, subSectionSelected, fileSelected]);
 
   return (
     <div className={styles.container}>
@@ -113,7 +109,7 @@ function normativa(props) {
                   <Row>
                     <Col md={3}>
                       {normativaSelected && (
-                        <Button variant="info" onClick={() => handleSetNormativeSelected(null)}>
+                        <Button variant="info" onClick={() => handleGoBackBtn()}>
                           <i className="fas fa-long-arrow-alt-left mr-2"></i>
                           {currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
                         </Button>
@@ -129,46 +125,16 @@ function normativa(props) {
                     </Col>
                   </Row>
                   {!normativaSelected && <NormativaChoice normative={props.normative} setNormativa={handleSetNormativeSelected} currentLang={currentLang} />}
-                  {normativaSelected && (
+                  {normativaSelected && !subSectionSelected && <NormativaChoice normative={normativaSelected.subSections} setNormativa={handleSetSubsectionSelected} currentLang={currentLang} />}
+                  {normativaSelected && subSectionSelected && (
                     <Row className="w-100 m-0 p-0">
-                      {noSections && <PdfFileList files={noSections} onFileClick={selectItem} />}
-                      {!noSections &&
-                        Object.keys(normativaSelected.fileUrls).map(x => {
-                          return (
-                            <Col key={x} md={{ span: 6, offset: 0 }} className="p-4">
-                              <Row className="w-100 m-0 p-0">
-                                <Col md={{ span: 12, offset: 0 }} className="text-center">
-                                  <h4>{getHumanizedTitle(x)}</h4>
-                                </Col>
-                              </Row>
-                              <PdfFileList files={normativaSelected.fileUrls[x]} onFileClick={selectItem} />
-                            </Col>
-                          );
-                        })}
+                      <PdfFileList files={subSectionSelected.fileUrls} onFileClick={selectItem} />
                     </Row>
-                  )}
-                  {normativaSelected && listItemSelected && (
-                    <NormativaCard
-                      normativa={normativaSelected}
-                      setNormativa={handleSetNormativeSelected}
-                      currentLang={currentLang}
-                      openPdfViewer={openPdfViewer}
-                      normativaSelected={normativaSelected}
-                    />
                   )}
                 </Card.Body>
                 <Card.Footer className="text-center"></Card.Footer>
               </Card>
-              {pdfToShow && (
-                <PdfViewer
-                  path={pdfToShow.relativePath}
-                  //buffer={el.buffer}
-                  filename={pdfToShow.filename}
-                  //show={showPdfModal === el.relativepath || showPdfModal === el.buffer}
-                  show={showPdfModal}
-                  onClose={closePdfViewer}
-                />
-              )}
+              {pdfToShow && <PdfViewer path={pdfToShow.relativePath} filename={pdfToShow.filename} show={!!pdfToShow} onClose={closePdfViewer} />}
             </Container>
           </Col>
           <Col md={{ span: 3, offset: 0 }} className="m-0 p-0 justify-content-center">
@@ -191,82 +157,270 @@ export async function getServerSideProps(context) {
       {
         id: "0",
         title: "Anticorruzione",
-        fileUrls: {
-          europea: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (europea)" }],
-          nazionale: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (nazionale)" }],
-          provvGarante: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (provvGarante)" }],
-          provvEDPB: [{ id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione 1 (provvEDPB)" }],
-        },
+        subSections: [
+          {
+            id: "europea",
+            title: "Europea",
+            fileUrls: [
+              { id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Europea - 1 (europea)" },
+              { id: "1", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Europea - 2 (europea)" },
+            ],
+          },
+          {
+            id: "nazionale",
+            title: "Nazionale",
+            fileUrls: [
+              { id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Nazionale - 1 (europea)" },
+              { id: "1", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Nazionale - 2 (europea)" },
+            ],
+          },
+          {
+            id: "provvGarante",
+            title: "Provvedimento garante",
+            fileUrls: [
+              { id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Provvedimento garante - 1 (europea)" },
+              { id: "1", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Provvedimento garante - 2 (europea)" },
+            ],
+          },
+          {
+            id: "provvEDPB",
+            title: "Provvedimento EDPB",
+            fileUrls: [
+              { id: "0", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Provvedimento EDPB - 1 (europea)" },
+              { id: "1", url: "/normativa/anticorruzione1.pdf", title: "Anticorruzione - Provvedimento EDPB - 2 (europea)" },
+            ],
+          },
+        ],
       },
       {
         id: "1",
         title: "Antiriciclaggio",
-        fileUrls: {
-          organismiSovranazionali: [
-            { id: "organismiSovranazionali", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("organismiSovranazionali") },
-            { id: "regolamento_UE_2016_679", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
-          ],
-          ministeroEconomiaFinanze: [{ id: "ministeroEconomiaFinanze", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("ministeroEconomiaFinanze") }],
-          bancaItalia: [{ id: "bancaItalia", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("bancaItalia") }],
-          unitaInformazioneFinanziaria: [{ id: "unitaInformazioneFinanziaria", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("unitaInformazioneFinanziaria") }],
-          guardiaFinanza: [{ id: "guardiaFinanza", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("guardiaFinanza") }],
-          autoritaBancariaEuropea: [{ id: "autoritaBancariaEuropea", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("autoritaBancariaEuropea") }],
-          terrorismoInternazionale: [{ id: "terrorismoInternazionale", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("terrorismoInternazionale") }],
-          valuteVirtuali: [{ id: "valuteVirtuali", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("valuteVirtuali") }],
-          proliferazioneArmiDistruzioneMassa: [{ id: "proliferazioneArmiDistruzioneMassa", url: "/normativa/antiriciclaggio1.pdf", title: getHumanizedTitle("proliferazioneArmiDistruzioneMassa") }],
-        },
+        subSections: [
+          {
+            id: "organismiSovranazionali",
+            title: getHumanizedTitle("organismiSovranazionali"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("organismiSovranazionali") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "ministeroEconomiaFinanze",
+            title: getHumanizedTitle("ministeroEconomiaFinanze"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("ministeroEconomiaFinanze") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "bancaItalia",
+            title: getHumanizedTitle("bancaItalia"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("bancaItalia") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "unitaInformazioneFinanziaria",
+            title: getHumanizedTitle("unitaInformazioneFinanziaria"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("unitaInformazioneFinanziaria") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "guardiaFinanza",
+            title: getHumanizedTitle("guardiaFinanza"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("guardiaFinanza") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "autoritaBancariaEuropea",
+            title: getHumanizedTitle("autoritaBancariaEuropea"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("autoritaBancariaEuropea") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "terrorismoInternazionale",
+            title: getHumanizedTitle("terrorismoInternazionale"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("terrorismoInternazionale") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "valuteVirtuali",
+            title: getHumanizedTitle("valuteVirtuali"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("valuteVirtuali") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "proliferazioneArmiDistruzioneMassa",
+            title: getHumanizedTitle("proliferazioneArmiDistruzioneMassa"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Antiriciclaggio - " + getHumanizedTitle("proliferazioneArmiDistruzioneMassa") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+        ],
       },
       {
         id: "2",
         title: "Privacy",
-        fileUrls: {
-          europea: [
-            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (europea)" },
-            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
-          ],
-          nazionale: [
-            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (nazionale)" },
-            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
-          ],
-          provvGarante: [
-            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (provvGarante)" },
-            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
-          ],
-          provvEDPB: [
-            { id: "0", url: "/normativa/codice-privacy.pdf", title: "Codice Privacy (provvEDPB)" },
-            { id: "1", url: "/normativa/d-Legislativo101-2018.pdf", title: "D.Legislativo 101/2018" },
-          ],
-        },
+        subSections: [
+          {
+            id: "europea",
+            title: getHumanizedTitle("europea"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Privacy - " + getHumanizedTitle("europea") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "nazionale",
+            title: getHumanizedTitle("nazionale"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Privacy - " + getHumanizedTitle("nazionale") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvGarante",
+            title: getHumanizedTitle("provvGarante"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Privacy - " + getHumanizedTitle("provvGarante") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvEDPB",
+            title: getHumanizedTitle("provvEDPB"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Privacy - " + getHumanizedTitle("provvEDPB") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+        ],
       },
       {
         id: "3",
         title: "Responsabilità degli Enti",
-        fileUrls: {
-          europea: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (europea)" }],
-          nazionale: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (nazionale)" }],
-          provvGarante: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvGarante)" }],
-          provvEDPB: [{ id: "0", url: "/normativa/responsabilita-enti.pdf", title: "Responsabilità degli Enti 1 (provvEDPB)" }],
-        },
+        subSections: [
+          {
+            id: "europea",
+            title: getHumanizedTitle("europea"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Responsabilità degli Enti - " + getHumanizedTitle("europea") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "nazionale",
+            title: getHumanizedTitle("nazionale"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Responsabilità degli Enti - " + getHumanizedTitle("nazionale") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvGarante",
+            title: getHumanizedTitle("provvGarante"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Responsabilità degli Enti - " + getHumanizedTitle("provvGarante") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvEDPB",
+            title: getHumanizedTitle("provvEDPB"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Responsabilità degli Enti - " + getHumanizedTitle("provvEDPB") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+        ],
       },
       {
         id: "4",
         title: '"Codice" di consumo',
-        fileUrls: {
-          europea: [],
-          nazionale: [],
-          provvGarante: [],
-          provvEDPB: [],
-        },
+        subSections: [
+          {
+            id: "europea",
+            title: getHumanizedTitle("europea"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: '"Codice" di consumo - ' + getHumanizedTitle("europea") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "nazionale",
+            title: getHumanizedTitle("nazionale"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: '"Codice" di consumo - ' + getHumanizedTitle("nazionale") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvGarante",
+            title: getHumanizedTitle("provvGarante"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: '"Codice" di consumo - ' + getHumanizedTitle("provvGarante") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvEDPB",
+            title: getHumanizedTitle("provvEDPB"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: '"Codice" di consumo - ' + getHumanizedTitle("provvEDPB") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+        ],
       },
       {
         id: "5",
         title: "Contrasto alla criminalità organizzata",
-        fileUrls: {
-          europea: [],
-          nazionale: [],
-          provvGarante: [],
-          provvEDPB: [],
-        },
+        subSections: [
+          {
+            id: "europea",
+            title: getHumanizedTitle("europea"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Contrasto alla criminalità organizzata - " + getHumanizedTitle("europea") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "nazionale",
+            title: getHumanizedTitle("nazionale"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Contrasto alla criminalità organizzata - " + getHumanizedTitle("nazionale") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvGarante",
+            title: getHumanizedTitle("provvGarante"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Contrasto alla criminalità organizzata - " + getHumanizedTitle("provvGarante") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+          {
+            id: "provvEDPB",
+            title: getHumanizedTitle("provvEDPB"),
+            fileUrls: [
+              { id: "0", url: "/normativa/antiriciclaggio1.pdf", title: "Contrasto alla criminalità organizzata - " + getHumanizedTitle("provvEDPB") },
+              { id: "1", url: "/normativa/regolamento_UE_2016_679.pdf", title: "Regolamento UE 2016/679" },
+            ],
+          },
+        ],
       },
     ],
   };
