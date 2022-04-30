@@ -14,7 +14,7 @@
 ## [Note/Memo]
 - 
 ## [Known_Issues/Bugs]
--
+- Se la risoluzione è full hd, nella pagina di login il footer copre parzialmente la card (se si zooma a 90% non la copre).
 ## Implementazioni Possibili/Utili e Migliorie
 - 
 
