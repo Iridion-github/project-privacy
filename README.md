@@ -4,7 +4,7 @@
 - [Immagini] Mancano ancora quasi tutte le immagini da usare e ci sono ancora text 'work in progress' sparsi in giro (per esempio la terza slide in home).
 
 ## [Checkpoint]
-- [23/04/2022)] [Checkpoint] Basarsi sulla nuova struttura (mille sottosezioni perchè si) della page normativa per modificare anche le pages giurisprudenza e prassi operative.
+- [23/04/2022)] [Checkpoint] Ulteriori modifiche alla logica di rendering e alle strutture dati effettuate in normativa page. Basarsi sulle suddette logiche e strutture per refattorizzare le pages giurisprudenza e prassi operative.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

@@ -11,8 +11,14 @@ export const PdfFileList = function (props) {
 
   if (props.noSections) {
     return (
-      <Row className="w-100 m-0 p-0">
-        <Col md={{ span: 12, offset: 0 }} className="p-0">
+      <Row className="w-100 m-0 p-0 justify-content-center">
+        {props.handleGoBackBtn && (
+          <Button variant="info" onClick={() => props.handleGoBackBtn()} style={{ position: "absolute", left: "1%", zIndex: 9999 }}>
+            <i className="fas fa-long-arrow-alt-left mr-2"></i>
+            {props.currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
+          </Button>
+        )}
+        <Col md={{ span: props.colMd ?? 12, offset: 0 }} className="p-0">
           <ListGroup defaultActiveKey="#link1">
             {props.files.map(file => {
               return (
@@ -30,8 +36,14 @@ export const PdfFileList = function (props) {
   }
 
   return (
-    <Row className="w-100 m-0 p-0">
-      <Col md={{ span: 12, offset: 0 }} className="p-0">
+    <Row className="w-100 m-0 p-0 justify-content-center">
+      {props.handleGoBackBtn && (
+        <Button variant="info" onClick={() => props.handleGoBackBtn()} style={{ position: "absolute", left: "1%", zIndex: 9999 }}>
+          <i className="fas fa-long-arrow-alt-left mr-2"></i>
+          {props.currentLang === "ita" ? "Torna Indietro" : "Back to Selection"}
+        </Button>
+      )}
+      <Col md={{ span: props.colMd ?? 12, offset: 0 }} className="p-0">
         <ListGroup defaultActiveKey="#link1">
           {props.files.map(file => {
             return (
