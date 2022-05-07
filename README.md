@@ -4,7 +4,7 @@
 - [Immagini] Mancano ancora quasi tutte le immagini da usare e ci sono ancora text 'work in progress' sparsi in giro (per esempio la terza slide in home).
 
 ## [Checkpoint]
-- [23/04/2022)] [Checkpoint] Reworkata struttura dati e render di Giurisprudenza, emulando Normativa. Basarsi sulle suddette logiche e strutture per refattorizzare anche la page Prassi Operative.
+- [23/04/2022)] [Checkpoint] Reworkata struttura dati e render di Prassi Operative, emulando Normativa.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy
