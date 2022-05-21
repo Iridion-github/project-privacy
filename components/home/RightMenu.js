@@ -33,6 +33,10 @@ export const RightMenu = function (props) {
       ita: "Dizionario privacy (ita-eng)",
       eng: "Privacy dictionary (ita-eng)",
     },
+    trovaLaNorma: {
+      ita: "Trova la norma",
+      eng: "Find the norm",
+    },
   };
 
   return (
@@ -80,6 +84,11 @@ export const RightMenu = function (props) {
             <ListGroup.Item>
               <Button block variant="info" onClick={() => router.push("/dizionarioPrivacy")}>
                 {btnLabels.dizionarioPrivacy[props.currentLang]}
+              </Button>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button block variant="info" onClick={() => router.push("/trovaLaNorma")}>
+                {btnLabels.trovaLaNorma[props.currentLang]}
               </Button>
             </ListGroup.Item>
           </ListGroup>

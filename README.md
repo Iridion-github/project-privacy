@@ -4,7 +4,7 @@
 - [Immagini] Mancano ancora quasi tutte le immagini da usare e ci sono ancora text 'work in progress' sparsi in giro (per esempio la terza slide in home).
 
 ## [Checkpoint]
-- [23/04/2022)] [Checkpoint] Reworkata struttura dati e render di Prassi Operative, emulando Normativa.
+- [23/04/2022)] [Checkpoint] Aggiunta la pagina trovaLaNorma, che si basa su dizionarioPrivacy. Aggiunti relativi db records, model, api, etc. Aggiunta rimozione filtro a dizionarioPrivacy, e risolto crash in caso di nessun risultato ricerca.
 
 ## [Deployment]
 - Vercel: https://vercel.com/iridion-github/project-privacy

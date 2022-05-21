@@ -8,33 +8,34 @@ import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 import { Loading } from "../components/layout/Loading";
 
-function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
+function trovaLaNorma({ normaRecords, apiUrl, isDeployedVersion }) {
   const { currentLang, resetQuizQuestionsSeen } = useAppContext();
-
   const [searchInput, setSearchInput] = useState("");
   const [searched, setSearched] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [filteredDizionarioRecords, setFilteredDizionarioRecords] = useState([]);
+  const [filteredNormaRecords, setFilteredNormaRecords] = useState([]);
 
-  const allTableRows = dizionarioRecords.map(record => {
+  const allTableRows = normaRecords.map(record => {
     return (
       <tr key={record._id}>
-        <td className="border-MG-blue">{record.ita}</td>
-        <td className="border-MG-blue">{record.eng}</td>
-        <td className="border-MG-blue">{record.ref.length > 0 ? record.ref : " - "}</td>
+        <td className="border-MG-blue">{record.terminiDiRiferimento}</td>
+        <td className="border-MG-blue">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
+        <td className="border-MG-blue">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
+        <td className="border-MG-blue">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
       </tr>
     );
   });
 
   const filteredTableRows =
-    filteredDizionarioRecords && filteredDizionarioRecords.length > 0
-      ? filteredDizionarioRecords.map(record => {
+    filteredNormaRecords && filteredNormaRecords.length > 0
+      ? filteredNormaRecords.map(record => {
           return (
             <tr key={record._id}>
-              <td className="border-MG-blue">{record.ita}</td>
-              <td className="border-MG-blue">{record.eng}</td>
-              <td className="border-MG-blue">{record.ref.length > 0 ? record.ref : " - "}</td>
+              <td className="border-MG-blue">{record.terminiDiRiferimento}</td>
+              <td className="border-MG-blue">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
+              <td className="border-MG-blue">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
+              <td className="border-MG-blue">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
             </tr>
           );
         })
@@ -70,7 +71,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
       })
         .then(response => response.json())
         .then(async response => {
-          setFilteredDizionarioRecords(response.data);
+          setFilteredNormaRecords(response.data);
           handleSetSearched(searchInput);
           setLoading(false);
         });
@@ -96,7 +97,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
 
   return (
     <div className={styles.container}>
-      <Header title={currentLang === "ita" ? "Dizionario Privacy" : "Privacy Dictionary"} />
+      <Header title={currentLang === "ita" ? "Trova la norma" : "Find the norm"} />
       {/* Navbar */}
       <Navigation />
       {loading && <Loading />}
@@ -107,25 +108,17 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
             {/*Presentation start*/}
             <Row className="w-100 ml-0 mr-0 p-3">
               <Card className="grey-border" ref={presentationRef}>
-                <Card.Img variant="top" src="./dizionario/copertinaDizionario.png" />
+                <Card.Img variant="top" src="./trovaLaNorma/copertinaTrovaLaNorma.png" />
                 <Card.Body className="" style={{ textAlign: "justify", textJustify: "inter-word" }}>
                   <Row className="w-100 p-2 ml-0 mr-0">
-                    L'attuale normativa sulla tutela dei dati personali trova la sua fonte di riferimento principale nel Regolamento dell'Unione Europea 679/2016/UE (comunemente chiamato GDPR). Il
-                    sistema di protezione dei dati personali antecedente al GDPR era strutturato, invece, sulla Direttiva 95/46/CE e su distinte discipline nazionali di attuazione. Nonostante i comuni
-                    principi il cambiamento dello strumento legislativo ha determinato cambiamenti strutturali nel processo di adeguamento alla disciplina comunitaria. Sotto la previgente normativa si
-                    era infatti creata nel territorio dell'Unione una frammentazione applicativa per la compresenza di livelli di protezione non equivalenti. Il nuovo Regolamento nasce, quindi, con
-                    l'obiettivo di realizzare un'applicazione coerente ed omogenea al fine di assicurare più efficaci e armonizzate misure di protezione dei dati personali e una più fluida
-                    circolazione dei dati, nell'ottica dello sviluppo dell'economia digitale in tutto il mercato interno. La menzionata disciplina ha posto, ovviamente, la necessità di tradurre
-                    principi ed istituti alle realtà linguistiche dei singoli Stati membri. È evidente, però, che il testo in lingua inglese costituisce il riferimento principale per tutti gli
-                    operatori, pubblici e privati, che si trovano ad operare sul mercato internazionale o che realizzano trattamenti transfrontalieri. Si pensi, al riguardo, ai dipendenti o
-                    responsabili delle articolazioni dedicate alla “compliance privacy” di gruppi societari che operano in differenti nazioni e che devono discutere e affrontare problematiche
-                    differenti con colleghi residenti in altri stati ovvero ai Responsabili della Protezione Dati che risiedono presso sedi che sono differenti dalle sedi delle rispettive branch o
-                    filiali nazionali. In tale contesto si è pensato di realizzare un piccolo dizionario tascabile dove riportare i termini e/o le frasi più importanti o più utilizzate nell’ambito del
-                    GDPR. In questo modo viene messo a disposizione di tutti gli addetti ai lavori un pratico e agile strumento di lavoro che, a livello internazionale, potrà essere consultato in
-                    occasione della redazione di testi scritti o per preparare interventi in occasione di riunioni o incontri. In alcuni casi è stato altresì riportato il riferimento al Considerando
-                    e/o all’articolo da cui il termine o la frase sono state tratte. Il testo, in realtà, può essere considerato utile anche per chi lavora nel mercato nazionale perché consente di
-                    poter conoscere il corretto significato di molti termini che ormai sono entrati nel linguaggio comune e che vengono pronunciati direttamente in inglese (vgs, ad esempio,
-                    accountability privacy by design o by default) senza conoscere il reale significato letterale.
+                    Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la
+                    norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di
+                    trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma.
+                    Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la
+                    norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di
+                    trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma.
+                    Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la
+                    norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma. Descrizione di trova la norma.
                   </Row>
                   <Row className="w-100 text-right p-1 font-italic" style={{ fontSize: "11px", justifyContent: "end", lineHeight: 1.5 }}>
                     <Col className="p-0" md={{ span: 12, offset: 0 }}>
@@ -167,7 +160,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
                                     <Form.Control
                                       size="lg"
                                       type="text"
-                                      placeholder={currentLang === "ita" ? "Cerca nel Dizionario" : "Search in the Dictionary"}
+                                      placeholder={currentLang === "ita" ? "Cerca una norma" : "Search a norm"}
                                       value={searchInput}
                                       onChange={event => setSearchInput(event.target.value)}
                                       className="inline-form-custom w-100"
@@ -202,13 +195,16 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
                             <thead className="bg-standard-blue">
                               <tr>
                                 <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Italiano" : "Italian"}
+                                  {currentLang === "ita" ? "Termini di riferimento in ambito privacy" : "Terms of reference in privacy field"}
                                 </th>
                                 <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Inglese" : "English"}
+                                  {currentLang === "ita" ? "GDPR" : "GDPR"}
                                 </th>
                                 <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Riferimento" : "Reference"}
+                                  {currentLang === "ita" ? "D.Lgs.196/2003" : "D.Lgs.196/2003"}
+                                </th>
+                                <th className="border-MG-blue" scope="col">
+                                  {currentLang === "ita" ? "Altre norme" : "Other norms"}
                                 </th>
                               </tr>
                             </thead>
@@ -236,7 +232,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
 
 export async function getServerSideProps(context) {
   const host = context.req.headers.host;
-  const path = "/api/dizionario";
+  const path = "/api/trovaLaNorma";
   let isDeployedVersion;
   let apiUrl;
   if (host.includes("localhost")) {
@@ -255,7 +251,7 @@ export async function getServerSideProps(context) {
   }
   const res = await fetch(apiUrl);
   const { data } = await res.json();
-  return { props: { dizionarioRecords: data, apiUrl, isDeployedVersion } };
+  return { props: { normaRecords: data, apiUrl, isDeployedVersion } };
 }
 
-export default dizionarioPrivacy;
+export default trovaLaNorma;
