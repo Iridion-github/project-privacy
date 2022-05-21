@@ -20,9 +20,9 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
   const allTableRows = dizionarioRecords.map(record => {
     return (
       <tr key={record._id}>
-        <td className="border-MG-blue">{record.ita}</td>
-        <td className="border-MG-blue">{record.eng}</td>
-        <td className="border-MG-blue">{record.ref.length > 0 ? record.ref : " - "}</td>
+        <td className="border-MG-blue td-ita">{record.ita}</td>
+        <td className="border-MG-blue td-eng">{record.eng}</td>
+        <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
       </tr>
     );
   });
@@ -32,9 +32,9 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
       ? filteredDizionarioRecords.map(record => {
           return (
             <tr key={record._id}>
-              <td className="border-MG-blue">{record.ita}</td>
-              <td className="border-MG-blue">{record.eng}</td>
-              <td className="border-MG-blue">{record.ref.length > 0 ? record.ref : " - "}</td>
+              <td className="border-MG-blue td-ita">{record.ita}</td>
+              <td className="border-MG-blue td-eng">{record.eng}</td>
+              <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
             </tr>
           );
         })
@@ -198,7 +198,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
                               </Col>
                             </Row>
                           )}
-                          <Table responsive size="md">
+                          <Table responsive="sm" size="md">
                             <thead className="bg-standard-blue">
                               <tr>
                                 <th className="border-MG-blue" scope="col">

@@ -19,10 +19,10 @@ function trovaLaNorma({ normaRecords, apiUrl, isDeployedVersion }) {
   const allTableRows = normaRecords.map(record => {
     return (
       <tr key={record._id}>
-        <td className="border-MG-blue">{record.terminiDiRiferimento}</td>
-        <td className="border-MG-blue">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
-        <td className="border-MG-blue">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
-        <td className="border-MG-blue">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
+        <td className="border-MG-blue td-termini">{record.terminiDiRiferimento}</td>
+        <td className="border-MG-blue td-GDPR">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
+        <td className="border-MG-blue td-d-legis">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
+        <td className="border-MG-blue td-altre-norme">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
       </tr>
     );
   });
@@ -32,10 +32,10 @@ function trovaLaNorma({ normaRecords, apiUrl, isDeployedVersion }) {
       ? filteredNormaRecords.map(record => {
           return (
             <tr key={record._id}>
-              <td className="border-MG-blue">{record.terminiDiRiferimento}</td>
-              <td className="border-MG-blue">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
-              <td className="border-MG-blue">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
-              <td className="border-MG-blue">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
+              <td className="border-MG-blue td-termini">{record.terminiDiRiferimento}</td>
+              <td className="border-MG-blue td-GDPR">{record.GDPR.length > 0 ? record.GDPR : " - "}</td>
+              <td className="border-MG-blue td-d-legis">{record.decretoLegislativo.length > 0 ? record.decretoLegislativo : " - "}</td>
+              <td className="border-MG-blue td-altre-norme">{record.altreNorme.length > 0 ? record.altreNorme : " - "}</td>
             </tr>
           );
         })
@@ -142,7 +142,7 @@ function trovaLaNorma({ normaRecords, apiUrl, isDeployedVersion }) {
                 style={{
                   width: "100%",
                   height: presentationRefHeight ? `${presentationRefHeight}px` : "100vh",
-                  overflowX: "hidden",
+                  //overflowX: "hidden",
                   overflowY: "scroll",
                 }}
               >
@@ -191,25 +191,27 @@ function trovaLaNorma({ normaRecords, apiUrl, isDeployedVersion }) {
                               </Col>
                             </Row>
                           )}
-                          <Table responsive size="md">
-                            <thead className="bg-standard-blue">
-                              <tr>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Termini di riferimento in ambito privacy" : "Terms of reference in privacy field"}
-                                </th>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "GDPR" : "GDPR"}
-                                </th>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "D.Lgs.196/2003" : "D.Lgs.196/2003"}
-                                </th>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Altre norme" : "Other norms"}
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>{searched ? filteredTableRows : allTableRows}</tbody>
-                          </Table>
+                          <Col md={12} className="pl-3 pr-3 table-responsive">
+                            <Table responsive="sm" size="sm">
+                              <thead className="bg-standard-blue">
+                                <tr>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "Termini di riferimento in ambito privacy" : "Terms of reference in privacy field"}
+                                  </th>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "GDPR" : "GDPR"}
+                                  </th>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "D.Lgs.196/2003" : "D.Lgs.196/2003"}
+                                  </th>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "Altre norme" : "Other norms"}
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>{searched ? filteredTableRows : allTableRows}</tbody>
+                            </Table>
+                          </Col>
                         </Row>
                         {/*Table end*/}
                       </Col>

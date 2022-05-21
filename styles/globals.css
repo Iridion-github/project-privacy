@@ -626,3 +626,33 @@ label:focus,
 .border-MG-blue {
   border: 1px solid #17a2b8 !important;
 }
+
+/* grandezze massime per ogni table col - start */
+.td-ita  {
+  max-width: 350px !important;
+}
+
+.td-eng  {
+  max-width: 350px !important;
+}
+
+.td-riferimento  {
+  max-width: 200px !important;
+}
+
+.td-termini  {
+  max-width: 350px !important;
+}
+
+.td-GDPR  {
+  max-width: 175px !important;
+}
+
+.td-d-legis  {
+  max-width: 175px !important;
+}
+
+.td-altre-norme  {
+  max-width: 175px !important;
+}
+/* grandezze massime per ogni table col - end */
