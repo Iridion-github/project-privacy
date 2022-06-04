@@ -656,3 +656,10 @@ label:focus,
   max-width: 175px !important;
 }
 /* grandezze massime per ogni table col - end */
+
+.link-subtitle {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #48626f;
+}

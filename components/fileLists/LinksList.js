@@ -1,6 +1,7 @@
 import { Row, Col, Button, ListGroup } from "react-bootstrap";
 
 export const LinksList = function (props) {
+  console.log("props.linkSections:", props.linkSections);
   if (props.linkSections && props.linkSections.length) {
     return (
       <Row className="w-100 m-0 p-0">
@@ -25,9 +26,16 @@ export const LinksList = function (props) {
                     .map(link => {
                       return (
                         <ListGroup.Item inactive key={link.id} className="justify-content-center">
-                          <Button variant="link" href={link.url} target="_blank">
-                            {link.title}
-                          </Button>
+                          <Row className="m-0 p-0 w-100">
+                            <Button variant="link" block href={link.url} target="_blank" className="pl-0 pr-0">
+                              {link.title}
+                            </Button>
+                          </Row>
+                          {link.subtitle && link.subtitle.length && (
+                            <Row className="m-0 p-0 w-100">
+                              <span className="link-subtitle">{link.subtitle}</span>
+                            </Row>
+                          )}
                         </ListGroup.Item>
                       );
                     })}
@@ -53,9 +61,16 @@ export const LinksList = function (props) {
           {props.links.map(link => {
             return (
               <ListGroup.Item inactive key={link.id} className="justify-content-center">
-                <Button variant="link" href={link.url} target="_blank">
-                  {link.title}
-                </Button>
+                <Row className="m-0 p-0 w-100">
+                  <Button variant="link" block href={link.url} target="_blank" className="pl-0 pr-0">
+                    {link.title}
+                  </Button>
+                </Row>
+                {link.subtitle && link.subtitle.length && (
+                  <Row className="m-0 p-0 w-100">
+                    <span className="link-subtitle">{link.subtitle}</span>
+                  </Row>
+                )}
               </ListGroup.Item>
             );
           })}
