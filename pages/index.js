@@ -58,7 +58,7 @@ function Home() {
             <Container className="justify-content-center p-0 mb-5">
               <Row className="w-100 justify-content-center ml-0 mr-0">
                 <Card className="pt-2 pb-2 text-center justify-content-center">
-                  <Card.Body>
+                  <Card.Body className="home-text">
                     <Col md={{ span: 8 }} className="text-justify-desktop-only">
                       <p className="home-text-left">
                         {currentLang === "ita"

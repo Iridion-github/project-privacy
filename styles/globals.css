@@ -340,6 +340,10 @@ a {
   font-size: 1.2em;
 }
 
+.home-text {
+  font-size: 1.2em;
+}
+
 .text-justify-desktop-only {
   text-align: justify;
   text-justify: inter-word;
