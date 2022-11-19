@@ -26,7 +26,9 @@ function Home() {
               <Carousel.Caption>
                 <h2 className={styles.title}>{currentLang === "ita" ? "Consulenza Compliance e Integrata" : "Compliance and Integrated Consulting"}</h2>
                 <span className={styles.description}>
-                  {currentLang === "ita" ? "Privacy | Antiriciclaggio | Responsabilità Amministrativa degli Enti" : "Privacy | Anti-money Laundering | Administrative Liability"}
+                  {currentLang === "ita"
+                    ? "Privacy | Antiriciclaggio | Anticorruzione | Responsabilità Amministrativa degli Enti"
+                    : "Privacy | Anti-money Laundering | Anticorruption | Administrative Liability"}
                 </span>
               </Carousel.Caption>
             </Carousel.Item>

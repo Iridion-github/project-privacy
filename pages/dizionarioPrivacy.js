@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Row, Col, Card, Table, Form, Button } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
@@ -8,37 +8,89 @@ import { useAppContext } from "../context/contextLib";
 import { RightMenu } from "../components/home/RightMenu";
 import { Loading } from "../components/layout/Loading";
 
+const elementsPerPageDefault = 25;
+
 function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
   const { currentLang, resetQuizQuestionsSeen } = useAppContext();
-
   const [searchInput, setSearchInput] = useState("");
   const [searched, setSearched] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredDizionarioRecords, setFilteredDizionarioRecords] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const allTableRows = dizionarioRecords.map(record => {
-    return (
-      <tr key={record._id}>
-        <td className="border-MG-blue td-ita">{record.ita}</td>
-        <td className="border-MG-blue td-eng">{record.eng}</td>
-        <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
-      </tr>
-    );
-  });
+  const allTableRows = useMemo(() => {
+    return dizionarioRecords.map(record => {
+      return (
+        <tr key={record._id}>
+          <td className="border-MG-blue td-ita">{record.ita}</td>
+          <td className="border-MG-blue td-eng">{record.eng}</td>
+          <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
+        </tr>
+      );
+    });
+  }, [dizionarioRecords, searched]);
 
-  const filteredTableRows =
-    filteredDizionarioRecords && filteredDizionarioRecords.length > 0
-      ? filteredDizionarioRecords.map(record => {
-          return (
-            <tr key={record._id}>
-              <td className="border-MG-blue td-ita">{record.ita}</td>
-              <td className="border-MG-blue td-eng">{record.eng}</td>
-              <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
-            </tr>
-          );
-        })
-      : [];
+  const filteredTableRows = useMemo(() => {
+    if (!filteredDizionarioRecords || filteredDizionarioRecords.length < 1) {
+      return [];
+    } else {
+      return filteredDizionarioRecords.map(record => {
+        return (
+          <tr key={record._id}>
+            <td className="border-MG-blue td-ita">{record.ita}</td>
+            <td className="border-MG-blue td-eng">{record.eng}</td>
+            <td className="border-MG-blue td-riferimento">{record.ref.length > 0 ? record.ref : " - "}</td>
+          </tr>
+        );
+      });
+    }
+  }, [filteredDizionarioRecords, searched]);
+
+  function getPaginatedData(allData, elementsPerPage = elementsPerPageDefault) {
+    const result = [];
+    for (let i = 0; i < allData.length; i += elementsPerPage) {
+      const chunk = allData.slice(i, i + elementsPerPage);
+      result.push(chunk);
+    }
+    return result;
+  }
+
+  const paginatedAllTableRows = useMemo(() => {
+    return getPaginatedData(allTableRows);
+  }, [allTableRows, searched]);
+
+  const paginatedFilteredTableRows = useMemo(() => {
+    return getPaginatedData(filteredTableRows);
+  }, [filteredTableRows, searched]);
+
+  const totalPages = useMemo(() => {
+    if (filteredDizionarioRecords.length > 0) {
+      return Math.ceil(filteredDizionarioRecords.length / elementsPerPageDefault);
+    } else {
+      return Math.ceil(dizionarioRecords.length / elementsPerPageDefault);
+    }
+  }, [filteredDizionarioRecords, elementsPerPageDefault, searched]);
+
+  const isDisabledPrevPage = useMemo(() => {
+    return currentPage < 2;
+  }, [currentPage]);
+
+  const isDisabledNextPage = useMemo(() => {
+    return currentPage > totalPages - 1;
+  }, [currentPage, totalPages]);
+
+  const isLoading = useMemo(() => {
+    return false;
+  }, []);
+
+  const goNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const goPrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
 
   const handleSetSearchResult = searchResBefore => {
     setSearchResult(searchResBefore);
@@ -50,6 +102,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
 
   const resetFilters = () => {
     setSearched(false);
+    setCurrentPage(1);
   };
 
   const submitSearch = async input => {
@@ -83,16 +136,31 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
     event.preventDefault();
     const cleanInput = searchInput.replace(/[^\w\s]/gi, "");
     submitSearch(cleanInput);
+    setCurrentPage(1);
   };
 
   const presentationRef = useRef();
   const [presentationRefHeight, setPresentationRefHeight] = useState();
 
+  const tableRef = useRef();
+  const [tableRefWidth, setTableRefWidth] = useState();
+
+  const tableBodyContent = useMemo(() => {
+    if (searched && searched.length) {
+      return paginatedFilteredTableRows[currentPage - 1];
+    } else {
+      return paginatedAllTableRows[currentPage - 1];
+    }
+  }, [searched, currentPage, paginatedFilteredTableRows, paginatedAllTableRows]);
+
   useEffect(() => {
     if (presentationRef.current) {
       setPresentationRefHeight(presentationRef.current.clientHeight);
     }
-  }, [presentationRef, presentationRef.current]);
+    if (tableRef.current) {
+      setTableRefWidth(tableRef.current.clientWidth);
+    }
+  }, [presentationRef, presentationRef.current, tableRef, tableRef.current]);
 
   return (
     <div className={styles.container}>
@@ -162,7 +230,7 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
                           <Form onSubmit={event => handleSubmit(event)} inline className="w-100 p-0">
                             <Form.Group className="w-100 justify-content-center">
                               <Col md={9} className="text-right pl-0 pr-0">
-                                <Row className="w-100">
+                                <Row className="w-100 m-0">
                                   <Col md={11} className="pl-0 pr-0">
                                     <Form.Control
                                       size="lg"
@@ -193,27 +261,81 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
                               </Col>
                               <Col md={6} className="pl-0 pr-0 ">
                                 <Button variant={"danger"} size="sm" className="" onClick={resetFilters}>
-                                  <i class="fas fa-times"></i> {currentLang === "ita" ? `Rimuovi filtro: "${searched}"` : `Remove filter: "${searched}"`}
+                                  <i className="fas fa-times"></i> {currentLang === "ita" ? `Rimuovi filtro: "${searched}"` : `Remove filter: "${searched}"`}
                                 </Button>
                               </Col>
                             </Row>
                           )}
-                          <Table responsive="sm" size="md">
-                            <thead className="bg-standard-blue">
-                              <tr>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Italiano" : "Italian"}
-                                </th>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Inglese" : "English"}
-                                </th>
-                                <th className="border-MG-blue" scope="col">
-                                  {currentLang === "ita" ? "Riferimento" : "Reference"}
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>{searched ? filteredTableRows : allTableRows}</tbody>
-                          </Table>
+                          {/*Navigation start*/}
+                          <Row className="justify-content-center ml-0 w-100">
+                            <div
+                              className="p-2 bg-standard-blue border-MG-blue"
+                              style={{
+                                display: "flex",
+                                width: tableRefWidth ? `${tableRefWidth}px` : "800px",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <button className="btn btn-info btn-sm" disabled={isDisabledPrevPage} onClick={goPrevPage}>
+                                <i className="fa-solid fa-angles-left"></i> {currentLang === "ita" ? "Indietro" : "Prev"}
+                              </button>
+                              {!isLoading && (
+                                <div>
+                                  <small>
+                                    Pagina: {currentPage} di {totalPages}
+                                  </small>
+                                </div>
+                              )}
+                              <button className="btn btn-info btn-sm" disabled={isDisabledNextPage} onClick={goNextPage}>
+                                {currentLang === "ita" ? "Avanti" : "Next"} <i className="fa-solid fa-angles-right"></i>
+                              </button>
+                            </div>
+                          </Row>
+                          {/*Navigation end*/}
+                          <Row className="justify-content-center ml-0 w-100 pb-0">
+                            <Table className="mb-0" size="md" ref={tableRef}>
+                              <thead className="bg-standard-blue">
+                                <tr>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "Italiano" : "Italian"}
+                                  </th>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "Inglese" : "English"}
+                                  </th>
+                                  <th className="border-MG-blue" scope="col">
+                                    {currentLang === "ita" ? "Riferimento" : "Reference"}
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>{tableBodyContent}</tbody>
+                            </Table>
+                          </Row>
+                          {/*Navigation start*/}
+                          <Row className="pt-0 justify-content-center ml-0 w-100">
+                            <div
+                              className="p-2 bg-standard-blue border-MG-blue"
+                              style={{
+                                display: "flex",
+                                width: tableRefWidth ? `${tableRefWidth}px` : "800px",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <button className="btn btn-info btn-sm" disabled={isDisabledPrevPage} onClick={goPrevPage}>
+                                <i className="fa-solid fa-angles-left"></i> {currentLang === "ita" ? "Indietro" : "Prev"}
+                              </button>
+                              {!isLoading && (
+                                <div>
+                                  <small>
+                                    Pagina: {currentPage} di {totalPages}
+                                  </small>
+                                </div>
+                              )}
+                              <button className="btn btn-info btn-sm" disabled={isDisabledNextPage} onClick={goNextPage}>
+                                {currentLang === "ita" ? "Avanti" : "Next"} <i className="fa-solid fa-angles-right"></i>
+                              </button>
+                            </div>
+                          </Row>
+                          {/*Navigation end*/}
                         </Row>
                         {/*Table end*/}
                       </Col>
