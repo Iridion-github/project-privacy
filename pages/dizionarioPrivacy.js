@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.css";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Row, Col, Card, Table, Form, Button } from "react-bootstrap";
 import { Header } from "../components/layout/Header";
 import { Navigation } from "../components/layout/Navbar";
@@ -47,14 +47,17 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
     }
   }, [filteredDizionarioRecords, searched]);
 
-  function getPaginatedData(allData, elementsPerPage = elementsPerPageDefault) {
-    const result = [];
-    for (let i = 0; i < allData.length; i += elementsPerPage) {
-      const chunk = allData.slice(i, i + elementsPerPage);
-      result.push(chunk);
-    }
-    return result;
-  }
+  const getPaginatedData = useCallback(
+    (allData, elementsPerPage = elementsPerPageDefault) => {
+      const result = [];
+      for (let i = 0; i < allData.length; i += elementsPerPage) {
+        const chunk = allData.slice(i, i + elementsPerPage);
+        result.push(chunk);
+      }
+      return result;
+    },
+    [searched]
+  );
 
   const paginatedAllTableRows = useMemo(() => {
     return getPaginatedData(allTableRows);
@@ -101,7 +104,8 @@ function dizionarioPrivacy({ dizionarioRecords, apiUrl, isDeployedVersion }) {
   };
 
   const resetFilters = () => {
-    setSearched(false);
+    setSearched(null);
+    setFilteredDizionarioRecords([]);
     setCurrentPage(1);
   };
 
